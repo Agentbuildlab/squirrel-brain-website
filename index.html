@@ -906,8 +906,8 @@
   <div id="sq-outer" style="position:fixed; bottom:18px; left:-110px; z-index:9999; pointer-events:none; will-change:left;">
     <div id="sq-inner" style="display:inline-block; will-change:transform;">
       <img id="sq-img" src="assets/squirrel_logo.png"
-           style="width:270px; height:270px; object-fit:contain; display:block;
-                  filter:drop-shadow(0 10px 30px rgba(0,0,0,0.7));
+           style="width:90px; height:90px; object-fit:contain; display:block;
+                  filter:drop-shadow(0 4px 10px rgba(0,0,0,0.5));
                   will-change:transform;" />
     </div>
   </div>
@@ -940,7 +940,7 @@
       const inner = document.getElementById('sq-inner');
       const img   = document.getElementById('sq-img');
       const audio = new Audio('assets/chipmunk_squirrel.wav');
-      audio.volume = 0.7;
+      audio.volume = 1.0;
 
       // Unlock audio on first user gesture (required by all modern browsers)
       let audioUnlocked = false;
@@ -954,7 +954,7 @@
       );
 
       const VW = () => window.innerWidth;
-      const CHAR = 290; // px width of char + margin
+      const CHAR = 110; // px width of char + margin
 
       function setX(x) { outer.style.left = x + 'px'; }
       function setDir(facingRight) {
@@ -976,8 +976,15 @@
       }
 
       function playSound() {
+        audio.loop = true;
         audio.currentTime = 0;
         audio.play().catch(() => {});
+      }
+
+      function stopSound() {
+        audio.pause();
+        audio.loop = false;
+        audio.currentTime = 0;
       }
 
       function run(fromRight, ms, done) {
@@ -987,48 +994,19 @@
         img.className = 'running';
         outer.style.display = 'block';
         playSound();
-        slide(x0, x1, ms, done);
-      }
-
-      function eat(x, done) {
-        setX(x);
-        setDir(true); // face right while eating
-        img.className = 'eating';
-        setTimeout(done, 5000);
+        slide(x0, x1, ms, () => { stopSound(); done(); });
       }
 
       function startShow() {
-        // Pass 1: left → right
-        run(false, 5000, () => {
-          setTimeout(() => {
-            // Pass 2: right → left
-            run(true, 4800, () => {
-              setTimeout(() => {
-                // Pass 3: left → right, stops 70% across
-                const stopX = Math.round(VW() * 0.65);
-                setDir(true);
-                img.className = 'running';
-                playSound();
-                slide(-CHAR, stopX, 3200, () => {
-                  // Sit and eat
-                  eat(stopX, () => {
-                    // Scurry off screen
-                    img.className = 'running';
-                    slide(stopX, VW() + CHAR, 900, () => {
-                      outer.style.transition = 'opacity 0.4s';
-                      outer.style.opacity = '0';
-                      setTimeout(() => {
-                        outer.style.display = 'none';
-                        outer.style.opacity = '1';
-                        outer.style.transition = '';
-                      }, 400);
-                    });
-                  });
-                });
-              }, 700);
-            });
-          }, 900);
-        });
+        let fromRight = false;
+        function nextRun() {
+          run(fromRight, 5000, () => {
+            img.className = '';
+            fromRight = !fromRight;
+            setTimeout(nextRun, 5000); // 5s pause then run back
+          });
+        }
+        nextRun();
       }
 
       // Wait 5s after first interaction (or 8s from load, whichever is first)
