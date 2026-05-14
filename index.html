@@ -317,6 +317,215 @@
       line-height: 1.6;
     }
 
+    /* ─── USE CASES (SNAP→DONE) ──────────────────────────── */
+    #usecases {
+      background: var(--bg);
+    }
+
+    .usecase-list {
+      display: flex;
+      flex-direction: column;
+      gap: 48px;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    .usecase-row {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .usecase-row:nth-child(even) {
+      direction: rtl;
+    }
+
+    .usecase-row:nth-child(even) > * {
+      direction: ltr;
+    }
+
+    /* Photo card */
+    .usecase-photo {
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: 0 8px 40px rgba(0,0,0,0.5);
+      aspect-ratio: 4/3;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      padding: 20px;
+      position: relative;
+      font-family: 'Courier New', monospace;
+    }
+
+    .usecase-photo--legal {
+      background: #f5f0d8;
+      background-image: repeating-linear-gradient(transparent, transparent 27px, #b8c8e8 27px, #b8c8e8 28px);
+      padding-top: 16px;
+    }
+
+    .usecase-photo--legal::before {
+      content: "";
+      position: absolute;
+      top: 0; bottom: 0;
+      left: 44px;
+      width: 2px;
+      background: #e88080aa;
+    }
+
+    .usecase-photo--sticky {
+      background: #f6e84a;
+      box-shadow: 4px 4px 0 #d4c430, 0 8px 40px rgba(0,0,0,0.4);
+    }
+
+    .usecase-photo--schedule {
+      background: #1a2744;
+      border: 2px solid #2d4a8a;
+    }
+
+    .usecase-photo--card {
+      background: #ffffff;
+      color: #111;
+    }
+
+    .photo-title {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #333;
+      margin-bottom: 8px;
+    }
+
+    .usecase-photo--schedule .photo-title,
+    .usecase-photo--schedule .photo-line {
+      color: rgba(255,255,255,0.7);
+    }
+
+    .photo-line {
+      font-size: 10px;
+      color: #444;
+      line-height: 1.8;
+      padding-left: 52px;
+    }
+
+    .photo-line.indent {
+      padding-left: 64px;
+    }
+
+    .photo-badge {
+      position: absolute;
+      bottom: 14px;
+      right: 14px;
+      background: rgba(0,0,0,0.15);
+      color: rgba(0,0,0,0.5);
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 4px 8px;
+      border-radius: 100px;
+    }
+
+    .usecase-photo--schedule .photo-badge {
+      background: rgba(255,255,255,0.1);
+      color: rgba(255,255,255,0.4);
+    }
+
+    /* Arrow */
+    .usecase-arrow {
+      font-size: 28px;
+      color: var(--orange);
+      flex-shrink: 0;
+      filter: drop-shadow(0 0 8px #FF7A1A88);
+    }
+
+    /* Output card */
+    .usecase-output {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 24px;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.4);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .output-header {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 4px;
+    }
+
+    .output-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 10px 12px;
+      background: var(--bg2);
+      border-radius: 10px;
+      border: 1px solid var(--border);
+    }
+
+    .output-item-icon {
+      font-size: 15px;
+      flex-shrink: 0;
+      margin-top: 1px;
+      line-height: 1;
+    }
+
+    .output-item-body {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .output-item-type {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 2px;
+    }
+
+    .output-item-text {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--white);
+      line-height: 1.35;
+    }
+
+    .output-item-meta {
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    @media (max-width: 768px) {
+      .usecase-row {
+        grid-template-columns: 1fr;
+      }
+
+      .usecase-row:nth-child(even) {
+        direction: ltr;
+      }
+
+      .usecase-arrow {
+        text-align: center;
+        font-size: 22px;
+      }
+
+      .usecase-photo {
+        aspect-ratio: 3/2;
+      }
+    }
+
     /* ─── SCREENSHOTS ─────────────────────────────────────── */
     #screenshots {
       background: var(--bg);
@@ -695,6 +904,190 @@
         <h3 class="feature-name">Loud Alarms</h3>
         <p class="feature-desc">No silent notification that gets buried. Squirrel Brain fires real, loud alarms so deadlines actually get met.</p>
       </div>
+    </div>
+  </section>
+
+  <!-- ─── USE CASES ──────────────────────────────────────────── -->
+  <section id="usecases">
+    <p class="section-label">Snap → Done</p>
+    <h2 class="section-title">Point it at anything.<br>Get your life organized.</h2>
+    <p class="section-sub">Squirrel Brain reads what you photograph and turns it into alarms, calendar events, and notes — automatically.</p>
+
+    <div class="usecase-list">
+
+      <!-- Use case 1: Meeting notes / legal pad -->
+      <div class="usecase-row">
+        <div class="usecase-photo usecase-photo--legal">
+          <div class="photo-title" style="padding-left:52px;">Partner Meeting Notes &nbsp;·&nbsp; May 14</div>
+          <div class="photo-line" style="font-weight:700;">CASE UPDATES</div>
+          <div class="photo-line indent">Anderson v. TechCo — motion due 5/28</div>
+          <div class="photo-line indent">Davis v. Greenfield — mediation 6/10</div>
+          <div class="photo-line indent">Lopez v. City — trial set 9/16</div>
+          <div class="photo-line" style="font-weight:700;margin-top:4px;">NEXT MEETING: June 11 @ 9:00 AM</div>
+          <div class="photo-badge">Handwritten notes</div>
+        </div>
+
+        <div class="usecase-arrow">→</div>
+
+        <div class="usecase-output">
+          <div class="output-header">Squirrel Brain extracted:</div>
+
+          <div class="output-item">
+            <div class="output-item-icon">📅</div>
+            <div class="output-item-body">
+              <div class="output-item-type">Calendar Event</div>
+              <div class="output-item-text">Partner Meeting</div>
+              <div class="output-item-meta">June 11 · 9:00 AM</div>
+            </div>
+          </div>
+
+          <div class="output-item">
+            <div class="output-item-icon">🔔</div>
+            <div class="output-item-body">
+              <div class="output-item-type">Alarm</div>
+              <div class="output-item-text">Summary judgment motion due</div>
+              <div class="output-item-meta">May 28 · Anderson v. TechCo</div>
+            </div>
+          </div>
+
+          <div class="output-item">
+            <div class="output-item-icon">🔔</div>
+            <div class="output-item-body">
+              <div class="output-item-type">Alarm</div>
+              <div class="output-item-text">Mediation — Davis v. Greenfield</div>
+              <div class="output-item-meta">June 10</div>
+            </div>
+          </div>
+
+          <div class="output-item">
+            <div class="output-item-icon">📝</div>
+            <div class="output-item-body">
+              <div class="output-item-type">Note</div>
+              <div class="output-item-text">Full meeting summary saved</div>
+              <div class="output-item-meta">4 agenda items · 5 attendees</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Use case 2: Sticky note -->
+      <div class="usecase-row">
+        <div class="usecase-photo usecase-photo--sticky">
+          <div class="photo-title" style="color:#333;text-align:center;font-size:14px;font-weight:900;letter-spacing:0.12em;margin-bottom:12px;">REMINDER!</div>
+          <div class="photo-title" style="color:#333;font-size:12px;">TEAM MEETING</div>
+          <div class="photo-line" style="color:#333;">Date: Tuesday, May 21</div>
+          <div class="photo-line" style="color:#333;">Time: 10:00 AM</div>
+          <div class="photo-line" style="color:#333;">Location: Conference Room B</div>
+          <div class="photo-line" style="color:#333;margin-top:4px;">Agenda: Q2 Update · Budget · Hiring</div>
+          <div class="photo-badge" style="background:rgba(0,0,0,0.12);color:#666;">Sticky note</div>
+        </div>
+
+        <div class="usecase-arrow">→</div>
+
+        <div class="usecase-output">
+          <div class="output-header">Squirrel Brain extracted:</div>
+
+          <div class="output-item">
+            <div class="output-item-icon">📅</div>
+            <div class="output-item-body">
+              <div class="output-item-type">Calendar Event</div>
+              <div class="output-item-text">Team Meeting · Conference Room B</div>
+              <div class="output-item-meta">Tuesday May 21 · 10:00 AM</div>
+            </div>
+          </div>
+
+          <div class="output-item">
+            <div class="output-item-icon">🔔</div>
+            <div class="output-item-body">
+              <div class="output-item-type">Alarm</div>
+              <div class="output-item-text">Team Meeting starts in 30 min</div>
+              <div class="output-item-meta">May 21 · 9:30 AM</div>
+            </div>
+          </div>
+
+          <div class="output-item">
+            <div class="output-item-icon">📝</div>
+            <div class="output-item-body">
+              <div class="output-item-type">Note</div>
+              <div class="output-item-text">Agenda saved: Q2 Update, Budget Review, New Hire Onboarding, Next Steps</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Use case 3: Sports schedule -->
+      <div class="usecase-row">
+        <div class="usecase-photo usecase-photo--schedule">
+          <div class="photo-title" style="color:rgba(255,255,255,0.9);font-size:12px;font-weight:900;letter-spacing:0.1em;padding-left:0;">⚽ SPRING SOCCER SCHEDULE</div>
+          <div class="photo-line" style="color:rgba(255,255,255,0.75);padding-left:0;">May 17 · Sat · 9:00 AM — Game vs. Rovers</div>
+          <div class="photo-line" style="color:rgba(255,255,255,0.75);padding-left:0;">May 24 · Sat · 10:30 AM — Game vs. Eagles</div>
+          <div class="photo-line" style="color:rgba(255,255,255,0.75);padding-left:0;">May 31 · Sat · 9:00 AM — Game vs. Storm</div>
+          <div class="photo-line" style="color:rgba(255,255,255,0.75);padding-left:0;">Jun 7 · Sat · 11:00 AM — Championship</div>
+          <div class="photo-badge" style="background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.4);">Season schedule</div>
+        </div>
+
+        <div class="usecase-arrow">→</div>
+
+        <div class="usecase-output">
+          <div class="output-header">Squirrel Brain extracted:</div>
+
+          <div class="output-item">
+            <div class="output-item-icon">📅</div>
+            <div class="output-item-body">
+              <div class="output-item-type">4 Calendar Events created</div>
+              <div class="output-item-text">Entire season added at once</div>
+              <div class="output-item-meta">May 17, 24, 31 · Jun 7</div>
+            </div>
+          </div>
+
+          <div class="output-item">
+            <div class="output-item-icon">🔔</div>
+            <div class="output-item-body">
+              <div class="output-item-type">4 Alarms set</div>
+              <div class="output-item-text">Game day reminders, 1 hour before each</div>
+              <div class="output-item-meta">You'll never miss kickoff</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Use case 4: Business card -->
+      <div class="usecase-row">
+        <div class="usecase-photo usecase-photo--card">
+          <div style="padding-left:0;">
+            <div style="font-size:16px;font-weight:900;color:#111;letter-spacing:0.04em;margin-bottom:4px;">MARCUS REED</div>
+            <div style="font-size:11px;color:#555;margin-bottom:12px;">VP of Sales · Apex Solutions</div>
+            <div style="font-size:10px;color:#444;line-height:2;">📞 (312) 555-0182<br>✉️ m.reed@apexsolutions.com<br>🌐 apexsolutions.com</div>
+            <div style="margin-top:12px;font-size:9px;color:#888;font-style:italic;">"Let's connect on the Q3 proposal next week"</div>
+          </div>
+          <div class="photo-badge">Business card</div>
+        </div>
+
+        <div class="usecase-arrow">→</div>
+
+        <div class="usecase-output">
+          <div class="output-header">Squirrel Brain extracted:</div>
+
+          <div class="output-item">
+            <div class="output-item-icon">📝</div>
+            <div class="output-item-body">
+              <div class="output-item-type">Note</div>
+              <div class="output-item-text">Marcus Reed — Apex Solutions VP Sales</div>
+              <div class="output-item-meta">(312) 555-0182 · m.reed@apexsolutions.com</div>
+            </div>
+          </div>
+
+          <div class="output-item">
+            <div class="output-item-icon">🔔</div>
+            <div class="output-item-body">
+              <div class="output-item-type">Follow-up Alarm</div>
+              <div class="output-item-text">Call Marcus re: Q3 proposal</div>
+              <div class="output-item-meta">Next week · Apex Solutions</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </section>
 
