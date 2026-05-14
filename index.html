@@ -407,7 +407,8 @@
     .usecase-output { background: var(--bg3); border: 1px solid var(--border); border-radius: 18px; padding: 24px; box-shadow: 0 8px 40px rgba(0,0,0,0.4); display: flex; flex-direction: column; gap: 10px; }
     .output-header { font-size: 10px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--orange); margin-bottom: 4px; }
     .output-item { display: flex; align-items: flex-start; gap: 10px; padding: 10px 12px; background: var(--bg2); border-radius: 10px; border: 1px solid var(--border); }
-    .output-item-icon { font-size: 15px; flex-shrink: 0; margin-top: 1px; }
+    .output-item-icon { font-size: 15px; flex-shrink: 0; margin-top: 1px; display: flex; align-items: center; }
+    .output-item-icon img { width: 24px; height: 24px; object-fit: contain; }
     .output-item-body { flex: 1; }
     .output-item-type { font-size: 9px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--orange); margin-bottom: 2px; }
     .output-item-text { font-size: 13px; font-weight: 600; color: var(--white); line-height: 1.35; }
@@ -472,77 +473,37 @@
     .ba-label--before { background: #222; color: var(--muted); }
     .ba-label--after  { background: #FF7A1A22; color: var(--orange); }
 
-    /* Legal pad card */
-    .ba-card--legal {
-      width: 100%; background: #f5f0c8;
-      background-image: repeating-linear-gradient(transparent, transparent 27px, #b8cce8 27px, #b8cce8 28px);
-      border-radius: 8px; padding: 16px 16px 14px 52px; position: relative;
-      box-shadow: 0 4px 24px rgba(0,0,0,0.5); min-height: 280px;
+    /* Before/After real images */
+    .ba-img {
+      width: 100%;
+      max-height: 400px;
+      object-fit: contain;
+      border-radius: 14px;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.55), 0 0 0 1px rgba(255,255,255,0.07);
+      display: block;
+      background: #1a1a1a; /* placeholder bg while image loads or if missing */
     }
-    .ba-card--legal::before {
-      content: ""; position: absolute; top: 0; bottom: 0; left: 40px; width: 2px;
-      background: #e88080aa;
+    /* Fallback placeholder shown when img fails to load */
+    .ba-img-wrap {
+      width: 100%; position: relative;
     }
-    .legal-header { margin-bottom: 10px; border-bottom: 2px solid #d0bc7088; padding-bottom: 6px; }
-    .legal-firm { font-size: 11px; font-weight: 900; color: #555; letter-spacing: 0.08em; text-transform: uppercase; }
-    .legal-subtitle { font-size: 13px; color: #444; font-style: italic; margin-top: 2px; }
-    .legal-rules { display: flex; flex-direction: column; gap: 2px; }
-    .legal-line {
-      font-family: "Segoe Print", "Comic Sans MS", cursive; font-size: 12px; color: #333;
-      line-height: 28px; padding-left: 6px;
+    .ba-img-wrap::after {
+      content: attr(data-label);
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; color: var(--muted); letter-spacing: 0.06em;
+      pointer-events: none; opacity: 0;
     }
-    .legal-line.hw-bold { font-weight: 700; color: #222; }
-    .legal-line.hw-faded { color: #777; font-size: 11px; padding-left: 16px; }
-    .ba-photo-badge {
-      margin-top: 10px; font-size: 10px; color: #888; font-weight: 600;
-      letter-spacing: 0.08em; text-transform: uppercase;
+    .ba-img[data-broken="true"] { opacity: 0; }
+    /* Simple min-height placeholder so the layout doesn't collapse before images arrive */
+    .ba-img-placeholder {
+      width: 100%; min-height: 260px;
+      background: var(--bg3); border-radius: 14px;
+      border: 1px dashed var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; color: var(--muted); letter-spacing: 0.08em;
+      text-transform: uppercase;
     }
-
-    /* App card (PixNote) */
-    .ba-card--app {
-      width: 100%; background: #141414; border-radius: 16px;
-      box-shadow: 0 4px 24px rgba(0,0,0,0.7), 0 0 0 1px #FF7A1A33;
-      overflow: hidden; min-height: 280px;
-      display: flex; flex-direction: column;
-    }
-    .app-topbar {
-      display: flex; align-items: center; gap: 8px;
-      padding: 10px 14px 8px;
-      background: #1a1a1a; border-bottom: 1px solid #2a2a2a;
-    }
-    .app-topbar-back { font-size: 12px; color: var(--orange); flex-shrink: 0; }
-    .app-topbar-title { font-size: 13px; font-weight: 700; color: var(--white); flex: 1; text-align: center; }
-    .app-topbar-badge {
-      font-size: 9px; font-weight: 800; letter-spacing: 0.1em;
-      background: var(--orange); color: #fff; padding: 2px 7px; border-radius: 100px;
-      flex-shrink: 0;
-    }
-    .app-thumb-wrap {
-      display: flex; align-items: center; gap: 10px;
-      padding: 10px 14px 8px; border-bottom: 1px solid #2a2a2a;
-    }
-    .app-thumb {
-      width: 68px; height: 50px; border-radius: 6px; overflow: hidden; flex-shrink: 0;
-      border: 1.5px solid var(--orange); background: #f5f0c8;
-      padding: 4px 4px 4px 8px;
-    }
-    .app-thumb-legal { height: 100%; display: flex; flex-direction: column; justify-content: flex-start; }
-    .app-thumb-expand { font-size: 10px; color: var(--muted); }
-    .app-note-body { padding: 10px 14px 6px; flex: 1; }
-    .app-note-title { font-size: 12px; font-weight: 700; color: var(--white); margin-bottom: 6px; }
-    .app-note-text { font-size: 11px; color: #aaa; line-height: 1.65; }
-    .app-note-text strong { color: #ddd; }
-    .app-actions {
-      display: flex; flex-wrap: wrap; gap: 6px;
-      padding: 10px 14px 12px; border-top: 1px solid #2a2a2a;
-    }
-    .app-action {
-      font-size: 10px; font-weight: 600; padding: 5px 10px;
-      border-radius: 8px; border: 1px solid #333; color: #aaa;
-      background: #1e1e1e; cursor: default;
-    }
-    .app-action--primary { background: var(--orange); color: #fff; border-color: transparent; }
-    .app-action--ghost { color: #555; border-color: #222; }
 
     /* Arrow between cards */
     .ba-arrow { display: flex; flex-direction: column; align-items: center; gap: 6px; flex-shrink: 0; }
@@ -809,9 +770,9 @@
         <div class="usecase-arrow">→</div>
         <div class="usecase-output">
           <div class="output-header">Squirrel Brain extracted:</div>
-          <div class="output-item"><div class="output-item-icon">📅</div><div class="output-item-body"><div class="output-item-type">Calendar Event</div><div class="output-item-text">Partner Meeting</div><div class="output-item-meta">June 11 · 9:00 AM</div></div></div>
-          <div class="output-item"><div class="output-item-icon">🔔</div><div class="output-item-body"><div class="output-item-type">Alarm</div><div class="output-item-text">Summary judgment motion due</div><div class="output-item-meta">May 28 · Anderson v. TechCo</div></div></div>
-          <div class="output-item"><div class="output-item-icon">📝</div><div class="output-item-body"><div class="output-item-type">Note</div><div class="output-item-text">Full meeting summary saved</div><div class="output-item-meta">4 agenda items · 5 attendees</div></div></div>
+          <div class="output-item"><div class="output-item-icon"><img src="assets/calendar_branch_transparent.png" alt="Calendar" /></div><div class="output-item-body"><div class="output-item-type">Calendar Event</div><div class="output-item-text">Partner Meeting</div><div class="output-item-meta">June 11 · 9:00 AM</div></div></div>
+          <div class="output-item"><div class="output-item-icon"><img src="assets/alarm_wood_icon_transparent.png" alt="Alarm" /></div><div class="output-item-body"><div class="output-item-type">Alarm</div><div class="output-item-text">Summary judgment motion due</div><div class="output-item-meta">May 28 · Anderson v. TechCo</div></div></div>
+          <div class="output-item"><div class="output-item-icon"><img src="assets/notes_transparent.png" alt="Note" /></div><div class="output-item-body"><div class="output-item-type">Note</div><div class="output-item-text">Full meeting summary saved</div><div class="output-item-meta">4 agenda items · 5 attendees</div></div></div>
         </div>
       </div>
       <div class="usecase-row">
@@ -826,9 +787,9 @@
         <div class="usecase-arrow">→</div>
         <div class="usecase-output">
           <div class="output-header">Squirrel Brain extracted:</div>
-          <div class="output-item"><div class="output-item-icon">📅</div><div class="output-item-body"><div class="output-item-type">Calendar Event</div><div class="output-item-text">Team Meeting · Conference Room B</div><div class="output-item-meta">Tuesday May 21 · 10:00 AM</div></div></div>
-          <div class="output-item"><div class="output-item-icon">🔔</div><div class="output-item-body"><div class="output-item-type">Alarm</div><div class="output-item-text">Team Meeting starts in 30 min</div><div class="output-item-meta">May 21 · 9:30 AM</div></div></div>
-          <div class="output-item"><div class="output-item-icon">📝</div><div class="output-item-body"><div class="output-item-type">Note</div><div class="output-item-text">Agenda: Q2 Update, Budget Review, New Hire Onboarding, Next Steps</div></div></div>
+          <div class="output-item"><div class="output-item-icon"><img src="assets/calendar_branch_transparent.png" alt="Calendar" /></div><div class="output-item-body"><div class="output-item-type">Calendar Event</div><div class="output-item-text">Team Meeting · Conference Room B</div><div class="output-item-meta">Tuesday May 21 · 10:00 AM</div></div></div>
+          <div class="output-item"><div class="output-item-icon"><img src="assets/alarm_wood_icon_transparent.png" alt="Alarm" /></div><div class="output-item-body"><div class="output-item-type">Alarm</div><div class="output-item-text">Team Meeting starts in 30 min</div><div class="output-item-meta">May 21 · 9:30 AM</div></div></div>
+          <div class="output-item"><div class="output-item-icon"><img src="assets/notes_transparent.png" alt="Note" /></div><div class="output-item-body"><div class="output-item-type">Note</div><div class="output-item-text">Agenda: Q2 Update, Budget Review, New Hire Onboarding, Next Steps</div></div></div>
         </div>
       </div>
       <div class="usecase-row">
@@ -843,8 +804,8 @@
         <div class="usecase-arrow">→</div>
         <div class="usecase-output">
           <div class="output-header">Squirrel Brain extracted:</div>
-          <div class="output-item"><div class="output-item-icon">📅</div><div class="output-item-body"><div class="output-item-type">4 Calendar Events created</div><div class="output-item-text">Entire season added at once</div><div class="output-item-meta">May 17, 24, 31 · Jun 7</div></div></div>
-          <div class="output-item"><div class="output-item-icon">🔔</div><div class="output-item-body"><div class="output-item-type">4 Alarms set</div><div class="output-item-text">Game day reminders, 1 hour before each</div><div class="output-item-meta">You'll never miss kickoff</div></div></div>
+          <div class="output-item"><div class="output-item-icon"><img src="assets/calendar_branch_transparent.png" alt="Calendar" /></div><div class="output-item-body"><div class="output-item-type">4 Calendar Events created</div><div class="output-item-text">Entire season added at once</div><div class="output-item-meta">May 17, 24, 31 · Jun 7</div></div></div>
+          <div class="output-item"><div class="output-item-icon"><img src="assets/alarm_wood_icon_transparent.png" alt="Alarm" /></div><div class="output-item-body"><div class="output-item-type">4 Alarms set</div><div class="output-item-text">Game day reminders, 1 hour before each</div><div class="output-item-meta">You'll never miss kickoff</div></div></div>
         </div>
       </div>
       <div class="usecase-row">
@@ -855,8 +816,8 @@
         <div class="usecase-arrow">→</div>
         <div class="usecase-output">
           <div class="output-header">Squirrel Brain extracted:</div>
-          <div class="output-item"><div class="output-item-icon">📝</div><div class="output-item-body"><div class="output-item-type">Note</div><div class="output-item-text">Marcus Reed — Apex Solutions VP Sales</div><div class="output-item-meta">(312) 555-0182 · m.reed@apexsolutions.com</div></div></div>
-          <div class="output-item"><div class="output-item-icon">🔔</div><div class="output-item-body"><div class="output-item-type">Follow-up Alarm</div><div class="output-item-text">Call Marcus re: Q3 proposal</div><div class="output-item-meta">Next week · Apex Solutions</div></div></div>
+          <div class="output-item"><div class="output-item-icon"><img src="assets/notes_transparent.png" alt="Note" /></div><div class="output-item-body"><div class="output-item-type">Note</div><div class="output-item-text">Marcus Reed — Apex Solutions VP Sales</div><div class="output-item-meta">(312) 555-0182 · m.reed@apexsolutions.com</div></div></div>
+          <div class="output-item"><div class="output-item-icon"><img src="assets/alarm_wood_icon_transparent.png" alt="Alarm" /></div><div class="output-item-body"><div class="output-item-type">Follow-up Alarm</div><div class="output-item-text">Call Marcus re: Q3 proposal</div><div class="output-item-meta">Next week · Apex Solutions</div></div></div>
         </div>
       </div>
     </div>
@@ -871,23 +832,14 @@
       <!-- BEFORE -->
       <div class="ba-side">
         <div class="ba-label ba-label--before">Before</div>
-        <div class="ba-card ba-card--legal">
-          <div class="legal-header">
-            <div class="legal-firm">Smith &amp; Jordan LLP</div>
-            <div class="legal-subtitle">Partner Meeting Notes</div>
-          </div>
-          <div class="legal-rules">
-            <div class="legal-line hw-bold">Agenda</div>
-            <div class="legal-line">— Q2 billing review</div>
-            <div class="legal-line">— Anderson v. TechCo update</div>
-            <div class="legal-line hw-faded">  motion due 5/28</div>
-            <div class="legal-line">— Davis mediation — June 10</div>
-            <div class="legal-line">— Lopez trial → Sept 16</div>
-            <div class="legal-line hw-bold" style="margin-top:6px;">Next mtg: June 11 @ 9am</div>
-            <div class="legal-line hw-faded">— send agenda by June 7</div>
-            <div class="legal-line hw-faded">— confirm all partners avail</div>
-          </div>
-          <div class="ba-photo-badge">Handwritten legal pad</div>
+        <div class="ba-img-wrap" data-label="Photo coming soon">
+          <img
+            src="assets/sticky_note_before.jpg"
+            alt="Handwritten sticky note — the raw input before Squirrel Brain"
+            class="ba-img"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"
+          />
+          <div class="ba-img-placeholder" style="display:none;">Photo coming soon</div>
         </div>
       </div>
 
@@ -903,46 +855,14 @@
       <!-- AFTER -->
       <div class="ba-side">
         <div class="ba-label ba-label--after">After</div>
-        <div class="ba-card ba-card--app">
-          <!-- Phone chrome top bar -->
-          <div class="app-topbar">
-            <span class="app-topbar-back">‹ Back</span>
-            <span class="app-topbar-title">Pix Note</span>
-            <span class="app-topbar-badge">PIX NOTE</span>
-          </div>
-          <!-- Thumbnail -->
-          <div class="app-thumb-wrap">
-            <div class="app-thumb">
-              <!-- CSS legal pad miniature -->
-              <div class="app-thumb-legal">
-                <div style="font-size:5px;font-weight:900;color:#555;letter-spacing:.04em;margin-bottom:2px;">Smith &amp; Jordan LLP</div>
-                <div style="font-size:4px;color:#777;border-bottom:1px solid #aac4f0;padding-bottom:1px;margin-bottom:2px;">Partner Meeting Notes</div>
-                <div style="font-size:4px;color:#888;line-height:1.7;">Q2 billing review<br>Anderson v. TechCo<br>Davis mediation June 10<br>Lopez trial Sept 16</div>
-              </div>
-            </div>
-            <div class="app-thumb-expand">Tap to expand ↗</div>
-          </div>
-          <!-- Extracted text -->
-          <div class="app-note-body">
-            <div class="app-note-title">Partner Meeting Notes — Smith &amp; Jordan LLP</div>
-            <div class="app-note-text">
-              <strong>Agenda:</strong><br>
-              • Q2 billing review<br>
-              • Anderson v. TechCo — motion due May 28<br>
-              • Davis v. Greenfield — mediation June 10<br>
-              • Lopez v. City — trial set September 16<br>
-              <br>
-              <strong>Next Meeting:</strong> June 11 at 9:00 AM<br>
-              Send agenda by June 7. Confirm all partners available.
-            </div>
-          </div>
-          <!-- Action buttons -->
-          <div class="app-actions">
-            <div class="app-action">Send as...</div>
-            <div class="app-action app-action--primary">Mark Done</div>
-            <div class="app-action">Set Reminder</div>
-            <div class="app-action app-action--ghost">Dismiss</div>
-          </div>
+        <div class="ba-img-wrap" data-label="Screenshot coming soon">
+          <img
+            src="assets/checklist_after.png"
+            alt="Squirrel Brain app showing the Team Meeting checklist extracted automatically"
+            class="ba-img"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"
+          />
+          <div class="ba-img-placeholder" style="display:none;">Screenshot coming soon</div>
         </div>
       </div>
     </div>
