@@ -906,8 +906,8 @@
   <div id="sq-outer" style="position:fixed; bottom:18px; left:-110px; z-index:9999; pointer-events:none; will-change:left;">
     <div id="sq-inner" style="display:inline-block; will-change:transform;">
       <img id="sq-img" src="assets/squirrel_logo.png"
-           style="width:90px; height:90px; object-fit:contain; display:block;
-                  filter:drop-shadow(0 6px 16px rgba(0,0,0,0.7));
+           style="width:270px; height:270px; object-fit:contain; display:block;
+                  filter:drop-shadow(0 10px 30px rgba(0,0,0,0.7));
                   will-change:transform;" />
     </div>
   </div>
@@ -942,13 +942,19 @@
       const audio = new Audio('assets/chipmunk_squirrel.wav');
       audio.volume = 0.7;
 
-      let interacted = false;
-      ['scroll','click','touchstart','mousemove'].forEach(ev =>
-        document.addEventListener(ev, () => { interacted = true; }, { once: true, passive: true })
+      // Unlock audio on first user gesture (required by all modern browsers)
+      let audioUnlocked = false;
+      function unlockAudio() {
+        if (audioUnlocked) return;
+        audioUnlocked = true;
+        audio.play().then(() => { audio.pause(); audio.currentTime = 0; }).catch(() => {});
+      }
+      ['scroll','click','touchstart','mousemove','keydown'].forEach(ev =>
+        document.addEventListener(ev, unlockAudio, { once: false, passive: true })
       );
 
       const VW = () => window.innerWidth;
-      const CHAR = 80; // px width of char + margin
+      const CHAR = 290; // px width of char + margin
 
       function setX(x) { outer.style.left = x + 'px'; }
       function setDir(facingRight) {
@@ -970,7 +976,6 @@
       }
 
       function playSound() {
-        if (!interacted) return;
         audio.currentTime = 0;
         audio.play().catch(() => {});
       }
@@ -994,17 +999,17 @@
 
       function startShow() {
         // Pass 1: left → right
-        run(false, 2800, () => {
+        run(false, 5000, () => {
           setTimeout(() => {
             // Pass 2: right → left
-            run(true, 2600, () => {
+            run(true, 4800, () => {
               setTimeout(() => {
                 // Pass 3: left → right, stops 70% across
                 const stopX = Math.round(VW() * 0.65);
                 setDir(true);
                 img.className = 'running';
                 playSound();
-                slide(-CHAR, stopX, 1800, () => {
+                slide(-CHAR, stopX, 3200, () => {
                   // Sit and eat
                   eat(stopX, () => {
                     // Scurry off screen
