@@ -7,31 +7,25 @@
   <meta name="description" content="Voice memo, photo, or screenshot — Squirrel Brain reads it, extracts every task and date, and turns it into alarms, notes, and calendar events. Automatically." />
   <meta property="og:title" content="Squirrel Brain — Speak it. Snap it. Stash it." />
   <meta property="og:description" content="Voice memo, photo, or screenshot — Squirrel Brain reads it, extracts every task and date, and turns it into alarms, notes, and calendar events. Automatically." />
-  <meta property="og:image" content="assets/squirrel_logo.png" />
+  <meta property="og:image" content="assets/squirrel_treehouse.png" />
   <style>
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg:       #0a0a0a;
-      --bg2:      #111111;
-      --bg3:      #161616;
-      --orange:   #FF7A1A;
-      --orange-dim: #FF7A1A44;
-      --orange-mid: #FF7A1A88;
-      --white:    #ffffff;
-      --muted:    #888888;
-      --border:   #222222;
-      --radius:   16px;
-      --font:     system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --bg:        #0a0a0a;
+      --bg2:       #111111;
+      --bg3:       #161616;
+      --orange:    #FF7A1A;
+      --orange-dim:#FF7A1A33;
+      --orange-mid:#FF7A1A88;
+      --white:     #ffffff;
+      --muted:     #888888;
+      --border:    #222222;
+      --radius:    16px;
+      --font:      system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
 
-    html {
-      scroll-behavior: smooth;
-    }
+    html { scroll-behavior: smooth; }
 
     body {
       background: var(--bg);
@@ -42,883 +36,769 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* ─── NAV ─────────────────────────────────────────────── */
+    /* ── NAV ─────────────────────────────────────────────── */
     nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 100;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 16px 32px;
-      background: rgba(10, 10, 10, 0.85);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 32px;
+      background: rgba(10,10,10,0.80);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid #ffffff11;
     }
-
-    .nav-brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      text-decoration: none;
-    }
-
-    .nav-brand img {
-      width: 32px;
-      height: 32px;
-      border-radius: 8px;
-    }
-
-    .nav-brand span {
-      font-size: 15px;
-      font-weight: 700;
-      letter-spacing: 0.05em;
-      color: var(--white);
-    }
-
+    .nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .nav-brand img { width: 32px; height: 32px; border-radius: 8px; }
+    .nav-brand span { font-size: 14px; font-weight: 800; letter-spacing: 0.08em; color: var(--white); }
+    .nav-brand em { color: var(--orange); font-style: normal; }
     .nav-cta {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: var(--orange);
-      color: var(--white);
-      text-decoration: none;
-      font-size: 13px;
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      padding: 8px 18px;
-      border-radius: 100px;
-      transition: opacity 0.2s;
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--orange); color: var(--white); text-decoration: none;
+      font-size: 13px; font-weight: 700; letter-spacing: 0.04em;
+      padding: 8px 20px; border-radius: 100px; transition: opacity 0.2s;
     }
-
     .nav-cta:hover { opacity: 0.85; }
 
-    /* ─── HERO ────────────────────────────────────────────── */
+    /* ── HERO — treehouse background ─────────────────────── */
     #hero {
-      min-height: 100svh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 120px 24px 80px;
       position: relative;
+      min-height: 100svh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center;
+      padding: 120px 24px 100px;
       overflow: hidden;
     }
 
-    /* Radial glow behind the logo */
+    /* Treehouse fills the whole hero as a bg image */
     #hero::before {
       content: "";
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -60%);
-      width: 520px;
-      height: 520px;
-      background: radial-gradient(ellipse at center, #FF7A1A22 0%, transparent 70%);
-      pointer-events: none;
+      position: absolute; inset: 0;
+      background: url('assets/squirrel_treehouse.png') center center / cover no-repeat;
+      opacity: 0.18;
+      z-index: 0;
     }
 
-    .hero-logo-wrap {
-      position: relative;
-      display: inline-block;
-      margin-bottom: 32px;
+    /* Dark gradient to keep text readable */
+    #hero::after {
+      content: "";
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, rgba(10,10,10,0.55) 0%, rgba(10,10,10,0.30) 40%, rgba(10,10,10,0.80) 100%);
+      z-index: 0;
     }
 
+    /* Orange glow */
+    .hero-glow {
+      position: absolute; top: 30%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 600px; height: 600px;
+      background: radial-gradient(ellipse, #FF7A1A1A 0%, transparent 70%);
+      pointer-events: none; z-index: 1;
+    }
+
+    .hero-content { position: relative; z-index: 2; }
+
+    .hero-logo-wrap { display: inline-block; margin-bottom: 28px; }
     .hero-logo-wrap img {
-      width: 140px;
-      height: 140px;
-      border-radius: 32px;
-      box-shadow: 0 0 80px #FF7A1A44, 0 0 160px #FF7A1A22;
-      position: relative;
-      z-index: 1;
+      width: 130px; height: 130px; border-radius: 30px;
+      box-shadow: 0 0 60px #FF7A1A55, 0 0 120px #FF7A1A22;
     }
 
     .hero-wordmark {
-      font-size: clamp(36px, 7vw, 72px);
-      font-weight: 900;
-      letter-spacing: -0.02em;
-      color: var(--white);
-      line-height: 1;
-      margin-bottom: 16px;
+      font-size: clamp(38px, 8vw, 80px);
+      font-weight: 900; letter-spacing: -0.02em; color: var(--white);
+      line-height: 1; margin-bottom: 14px;
     }
-
-    .hero-wordmark span {
-      color: var(--orange);
-    }
+    .hero-wordmark span { color: var(--orange); }
 
     .hero-tagline {
-      font-size: clamp(14px, 2.5vw, 20px);
-      font-weight: 700;
-      letter-spacing: 0.18em;
-      color: var(--orange);
-      text-transform: uppercase;
-      margin-bottom: 12px;
+      font-size: clamp(13px, 2.2vw, 18px);
+      font-weight: 700; letter-spacing: 0.22em;
+      color: var(--orange); text-transform: uppercase; margin-bottom: 16px;
     }
 
     .hero-sub {
-      font-size: clamp(14px, 2vw, 18px);
-      color: var(--muted);
-      max-width: 480px;
-      margin: 0 auto 40px;
+      font-size: clamp(15px, 2vw, 18px);
+      color: rgba(255,255,255,0.75);
+      max-width: 500px; margin: 0 auto 40px; line-height: 1.65;
     }
 
-    /* App Store badge (pure CSS) */
     .appstore-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      background: #000000;
-      border: 1.5px solid rgba(255,255,255,0.25);
-      border-radius: 14px;
-      padding: 11px 22px;
-      text-decoration: none;
-      color: var(--white);
+      display: inline-flex; align-items: center; gap: 12px;
+      background: rgba(0,0,0,0.7); border: 1.5px solid rgba(255,255,255,0.3);
+      border-radius: 14px; padding: 12px 24px;
+      text-decoration: none; color: var(--white);
       transition: border-color 0.2s, box-shadow 0.2s;
+      backdrop-filter: blur(8px);
     }
-
-    .appstore-btn:hover {
-      border-color: var(--orange);
-      box-shadow: 0 0 20px var(--orange-dim);
-    }
-
-    .appstore-btn-icon {
-      font-size: 28px;
-      line-height: 1;
-    }
-
-    .appstore-btn-text {
-      display: flex;
-      flex-direction: column;
-      text-align: left;
-    }
-
-    .appstore-btn-text .line1 {
-      font-size: 10px;
-      letter-spacing: 0.04em;
-      color: rgba(255,255,255,0.7);
-    }
-
-    .appstore-btn-text .line2 {
-      font-size: 18px;
-      font-weight: 700;
-      letter-spacing: -0.01em;
-      line-height: 1.1;
-    }
+    .appstore-btn:hover { border-color: var(--orange); box-shadow: 0 0 24px #FF7A1A44; }
+    .appstore-btn-icon { font-size: 28px; line-height: 1; }
+    .appstore-btn-text { display: flex; flex-direction: column; text-align: left; }
+    .appstore-btn-text .line1 { font-size: 10px; letter-spacing: 0.04em; color: rgba(255,255,255,0.65); }
+    .appstore-btn-text .line2 { font-size: 18px; font-weight: 700; letter-spacing: -0.01em; line-height: 1.1; }
 
     .hero-scroll-hint {
-      position: absolute;
-      bottom: 32px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 6px;
-      color: var(--muted);
-      font-size: 11px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      animation: bounce 2s ease-in-out infinite;
+      position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 6px;
+      color: rgba(255,255,255,0.4); font-size: 10px; letter-spacing: 0.12em;
+      text-transform: uppercase; animation: bounce 2s ease-in-out infinite; z-index: 2;
     }
-
-    .hero-scroll-hint svg {
-      width: 16px;
-      height: 16px;
-      opacity: 0.5;
-    }
-
     @keyframes bounce {
-      0%, 100% { transform: translateX(-50%) translateY(0); }
-      50%       { transform: translateX(-50%) translateY(6px); }
+      0%,100% { transform: translateX(-50%) translateY(0); }
+      50%      { transform: translateX(-50%) translateY(7px); }
     }
 
-    /* ─── SECTION SHARED ──────────────────────────────────── */
-    section {
-      padding: 96px 24px;
-    }
+    /* ── SECTION SHARED ───────────────────────────────────── */
+    section { padding: 96px 24px; }
 
     .section-label {
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--orange);
-      margin-bottom: 12px;
-      text-align: center;
+      font-size: 11px; font-weight: 700; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--orange);
+      margin-bottom: 12px; text-align: center;
     }
-
     .section-title {
-      font-size: clamp(28px, 4vw, 44px);
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      text-align: center;
-      margin-bottom: 16px;
-      line-height: 1.15;
+      font-size: clamp(28px, 4vw, 46px); font-weight: 900;
+      letter-spacing: -0.02em; text-align: center;
+      margin-bottom: 16px; line-height: 1.12;
     }
-
     .section-sub {
-      font-size: 17px;
-      color: var(--muted);
-      text-align: center;
-      max-width: 520px;
-      margin: 0 auto 64px;
+      font-size: 17px; color: var(--muted); text-align: center;
+      max-width: 540px; margin: 0 auto 64px; line-height: 1.65;
     }
 
-    /* ─── FEATURES ────────────────────────────────────────── */
-    #features {
-      background: var(--bg2);
-    }
+    /* ── PAIN SECTION ─────────────────────────────────────── */
+    #pain { background: var(--bg2); }
 
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-      max-width: 960px;
-      margin: 0 auto;
-    }
-
-    .feature-card {
-      background: var(--bg3);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 36px 28px;
-      text-align: center;
-      transition: border-color 0.25s, box-shadow 0.25s;
-    }
-
-    .feature-card:hover {
-      border-color: var(--orange-mid);
-      box-shadow: 0 0 32px var(--orange-dim);
-    }
-
-    .feature-icon {
-      width: 64px;
-      height: 64px;
-      object-fit: contain;
-      margin: 0 auto 20px;
-      display: block;
-      filter: drop-shadow(0 0 12px #FF7A1A55);
-    }
-
-    .feature-name {
-      font-size: 18px;
-      font-weight: 700;
-      margin-bottom: 10px;
-      color: var(--white);
-    }
-
-    .feature-desc {
-      font-size: 14px;
-      color: var(--muted);
-      line-height: 1.6;
-    }
-
-    /* ─── USE CASES (SNAP→DONE) ──────────────────────────── */
-    #usecases {
-      background: var(--bg);
-    }
-
-    .usecase-list {
-      display: flex;
-      flex-direction: column;
-      gap: 48px;
-      max-width: 960px;
-      margin: 0 auto;
-    }
-
-    .usecase-row {
-      display: grid;
-      grid-template-columns: 1fr auto 1fr;
+    .pain-inner {
+      max-width: 1000px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 48px;
       align-items: center;
-      gap: 24px;
     }
 
-    .usecase-row:nth-child(even) {
-      direction: rtl;
+    .pain-left { }
+    .pain-number {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 40px; height: 40px; border-radius: 50%;
+      background: var(--orange); color: #fff;
+      font-size: 18px; font-weight: 900; margin-bottom: 20px;
+    }
+    .pain-heading {
+      font-size: clamp(26px, 3.5vw, 40px); font-weight: 900;
+      letter-spacing: -0.02em; line-height: 1.15; margin-bottom: 20px;
+    }
+    .pain-body { font-size: 15px; color: var(--muted); line-height: 1.75; margin-bottom: 20px; }
+    .pain-cta { font-size: 15px; font-weight: 700; color: var(--orange); }
+
+    .brain-tabs {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+    }
+    .brain-tab {
+      background: var(--bg3); border: 1px solid var(--border);
+      border-radius: 12px; padding: 14px 16px;
+      display: flex; align-items: center; gap: 10px;
+      font-size: 13px; font-weight: 600; color: var(--white);
+      transition: border-color 0.2s;
+    }
+    .brain-tab:hover { border-color: var(--orange-mid); }
+    .brain-tab .tab-icon { font-size: 20px; flex-shrink: 0; }
+    .brain-tab .tab-dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--orange); margin-left: auto; flex-shrink: 0;
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%,100% { opacity: 1; transform: scale(1); }
+      50%      { opacity: 0.4; transform: scale(0.7); }
     }
 
-    .usecase-row:nth-child(even) > * {
-      direction: ltr;
+    /* ── FEATURE ROW (shared for all 5 sections) ─────────── */
+    .feature-section { max-width: 1020px; margin: 0 auto; }
+
+    .feature-row {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 64px; align-items: center;
+    }
+    .feature-row.reverse { direction: rtl; }
+    .feature-row.reverse > * { direction: ltr; }
+
+    .feature-number {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 36px; height: 36px; border-radius: 50%;
+      background: var(--orange); color: #fff;
+      font-size: 16px; font-weight: 900; margin-bottom: 16px;
     }
 
-    /* Photo card */
-    .usecase-photo {
-      border-radius: 18px;
-      overflow: hidden;
-      border: 1px solid var(--border);
-      box-shadow: 0 8px 40px rgba(0,0,0,0.5);
-      aspect-ratio: 4/3;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      padding: 20px;
-      position: relative;
-      font-family: 'Courier New', monospace;
+    .feature-label-tag {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--orange); margin-bottom: 10px;
     }
 
-    .usecase-photo--legal {
-      background: #f5f0d8;
-      background-image: repeating-linear-gradient(transparent, transparent 27px, #b8c8e8 27px, #b8c8e8 28px);
-      padding-top: 16px;
+    .feature-heading {
+      font-size: clamp(24px, 3vw, 38px); font-weight: 900;
+      letter-spacing: -0.02em; line-height: 1.15; margin-bottom: 16px;
     }
 
-    .usecase-photo--legal::before {
-      content: "";
-      position: absolute;
-      top: 0; bottom: 0;
-      left: 44px;
-      width: 2px;
-      background: #e88080aa;
+    .feature-body {
+      font-size: 15px; color: var(--muted); line-height: 1.75; margin-bottom: 14px;
     }
 
-    .usecase-photo--sticky {
-      background: #f6e84a;
-      box-shadow: 4px 4px 0 #d4c430, 0 8px 40px rgba(0,0,0,0.4);
+    .feature-accent {
+      font-size: 15px; font-weight: 700; color: var(--orange);
+      line-height: 1.5;
     }
 
-    .usecase-photo--schedule {
-      background: #1a2744;
-      border: 2px solid #2d4a8a;
+    /* Visual panel (right/left side) */
+    .feature-visual {
+      background: var(--bg3); border: 1px solid var(--border);
+      border-radius: 24px; padding: 32px;
+      display: flex; flex-direction: column; align-items: center; gap: 20px;
+      box-shadow: 0 16px 64px rgba(0,0,0,0.4);
+      position: relative; overflow: hidden;
     }
 
-    .usecase-photo--card {
-      background: #ffffff;
-      color: #111;
-    }
-
-    .photo-title {
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: #333;
-      margin-bottom: 8px;
-    }
-
-    .usecase-photo--schedule .photo-title,
-    .usecase-photo--schedule .photo-line {
-      color: rgba(255,255,255,0.7);
-    }
-
-    .photo-line {
-      font-size: 10px;
-      color: #444;
-      line-height: 1.8;
-      padding-left: 52px;
-    }
-
-    .photo-line.indent {
-      padding-left: 64px;
-    }
-
-    .photo-badge {
-      position: absolute;
-      bottom: 14px;
-      right: 14px;
-      background: rgba(0,0,0,0.15);
-      color: rgba(0,0,0,0.5);
-      font-size: 9px;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      padding: 4px 8px;
-      border-radius: 100px;
-    }
-
-    .usecase-photo--schedule .photo-badge {
-      background: rgba(255,255,255,0.1);
-      color: rgba(255,255,255,0.4);
-    }
-
-    /* Arrow */
-    .usecase-arrow {
-      font-size: 28px;
-      color: var(--orange);
-      flex-shrink: 0;
-      filter: drop-shadow(0 0 8px #FF7A1A88);
-    }
-
-    /* Output card */
-    .usecase-output {
-      background: var(--bg3);
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 24px;
-      box-shadow: 0 8px 40px rgba(0,0,0,0.4);
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .output-header {
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--orange);
-      margin-bottom: 4px;
-    }
-
-    .output-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      padding: 10px 12px;
-      background: var(--bg2);
-      border-radius: 10px;
-      border: 1px solid var(--border);
-    }
-
-    .output-item-icon {
-      font-size: 15px;
-      flex-shrink: 0;
-      margin-top: 1px;
-      line-height: 1;
-    }
-
-    .output-item-body {
-      flex: 1;
-      min-width: 0;
-    }
-
-    .output-item-type {
-      font-size: 9px;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--orange);
-      margin-bottom: 2px;
-    }
-
-    .output-item-text {
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--white);
-      line-height: 1.35;
-    }
-
-    .output-item-meta {
-      font-size: 11px;
-      color: var(--muted);
-      margin-top: 2px;
-    }
-
-    @media (max-width: 768px) {
-      .usecase-row {
-        grid-template-columns: 1fr;
-      }
-
-      .usecase-row:nth-child(even) {
-        direction: ltr;
-      }
-
-      .usecase-arrow {
-        text-align: center;
-        font-size: 22px;
-      }
-
-      .usecase-photo {
-        aspect-ratio: 3/2;
-      }
-    }
-
-    /* ─── SCREENSHOTS ─────────────────────────────────────── */
-    #screenshots {
-      background: var(--bg);
-      overflow: hidden;
-    }
-
-    #screenshots .section-title,
-    #screenshots .section-label,
-    #screenshots .section-sub {
-      padding: 0 24px;
-    }
-
-    .screenshots-scroll {
-      display: flex;
-      gap: 20px;
-      overflow-x: auto;
-      padding: 8px 48px 32px;
-      scroll-snap-type: x mandatory;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: thin;
-      scrollbar-color: var(--border) transparent;
-    }
-
-    .screenshots-scroll::-webkit-scrollbar {
-      height: 4px;
-    }
-
-    .screenshots-scroll::-webkit-scrollbar-track {
-      background: transparent;
-    }
-
-    .screenshots-scroll::-webkit-scrollbar-thumb {
-      background: var(--border);
-      border-radius: 4px;
-    }
-
-    .screenshot-card {
-      flex: 0 0 auto;
-      scroll-snap-align: start;
-      width: 240px;
-      border-radius: 20px;
-      overflow: hidden;
-      border: 1px solid var(--border);
-      box-shadow: 0 8px 40px rgba(0,0,0,0.6);
-      transition: transform 0.25s, box-shadow 0.25s;
-      background: #111;
-    }
-
-    .screenshot-card:hover {
-      transform: translateY(-4px) scale(1.01);
-      box-shadow: 0 16px 60px rgba(255,122,26,0.18);
-    }
-
-    .screenshot-card img {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-
-    .screenshot-label {
-      padding: 10px 14px 12px;
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.05em;
-      color: var(--muted);
-      text-align: center;
-      text-transform: uppercase;
-    }
-
-    /* ─── HOW IT WORKS ────────────────────────────────────── */
-    #how {
-      background: var(--bg2);
-    }
-
-    .steps-row {
-      display: flex;
-      align-items: flex-start;
-      justify-content: center;
-      gap: 0;
-      max-width: 900px;
-      margin: 0 auto;
-      position: relative;
-    }
-
-    /* connector line between steps */
-    .steps-row::before {
-      content: "";
-      position: absolute;
-      top: 36px;
-      left: calc(50% - 260px);
-      right: calc(50% - 260px);
-      height: 2px;
-      background: linear-gradient(90deg, transparent, var(--orange-mid), transparent);
-    }
-
-    .step {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      padding: 0 24px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .step-number {
-      width: 72px;
-      height: 72px;
-      border-radius: 50%;
-      background: var(--bg3);
-      border: 2px solid var(--orange);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 26px;
-      font-weight: 900;
-      color: var(--orange);
-      margin-bottom: 20px;
-      box-shadow: 0 0 24px var(--orange-dim);
-      flex-shrink: 0;
-    }
-
-    .step-title {
-      font-size: 17px;
-      font-weight: 700;
-      margin-bottom: 8px;
-      color: var(--white);
-    }
-
-    .step-desc {
-      font-size: 14px;
-      color: var(--muted);
-      line-height: 1.6;
-    }
-
-    /* ─── SOCIAL PROOF STRIP ──────────────────────────────── */
-    #proof {
-      background: var(--bg);
-      padding: 64px 24px;
-    }
-
-    .proof-inner {
-      max-width: 800px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 32px;
-      text-align: center;
-    }
-
-    .proof-stat {
-      padding: 28px 16px;
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      background: var(--bg3);
-    }
-
-    .proof-number {
-      font-size: 42px;
-      font-weight: 900;
-      color: var(--orange);
-      letter-spacing: -0.03em;
-      line-height: 1;
-      margin-bottom: 6px;
-    }
-
-    .proof-label {
-      font-size: 13px;
-      color: var(--muted);
-      letter-spacing: 0.05em;
-    }
-
-    /* ─── CTA BAND ────────────────────────────────────────── */
-    #cta {
-      background: var(--bg2);
-      padding: 96px 24px;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    #cta::before {
-      content: "";
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 600px;
-      height: 300px;
-      background: radial-gradient(ellipse at center, #FF7A1A18 0%, transparent 70%);
+    .feature-visual::before {
+      content: ""; position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 50% 0%, #FF7A1A0D 0%, transparent 70%);
       pointer-events: none;
     }
 
-    #cta .section-title {
-      margin-bottom: 12px;
+    .feature-visual-icon {
+      width: 80px; height: 80px; object-fit: contain;
+      filter: drop-shadow(0 0 16px #FF7A1A66);
     }
 
-    #cta .section-sub {
-      margin-bottom: 40px;
+    /* Voice quotes */
+    .voice-quotes { width: 100%; display: flex; flex-direction: column; gap: 10px; }
+    .voice-quote {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 12px; padding: 12px 16px;
+      font-size: 14px; color: var(--white); font-style: italic;
     }
-
-    #cta .appstore-btn {
-      font-size: 16px;
+    .voice-quote-arrow {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 12px; color: var(--orange); font-weight: 700;
+      padding: 0 4px;
     }
+    .voice-output {
+      background: var(--bg2); border: 1px solid #FF7A1A33;
+      border-radius: 12px; padding: 12px 16px; width: 100%;
+    }
+    .voice-output-item {
+      display: flex; align-items: center; gap: 10px;
+      padding: 6px 0; font-size: 13px; color: var(--white);
+      border-bottom: 1px solid var(--border);
+    }
+    .voice-output-item:last-child { border-bottom: none; }
+    .voice-check {
+      width: 18px; height: 18px; border-radius: 50%;
+      background: #FF7A1A22; border: 1.5px solid var(--orange);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .voice-check svg { width: 10px; height: 10px; }
 
-    /* ─── FOOTER ──────────────────────────────────────────── */
-    footer {
-      background: var(--bg);
+    /* Calendar table */
+    .mini-schedule {
+      width: 100%; border-collapse: collapse; font-size: 11px;
+      background: var(--bg2); border-radius: 10px; overflow: hidden;
+    }
+    .mini-schedule th {
+      background: #1a1a1a; color: var(--orange); font-size: 9px;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 8px 10px; text-align: left;
+    }
+    .mini-schedule td {
+      padding: 8px 10px; color: rgba(255,255,255,0.75);
       border-top: 1px solid var(--border);
-      padding: 32px 24px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 12px;
-      text-align: center;
+    }
+    .mini-schedule tr:hover td { background: rgba(255,122,26,0.05); }
+
+    .cal-result {
+      width: 100%; background: var(--bg2); border: 1px solid #FF7A1A33;
+      border-radius: 12px; padding: 14px 16px;
+      display: flex; gap: 14px; align-items: center;
+    }
+    .cal-date-block {
+      text-align: center; flex-shrink: 0;
+      background: var(--orange); color: #fff;
+      border-radius: 10px; padding: 8px 14px;
+    }
+    .cal-date-block .month { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+    .cal-date-block .day { font-size: 28px; font-weight: 900; line-height: 1; }
+    .cal-info { flex: 1; }
+    .cal-info .event-name { font-size: 14px; font-weight: 700; color: var(--white); }
+    .cal-info .event-meta { font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+    /* Photo grid */
+    .photo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; width: 100%; }
+    .photo-tile {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 12px; padding: 14px;
+      display: flex; flex-direction: column; gap: 6px; align-items: center;
+      text-align: center; transition: border-color 0.2s;
+    }
+    .photo-tile:hover { border-color: var(--orange-mid); }
+    .photo-tile-icon { font-size: 26px; }
+    .photo-tile-label { font-size: 11px; font-weight: 600; color: var(--muted); letter-spacing: 0.05em; }
+    .search-bar {
+      width: 100%; background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 10px; padding: 10px 16px;
+      display: flex; align-items: center; gap: 10px;
+      font-size: 13px; color: var(--muted);
+    }
+    .search-bar span { color: var(--orange); }
+
+    /* Lock screen notification */
+    .lock-screen {
+      width: 100%; background: linear-gradient(160deg, #1c2a3a 0%, #0d1520 100%);
+      border-radius: 16px; padding: 20px 18px;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    .lock-time { font-size: 42px; font-weight: 200; color: #fff; line-height: 1; }
+    .lock-date { font-size: 13px; color: rgba(255,255,255,0.6); margin-bottom: 20px; }
+    .notif-card {
+      background: rgba(255,255,255,0.12);
+      backdrop-filter: blur(12px);
+      border-radius: 14px; padding: 14px 16px;
+    }
+    .notif-header { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+    .notif-icon { width: 22px; height: 22px; border-radius: 6px; object-fit: contain; }
+    .notif-app { font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.6); letter-spacing: 0.04em; text-transform: uppercase; }
+    .notif-time { font-size: 11px; color: rgba(255,255,255,0.4); margin-left: auto; }
+    .notif-title { font-size: 14px; font-weight: 700; color: #fff; line-height: 1.3; }
+    .notif-body { font-size: 12px; color: rgba(255,255,255,0.65); margin-top: 3px; }
+    .notif-actions { display: flex; gap: 8px; margin-top: 12px; }
+    .notif-btn {
+      flex: 1; background: rgba(255,255,255,0.15); border: none;
+      border-radius: 10px; padding: 9px; font-size: 13px; font-weight: 600;
+      color: #fff; cursor: default; text-align: center;
+    }
+    .notif-btn.primary { background: #FF7A1A; }
+
+    /* ── USE CASES ────────────────────────────────────────── */
+    #usecases { background: var(--bg); }
+
+    .usecase-list { display: flex; flex-direction: column; gap: 48px; max-width: 960px; margin: 0 auto; }
+
+    .usecase-row { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 24px; }
+    .usecase-row:nth-child(even) { direction: rtl; }
+    .usecase-row:nth-child(even) > * { direction: ltr; }
+
+    .usecase-photo {
+      border-radius: 18px; overflow: hidden; border: 1px solid var(--border);
+      box-shadow: 0 8px 40px rgba(0,0,0,0.5); aspect-ratio: 4/3;
+      display: flex; flex-direction: column; justify-content: flex-start;
+      padding: 20px; position: relative; font-family: 'Courier New', monospace;
+    }
+    .usecase-photo--legal { background: #f5f0d8; background-image: repeating-linear-gradient(transparent, transparent 27px, #b8c8e8 27px, #b8c8e8 28px); }
+    .usecase-photo--legal::before { content: ""; position: absolute; top: 0; bottom: 0; left: 44px; width: 2px; background: #e88080aa; }
+    .usecase-photo--sticky { background: #f6e84a; box-shadow: 4px 4px 0 #d4c430, 0 8px 40px rgba(0,0,0,0.4); }
+    .usecase-photo--schedule { background: #1a2744; border: 2px solid #2d4a8a; }
+    .usecase-photo--card { background: #ffffff; color: #111; }
+
+    .photo-title { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #333; margin-bottom: 8px; }
+    .usecase-photo--schedule .photo-title, .usecase-photo--schedule .photo-line { color: rgba(255,255,255,0.7); }
+    .photo-line { font-size: 10px; color: #444; line-height: 1.8; padding-left: 52px; }
+    .photo-line.indent { padding-left: 64px; }
+    .photo-badge { position: absolute; bottom: 14px; right: 14px; background: rgba(0,0,0,0.15); color: rgba(0,0,0,0.5); font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 4px 8px; border-radius: 100px; }
+    .usecase-photo--schedule .photo-badge { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.4); }
+
+    .usecase-arrow { font-size: 28px; color: var(--orange); flex-shrink: 0; filter: drop-shadow(0 0 8px #FF7A1A88); }
+
+    .usecase-output { background: var(--bg3); border: 1px solid var(--border); border-radius: 18px; padding: 24px; box-shadow: 0 8px 40px rgba(0,0,0,0.4); display: flex; flex-direction: column; gap: 10px; }
+    .output-header { font-size: 10px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--orange); margin-bottom: 4px; }
+    .output-item { display: flex; align-items: flex-start; gap: 10px; padding: 10px 12px; background: var(--bg2); border-radius: 10px; border: 1px solid var(--border); }
+    .output-item-icon { font-size: 15px; flex-shrink: 0; margin-top: 1px; }
+    .output-item-body { flex: 1; }
+    .output-item-type { font-size: 9px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--orange); margin-bottom: 2px; }
+    .output-item-text { font-size: 13px; font-weight: 600; color: var(--white); line-height: 1.35; }
+    .output-item-meta { font-size: 11px; color: var(--muted); margin-top: 2px; }
+
+    /* ── SCREENSHOTS ──────────────────────────────────────── */
+    #screenshots { background: var(--bg2); overflow: hidden; }
+    .screenshots-scroll {
+      display: flex; gap: 20px; overflow-x: auto; padding: 8px 48px 32px;
+      scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;
+      scrollbar-width: thin; scrollbar-color: var(--border) transparent;
+    }
+    .screenshots-scroll::-webkit-scrollbar { height: 4px; }
+    .screenshots-scroll::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+    .screenshot-card {
+      flex: 0 0 auto; scroll-snap-align: start; width: 240px;
+      border-radius: 20px; overflow: hidden; border: 1px solid var(--border);
+      box-shadow: 0 8px 40px rgba(0,0,0,0.6); transition: transform 0.25s, box-shadow 0.25s; background: #111;
+    }
+    .screenshot-card:hover { transform: translateY(-4px) scale(1.01); box-shadow: 0 16px 60px rgba(255,122,26,0.18); }
+    .screenshot-card img { width: 100%; height: auto; display: block; }
+    .screenshot-label { padding: 10px 14px 12px; font-size: 11px; font-weight: 600; letter-spacing: 0.05em; color: var(--muted); text-align: center; text-transform: uppercase; }
+
+    /* ── PROOF ────────────────────────────────────────────── */
+    #proof { background: var(--bg); padding: 72px 24px; }
+    .proof-inner { max-width: 800px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; text-align: center; }
+    .proof-stat { padding: 28px 16px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--bg3); }
+    .proof-number { font-size: 42px; font-weight: 900; color: var(--orange); letter-spacing: -0.03em; line-height: 1; margin-bottom: 6px; }
+    .proof-label { font-size: 13px; color: var(--muted); letter-spacing: 0.05em; }
+
+    /* ── CTA ──────────────────────────────────────────────── */
+    #cta {
+      background: var(--bg2); padding: 0; text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .cta-treehouse {
+      width: 100%; max-height: 320px; object-fit: cover; object-position: center 30%;
+      opacity: 0.25; display: block;
+    }
+    .cta-content {
+      position: absolute; inset: 0; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; padding: 60px 24px;
+      background: linear-gradient(to bottom, rgba(17,17,17,0.4) 0%, rgba(17,17,17,0.85) 100%);
+    }
+    .cta-bottom-tag {
+      font-size: clamp(13px, 2vw, 16px); color: rgba(255,255,255,0.55);
+      letter-spacing: 0.04em; margin-top: 20px;
+      max-width: 520px; line-height: 1.6;
+    }
+    .cta-bottom-tag strong { color: var(--orange); font-style: normal; }
+
+    /* ── BEFORE / AFTER ──────────────────────────────────── */
+    .ba-wrap {
+      display: flex; align-items: center; justify-content: center;
+      gap: 24px; flex-wrap: wrap; max-width: 900px; margin: 0 auto;
+    }
+    .ba-side { display: flex; flex-direction: column; align-items: center; gap: 12px; flex: 1; min-width: 280px; max-width: 340px; }
+    .ba-label {
+      font-size: 11px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase;
+      padding: 4px 14px; border-radius: 100px;
+    }
+    .ba-label--before { background: #222; color: var(--muted); }
+    .ba-label--after  { background: #FF7A1A22; color: var(--orange); }
+
+    /* Legal pad card */
+    .ba-card--legal {
+      width: 100%; background: #f5f0c8;
+      background-image: repeating-linear-gradient(transparent, transparent 27px, #b8cce8 27px, #b8cce8 28px);
+      border-radius: 8px; padding: 16px 16px 14px 52px; position: relative;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.5); min-height: 280px;
+    }
+    .ba-card--legal::before {
+      content: ""; position: absolute; top: 0; bottom: 0; left: 40px; width: 2px;
+      background: #e88080aa;
+    }
+    .legal-header { margin-bottom: 10px; border-bottom: 2px solid #d0bc7088; padding-bottom: 6px; }
+    .legal-firm { font-size: 11px; font-weight: 900; color: #555; letter-spacing: 0.08em; text-transform: uppercase; }
+    .legal-subtitle { font-size: 13px; color: #444; font-style: italic; margin-top: 2px; }
+    .legal-rules { display: flex; flex-direction: column; gap: 2px; }
+    .legal-line {
+      font-family: "Segoe Print", "Comic Sans MS", cursive; font-size: 12px; color: #333;
+      line-height: 28px; padding-left: 6px;
+    }
+    .legal-line.hw-bold { font-weight: 700; color: #222; }
+    .legal-line.hw-faded { color: #777; font-size: 11px; padding-left: 16px; }
+    .ba-photo-badge {
+      margin-top: 10px; font-size: 10px; color: #888; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase;
     }
 
-    .footer-brand {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 4px;
+    /* App card (PixNote) */
+    .ba-card--app {
+      width: 100%; background: #141414; border-radius: 16px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.7), 0 0 0 1px #FF7A1A33;
+      overflow: hidden; min-height: 280px;
+      display: flex; flex-direction: column;
+    }
+    .app-topbar {
+      display: flex; align-items: center; gap: 8px;
+      padding: 10px 14px 8px;
+      background: #1a1a1a; border-bottom: 1px solid #2a2a2a;
+    }
+    .app-topbar-back { font-size: 12px; color: var(--orange); flex-shrink: 0; }
+    .app-topbar-title { font-size: 13px; font-weight: 700; color: var(--white); flex: 1; text-align: center; }
+    .app-topbar-badge {
+      font-size: 9px; font-weight: 800; letter-spacing: 0.1em;
+      background: var(--orange); color: #fff; padding: 2px 7px; border-radius: 100px;
+      flex-shrink: 0;
+    }
+    .app-thumb-wrap {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 14px 8px; border-bottom: 1px solid #2a2a2a;
+    }
+    .app-thumb {
+      width: 68px; height: 50px; border-radius: 6px; overflow: hidden; flex-shrink: 0;
+      border: 1.5px solid var(--orange); background: #f5f0c8;
+      padding: 4px 4px 4px 8px;
+    }
+    .app-thumb-legal { height: 100%; display: flex; flex-direction: column; justify-content: flex-start; }
+    .app-thumb-expand { font-size: 10px; color: var(--muted); }
+    .app-note-body { padding: 10px 14px 6px; flex: 1; }
+    .app-note-title { font-size: 12px; font-weight: 700; color: var(--white); margin-bottom: 6px; }
+    .app-note-text { font-size: 11px; color: #aaa; line-height: 1.65; }
+    .app-note-text strong { color: #ddd; }
+    .app-actions {
+      display: flex; flex-wrap: wrap; gap: 6px;
+      padding: 10px 14px 12px; border-top: 1px solid #2a2a2a;
+    }
+    .app-action {
+      font-size: 10px; font-weight: 600; padding: 5px 10px;
+      border-radius: 8px; border: 1px solid #333; color: #aaa;
+      background: #1e1e1e; cursor: default;
+    }
+    .app-action--primary { background: var(--orange); color: #fff; border-color: transparent; }
+    .app-action--ghost { color: #555; border-color: #222; }
+
+    /* Arrow between cards */
+    .ba-arrow { display: flex; flex-direction: column; align-items: center; gap: 6px; flex-shrink: 0; }
+    .ba-arrow-label { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; color: var(--orange); text-transform: uppercase; }
+
+    @media (max-width: 680px) {
+      .ba-arrow { transform: rotate(90deg); }
+      .ba-arrow-label { display: none; }
     }
 
-    .footer-brand img {
-      width: 24px;
-      height: 24px;
-      border-radius: 6px;
-    }
+    /* ── FOOTER ───────────────────────────────────────────── */
+    footer { background: var(--bg); border-top: 1px solid var(--border); padding: 32px 24px; display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center; }
+    .footer-brand { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
+    .footer-brand img { width: 24px; height: 24px; border-radius: 6px; }
+    .footer-brand span { font-size: 14px; font-weight: 700; color: var(--white); letter-spacing: 0.05em; }
+    .footer-links { display: flex; gap: 24px; flex-wrap: wrap; justify-content: center; }
+    .footer-links a { font-size: 13px; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--orange); }
+    .footer-copy { font-size: 12px; color: #333; }
 
-    .footer-brand span {
-      font-size: 14px;
-      font-weight: 700;
-      color: var(--white);
-      letter-spacing: 0.05em;
-    }
-
-    .footer-links {
-      display: flex;
-      gap: 24px;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-
-    .footer-links a {
-      font-size: 13px;
-      color: var(--muted);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-
-    .footer-links a:hover {
-      color: var(--orange);
-    }
-
-    .footer-copy {
-      font-size: 12px;
-      color: var(--border);
-    }
-
-    /* ─── RESPONSIVE ──────────────────────────────────────── */
+    /* ── RESPONSIVE ───────────────────────────────────────── */
     @media (max-width: 768px) {
-      nav {
-        padding: 14px 20px;
-      }
+      nav { padding: 12px 18px; }
+      .nav-brand span { display: none; }
 
-      .nav-brand span {
-        display: none;
-      }
+      .pain-inner { grid-template-columns: 1fr; }
+      .brain-tabs { grid-template-columns: 1fr 1fr; }
 
-      .features-grid {
-        grid-template-columns: 1fr;
-        max-width: 440px;
-      }
+      .feature-row { grid-template-columns: 1fr; gap: 32px; }
+      .feature-row.reverse { direction: ltr; }
 
-      .steps-row {
-        flex-direction: column;
-        align-items: center;
-        gap: 40px;
-      }
+      .usecase-row { grid-template-columns: 1fr; }
+      .usecase-row:nth-child(even) { direction: ltr; }
+      .usecase-photo { aspect-ratio: 3/2; }
+      .usecase-arrow { text-align: center; font-size: 22px; }
 
-      .steps-row::before {
-        display: none;
-      }
-
-      .step {
-        max-width: 320px;
-        width: 100%;
-      }
-
-      .proof-inner {
-        grid-template-columns: 1fr;
-        max-width: 320px;
-      }
-
-      .screenshot-card {
-        width: 200px;
-      }
-
-      .screenshots-scroll {
-        padding: 8px 24px 24px;
-      }
-
-      section {
-        padding: 72px 16px;
-      }
+      .proof-inner { grid-template-columns: 1fr; max-width: 320px; }
+      .screenshot-card { width: 200px; }
+      .screenshots-scroll { padding: 8px 20px 20px; }
+      section { padding: 72px 16px; }
     }
 
     @media (max-width: 480px) {
-      .hero-logo-wrap img {
-        width: 110px;
-        height: 110px;
-      }
+      .hero-logo-wrap img { width: 100px; height: 100px; }
+      .brain-tabs { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
 
-  <!-- ─── NAV ─────────────────────────────────────────────── -->
+  <!-- NAV -->
   <nav>
     <a href="#hero" class="nav-brand">
-      <img src="assets/icon.png" alt="Squirrel Brain icon" />
-      <span>SQUIRREL BRAIN</span>
+      <img src="assets/icon.png" alt="Squirrel Brain" />
+      <span>SQUIRREL <em>BRAIN</em></span>
     </a>
-    <a href="#" class="nav-cta">Download</a>
+    <a href="#" class="nav-cta">Download Free</a>
   </nav>
 
-  <!-- ─── HERO ─────────────────────────────────────────────── -->
+  <!-- HERO — treehouse background -->
   <section id="hero">
-    <div class="hero-logo-wrap">
-      <img src="assets/squirrel_logo.png" alt="Squirrel Brain logo — orange squirrel with glowing brain" />
+    <div class="hero-glow"></div>
+    <div class="hero-content">
+      <div class="hero-logo-wrap">
+        <img src="assets/squirrel_logo.png" alt="Squirrel Brain" />
+      </div>
+      <h1 class="hero-wordmark">SQUIRREL <span>BRAIN</span></h1>
+      <p class="hero-tagline">Speak it. &nbsp; Snap it. &nbsp; Stash it.</p>
+      <p class="hero-sub">Voice memo, photo, or screenshot — Squirrel Brain reads it, extracts every task and date, and turns it into alarms, notes, and calendar events. Automatically.</p>
+      <a href="#" class="appstore-btn" aria-label="Download on the App Store">
+        <span class="appstore-btn-icon">&#63743;</span>
+        <span class="appstore-btn-text">
+          <span class="line1">Download on the</span>
+          <span class="line2">App Store</span>
+        </span>
+      </a>
     </div>
-
-    <h1 class="hero-wordmark">SQUIRREL <span>BRAIN</span></h1>
-    <p class="hero-tagline">Speak it. Snap it. Stash it.</p>
-    <p class="hero-sub">Voice memo, photo, or screenshot — Squirrel Brain reads it, extracts every task and date, and turns it into alarms, notes, and calendar events. Automatically.</p>
-
-    <a href="#" class="appstore-btn" aria-label="Download on the App Store">
-      <span class="appstore-btn-icon">&#63743;</span>
-      <span class="appstore-btn-text">
-        <span class="line1">Download on the</span>
-        <span class="line2">App Store</span>
-      </span>
-    </a>
-
     <div class="hero-scroll-hint" aria-hidden="true">
       <span>Scroll</span>
-      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16">
         <path d="M8 3v10M3 9l5 5 5-5"/>
       </svg>
     </div>
   </section>
 
-  <!-- ─── FEATURES ─────────────────────────────────────────── -->
-  <section id="features">
-    <p class="section-label">Why Squirrel Brain</p>
-    <h2 class="section-title">Your brain dump, handled.</h2>
-    <p class="section-sub">Stop losing tasks in the fog after meetings. One voice note does all the work.</p>
-
-    <div class="features-grid">
-      <div class="feature-card">
-        <img class="feature-icon" src="assets/acorn_mic_transparent.png" alt="Voice first" />
-        <h3 class="feature-name">Voice First</h3>
-        <p class="feature-desc">Tap once and talk. Squirrel Brain listens to your whole brain dump — no typing, no tapping, no friction.</p>
+  <!-- 1 — PAIN: Your brain has too many tabs open -->
+  <section id="pain">
+    <div class="pain-inner">
+      <div class="pain-left">
+        <div class="pain-number">1</div>
+        <h2 class="pain-heading">Your brain has too many tabs open.</h2>
+        <p class="pain-body">Soccer schedules. Doctor appointments. Work follow-ups. Passwords. Ideas. Random screenshots. Things your spouse texted you three days ago.</p>
+        <p class="pain-cta">Squirrel Brain helps you capture everything before it disappears.</p>
       </div>
-
-      <div class="feature-card">
-        <img class="feature-icon" src="assets/squirrel_logo.png" alt="AI powered" style="border-radius:8px;" />
-        <h3 class="feature-name">AI Powered</h3>
-        <p class="feature-desc">The AI reads between the lines — extracting tasks, dates, people, and priorities from your natural speech.</p>
-      </div>
-
-      <div class="feature-card">
-        <img class="feature-icon" src="assets/alarm_wood_icon_transparent.png" alt="Loud alarms" />
-        <h3 class="feature-name">Loud Alarms</h3>
-        <p class="feature-desc">No silent notification that gets buried. Squirrel Brain fires real, loud alarms so deadlines actually get met.</p>
+      <div class="brain-tabs">
+        <div class="brain-tab"><span class="tab-icon">⚽</span>Soccer Schedule<span class="tab-dot"></span></div>
+        <div class="brain-tab"><span class="tab-icon">🩺</span>Doctor Appt<span class="tab-dot"></span></div>
+        <div class="brain-tab"><span class="tab-icon">💼</span>Work Follow-Up<span class="tab-dot"></span></div>
+        <div class="brain-tab"><span class="tab-icon">🔑</span>Passwords<span class="tab-dot"></span></div>
+        <div class="brain-tab"><span class="tab-icon">📸</span>Screenshots<span class="tab-dot"></span></div>
+        <div class="brain-tab"><span class="tab-icon">💬</span>Spouse Text<span class="tab-dot"></span></div>
+        <div class="brain-tab"><span class="tab-icon">💡</span>Ideas<span class="tab-dot"></span></div>
+        <div class="brain-tab"><span class="tab-icon">🛒</span>Grocery Run<span class="tab-dot"></span></div>
       </div>
     </div>
   </section>
 
-  <!-- ─── USE CASES ──────────────────────────────────────────── -->
-  <section id="usecases">
+  <!-- 2 — VOICE: Your thoughts aren't organized -->
+  <section style="background:var(--bg);">
+    <div class="feature-section">
+      <div class="feature-row">
+        <div>
+          <div class="feature-number">2</div>
+          <div class="feature-label-tag">Speak It</div>
+          <h2 class="feature-heading">Your thoughts aren't organized.<br>That's okay.</h2>
+          <p class="feature-body">Just say it out loud. "Remind me to call legal." "Need to send pricing tomorrow." "Pick up cleats after school."<br><br>You don't need complete sentences. You don't need to think first. Just talk.</p>
+          <p class="feature-accent">Squirrel Brain turns chaos into organized action.</p>
+        </div>
+        <div class="feature-visual">
+          <img src="assets/acorn_mic_transparent.png" alt="Voice capture" class="feature-visual-icon" />
+          <div class="voice-quotes">
+            <div class="voice-quote">"Remind me to call legal."</div>
+            <div class="voice-quote">"Need to send pricing tomorrow."</div>
+            <div class="voice-quote">"Pick up cleats after school."</div>
+          </div>
+          <div class="voice-quote-arrow">↓ &nbsp; Squirrel Brain extracts</div>
+          <div class="voice-output">
+            <div class="voice-output-item">
+              <div class="voice-check"><svg viewBox="0 0 10 10" fill="none" stroke="#FF7A1A" stroke-width="2"><path d="M2 5l2.5 2.5L8 3"/></svg></div>
+              Call legal — Tomorrow
+            </div>
+            <div class="voice-output-item">
+              <div class="voice-check"><svg viewBox="0 0 10 10" fill="none" stroke="#FF7A1A" stroke-width="2"><path d="M2 5l2.5 2.5L8 3"/></svg></div>
+              Send pricing — Tomorrow
+            </div>
+            <div class="voice-output-item">
+              <div class="voice-check"><svg viewBox="0 0 10 10" fill="none" stroke="#FF7A1A" stroke-width="2"><path d="M2 5l2.5 2.5L8 3"/></svg></div>
+              Pick up cleats — Tomorrow after school
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 — SCREENSHOT: One screenshot. Full calendar. -->
+  <section style="background:var(--bg2);">
+    <div class="feature-section">
+      <div class="feature-row reverse">
+        <div>
+          <div class="feature-number">3</div>
+          <div class="feature-label-tag">Snap It</div>
+          <h2 class="feature-heading">One screenshot.<br>Full calendar.</h2>
+          <p class="feature-body">Soccer schedules. School events. Travel itineraries. Work schedules.<br><br>Screenshot it once. Squirrel Brain reads every date, time, address, and location — then builds your calendar automatically.</p>
+          <p class="feature-accent">Every game, every event, every deadline. All at once.</p>
+        </div>
+        <div class="feature-visual">
+          <img src="assets/calendar_branch_transparent.png" alt="Calendar" class="feature-visual-icon" />
+          <table class="mini-schedule">
+            <thead>
+              <tr><th>Date</th><th>Time</th><th>Opponent</th><th>Field</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Sat 3/9</td><td>9:00 AM</td><td>Riverside FC</td><td>Field 3</td></tr>
+              <tr><td>Sat 3/16</td><td>11:00 AM</td><td>Westview Utd</td><td>Field 1</td></tr>
+              <tr><td>Sat 3/23</td><td>10:00 AM</td><td>Kings FC</td><td>Field 2</td></tr>
+              <tr><td>Sat 4/6</td><td>9:00 AM</td><td>Lakeside SC</td><td>Field 4</td></tr>
+            </tbody>
+          </table>
+          <div class="cal-result">
+            <div class="cal-date-block">
+              <div class="month">MAR</div>
+              <div class="day">9</div>
+            </div>
+            <div class="cal-info">
+              <div class="event-name">Riverside FC</div>
+              <div class="event-meta">Sat, Mar 9 · 9:00 AM · Field 3</div>
+              <div class="event-meta" style="color:#FF7A1A;margin-top:4px;">+ 3 more events added ✓</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 — SNAP: Snap anything. Find it instantly. -->
+  <section style="background:var(--bg);">
+    <div class="feature-section">
+      <div class="feature-row">
+        <div>
+          <div class="feature-number">4</div>
+          <div class="feature-label-tag">Snap It</div>
+          <h2 class="feature-heading">Snap anything.<br>Find it instantly.</h2>
+          <p class="feature-body">Wine you loved. A whiteboard. A menu. A business card.<br><br>Take a picture and Squirrel Brain turns it into searchable notes you can actually find later.</p>
+          <p class="feature-accent">No more scrolling through thousands of random photos trying to remember where something was.</p>
+        </div>
+        <div class="feature-visual">
+          <img src="assets/notes_transparent.png" alt="Photo notes" class="feature-visual-icon" />
+          <div class="photo-grid">
+            <div class="photo-tile"><div class="photo-tile-icon">🍷</div><div class="photo-tile-label">Wine Label</div></div>
+            <div class="photo-tile"><div class="photo-tile-icon">📋</div><div class="photo-tile-label">Whiteboard</div></div>
+            <div class="photo-tile"><div class="photo-tile-icon">👤</div><div class="photo-tile-label">Business Card</div></div>
+            <div class="photo-tile"><div class="photo-tile-icon">🍽️</div><div class="photo-tile-label">Restaurant Menu</div></div>
+          </div>
+          <div class="search-bar">
+            <span>🔍</span> <span>cakebread chardonnay</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 — ALARMS: Stop missing important things. -->
+  <section style="background:var(--bg2);">
+    <div class="feature-section">
+      <div class="feature-row reverse">
+        <div>
+          <div class="feature-number">5</div>
+          <div class="feature-label-tag">Stash It</div>
+          <h2 class="feature-heading">Stop missing important things.</h2>
+          <p class="feature-body">Most reminder apps are too easy to ignore. Squirrel Brain was built for real life: busy parents, busy professionals, busy minds.</p>
+          <p class="feature-accent">Reminders that stay with you until you deal with them.</p>
+        </div>
+        <div class="feature-visual">
+          <img src="assets/alarm_wood_icon_transparent.png" alt="Alarms" class="feature-visual-icon" />
+          <div class="lock-screen">
+            <div class="lock-time">9:30</div>
+            <div class="lock-date">Monday, May 13</div>
+            <div class="notif-card">
+              <div class="notif-header">
+                <img src="assets/icon.png" alt="" class="notif-icon" />
+                <span class="notif-app">Squirrel Brain</span>
+                <span class="notif-time">now</span>
+              </div>
+              <div class="notif-title">⚽ Soccer Game — Today at 9:00 AM</div>
+              <div class="notif-body">Riverside FC · Field 3 – 123 Main St, Antytown, CA</div>
+              <div class="notif-actions">
+                <div class="notif-btn">Snooze</div>
+                <div class="notif-btn primary">Complete</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SNAP→DONE USE CASES -->
+  <section id="usecases" style="background:var(--bg);">
     <p class="section-label">Snap → Done</p>
     <h2 class="section-title">Point it at anything.<br>Get your life organized.</h2>
     <p class="section-sub">Squirrel Brain reads what you photograph and turns it into alarms, calendar events, and notes — automatically.</p>
-
     <div class="usecase-list">
-
-      <!-- Use case 1: Meeting notes / legal pad -->
       <div class="usecase-row">
         <div class="usecase-photo usecase-photo--legal">
-          <div class="photo-title" style="padding-left:52px;">Partner Meeting Notes &nbsp;·&nbsp; May 14</div>
+          <div class="photo-title" style="padding-left:52px;">Partner Meeting Notes · May 14</div>
           <div class="photo-line" style="font-weight:700;">CASE UPDATES</div>
           <div class="photo-line indent">Anderson v. TechCo — motion due 5/28</div>
           <div class="photo-line indent">Davis v. Greenfield — mediation 6/10</div>
@@ -926,51 +806,14 @@
           <div class="photo-line" style="font-weight:700;margin-top:4px;">NEXT MEETING: June 11 @ 9:00 AM</div>
           <div class="photo-badge">Handwritten notes</div>
         </div>
-
         <div class="usecase-arrow">→</div>
-
         <div class="usecase-output">
           <div class="output-header">Squirrel Brain extracted:</div>
-
-          <div class="output-item">
-            <div class="output-item-icon">📅</div>
-            <div class="output-item-body">
-              <div class="output-item-type">Calendar Event</div>
-              <div class="output-item-text">Partner Meeting</div>
-              <div class="output-item-meta">June 11 · 9:00 AM</div>
-            </div>
-          </div>
-
-          <div class="output-item">
-            <div class="output-item-icon">🔔</div>
-            <div class="output-item-body">
-              <div class="output-item-type">Alarm</div>
-              <div class="output-item-text">Summary judgment motion due</div>
-              <div class="output-item-meta">May 28 · Anderson v. TechCo</div>
-            </div>
-          </div>
-
-          <div class="output-item">
-            <div class="output-item-icon">🔔</div>
-            <div class="output-item-body">
-              <div class="output-item-type">Alarm</div>
-              <div class="output-item-text">Mediation — Davis v. Greenfield</div>
-              <div class="output-item-meta">June 10</div>
-            </div>
-          </div>
-
-          <div class="output-item">
-            <div class="output-item-icon">📝</div>
-            <div class="output-item-body">
-              <div class="output-item-type">Note</div>
-              <div class="output-item-text">Full meeting summary saved</div>
-              <div class="output-item-meta">4 agenda items · 5 attendees</div>
-            </div>
-          </div>
+          <div class="output-item"><div class="output-item-icon">📅</div><div class="output-item-body"><div class="output-item-type">Calendar Event</div><div class="output-item-text">Partner Meeting</div><div class="output-item-meta">June 11 · 9:00 AM</div></div></div>
+          <div class="output-item"><div class="output-item-icon">🔔</div><div class="output-item-body"><div class="output-item-type">Alarm</div><div class="output-item-text">Summary judgment motion due</div><div class="output-item-meta">May 28 · Anderson v. TechCo</div></div></div>
+          <div class="output-item"><div class="output-item-icon">📝</div><div class="output-item-body"><div class="output-item-type">Note</div><div class="output-item-text">Full meeting summary saved</div><div class="output-item-meta">4 agenda items · 5 attendees</div></div></div>
         </div>
       </div>
-
-      <!-- Use case 2: Sticky note -->
       <div class="usecase-row">
         <div class="usecase-photo usecase-photo--sticky">
           <div class="photo-title" style="color:#333;text-align:center;font-size:14px;font-weight:900;letter-spacing:0.12em;margin-bottom:12px;">REMINDER!</div>
@@ -978,225 +821,184 @@
           <div class="photo-line" style="color:#333;">Date: Tuesday, May 21</div>
           <div class="photo-line" style="color:#333;">Time: 10:00 AM</div>
           <div class="photo-line" style="color:#333;">Location: Conference Room B</div>
-          <div class="photo-line" style="color:#333;margin-top:4px;">Agenda: Q2 Update · Budget · Hiring</div>
           <div class="photo-badge" style="background:rgba(0,0,0,0.12);color:#666;">Sticky note</div>
         </div>
-
         <div class="usecase-arrow">→</div>
-
         <div class="usecase-output">
           <div class="output-header">Squirrel Brain extracted:</div>
-
-          <div class="output-item">
-            <div class="output-item-icon">📅</div>
-            <div class="output-item-body">
-              <div class="output-item-type">Calendar Event</div>
-              <div class="output-item-text">Team Meeting · Conference Room B</div>
-              <div class="output-item-meta">Tuesday May 21 · 10:00 AM</div>
-            </div>
-          </div>
-
-          <div class="output-item">
-            <div class="output-item-icon">🔔</div>
-            <div class="output-item-body">
-              <div class="output-item-type">Alarm</div>
-              <div class="output-item-text">Team Meeting starts in 30 min</div>
-              <div class="output-item-meta">May 21 · 9:30 AM</div>
-            </div>
-          </div>
-
-          <div class="output-item">
-            <div class="output-item-icon">📝</div>
-            <div class="output-item-body">
-              <div class="output-item-type">Note</div>
-              <div class="output-item-text">Agenda saved: Q2 Update, Budget Review, New Hire Onboarding, Next Steps</div>
-            </div>
-          </div>
+          <div class="output-item"><div class="output-item-icon">📅</div><div class="output-item-body"><div class="output-item-type">Calendar Event</div><div class="output-item-text">Team Meeting · Conference Room B</div><div class="output-item-meta">Tuesday May 21 · 10:00 AM</div></div></div>
+          <div class="output-item"><div class="output-item-icon">🔔</div><div class="output-item-body"><div class="output-item-type">Alarm</div><div class="output-item-text">Team Meeting starts in 30 min</div><div class="output-item-meta">May 21 · 9:30 AM</div></div></div>
+          <div class="output-item"><div class="output-item-icon">📝</div><div class="output-item-body"><div class="output-item-type">Note</div><div class="output-item-text">Agenda: Q2 Update, Budget Review, New Hire Onboarding, Next Steps</div></div></div>
         </div>
       </div>
-
-      <!-- Use case 3: Sports schedule -->
       <div class="usecase-row">
         <div class="usecase-photo usecase-photo--schedule">
-          <div class="photo-title" style="color:rgba(255,255,255,0.9);font-size:12px;font-weight:900;letter-spacing:0.1em;padding-left:0;">⚽ SPRING SOCCER SCHEDULE</div>
-          <div class="photo-line" style="color:rgba(255,255,255,0.75);padding-left:0;">May 17 · Sat · 9:00 AM — Game vs. Rovers</div>
-          <div class="photo-line" style="color:rgba(255,255,255,0.75);padding-left:0;">May 24 · Sat · 10:30 AM — Game vs. Eagles</div>
-          <div class="photo-line" style="color:rgba(255,255,255,0.75);padding-left:0;">May 31 · Sat · 9:00 AM — Game vs. Storm</div>
+          <div class="photo-title" style="color:rgba(255,255,255,0.9);font-size:12px;font-weight:900;padding-left:0;">⚽ SPRING SOCCER SCHEDULE</div>
+          <div class="photo-line" style="color:rgba(255,255,255,0.75);padding-left:0;">May 17 · Sat · 9:00 AM — Rovers</div>
+          <div class="photo-line" style="color:rgba(255,255,255,0.75);padding-left:0;">May 24 · Sat · 10:30 AM — Eagles</div>
+          <div class="photo-line" style="color:rgba(255,255,255,0.75);padding-left:0;">May 31 · Sat · 9:00 AM — Storm</div>
           <div class="photo-line" style="color:rgba(255,255,255,0.75);padding-left:0;">Jun 7 · Sat · 11:00 AM — Championship</div>
           <div class="photo-badge" style="background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.4);">Season schedule</div>
         </div>
-
         <div class="usecase-arrow">→</div>
-
         <div class="usecase-output">
           <div class="output-header">Squirrel Brain extracted:</div>
-
-          <div class="output-item">
-            <div class="output-item-icon">📅</div>
-            <div class="output-item-body">
-              <div class="output-item-type">4 Calendar Events created</div>
-              <div class="output-item-text">Entire season added at once</div>
-              <div class="output-item-meta">May 17, 24, 31 · Jun 7</div>
-            </div>
-          </div>
-
-          <div class="output-item">
-            <div class="output-item-icon">🔔</div>
-            <div class="output-item-body">
-              <div class="output-item-type">4 Alarms set</div>
-              <div class="output-item-text">Game day reminders, 1 hour before each</div>
-              <div class="output-item-meta">You'll never miss kickoff</div>
-            </div>
-          </div>
+          <div class="output-item"><div class="output-item-icon">📅</div><div class="output-item-body"><div class="output-item-type">4 Calendar Events created</div><div class="output-item-text">Entire season added at once</div><div class="output-item-meta">May 17, 24, 31 · Jun 7</div></div></div>
+          <div class="output-item"><div class="output-item-icon">🔔</div><div class="output-item-body"><div class="output-item-type">4 Alarms set</div><div class="output-item-text">Game day reminders, 1 hour before each</div><div class="output-item-meta">You'll never miss kickoff</div></div></div>
         </div>
       </div>
-
-      <!-- Use case 4: Business card -->
       <div class="usecase-row">
         <div class="usecase-photo usecase-photo--card">
-          <div style="padding-left:0;">
-            <div style="font-size:16px;font-weight:900;color:#111;letter-spacing:0.04em;margin-bottom:4px;">MARCUS REED</div>
-            <div style="font-size:11px;color:#555;margin-bottom:12px;">VP of Sales · Apex Solutions</div>
-            <div style="font-size:10px;color:#444;line-height:2;">📞 (312) 555-0182<br>✉️ m.reed@apexsolutions.com<br>🌐 apexsolutions.com</div>
-            <div style="margin-top:12px;font-size:9px;color:#888;font-style:italic;">"Let's connect on the Q3 proposal next week"</div>
-          </div>
+          <div><div style="font-size:16px;font-weight:900;color:#111;margin-bottom:4px;">MARCUS REED</div><div style="font-size:11px;color:#555;margin-bottom:12px;">VP of Sales · Apex Solutions</div><div style="font-size:10px;color:#444;line-height:2;">📞 (312) 555-0182<br>✉️ m.reed@apexsolutions.com</div><div style="margin-top:10px;font-size:9px;color:#888;font-style:italic;">"Let's connect on the Q3 proposal"</div></div>
           <div class="photo-badge">Business card</div>
         </div>
-
         <div class="usecase-arrow">→</div>
-
         <div class="usecase-output">
           <div class="output-header">Squirrel Brain extracted:</div>
+          <div class="output-item"><div class="output-item-icon">📝</div><div class="output-item-body"><div class="output-item-type">Note</div><div class="output-item-text">Marcus Reed — Apex Solutions VP Sales</div><div class="output-item-meta">(312) 555-0182 · m.reed@apexsolutions.com</div></div></div>
+          <div class="output-item"><div class="output-item-icon">🔔</div><div class="output-item-body"><div class="output-item-type">Follow-up Alarm</div><div class="output-item-text">Call Marcus re: Q3 proposal</div><div class="output-item-meta">Next week · Apex Solutions</div></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-          <div class="output-item">
-            <div class="output-item-icon">📝</div>
-            <div class="output-item-body">
-              <div class="output-item-type">Note</div>
-              <div class="output-item-text">Marcus Reed — Apex Solutions VP Sales</div>
-              <div class="output-item-meta">(312) 555-0182 · m.reed@apexsolutions.com</div>
-            </div>
+  <!-- BEFORE / AFTER — Real example -->
+  <section id="before-after" style="background:var(--bg2);">
+    <p class="section-label">Real example</p>
+    <h2 class="section-title">From handwritten chaos<br>to organized in seconds.</h2>
+    <p class="section-sub">Adam photographed his legal-pad meeting notes. This is what happened next.</p>
+    <div class="ba-wrap">
+      <!-- BEFORE -->
+      <div class="ba-side">
+        <div class="ba-label ba-label--before">Before</div>
+        <div class="ba-card ba-card--legal">
+          <div class="legal-header">
+            <div class="legal-firm">Smith &amp; Jordan LLP</div>
+            <div class="legal-subtitle">Partner Meeting Notes</div>
           </div>
-
-          <div class="output-item">
-            <div class="output-item-icon">🔔</div>
-            <div class="output-item-body">
-              <div class="output-item-type">Follow-up Alarm</div>
-              <div class="output-item-text">Call Marcus re: Q3 proposal</div>
-              <div class="output-item-meta">Next week · Apex Solutions</div>
-            </div>
+          <div class="legal-rules">
+            <div class="legal-line hw-bold">Agenda</div>
+            <div class="legal-line">— Q2 billing review</div>
+            <div class="legal-line">— Anderson v. TechCo update</div>
+            <div class="legal-line hw-faded">  motion due 5/28</div>
+            <div class="legal-line">— Davis mediation — June 10</div>
+            <div class="legal-line">— Lopez trial → Sept 16</div>
+            <div class="legal-line hw-bold" style="margin-top:6px;">Next mtg: June 11 @ 9am</div>
+            <div class="legal-line hw-faded">— send agenda by June 7</div>
+            <div class="legal-line hw-faded">— confirm all partners avail</div>
           </div>
+          <div class="ba-photo-badge">Handwritten legal pad</div>
         </div>
       </div>
 
+      <!-- ARROW -->
+      <div class="ba-arrow">
+        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="20" cy="20" r="20" fill="#FF7A1A22"/>
+          <path d="M14 20h13M22 15l5 5-5 5" stroke="#FF7A1A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <div class="ba-arrow-label">Squirrel Brain</div>
+      </div>
+
+      <!-- AFTER -->
+      <div class="ba-side">
+        <div class="ba-label ba-label--after">After</div>
+        <div class="ba-card ba-card--app">
+          <!-- Phone chrome top bar -->
+          <div class="app-topbar">
+            <span class="app-topbar-back">‹ Back</span>
+            <span class="app-topbar-title">Pix Note</span>
+            <span class="app-topbar-badge">PIX NOTE</span>
+          </div>
+          <!-- Thumbnail -->
+          <div class="app-thumb-wrap">
+            <div class="app-thumb">
+              <!-- CSS legal pad miniature -->
+              <div class="app-thumb-legal">
+                <div style="font-size:5px;font-weight:900;color:#555;letter-spacing:.04em;margin-bottom:2px;">Smith &amp; Jordan LLP</div>
+                <div style="font-size:4px;color:#777;border-bottom:1px solid #aac4f0;padding-bottom:1px;margin-bottom:2px;">Partner Meeting Notes</div>
+                <div style="font-size:4px;color:#888;line-height:1.7;">Q2 billing review<br>Anderson v. TechCo<br>Davis mediation June 10<br>Lopez trial Sept 16</div>
+              </div>
+            </div>
+            <div class="app-thumb-expand">Tap to expand ↗</div>
+          </div>
+          <!-- Extracted text -->
+          <div class="app-note-body">
+            <div class="app-note-title">Partner Meeting Notes — Smith &amp; Jordan LLP</div>
+            <div class="app-note-text">
+              <strong>Agenda:</strong><br>
+              • Q2 billing review<br>
+              • Anderson v. TechCo — motion due May 28<br>
+              • Davis v. Greenfield — mediation June 10<br>
+              • Lopez v. City — trial set September 16<br>
+              <br>
+              <strong>Next Meeting:</strong> June 11 at 9:00 AM<br>
+              Send agenda by June 7. Confirm all partners available.
+            </div>
+          </div>
+          <!-- Action buttons -->
+          <div class="app-actions">
+            <div class="app-action">Send as...</div>
+            <div class="app-action app-action--primary">Mark Done</div>
+            <div class="app-action">Set Reminder</div>
+            <div class="app-action app-action--ghost">Dismiss</div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- ─── SCREENSHOTS ───────────────────────────────────────── -->
-  <section id="screenshots">
-    <p class="section-label">See it in action</p>
+  <!-- APP SCREENSHOTS -->
+  <section id="screenshots" style="background:var(--bg2);">
+    <p class="section-label">Inside the app</p>
     <h2 class="section-title">Built for the way you actually work.</h2>
     <p class="section-sub">Capture anything. Review before it saves. Every task, alarm, and calendar event — in one place.</p>
-
     <div class="screenshots-scroll" role="list">
-      <div class="screenshot-card" role="listitem">
-        <img src="assets/Main Screen.png" alt="Main screen — tap the mic to start" loading="lazy" />
-        <div class="screenshot-label">Main Screen</div>
-      </div>
-      <div class="screenshot-card" role="listitem">
-        <img src="assets/Review and Confirm Screen.PNG" alt="Review and confirm screen" loading="lazy" />
-        <div class="screenshot-label">Review &amp; Confirm</div>
-      </div>
-      <div class="screenshot-card" role="listitem">
-        <img src="assets/1st 2nd 3rd Alarm Screen.PNG" alt="Alarm scheduling screen" loading="lazy" />
-        <div class="screenshot-label">Alarm Setup</div>
-      </div>
-      <div class="screenshot-card" role="listitem">
-        <img src="assets/Callander Screen.PNG" alt="Calendar events screen" loading="lazy" />
-        <div class="screenshot-label">Calendar Events</div>
-      </div>
-      <div class="screenshot-card" role="listitem">
-        <img src="assets/Notes Screen.PNG" alt="Notes screen" loading="lazy" />
-        <div class="screenshot-label">Notes</div>
-      </div>
+      <div class="screenshot-card" role="listitem"><img src="assets/Main Screen.png" alt="Main screen" loading="lazy" /><div class="screenshot-label">Main Screen</div></div>
+      <div class="screenshot-card" role="listitem"><img src="assets/Review and Confirm Screen.PNG" alt="Review screen" loading="lazy" /><div class="screenshot-label">Review &amp; Confirm</div></div>
+      <div class="screenshot-card" role="listitem"><img src="assets/1st 2nd 3rd Alarm Screen.PNG" alt="Alarm setup" loading="lazy" /><div class="screenshot-label">Alarm Setup</div></div>
+      <div class="screenshot-card" role="listitem"><img src="assets/Callander Screen.PNG" alt="Calendar events" loading="lazy" /><div class="screenshot-label">Calendar Events</div></div>
+      <div class="screenshot-card" role="listitem"><img src="assets/Notes Screen.PNG" alt="Notes screen" loading="lazy" /><div class="screenshot-label">Notes</div></div>
     </div>
   </section>
 
-  <!-- ─── HOW IT WORKS ─────────────────────────────────────── -->
-  <section id="how">
-    <p class="section-label">How it works</p>
-    <h2 class="section-title">Three steps. Zero dropped balls.</h2>
-    <p class="section-sub">From voice to done in under 30 seconds.</p>
-
-    <div class="steps-row">
-      <div class="step">
-        <div class="step-number">1</div>
-        <img src="assets/acorn_mic_transparent.png" alt="" style="width:48px;height:48px;object-fit:contain;margin-bottom:14px;filter:drop-shadow(0 0 8px #FF7A1A55);" />
-        <h3 class="step-title">Speak your brain dump</h3>
-        <p class="step-desc">After your meeting, tap once and say everything rattling around in your head. Tasks, follow-ups, ideas — all of it.</p>
-      </div>
-
-      <div class="step">
-        <div class="step-number">2</div>
-        <img src="assets/notes_transparent.png" alt="" style="width:48px;height:48px;object-fit:contain;margin-bottom:14px;filter:drop-shadow(0 0 8px #FF7A1A55);" />
-        <h3 class="step-title">AI extracts tasks &amp; notes</h3>
-        <p class="step-desc">Squirrel Brain parses your words and pulls out action items, dates, and notes — then lets you review before saving.</p>
-      </div>
-
-      <div class="step">
-        <div class="step-number">3</div>
-        <img src="assets/alarm_wood_icon_transparent.png" alt="" style="width:48px;height:48px;object-fit:contain;margin-bottom:14px;filter:drop-shadow(0 0 8px #FF7A1A55);" />
-        <h3 class="step-title">Alarms fire at the right time</h3>
-        <p class="step-desc">Loud alarms go off when deadlines are due. Calendar events appear in your calendar. Nothing slips through.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ─── PROOF ─────────────────────────────────────────────── -->
+  <!-- PROOF STATS -->
   <section id="proof">
     <div class="proof-inner">
-      <div class="proof-stat">
-        <div class="proof-number">&lt;30s</div>
-        <div class="proof-label">From voice to saved tasks</div>
-      </div>
-      <div class="proof-stat">
-        <div class="proof-number">0</div>
-        <div class="proof-label">Tasks manually typed</div>
-      </div>
-      <div class="proof-stat">
-        <div class="proof-number">100%</div>
-        <div class="proof-label">Loud alarms, no silent pings</div>
-      </div>
+      <div class="proof-stat"><div class="proof-number">&lt;30s</div><div class="proof-label">Voice to saved tasks</div></div>
+      <div class="proof-stat"><div class="proof-number">0</div><div class="proof-label">Tasks manually typed</div></div>
+      <div class="proof-stat"><div class="proof-number">100%</div><div class="proof-label">Loud alarms, zero silent pings</div></div>
     </div>
   </section>
 
-  <!-- ─── CTA BAND ──────────────────────────────────────────── -->
+  <!-- CTA — treehouse banner -->
   <section id="cta">
-    <p class="section-label">Get the app</p>
-    <h2 class="section-title">Stop losing tasks after meetings.</h2>
-    <p class="section-sub">Download Squirrel Brain and speak your first brain dump today. It's free to try.</p>
-
-    <a href="#" class="appstore-btn" aria-label="Download on the App Store">
-      <span class="appstore-btn-icon">&#63743;</span>
-      <span class="appstore-btn-text">
-        <span class="line1">Download on the</span>
-        <span class="line2">App Store</span>
-      </span>
-    </a>
+    <img src="assets/squirrel_treehouse_banner.png" alt="" class="cta-treehouse" aria-hidden="true" />
+    <div class="cta-content">
+      <p class="section-label">Get the app</p>
+      <h2 class="section-title" style="max-width:600px;margin:0 auto 12px;">Your brain only has so much room.<br>Let Squirrel Brain carry the rest.</h2>
+      <a href="#" class="appstore-btn" aria-label="Download on the App Store">
+        <span class="appstore-btn-icon">&#63743;</span>
+        <span class="appstore-btn-text">
+          <span class="line1">Download on the</span>
+          <span class="line2">App Store</span>
+        </span>
+      </a>
+      <p class="cta-bottom-tag"><strong>A smarter place to stash everything you meant to remember.</strong></p>
+    </div>
   </section>
 
-  <!-- ─── FOOTER ────────────────────────────────────────────── -->
+  <!-- FOOTER -->
   <footer>
     <div class="footer-brand">
       <img src="assets/icon.png" alt="Squirrel Brain" />
       <span>SQUIRREL BRAIN</span>
     </div>
-
     <nav class="footer-links" aria-label="Footer links">
       <a href="#">Privacy Policy</a>
       <a href="mailto:hello@squirrelbrainapp.com">Contact</a>
       <a href="#">Terms of Use</a>
     </nav>
-
     <p class="footer-copy">&copy; 2026 Squirrel Brain. All rights reserved.</p>
   </footer>
 
