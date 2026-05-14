@@ -192,9 +192,10 @@
       border-radius: 12px; padding: 14px 16px;
       display: flex; align-items: center; gap: 10px;
       font-size: 13px; font-weight: 600; color: var(--white);
-      transition: border-color 0.2s;
+      transition: border-color 0.2s, background 0.2s;
+      cursor: pointer; user-select: none;
     }
-    .brain-tab:hover { border-color: var(--orange-mid); }
+    .brain-tab:hover { border-color: var(--orange-mid); background: #1c1c1c; }
     .brain-tab .tab-icon { font-size: 20px; flex-shrink: 0; }
     .brain-tab .tab-dot {
       width: 7px; height: 7px; border-radius: 50%;
@@ -495,18 +496,18 @@
       <div class="pain-left">
         <div class="pain-number">1</div>
         <h2 class="pain-heading">Your brain has too many tabs open.</h2>
-        <p class="pain-body">Soccer schedules. Doctor appointments. Work follow-ups. Passwords. Ideas. Random screenshots. Things your spouse texted you three days ago.</p>
-        <p class="pain-cta">Squirrel Brain helps you capture everything before it disappears.</p>
+        <p class="pain-body">Soccer schedules. Doctor appointments. Work follow-ups. Ideas. Random screenshots. Things your spouse texted you three days ago.</p>
+        <p class="pain-cta">Tap any tab to see what Squirrel Brain does with it.</p>
       </div>
       <div class="brain-tabs">
-        <div class="brain-tab"><span class="tab-icon">&#9917;</span>Soccer Schedule<span class="tab-dot"></span></div>
-        <div class="brain-tab"><span class="tab-icon">&#128138;</span>Doctor Appt<span class="tab-dot"></span></div>
-        <div class="brain-tab"><span class="tab-icon">&#128188;</span>Work Follow-Up<span class="tab-dot"></span></div>
-        <div class="brain-tab"><span class="tab-icon">&#128273;</span>Passwords<span class="tab-dot"></span></div>
-        <div class="brain-tab"><span class="tab-icon">&#128247;</span>Screenshots<span class="tab-dot"></span></div>
-        <div class="brain-tab"><span class="tab-icon">&#128172;</span>Spouse Text<span class="tab-dot"></span></div>
-        <div class="brain-tab"><span class="tab-icon">&#128161;</span>Ideas<span class="tab-dot"></span></div>
-        <div class="brain-tab"><span class="tab-icon">&#128722;</span>Grocery Run<span class="tab-dot"></span></div>
+        <div class="brain-tab" data-tab="soccer"><span class="tab-icon">&#9917;</span>Soccer Schedule<span class="tab-dot"></span></div>
+        <div class="brain-tab" data-tab="doctor"><span class="tab-icon">&#128138;</span>Doctor Appt<span class="tab-dot"></span></div>
+        <div class="brain-tab" data-tab="work"><span class="tab-icon">&#128188;</span>Work Follow-Up<span class="tab-dot"></span></div>
+        <div class="brain-tab" data-tab="screenshots"><span class="tab-icon">&#128247;</span>Screenshots<span class="tab-dot"></span></div>
+        <div class="brain-tab" data-tab="spouse"><span class="tab-icon">&#128172;</span>Spouse Text<span class="tab-dot"></span></div>
+        <div class="brain-tab" data-tab="ideas"><span class="tab-icon">&#128161;</span>Ideas<span class="tab-dot"></span></div>
+        <div class="brain-tab" data-tab="grocery"><span class="tab-icon">&#128722;</span>Grocery Run<span class="tab-dot"></span></div>
+        <div class="brain-tab" data-tab="meeting"><span class="tab-icon">&#128203;</span>Meeting Notes<span class="tab-dot"></span></div>
       </div>
     </div>
   </section>
@@ -749,5 +750,111 @@
     <p class="footer-copy">&copy; 2026 Squirrel Brain. All rights reserved.</p>
   </footer>
 
+  <!-- TAB MODAL -->
+  <div id="tab-modal" style="display:none; position:fixed; inset:0; z-index:500; background:rgba(0,0,0,0.85); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px); padding:24px 16px; overflow-y:auto;" onclick="if(event.target===this)closeTabModal()">
+    <div style="max-width:820px; margin:60px auto; background:#111; border-radius:24px; border:1px solid #2a2a2a; overflow:hidden; position:relative;">
+      <button onclick="closeTabModal()" style="position:absolute; top:16px; right:18px; background:none; border:none; color:#888; font-size:24px; cursor:pointer; line-height:1; z-index:10;">✕</button>
+      <div id="tab-modal-inner" style="padding:32px 28px 28px;"></div>
+    </div>
+  </div>
+
+  <style>
+    .tab-ba-wrap { display:flex; gap:20px; align-items:flex-start; flex-wrap:wrap; }
+    .tab-ba-side { flex:1; min-width:220px; display:flex; flex-direction:column; gap:10px; }
+    .tab-ba-label { font-size:11px; font-weight:800; letter-spacing:0.14em; text-transform:uppercase; padding:4px 14px; border-radius:100px; display:inline-block; width:fit-content; }
+    .tab-ba-label--before { background:#222; color:#888; }
+    .tab-ba-label--after  { background:#FF7A1A22; color:#FF7A1A; }
+    .tab-ba-img { width:100%; border-radius:14px; display:block; object-fit:cover; max-height:380px; object-position:top; box-shadow:0 4px 24px rgba(0,0,0,0.5); }
+    .tab-ba-arrow { font-size:28px; color:#FF7A1A; align-self:center; flex-shrink:0; }
+    .tab-ba-ph { background:#161616; border:2px dashed #FF7A1A44; border-radius:14px; padding:32px 16px; text-align:center; color:#555; font-size:12px; min-height:180px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px; }
+    .tab-ba-ph-icon { font-size:32px; color:#FF7A1A; }
+    .tab-ba-caption { font-size:12px; color:#888; margin-top:6px; text-align:center; }
+    .tab-modal-title { font-size:22px; font-weight:800; color:#fff; margin-bottom:6px; }
+    .tab-modal-sub { font-size:14px; color:#888; margin-bottom:22px; }
+  </style>
+
+  <script>
+    const TAB_DATA = {
+      soccer: {
+        label: 'Soccer Schedule',
+        desc: 'Snap a photo of the season schedule — every game lands in your calendar automatically.',
+        before: { placeholder: 'PHOTO NEEDED: Real photo of a printed soccer season schedule or screenshot of one on a phone' },
+        after:  { img: 'assets/Callander Screen.PNG', caption: 'Every game added to your calendar — dates, times, locations.' }
+      },
+      doctor: {
+        label: 'Doctor Appt',
+        desc: 'Photograph the appointment card. Squirrel Brain sets the alarm so you never miss it.',
+        before: { placeholder: 'PHOTO NEEDED: Real photo of a doctor appointment reminder card or slip' },
+        after:  { img: 'assets/1st 2nd 3rd Alarm Screen.PNG', caption: 'Alarm set with 1st, 2nd, and 3rd reminders — loud ones.' }
+      },
+      work: {
+        label: 'Work Follow-Up',
+        desc: 'Snap your meeting notes. Every action item, deadline, and follow-up extracted and saved.',
+        before: { img: 'assets/before_legal_pad.png', caption: 'Handwritten meeting notes — Smith & Jordan LLP' },
+        after:  { img: 'assets/after_review_capture.png', caption: '9 items extracted: notes, alarms, and calendar events — one tap to save.' }
+      },
+      screenshots: {
+        label: 'Screenshots',
+        desc: 'Screenshot a calendar invite, email, or anything with a date. Squirrel Brain reads it.',
+        before: { placeholder: 'PHOTO NEEDED: Screenshot of an Outlook calendar invite or email with a date/time' },
+        after:  { img: 'assets/Callander Screen.PNG', caption: 'Calendar event created automatically — no typing.' }
+      },
+      spouse: {
+        label: 'Spouse Text',
+        desc: 'Screenshot the text. Squirrel Brain turns "can you pick up the dry cleaning?" into a reminder.',
+        before: { placeholder: 'PHOTO NEEDED: Screenshot of a text message asking you to do something or pick something up' },
+        after:  { img: 'assets/Review and Confirm Screen.PNG', caption: 'Task captured and alarm set before you forget.' }
+      },
+      ideas: {
+        label: 'Ideas',
+        desc: 'Just tap and speak. Your idea is saved as a searchable note in under 10 seconds.',
+        before: { img: 'assets/Main Screen.png', caption: 'Tap the mic — say the idea out loud. That\'s it.' },
+        after:  { img: 'assets/Notes Screen.PNG', caption: 'Saved, searchable, never lost.' }
+      },
+      grocery: {
+        label: 'Grocery Run',
+        desc: 'Snap a photo of your handwritten list. Squirrel Brain saves it as a checklist you can check off.',
+        before: { img: 'assets/before_sticky_note.png', caption: 'A real handwritten reminder — photographed in 2 seconds.' },
+        after:  { img: 'assets/Notes Screen.PNG', caption: 'Checklist saved — tap items to check them off.' }
+      },
+      meeting: {
+        label: 'Meeting Notes',
+        desc: 'Take a photo of any notes — whiteboard, legal pad, napkin. Everything extracted and organized.',
+        before: { placeholder: 'PHOTO NEEDED: Photo of a whiteboard covered in meeting notes or a legal pad with handwriting' },
+        after:  { img: 'assets/after_review_capture.png', caption: 'Notes, alarms, and calendar events — all from one photo.' }
+      }
+    };
+
+    document.querySelectorAll('.brain-tab[data-tab]').forEach(tab => {
+      tab.addEventListener('click', () => openTabModal(tab.dataset.tab));
+    });
+
+    function openTabModal(key) {
+      const d = TAB_DATA[key]; if (!d) return;
+      const before = d.before.img
+        ? `<img src="${d.before.img}" class="tab-ba-img" alt="${d.label} before" /><p class="tab-ba-caption">${d.before.caption||''}</p>`
+        : `<div class="tab-ba-ph"><div class="tab-ba-ph-icon">&#128247;</div><div>${d.before.placeholder}</div></div>`;
+      const after = d.after.img
+        ? `<img src="${d.after.img}" class="tab-ba-img" alt="${d.label} after" /><p class="tab-ba-caption">${d.after.caption||''}</p>`
+        : `<div class="tab-ba-ph"><div class="tab-ba-ph-icon">&#128247;</div><div>${d.after.placeholder}</div></div>`;
+      document.getElementById('tab-modal-inner').innerHTML = `
+        <div class="tab-modal-title">${d.label}</div>
+        <div class="tab-modal-sub">${d.desc}</div>
+        <div class="tab-ba-wrap">
+          <div class="tab-ba-side"><span class="tab-ba-label tab-ba-label--before">Before</span>${before}</div>
+          <div class="tab-ba-arrow">→</div>
+          <div class="tab-ba-side"><span class="tab-ba-label tab-ba-label--after">After</span>${after}</div>
+        </div>`;
+      document.getElementById('tab-modal').style.display = 'block';
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeTabModal() {
+      document.getElementById('tab-modal').style.display = 'none';
+      document.body.style.overflow = '';
+    }
+
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeTabModal(); });
+  </script>
 </body>
 </html>
