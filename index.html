@@ -564,9 +564,11 @@
           </div>
         </div>
         <div style="display:flex; flex-direction:column; gap:20px; align-items:center;">
-          <div class="photo-placeholder" id="lifestyle-placeholder" style="min-height:280px; max-width:340px;">
-            <div class="placeholder-icon">&#127939;</div>
-            <div class="placeholder-desc">Lifestyle photo coming soon</div>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; max-width:340px;">
+            <img src="assets/lifestyle_sales_walkout.png" alt="Professional dictating notes walking out of a meeting" style="width:100%; border-radius:14px; box-shadow:0 8px 32px rgba(0,0,0,0.5);" loading="lazy" />
+            <img src="assets/lifestyle_runner.png" alt="Runner capturing a thought mid-run" style="width:100%; border-radius:14px; box-shadow:0 8px 32px rgba(0,0,0,0.5);" loading="lazy" />
+            <img src="assets/lifestyle_gym.png" alt="Guy at gym speaking a voice note between sets" style="width:100%; border-radius:14px; box-shadow:0 8px 32px rgba(0,0,0,0.5);" loading="lazy" />
+            <img src="assets/lifestyle_driving.png" alt="Person dictating a note in their car" style="width:100%; border-radius:14px; box-shadow:0 8px 32px rgba(0,0,0,0.5);" loading="lazy" />
           </div>
           <div style="font-size:28px; color:var(--orange);">↓</div>
           <div class="iphone-frame" style="max-width:220px;">
@@ -852,6 +854,64 @@
     </div>
   </section>
 
+  <!-- SECTION — END OF DAY NUDGE -->
+  <section style="background:var(--bg);">
+    <div class="feature-section">
+      <div class="feature-row">
+        <div>
+          <div class="feature-label-tag">End of Day Nudge</div>
+          <h2 class="feature-heading">The things that actually matter — checked before 5 PM.</h2>
+          <p class="feature-body">
+            Some things aren't just tasks. They're the things you really need to do today.<br><br>
+            When you save something in Squirrel Brain — a voice note, a photo, anything — you can mark it as important with one tap. That's it.<br><br>
+            At the end of the day, before 5 PM, Squirrel Brain sends you one email: everything you marked as important that's still unchecked. No noise. No full task list. Just the things that mattered — and didn't get done yet.
+          </p>
+          <p class="feature-accent">Mark it. Get nudged. Check it off. Move on.</p>
+          <div style="display:flex; flex-direction:column; gap:10px; margin-top:24px;">
+            <div style="display:flex; align-items:center; gap:10px; padding:12px 16px; background:#161616; border-radius:12px; border:1px solid #2a2a2a;">
+              <div style="width:20px; height:20px; border-radius:5px; border:2px solid var(--orange); flex-shrink:0; display:flex; align-items:center; justify-content:center;">
+                <div style="width:10px; height:10px; background:var(--orange); border-radius:2px;"></div>
+              </div>
+              <span style="font-size:13px; color:#ddd;">Call back Dr. Chen's office <span style="color:var(--orange); font-size:11px; font-weight:700; margin-left:6px;">IMPORTANT</span></span>
+            </div>
+            <div style="display:flex; align-items:center; gap:10px; padding:12px 16px; background:#161616; border-radius:12px; border:1px solid #2a2a2a;">
+              <div style="width:20px; height:20px; border-radius:5px; border:2px solid var(--orange); flex-shrink:0; display:flex; align-items:center; justify-content:center;">
+                <div style="width:10px; height:10px; background:var(--orange); border-radius:2px;"></div>
+              </div>
+              <span style="font-size:13px; color:#ddd;">Send revised pricing to Marcus at Meridian <span style="color:var(--orange); font-size:11px; font-weight:700; margin-left:6px;">IMPORTANT</span></span>
+            </div>
+            <div style="display:flex; align-items:center; gap:10px; padding:12px 16px; background:#161616; border-radius:12px; border:1px solid #2a2a2a;">
+              <div style="width:20px; height:20px; border-radius:5px; border:2px solid #333; flex-shrink:0;"></div>
+              <span style="font-size:13px; color:#555; text-decoration:line-through;">Pick up dry cleaning</span>
+            </div>
+          </div>
+          <div style="margin-top:16px; padding:14px 18px; background:#0f1a0f; border:1px solid #2a4a2a; border-radius:14px;">
+            <div style="font-size:11px; font-weight:700; color:#4a9e4a; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:6px;">&#128231; 4:45 PM — Your end of day nudge</div>
+            <div style="font-size:13px; color:#aaa; line-height:1.6;">You still have <strong style="color:#fff;">2 important items</strong> unchecked today. Tap to review.</div>
+          </div>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:20px; align-items:center; justify-content:center;">
+          <div style="max-width:320px; width:100%;">
+            <div class="split-caption" style="margin-bottom:12px; text-align:center;">How you mark it</div>
+            <div style="background:#161616; border:1px solid #2a2a2a; border-radius:16px; padding:20px; display:flex; flex-direction:column; gap:12px;">
+              <div style="font-size:12px; color:#666; text-align:center; text-transform:uppercase; letter-spacing:0.1em;">When saving any note or voice capture</div>
+              <div style="display:flex; align-items:center; justify-content:space-between; padding:12px 16px; background:#0a0a0a; border-radius:10px; border:1px solid #222;">
+                <span style="font-size:13px; color:#ddd;">Call back Dr. Chen's office</span>
+                <div style="display:flex; align-items:center; gap:8px;">
+                  <span style="font-size:11px; color:#666;">Important?</span>
+                  <div style="width:36px; height:20px; background:var(--orange); border-radius:20px; position:relative;">
+                    <div style="width:16px; height:16px; background:#fff; border-radius:50%; position:absolute; right:2px; top:2px;"></div>
+                  </div>
+                </div>
+              </div>
+              <div style="font-size:12px; color:#555; text-align:center;">One toggle. That's it. You'll hear about it before 5 PM if it's not done.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- SECTION — DAILY BRIEF -->
   <section style="background:var(--bg2);">
     <div class="feature-section">
@@ -891,9 +951,8 @@
           <p style="font-size:12px; color:#444; margin-top:16px; line-height:1.6;">Delivered to your inbox every morning. No app to open. No list to update. Just clarity.</p>
         </div>
         <div style="display:flex; align-items:center; justify-content:center;">
-          <div class="photo-placeholder" id="daily-brief-placeholder" style="max-width:300px; min-height:400px;">
-            <div class="placeholder-icon">&#9728;&#65039;</div>
-            <div class="placeholder-desc">Daily Brief mockup coming soon</div>
+          <div class="iphone-frame" style="max-width:260px;">
+            <img src="assets/daily_brief_mockup.png" alt="Squirrel Brain Daily Brief — Good Morning Adam screen" loading="lazy" />
           </div>
         </div>
       </div>
@@ -1045,9 +1104,9 @@
       },
       parking: {
         label: 'Parking Spot',
-        desc: 'Level 3B, Row 7. You\'ll remember it. You won\'t. Snap the sign — Squirrel Brain saves your spot and sets a "find my car" reminder for when you\'re done.',
-        before: { placeholder: 'You\'re at Level 3B, Row 7. You\'ll definitely remember that.' },
-        after:  { img: 'assets/Notes Screen.PNG', caption: 'Spot saved as a note. Reminder fires when you leave the building.' }
+        desc: 'Level 3, Row B7. You\'ll remember it. You won\'t. Snap the sign — Squirrel Brain saves it as a searchable note so you\'re not wandering a garage for 20 minutes.',
+        before: { img: 'assets/before_parking_spot.png', caption: 'Level 3, Row B7. One snap before you walk away.' },
+        after:  { img: 'assets/Notes Screen.PNG', caption: 'Saved. Search "parking" later and find it instantly.' }
       },
       bizcard: {
         label: 'Business Card',
