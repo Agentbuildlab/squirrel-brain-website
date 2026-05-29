@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Squirrel Brain — Speak it. Snap it. Stash it.</title>
-  <meta name="description" content="Voice memo, photo, or screenshot — Squirrel Brain reads it, extracts every task and date, and turns it into alarms, notes, and calendar events. Automatically." />
+  <meta name="description" content="Voice memo, photo, or screenshot — Squirrel Brain reads it, extracts every task and date, and turns it into alarms, living notes, and calendar events automatically." />
   <meta property="og:title" content="Squirrel Brain — Speak it. Snap it. Stash it." />
-  <meta property="og:description" content="Voice memo, photo, or screenshot — Squirrel Brain reads it, extracts every task and date, and turns it into alarms, notes, and calendar events. Automatically." />
+  <meta property="og:description" content="Voice memo, photo, or screenshot — Squirrel Brain reads it, extracts every task and date, and turns it into alarms, living notes, and calendar events automatically." />
   <meta property="og:image" content="assets/squirrel_treehouse.png" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -34,27 +34,29 @@
       font-size: 16px;
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
+      padding-left: max(0px, env(safe-area-inset-left));
+      padding-right: max(0px, env(safe-area-inset-right));
     }
 
     /* ── NAV ─────────────────────────────────────────────── */
-    nav {
+    nav.main-nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 200;
       display: flex; align-items: center; justify-content: space-between;
-      padding: 14px 32px;
+      padding: 14px max(32px, env(safe-area-inset-right) + 16px) 14px max(32px, env(safe-area-inset-left) + 16px);
       background: rgba(10,10,10,0.80);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       border-bottom: 1px solid #ffffff11;
     }
     .nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-    .nav-brand img { width: 32px; height: 32px; border-radius: 8px; }
+    .nav-brand img { width: 40px; height: 40px; border-radius: 10px; }
     .nav-brand span { font-size: 14px; font-weight: 800; letter-spacing: 0.08em; color: var(--white); }
     .nav-brand em { color: var(--orange); font-style: normal; }
     .nav-cta {
       display: inline-flex; align-items: center; gap: 8px;
       background: var(--orange); color: var(--white); text-decoration: none;
-      font-size: 13px; font-weight: 700; letter-spacing: 0.04em;
-      padding: 8px 20px; border-radius: 100px; transition: opacity 0.2s;
+      font-size: 15px; font-weight: 700; letter-spacing: 0.04em;
+      padding: 10px 22px; min-height: 44px; border-radius: 100px; transition: opacity 0.2s;
     }
     .nav-cta:hover { opacity: 0.85; }
 
@@ -80,7 +82,7 @@
     #hero::after {
       content: "";
       position: absolute; inset: 0;
-      background: linear-gradient(to bottom, rgba(10,10,10,0.55) 0%, rgba(10,10,10,0.30) 40%, rgba(10,10,10,0.80) 100%);
+      background: linear-gradient(to bottom, rgba(10,10,10,0.55) 0%, rgba(10,10,10,0.30) 40%, rgba(10,10,10,1.0) 100%);
       z-index: 0;
     }
 
@@ -96,8 +98,48 @@
 
     .hero-logo-wrap { display: inline-block; margin-bottom: 28px; }
     .hero-logo-wrap img {
-      width: 130px; height: 130px; border-radius: 30px;
-      box-shadow: 0 0 60px #FF7A1A55, 0 0 120px #FF7A1A22;
+      width: 160px; height: 160px; border-radius: 24px;
+      filter: drop-shadow(0 0 40px #FF7A1A88);
+    }
+    .hero-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 56px;
+      align-items: center;
+      max-width: 1020px;
+      width: 100%;
+    }
+    .hero-text-col { text-align: left; }
+    .hero-text-col .hero-wordmark,
+    .hero-text-col .hero-tagline { text-align: left; }
+    .hero-text-col .hero-sub { text-align: left; margin-left: 0; margin-right: 0; }
+    .hero-phone-col { display: flex; justify-content: center; }
+    @media (max-width: 820px) {
+      .hero-layout { grid-template-columns: 1fr; gap: 36px; text-align: center; }
+      .hero-text-col { text-align: center; }
+      .hero-text-col .hero-wordmark,
+      .hero-text-col .hero-tagline { text-align: center; }
+      .hero-text-col .hero-sub { text-align: center; margin: 0 auto 40px; }
+      .hero-phone-col { display: flex; }
+    }
+    @media (max-width: 480px) {
+      section { padding: 72px 16px; }
+      .feature-row, .pain-inner { grid-template-columns: 1fr; gap: 36px; }
+      .feature-row.reverse { direction: ltr; }
+      .daily-emails-grid { grid-template-columns: 1fr !important; }
+      .snap-ba-wrap, .ba-wrap { grid-template-columns: 1fr; flex-direction: column; }
+      .ba-arrow { transform: rotate(90deg); }
+      .brain-tabs { grid-template-columns: 1fr; }
+      nav { padding: 10px 16px; }
+      .iphone-frame { max-width: 240px; }
+      .proof-inner { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 390px) {
+      .hero-wordmark { font-size: clamp(28px, 7vw, 38px); }
+      .hero-tagline { font-size: 11px; letter-spacing: 0.16em; }
+      .hero-sub { font-size: 14px; }
+      .section-title { font-size: clamp(22px, 6vw, 32px); }
+      .feature-heading { font-size: clamp(20px, 5.5vw, 28px); }
     }
 
     .hero-wordmark {
@@ -130,7 +172,7 @@
     .appstore-btn:hover { border-color: var(--orange); box-shadow: 0 0 24px #FF7A1A44; }
     .appstore-btn-icon { font-size: 28px; line-height: 1; }
     .appstore-btn-text { display: flex; flex-direction: column; text-align: left; }
-    .appstore-btn-text .line1 { font-size: 10px; letter-spacing: 0.04em; color: rgba(255,255,255,0.65); }
+    .appstore-btn-text .line1 { font-size: 12px; letter-spacing: 0.04em; color: rgba(255,255,255,0.65); }
     .appstore-btn-text .line2 { font-size: 18px; font-weight: 700; letter-spacing: -0.01em; line-height: 1.1; }
 
     .hero-scroll-hint {
@@ -148,7 +190,7 @@
     section { padding: 96px 24px; }
 
     .section-label {
-      font-size: 11px; font-weight: 700; letter-spacing: 0.22em;
+      font-size: 13px; font-weight: 700; letter-spacing: 0.22em;
       text-transform: uppercase; color: var(--orange);
       margin-bottom: 12px; text-align: center;
     }
@@ -158,7 +200,7 @@
       margin-bottom: 16px; line-height: 1.12;
     }
     .section-sub {
-      font-size: 17px; color: var(--muted); text-align: center;
+      font-size: 19px; color: var(--muted); text-align: center;
       max-width: 540px; margin: 0 auto 64px; line-height: 1.65;
     }
 
@@ -181,31 +223,28 @@
       font-size: clamp(26px, 3.5vw, 40px); font-weight: 900;
       letter-spacing: -0.02em; line-height: 1.15; margin-bottom: 20px;
     }
-    .pain-body { font-size: 15px; color: var(--muted); line-height: 1.75; margin-bottom: 20px; }
+    .pain-body { font-size: 17px; color: var(--muted); line-height: 1.75; margin-bottom: 20px; }
     .pain-cta { font-size: 15px; font-weight: 700; color: var(--orange); }
 
     .brain-tabs {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
     }
     .brain-tab {
-      background: var(--bg3); border: 1px solid var(--border);
-      border-radius: 12px; padding: 14px 16px;
-      display: flex; align-items: center; gap: 10px;
-      font-size: 13px; font-weight: 600; color: var(--white);
-      transition: border-color 0.2s, background 0.2s;
+      background: #111; border: 1px solid #222; border-left: 3px solid #FF7A1A33;
+      border-radius: 10px; padding: 11px 13px;
+      display: flex; align-items: center; gap: 8px;
       cursor: pointer; user-select: none;
+      transition: border-color 0.15s, background 0.15s;
     }
-    .brain-tab:hover { border-color: var(--orange-mid); background: #1c1c1c; }
-    .brain-tab .tab-icon { font-size: 20px; flex-shrink: 0; }
-    .brain-tab .tab-dot {
-      width: 7px; height: 7px; border-radius: 50%;
-      background: var(--orange); margin-left: auto; flex-shrink: 0;
-      animation: pulse 2s ease-in-out infinite;
+    .brain-tab:hover { background: #161616; border-color: #FF7A1A55; border-left-color: #FF7A1A; }
+    .brain-tab .tab-text { flex: 1; }
+    .brain-tab .tab-name {
+      font-size: 15px; font-weight: 700; color: #eee; line-height: 1.3;
     }
-    @keyframes pulse {
-      0%,100% { opacity: 1; transform: scale(1); }
-      50%      { opacity: 0.4; transform: scale(0.7); }
+    .brain-tab .tab-sub {
+      font-size: 13px; color: #555; margin-top: 2px;
     }
+    .brain-tab .tab-chevron { color: #333; font-size: 16px; flex-shrink: 0; }
 
     /* ── FEATURE ROW (shared) ────────────────────────────── */
     .feature-section { max-width: 1020px; margin: 0 auto; }
@@ -225,36 +264,62 @@
     }
 
     .feature-label-tag {
-      font-size: 10px; font-weight: 700; letter-spacing: 0.2em;
+      font-size: 13px; font-weight: 700; letter-spacing: 0.2em;
       text-transform: uppercase; color: var(--orange); margin-bottom: 10px;
     }
 
     .feature-heading {
-      font-size: clamp(24px, 3vw, 38px); font-weight: 900;
+      font-size: clamp(26px, 3vw, 40px); font-weight: 900;
       letter-spacing: -0.02em; line-height: 1.15; margin-bottom: 16px;
     }
 
     .feature-body {
-      font-size: 15px; color: var(--muted); line-height: 1.75; margin-bottom: 14px;
+      font-size: 17px; color: var(--muted); line-height: 1.75; margin-bottom: 14px;
     }
 
     .feature-accent {
-      font-size: 15px; font-weight: 700; color: var(--orange);
+      font-size: 17px; font-weight: 700; color: var(--orange);
       line-height: 1.5;
     }
 
     /* ── IPHONE FRAME ─────────────────────────────────────── */
     .iphone-frame {
-      background: #1a1a1a;
+      background: #000;
       border-radius: 44px;
-      padding: 12px;
-      box-shadow: 0 0 0 2px #333, 0 20px 60px rgba(0,0,0,0.6);
+      padding: 14px;
+      box-shadow:
+        0 0 0 2px #3a3a3a,
+        0 0 0 4px #1a1a1a,
+        0 28px 80px rgba(0,0,0,0.75),
+        0 8px 24px rgba(0,0,0,0.5);
       max-width: 260px;
       margin: 0 auto;
+      position: relative;
+      overflow: hidden;
+    }
+    .iphone-frame::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 100px; height: 20px;
+      background: #000;
+      border-radius: 0 0 14px 14px;
+      z-index: 20;
+    }
+    .iphone-frame::after {
+      content: "";
+      position: absolute;
+      top: 6px; left: 50%;
+      transform: translateX(-50%);
+      width: 56px; height: 10px;
+      background: #1a1a1a;
+      border-radius: 20px;
+      z-index: 21;
     }
     .iphone-frame img {
       width: 100%;
-      border-radius: 36px;
+      border-radius: 32px;
       display: block;
     }
 
@@ -266,7 +331,7 @@
     .voice-quote {
       background: var(--bg3); border: 1px solid var(--border);
       border-radius: 12px; padding: 12px 16px;
-      font-size: 14px; color: var(--white); font-style: italic;
+      font-size: 16px; color: var(--white); font-style: italic;
     }
     .voice-quote-arrow {
       display: flex; align-items: center; gap: 8px;
@@ -282,7 +347,7 @@
       flex: 1;
     }
     .split-caption {
-      font-size: 10px; font-weight: 700; letter-spacing: 0.12em;
+      font-size: 13px; font-weight: 700; letter-spacing: 0.12em;
       text-transform: uppercase; color: var(--muted);
       text-align: center; margin-bottom: 8px;
     }
@@ -335,7 +400,7 @@
     }
 
     .ba-arrow { display: flex; flex-direction: column; align-items: center; gap: 6px; flex-shrink: 0; }
-    .ba-arrow-label { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; color: var(--orange); text-transform: uppercase; }
+    .ba-arrow-label { font-size: 13px; font-weight: 700; letter-spacing: 0.1em; color: var(--orange); text-transform: uppercase; }
 
     @media (max-width: 680px) {
       .ba-arrow { transform: rotate(90deg); }
@@ -395,24 +460,28 @@
     .proof-inner { max-width: 800px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; text-align: center; }
     .proof-stat { padding: 28px 16px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--bg3); }
     .proof-number { font-size: 42px; font-weight: 900; color: var(--orange); letter-spacing: -0.03em; line-height: 1; margin-bottom: 6px; }
-    .proof-label { font-size: 13px; color: var(--muted); letter-spacing: 0.05em; }
+    .proof-label { font-size: 15px; color: var(--muted); letter-spacing: 0.05em; }
 
     /* ── CTA ──────────────────────────────────────────────── */
     #cta {
       background: var(--bg2); padding: 0; text-align: center;
       position: relative; overflow: hidden;
     }
-    .cta-treehouse {
-      width: 100%; max-height: 320px; object-fit: cover; object-position: center 30%;
-      opacity: 0.25; display: block;
+    #cta::before {
+      content: "";
+      position: absolute; inset: 0;
+      background: url('assets/squirrel_treehouse_banner.png') center 30% / cover no-repeat;
+      opacity: 0.25;
+      z-index: 0;
     }
+    .cta-treehouse { display: none; }
     .cta-content {
-      position: absolute; inset: 0; display: flex; flex-direction: column;
-      align-items: center; justify-content: center; padding: 60px 24px;
-      background: linear-gradient(to bottom, rgba(17,17,17,0.4) 0%, rgba(17,17,17,0.85) 100%);
+      position: relative; z-index: 1; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; padding: 80px 24px;
+      background: linear-gradient(to bottom, rgba(17,17,17,0.55) 0%, rgba(17,17,17,0.95) 55%, rgba(17,17,17,1.0) 100%);
     }
     .cta-bottom-tag {
-      font-size: clamp(13px, 2vw, 16px); color: rgba(255,255,255,0.55);
+      font-size: clamp(15px, 2vw, 18px); color: rgba(255,255,255,0.55);
       letter-spacing: 0.04em; margin-top: 20px;
       max-width: 520px; line-height: 1.6;
     }
@@ -421,16 +490,17 @@
     /* ── FOOTER ───────────────────────────────────────────── */
     footer { background: var(--bg); border-top: 1px solid var(--border); padding: 32px 24px; display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center; }
     .footer-brand { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
-    .footer-brand img { width: 24px; height: 24px; border-radius: 6px; }
+    .footer-brand img { width: 24px; height: 24px; border-radius: 0; }
     .footer-brand span { font-size: 14px; font-weight: 700; color: var(--white); letter-spacing: 0.05em; }
+    .footer-brand span em { color: var(--orange); font-style: normal; }
     .footer-links { display: flex; gap: 24px; flex-wrap: wrap; justify-content: center; }
-    .footer-links a { font-size: 13px; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .footer-links a { font-size: 15px; color: var(--muted); text-decoration: none; transition: color 0.2s; }
     .footer-links a:hover { color: var(--orange); }
-    .footer-copy { font-size: 12px; color: #333; }
+    .footer-copy { font-size: 14px; color: #333; }
 
     /* ── RESPONSIVE ───────────────────────────────────────── */
     @media (max-width: 768px) {
-      nav { padding: 12px 18px; }
+      nav.main-nav { padding: 12px 18px; }
       .nav-brand span { display: none; }
 
       .pain-inner { grid-template-columns: 1fr; }
@@ -448,15 +518,214 @@
     }
 
     @media (max-width: 480px) {
-      .hero-logo-wrap img { width: 100px; height: 100px; }
+      .hero-logo-wrap img { width: 120px; height: 120px; }
       .brain-tabs { grid-template-columns: 1fr; }
     }
+
+    @media (max-width: 768px) {
+      .daily-emails-grid { grid-template-columns: 1fr !important; }
+    }
+
+    @media (max-width: 640px) {
+      .squirrel-intro-grid { grid-template-columns: 1fr !important; }
+      .sales-two-col { grid-template-columns: 1fr !important; }
+    }
+
+    /* ── FEATURE ACCORDION ──────────────────────────────────── */
+    #feature-accordion {
+      background: var(--bg);
+      padding: 64px 24px 48px;
+    }
+    .accordion-label {
+      font-size: 13px; font-weight: 700; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--orange);
+      text-align: center; margin-bottom: 10px;
+    }
+    .accordion-title {
+      font-size: clamp(22px, 3.5vw, 36px); font-weight: 900;
+      letter-spacing: -0.02em; text-align: center;
+      margin-bottom: 8px; line-height: 1.15;
+    }
+    .accordion-sub {
+      font-size: 16px; color: var(--muted); text-align: center;
+      max-width: 520px; margin: 0 auto 40px; line-height: 1.6;
+    }
+    .accordion-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    @media (max-width: 700px) {
+      .accordion-grid { grid-template-columns: 1fr; }
+    }
+
+    .acc-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .acc-card.open {
+      border-color: var(--orange-mid);
+      box-shadow: -4px 0 0 0 var(--orange), 0 0 32px #FF7A1A14;
+    }
+
+    .acc-header {
+      display: flex; align-items: center;
+      gap: 14px; padding: 20px 22px;
+      cursor: pointer; user-select: none;
+      -webkit-user-select: none;
+    }
+    .acc-header:hover .acc-chevron { color: var(--orange); }
+
+    .acc-icon {
+      width: 44px; height: 44px; border-radius: 12px;
+      background: var(--bg3); border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px; flex-shrink: 0;
+    }
+    .acc-card.open .acc-icon {
+      background: var(--orange-dim);
+      border-color: var(--orange-mid);
+    }
+
+    .acc-header-text { flex: 1; min-width: 0; }
+    .acc-header-title {
+      font-size: 16px; font-weight: 800;
+      color: var(--white); letter-spacing: -0.01em;
+      line-height: 1.2;
+    }
+    .acc-card.open .acc-header-title { color: var(--orange); }
+    .acc-header-desc {
+      font-size: 13px; color: var(--muted);
+      margin-top: 3px; line-height: 1.45;
+    }
+
+    .acc-chevron {
+      font-size: 20px; color: #444; flex-shrink: 0;
+      transition: transform 0.28s cubic-bezier(.4,0,.2,1), color 0.2s;
+      line-height: 1;
+    }
+    .acc-card.open .acc-chevron {
+      transform: rotate(180deg);
+      color: var(--orange);
+    }
+
+    .acc-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.38s cubic-bezier(.4,0,.2,1);
+    }
+    .acc-card.open .acc-body {
+      max-height: 2000px;
+    }
+
+    .acc-body-inner {
+      padding: 0 22px 24px;
+      border-top: 1px solid var(--border);
+    }
+    .acc-body-inner p { font-size: 15px; color: #bbb; line-height: 1.7; margin-bottom: 14px; }
+    .acc-body-inner p:last-child { margin-bottom: 0; }
+
+    /* Shared inner components */
+    .acc-scenario {
+      display: flex; align-items: flex-start; gap: 12px;
+      padding: 12px 14px; background: var(--bg3);
+      border: 1px solid var(--border); border-radius: 12px;
+      margin-bottom: 10px;
+    }
+    .acc-scenario-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+    .acc-scenario-head { font-size: 12px; font-weight: 700; color: var(--orange); margin-bottom: 2px; letter-spacing: 0.04em; }
+    .acc-scenario-body { font-size: 13px; color: #aaa; line-height: 1.5; }
+    .acc-scenario-result { font-size: 12px; color: #555; margin-top: 3px; }
+
+    /* MCP tool table */
+    .mcp-tools-table {
+      width: 100%; border-collapse: collapse; font-size: 13px; margin: 14px 0;
+    }
+    .mcp-tools-table th {
+      text-align: left; font-size: 11px; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--muted); padding: 6px 10px 8px;
+      border-bottom: 1px solid var(--border);
+    }
+    .mcp-tools-table td {
+      padding: 8px 10px; border-bottom: 1px solid #1a1a1a;
+      vertical-align: top; color: #ccc; line-height: 1.5;
+    }
+    .mcp-tools-table tr:last-child td { border-bottom: none; }
+    .mcp-tools-table code {
+      background: var(--bg3); color: var(--orange);
+      padding: 2px 7px; border-radius: 6px; font-size: 12px;
+      font-family: "SF Mono", "Fira Code", monospace;
+    }
+
+    .acc-code-block {
+      background: var(--bg3); border: 1px solid var(--border);
+      border-radius: 10px; padding: 14px 16px; margin: 12px 0;
+      font-family: "SF Mono", "Fira Code", monospace;
+      font-size: 12px; color: #aaa; line-height: 1.7;
+      overflow-x: auto; white-space: pre;
+    }
+    .acc-code-block .acc-code-key { color: #4A8FE7; }
+    .acc-code-block .acc-code-val { color: #22C55E; }
+    .acc-code-block .acc-code-str { color: #e8b96a; }
+    .acc-code-block .acc-code-comment { color: #444; }
+
+    .acc-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      color: var(--orange); font-size: 14px; font-weight: 700;
+      text-decoration: none; margin-top: 16px;
+      transition: opacity 0.2s;
+    }
+    .acc-link:hover { opacity: 0.75; }
+
+    .acc-pill-row {
+      display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0;
+    }
+    .acc-pill {
+      font-size: 12px; font-weight: 700;
+      background: var(--bg3); border: 1px solid var(--border);
+      color: #aaa; padding: 4px 12px; border-radius: 100px;
+      letter-spacing: 0.04em;
+    }
+    .acc-pill.orange { background: var(--orange-dim); border-color: var(--orange-mid); color: var(--orange); }
+
+    .email-mock {
+      background: #1a0f05; border-radius: 14px; overflow: hidden;
+      border: 1px solid #3a2010; margin-top: 14px;
+    }
+    .email-mock-header {
+      background: var(--orange); padding: 11px 16px;
+      font-size: 11px; font-weight: 800; color: #fff; letter-spacing: 0.15em;
+    }
+    .email-mock-body { padding: 14px 16px; }
+    .email-mock-body .email-from { font-size: 9px; font-weight: 700; color: #888; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 6px; }
+    .email-mock-body .email-greeting { font-size: 16px; font-weight: 800; color: var(--orange); margin-bottom: 4px; }
+    .email-mock-body .email-note { font-size: 11px; color: #888; margin-bottom: 12px; }
+    .email-mock-body .email-section { border-left: 3px solid var(--orange); padding-left: 10px; margin-bottom: 10px; }
+    .email-mock-body .email-section-label { font-size: 10px; font-weight: 700; color: var(--orange); letter-spacing: 0.08em; margin-bottom: 6px; }
+    .email-mock-body .email-item { font-size: 11px; color: #ccc; margin-bottom: 4px; }
+    .email-mock-body .email-overdue { color: var(--orange); }
+    .email-mock-body .email-badge { font-size: 9px; background: #FF7A1A22; padding: 1px 6px; border-radius: 20px; }
   </style>
+
+  <!-- PostHog Analytics -->
+  <script>
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+" (stub)"},o="init push capture register register_once register_for_session unregister unregister_for_session getFeatureFlag getFeatureFlagPayload isFeatureFlagEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty createPersonProfile opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing debug".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init('phc_mtTXNiTrgfZWWnh6akwidh82ZNnWM2zrdFxjw8MYUC2B', {
+      api_host: 'https://us.i.posthog.com',
+      person_profiles: 'identified_only'
+    });
+  </script>
 </head>
 <body>
 
   <!-- NAV -->
-  <nav>
+  <nav class="main-nav">
     <a href="#hero" class="nav-brand">
       <img src="assets/icon.png" alt="Squirrel Brain" />
       <span>SQUIRREL <em>BRAIN</em></span>
@@ -468,20 +737,101 @@
   <section id="hero">
     <div class="hero-glow"></div>
     <div class="hero-content">
-      <div class="hero-logo-wrap">
-        <img src="assets/squirrel_logo.png" alt="Squirrel Brain" />
-      </div>
-      <h1 class="hero-wordmark">SQUIRREL <span>BRAIN</span></h1>
-      <p class="hero-tagline">Speak it. &nbsp; Snap it. &nbsp; Stash it.</p>
-      <p class="hero-sub">Voice memo, photo, or screenshot — Squirrel Brain reads it, extracts every task and date, and turns it into alarms, notes, and calendar events. Automatically.</p>
-      <a href="#" class="appstore-btn" aria-label="Download on the App Store">
-        <span class="appstore-btn-icon">&#63743;</span>
-        <span class="appstore-btn-text">
-          <span class="line1">Download on the</span>
-          <span class="line2">App Store</span>
-        </span>
-      </a>
-    </div>
+      <div class="hero-layout">
+
+        <!-- LEFT: text -->
+        <div class="hero-text-col">
+          <div class="hero-logo-wrap">
+            <img src="assets/icon.png" alt="Squirrel Brain" />
+          </div>
+          <h1 class="hero-wordmark">SQUIRREL <span>BRAIN</span></h1>
+          <p class="hero-tagline">Speak it. &nbsp; Snap it. &nbsp; Stash it.</p>
+          <p class="hero-sub">Voice memo, photo, or screenshot — Squirrel Brain reads it, extracts every task and date, and turns it into alarms, living notes, and calendar events automatically.</p>
+          <a href="#" class="appstore-btn" aria-label="Download on the App Store">
+            <span class="appstore-btn-icon">&#63743;</span>
+            <span class="appstore-btn-text">
+              <span class="line1">Download on the</span>
+              <span class="line2">App Store</span>
+            </span>
+          </a>
+        </div>
+
+        <!-- RIGHT: phone mockup — current real app home screen -->
+        <div class="hero-phone-col">
+          <div class="iphone-frame" style="max-width:230px; width:100%;">
+            <div style="border-radius:36px; overflow:hidden; background:#0a0a0a;">
+              <!-- Header -->
+              <div style="display:flex;align-items:center;gap:9px;padding:12px 13px 5px;">
+                <img src="assets/icon.png" style="width:24px;height:24px;border-radius:6px;flex-shrink:0;" alt="" />
+                <div style="font-size:12px;font-weight:900;color:#fff;letter-spacing:0.06em;line-height:1;">SQUIRREL <em style="color:#FF7A1A;font-style:normal;">BRAIN</em></div>
+              </div>
+              <!-- Subtitle -->
+              <div style="font-size:8px;color:#555;text-align:center;padding:0 12px 8px;line-height:1.5;">Turn quick thoughts into timely reminders.<br><span style="color:#3a3a3a;">(Sometimes annoyingly timely.)</span></div>
+              <!-- Daily Brief banner -->
+              <div style="margin:0 10px 8px;background:#FF7A1A15;border:1px solid #FF7A1A44;border-radius:10px;padding:8px 11px;display:flex;align-items:center;justify-content:space-between;">
+                <div>
+                  <div style="font-size:9px;font-weight:800;color:#FF7A1A;letter-spacing:0.12em;text-transform:uppercase;">DAILY BRIEF</div>
+                  <div style="font-size:10px;color:#ccc;margin-top:2px;line-height:1.3;">3 to-dos today · 1 overdue</div>
+                </div>
+                <div style="color:#FF7A1A;font-size:14px;">›</div>
+              </div>
+              <!-- Nav rows -->
+              <div style="padding:0 10px;display:flex;flex-direction:column;gap:5px;margin-bottom:10px;">
+                <div style="background:#161616;border-radius:9px;padding:8px 10px;display:flex;align-items:center;gap:7px;border:1px solid #252525;">
+                  <img src="assets/alarm_wood_icon_transparent.png" style="width:16px;height:16px;object-fit:contain;flex-shrink:0;" alt="" />
+                  <div style="flex:1;"><div style="font-size:10px;font-weight:800;color:#fff;">Today</div><div style="font-size:9px;color:#FF7A1A;margin-top:1px;">2 items</div></div>
+                  <div style="color:#3a3a3a;font-size:12px;">›</div>
+                </div>
+                <div style="background:#161616;border-radius:9px;padding:8px 10px;display:flex;align-items:center;gap:7px;border:1px solid #252525;">
+                  <img src="assets/calendar_branch_transparent.png" style="width:16px;height:16px;object-fit:contain;flex-shrink:0;" alt="" />
+                  <div style="flex:1;"><div style="font-size:10px;font-weight:800;color:#fff;">This Month</div><div style="font-size:9px;color:#FF7A1A;margin-top:1px;">8 events</div></div>
+                  <div style="color:#3a3a3a;font-size:12px;">›</div>
+                </div>
+                <div style="background:#161616;border-radius:9px;padding:8px 10px;display:flex;align-items:center;gap:7px;border:1px solid #252525;">
+                  <img src="assets/notes_transparent.png" style="width:16px;height:16px;object-fit:contain;flex-shrink:0;" alt="" />
+                  <div style="flex:1;"><div style="font-size:10px;font-weight:800;color:#fff;">Memory Stash</div><div style="font-size:9px;color:#FF7A1A;margin-top:1px;">5 saved</div></div>
+                  <div style="color:#3a3a3a;font-size:12px;">›</div>
+                </div>
+                <div style="background:#161616;border-radius:9px;padding:8px 10px;display:flex;align-items:center;gap:7px;border:1px solid #252525;">
+                  <img src="assets/tree_link_transparent.png" style="width:16px;height:16px;object-fit:contain;flex-shrink:0;" alt="" />
+                  <div style="flex:1;"><div style="font-size:10px;font-weight:800;color:#fff;">LinkStash</div><div style="font-size:9px;color:#555;margin-top:1px;">12 links</div></div>
+                  <div style="color:#3a3a3a;font-size:12px;">›</div>
+                </div>
+              </div>
+              <!-- Type Note button -->
+              <div style="margin:0 10px 8px;background:#161616;border-radius:9px;padding:6px 10px;display:flex;align-items:center;justify-content:center;gap:5px;border:1px solid #252525;">
+                <img src="assets/notes_transparent.png" style="width:12px;height:12px;object-fit:contain;" alt="" />
+                <div style="font-size:9px;font-weight:700;color:#888;">Type Note</div>
+              </div>
+              <!-- 4 acorn buttons — 2×2 grid -->
+              <div style="padding:0 10px 14px;display:flex;flex-direction:column;gap:6px;">
+                <div style="display:flex;gap:10px;justify-content:center;">
+                  <div style="display:flex;flex-direction:column;align-items:center;gap:2px;">
+                    <img src="assets/acorn_screenshot_transparent.png" style="width:42px;height:42px;object-fit:contain;" alt="" />
+                    <div style="font-size:8px;color:#777;letter-spacing:0.08em;font-weight:700;text-transform:uppercase;">Screenshot</div>
+                  </div>
+                  <div style="display:flex;flex-direction:column;align-items:center;gap:2px;">
+                    <img src="assets/acorn_upload_transparent.png" style="width:42px;height:42px;object-fit:contain;" alt="" />
+                    <div style="font-size:8px;color:#777;letter-spacing:0.08em;font-weight:700;text-transform:uppercase;">From Phone</div>
+                  </div>
+                </div>
+                <div style="display:flex;gap:10px;justify-content:center;">
+                  <div style="display:flex;flex-direction:column;align-items:center;gap:2px;">
+                    <img src="assets/acorn_camera_transparent.png" style="width:42px;height:42px;object-fit:contain;" alt="" />
+                    <div style="font-size:8px;color:#777;letter-spacing:0.08em;font-weight:700;text-transform:uppercase;">Take Photo</div>
+                  </div>
+                  <div style="display:flex;flex-direction:column;align-items:center;gap:2px;">
+                    <img src="assets/acorn_mic_transparent.png" style="width:42px;height:42px;object-fit:contain;" alt="" />
+                    <div style="font-size:8px;color:#777;letter-spacing:0.08em;font-weight:700;text-transform:uppercase;">Speak</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /.hero-layout -->
+    </div><!-- /.hero-content -->
     <div class="hero-scroll-hint" aria-hidden="true">
       <span>Scroll</span>
       <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16">
@@ -490,6 +840,238 @@
     </div>
   </section>
 
+  <!-- FEATURE ACCORDION — sits between hero and pain section -->
+  <section id="feature-accordion">
+    <p class="accordion-label">What Squirrel Brain Does</p>
+    <h2 class="accordion-title">Everything your brain tries to hold.<br>Now it doesn't have to.</h2>
+    <p class="accordion-sub">Tap any card to see how it works.</p>
+
+    <div class="accordion-grid">
+
+      <!-- CARD 1: Sales & Use Cases -->
+      <div class="acc-card" id="acc-sales">
+        <div class="acc-header" onclick="accToggle('acc-sales')" role="button" tabindex="0" aria-expanded="false">
+          <div class="acc-icon">&#128188;</div>
+          <div class="acc-header-text">
+            <div class="acc-header-title">Sales &amp; Use Cases</div>
+            <div class="acc-header-desc">For reps, field teams, and anyone always on the move.</div>
+          </div>
+          <div class="acc-chevron">&#8964;</div>
+        </div>
+        <div class="acc-body">
+          <div class="acc-body-inner">
+            <p>Squirrel Brain was built for people who are always moving — and can't afford to let anything slip through the cracks.</p>
+
+            <div class="acc-scenario">
+              <div class="acc-scenario-icon">&#128188;</div>
+              <div>
+                <div class="acc-scenario-head">SALES REP — WALKING OUT OF A CALL</div>
+                <div class="acc-scenario-body">"Follow up with Marcus at Meridian — he wants revised pricing by Thursday and a case study from a similar client."</div>
+                <div class="acc-scenario-result">→ Note saved. Reminder set for Wednesday. Calendar event created.</div>
+              </div>
+            </div>
+
+            <div class="acc-scenario">
+              <div class="acc-scenario-icon">&#128247;</div>
+              <div>
+                <div class="acc-scenario-head">EQUIPMENT DROP-OFF — LOANER / DEMO UNIT</div>
+                <div class="acc-scenario-body">Snap a photo at the account. Squirrel Brain attaches your GPS location and the photo to a note — proof of drop-off, ready to forward.</div>
+                <div class="acc-scenario-result">→ GPS tagged. Photo attached. Pickup alarm set. Forward to customer instantly.</div>
+              </div>
+            </div>
+
+            <div class="acc-scenario">
+              <div class="acc-scenario-icon">&#128196;</div>
+              <div>
+                <div class="acc-scenario-head">BUSINESS CARD — NEW CONTACT</div>
+                <div class="acc-scenario-body">Snap the card. Name, title, company, phone, and a follow-up reminder — all saved before you walk away.</div>
+                <div class="acc-scenario-result">→ Contact note created. Follow-up alarm set for next morning.</div>
+              </div>
+            </div>
+
+            <div class="acc-scenario">
+              <div class="acc-scenario-icon">&#128230;</div>
+              <div>
+                <div class="acc-scenario-head">PROOF OF SHIPPING — MULTI-PHOTO NOTE</div>
+                <div class="acc-scenario-body">Snap up to 10 photos into one note — receipt, box contents, serial numbers. When a customer says they never got it, you have proof in seconds.</div>
+                <div class="acc-scenario-result">→ PixNote created. Forward button sends proof to anyone instantly.</div>
+              </div>
+            </div>
+
+            <div class="acc-scenario">
+              <div class="acc-scenario-icon">&#128203;</div>
+              <div>
+                <div class="acc-scenario-head">MEETING NOTES — SNAP &amp; EXTRACT</div>
+                <div class="acc-scenario-body">Photograph any whiteboard, legal pad, or handwritten notes. Every action item and deadline is extracted and saved.</div>
+                <div class="acc-scenario-result">→ Tasks saved. Deadlines alarmed. Nothing falls through the cracks.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 2: MCP Server & Agent Setup -->
+      <div class="acc-card" id="acc-mcp">
+        <div class="acc-header" onclick="accToggle('acc-mcp')" role="button" tabindex="0" aria-expanded="false">
+          <div class="acc-icon">&#129302;</div>
+          <div class="acc-header-text">
+            <div class="acc-header-title">MCP Server &amp; Agent Setup</div>
+            <div class="acc-header-desc">Connect any AI agent directly to your brain.</div>
+          </div>
+          <div class="acc-chevron">&#8964;</div>
+        </div>
+        <div class="acc-body">
+          <div class="acc-body-inner">
+            <p>Squirrel Brain has a built-in MCP server. Any AI agent — Claude, a custom agent, or your own automation — can read your tasks, create alarms, and send voice messages directly to your phone.</p>
+
+            <p><strong style="color:var(--white);">Endpoint</strong></p>
+            <div class="acc-code-block"><span class="acc-code-key">POST</span> https://geczbtsjfbvfukdzdemr.supabase.co/functions/v1/mcp-server
+
+<span class="acc-code-comment"># Auth header — use your API key from Settings → API Key</span>
+<span class="acc-code-key">X-API-Key:</span> <span class="acc-code-str">sb_your_api_key_here</span></div>
+
+            <p><strong style="color:var(--white);">Available Tools</strong></p>
+            <table class="mcp-tools-table">
+              <thead>
+                <tr>
+                  <th>Tool</th>
+                  <th>What it does</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td><code>create_item</code></td><td>Create a task or note in your brain</td></tr>
+                <tr><td><code>create_alarm</code></td><td>Set a loud alarm on your phone</td></tr>
+                <tr><td><code>list_items</code></td><td>Read your current tasks and notes</td></tr>
+                <tr><td><code>get_daily_brief</code></td><td>Fetch today's agenda and pending items</td></tr>
+                <tr><td><code>notify_human</code></td><td>Send a push notification to your phone</td></tr>
+                <tr><td><code>pip_call</code></td><td>Send a voice message via Pip (TTS)</td></tr>
+              </tbody>
+            </table>
+
+            <p><strong style="color:var(--white);">Getting Started</strong></p>
+            <div class="acc-pill-row">
+              <span class="acc-pill orange">1. Open Squirrel Brain</span>
+              <span class="acc-pill orange">2. Settings → API Key</span>
+              <span class="acc-pill orange">3. Copy your key</span>
+              <span class="acc-pill orange">4. Add to your agent</span>
+            </div>
+
+            <a href="/mcp/" class="acc-link">Full setup guide &amp; curl examples &#8594;</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 3: Daily Email Brief -->
+      <div class="acc-card" id="acc-brief">
+        <div class="acc-header" onclick="accToggle('acc-brief')" role="button" tabindex="0" aria-expanded="false">
+          <div class="acc-icon">&#9728;&#65039;</div>
+          <div class="acc-header-text">
+            <div class="acc-header-title">Daily Email Brief</div>
+            <div class="acc-header-desc">Two emails a day. Zero noise.</div>
+          </div>
+          <div class="acc-chevron">&#8964;</div>
+        </div>
+        <div class="acc-body">
+          <div class="acc-body-inner">
+            <p>Every morning at 5 AM, your squirrel sends a daily brief — already waiting in your inbox when you wake up. No app to open. Just clarity.</p>
+            <p>In the afternoon, your squirrel decides: if everything's done, you get an all-clear. If there's still work left, you get a 4 PM check-in with exactly what's still on your plate.</p>
+
+            <div class="email-mock">
+              <div class="email-mock-header">MORNING BRIEF — 5 AM</div>
+              <div class="email-mock-body">
+                <div class="email-from">Sent each morning · from Pip</div>
+                <div class="email-greeting">Good morning, Hazel.</div>
+                <div class="email-note">Went through your stash last night. Here's what I found.</div>
+                <div class="email-section">
+                  <div class="email-section-label">&#127919; TODAY'S FOCUS</div>
+                  <div class="email-item">• Team standup &nbsp;<span style="color:#666;">9:00 AM</span></div>
+                  <div class="email-item email-overdue">• Send pricing to Meridian &nbsp;<span class="email-badge">overdue</span></div>
+                  <div class="email-item">• Pick up kids &nbsp;<span style="color:#666;">5:30 PM</span></div>
+                </div>
+                <div style="font-size:11px;color:#555;font-style:italic;">— Pip &#128063;</div>
+              </div>
+            </div>
+
+            <div style="display:flex;gap:10px;margin-top:12px;flex-wrap:wrap;">
+              <div style="flex:1;min-width:160px;background:#0a1a0a;border-radius:12px;padding:12px 14px;border:1px solid #1a3a1a;">
+                <div style="font-size:10px;font-weight:800;color:#22C55E;letter-spacing:0.12em;margin-bottom:5px;">ALL CLEAR ✓</div>
+                <div style="font-size:11px;color:#888;line-height:1.5;">Sent when everything's done. Pip does the Three Spins. Go enjoy your evening.</div>
+              </div>
+              <div style="flex:1;min-width:160px;background:#1a0f05;border-radius:12px;padding:12px 14px;border:1px solid #3a2010;">
+                <div style="font-size:10px;font-weight:800;color:var(--orange);letter-spacing:0.12em;margin-bottom:5px;">4 PM CHECK-IN &#11088;</div>
+                <div style="font-size:11px;color:#888;line-height:1.5;">Sent only if items are still pending. Exactly what's left — nothing more.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 4: Photo & Camera Capture -->
+      <div class="acc-card" id="acc-photo">
+        <div class="acc-header" onclick="accToggle('acc-photo')" role="button" tabindex="0" aria-expanded="false">
+          <div class="acc-icon">&#128247;</div>
+          <div class="acc-header-text">
+            <div class="acc-header-title">Photo &amp; Camera Capture</div>
+            <div class="acc-header-desc">Snap anything. Find it instantly.</div>
+          </div>
+          <div class="acc-chevron">&#8964;</div>
+        </div>
+        <div class="acc-body">
+          <div class="acc-body-inner">
+            <p>Wine you loved. A whiteboard. A sticky note. A business card. A soccer schedule. A school permission slip. Take a picture and Squirrel Brain reads it, names it, and makes it searchable.</p>
+            <p>No more digging through your camera roll. Find anything in 2 seconds — not 20 minutes of scrolling.</p>
+
+            <div class="acc-pill-row">
+              <span class="acc-pill orange">Take Photo</span>
+              <span class="acc-pill orange">From Phone</span>
+              <span class="acc-pill orange">Screenshot</span>
+              <span class="acc-pill">Up to 10 photos per PixNote</span>
+              <span class="acc-pill">GPS tagged automatically</span>
+            </div>
+
+            <div class="acc-scenario">
+              <div class="acc-scenario-icon">&#127863;</div>
+              <div>
+                <div class="acc-scenario-head">WINE YOU LOVED — NAPA</div>
+                <div class="acc-scenario-body">Snap the bottle before you leave the table.</div>
+                <div class="acc-scenario-result">→ "That Napa Cab" → Stag's Leap Artemis 2021, found in 2 seconds.</div>
+              </div>
+            </div>
+
+            <div class="acc-scenario">
+              <div class="acc-scenario-icon">&#128197;</div>
+              <div>
+                <div class="acc-scenario-head">SOCCER SCHEDULE — FULL SEASON</div>
+                <div class="acc-scenario-body">Snap the season schedule once. Every game, date, and location lands in your calendar automatically.</div>
+                <div class="acc-scenario-result">→ 15 calendar events created. Map pins added. Alarms set.</div>
+              </div>
+            </div>
+
+            <div class="acc-scenario">
+              <div class="acc-scenario-icon">&#128396;</div>
+              <div>
+                <div class="acc-scenario-head">HANDWRITTEN NOTES — ANY FORMAT</div>
+                <div class="acc-scenario-body">Legal pad, sticky note, napkin, whiteboard. Doesn't matter. Squirrel Brain reads all of it.</div>
+                <div class="acc-scenario-result">→ Tasks extracted. Deadlines alarmed. Notes saved and searchable.</div>
+              </div>
+            </div>
+
+            <div class="acc-scenario">
+              <div class="acc-scenario-icon">&#128279;</div>
+              <div>
+                <div class="acc-scenario-head">YOUTUBE / SAVED LINKS — LINKSTASH</div>
+                <div class="acc-scenario-body">Share any link from Safari, YouTube, or any app. Squirrel Brain saves and summarizes it.</div>
+                <div class="acc-scenario-result">→ Searchable. Never buried in your camera roll again.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /.accordion-grid -->
+  </section>
+  <!-- END FEATURE ACCORDION -->
+
   <!-- SECTION 1 — PAIN: Your brain has too many tabs open -->
   <section id="pain">
     <div class="pain-inner">
@@ -497,26 +1079,55 @@
         <div class="pain-number">1</div>
         <h2 class="pain-heading">Your brain has too many tabs open.</h2>
         <p class="pain-body">Soccer schedules. Doctor appointments. Work follow-ups. The wine you loved in Napa. The gift idea you spotted for mom. 52 saved YouTube videos you'll never find. The school permission slip. Things your spouse texted you three days ago.</p>
-        <p class="pain-cta">Tap any tab to see what Squirrel Brain does with it.</p>
+        <p class="pain-cta">Feelin' squirrely? Pick a tab — let's get crackin'.</p>
       </div>
       <div class="brain-tabs">
-        <div class="brain-tab" data-tab="soccer"><span class="tab-icon">&#9917;</span>Soccer Schedule<span class="tab-dot"></span></div>
-        <div class="brain-tab" data-tab="doctor"><span class="tab-icon">&#128138;</span>Doctor Appt<span class="tab-dot"></span></div>
-        <div class="brain-tab" data-tab="work"><span class="tab-icon">&#128188;</span>Work Follow-Up<span class="tab-dot"></span></div>
-        <div class="brain-tab" data-tab="screenshots"><span class="tab-icon">&#128247;</span>Screenshots<span class="tab-dot"></span></div>
-        <div class="brain-tab" data-tab="spouse"><span class="tab-icon">&#128172;</span>Spouse Text<span class="tab-dot"></span></div>
-        <div class="brain-tab" data-tab="ideas"><span class="tab-icon">&#128161;</span>Ideas<span class="tab-dot"></span></div>
-        <div class="brain-tab" data-tab="grocery"><span class="tab-icon">&#128722;</span>Grocery Run<span class="tab-dot"></span></div>
-        <div class="brain-tab" data-tab="meeting"><span class="tab-icon">&#128203;</span>Meeting Notes<span class="tab-dot"></span></div>
-        <div class="brain-tab" data-tab="wine"><span class="tab-icon">&#127863;</span>Wine You Loved<span class="tab-dot"></span></div>
-        <div class="brain-tab" data-tab="gift"><span class="tab-icon">&#127873;</span>Gift Idea<span class="tab-dot"></span></div>
-        <div class="brain-tab" data-tab="whiteboard"><span class="tab-icon">&#129526;</span>Whiteboard<span class="tab-dot"></span></div>
-        <div class="brain-tab" data-tab="savedvideo"><span class="tab-icon">&#127909;</span>Saved Videos<span class="tab-dot"></span></div>
-        <div class="brain-tab" data-tab="handwritten"><span class="tab-icon">&#128394;</span>Handwritten Note<span class="tab-dot"></span></div>
-        <div class="brain-tab" data-tab="parking"><span class="tab-icon">&#128663;</span>Parking Spot<span class="tab-dot"></span></div>
-        <div class="brain-tab" data-tab="bizcard"><span class="tab-icon">&#128197;</span>Business Card<span class="tab-dot"></span></div>
-        <div class="brain-tab" data-tab="schoolform"><span class="tab-icon">&#128218;</span>School Form<span class="tab-dot"></span></div>
-        <div class="brain-tab" data-tab="salescall"><span class="tab-icon">&#128188;</span>Sales Call<span class="tab-dot"></span></div>
+        <div class="brain-tab" data-tab="soccer"><div class="tab-text"><div class="tab-name">Soccer Schedule</div><div class="tab-sub">→ calendar events + alarms</div></div><span class="tab-chevron">›</span></div>
+        <div class="brain-tab" data-tab="doctor"><div class="tab-text"><div class="tab-name">Doctor Appt</div><div class="tab-sub">→ event + 3 alarms</div></div><span class="tab-chevron">›</span></div>
+        <div class="brain-tab" data-tab="work"><div class="tab-text"><div class="tab-name">Work Follow-Up</div><div class="tab-sub">→ notes + reminders</div></div><span class="tab-chevron">›</span></div>
+        <div class="brain-tab" data-tab="screenshots"><div class="tab-text"><div class="tab-name">Screenshots</div><div class="tab-sub">→ events + alarms</div></div><span class="tab-chevron">›</span></div>
+        <div class="brain-tab" data-tab="spouse"><div class="tab-text"><div class="tab-name">Spouse Text</div><div class="tab-sub">→ tasks + reminders</div></div><span class="tab-chevron">›</span></div>
+        <div class="brain-tab" data-tab="ideas"><div class="tab-text"><div class="tab-name">Ideas</div><div class="tab-sub">→ searchable note</div></div><span class="tab-chevron">›</span></div>
+        <div class="brain-tab" data-tab="grocery"><div class="tab-text"><div class="tab-name">Grocery Run</div><div class="tab-sub">→ checklist note</div></div><span class="tab-chevron">›</span></div>
+        <div class="brain-tab" data-tab="meeting"><div class="tab-text"><div class="tab-name">Meeting Notes</div><div class="tab-sub">→ notes + follow-ups</div></div><span class="tab-chevron">›</span></div>
+        <div class="brain-tab" data-tab="wine"><div class="tab-text"><div class="tab-name">Wine You Loved</div><div class="tab-sub">→ saved note</div></div><span class="tab-chevron">›</span></div>
+        <div class="brain-tab" data-tab="gift"><div class="tab-text"><div class="tab-name">Gift Idea</div><div class="tab-sub">→ note + reminder</div></div><span class="tab-chevron">›</span></div>
+        <div class="brain-tab" data-tab="whiteboard"><div class="tab-text"><div class="tab-name">Whiteboard</div><div class="tab-sub">→ notes + tasks</div></div><span class="tab-chevron">›</span></div>
+        <div class="brain-tab" data-tab="savedvideo"><div class="tab-text"><div class="tab-name">Saved Videos</div><div class="tab-sub">→ searchable notes</div></div><span class="tab-chevron">›</span></div>
+        <div class="brain-tab" data-tab="handwritten"><div class="tab-text"><div class="tab-name">Handwritten Note</div><div class="tab-sub">→ tasks + alarms</div></div><span class="tab-chevron">›</span></div>
+        <div class="brain-tab" data-tab="parking"><div class="tab-text"><div class="tab-name">Parking Spot</div><div class="tab-sub">→ note + alarm</div></div><span class="tab-chevron">›</span></div>
+        <div class="brain-tab" data-tab="bizcard"><div class="tab-text"><div class="tab-name">Business Card</div><div class="tab-sub">→ contact + follow-up</div></div><span class="tab-chevron">›</span></div>
+        <div class="brain-tab" data-tab="schoolform"><div class="tab-text"><div class="tab-name">School Form</div><div class="tab-sub">→ deadline + alarms</div></div><span class="tab-chevron">›</span></div>
+        <div class="brain-tab" data-tab="salescall"><div class="tab-text"><div class="tab-name">Sales Call</div><div class="tab-sub">→ notes + calendar</div></div><span class="tab-chevron">›</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION — SQUIRREL PERSONALITY -->
+  <section style="background:var(--bg2); padding:72px 24px;">
+    <div class="squirrel-intro-grid" style="max-width:780px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:center;">
+      <div>
+        <div class="feature-label-tag">Meet Your Squirrel</div>
+        <h2 class="feature-heading" style="margin-top:14px;">First thing in onboarding — you name your squirrel.</h2>
+        <p class="feature-body" style="margin-top:16px;">
+          From that moment on, your squirrel is yours. It shows up in your morning email, your afternoon check-in, your reminders — and moments you'd never see coming.<br><br>
+          Your squirrel has a personality. And you never quite know what it's going to say. Sometimes it's exactly what you need. Sometimes it's just nuts. <em style="color:#FF7A1A; font-style:normal;">Hint hint.</em>
+        </p>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:10px;">
+        <div style="background:#1a1a1a; border-radius:14px; padding:14px 18px; border-left:3px solid var(--orange);">
+          <div style="font-size:10px; font-weight:700; color:var(--orange); letter-spacing:0.12em; text-transform:uppercase; margin-bottom:6px;">Morning Brief — 5 AM</div>
+          <div style="font-size:13px; color:#eee; font-weight:600; margin-bottom:4px;">Good morning, Hazel.</div>
+          <div style="font-size:12px; color:#888; line-height:1.5;">Went through your stash last night. Here's what I found. — <em style="color:#FF7A1A; font-style:normal;">Pip</em></div>
+        </div>
+        <div style="background:#1a1a1a; border-radius:14px; padding:14px 18px; border-left:3px solid #333;">
+          <div style="font-size:10px; font-weight:700; color:#666; letter-spacing:0.12em; text-transform:uppercase; margin-bottom:6px;">4 PM Check-In</div>
+          <div style="font-size:12px; color:#888; line-height:1.5;">Still a few things between you and peace. The school form won't fill itself — though wouldn't that be nice. — <em style="color:#FF7A1A; font-style:normal;">Pip</em></div>
+        </div>
+        <div style="background:#0d1a0d; border-radius:14px; padding:14px 18px; border-left:3px solid #22C55E55;">
+          <div style="font-size:10px; font-weight:700; color:#22C55E; letter-spacing:0.12em; text-transform:uppercase; margin-bottom:6px;">All Clear ✓</div>
+          <div style="font-size:12px; color:#888; line-height:1.5;">I'm doing the ancient ritual of the Three Spins. Today you crushed it. Go enjoy your evening. — <em style="color:#FF7A1A; font-style:normal;">Pip</em></div>
+        </div>
       </div>
     </div>
   </section>
@@ -540,39 +1151,47 @@
             <div style="display:flex; align-items:flex-start; gap:12px; padding:14px 16px; background:#161616; border-radius:12px; border:1px solid #2a2a2a;">
               <span style="font-size:18px; flex-shrink:0;">&#128188;</span>
               <div>
-                <div style="font-size:12px; font-weight:700; color:var(--orange); margin-bottom:3px;">SALES REP — WALKING OUT OF A CALL</div>
+                <div style="font-size:14px; font-weight:700; color:var(--orange); margin-bottom:3px;">SALES REP — WALKING OUT OF A CALL</div>
                 <div style="font-size:13px; color:#aaa; line-height:1.5;">"Follow up with Marcus at Meridian — he wants revised pricing by Thursday and a case study from a similar client."</div>
-                <div style="font-size:11px; color:#555; margin-top:4px;">→ Note saved. Reminder set for Wednesday. Calendar event created.</div>
+                <div style="font-size:13px; color:#555; margin-top:4px;">→ Note saved. Reminder set for Wednesday. Calendar event created.</div>
               </div>
             </div>
             <div style="display:flex; align-items:flex-start; gap:12px; padding:14px 16px; background:#161616; border-radius:12px; border:1px solid #2a2a2a;">
               <span style="font-size:18px; flex-shrink:0;">&#127939;</span>
               <div>
-                <div style="font-size:12px; font-weight:700; color:var(--orange); margin-bottom:3px;">RUNNER — MILE 3</div>
+                <div style="font-size:14px; font-weight:700; color:var(--orange); margin-bottom:3px;">RUNNER — MILE 3</div>
                 <div style="font-size:13px; color:#aaa; line-height:1.5;">"Remember to call mom this weekend. Also — the dryer has been making that noise again, schedule someone to look at it."</div>
-                <div style="font-size:11px; color:#555; margin-top:4px;">→ Two reminders set. Back to running in 8 seconds.</div>
+                <div style="font-size:13px; color:#555; margin-top:4px;">→ Two reminders set. Back to running in 8 seconds.</div>
               </div>
             </div>
             <div style="display:flex; align-items:flex-start; gap:12px; padding:14px 16px; background:#161616; border-radius:12px; border:1px solid #2a2a2a;">
               <span style="font-size:18px; flex-shrink:0;">&#127947;</span>
               <div>
-                <div style="font-size:12px; font-weight:700; color:var(--orange); margin-bottom:3px;">GYM — BETWEEN SETS</div>
+                <div style="font-size:14px; font-weight:700; color:var(--orange); margin-bottom:3px;">GYM — BETWEEN SETS</div>
                 <div style="font-size:13px; color:#aaa; line-height:1.5;">"That idea for the presentation intro — start with the client's problem, not our solution. Write that down before I forget."</div>
-                <div style="font-size:11px; color:#555; margin-top:4px;">→ Saved to Notes. Alarm set for the night before the meeting.</div>
+                <div style="font-size:13px; color:#555; margin-top:4px;">→ Saved to Notes. Alarm set for the night before the meeting.</div>
               </div>
             </div>
           </div>
         </div>
         <div style="display:flex; flex-direction:column; gap:20px; align-items:center;">
-          <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; max-width:340px;">
+          <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px; max-width:380px;">
             <img src="assets/lifestyle_sales_walkout.png" alt="Professional dictating notes walking out of a meeting" style="width:100%; border-radius:14px; box-shadow:0 8px 32px rgba(0,0,0,0.5);" loading="lazy" />
             <img src="assets/lifestyle_runner.png" alt="Runner capturing a thought mid-run" style="width:100%; border-radius:14px; box-shadow:0 8px 32px rgba(0,0,0,0.5);" loading="lazy" />
             <img src="assets/lifestyle_gym.png" alt="Guy at gym speaking a voice note between sets" style="width:100%; border-radius:14px; box-shadow:0 8px 32px rgba(0,0,0,0.5);" loading="lazy" />
-            <img src="assets/lifestyle_driving.png" alt="Person dictating a note in their car" style="width:100%; border-radius:14px; box-shadow:0 8px 32px rgba(0,0,0,0.5);" loading="lazy" />
           </div>
           <div style="font-size:28px; color:var(--orange);">↓</div>
           <div class="iphone-frame" style="max-width:220px;">
-            <img src="assets/Notes Screen.PNG" alt="Squirrel Brain saved note from voice capture" loading="lazy" />
+            <div style="border-radius:36px; overflow:hidden;">
+              <div class="sb-mock" style="border-radius:0; border:none;">
+                <div class="sb-mock-hdr"><img src="assets/icon.png" alt=""/><div class="sb-mock-hdr-name">SQUIRREL <em>BRAIN</em></div></div>
+                <div class="sb-mock-sec"><div class="sb-mock-sec-ttl"><img src="assets/notes_transparent.png" alt=""/>NOTES</div>
+                  <div class="sb-note"><div class="sb-note-title">Follow up with Marcus — revised pricing</div><div class="sb-note-body">Send before Thursday EOD. Include Riverside case study.</div><div class="sb-note-tags"><span class="sb-note-tag">ACTION ITEM</span></div><div class="sb-note-foot"><span class="sb-note-send">Send as Text</span><span class="sb-note-close">✕</span></div></div>
+                  <div class="sb-note"><div class="sb-note-title">Call mom this weekend</div><div class="sb-note-body">Also check on the dryer noise — schedule a repair.</div><div class="sb-note-foot"><span class="sb-note-send">Send as Text</span><span class="sb-note-close">✕</span></div></div>
+                  <div class="sb-note"><div class="sb-note-title">Presentation intro — start with the problem</div><div class="sb-note-body">Lead with the client's pain, not the product.</div><div class="sb-note-tags"><span class="sb-note-tag">IDEA</span></div><div class="sb-note-foot"><span class="sb-note-send">Send as Text</span><span class="sb-note-close">✕</span></div></div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -585,7 +1204,7 @@
       <div class="feature-row" style="align-items:center;">
         <div class="feature-text">
           <p class="section-label">Work Calendar Problem</p>
-          <h2 class="feature-title">Outlook gives you<br>one ding.<br>That's all you get.</h2>
+          <h2 class="feature-heading">Outlook gives you<br>one ding.<br>That's all you get.</h2>
           <p class="feature-body">
             Company policy keeps Outlook locked to your work calendar — no external connections, no integrations. That's fine. We get it.<br><br>
             But when that single notification fires and you miss it, you miss the meeting. You miss the call. You look bad for something that was literally on your calendar all along.<br><br>
@@ -593,7 +1212,7 @@
           </p>
           <div style="display:flex; align-items:center; gap:10px; margin-top:20px; padding:14px 18px; background:#1a1a1a; border-radius:14px; border-left:4px solid var(--orange);">
             <img src="assets/alarm_wood_icon_transparent.png" style="width:28px; height:28px; object-fit:contain; flex-shrink:0;" alt="" />
-            <p style="font-size:13px; color:#aaa; line-height:1.5; margin:0;">Your alarm fires on your phone <em>and</em> your watch. It keeps going until you dismiss it — not just one ding and gone.</p>
+            <p style="font-size:15px; color:#aaa; line-height:1.5; margin:0;">Your alarm fires on your phone <em>and</em> your watch. It keeps going until you dismiss it — not just one ding and gone.</p>
           </div>
         </div>
         <div class="feature-visual" style="display:flex; flex-direction:column; gap:16px; align-items:center;">
@@ -607,7 +1226,19 @@
           <div>
             <p class="tab-ba-label tab-ba-label--after" style="margin-bottom:10px; display:inline-block;">Squirrel Brain fires the alarm</p>
             <div class="iphone-frame" style="max-width:220px;">
-              <img src="assets/1st 2nd 3rd Alarm Screen.PNG" class="iphone-frame img" alt="Alarm screen with 1st, 2nd, 3rd reminders" style="width:100%; border-radius:36px; display:block;" />
+              <div style="border-radius:36px; overflow:hidden;">
+                <div class="sb-mock" style="border-radius:0; border:none;">
+                  <div class="sb-mock-hdr"><img src="assets/icon.png" alt=""/><div class="sb-mock-hdr-name">SQUIRREL <em>BRAIN</em></div></div>
+                  <div class="sb-mock-sec"><div class="sb-mock-sec-ttl"><img src="assets/calendar_branch_transparent.png" alt=""/>CALENDAR EVENT</div>
+                    <div class="sb-ev"><div class="sb-ev-time">MON OCT 13 · 2:30 PM</div><div class="sb-ev-title">Q4 Planning — Meridian Group</div><div class="sb-ev-loc">📍 Conference Room B, 4th floor</div><div class="sb-ev-foot"><div class="sb-ev-chk"></div><span class="sb-ev-snooze">SNOOZE</span></div></div>
+                  </div>
+                  <div class="sb-mock-sec"><div class="sb-mock-sec-ttl"><img src="assets/alarm_wood_icon_transparent.png" alt=""/>SQUIRREL ALARMS</div>
+                    <div class="sb-ev"><div class="sb-ev-time">MON OCT 13 · 1:00 PM</div><div class="sb-ev-title">1st alarm — 90 min before</div><div class="sb-ev-foot"><div class="sb-ev-chk"></div><span class="sb-ev-snooze">SNOOZE</span></div></div>
+                    <div class="sb-ev"><div class="sb-ev-time">MON OCT 13 · 2:00 PM</div><div class="sb-ev-title">2nd alarm — time to prep</div><div class="sb-ev-foot"><div class="sb-ev-chk"></div><span class="sb-ev-snooze">SNOOZE</span></div></div>
+                    <div class="sb-ev"><div class="sb-ev-time">MON OCT 13 · 2:15 PM</div><div class="sb-ev-title">3rd alarm — head in now</div><div class="sb-ev-foot"><div class="sb-ev-chk"></div><span class="sb-ev-snooze">SNOOZE</span></div></div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -615,15 +1246,15 @@
     </div>
   </section>
 
-  <!-- SECTION 2 — VOICE: Your thoughts aren't organized -->
-  <section style="background:var(--bg);">
+  <!-- SECTION 2 — VOICE: Your thoughts aren't organized — REMOVED PER ADAM 2026-05-27 -->
+  <section style="display:none; background:var(--bg);">
     <div class="feature-section">
       <div class="feature-row">
         <div>
-          <div class="feature-number">2</div>
+          <div class="feature-number">✦</div>
           <div class="feature-label-tag">Speak It</div>
           <h2 class="feature-heading">Your thoughts aren't organized.<br>That's okay.</h2>
-          <p class="feature-body">Just say it out loud. "Remind me to call legal." "Need to send pricing tomorrow." "Pick up cleats after school."<br><br>You don't need complete sentences. You don't need to think first. Just talk.</p>
+          <p class="feature-body">You don't need complete sentences. You don't need to think first. Just ramble a thought into Squirrel Brain — while you're walking out of a meeting, driving home, or standing in the cereal aisle.<br><br>Squirrel Brain listens, extracts every task and date, and turns it into something you can actually act on.</p>
           <p class="feature-accent">Squirrel Brain turns chaos into organized action.</p>
           <div class="voice-quotes" style="margin-top:24px;">
             <div class="voice-quote">"Remind me to call legal."</div>
@@ -632,8 +1263,45 @@
           </div>
         </div>
         <div>
-          <div class="iphone-frame">
-            <img src="assets/Main Screen.png" alt="Squirrel Brain main screen with voice capture button" loading="lazy" />
+          <!-- What you get after speaking — real result screen -->
+          <div style="display:flex;flex-direction:column;align-items:center;gap:10px;">
+            <div style="font-size:10px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#FF7A1A;padding:3px 14px;background:#FF7A1A15;border-radius:100px;">You just said it out loud</div>
+            <div style="font-size:20px;color:#FF7A1A;">↓</div>
+            <div class="iphone-frame" style="max-width:260px;width:100%;">
+              <div style="border-radius:36px;overflow:hidden;">
+                <div class="sb-mock" style="border-radius:0;border:none;">
+                  <div class="sb-mock-hdr"><img src="assets/icon.png" alt=""/><div class="sb-mock-hdr-name">SQUIRREL <em>BRAIN</em></div></div>
+                  <!-- Screen title -->
+                  <div style="padding:10px 14px 2px;display:flex;align-items:center;gap:8px;border-bottom:1px solid #141414;">
+                    <img src="assets/acorn_mic_transparent.png" style="width:18px;height:18px;object-fit:contain;" alt="" />
+                    <div style="font-size:11px;font-weight:800;color:#fff;letter-spacing:0.08em;">NOTES</div>
+                  </div>
+                  <div class="sb-mock-sec">
+                    <div class="sb-note">
+                      <div style="font-size:8px;font-weight:800;color:#FF7A1A;letter-spacing:0.08em;margin-bottom:4px;">⚖️ LEGAL</div>
+                      <div class="sb-note-title">📞 Call legal — re: NDA update</div>
+                      <div class="sb-note-body">Follow up on contract revisions before end of week.</div>
+                      <div class="sb-note-tags"><span class="sb-note-tag">CALL</span></div>
+                      <div class="sb-note-foot"><span class="sb-note-send">Send as Text</span><span class="sb-note-close">✕</span></div>
+                    </div>
+                    <div class="sb-note">
+                      <div style="font-size:8px;font-weight:800;color:#FF7A1A;letter-spacing:0.08em;margin-bottom:4px;">📅 THU · EOD</div>
+                      <div class="sb-note-title">💼 Send revised pricing to Meridian</div>
+                      <div class="sb-note-body">Include updated Q3 case study + tier breakdown.</div>
+                      <div class="sb-note-tags"><span class="sb-note-tag">ACTION ITEM</span></div>
+                      <div class="sb-note-foot"><span class="sb-note-send">Send as Text</span><span class="sb-note-close">✕</span></div>
+                    </div>
+                    <div class="sb-note" style="margin-bottom:0;">
+                      <div style="font-size:8px;font-weight:800;color:#FF7A1A;letter-spacing:0.08em;margin-bottom:4px;">⏰ TODAY · 4:00 PM</div>
+                      <div class="sb-note-title">⚽ Pick up cleats after school</div>
+                      <div class="sb-note-body">Cedar Ridge Sporting Goods. Call ahead — size 5.</div>
+                      <div class="sb-note-tags"><span class="sb-note-tag">REMINDER SET</span></div>
+                      <div class="sb-note-foot"><span class="sb-note-send">Send as Text</span><span class="sb-note-close">✕</span></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -645,10 +1313,10 @@
     <div class="feature-section">
       <div class="feature-row reverse">
         <div>
-          <div class="feature-number">3</div>
+          <div class="feature-number">✦</div>
           <div class="feature-label-tag">Snap It</div>
           <h2 class="feature-heading">One screenshot.<br>Full calendar.</h2>
-          <p class="feature-body">Soccer schedules. School events. Travel itineraries. Work schedules.<br><br>Screenshot it once. Squirrel Brain reads every date, time, address, and location — then builds your calendar automatically.</p>
+          <p class="feature-body">Soccer schedules. School events. Travel itineraries. Work schedules.<br><br>Screenshot it once. Squirrel Brain reads every date, time, address, and location — then builds your calendar automatically. Every event comes with a map pin that drops straight into Apple Maps so you always know exactly where you're going.</p>
           <p class="feature-accent">Every game, every event, every deadline. All at once.</p>
         </div>
         <div class="split-visual">
@@ -665,7 +1333,59 @@
               What Squirrel Brain creates
             </div>
             <div class="iphone-frame">
-              <img src="assets/Callander Screen.PNG" alt="Squirrel Brain calendar events screen" loading="lazy" />
+              <div style="border-radius:36px; overflow:hidden;">
+                <div class="sb-mock" style="border-radius:0; border:none;">
+                  <!-- App header matching real screen -->
+                  <div style="display:flex;align-items:center;gap:8px;padding:10px 14px 8px;border-bottom:1px solid #1a1a1a;">
+                    <img src="assets/icon.png" style="width:20px;height:20px;border-radius:5px;flex-shrink:0;" alt="" />
+                    <div style="font-size:9px;font-weight:800;color:#fff;letter-spacing:0.1em;">SQUIRREL <em style="color:#FF7A1A;font-style:normal;">BRAIN</em></div>
+                  </div>
+                  <!-- Screen title -->
+                  <div style="padding:10px 14px 8px;display:flex;align-items:center;gap:7px;border-bottom:1px solid #141414;">
+                    <img src="assets/calendar_branch_transparent.png" style="width:14px;height:14px;object-fit:contain;" alt="" />
+                    <div style="font-size:10px;font-weight:800;color:#fff;letter-spacing:0.08em;">THIS MONTH'S EVENTS</div>
+                  </div>
+                  <div class="sb-mock-sec">
+                    <div class="sb-ev-v2">
+                      <div class="sb-ev-v2-erase"><div class="sb-ev-v2-erase-txt">ERASE</div><div class="sb-ev-v2-erase-circle"></div></div>
+                      <div class="sb-ev-v2-main">
+                        <div class="sb-ev-v2-time">SAT APR 5 · 10:00 AM – 12:00 PM</div>
+                        <div class="sb-ev-v2-title">Acorn FC vs. Pine Ridge Warriors</div>
+                        <div class="sb-ev-v2-source">📍 Oakwood Park, Field 2</div>
+                      </div>
+                      <div class="sb-ev-v2-actions">
+                        <div class="sb-ev-v2-attime"><div class="sb-ev-v2-attime-line1">AT EVENT<br>TIME</div></div>
+                        <div class="sb-ev-v2-snooze"><div class="sb-ev-v2-snooze-line1">SNOOZE</div><div class="sb-ev-v2-snooze-line2">pick time</div></div>
+                      </div>
+                    </div>
+                    <div class="sb-ev-v2">
+                      <div class="sb-ev-v2-erase"><div class="sb-ev-v2-erase-txt">ERASE</div><div class="sb-ev-v2-erase-circle"></div></div>
+                      <div class="sb-ev-v2-main">
+                        <div class="sb-ev-v2-time">SAT APR 12 · 1:00 PM – 3:00 PM</div>
+                        <div class="sb-ev-v2-title">Acorn FC vs. Hollow Oak United</div>
+                        <div class="sb-ev-v2-source">📍 Cedar Creek Complex, Field 1</div>
+                      </div>
+                      <div class="sb-ev-v2-actions">
+                        <div class="sb-ev-v2-attime"><div class="sb-ev-v2-attime-line1">AT EVENT<br>TIME</div></div>
+                        <div class="sb-ev-v2-snooze"><div class="sb-ev-v2-snooze-line1">SNOOZE</div><div class="sb-ev-v2-snooze-line2">pick time</div></div>
+                      </div>
+                    </div>
+                    <div class="sb-ev-v2">
+                      <div class="sb-ev-v2-erase"><div class="sb-ev-v2-erase-txt">ERASE</div><div class="sb-ev-v2-erase-circle"></div></div>
+                      <div class="sb-ev-v2-main">
+                        <div class="sb-ev-v2-time">SAT APR 19 · 9:00 AM – 11:00 AM</div>
+                        <div class="sb-ev-v2-title">Acorn FC @ Birchwood Blazers</div>
+                        <div class="sb-ev-v2-source">📍 Maple Run Park, Field 3</div>
+                      </div>
+                      <div class="sb-ev-v2-actions">
+                        <div class="sb-ev-v2-attime"><div class="sb-ev-v2-attime-line1">AT EVENT<br>TIME</div></div>
+                        <div class="sb-ev-v2-snooze"><div class="sb-ev-v2-snooze-line1">SNOOZE</div><div class="sb-ev-v2-snooze-line2">pick time</div></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="sb-mock-more">+12 more games added automatically</div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -678,16 +1398,16 @@
     <div class="feature-section">
       <div class="feature-row">
         <div>
-          <div class="feature-number">4</div>
+          <div class="feature-number">✦</div>
           <div class="feature-label-tag">Snap It</div>
           <h2 class="feature-heading">Snap anything.<br>Find it instantly.</h2>
           <p class="feature-body">Wine you loved. A whiteboard. A sticky note. A business card.<br><br>Take a picture and Squirrel Brain turns it into searchable notes you can actually find later.</p>
-          <p class="feature-accent">No more scrolling through thousands of random photos trying to remember where something was.</p>
+          <p class="feature-accent">No more digging through your camera roll like you forgot where you buried the good stuff.</p>
         </div>
         <div>
           <div class="snap-ba-wrap">
             <div class="snap-ba-side">
-              <span class="snap-ba-label snap-ba-label--before">Before</span>
+              <span class="snap-ba-label snap-ba-label--before">The photo you take</span>
               <img
                 src="assets/before_sticky_note.png"
                 alt="Real sticky note — Team Meeting reminder before Squirrel Brain captures it"
@@ -696,34 +1416,36 @@
               />
             </div>
             <div class="snap-ba-side">
-              <span class="snap-ba-label snap-ba-label--after">After</span>
-              <img
-                src="assets/after_review_capture.png"
-                alt="Squirrel Brain Review Capture screen showing extracted notes and alarms"
-                class="snap-ba-img"
-                loading="lazy"
-              />
+              <span class="snap-ba-label snap-ba-label--after">What Squirrel Brain creates</span>
+              <!-- Matches sticky note exactly: Team Meeting Tue May 21 10AM Conf Room B, Q2 Project Update etc. -->
+              <div class="sb-mock" style="border-radius:14px;">
+                <div class="sb-mock-hdr"><img src="assets/icon.png" alt=""/><div class="sb-mock-hdr-name">SQUIRREL <em>BRAIN</em></div></div>
+                <div class="sb-mock-sec">
+                  <div class="sb-mock-sec-ttl"><img src="assets/calendar_branch_transparent.png" alt=""/>CALENDAR EVENT</div>
+                  <div class="sb-ev-v2">
+                    <div class="sb-ev-v2-erase"><div class="sb-ev-v2-erase-txt">ERASE</div><div class="sb-ev-v2-erase-circle"></div></div>
+                    <div class="sb-ev-v2-main">
+                      <div class="sb-ev-v2-time">TUE MAY 21 · 10:00 AM</div>
+                      <div class="sb-ev-v2-title">Team Meeting</div>
+                      <div class="sb-ev-v2-source">📍 Conference Room B</div>
+                    </div>
+                    <div class="sb-ev-v2-actions">
+                      <div class="sb-ev-v2-attime"><div class="sb-ev-v2-attime-line1">AT EVENT<br>TIME</div></div>
+                      <div class="sb-ev-v2-snooze"><div class="sb-ev-v2-snooze-line1">SNOOZE</div><div class="sb-ev-v2-snooze-line2">pick time</div></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="sb-mock-sec">
+                  <div class="sb-mock-sec-ttl"><img src="assets/notes_transparent.png" alt=""/>NOTES</div>
+                  <div class="sb-note">
+                    <div class="sb-note-title">Team Meeting Agenda — May 21</div>
+                    <div class="sb-note-body">• Q2 Project Update<br>• Budget Review<br>• New Hire Onboarding<br>• Next Steps</div>
+                    <div class="sb-note-tags"><span class="sb-note-tag">COME PREPARED</span></div>
+                    <div class="sb-note-foot"><span class="sb-note-send">Send as Text</span><span class="sb-note-close">✕</span></div>
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- SECTION 5 — ALARMS: Stop missing important things. -->
-  <section style="background:var(--bg2);">
-    <div class="feature-section">
-      <div class="feature-row reverse">
-        <div>
-          <div class="feature-number">5</div>
-          <div class="feature-label-tag">Stash It</div>
-          <h2 class="feature-heading">Stop missing important things.</h2>
-          <p class="feature-body">Most reminder apps are too easy to ignore. Squirrel Brain was built for real life: busy parents, busy professionals, busy minds.</p>
-          <p class="feature-accent">Reminders that stay with you until you deal with them.</p>
-        </div>
-        <div>
-          <div class="iphone-frame">
-            <img src="assets/1st 2nd 3rd Alarm Screen.PNG" alt="Squirrel Brain alarm setup with 1st, 2nd, and 3rd reminder times" loading="lazy" />
           </div>
         </div>
       </div>
@@ -736,11 +1458,11 @@
       <p class="section-label" style="text-align:left;">Snap It</p>
       <div class="feature-row">
         <div>
-          <div class="feature-number">6</div>
+          <div class="feature-number">✦</div>
           <div class="feature-label-tag">Your Personal Search Engine</div>
           <h2 class="feature-heading">You saved it.<br>Now you can actually<br>find it.</h2>
           <p class="feature-body">
-            You have 52 saved YouTube videos. 40 TikToks. 200 random screenshots.<br><br>
+            You have 52 saved YouTube videos. 40 TikToks. 200 random screenshots. That's more nuts than a squirrel's winter stash — and you can't find any of them.<br><br>
             The wine you loved in Napa. The gift you spotted for mom's birthday. The sourdough recipe you swore you'd make. The home repair hack that would save you a weekend.<br><br>
             They're all in your camera roll, buried forever. You know they exist. You cannot find them.
           </p>
@@ -748,15 +1470,15 @@
           <div style="display:flex; flex-direction:column; gap:10px; margin-top:24px;">
             <div style="display:flex; align-items:center; gap:12px; padding:12px 16px; background:#161616; border-radius:12px; border:1px solid #2a2a2a;">
               <span style="font-size:20px;">&#127863;</span>
-              <span style="font-size:13px; color:#aaa;">"That Napa Cab from last year" → <strong style="color:#fff;">Stag's Leap Artemis 2021, tasting room on Silverado Trail</strong></span>
+              <span style="font-size:15px; color:#aaa;">"That Napa Cab from last year" → <strong style="color:#fff;">Stag's Leap Artemis 2021, tasting room on Silverado Trail</strong></span>
             </div>
             <div style="display:flex; align-items:center; gap:12px; padding:12px 16px; background:#161616; border-radius:12px; border:1px solid #2a2a2a;">
               <span style="font-size:20px;">&#127873;</span>
-              <span style="font-size:13px; color:#aaa;">"Gift idea for mom" → <strong style="color:#fff;">Lavender candle, Target, aisle 7 — reminder set for May 3rd</strong></span>
+              <span style="font-size:15px; color:#aaa;">"Gift idea for mom" → <strong style="color:#fff;">Lavender candle, Target, aisle 7 — reminder set for May 3rd</strong></span>
             </div>
             <div style="display:flex; align-items:center; gap:12px; padding:12px 16px; background:#161616; border-radius:12px; border:1px solid #2a2a2a;">
               <span style="font-size:20px;">&#127909;</span>
-              <span style="font-size:13px; color:#aaa;">"That sourdough video" → <strong style="color:#fff;">Joshua Weissman, 'Homemade Sourdough in 24 Hours', saved May 2025</strong></span>
+              <span style="font-size:15px; color:#aaa;">"That sourdough video" → <strong style="color:#fff;">Joshua Weissman, 'Homemade Sourdough in 24 Hours', saved May 2025</strong></span>
             </div>
           </div>
         </div>
@@ -773,7 +1495,16 @@
               <span style="background:#FF7A1A22; color:var(--orange); font-size:10px; font-weight:800; letter-spacing:0.12em; text-transform:uppercase; padding:4px 12px; border-radius:100px;">Squirrel Brain</span>
             </div>
             <div class="iphone-frame">
-              <img src="assets/Notes Screen.PNG" alt="Squirrel Brain Notes screen — searchable saves" loading="lazy" />
+              <div style="border-radius:36px; overflow:hidden;">
+                <div class="sb-mock" style="border-radius:0; border:none;">
+                  <div class="sb-mock-hdr"><img src="assets/icon.png" alt=""/><div class="sb-mock-hdr-name">SQUIRREL <em>BRAIN</em></div></div>
+                  <div class="sb-mock-sec"><div class="sb-mock-sec-ttl"><img src="assets/notes_transparent.png" alt=""/>NOTES</div>
+                    <div class="sb-note"><div class="sb-note-title">Homemade Sourdough in 24 Hours</div><div class="sb-note-body">Joshua Weissman · YouTube. Dutch oven, no-knead starter.</div><div class="sb-note-tags"><span class="sb-note-tag">YOUTUBE</span><span class="sb-note-tag">RECIPE</span></div><div class="sb-note-foot"><span class="sb-note-send">Send as Text</span><span class="sb-note-close">✕</span></div></div>
+                    <div class="sb-note"><div class="sb-note-title">Stag's Leap Artemis Cab 2021</div><div class="sb-note-body">Silverado Trail tasting room. Get another case before the holidays.</div><div class="sb-note-tags"><span class="sb-note-tag">NAPA</span></div><div class="sb-note-foot"><span class="sb-note-send">Send as Text</span><span class="sb-note-close">✕</span></div></div>
+                    <div class="sb-note"><div class="sb-note-title">Lavender &amp; Cedar Gift Set — Terrain</div><div class="sb-note-body">$48. Back corner near entrance. Reminder: Nov 22.</div><div class="sb-note-tags"><span class="sb-note-tag">GIFT</span></div><div class="sb-note-foot"><span class="sb-note-send">Send as Text</span><span class="sb-note-close">✕</span></div></div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -781,11 +1512,200 @@
     </div>
   </section>
 
+  <!-- SECTION — SALES / FIELD REPS -->
+  <section style="background:var(--bg);">
+    <div class="feature-section">
+      <div class="feature-label-tag" style="text-align:center;">For Sales &amp; Field Teams</div>
+      <h2 class="section-title">Drop off equipment.<br>Never lose track of it.</h2>
+      <p class="section-sub">Squirrel Brain was built for people who are always on the move — and always need proof of where they were and what they left behind.</p>
+
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px; max-width:900px; margin:0 auto 48px;">
+
+        <!-- Equipment loaner card -->
+        <div style="background:#111; border-radius:20px; padding:28px 24px; border:1px solid #2a2a2a; border-top:3px solid #FF7A1A;">
+          <div style="display:flex; align-items:center; gap:12px; margin-bottom:16px;">
+            <div style="width:44px;height:44px;border-radius:12px;background:#FF7A1A18;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <img src="assets/acorn_camera_transparent.png" style="width:26px;height:26px;object-fit:contain;" alt="" />
+            </div>
+            <div>
+              <div style="font-size:13px;font-weight:800;color:#FF7A1A;letter-spacing:0.08em;text-transform:uppercase;">Equipment Drop-Off</div>
+              <div style="font-size:11px;color:#FF7A1A55;margin-top:2px;font-weight:700;">Loaner · Demo Unit · Account Visit</div>
+            </div>
+          </div>
+
+          <p style="font-size:15px;color:#ddd;line-height:1.75;margin-bottom:16px;font-weight:600;">Left a loaner or demo unit at an account? Snap a photo right there in their facility.</p>
+
+          <p style="font-size:13px;color:#888;line-height:1.75;margin-bottom:18px;">Squirrel Brain automatically uses your GPS location and attaches the photo to the note — so you always know exactly where the equipment is, what it looked like when you left it, and when you need to go back. View it anytime in the app, or forward it directly to your customer as proof of drop-off.</p>
+
+          <!-- 3 feature bullets -->
+          <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:16px;">
+            <div style="display:flex;align-items:flex-start;gap:10px;padding:10px 12px;background:#161616;border-radius:10px;border:1px solid #2a2a2a;">
+              <span style="font-size:14px;flex-shrink:0;margin-top:1px;">📍</span>
+              <div style="font-size:12px;color:#ccc;line-height:1.6;"><strong style="color:#fff;">GPS tagged automatically</strong> — Squirrel Brain captures the exact location the moment you snap the photo. No typing the address.</div>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:10px;padding:10px 12px;background:#161616;border-radius:10px;border:1px solid #2a2a2a;">
+              <img src="assets/acorn_camera_transparent.png" style="width:16px;height:16px;object-fit:contain;flex-shrink:0;margin-top:2px;" alt="" />
+              <div style="font-size:12px;color:#ccc;line-height:1.6;"><strong style="color:#fff;">Photo attached to the note</strong> — see exactly what you left, where you put it, and what condition it was in. View it anytime or share it with your customer.</div>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:10px;padding:10px 12px;background:#161616;border-radius:10px;border:1px solid #2a2a2a;">
+              <img src="assets/acorn_mic_transparent.png" style="width:16px;height:16px;object-fit:contain;flex-shrink:0;margin-top:2px;" alt="" />
+              <div style="font-size:12px;color:#ccc;line-height:1.6;"><strong style="color:#fff;">Verbal pickup reminder</strong> — just say when you need to come back. Squirrel Brain sets the alarm.</div>
+            </div>
+          </div>
+
+          <div style="background:#1a1a1a;border-radius:12px;padding:14px 16px;border:1px solid #252525;">
+            <div style="font-size:11px;font-weight:700;color:#FF7A1A;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:8px;display:flex;align-items:center;gap:6px;">
+              <img src="assets/acorn_mic_transparent.png" style="width:14px;height:14px;object-fit:contain;" alt="" /> You say:
+            </div>
+            <div style="font-size:13px;color:#ddd;font-style:italic;line-height:1.6;">"Left the demo unit at Mercy Medical, OR-2 suite. Remind me to pick it up next Thursday."</div>
+            <div style="margin-top:10px;padding-top:10px;border-top:1px solid #252525;">
+              <div style="font-size:11px;font-weight:700;color:#888;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:8px;">Squirrel Brain creates:</div>
+              <div style="display:flex;flex-direction:column;gap:5px;">
+                <div style="font-size:12px;color:#ccc;line-height:1.5;">📍 <strong style="color:#fff;">GPS tagged:</strong> Mercy Medical — OR-2 suite</div>
+                <div style="font-size:12px;color:#ccc;line-height:1.5;">🖼 <strong style="color:#fff;">Photo attached:</strong> demo unit on equipment shelf</div>
+                <div style="font-size:12px;color:#ccc;line-height:1.5;">⏰ <strong style="color:#fff;">Alarm set:</strong> Thursday · Pickup reminder</div>
+                <div style="font-size:12px;color:#ccc;line-height:1.5;">📤 <strong style="color:#fff;">Ready to forward</strong> to customer or manager as proof</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Proof of shipping card -->
+        <div style="background:#111; border-radius:20px; padding:28px 24px; border:1px solid #2a2a2a; border-top:3px solid #8B5CF6;">
+          <div style="display:flex; align-items:center; gap:12px; margin-bottom:16px;">
+            <div style="width:44px;height:44px;border-radius:12px;background:#8B5CF618;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <img src="assets/acorn_screenshot_transparent.png" style="width:26px;height:26px;object-fit:contain;" alt="" />
+            </div>
+            <div>
+              <div style="font-size:13px;font-weight:800;color:#8B5CF6;letter-spacing:0.08em;text-transform:uppercase;">Proof of Shipping</div>
+              <div style="font-size:11px;color:#555;margin-top:2px;">Multi-photo notes · forward instantly</div>
+            </div>
+          </div>
+          <p style="font-size:14px;color:#aaa;line-height:1.75;margin-bottom:16px;">Shipping multiple serial numbers? Snap up to 10 photos into one note — the receipt, the contents, every item in the box. When a customer says they never got it, hit forward and send your proof in seconds.</p>
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            <div style="display:flex;align-items:flex-start;gap:10px;padding:10px 12px;background:#1a1a1a;border-radius:10px;border:1px solid #252525;">
+              <img src="assets/acorn_camera_transparent.png" style="width:16px;height:16px;object-fit:contain;margin-top:2px;flex-shrink:0;" alt="" />
+              <div style="font-size:12px;color:#ccc;line-height:1.6;">Snap up to <strong style="color:#fff;">10 photos</strong> into one PixNote — receipt, box contents, serial numbers</div>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:10px;padding:10px 12px;background:#1a1a1a;border-radius:10px;border:1px solid #252525;">
+              <img src="assets/notes_transparent.png" style="width:16px;height:16px;object-fit:contain;margin-top:2px;flex-shrink:0;" alt="" />
+              <div style="font-size:12px;color:#ccc;line-height:1.6;">Ask for <strong style="color:#fff;">"all my FedEx receipts"</strong> — Squirrel Brain finds them all instantly</div>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:10px;padding:10px 12px;background:#1a1a1a;border-radius:10px;border:1px solid #252525;">
+              <img src="assets/tree_link_transparent.png" style="width:16px;height:16px;object-fit:contain;margin-top:2px;flex-shrink:0;" alt="" />
+              <div style="font-size:12px;color:#ccc;line-height:1.6;"><strong style="color:#fff;">Forward button</strong> emails or texts your proof of delivery to anyone, instantly</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div style="text-align:center;padding:20px 24px;background:#111;border-radius:16px;border:1px solid #2a2a2a;max-width:680px;margin:0 auto;">
+        <div style="font-size:13px;font-weight:700;color:#FF7A1A;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:8px;">Works for Amazon returns too</div>
+        <p style="font-size:14px;color:#888;line-height:1.7;margin:0;">Snap what's in the box before you seal it. Squirrel Brain always gives you proof of what was in the package when you sent it — no more disputes.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION — MEMORY STASH -->
+  <section id="memory-stash" style="background:var(--bg2);">
+    <div class="feature-section">
+      <div class="feature-label-tag" style="text-align:center;">Memory Stash</div>
+      <h2 class="section-title">Everything you stashed.<br>Sorted for you.</h2>
+      <p class="section-sub">Voice notes, photos, written notes — squirreled away in one searchable place. Organized by type. Never lost again.</p>
+
+      <!-- The 3-type tabs explanation -->
+      <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-bottom:48px;">
+        <div style="display:flex; flex-direction:column; align-items:center; gap:8px; padding:16px 20px; background:#111; border:2px solid #FF7A1A; border-radius:14px; min-width:130px;">
+          <img src="assets/notes_transparent.png" style="width:32px;height:32px;object-fit:contain;" alt="" />
+          <div style="font-size:12px; font-weight:800; color:#FF7A1A; letter-spacing:0.08em;">WRITTEN NOTE</div>
+          <div style="font-size:11px; color:#666; text-align:center;">Typed or dictated</div>
+        </div>
+        <div style="display:flex; flex-direction:column; align-items:center; gap:8px; padding:16px 20px; background:#111; border:2px solid #8B5CF6; border-radius:14px; min-width:130px;">
+          <img src="assets/acorn_camera_transparent.png" style="width:32px;height:32px;object-fit:contain;" alt="" />
+          <div style="font-size:12px; font-weight:800; color:#8B5CF6; letter-spacing:0.08em;">PIXNOTE</div>
+          <div style="font-size:11px; color:#666; text-align:center;">From a photo</div>
+        </div>
+        <div style="display:flex; flex-direction:column; align-items:center; gap:8px; padding:16px 20px; background:#111; border:2px solid #22C55E; border-radius:14px; min-width:130px;">
+          <img src="assets/acorn_mic_transparent.png" style="width:32px;height:32px;object-fit:contain;" alt="" />
+          <div style="font-size:12px; font-weight:800; color:#22C55E; letter-spacing:0.08em;">VOICE NOTE</div>
+          <div style="font-size:11px; color:#666; text-align:center;">Spoken out loud</div>
+        </div>
+      </div>
+
+      <!-- Memory Stash mockup showing all 3 types -->
+      <div style="max-width:360px; margin:0 auto;">
+        <div style="background:#0a0a0a; border-radius:24px; border:1px solid #2a2a2a; overflow:hidden; font-family:var(--font);">
+          <!-- Header -->
+          <div style="padding:20px 18px 14px; border-bottom:1px solid #1a1a1a;">
+            <div style="display:flex; align-items:center; gap:10px; margin-bottom:4px;">
+              <img src="assets/notes_transparent.png" style="width:28px;height:28px;object-fit:contain;flex-shrink:0;" alt="" />
+              <div>
+                <div style="font-size:18px; font-weight:900; color:#fff; letter-spacing:-0.01em;">MEMORY <span style="color:#FF7A1A;">STASH</span></div>
+                <div style="font-size:11px; color:#666;">Everything you saved. Sorted for you.</div>
+              </div>
+            </div>
+            <div style="font-size:12px; font-weight:700; color:#FF7A1A; margin-top:6px;">5 saved</div>
+          </div>
+          <!-- Type filter tabs -->
+          <div style="display:flex; gap:8px; padding:12px 14px; border-bottom:1px solid #1a1a1a;">
+            <div style="flex:1; text-align:center; padding:8px 6px; border:2px solid #FF7A1A; border-radius:10px; font-size:10px; font-weight:800; color:#FF7A1A;">Written<br>Note</div>
+            <div style="flex:1; text-align:center; padding:8px 6px; border:2px solid #8B5CF6; border-radius:10px; font-size:10px; font-weight:800; color:#8B5CF6;">Pix<br>Note</div>
+            <div style="flex:1; text-align:center; padding:8px 6px; border:2px solid #22C55E; border-radius:10px; font-size:10px; font-weight:800; color:#22C55E;">Voice<br>Note</div>
+          </div>
+          <!-- TODAY label -->
+          <div style="padding:10px 14px 4px; font-size:9px; font-weight:800; color:#444; letter-spacing:0.1em;">TODAY</div>
+          <!-- Written Note card -->
+          <div style="margin:0 10px 8px; background:#161616; border-radius:10px; border-left:3px solid #FF7A1A; padding:10px 11px; display:flex; gap:10px; align-items:flex-start;">
+            <div style="width:36px; height:36px; border-radius:50%; border:2px solid #FF7A1A; display:flex; align-items:center; justify-content:center; flex-shrink:0;"><img src="assets/notes_transparent.png" style="width:20px;height:20px;object-fit:contain;" alt="" /></div>
+            <div style="flex:1; min-width:0;">
+              <div style="font-size:9px; font-weight:800; color:#FF7A1A; letter-spacing:0.08em; margin-bottom:2px;">NOTE</div>
+              <div style="font-size:13px; font-weight:700; color:#fff; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">🚗 Pick up dry cleaning</div>
+              <div style="font-size:10px; color:#555; margin-top:1px;">Remember before Thursday</div>
+              <div style="font-size:9px; color:#444; margin-top:3px;">Oakwood Ave · 2h ago</div>
+            </div>
+          </div>
+          <!-- PixNote card — dress -->
+          <div style="margin:0 10px 8px; background:#161616; border-radius:10px; border-left:3px solid #8B5CF6; padding:10px 11px; display:flex; gap:10px; align-items:flex-start;">
+            <div style="width:36px; height:36px; border-radius:8px; overflow:hidden; flex-shrink:0;">
+              <img src="assets/pixnote_dress.jpg" style="width:100%;height:100%;object-fit:cover;" alt="Floral dress" />
+            </div>
+            <div style="flex:1; min-width:0;">
+              <div style="font-size:9px; font-weight:800; color:#8B5CF6; letter-spacing:0.08em; margin-bottom:2px;">PIXNOTE</div>
+              <div style="font-size:13px; font-weight:700; color:#fff;">👗 Floral wrap dress — Magnolia Boutique</div>
+              <div style="font-size:10px; color:#555; margin-top:1px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">$148 · Check back Fri — sale starts then</div>
+              <div style="font-size:9px; color:#444; margin-top:3px;">Magnolia Boutique · 3h ago</div>
+            </div>
+          </div>
+          <!-- Voice Note card -->
+          <div style="margin:0 10px 12px; background:#161616; border-radius:10px; border-left:3px solid #22C55E; padding:10px 11px; display:flex; gap:10px; align-items:flex-start;">
+            <div style="width:36px; height:36px; border-radius:50%; border:2px solid #22C55E; display:flex; align-items:center; justify-content:center; flex-shrink:0;"><img src="assets/acorn_mic_transparent.png" style="width:20px;height:20px;object-fit:contain;" alt="" /></div>
+            <div style="flex:1; min-width:0;">
+              <div style="font-size:9px; font-weight:800; color:#22C55E; letter-spacing:0.08em; margin-bottom:2px;">VOICE NOTE</div>
+              <div style="font-size:13px; font-weight:700; color:#fff;">💼 Follow up with Marcus</div>
+              <div style="font-size:10px; color:#555; margin-top:1px;">Send revised pricing by Thursday</div>
+              <div style="font-size:9px; color:#444; margin-top:3px;">Cedar Creek Blvd · 1h ago</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="text-align:center; margin-top:40px; display:flex; flex-direction:column; align-items:center; gap:16px;">
+        <p style="font-size:15px; color:var(--muted); max-width:460px; line-height:1.7;">Tap any note to see the full detail, add context, set a reminder, or mark it done. Every note knows where and when it was captured.</p>
+        <div style="display:flex; gap:16px; flex-wrap:wrap; justify-content:center;">
+          <div style="padding:10px 18px; background:#161616; border-radius:10px; border:1px solid #2a2a2a; font-size:15px; color:#aaa; display:flex; align-items:center; gap:8px;"><img src="assets/notes_transparent.png" style="width:18px;height:18px;object-fit:contain;flex-shrink:0;" alt="" /><span style="color:#FF7A1A; font-weight:700;">Written</span> — typed or dictated</div>
+          <div style="padding:10px 18px; background:#161616; border-radius:10px; border:1px solid #2a2a2a; font-size:15px; color:#aaa; display:flex; align-items:center; gap:8px;"><img src="assets/acorn_camera_transparent.png" style="width:18px;height:18px;object-fit:contain;flex-shrink:0;" alt="" /><span style="color:#8B5CF6; font-weight:700;">PixNote</span> — from any photo</div>
+          <div style="padding:10px 18px; background:#161616; border-radius:10px; border:1px solid #2a2a2a; font-size:15px; color:#aaa; display:flex; align-items:center; gap:8px;"><img src="assets/acorn_mic_transparent.png" style="width:18px;height:18px;object-fit:contain;flex-shrink:0;" alt="" /><span style="color:#22C55E; font-weight:700;">Voice</span> — spoken &amp; transcribed</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- SECTION 6 — BEFORE / AFTER — Real legal pad example -->
   <section id="before-after" style="background:var(--bg);">
-    <p class="section-label">Real example</p>
+    <p class="section-label">Shell yeah — real example</p>
     <h2 class="section-title">From handwritten chaos<br>to organized in seconds.</h2>
-    <p class="section-sub">Adam photographed his legal-pad meeting notes. This is what happened next.</p>
+    <p class="section-sub">Meeting notes photographed on the way out the door. This is what happened next.</p>
 
     <div class="ba-wrap">
       <!-- BEFORE -->
@@ -824,87 +1744,12 @@
     <div class="ba-extra">
       <div class="ba-extra-label">And then it saves to Notes</div>
       <div class="iphone-frame" style="max-width:240px; margin:0 auto;">
-        <img src="assets/Notes Screen.PNG" alt="Squirrel Brain Notes screen with saved meeting notes and reminders" loading="lazy" />
-      </div>
-    </div>
-  </section>
-
-  <!-- SECTION 7 — APP SCREENSHOTS GRID -->
-  <section id="screenshots" style="background:var(--bg2);">
-    <p class="section-label">Inside the app</p>
-    <h2 class="section-title">Built for the way you actually work.</h2>
-    <p class="section-sub">Capture anything. Review before it saves. Every task, alarm, and calendar event — in one place.</p>
-    <div class="screenshots-grid">
-      <div class="screenshot-item">
-        <img src="assets/Review and Confirm Screen.PNG" alt="Review and Confirm screen" loading="lazy" />
-        <div class="screenshot-caption">Review before it saves</div>
-      </div>
-      <div class="screenshot-item">
-        <img src="assets/Notes Screen.PNG" alt="Notes screen" loading="lazy" />
-        <div class="screenshot-caption">Every note, searchable</div>
-      </div>
-      <div class="screenshot-item">
-        <img src="assets/1st 2nd 3rd Alarm Screen.PNG" alt="Squirrel Brain alarm setup with 1st, 2nd, and 3rd reminder times" loading="lazy" />
-        <div class="screenshot-caption">Loud alarms you can't miss</div>
-      </div>
-      <div class="screenshot-item">
-        <img src="assets/Review and Confirm Screen.PNG" alt="Squirrel Brain Review and Confirm screen with 11 captured events" loading="lazy" />
-        <div class="screenshot-caption">Save anything from anywhere</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- SECTION — END OF DAY NUDGE -->
-  <section style="background:var(--bg);">
-    <div class="feature-section">
-      <div class="feature-row">
-        <div>
-          <div class="feature-label-tag">End of Day Nudge</div>
-          <h2 class="feature-heading">The things that actually matter — checked before 5 PM.</h2>
-          <p class="feature-body">
-            Some things aren't just tasks. They're the things you really need to do today.<br><br>
-            When you save something in Squirrel Brain — a voice note, a photo, anything — you can mark it as important with one tap. That's it.<br><br>
-            At the end of the day, before 5 PM, Squirrel Brain sends you one email: everything you marked as important that's still unchecked. No noise. No full task list. Just the things that mattered — and didn't get done yet.
-          </p>
-          <p class="feature-accent">Mark it. Get nudged. Check it off. Move on.</p>
-          <div style="display:flex; flex-direction:column; gap:10px; margin-top:24px;">
-            <div style="display:flex; align-items:center; gap:10px; padding:12px 16px; background:#161616; border-radius:12px; border:1px solid #2a2a2a;">
-              <div style="width:20px; height:20px; border-radius:5px; border:2px solid var(--orange); flex-shrink:0; display:flex; align-items:center; justify-content:center;">
-                <div style="width:10px; height:10px; background:var(--orange); border-radius:2px;"></div>
-              </div>
-              <span style="font-size:13px; color:#ddd;">Call back Dr. Chen's office <span style="color:var(--orange); font-size:11px; font-weight:700; margin-left:6px;">IMPORTANT</span></span>
-            </div>
-            <div style="display:flex; align-items:center; gap:10px; padding:12px 16px; background:#161616; border-radius:12px; border:1px solid #2a2a2a;">
-              <div style="width:20px; height:20px; border-radius:5px; border:2px solid var(--orange); flex-shrink:0; display:flex; align-items:center; justify-content:center;">
-                <div style="width:10px; height:10px; background:var(--orange); border-radius:2px;"></div>
-              </div>
-              <span style="font-size:13px; color:#ddd;">Send revised pricing to Marcus at Meridian <span style="color:var(--orange); font-size:11px; font-weight:700; margin-left:6px;">IMPORTANT</span></span>
-            </div>
-            <div style="display:flex; align-items:center; gap:10px; padding:12px 16px; background:#161616; border-radius:12px; border:1px solid #2a2a2a;">
-              <div style="width:20px; height:20px; border-radius:5px; border:2px solid #333; flex-shrink:0;"></div>
-              <span style="font-size:13px; color:#555; text-decoration:line-through;">Pick up dry cleaning</span>
-            </div>
-          </div>
-          <div style="margin-top:16px; padding:14px 18px; background:#0f1a0f; border:1px solid #2a4a2a; border-radius:14px;">
-            <div style="font-size:11px; font-weight:700; color:#4a9e4a; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:6px;">&#128231; 4:45 PM — Your end of day nudge</div>
-            <div style="font-size:13px; color:#aaa; line-height:1.6;">You still have <strong style="color:#fff;">2 important items</strong> unchecked today. Tap to review.</div>
-          </div>
-        </div>
-        <div style="display:flex; flex-direction:column; gap:20px; align-items:center; justify-content:center;">
-          <div style="max-width:320px; width:100%;">
-            <div class="split-caption" style="margin-bottom:12px; text-align:center;">How you mark it</div>
-            <div style="background:#161616; border:1px solid #2a2a2a; border-radius:16px; padding:20px; display:flex; flex-direction:column; gap:12px;">
-              <div style="font-size:12px; color:#666; text-align:center; text-transform:uppercase; letter-spacing:0.1em;">When saving any note or voice capture</div>
-              <div style="display:flex; align-items:center; justify-content:space-between; padding:12px 16px; background:#0a0a0a; border-radius:10px; border:1px solid #222;">
-                <span style="font-size:13px; color:#ddd;">Call back Dr. Chen's office</span>
-                <div style="display:flex; align-items:center; gap:8px;">
-                  <span style="font-size:11px; color:#666;">Important?</span>
-                  <div style="width:36px; height:20px; background:var(--orange); border-radius:20px; position:relative;">
-                    <div style="width:16px; height:16px; background:#fff; border-radius:50%; position:absolute; right:2px; top:2px;"></div>
-                  </div>
-                </div>
-              </div>
-              <div style="font-size:12px; color:#555; text-align:center;">One toggle. That's it. You'll hear about it before 5 PM if it's not done.</div>
+        <div style="border-radius:36px; overflow:hidden;">
+          <div class="sb-mock" style="border-radius:0; border:none;">
+            <div class="sb-mock-hdr"><img src="assets/icon.png" alt=""/><div class="sb-mock-hdr-name">SQUIRREL <em>BRAIN</em></div></div>
+            <div class="sb-mock-sec"><div class="sb-mock-sec-ttl"><img src="assets/notes_transparent.png" alt=""/>NOTES</div>
+              <div class="sb-note"><div class="sb-note-title">Send contract draft to Holloway &amp; Partners</div><div class="sb-note-body">Due Friday Oct 17. Pull updated terms from shared drive.</div><div class="sb-note-tags"><span class="sb-note-tag">DUE FRI OCT 17</span></div><div class="sb-note-foot"><span class="sb-note-send">Send as Text</span><span class="sb-note-close">✕</span></div></div>
+              <div class="sb-note"><div class="sb-note-title">Pull Q3 numbers before board meeting</div><div class="sb-note-body">CFO needs YoY comparison. Revenue + retention.</div><div class="sb-note-tags"><span class="sb-note-tag">ACTION ITEM</span></div><div class="sb-note-foot"><span class="sb-note-send">Send as Text</span><span class="sb-note-close">✕</span></div></div>
             </div>
           </div>
         </div>
@@ -912,8 +1757,86 @@
     </div>
   </section>
 
-  <!-- SECTION — DAILY BRIEF -->
+  <!-- SECTION — YOUR DAILY EMAILS -->
   <section style="background:var(--bg2);">
+    <div class="feature-section">
+      <div class="feature-label-tag" style="text-align:center;">Two Emails a Day</div>
+      <h2 class="section-title">Two emails a day.<br>Zero noise.</h2>
+      <p class="section-sub">Every morning, your squirrel sends a daily brief — already waiting in your inbox at 5 AM when you check your email. You don't even have to open the app. In the afternoon, your squirrel decides: if everything's done, you get an all-clear. If there's still work left, you get a 4 PM check-in with exactly what's still on your plate — nothing more.</p>
+
+      <div class="daily-emails-grid" style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:20px; max-width:960px; margin:0 auto;">
+
+        <!-- Morning Brief email mockup -->
+        <div style="background:#1a0f05; border-radius:16px; overflow:hidden; border:1px solid #3a2010;">
+          <div style="background:#FF7A1A; padding:14px; text-align:center;">
+            <div style="font-size:11px; font-weight:800; color:#fff; letter-spacing:0.15em;">MORNING BRIEF</div>
+          </div>
+          <div style="padding:16px;">
+            <div style="font-size:9px; font-weight:700; color:#888; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:6px;">Sent each morning</div>
+            <div style="font-size:16px; font-weight:800; color:#FF7A1A; margin-bottom:4px;">Good morning, Hazel.</div>
+            <div style="font-size:11px; color:#888; margin-bottom:12px;">A note from your squirrel 🐿️</div>
+            <div style="border-left:3px solid #FF7A1A; padding-left:10px; margin-bottom:10px;">
+              <div style="font-size:11px; color:#ccc; line-height:1.6;">Went through your stash this morning. Here's what matters today.</div>
+            </div>
+            <div style="font-size:10px; font-weight:700; color:#FF7A1A; letter-spacing:0.08em; margin-bottom:6px;">🎯 TODAY'S FOCUS</div>
+            <div style="display:flex; flex-direction:column; gap:5px;">
+              <div style="font-size:11px; color:#ccc;">• Team standup &nbsp;<span style="color:#666;">9:00 AM</span></div>
+              <div style="font-size:11px; color:#FF7A1A;">• Send pricing to Meridian &nbsp;<span style="font-size:9px; background:#FF7A1A22; padding:1px 6px; border-radius:20px;">overdue</span></div>
+              <div style="font-size:11px; color:#ccc;">• Pick up kids &nbsp;<span style="color:#666;">5:30 PM</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4 PM check-in email mockup -->
+        <div style="background:#1a0f05; border-radius:16px; overflow:hidden; border:1px solid #3a2010;">
+          <div style="background:#2a1a08; padding:14px; text-align:center; border-bottom:1px solid #3a2010;">
+            <div style="font-size:11px; font-weight:800; color:#FF7A1A; letter-spacing:0.15em;">4 PM CHECK-IN ⭐</div>
+          </div>
+          <div style="padding:16px;">
+            <div style="font-size:9px; font-weight:700; color:#888; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:6px;">Sent at 4 PM if items pending</div>
+            <div style="font-size:13px; font-weight:800; color:#fff; margin-bottom:8px; line-height:1.3;">Still a few things between you and peace.</div>
+            <div style="font-size:11px; color:#888; margin-bottom:12px; line-height:1.5;">From Pip: The school form won't email itself. And your mom's gift definitely won't order itself — though wouldn't that be nice.</div>
+            <div style="display:flex; flex-direction:column; gap:7px;">
+              <div style="display:flex; align-items:center; gap:8px; padding:8px 10px; background:#1e1008; border-radius:8px; border:1px solid #3a2010;">
+                <div style="width:14px; height:14px; border:1.5px solid #FF7A1A; border-radius:3px; flex-shrink:0;"></div>
+                <span style="font-size:11px; color:#ddd;">Call the contractor back</span>
+              </div>
+              <div style="display:flex; align-items:center; gap:8px; padding:8px 10px; background:#1e1008; border-radius:8px; border:1px solid #3a2010;">
+                <div style="width:14px; height:14px; border:1.5px solid #FF7A1A; border-radius:3px; flex-shrink:0;"></div>
+                <span style="font-size:11px; color:#ddd;">School permission slip — due tomorrow</span>
+              </div>
+              <div style="display:flex; align-items:center; gap:8px; padding:8px 10px; background:#1e1008; border-radius:8px; border:1px solid #3a2010;">
+                <div style="width:14px; height:14px; border:1.5px solid #FF7A1A; border-radius:3px; flex-shrink:0;"></div>
+                <span style="font-size:11px; color:#ddd;">Order mom's birthday gift</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- All clear email mockup -->
+        <div style="background:#0a1a0a; border-radius:16px; overflow:hidden; border:1px solid #1a3a1a;">
+          <div style="background:#0f2a0f; padding:14px; text-align:center; border-bottom:1px solid #1a3a1a;">
+            <div style="font-size:11px; font-weight:800; color:#22C55E; letter-spacing:0.15em;">ALL CLEAR ✓</div>
+          </div>
+          <div style="padding:16px;">
+            <div style="font-size:9px; font-weight:700; color:#888; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:6px;">Sent when everything is done</div>
+            <div style="font-size:14px; font-weight:800; color:#22C55E; margin-bottom:8px; line-height:1.3;">You've achieved squirrel-brain equilibrium.</div>
+            <div style="font-size:11px; color:#888; margin-bottom:12px; line-height:1.6;">I'm doing the ancient ritual of the Three Spins — because today you didn't just complete your important tasks, you completed ALL of them.</div>
+            <div style="font-size:11px; font-style:italic; color:#4a9e4a;">— Pip</div>
+            <div style="margin-top:12px; padding:10px; background:#0a2a0a; border-radius:8px; text-align:center;">
+              <div style="font-size:12px; color:#22C55E; font-weight:700;">Nothing to do. Seriously.<br>Go enjoy your evening.</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <p style="text-align:center; font-size:15px; color:#444; margin-top:28px;">Delivered to your inbox. No app to open. Just read and move on.</p>
+    </div>
+  </section>
+
+  <!-- SECTION — DAILY BRIEF — REMOVED PER ADAM 2026-05-27 -->
+  <section style="display:none; background:var(--bg2);">
     <div class="feature-section">
       <div class="feature-row reverse">
         <div>
@@ -951,8 +1874,31 @@
           <p style="font-size:12px; color:#444; margin-top:16px; line-height:1.6;">Delivered to your inbox every morning. No app to open. No list to update. Just clarity.</p>
         </div>
         <div style="display:flex; align-items:center; justify-content:center;">
-          <div class="iphone-frame" style="max-width:260px;">
-            <img src="assets/daily_brief_mockup.png" alt="Squirrel Brain Daily Brief — Good Morning Adam screen" loading="lazy" />
+          <div style="background:#1a0f05; border-radius:28px; padding:18px 16px; max-width:260px; width:100%; box-shadow:0 0 0 2px #3a2010, 0 20px 60px rgba(0,0,0,0.6); font-family:var(--font);">
+            <div style="display:flex; align-items:center; gap:10px; margin-bottom:14px; padding-bottom:12px; border-bottom:1px solid #3a2010;">
+              <img src="assets/icon.png" style="width:32px;height:32px;border-radius:8px;object-fit:cover;" />
+              <div>
+                <div style="font-size:11px; font-weight:800; color:#fff; letter-spacing:0.1em;">SQUIRREL <span style="color:#FF7A1A;">BRAIN</span></div>
+                <div style="font-size:12px; font-weight:700; color:#eee;">Good morning, Hazel ☀️</div>
+              </div>
+            </div>
+            <div style="font-size:10px; font-weight:700; color:#FF7A1A; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:8px;">Today's agenda</div>
+            <div style="display:flex;flex-direction:column;gap:6px; margin-bottom:12px; padding:10px 12px; background:#2a1505; border-radius:10px; border-left:3px solid #FF7A1A;">
+              <div style="font-size:12px;color:#ddd;">🔔 Team standup &nbsp;<span style="color:#888;">9:00 AM</span></div>
+              <div style="font-size:12px;color:#FF7A1A;">⚠️ Send pricing to Meridian &nbsp;<span style="font-size:10px;background:#FF7A1A22;padding:1px 7px;border-radius:20px;">overdue</span></div>
+              <div style="font-size:12px;color:#ddd;">📞 Client call — Meridian &nbsp;<span style="color:#888;">2:30 PM</span></div>
+              <div style="font-size:12px;color:#ddd;">🚗 Pick up kids &nbsp;<span style="color:#888;">5:30 PM</span></div>
+            </div>
+            <div style="font-size:10px; font-weight:700; color:#666; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:6px;">Still on your plate</div>
+            <div style="display:flex;flex-direction:column;gap:5px; margin-bottom:10px;">
+              <div style="font-size:11px;color:#888;">Review contract draft <span style="color:#555;">— 2 days ago</span></div>
+              <div style="font-size:11px;color:#888;">Call back Dr. Holloway</div>
+            </div>
+            <div style="font-size:10px; font-weight:700; color:#4a9e4a; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:6px;">✅ You crushed yesterday</div>
+            <div style="display:flex;flex-direction:column;gap:4px;">
+              <div style="font-size:11px;color:#555;text-decoration:line-through;">Sent proposal to Acme Corp</div>
+              <div style="font-size:11px;color:#555;text-decoration:line-through;">Made dentist appointment</div>
+            </div>
           </div>
         </div>
       </div>
@@ -968,12 +1914,73 @@
     </div>
   </section>
 
+  <!-- WAITLIST SIGNUP -->
+  <section id="waitlist" style="background:var(--bg2); padding:96px 24px;">
+    <div style="max-width:560px; margin:0 auto; text-align:center;">
+
+      <div style="display:inline-flex; align-items:center; gap:8px; background:#FF7A1A18; border:1px solid #FF7A1A44; border-radius:100px; padding:6px 18px; margin-bottom:24px;">
+        <img src="assets/icon.png" style="width:18px;height:18px;border-radius:5px;" alt="" />
+        <span style="font-size:11px; font-weight:700; color:#FF7A1A; letter-spacing:0.14em; text-transform:uppercase;">Early Access</span>
+      </div>
+
+      <h2 style="font-size:clamp(28px,5vw,46px); font-weight:900; letter-spacing:-0.02em; line-height:1.1; margin-bottom:14px;">
+        Get in before<br>everyone else.
+      </h2>
+      <p style="font-size:17px; color:var(--muted); line-height:1.65; margin-bottom:36px; max-width:440px; margin-left:auto; margin-right:auto;">
+        Squirrel Brain is rolling out to early members first. Drop your name and email — we'll let you know the moment your spot is ready.
+      </p>
+
+      <!-- Form -->
+      <form id="waitlist-form" style="display:flex; flex-direction:column; gap:12px; max-width:420px; margin:0 auto 20px;">
+        <input
+          id="wl-name"
+          type="text"
+          placeholder="First name"
+          style="background:#161616; border:1.5px solid #2a2a2a; border-radius:12px; padding:14px 18px; font-size:15px; color:#fff; font-family:inherit; outline:none; transition:border-color 0.2s; -webkit-appearance:none;"
+          onfocus="this.style.borderColor='#FF7A1A55'"
+          onblur="this.style.borderColor='#2a2a2a'"
+        />
+        <div style="display:flex; gap:10px;">
+          <input
+            id="wl-email"
+            type="email"
+            placeholder="Email address"
+            required
+            style="flex:1; background:#161616; border:1.5px solid #2a2a2a; border-radius:12px; padding:14px 18px; font-size:15px; color:#fff; font-family:inherit; outline:none; transition:border-color 0.2s; -webkit-appearance:none;"
+            onfocus="this.style.borderColor='#FF7A1A55'"
+            onblur="this.style.borderColor='#2a2a2a'"
+          />
+          <button
+            type="submit"
+            id="wl-btn"
+            style="background:#FF7A1A; color:#fff; border:none; border-radius:12px; padding:14px 22px; font-size:14px; font-weight:800; letter-spacing:0.04em; cursor:pointer; white-space:nowrap; min-height:50px; transition:opacity 0.2s; -webkit-appearance:none;"
+            onmouseenter="this.style.opacity='0.88'"
+            onmouseleave="this.style.opacity='1'"
+          >Join Waitlist</button>
+        </div>
+      </form>
+
+      <!-- Success state (hidden) -->
+      <div id="wl-success" style="display:none; background:#0d2d0d; border:1px solid #22C55E44; border-radius:14px; padding:20px 24px; text-align:center; max-width:420px; margin:0 auto 20px;">
+        <div style="font-size:22px; margin-bottom:8px;">🐿️</div>
+        <div style="font-size:16px; font-weight:800; color:#22C55E; margin-bottom:4px;">You're on the list!</div>
+        <div style="font-size:13px; color:#888; line-height:1.6;">We'll email you the moment your early access spot opens. Thanks for believing in Squirrel Brain early.</div>
+      </div>
+
+      <!-- Error state (hidden) -->
+      <div id="wl-error" style="display:none; background:#2d0d0d; border:1px solid #e5484444; border-radius:12px; padding:12px 18px; font-size:13px; color:#e54844; max-width:420px; margin:0 auto 20px;"></div>
+
+      <p style="font-size:12px; color:#3a3a3a; line-height:1.6;">No spam. No pressure. Just your spot in the stash. Unsubscribe anytime.</p>
+
+    </div>
+  </section>
+
   <!-- CTA — treehouse banner -->
   <section id="cta">
     <img src="assets/squirrel_treehouse_banner.png" alt="" class="cta-treehouse" aria-hidden="true" />
     <div class="cta-content">
-      <p class="section-label">Get the app</p>
-      <h2 class="section-title" style="max-width:600px;margin:0 auto 12px;">Your brain only has so much room.<br>Let Squirrel Brain carry the rest.</h2>
+      <p class="section-label">Let's get crackin'</p>
+      <h2 class="section-title" style="max-width:600px;margin:0 auto 12px;">Your brain has too many tabs open.<br>Let's get some of those closed.</h2>
       <a href="#" class="appstore-btn" aria-label="Download on the App Store">
         <span class="appstore-btn-icon">&#63743;</span>
         <span class="appstore-btn-text">
@@ -981,22 +1988,22 @@
           <span class="line2">App Store</span>
         </span>
       </a>
-      <p class="cta-bottom-tag"><strong>A smarter place to stash everything you meant to remember.</strong></p>
+      <p class="cta-bottom-tag">Speak it. Snap it. Stash it. <strong>Squirrel Brain carries it so you don't have to.</strong></p>
     </div>
   </section>
 
   <!-- FOOTER -->
   <footer>
     <div class="footer-brand">
-      <img src="assets/icon.png" alt="Squirrel Brain" />
-      <span>SQUIRREL BRAIN</span>
+      <img src="assets/squirrel_logo.png" alt="Squirrel Brain mascot" style="width:80px;height:80px;object-fit:contain;border-radius:0;margin-bottom:4px;" />
+      <span>SQUIRREL <em>BRAIN</em></span>
     </div>
     <nav class="footer-links" aria-label="Footer links">
-      <a href="#">Privacy Policy</a>
+      <a href="/legal/privacy-policy.html">Privacy Policy</a>
       <a href="mailto:hello@squirrelbrainapp.com">Contact</a>
-      <a href="#">Terms of Use</a>
+      <a href="/legal/terms-of-use.html">Terms of Use</a>
     </nav>
-    <p class="footer-copy">&copy; 2026 Squirrel Brain. All rights reserved.</p>
+    <p class="footer-copy">&copy; 2026 Squirrel Brain. Stay nutty. All rights reserved.</p>
   </footer>
 
   <!-- TAB MODAL -->
@@ -1020,112 +2027,375 @@
     .tab-ba-caption { font-size:12px; color:#888; margin-top:6px; text-align:center; }
     .tab-modal-title { font-size:22px; font-weight:800; color:#fff; margin-bottom:6px; }
     .tab-modal-sub { font-size:14px; color:#888; margin-bottom:22px; }
+
+    /* ── PHONE MOCKUP (tab after-states) ─────────────────────── */
+    .tab-ph-mock { background:#1a1a1a; border-radius:14px; padding:14px 16px; border:1px solid #2a2a2a; font-family:var(--font); width:100%; }
+    .tab-ph-header { font-size:10px; font-weight:800; letter-spacing:0.12em; text-transform:uppercase; color:#FF7A1A; margin-bottom:12px; padding-bottom:10px; border-bottom:1px solid #2a2a2a; }
+    .tab-ph-row { padding:9px 0; border-bottom:1px solid #1e1e1e; }
+    .tab-ph-row:last-child { border-bottom:none; }
+    .tab-ph-meta { font-size:10px; color:#FF7A1A; font-weight:700; margin-bottom:3px; }
+    .tab-ph-title { font-size:13px; color:#eee; font-weight:600; }
+    .tab-ph-sub { font-size:11px; color:#666; margin-top:2px; }
+    .tab-ph-body { font-size:12px; color:#888; line-height:1.5; margin-top:4px; }
+    .tab-ph-alarm { background:#FF7A1A15; border:1px solid #FF7A1A33; border-radius:10px; padding:9px 12px; margin-bottom:7px; }
+    .tab-ph-alarm-time { font-size:12px; color:#FF7A1A; font-weight:700; }
+    .tab-ph-alarm-lbl { font-size:11px; color:#888; margin-top:2px; }
+    .tab-ph-more { font-size:11px; color:#555; text-align:center; padding-top:10px; font-style:italic; }
+    .tab-ph-badge { display:inline-block; font-size:9px; font-weight:800; background:#FF7A1A22; color:#FF7A1A; padding:1px 7px; border-radius:20px; margin-left:5px; letter-spacing:0.06em; }
+    .tab-ph-check { display:flex; align-items:center; gap:8px; padding:5px 0; }
+    .tab-ph-chkbox { width:14px; height:14px; border:1.5px solid #FF7A1A; border-radius:3px; flex-shrink:0; }
+    .tab-ph-chklbl { font-size:12px; color:#ccc; }
+
+    /* ── SQUIRREL BRAIN APP MOCKUP (tab after-states) ──────── */
+    .sb-mock {
+      background:#0a0a0a; border-radius:14px; overflow:hidden;
+      font-family:var(--font); width:100%; border:1px solid #2a2a2a;
+    }
+    .sb-mock-hdr {
+      display:flex; align-items:center; gap:9px;
+      padding:10px 14px; border-bottom:1px solid #1a1a1a;
+    }
+    .sb-mock-hdr img { width:24px; height:24px; border-radius:6px; object-fit:cover; flex-shrink:0; }
+    .sb-mock-hdr-name { font-size:12px; font-weight:800; color:#fff; letter-spacing:0.13em; }
+    .sb-mock-hdr-name em { color:#FF7A1A; font-style:normal; }
+    .sb-mock-sec { padding:12px 14px; }
+    .sb-mock-sec + .sb-mock-sec { border-top:1px solid #141414; }
+    .sb-mock-sec-ttl {
+      display:flex; align-items:center; gap:6px;
+      font-size:11px; font-weight:700; color:#666;
+      letter-spacing:0.1em; text-transform:uppercase;
+      margin-bottom:9px;
+    }
+    .sb-mock-sec-ttl img { width:13px; height:13px; object-fit:contain; flex-shrink:0; }
+    /* Event card */
+    .sb-ev {
+      background:#1c1c1e; border-radius:10px;
+      border-left:3px solid #4A8FE7;
+      padding:9px 11px; margin-bottom:7px;
+    }
+    .sb-ev:last-of-type { margin-bottom:0; }
+    .sb-ev-time {
+      font-size:10px; color:#4A8FE7; font-weight:700;
+      letter-spacing:0.06em; margin-bottom:3px;
+    }
+    .sb-ev-title { font-size:13px; color:#fff; font-weight:700; line-height:1.3; }
+    .sb-ev-loc { font-size:11px; color:#555; margin-top:2px; }
+    .sb-ev-foot {
+      display:flex; align-items:center; justify-content:space-between;
+      margin-top:8px;
+    }
+    .sb-ev-chk {
+      width:16px; height:16px; border-radius:50%;
+      border:1.5px solid #3a3a3a; flex-shrink:0;
+    }
+    .sb-ev-snooze {
+      font-size:10px; color:#FF7A1A; font-weight:800;
+      letter-spacing:0.08em; background:#FF7A1A15;
+      padding:3px 10px; border-radius:20px;
+    }
+    /* Note card */
+    .sb-note {
+      background:#1c1c1e; border-radius:10px;
+      padding:9px 11px; margin-bottom:7px;
+    }
+    .sb-note:last-of-type { margin-bottom:0; }
+    .sb-note-title { font-size:13px; color:#fff; font-weight:700; line-height:1.3; }
+    .sb-note-body { font-size:12px; color:#888; margin-top:3px; line-height:1.5; }
+    .sb-note-tags { display:flex; gap:5px; flex-wrap:wrap; margin-top:5px; }
+    .sb-note-tag {
+      font-size:10px; font-weight:700; color:#FF7A1A;
+      background:#FF7A1A15; padding:2px 8px; border-radius:20px;
+      letter-spacing:0.04em;
+    }
+    .sb-note-foot {
+      display:flex; align-items:center; justify-content:space-between;
+      margin-top:8px;
+    }
+    .sb-note-send { font-size:11px; color:#FF7A1A; font-weight:700; }
+    .sb-note-close { font-size:14px; color:#3a3a3a; }
+    .sb-mock-more {
+      font-size:11px; color:#444; text-align:center;
+      padding:9px 14px; font-style:italic;
+      border-top:1px solid #141414;
+    }
+    /* Checklist note variant */
+    .sb-checklist { display:flex; flex-direction:column; gap:5px; }
+    .sb-check-row { display:flex; align-items:center; gap:8px; }
+    .sb-check-box {
+      width:13px; height:13px; border-radius:3px;
+      border:1.5px solid #FF7A1A; flex-shrink:0;
+    }
+    .sb-check-lbl { font-size:11px; color:#ccc; }
+
+    /* ── CALENDAR EVENT CARD v2 — real app style ─────────── */
+    /* Matches: ERASE circle left, AT EVENT TIME orange btn, SNOOZE/pick time */
+    .sb-ev-v2 {
+      background: #1c1c1e; border-radius: 12px;
+      padding: 10px 10px 10px 6px; margin-bottom: 8px;
+      display: flex; align-items: stretch; gap: 6px;
+    }
+    .sb-ev-v2:last-of-type { margin-bottom: 0; }
+    .sb-ev-v2-erase {
+      display: flex; flex-direction: column; align-items: center;
+      justify-content: flex-start; gap: 3px;
+      flex-shrink: 0; width: 30px; padding-top: 2px;
+    }
+    .sb-ev-v2-erase-txt {
+      font-size: 8px; color: #555; font-weight: 700;
+      letter-spacing: 0.05em; text-transform: uppercase;
+    }
+    .sb-ev-v2-erase-circle {
+      width: 16px; height: 16px; border-radius: 50%;
+      border: 1.5px solid #3a3a3a;
+    }
+    .sb-ev-v2-main { flex: 1; min-width: 0; }
+    .sb-ev-v2-time {
+      font-size: 10px; color: #4A8FE7; font-weight: 700;
+      letter-spacing: 0.04em; margin-bottom: 2px;
+    }
+    .sb-ev-v2-title {
+      font-size: 13px; color: #fff; font-weight: 700; line-height: 1.3;
+    }
+    .sb-ev-v2-source {
+      font-size: 10px; color: #555; margin-top: 2px;
+    }
+    .sb-ev-v2-badge {
+      display: inline-block; font-size: 8px; font-weight: 800;
+      color: #22C55E; background: #22C55E15;
+      padding: 1px 6px; border-radius: 20px;
+      margin-top: 3px; letter-spacing: 0.04em;
+    }
+    .sb-ev-v2-actions {
+      display: flex; flex-direction: column; gap: 4px;
+      flex-shrink: 0; justify-content: center; min-width: 54px;
+    }
+    .sb-ev-v2-attime {
+      background: #FF7A1A; border-radius: 7px;
+      padding: 5px 7px; text-align: center; cursor: default;
+    }
+    .sb-ev-v2-attime-line1 {
+      font-size: 8px; font-weight: 800; color: #fff;
+      letter-spacing: 0.04em; line-height: 1.3;
+    }
+    .sb-ev-v2-snooze {
+      background: #1a1a1a; border-radius: 7px;
+      padding: 5px 7px; text-align: center;
+      border: 1px solid #2a2a2a; cursor: default;
+    }
+    .sb-ev-v2-snooze-line1 {
+      font-size: 8px; font-weight: 700; color: #888; line-height: 1.2;
+    }
+    .sb-ev-v2-snooze-line2 {
+      font-size: 7px; color: #555; line-height: 1.2;
+    }
+
+    /* ── BEFORE STATE — Schedule table ─────────────────────── */
+    .sched-tbl {
+      background:#161616; border-radius:12px;
+      border:1px solid #2a2a2a; overflow:hidden;
+      font-family:var(--font); width:100%;
+    }
+    .sched-tbl-head {
+      background:#1c1c1c; padding:9px 14px;
+      font-size:10px; font-weight:800; color:#FF7A1A;
+      letter-spacing:0.1em; text-transform:uppercase;
+      border-bottom:1px solid #2a2a2a;
+    }
+    .sched-row {
+      display:flex; align-items:center;
+      padding:8px 14px; border-bottom:1px solid #1e1e1e; gap:8px;
+    }
+    .sched-row:last-child { border-bottom:none; }
+    .sched-date { font-size:10px; font-weight:700; color:#FF7A1A; width:54px; flex-shrink:0; }
+    .sched-opp { flex:1; font-size:11px; color:#ccc; }
+    .sched-loc { font-size:10px; color:#555; text-align:right; flex-shrink:0; max-width:110px; }
+
+    /* ── BEFORE STATE — iMessage bubbles ───────────────────── */
+    .imsg-wrap {
+      background:#1a1a1a; border-radius:14px;
+      padding:14px 14px 10px; border:1px solid #2a2a2a;
+    }
+    .imsg-from {
+      font-size:10px; font-weight:800; color:#888;
+      letter-spacing:0.1em; text-transform:uppercase;
+      text-align:center; margin-bottom:10px;
+    }
+    .imsg-bubble {
+      border-radius:14px; padding:8px 12px;
+      margin-bottom:6px; font-size:12px;
+      line-height:1.5; max-width:85%;
+    }
+    .imsg-them {
+      background:#2c2c2e; color:#eee;
+      margin-left:0; border-bottom-left-radius:4px;
+    }
+    .imsg-me {
+      background:#FF7A1A; color:#fff;
+      margin-left:auto; border-bottom-right-radius:4px;
+    }
+    .imsg-time { font-size:10px; color:#555; text-align:center; margin:4px 0 8px; }
+
+    /* ── BEFORE STATE — Business card ──────────────────────── */
+    .biz-card {
+      background:#1c1c1e; border-radius:12px;
+      padding:16px 18px; border:1px solid #2a2a2a;
+      position:relative;
+    }
+    .biz-card-accent {
+      position:absolute; top:0; left:0;
+      width:4px; height:100%; background:#FF7A1A;
+      border-top-left-radius:12px; border-bottom-left-radius:12px;
+    }
+    .biz-card-name { font-size:15px; font-weight:800; color:#fff; margin-bottom:2px; }
+    .biz-card-title { font-size:11px; color:#888; margin-bottom:8px; }
+    .biz-card-co { font-size:12px; font-weight:700; color:#FF7A1A; margin-bottom:10px; }
+    .biz-card-contact { font-size:11px; color:#666; line-height:1.9; }
+    .biz-card-note { font-size:10px; color:#FF7A1A55; margin-top:8px; font-style:italic; }
+
+    /* ── BEFORE STATE — Permission slip ────────────────────── */
+    .perm-slip {
+      background:#fafaf8; border-radius:10px;
+      padding:14px 16px; border:1px solid #ddd;
+    }
+    .perm-slip-school {
+      font-size:11px; font-weight:700; color:#333;
+      text-align:center; border-bottom:1px solid #ddd;
+      padding-bottom:8px; margin-bottom:10px;
+      font-family:Georgia, serif; letter-spacing:0.03em;
+    }
+    .perm-slip-body {
+      font-size:11px; color:#555; line-height:1.6;
+      margin-bottom:8px; font-family:Georgia, serif;
+    }
+    .perm-slip-due {
+      font-size:11px; font-weight:700; color:#b00;
+      padding:6px 10px; background:#fff0f0;
+      border-radius:6px; border:1px solid #f5c0c0;
+    }
   </style>
 
   <script>
+    // ── helpers ───────────────────────────────────────────────
+    const _hdr = `<div class="sb-mock-hdr"><img src="assets/icon.png" alt=""/><div class="sb-mock-hdr-name">SQUIRREL <em>BRAIN</em></div></div>`;
+    const _calIcon = `<img src="assets/calendar_branch_transparent.png" alt=""/>`;
+    const _almIcon = `<img src="assets/alarm_wood_icon_transparent.png" alt=""/>`;
+    const _noteIcon = `<img src="assets/notes_transparent.png" alt=""/>`;
+    function _ev(time, title, loc) {
+      return `<div class="sb-ev"><div class="sb-ev-time">${time}</div><div class="sb-ev-title">${title}</div>${loc?`<div class="sb-ev-loc">📍 ${loc}</div>`:''}<div class="sb-ev-foot"><div class="sb-ev-chk"></div><span class="sb-ev-snooze">SNOOZE</span></div></div>`;
+    }
+    function _note(title, body, tags) {
+      const tagHtml = tags ? `<div class="sb-note-tags">${tags.map(t=>`<span class="sb-note-tag">${t}</span>`).join('')}</div>` : '';
+      return `<div class="sb-note"><div class="sb-note-title">${title}</div>${body?`<div class="sb-note-body">${body}</div>`:''}${tagHtml}<div class="sb-note-foot"><span class="sb-note-send">Send as Text</span><span class="sb-note-close">✕</span></div></div>`;
+    }
+    function _sec(icon, label, cards, more) {
+      return `<div class="sb-mock-sec"><div class="sb-mock-sec-ttl">${icon}${label}</div>${cards}</div>${more?`<div class="sb-mock-more">${more}</div>`:''}`;
+    }
+    function _wrap(...secs) { return `<div class="sb-mock">${_hdr}${secs.join('')}</div>`; }
+
     const TAB_DATA = {
       soccer: {
         label: 'Soccer Schedule',
-        desc: 'Snap a photo of the season schedule — every game lands in your calendar automatically.',
-        before: { img: 'assets/squirrel_test_schedule.png', caption: 'U10 soccer season schedule — 15 games, all dates and locations.' },
-        after:  { img: 'assets/Callander Screen.PNG', caption: 'Every game added to your calendar — dates, times, locations.' }
+        desc: 'Snap a photo of the season schedule — every game, date, and location lands in your calendar automatically. No manual entry.',
+        before: { html: `<div class="sched-tbl"><div class="sched-tbl-head">ACORN FC — U10 SPRING SCHEDULE</div><div class="sched-row"><span class="sched-date">SAT 4/5</span><span class="sched-opp">vs. Pine Ridge Warriors</span><span class="sched-loc">Oakwood Park, Field 2</span></div><div class="sched-row"><span class="sched-date">SAT 4/12</span><span class="sched-opp">vs. Hollow Oak United</span><span class="sched-loc">Cedar Creek, Field 1</span></div><div class="sched-row"><span class="sched-date">SAT 4/19</span><span class="sched-opp">@ Birchwood Blazers</span><span class="sched-loc">Maple Run Park</span></div><div class="sched-row"><span class="sched-date">SAT 4/26</span><span class="sched-opp">vs. Riverside Rovers</span><span class="sched-loc">Oakwood Park, Field 3</span></div><div class="sched-row"><span class="sched-date">SAT 5/3</span><span class="sched-opp">@ Thornfield FC</span><span class="sched-loc">Riverside Sports Complex</span></div><div class="sched-row" style="border-bottom:none;"><span class="sched-date" style="color:#444;">+10</span><span class="sched-opp" style="color:#444; font-style:italic;">more games this season…</span></div></div>` },
+        after: { html: _wrap(_sec(_calIcon, 'CALENDAR EVENTS', _ev('SAT APR 5 · 10:00 AM','Acorn FC vs. Pine Ridge Warriors','Oakwood Park, Field 2')+_ev('SAT APR 12 · 1:00 PM','Acorn FC vs. Hollow Oak United','Cedar Creek Complex, Field 1')+_ev('SAT APR 19 · 9:00 AM','Acorn FC @ Birchwood Blazers','Maple Run Park, Field 3'), '+12 more games added automatically')) }
       },
       doctor: {
         label: 'Doctor Appt',
-        desc: 'Photograph the appointment card. Squirrel Brain reads it, drops it into your calendar, and sets a loud alarm — so you actually show up.',
+        desc: 'Photograph the appointment card they hand you on the way out. Squirrel Brain reads it, drops it in your calendar, and sets loud alarms so you actually show up.',
         before: { img: 'assets/before_doctor_appt.png', caption: 'The little card they hand you on the way out. One snap.' },
-        after:  { img: 'assets/1st 2nd 3rd Alarm Screen.PNG', caption: 'Alarm set with 1st, 2nd, and 3rd reminders — loud ones.' }
+        after: { html: _wrap(_sec(_calIcon, 'CALENDAR EVENT', _ev('TUE OCT 14 · 2:30 PM','Dr. Holloway — Annual Checkup','Oakwood Family Medical, Suite 204'), ''), _sec(_almIcon, 'SQUIRREL ALARMS', _ev('TUE OCT 14 · 10:30 AM','1st alarm — 4 hours before','')+_ev('TUE OCT 14 · 1:30 PM','2nd alarm — time to leave','')+_ev('TUE OCT 14 · 2:00 PM','3rd alarm — don\'t be late',''), '')) }
       },
       work: {
         label: 'Work Follow-Up',
-        desc: 'Snap your meeting notes. Every action item, deadline, and follow-up extracted and saved.',
-        before: { img: 'assets/before_legal_pad.png', caption: 'Handwritten meeting notes — Smith & Jordan LLP' },
-        after:  { img: 'assets/after_review_capture.png', caption: '9 items extracted: notes, alarms, and calendar events — one tap to save.' }
+        desc: 'Snap your meeting notes. Every action item, deadline, and follow-up extracted, saved, and reminded — nothing falls through the cracks.',
+        before: { img: 'assets/before_legal_pad.png', caption: 'Handwritten meeting notes — photographed in 2 seconds on the way out.' },
+        after: { html: _wrap(_sec(_calIcon, 'CALENDAR EVENTS', _ev('MON OCT 13 · 9:00 AM','Follow-up call — Marcus at Meridian','')+_ev('FRI OCT 17 · EOD','Send revised pricing to Meridian Group',''), ''), _sec(_noteIcon, 'NOTES', _note('Include Q3 case study from Riverside account','Pull the Riverside renewal numbers for the comparison doc.',['FOLLOW-UP'])+_note('Meridian wants 3-tier pricing','Starter / Growth / Enterprise. Decision by Oct 20.',['ACTION ITEM']), '+ 5 more items saved')) }
       },
       screenshots: {
         label: 'Screenshots',
-        desc: 'Screenshot a calendar invite, email, or anything with a date. Squirrel Brain reads it.',
-        before: { img: 'assets/sb_test_events.png', caption: 'A daily schedule screenshot — dates, times, to-dos all in one.' },
-        after:  { img: 'assets/Callander Screen.PNG', caption: 'Calendar event created automatically — no typing.' }
+        desc: 'Screenshot a calendar invite, Outlook event, or any schedule. Squirrel Brain reads every date and time and fires a real alarm on your phone.',
+        before: { img: 'assets/sb_test_events.png', caption: 'A daily schedule screenshot — dates, times, and meetings all extracted.' },
+        after: { html: _wrap(_sec(_calIcon, 'CALENDAR EVENTS', _ev('MON OCT 13 · 9:00 AM','Team Standup — Conference Room B','')+_ev('MON OCT 13 · 2:30 PM','Client Review — Meridian Group','')+_ev('MON OCT 13 · 5:00 PM','Pick up kids from practice',''), '+3 more events added')) }
       },
       spouse: {
         label: 'Spouse Text',
-        desc: 'You read it. You think "I\'ll remember that." You don\'t. Screenshot the thread — Squirrel Brain turns every ask into a task with an alarm.',
-        before: { img: 'assets/before_spouse_text.png', caption: 'Three things from Sarah. Soccer practice, dentist rescheduling, Sunday dinner. All forgettable.' },
-        after:  { img: 'assets/Review and Confirm Screen.PNG', caption: 'Every ask extracted, timed, and saved — before you swipe away.' }
+        desc: 'You read it. You think you\'ll remember it. You don\'t. Screenshot the thread — every ask becomes a task with an alarm.',
+        before: { html: `<div class="imsg-wrap"><div class="imsg-from">Messages — Hazel</div><div class="imsg-bubble imsg-them">Can you grab the kids from soccer at 4? I'm stuck in a meeting until at least 4:30</div><div class="imsg-time">2:14 PM</div><div class="imsg-bubble imsg-them">Also the dentist called — they moved it to Nov 5th, can you reschedule?</div><div class="imsg-bubble imsg-them">Oh and don't forget dinner at my parents Sunday at 6 🙂</div><div class="imsg-bubble imsg-me" style="margin-left:auto;">👍 on it</div></div>` },
+        after: { html: _wrap(_sec(_calIcon, 'CALENDAR EVENTS', _ev('TODAY · 4:00 PM','Pick up kids — Cedar Creek Soccer','Alarm set for 3:45 PM')+_ev('SUN · 6:00 PM','Dinner at Hazel\'s parents',''), ''), _sec(_noteIcon, 'NOTES', _note('Call dentist — reschedule to Nov 5','Moved from original date. Call during lunch.',['CALL TOMORROW']), '')) }
       },
       ideas: {
         label: 'Ideas',
-        desc: 'Just tap and speak. Your idea is saved as a searchable note in under 10 seconds.',
-        before: { img: 'assets/Main Screen.png', caption: 'Tap the mic — say the idea out loud. That\'s it.' },
-        after:  { img: 'assets/Notes Screen.PNG', caption: 'Saved, searchable, never lost.' }
+        desc: 'Just tap and speak. Your idea is saved as a searchable note in under 10 seconds — with a reminder if you need it later.',
+        before: { img: 'assets/01-home.png', caption: 'Tap the mic, say the idea out loud. That\'s it.' },
+        after: { html: _wrap(_sec(_noteIcon, 'NOTES', _note('Presentation Intro — Lead with the Problem','Start with the client\'s real pain point, not our product. Build tension before offering the solution.',['IDEA'])+_note('Reminder set for the night before your presentation','', ['MON OCT 13 · 9:00 PM']), 'Saved. Searchable. Never lost.')) }
       },
       grocery: {
         label: 'Grocery Run',
-        desc: 'Scribble it down, snap it, go. Squirrel Brain turns your handwritten list into a searchable checklist before you hit the store.',
+        desc: 'Scribble it down or snap a photo of the list on the counter. Squirrel Brain turns it into a checklist you can tap through at the store.',
         before: { img: 'assets/before_grocery_list.png', caption: 'Written in 30 seconds on the counter before you left.' },
-        after:  { img: 'assets/Notes Screen.PNG', caption: 'Checklist saved — tap items to check them off.' }
+        after: { html: _wrap(_sec(_noteIcon, 'NOTES', `<div class="sb-note"><div class="sb-note-title">Grocery List</div><div class="sb-checklist" style="margin-top:8px;"><div class="sb-check-row"><div class="sb-check-box"></div><span class="sb-check-lbl">Eggs (2 dozen)</span></div><div class="sb-check-row"><div class="sb-check-box"></div><span class="sb-check-lbl">Sourdough bread</span></div><div class="sb-check-row"><div class="sb-check-box"></div><span class="sb-check-lbl">Almond milk</span></div><div class="sb-check-row"><div class="sb-check-box"></div><span class="sb-check-lbl">Greek yogurt</span></div><div class="sb-check-row"><div class="sb-check-box"></div><span class="sb-check-lbl">Avocados (×4)</span></div><div class="sb-check-row"><div class="sb-check-box"></div><span class="sb-check-lbl">Chicken breast</span></div><div class="sb-check-row"><div class="sb-check-box"></div><span class="sb-check-lbl">Sparkling water (2 cases)</span></div></div><div class="sb-note-foot" style="margin-top:10px;"><span class="sb-note-send">Send as Text</span><span class="sb-note-close">✕</span></div></div>`, 'Tap items to check off as you shop')) }
       },
       meeting: {
         label: 'Meeting Notes',
-        desc: 'Take a photo of any notes — whiteboard, legal pad, napkin. Everything extracted and organized.',
-        before: { img: 'assets/before_legal_pad.png', caption: 'Smith & Jordan LLP legal pad — photographed in 2 seconds.' },
-        after:  { img: 'assets/after_review_capture.png', caption: 'Notes, alarms, and calendar events — all from one photo.' }
+        desc: 'Take a photo of any notes — whiteboard, legal pad, napkin. Every deadline, action item, and follow-up is saved and reminded.',
+        before: { img: 'assets/before_legal_pad.png', caption: 'Legal pad from the board meeting. Photographed in 2 seconds.' },
+        after: { html: _wrap(_sec(_calIcon, 'CALENDAR EVENTS', _ev('WED OCT 15 · 10:00 AM','Follow-up call — Riverside renewal',''), ''), _sec(_noteIcon, 'NOTES', _note('Send contract draft to Holloway & Partners','Due Friday Oct 17. Pull the updated terms from the shared drive.',['DUE FRI OCT 17'])+_note('Pull Q3 numbers before board meeting','CFO needs YoY comparison. Revenue + retention.',['ACTION ITEM']), '+4 more items saved')) }
       },
       wine: {
         label: 'Wine You Loved',
-        desc: 'Snap the bottle. Squirrel Brain saves the name, winery, and vintage — searchable forever. "That Napa Cab from last year" is now findable in 2 seconds.',
-        before: { img: 'assets/before_wine_bottle.png', caption: 'A great bottle you found in Napa. Snap it before you forget it.' },
-        after:  { img: 'assets/Notes Screen.PNG', caption: 'Saved as a searchable note — winery, vintage, tasting notes. Find it anytime.' }
+        desc: 'Snap the bottle before you leave the table. Squirrel Brain saves the name, winery, and vintage — searchable forever.',
+        before: { img: 'assets/before_wine_bottle.png', caption: 'A great bottle at the tasting room. Snap it before you forget it.' },
+        after: { html: _wrap(_sec(_noteIcon, 'NOTES', _note('Stag\'s Leap Artemis Cabernet 2021','Napa Valley · Silverado Trail Tasting Room. Deep cherry, cedar finish. Had with the ribeye. Get another case before the holidays.',['NAPA','CAB SAV'])+_note('Reorder reminder set for Nov 15','Before holiday sellout.',['REMINDER: NOV 15']), 'Searchable forever. "That Napa Cab" → found in 2 sec.')) }
       },
       gift: {
         label: 'Gift Idea',
-        desc: 'See something that would be perfect for mom\'s birthday? Snap it. Squirrel Brain saves it with a reminder so you actually follow through.',
+        desc: 'See something that would be perfect? Snap it. The idea is saved with a reminder so you actually follow through before the birthday.',
         before: { img: 'assets/before_birthday_gift.png', caption: 'Spotted the perfect gift. One photo before you walk past it.' },
-        after:  { img: 'assets/Review and Confirm Screen.PNG', caption: 'Gift idea saved + reminder set for a week before her birthday.' }
+        after: { html: _wrap(_sec(_noteIcon, 'NOTES', _note('Lavender & Cedar Gift Set — Terrain','Saw it in the window. $48. Back corner near the entrance. Perfect for her birthday.',['GIFT IDEA','$48'])+_note('Reminder set for 1 week before her birthday','Sat Nov 22 — go get this before it\'s gone.',['REMINDER: NOV 22']), 'Gift idea locked in. Won\'t slip through the cracks.')) }
       },
       whiteboard: {
         label: 'Whiteboard',
-        desc: 'Someone is about to erase it. Snap it. Every bullet point, name, and deadline is saved and searchable before they pick up the eraser.',
+        desc: 'Someone is about to erase it. Snap it fast. Every bullet, name, and deadline is saved and searchable before they pick up the eraser.',
         before: { img: 'assets/before_whiteboard.png', caption: 'End of the meeting. Someone\'s already reaching for the eraser.' },
-        after:  { img: 'assets/after_review_capture.png', caption: 'Every action item, name, and deadline extracted and saved.' }
+        after: { html: _wrap(_sec(_calIcon, 'CALENDAR EVENTS', _ev('MON · 9:00 AM','Stakeholder sign-off call','')+_ev('FRI · EOD','Launch readiness review — product team',''), ''), _sec(_noteIcon, 'NOTES', _note('Finalize 3 pricing tiers — Starter / Growth / Enterprise','Owner: Maple & Associates. Decision needed by Thursday.',['ACTION ITEM'])+_note('Design team needs final assets by Wednesday','Logos, banner, and 3 product screenshots.',['DEADLINE: WED']), '+4 more items saved')) }
       },
       savedvideo: {
         label: 'Saved Videos',
-        desc: 'You saved 52 YouTube videos and 40 TikToks. You cannot find the sourdough recipe. You cannot find the home repair hack. Screenshot the video — Squirrel Brain names it, tags it, makes it searchable.',
+        desc: 'You saved 52 YouTube videos. You cannot find the sourdough recipe. Screenshot the video — Squirrel Brain names it and makes it searchable.',
         before: { img: 'assets/before_youtube_saved.png', caption: '52 saved videos. No way to find the one you actually want.' },
-        after:  { img: 'assets/Notes Screen.PNG', caption: 'Saved as a note: title, creator, what it covers. Find it in 2 seconds.' }
+        after: { html: _wrap(_sec(_noteIcon, 'NOTES', _note('Homemade Sourdough in 24 Hours','Joshua Weissman · YouTube. Dutch oven, no-knead starter. Saved May 2025.',['YOUTUBE','RECIPE'])+_note('HVAC Filter Replacement Guide','This Old House · YouTube. 16×25×1 MERV 11. Change every 90 days.',['YOUTUBE','HOME'])+_note('30-Min Meal Prep for the Week','Budget Bytes · YouTube. Batch cook Sunday, eat all week.',['YOUTUBE','MEAL PREP']), 'Find any video in 2 sec — not 20 min of scrolling.')) }
       },
       handwritten: {
         label: 'Handwritten Note',
-        desc: 'Scribbled during a phone call. On a napkin. On your hand. Doesn\'t matter. Snap it and Squirrel Brain pulls out every task, name, and number.',
-        before: { img: 'assets/before_handwritten_note.png', caption: 'Real notes from a real phone call — five things you\'ll forget by dinner.' },
-        after:  { img: 'assets/after_review_capture.png', caption: 'Every item extracted, organized, and saved with reminders.' }
+        desc: 'Scribbled during a phone call. On a napkin. On your hand. Doesn\'t matter. Snap it and every task, name, and deadline is saved.',
+        before: { img: 'assets/before_handwritten_note.png', caption: 'Notes from a real phone call — five things you\'ll forget by dinner.' },
+        after: { html: _wrap(_sec(_calIcon, 'CALENDAR EVENTS', _ev('THU · 3:00 PM','Review session — Hazel joining','')+_ev('TOM · 9:00 AM','Ring back Holloway & Partners — re: contract',''), ''), _sec(_noteIcon, 'NOTES', _note('Get invoice # from Riverside account','Need it before the Thursday call.',['FOLLOW-UP'])+_note('Meridian — new contact is River Thorne, VP BizDev','(615) 882-4310',['CONTACT']), '+1 more item saved')) }
       },
       parking: {
         label: 'Parking Spot',
-        desc: 'Level 3, Row B7. You\'ll remember it. You won\'t. Snap the sign — Squirrel Brain saves it as a searchable note so you\'re not wandering a garage for 20 minutes.',
+        desc: 'Level 3, Row B7. You\'ll remember it. You won\'t. Snap the sign — Squirrel Brain saves it and sets an alarm if the meter is running.',
         before: { img: 'assets/before_parking_spot.png', caption: 'Level 3, Row B7. One snap before you walk away.' },
-        after:  { img: 'assets/Notes Screen.PNG', caption: 'Saved. Search "parking" later and find it instantly.' }
+        after: { html: _wrap(_sec(_noteIcon, 'NOTES', _note('Oakwood Convention Center Garage','Level 3 · Row B7 · Space 14. Blue elevator near northwest stairwell. Meter expires 4:30 PM.',['PARKING'])+_note('Meter alarm set for 4:15 PM','Move the car or add time.',['ALARM: 4:15 PM']), 'Search "parking" to find it instantly.')) }
       },
       bizcard: {
         label: 'Business Card',
-        desc: 'You meet someone great. You take their card. It goes in your pocket and disappears forever. Snap it — name, company, number, and a follow-up reminder, all saved.',
-        before: { placeholder: 'The business card that\'s been in your pocket for two weeks.' },
-        after:  { img: 'assets/Notes Screen.PNG', caption: 'Contact saved. Follow-up reminder set. Nothing slips.' }
+        desc: 'You meet someone great. You take their card. It disappears forever. Snap it — name, company, number, and a follow-up reminder all saved.',
+        before: { html: `<div class="biz-card"><div class="biz-card-accent"></div><div style="padding-left:12px;"><div class="biz-card-name">River Thorne</div><div class="biz-card-title">VP of Business Development</div><div class="biz-card-co">Holloway &amp; Partners</div><div class="biz-card-contact">river@hollowaypartners.com<br>(615) 882-4310<br>133 Commerce Square, Suite 800</div><div class="biz-card-note">Met at Oakwood Summit — interested in Q1 pilot</div></div></div>` },
+        after: { html: _wrap(_sec(_noteIcon, 'NOTES', _note('River Thorne — Holloway & Partners','VP of Business Development. river@hollowaypartners.com · (615) 882-4310. Met at Oakwood Summit — interested in Q1 pilot.',['CONTACT','BIZ DEV'])+_note('Follow-up reminder set — Wed Oct 15 · 9:00 AM','Re: Q1 pilot discussion.',['REMINDER: WED 9 AM']), 'Contact saved. Nothing slips.')) }
       },
       schoolform: {
         label: 'School Form',
         desc: 'Permission slip. Field trip notice. Due Friday. Snap it the moment it comes home — Squirrel Brain reads the deadline and sets the reminder before it hits the bottom of the backpack.',
-        before: { placeholder: 'The permission slip that came home in the backpack. Due Friday.' },
-        after:  { img: 'assets/1st 2nd 3rd Alarm Screen.PNG', caption: 'Deadline extracted. Alarm set. It won\'t get lost.' }
+        before: { html: `<div class="perm-slip"><div class="perm-slip-school">OAKWOOD ELEMENTARY SCHOOL<br><span style="font-weight:400;font-size:10px;">Permission Slip &amp; Payment Form</span></div><div class="perm-slip-body">Your child's class will be taking a field trip to the <strong>Oakwood Nature Center</strong> on <strong>Friday, October 17th</strong>. Please return the signed permission slip along with a <strong>$12 activity fee</strong> to your child's homeroom teacher.</div><div class="perm-slip-due">⚠ DUE: Friday, October 17th</div></div>` },
+        after: { html: _wrap(_sec(_calIcon, 'CALENDAR EVENTS', _ev('FRI OCT 17','Oakwood Elementary — Fall Field Trip','Permission slip + $12 due to homeroom'), ''), _sec(_almIcon, 'SQUIRREL ALARMS', _ev('WED OCT 15 · 7:30 AM','2 days early — find the form and pay it','')+_ev('THU OCT 16 · 7:30 AM','Due tomorrow — last chance',''), 'It won\'t get lost at the bottom of the backpack.')) }
       },
       salescall: {
         label: 'Sales Call',
-        desc: 'Walking out of a meeting, between calls, heading to the car — speak it before it fades. Squirrel Brain captures every follow-up, next step, and promise you made, and sets reminders so nothing slips.',
-        before: { img: 'assets/lifestyle_sales_walkout.png', caption: 'Walking out of a client meeting. A lot was said. You need to capture all of it — right now.' },
-        after:  { img: 'assets/after_review_capture.png', caption: 'Every follow-up, deadline, and action item extracted. Reminders set before you reach your car.' }
-      }
+        desc: 'Walking out of the meeting, between calls, heading to your car — speak it before it fades. Every follow-up and promise captured before you reach the parking lot.',
+        before: { img: 'assets/lifestyle_sales_walkout.png', caption: 'Walking out of a client meeting. A lot was said. Capture it now.' },
+        after: { html: _wrap(_sec(_calIcon, 'CALENDAR EVENTS', _ev('MON · 2:00 PM','Demo call — Meridian procurement team','')+_ev('THU · EOD','Send revised pricing to Marcus at Meridian',''), ''), _sec(_noteIcon, 'NOTES', _note('Pull Riverside case study for comparison','Use the Q3 renewal story — Meridian is a similar profile.',['ACTION ITEM'])+_note('Marcus wants 3-tier pricing breakdown','Starter / Growth / Enterprise. He\'ll share with legal.',['MERIDIAN']), '+2 more items captured before you reached your car.')) }
+      },
+
     };
 
     document.querySelectorAll('.brain-tab[data-tab]').forEach(tab => {
@@ -1134,12 +2404,16 @@
 
     function openTabModal(key) {
       const d = TAB_DATA[key]; if (!d) return;
-      const before = d.before.img
-        ? `<img src="${d.before.img}" class="tab-ba-img" alt="${d.label} before" /><p class="tab-ba-caption">${d.before.caption||''}</p>`
-        : `<div class="tab-ba-ph"><div class="tab-ba-ph-icon">&#128247;</div><div>${d.before.placeholder}</div></div>`;
-      const after = d.after.img
-        ? `<img src="${d.after.img}" class="tab-ba-img" alt="${d.label} after" /><p class="tab-ba-caption">${d.after.caption||''}</p>`
-        : `<div class="tab-ba-ph"><div class="tab-ba-ph-icon">&#128247;</div><div>${d.after.placeholder}</div></div>`;
+      const before = d.before.html
+        ? d.before.html
+        : d.before.img
+          ? `<img src="${d.before.img}" class="tab-ba-img" alt="${d.label} before" /><p class="tab-ba-caption">${d.before.caption||''}</p>`
+          : `<div class="tab-ba-ph"><div class="tab-ba-ph-icon">&#128247;</div><div>${d.before.placeholder||''}</div></div>`;
+      const after = d.after.html
+        ? d.after.html
+        : d.after.img
+          ? `<img src="${d.after.img}" class="tab-ba-img" alt="${d.label} after" /><p class="tab-ba-caption">${d.after.caption||''}</p>`
+          : `<div class="tab-ba-ph"><div class="tab-ba-ph-icon">&#128247;</div><div>${d.after.placeholder||''}</div></div>`;
       document.getElementById('tab-modal-inner').innerHTML = `
         <div class="tab-modal-title">${d.label}</div>
         <div class="tab-modal-sub">${d.desc}</div>
@@ -1158,6 +2432,33 @@
     }
 
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closeTabModal(); });
+  </script>
+
+  <!-- ACCORDION LOGIC -->
+  <script>
+    function accToggle(id) {
+      const card = document.getElementById(id);
+      const isOpen = card.classList.contains('open');
+      // Close all cards
+      document.querySelectorAll('.acc-card').forEach(c => {
+        c.classList.remove('open');
+        c.querySelector('.acc-header').setAttribute('aria-expanded', 'false');
+      });
+      // Open clicked card if it was closed
+      if (!isOpen) {
+        card.classList.add('open');
+        card.querySelector('.acc-header').setAttribute('aria-expanded', 'true');
+      }
+    }
+    // Keyboard accessibility
+    document.querySelectorAll('.acc-header').forEach(h => {
+      h.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          h.click();
+        }
+      });
+    });
   </script>
 
   <!-- ── SQUIRREL MUTE BUTTON ─────────────────────────────── -->
@@ -1247,16 +2548,19 @@
         requestAnimationFrame(frame);
       }
 
+      let soundPlays = 0;
+      const MAX_SOUND_PLAYS = 3;
+
       function playSound() {
-        audio.loop = true;
+        if (soundPlays >= MAX_SOUND_PLAYS) return;
+        soundPlays++;
+        audio.loop = false;
         audio.currentTime = 0;
         audio.play().catch(() => {});
       }
 
       function stopSound() {
         audio.pause();
-        audio.loop = false;
-        audio.currentTime = 0;
       }
 
       function startShow() {
@@ -1275,7 +2579,7 @@
             img.className = 'running';
             playSound();
             slide(x0, x1, 5000, () => doRest(!atRight));
-          }, 5000);
+          }, 14000);
         }
 
         // First entry: run in from off-screen left → stop at right edge
@@ -1295,6 +2599,64 @@
       }
       setTimeout(trigger, 8000);
       document.addEventListener('scroll', () => setTimeout(trigger, 3000), { once: true, passive: true });
+    })();
+  </script>
+
+  <!-- WAITLIST FORM HANDLER -->
+  <script>
+    (function() {
+      var SUPA_URL  = 'https://geczbtsjfbvfukdzdemr.supabase.co';
+      var SUPA_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdlY3pidHNqZmJ2ZnVrZHpkZW1yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc4NTA1OTksImV4cCI6MjA5MzQyNjU5OX0.Rdn6ujhp8t1qJNBmAc8VmV5xst10tpSzXh5tt6VCptM';
+
+      var form    = document.getElementById('waitlist-form');
+      var success = document.getElementById('wl-success');
+      var errBox  = document.getElementById('wl-error');
+      var btn     = document.getElementById('wl-btn');
+
+      if (!form) return;
+
+      form.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        var email = document.getElementById('wl-email').value.trim();
+        var name  = document.getElementById('wl-name').value.trim();
+        if (!email) return;
+
+        btn.textContent = 'Adding you…';
+        btn.disabled = true;
+        btn.style.opacity = '0.6';
+        errBox.style.display = 'none';
+
+        try {
+          var res = await fetch(SUPA_URL + '/rest/v1/waitlist', {
+            method: 'POST',
+            headers: {
+              'apikey': SUPA_ANON,
+              'Authorization': 'Bearer ' + SUPA_ANON,
+              'Content-Type': 'application/json',
+              'Prefer': 'return=minimal'
+            },
+            body: JSON.stringify({ email: email, name: name || null })
+          });
+
+          if (res.ok || res.status === 201) {
+            form.style.display = 'none';
+            success.style.display = 'block';
+          } else if (res.status === 409) {
+            // Duplicate email — still show success (no info leak)
+            form.style.display = 'none';
+            success.style.display = 'block';
+          } else {
+            var body = await res.text();
+            throw new Error('Server error ' + res.status + ': ' + body);
+          }
+        } catch (err) {
+          errBox.textContent = 'Something went wrong — try again or email us directly.';
+          errBox.style.display = 'block';
+          btn.textContent = 'Join Waitlist';
+          btn.disabled = false;
+          btn.style.opacity = '1';
+        }
+      });
     })();
   </script>
 </body>

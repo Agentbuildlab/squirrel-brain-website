@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy — Squirrel Brain</title>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <style>
+    :root { --bg:#0a0a0a; --bg2:#111; --orange:#FF7A1A; --muted:#888; --font:'Inter',system-ui,-apple-system,sans-serif; }
+    * { box-sizing:border-box; margin:0; padding:0; }
+    body { background:var(--bg); color:#ccc; font-family:var(--font); line-height:1.7; }
+    nav { display:flex; align-items:center; justify-content:space-between; padding:16px 32px; background:rgba(10,10,10,0.95); border-bottom:1px solid #1a1a1a; position:sticky; top:0; z-index:100; backdrop-filter:blur(12px); }
+    .nav-brand { display:flex; align-items:center; gap:10px; text-decoration:none; }
+    .nav-brand img { width:28px; height:28px; border-radius:7px; }
+    .nav-brand span { font-size:13px; font-weight:900; letter-spacing:0.1em; color:#fff; }
+    .nav-brand em { color:var(--orange); font-style:normal; }
+    .nav-back { font-size:13px; color:var(--muted); text-decoration:none; }
+    .nav-back:hover { color:#fff; }
+    main { max-width:740px; margin:0 auto; padding:60px 24px 100px; }
+    #content h1 { font-size:clamp(26px,4vw,38px); font-weight:900; color:#fff; letter-spacing:-0.02em; margin-bottom:8px; line-height:1.15; }
+    #content h2 { font-size:clamp(18px,2.5vw,24px); font-weight:800; color:#fff; margin:40px 0 14px; letter-spacing:-0.01em; padding-top:8px; border-top:1px solid #1e1e1e; }
+    #content h3 { font-size:16px; font-weight:700; color:#ddd; margin:28px 0 10px; }
+    #content h4 { font-size:14px; font-weight:700; color:#bbb; margin:20px 0 8px; }
+    #content p { margin-bottom:14px; font-size:15px; color:#aaa; }
+    #content strong { color:#ddd; }
+    #content em { color:#bbb; }
+    #content a { color:var(--orange); text-decoration:none; }
+    #content a:hover { text-decoration:underline; }
+    #content ul, #content ol { margin:12px 0 16px 22px; }
+    #content li { margin-bottom:6px; font-size:15px; color:#aaa; }
+    #content table { width:100%; border-collapse:collapse; margin:20px 0; font-size:13px; }
+    #content th { background:#161616; color:#ddd; font-weight:700; padding:10px 14px; text-align:left; border:1px solid #2a2a2a; }
+    #content td { padding:9px 14px; border:1px solid #1e1e1e; color:#999; vertical-align:top; }
+    #content td:first-child { color:#bbb; }
+    #content tr:nth-child(even) td { background:#0d0d0d; }
+    #content hr { border:none; border-top:1px solid #1e1e1e; margin:32px 0; }
+    #content blockquote { border-left:3px solid var(--orange); padding:12px 16px; background:#111; margin:20px 0; border-radius:0 8px 8px 0; }
+    #content blockquote p { color:#bbb; margin:0; }
+    #content code { background:#161616; border:1px solid #2a2a2a; padding:2px 6px; border-radius:4px; font-size:12px; color:var(--orange); font-family:monospace; }
+    /* Placeholder styling */
+    #content p:has-text, .placeholder-note { background:#1a1200; border-left:3px solid #FF7A1A55; padding:8px 12px; border-radius:0 6px 6px 0; margin:10px 0; font-size:13px; color:#888; }
+    .loading { color:var(--muted); font-size:15px; padding:40px 0; }
+    footer { text-align:center; padding:40px 24px; border-top:1px solid #1a1a1a; color:#333; font-size:12px; }
+    footer a { color:#444; text-decoration:none; margin:0 10px; }
+    footer a:hover { color:#888; }
+  </style>
+</head>
+<body>
+  <nav>
+    <a class="nav-brand" href="/">
+      <img src="/assets/icon.png" alt="Squirrel Brain" />
+      <span>SQUIRREL <em>BRAIN</em></span>
+    </a>
+    <a class="nav-back" href="/">← Back to site</a>
+  </nav>
+
+  <main>
+    <div id="content"><p class="loading">Loading privacy policy…</p></div>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Squirrel Brain. All rights reserved.</p>
+    <p style="margin-top:8px;">
+      <a href="/legal/privacy-policy.html">Privacy Policy</a>
+      <a href="/legal/terms-of-use.html">Terms of Use</a>
+      <a href="mailto:hello@squirrelbrainapp.com">Contact</a>
+    </p>
+  </footer>
+
+  <script>
+    fetch('/legal/privacy-policy-final.md')
+      .then(function(r) {
+        if (!r.ok) return fetch('/legal/privacy-policy-draft.md');
+        return r;
+      })
+      .then(function(r) { return r.text(); })
+      .then(function(md) {
+        document.getElementById('content').innerHTML = marked.parse(md);
+        // Highlight [PLACEHOLDER] markers
+        document.querySelectorAll('#content p, #content li, #content td').forEach(function(el) {
+          if (el.textContent.includes('[PLACEHOLDER')) {
+            el.style.background = '#1a1200';
+            el.style.borderLeft = '3px solid #FF7A1A55';
+            el.style.padding = '6px 10px';
+            el.style.borderRadius = '0 6px 6px 0';
+            el.style.marginBottom = '8px';
+          }
+        });
+      })
+      .catch(function() {
+        document.getElementById('content').innerHTML = '<p style="color:#888;">Unable to load document. Please try again.</p>';
+      });
+  </script>
+</body>
+</html>
