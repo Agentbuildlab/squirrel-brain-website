@@ -291,6 +291,37 @@
     .footer-links a:hover { color: var(--orange); }
     .footer-copy { font-size: 13px; color: #333; }
 
+    /* ── AGENT CONFIG TABS ───────────────────────────────── */
+    .agent-tabs {
+      display: flex; flex-wrap: wrap; gap: 8px; margin: 24px 0 0;
+    }
+    .agent-tab {
+      background: var(--bg3); color: var(--muted); border: 1px solid var(--border);
+      border-radius: 100px; padding: 7px 18px; font-size: 13px; font-weight: 700;
+      cursor: pointer; transition: all 0.15s; font-family: var(--font);
+    }
+    .agent-tab:hover { color: var(--white); border-color: #444; }
+    .agent-tab.active { background: var(--orange-dim); color: var(--orange); border-color: var(--orange-mid); }
+    .agent-config { display: none; margin-top: 20px; }
+    .agent-config.active { display: block; }
+    .copy-block {
+      position: relative; background: var(--bg3); border: 1px solid var(--border);
+      border-radius: var(--radius); overflow: hidden;
+    }
+    .copy-block pre {
+      font-family: var(--mono); font-size: 13px; line-height: 1.6;
+      color: #cdd6f4; padding: 20px 56px 20px 20px; overflow-x: auto;
+      white-space: pre;
+    }
+    .copy-btn {
+      position: absolute; top: 10px; right: 10px;
+      background: #222; color: var(--muted); border: 1px solid var(--border);
+      border-radius: 8px; padding: 5px 12px; font-size: 12px; font-weight: 700;
+      cursor: pointer; font-family: var(--font); transition: all 0.15s;
+    }
+    .copy-btn:hover { color: var(--white); border-color: #444; }
+    .copy-btn.copied { color: #4ade80; border-color: #4ade8044; }
+
     /* ── RESPONSIVE ──────────────────────────────────────── */
     @media (max-width: 640px) {
       .page-wrap { padding: 96px 16px 60px; }
@@ -639,7 +670,130 @@
       </div>
     </div>
 
+    <hr class="doc-divider" />
+
+    <!-- ── AGENT CONFIG SNIPPETS ────────────────────────── -->
+    <div class="doc-section" id="agent-configs">
+      <div class="doc-section-label">Quick Setup</div>
+      <h2 class="doc-section-title">Copy-paste config for your agent</h2>
+      <p>Replace <code>sb_YOUR_KEY_HERE</code> with your API key from <strong>Settings → API Key</strong> in the app.</p>
+
+      <!-- Agent tabs -->
+      <div class="agent-tabs" id="agentTabs">
+        <button class="agent-tab active" onclick="showAgent('claude')">Claude</button>
+        <button class="agent-tab" onclick="showAgent('cursor')">Cursor / Codex</button>
+        <button class="agent-tab" onclick="showAgent('openclaw')">OpenClaw</button>
+        <button class="agent-tab" onclick="showAgent('hermes')">Hermes</button>
+        <button class="agent-tab" onclick="showAgent('generic')">Generic HTTP</button>
+      </div>
+
+      <!-- Claude Desktop -->
+      <div class="agent-config active" id="config-claude">
+        <p style="color:var(--muted);font-size:14px;margin-bottom:12px;">Add to <code>~/Library/Application Support/Claude/claude_desktop_config.json</code></p>
+        <div class="copy-block" id="copy-claude">
+          <button class="copy-btn" onclick="copyBlock('copy-claude')">Copy</button>
+<pre>{
+  "mcpServers": {
+    "squirrel-brain": {
+      "url": "https://geczbtsjfbvfukdzdemr.supabase.co/functions/v1/mcp-server",
+      "headers": {
+        "X-API-Key": "sb_YOUR_KEY_HERE"
+      }
+    }
+  }
+}</pre>
+        </div>
+      </div>
+
+      <!-- Cursor / Codex -->
+      <div class="agent-config" id="config-cursor">
+        <p style="color:var(--muted);font-size:14px;margin-bottom:12px;">Add to <code>.cursor/mcp.json</code> in your project root, or Cursor's global MCP settings.</p>
+        <div class="copy-block" id="copy-cursor">
+          <button class="copy-btn" onclick="copyBlock('copy-cursor')">Copy</button>
+<pre>{
+  "mcpServers": {
+    "squirrel-brain": {
+      "url": "https://geczbtsjfbvfukdzdemr.supabase.co/functions/v1/mcp-server",
+      "headers": {
+        "X-API-Key": "sb_YOUR_KEY_HERE"
+      }
+    }
+  }
+}</pre>
+        </div>
+      </div>
+
+      <!-- OpenClaw -->
+      <div class="agent-config" id="config-openclaw">
+        <p style="color:var(--muted);font-size:14px;margin-bottom:12px;">Add to your OpenClaw agent's MCP server list.</p>
+        <div class="copy-block" id="copy-openclaw">
+          <button class="copy-btn" onclick="copyBlock('copy-openclaw')">Copy</button>
+<pre>{
+  "mcp_servers": [
+    {
+      "name": "squirrel-brain",
+      "url": "https://geczbtsjfbvfukdzdemr.supabase.co/functions/v1/mcp-server",
+      "headers": {
+        "X-API-Key": "sb_YOUR_KEY_HERE"
+      }
+    }
+  ]
+}</pre>
+        </div>
+      </div>
+
+      <!-- Hermes -->
+      <div class="agent-config" id="config-hermes">
+        <p style="color:var(--muted);font-size:14px;margin-bottom:12px;">Add to <code>~/.hermes/config.yaml</code> under <code>mcp_servers:</code></p>
+        <div class="copy-block" id="copy-hermes">
+          <button class="copy-btn" onclick="copyBlock('copy-hermes')">Copy</button>
+<pre>mcp_servers:
+  - name: squirrel-brain
+    url: https://geczbtsjfbvfukdzdemr.supabase.co/functions/v1/mcp-server
+    headers:
+      X-API-Key: sb_YOUR_KEY_HERE</pre>
+        </div>
+      </div>
+
+      <!-- Generic HTTP -->
+      <div class="agent-config" id="config-generic">
+        <p style="color:var(--muted);font-size:14px;margin-bottom:12px;">Any agent that supports JSON-RPC 2.0 over HTTP. Two required headers:</p>
+        <div class="copy-block" id="copy-generic">
+          <button class="copy-btn" onclick="copyBlock('copy-generic')">Copy</button>
+<pre>Endpoint:  POST https://geczbtsjfbvfukdzdemr.supabase.co/functions/v1/mcp-server
+Headers:
+  Content-Type: application/json
+  X-API-Key:    sb_YOUR_KEY_HERE
+
+Handshake:
+  {"jsonrpc":"2.0","id":1,"method":"initialize","params":{}}
+
+List tools:
+  {"jsonrpc":"2.0","id":2,"method":"tools/list","params":{}}</pre>
+        </div>
+      </div>
+
+    </div><!-- /#agent-configs -->
+
   </div><!-- /.page-wrap -->
+
+  <script>
+    function showAgent(id) {
+      document.querySelectorAll('.agent-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.agent-config').forEach(c => c.classList.remove('active'));
+      document.querySelector(`[onclick="showAgent('${id}')"]`).classList.add('active');
+      document.getElementById('config-' + id).classList.add('active');
+    }
+    function copyBlock(blockId) {
+      const pre = document.getElementById(blockId).querySelector('pre');
+      navigator.clipboard.writeText(pre.innerText).then(() => {
+        const btn = document.getElementById(blockId).querySelector('.copy-btn');
+        btn.textContent = 'Copied!';
+        btn.classList.add('copied');
+        setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2000);
+      });
+    }
+  </script>
 
   <!-- FOOTER -->
   <footer>
