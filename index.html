@@ -130,9 +130,10 @@
       color: var(--orange); text-transform: uppercase; margin-bottom: 16px;
     }
     .hero-sub {
-      font-size: clamp(15px, 1.8vw, 18px);
-      color: #7a6040;
-      max-width: 520px; margin: 0 auto 32px; line-height: 1.65;
+      font-size: clamp(20px, 2.8vw, 32px);
+      color: #2a1a08;
+      max-width: 580px; margin: 0 auto 32px; line-height: 1.55;
+      font-weight: 500;
     }
     .appstore-btn {
       display: inline-flex; align-items: center; gap: 12px;
@@ -203,7 +204,7 @@
     .fbox-arrow {
       position: absolute; bottom: 18px; right: 20px;
       font-size: 18px; color: #FF7A1A;
-      opacity: 0.5; transition: opacity 0.2s, transform 0.2s;
+      opacity: 0.5; transition: opacity 0.2s, transform 0.3s;
     }
     .fbox:hover .fbox-arrow { opacity: 1; transform: translateX(3px); }
 
@@ -211,6 +212,36 @@
     .fbox--green  { --fbox-color: #22C55E; }
     .fbox--blue   { --fbox-color: #60A5FA; }
     .fbox--purple { --fbox-color: #A78BFA; }
+
+    /* Accordion state */
+    .fbox.fbox-open {
+      border-color: var(--orange);
+      box-shadow: 0 0 30px rgba(255,122,26,0.15);
+    }
+    .fbox.fbox-open .fbox-arrow {
+      opacity: 1;
+      transform: rotate(90deg);
+    }
+    /* Accordion panel */
+    .fbox-panels {
+      width: 100%; max-width: 860px; margin: 10px auto 0;
+    }
+    .fbox-panel {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.48s cubic-bezier(0.4, 0, 0.2, 1);
+      background: #fdf5e8;
+      border: 1px solid #d4b896;
+      border-radius: 20px;
+      margin-top: 0;
+    }
+    .fbox-panel.panel-open {
+      max-height: 3000px;
+      margin-bottom: 8px;
+    }
+    .fbox-panel-inner {
+      padding: 28px 28px 24px;
+    }
 
     .hero-scroll-hint {
       position: absolute; bottom: 24px; left: 50%; transform: translateX(-50%);
@@ -525,7 +556,7 @@
 
     .pain-heading { font-size: clamp(26px, 3.5vw, 40px); font-weight: 900; letter-spacing: -0.02em; line-height: 1.15; margin-bottom: 20px; color: #2a1a08; }
     .pain-body { font-size: 16px; color: #7a6040; line-height: 1.75; margin-bottom: 20px; }
-    .pain-number { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; background: var(--orange); color: #fff; font-size: 18px; font-weight: 900; margin-bottom: 20px; }
+    .pain-star { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; font-size: 22px; color: var(--orange); margin-bottom: 20px; }
 
     .brain-tabs { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
     .brain-tab {
@@ -684,35 +715,274 @@
       <!-- Feature boxes — the hero -->
       <div class="feature-boxes">
 
-        <a href="/mcp/" class="fbox fbox--orange">
+        <div class="fbox fbox--orange" data-panel="dev" onclick="togglePanel(this)">
           <span class="fbox-icon"><img src="assets/squirrel_logo.png" alt=""></span>
           <div class="fbox-title">DEVELOPER DOCS</div>
           <div class="fbox-desc">Wire your AI agent in 5 minutes. MCP server, API keys, all 11 tools documented.</div>
-          <span class="fbox-arrow">&#8594;</span>
-        </a>
+          <span class="fbox-arrow">&#8250;</span>
+        </div>
 
-        <a href="#sales" class="fbox fbox--orange">
+        <div class="fbox fbox--orange" data-panel="sales" onclick="togglePanel(this)">
           <span class="fbox-icon"><img src="assets/acorn_mic_transparent.png" alt=""></span>
           <div class="fbox-title">SALES &amp; FIELD</div>
           <div class="fbox-desc">Drop pins, log pickups, snap photos. Your voice becomes structured notes instantly.</div>
-          <span class="fbox-arrow">&#8594;</span>
-        </a>
+          <span class="fbox-arrow">&#8250;</span>
+        </div>
 
-        <a href="#daily-brief" class="fbox fbox--orange">
+        <div class="fbox fbox--orange" data-panel="brief" onclick="togglePanel(this)">
           <span class="fbox-icon"><img src="assets/alarm_wood_icon_transparent.png" alt=""></span>
-          <div class="fbox-title">DAILY BRIEF</div>
+          <div class="fbox-title">DAILY BRIEF &amp; 4 PM EMAIL</div>
           <div class="fbox-desc">A 5 AM email with what's overdue, what's due today, and your wins. No app required.</div>
-          <span class="fbox-arrow">&#8594;</span>
-        </a>
+          <span class="fbox-arrow">&#8250;</span>
+        </div>
 
-        <a href="#memory" class="fbox fbox--orange">
+        <div class="fbox fbox--orange" data-panel="memory" onclick="togglePanel(this)">
           <span class="fbox-icon"><img src="assets/calendar_branch_transparent.png" alt=""></span>
           <div class="fbox-title">MEMORY &amp; CALENDAR</div>
           <div class="fbox-desc">Anything you say becomes a searchable memory or calendar event. Squirrel never forgets.</div>
-          <span class="fbox-arrow">&#8594;</span>
-        </a>
+          <span class="fbox-arrow">&#8250;</span>
+        </div>
 
       </div><!-- /.feature-boxes -->
+
+      <!-- Accordion panels -->
+      <div class="fbox-panels">
+
+        <!-- Developer Docs panel -->
+        <div class="fbox-panel" id="panel-dev">
+          <div class="fbox-panel-inner">
+            <div class="dev-docs-grid">
+              <a href="/mcp/" class="doc-card doc-card--humans">
+                <div class="doc-card-badge doc-card-badge--humans">For Humans</div>
+                <div class="doc-card-title">Get an API key &amp; connect</div>
+                <div class="doc-card-desc">How to generate your key, configure Claude Desktop or Cursor, and test the connection in 5 minutes.</div>
+                <div class="doc-card-features">
+                  <div class="doc-feat">How to get your API key (email us)</div>
+                  <div class="doc-feat">Configure Claude Desktop in one paste</div>
+                  <div class="doc-feat">Test with curl in under a minute</div>
+                  <div class="doc-feat">Works with Cursor, Codex, LangGraph</div>
+                </div>
+                <div class="doc-card-link">Full setup guide &#8594;</div>
+              </a>
+              <a href="/mcp/#for-agents" class="doc-card doc-card--agents">
+                <div class="doc-card-badge doc-card-badge--agents">For Agents</div>
+                <div class="doc-card-title">MCP reference for AI agents</div>
+                <div class="doc-card-desc">Endpoint, auth, all 11 tools, JSON-RPC format, and the session startup sequence — everything an agent needs to self-configure.</div>
+                <div class="doc-card-features">
+                  <div class="doc-feat">Endpoint + headers (copy-paste ready)</div>
+                  <div class="doc-feat">pip_call — voice alarm in ~10 seconds</div>
+                  <div class="doc-feat">create_alarm, notify_human, create_item</div>
+                  <div class="doc-feat">Session startup: profile + context + time</div>
+                </div>
+                <div class="doc-card-link">Agent self-setup guide &#8594;</div>
+              </a>
+            </div>
+            <div style="margin-top:20px; background:#f0f7f0; border:1px solid #22C55E33; border-radius:14px; padding:20px 24px;">
+              <div style="font-size:11px; font-weight:800; color:#16a34a; letter-spacing:0.18em; text-transform:uppercase; margin-bottom:12px;">Quick reference — MCP endpoint</div>
+              <div style="display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px;">
+                <span style="font-family:var(--mono); font-size:11px; background:#e8f5e8; border:1px solid #22C55E33; color:#16a34a; padding:3px 10px; border-radius:6px;">pip_call</span>
+                <span style="font-family:var(--mono); font-size:11px; background:#e8f5e8; border:1px solid #22C55E33; color:#16a34a; padding:3px 10px; border-radius:6px;">notify_human</span>
+                <span style="font-family:var(--mono); font-size:11px; background:#e8f5e8; border:1px solid #22C55E33; color:#16a34a; padding:3px 10px; border-radius:6px;">create_alarm</span>
+                <span style="font-family:var(--mono); font-size:11px; background:#e8f5e8; border:1px solid #22C55E33; color:#16a34a; padding:3px 10px; border-radius:6px;">create_item</span>
+                <span style="font-family:var(--mono); font-size:11px; background:#e8f5e8; border:1px solid #22C55E33; color:#16a34a; padding:3px 10px; border-radius:6px;">get_daily_brief</span>
+                <span style="font-family:var(--mono); font-size:11px; background:#e8f5e8; border:1px solid #22C55E33; color:#16a34a; padding:3px 10px; border-radius:6px;">get_agent_context</span>
+              </div>
+              <div style="font-size:13px; color:#7a6040;">Email <a href="mailto:hello@squirrelbrainapp.com" style="color:#16a34a;">hello@squirrelbrainapp.com</a> to request an API key. In-app generation coming soon.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sales & Field panel -->
+        <div class="fbox-panel" id="panel-sales">
+          <div class="fbox-panel-inner">
+            <div class="scenario-grid">
+              <div class="scenario-card">
+                <div class="scenario-head"><div class="scenario-name">Walking out of a call</div></div>
+                <div class="scenario-quote">"Follow up with Marcus at Meridian — he wants revised pricing by Thursday and a case study from a similar client."</div>
+                <div class="scenario-result"><strong>Result:</strong> Note saved. Reminder set for Wednesday. Calendar event created.</div>
+              </div>
+              <div class="scenario-card">
+                <div class="scenario-head"><div class="scenario-name">Business card — new contact</div></div>
+                <div class="scenario-quote">Snap the card. Name, title, company, phone, and a follow-up reminder — all saved before you walk away.</div>
+                <div class="scenario-result"><strong>Result:</strong> Contact note created. Follow-up alarm set for next morning.</div>
+              </div>
+              <div class="scenario-card">
+                <div class="scenario-head"><div class="scenario-name">Equipment drop-off</div></div>
+                <div class="scenario-quote">Snap a photo at the account. GPS-tagged. Photo attached to the note — proof of drop-off, ready to forward.</div>
+                <div class="scenario-result"><strong>Result:</strong> GPS tagged. Photo attached. Pickup alarm set. Forward to customer in one tap.</div>
+              </div>
+              <div class="scenario-card">
+                <div class="scenario-head"><div class="scenario-name">Proof of shipping</div></div>
+                <div class="scenario-quote">Snap up to 10 photos into one note — receipt, box contents, serial numbers. When a customer says they never got it, you have proof in seconds.</div>
+                <div class="scenario-result"><strong>Result:</strong> PixNote created. Forward sends proof to anyone instantly.</div>
+              </div>
+            </div>
+            <div class="sales-feature-list" style="margin-top:24px;">
+              <div class="sales-feat">
+                <div class="sales-feat-icon"><img src="assets/acorn_mic_transparent.png" style="width:28px;height:28px;object-fit:contain;" alt=""></div>
+                <div class="sales-feat-title">Tap to toggle mic</div>
+                <div class="sales-feat-body">One tap starts recording, one tap stops. No press-and-hold. Works while driving, running, or between meetings.</div>
+              </div>
+              <div class="sales-feat">
+                <div class="sales-feat-icon"><img src="assets/calendar_branch_transparent.png" style="width:28px;height:28px;object-fit:contain;" alt=""></div>
+                <div class="sales-feat-title">Outlook screenshot → alarm</div>
+                <div class="sales-feat-body">Company policy locks your calendar? Screenshot your Outlook schedule. Squirrel Brain reads every event and fires real alarms until you dismiss them.</div>
+              </div>
+              <div class="sales-feat">
+                <div class="sales-feat-icon"><img src="assets/notes_transparent.png" style="width:28px;height:28px;object-fit:contain;" alt=""></div>
+                <div class="sales-feat-title">Whiteboard → action items</div>
+                <div class="sales-feat-body">Photograph any whiteboard, legal pad, or handwritten notes. Every action item and deadline is extracted and saved automatically.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Daily Brief panel -->
+        <div class="fbox-panel" id="panel-brief">
+          <div class="fbox-panel-inner">
+            <div class="brief-grid">
+              <div class="brief-left">
+                <p>Every morning at 5 AM, your daily brief lands in your inbox — already waiting when you wake up. No app to open. Just clarity on what matters today.</p>
+                <p>In the afternoon, your squirrel decides: if everything's done, you get an all-clear. If work's still pending, you get a 4 PM nudge with exactly what's left — nothing more.</p>
+                <div class="brief-bullet-list">
+                  <div class="brief-bullet">
+                    <span class="brief-bullet-icon"><img src="assets/alarm_wood_icon_transparent.png" style="width:22px;height:22px;object-fit:contain;" alt=""></span>
+                    <div class="brief-bullet-text"><strong>5 AM morning brief</strong>Today's must-dos, overdue items, upcoming events, and recent wins. All in one email, already in your inbox.</div>
+                  </div>
+                  <div class="brief-bullet">
+                    <span class="brief-bullet-icon"><img src="assets/alarm_wood_icon_transparent.png" style="width:22px;height:22px;object-fit:contain;" alt=""></span>
+                    <div class="brief-bullet-text"><strong>4 PM nudge</strong>Only sent if items are still pending. Exactly what's left. No fluff.</div>
+                  </div>
+                  <div class="brief-bullet">
+                    <span class="brief-bullet-icon"><img src="assets/squirrel_logo.png" style="width:22px;height:22px;object-fit:contain;" alt=""></span>
+                    <div class="brief-bullet-text"><strong>Pip's items appear in your brief</strong>When your AI agent (Pip or Claude) creates a task or alarm, it shows up in the next morning brief automatically.</div>
+                  </div>
+                  <div class="brief-bullet">
+                    <span class="brief-bullet-icon"><img src="assets/calendar_branch_transparent.png" style="width:22px;height:22px;object-fit:contain;" alt=""></span>
+                    <div class="brief-bullet-text"><strong>Weather &amp; history</strong>Today's weather and a date-in-history fact — because your squirrel likes context.</div>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <div class="email-mockup">
+                  <div class="email-mockup-header">
+                    <span class="em-label">MORNING BRIEF</span>
+                    <span class="em-time">5:00 AM</span>
+                  </div>
+                  <div class="email-mockup-body">
+                    <div class="em-from">From: Pip &middot; Your Squirrel</div>
+                    <div class="em-greeting">Good morning, Hazel.</div>
+                    <div class="em-note">Went through your stash last night. Here's what I found.</div>
+                    <div class="em-section">
+                      <div class="em-section-label">TODAY'S FOCUS</div>
+                      <div class="em-item">• Team standup &nbsp;<span style="color:#8a7058;">9:00 AM</span></div>
+                      <div class="em-item em-overdue">• Send pricing to Meridian &nbsp;<span class="em-badge">overdue</span></div>
+                      <div class="em-item">• Pick up kids &nbsp;<span style="color:#8a7058;">5:30 PM</span></div>
+                    </div>
+                    <div class="em-section">
+                      <div class="em-section-label">WINS YESTERDAY</div>
+                      <div class="em-item">• Closed the Holloway deal</div>
+                      <div class="em-item">• Submitted Q3 report on time</div>
+                    </div>
+                    <div class="em-footer">— Pip <img src="assets/squirrel_logo.png" style="width:14px;height:14px;vertical-align:middle;margin-left:2px;" alt=""></div>
+                  </div>
+                </div>
+                <div class="brief-extras">
+                  <div class="brief-extra-chip brief-extra-chip--green">
+                    <div class="bec-label bec-label--green">ALL CLEAR ✓</div>
+                    <div class="bec-body">Sent when everything's done. Pip does the Three Spins. Go enjoy your evening.</div>
+                  </div>
+                  <div class="brief-extra-chip brief-extra-chip--orange">
+                    <div class="bec-label bec-label--orange">4 PM CHECK-IN</div>
+                    <div class="bec-body">Only sent if items are pending. Exactly what's left — nothing more.</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Memory & Calendar panel -->
+        <div class="fbox-panel" id="panel-memory">
+          <div class="fbox-panel-inner">
+            <div class="memory-features">
+              <div class="memory-feat-list">
+                <div class="memory-feat">
+                  <div class="memory-feat-icon"><img src="assets/calendar_branch_transparent.png" alt="" /></div>
+                  <div>
+                    <div class="memory-feat-title">Photo any calendar → real events</div>
+                    <div class="memory-feat-body">Snap an Outlook screenshot, paper schedule, or whiteboard. Every date, time, and location is extracted and dropped into your phone calendar automatically.</div>
+                  </div>
+                </div>
+                <div class="memory-feat">
+                  <div class="memory-feat-icon"><img src="assets/acorn_mic_transparent.png" alt="" /></div>
+                  <div>
+                    <div class="memory-feat-title">Voice notes become searchable memory</div>
+                    <div class="memory-feat-body">Speak a thought, get a structured note. Search "that Napa wine" or "Marcus pricing" and find it in under two seconds.</div>
+                  </div>
+                </div>
+                <div class="memory-feat">
+                  <div class="memory-feat-icon"><img src="assets/notes_transparent.png" alt="" /></div>
+                  <div>
+                    <div class="memory-feat-title">Pip remembers for next time</div>
+                    <div class="memory-feat-body">Never re-explain your preferences to an AI agent. Squirrel Brain stores persistent memory facts that every future session can read at startup.</div>
+                  </div>
+                </div>
+                <div class="memory-feat">
+                  <div class="memory-feat-icon"><img src="assets/tree_link_transparent.png" alt="" /></div>
+                  <div>
+                    <div class="memory-feat-title">Link Stash — save &amp; summarize URLs</div>
+                    <div class="memory-feat-body">Share any URL from Safari, YouTube, or any app. Squirrel Brain saves and summarizes it — no more losing links in a chat thread.</div>
+                  </div>
+                </div>
+              </div>
+              <div class="stash-mockup">
+                <div class="stash-mock-hdr">
+                  <img src="assets/notes_transparent.png" alt="" />
+                  <div>
+                    <div class="stash-mock-hdr-name">MEMORY <em>STASH</em></div>
+                    <div class="stash-mock-count">5 saved</div>
+                  </div>
+                </div>
+                <div class="stash-filter-row">
+                  <div class="stash-filter stash-filter--orange">Written<br>Note</div>
+                  <div class="stash-filter stash-filter--purple">Pix<br>Note</div>
+                  <div class="stash-filter stash-filter--green">Voice<br>Note</div>
+                </div>
+                <div class="stash-day-label">TODAY</div>
+                <div class="stash-card">
+                  <div class="stash-card-avatar stash-card-avatar--orange"><img src="assets/notes_transparent.png" alt="" /></div>
+                  <div style="flex:1;min-width:0;">
+                    <div class="stash-card-type stash-card-type--orange">NOTE</div>
+                    <div class="stash-card-title">Pick up dry cleaning</div>
+                    <div class="stash-card-body">Remember before Thursday</div>
+                    <div class="stash-card-meta">Oakwood Ave · 2h ago</div>
+                  </div>
+                </div>
+                <div class="stash-card">
+                  <div class="stash-card-avatar stash-card-avatar--purple" style="width:34px;height:34px;border-radius:8px;overflow:hidden;flex-shrink:0;"><img src="assets/pixnote_dress.jpg" style="width:100%;height:100%;object-fit:cover;" alt="" /></div>
+                  <div style="flex:1;min-width:0;">
+                    <div class="stash-card-type stash-card-type--purple">PIXNOTE</div>
+                    <div class="stash-card-title">Floral wrap dress — Magnolia</div>
+                    <div class="stash-card-body">$148 · sale starts Friday</div>
+                    <div class="stash-card-meta">Magnolia Boutique · 3h ago</div>
+                  </div>
+                </div>
+                <div class="stash-card" style="margin-bottom:12px;">
+                  <div class="stash-card-avatar stash-card-avatar--green"><img src="assets/acorn_mic_transparent.png" alt="" /></div>
+                  <div style="flex:1;min-width:0;">
+                    <div class="stash-card-type stash-card-type--green">VOICE NOTE</div>
+                    <div class="stash-card-title">Follow up with Marcus</div>
+                    <div class="stash-card-body">Send revised pricing by Thursday</div>
+                    <div class="stash-card-meta">Cedar Creek Blvd · 1h ago</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /.fbox-panels -->
 
     </div><!-- /.hero-content -->
 
@@ -730,7 +1000,7 @@
   <section id="pain-section">
     <div class="pain-inner">
       <div>
-        <div class="pain-number">1</div>
+        <div class="pain-star">★</div>
         <h2 class="pain-heading">Your brain has too many tabs open.</h2>
         <p class="pain-body">Soccer schedules. Doctor appointments. Work follow-ups. The wine you loved in Napa. The gift idea for mom. 52 saved YouTube videos you'll never find. The school permission slip. Things your spouse texted you three days ago.</p>
         <p style="font-size:15px; font-weight:700; color:var(--orange);">Feelin' squirrely? Pick a tab — let's get crackin'.</p>
@@ -758,7 +1028,7 @@
   <section id="sales">
     <div class="section-inner">
       <div style="text-align:center;">
-        <div class="sales-section-badge">&#128188; Sales &amp; Field</div>
+        <div class="sales-section-badge">Sales &amp; Field</div>
         <h2 class="section-title">For reps and people<br>always on the move.</h2>
         <p class="section-sub">Driving to your next call? Walking out of a meeting? Tap once — speak it — done. Before you even reach your car.</p>
       </div>
@@ -766,7 +1036,6 @@
       <div class="scenario-grid">
         <div class="scenario-card">
           <div class="scenario-head">
-            <span class="scenario-emoji">&#128188;</span>
             <div class="scenario-name">Walking out of a call</div>
           </div>
           <div class="scenario-quote">"Follow up with Marcus at Meridian — he wants revised pricing by Thursday and a case study from a similar client."</div>
@@ -775,7 +1044,6 @@
 
         <div class="scenario-card">
           <div class="scenario-head">
-            <span class="scenario-emoji">&#128196;</span>
             <div class="scenario-name">Business card — new contact</div>
           </div>
           <div class="scenario-quote">Snap the card. Name, title, company, phone, and a follow-up reminder — all saved before you walk away.</div>
@@ -784,7 +1052,6 @@
 
         <div class="scenario-card">
           <div class="scenario-head">
-            <span class="scenario-emoji">&#128247;</span>
             <div class="scenario-name">Equipment drop-off</div>
           </div>
           <div class="scenario-quote">Snap a photo at the account. GPS-tagged. Photo attached to the note — proof of drop-off, ready to forward.</div>
@@ -793,7 +1060,6 @@
 
         <div class="scenario-card">
           <div class="scenario-head">
-            <span class="scenario-emoji">&#128230;</span>
             <div class="scenario-name">Proof of shipping</div>
           </div>
           <div class="scenario-quote">Snap up to 10 photos into one note — receipt, box contents, serial numbers. When a customer says they never got it, you have proof in seconds.</div>
@@ -803,17 +1069,17 @@
 
       <div class="sales-feature-list">
         <div class="sales-feat">
-          <div class="sales-feat-icon">&#127897;&#65039;</div>
+          <div class="sales-feat-icon"><img src="assets/acorn_mic_transparent.png" style="width:28px;height:28px;object-fit:contain;" alt=""></div>
           <div class="sales-feat-title">Tap to toggle mic</div>
           <div class="sales-feat-body">One tap starts recording, one tap stops. No press-and-hold. Works while driving, running, or between meetings.</div>
         </div>
         <div class="sales-feat">
-          <div class="sales-feat-icon">&#128197;</div>
+          <div class="sales-feat-icon"><img src="assets/calendar_branch_transparent.png" style="width:28px;height:28px;object-fit:contain;" alt=""></div>
           <div class="sales-feat-title">Outlook screenshot → alarm</div>
           <div class="sales-feat-body">Company policy locks your calendar? Screenshot your Outlook schedule. Squirrel Brain reads every event and fires real alarms until you dismiss them.</div>
         </div>
         <div class="sales-feat">
-          <div class="sales-feat-icon">&#128203;</div>
+          <div class="sales-feat-icon"><img src="assets/notes_transparent.png" style="width:28px;height:28px;object-fit:contain;" alt=""></div>
           <div class="sales-feat-title">Whiteboard → action items</div>
           <div class="sales-feat-body">Photograph any whiteboard, legal pad, or handwritten notes. Every action item and deadline is extracted and saved automatically.</div>
         </div>
@@ -833,7 +1099,7 @@
   <section id="daily-brief">
     <div class="section-inner">
       <div style="text-align:center;">
-        <div class="sales-section-badge" style="--badge-color:#60A5FA; background:#60A5FA18; border-color:#60A5FA44; color:#60A5FA;">&#9728;&#65039; Daily Brief</div>
+        <div class="sales-section-badge" style="--badge-color:#60A5FA; background:#60A5FA18; border-color:#60A5FA44; color:#60A5FA;">Daily Brief &amp; 4 PM Email</div>
         <h2 class="section-title">Two emails a day.<br>Zero noise.</h2>
         <p class="section-sub">Your squirrel already knows what you need to do. It just needs you to wake up.</p>
       </div>
@@ -845,28 +1111,28 @@
 
           <div class="brief-bullet-list">
             <div class="brief-bullet">
-              <span class="brief-bullet-icon">&#9728;&#65039;</span>
+              <span class="brief-bullet-icon"><img src="assets/alarm_wood_icon_transparent.png" style="width:22px;height:22px;object-fit:contain;" alt=""></span>
               <div class="brief-bullet-text">
                 <strong>5 AM morning brief</strong>
                 Today's must-dos, overdue items, upcoming events, and recent wins. All in one email, already in your inbox.
               </div>
             </div>
             <div class="brief-bullet">
-              <span class="brief-bullet-icon">&#11088;</span>
+              <span class="brief-bullet-icon"><img src="assets/alarm_wood_icon_transparent.png" style="width:22px;height:22px;object-fit:contain;" alt=""></span>
               <div class="brief-bullet-text">
                 <strong>4 PM nudge</strong>
                 Only sent if items are still pending. Exactly what's left. No fluff.
               </div>
             </div>
             <div class="brief-bullet">
-              <span class="brief-bullet-icon">&#129302;</span>
+              <span class="brief-bullet-icon"><img src="assets/squirrel_logo.png" style="width:22px;height:22px;object-fit:contain;" alt=""></span>
               <div class="brief-bullet-text">
                 <strong>Pip's items appear in your brief</strong>
                 When your AI agent (Pip or Claude) creates a task or alarm, it shows up in the next morning brief automatically.
               </div>
             </div>
             <div class="brief-bullet">
-              <span class="brief-bullet-icon">&#127774;</span>
+              <span class="brief-bullet-icon"><img src="assets/calendar_branch_transparent.png" style="width:22px;height:22px;object-fit:contain;" alt=""></span>
               <div class="brief-bullet-text">
                 <strong>Weather &amp; history</strong>
                 Today's weather and a date-in-history fact — because your squirrel likes context.
@@ -887,17 +1153,17 @@
               <div class="em-greeting">Good morning, Hazel.</div>
               <div class="em-note">Went through your stash last night. Here's what I found.</div>
               <div class="em-section">
-                <div class="em-section-label">&#127919; TODAY'S FOCUS</div>
+                <div class="em-section-label">TODAY'S FOCUS</div>
                 <div class="em-item">• Team standup &nbsp;<span style="color:#8a7058;">9:00 AM</span></div>
                 <div class="em-item em-overdue">• Send pricing to Meridian &nbsp;<span class="em-badge">overdue</span></div>
                 <div class="em-item">• Pick up kids &nbsp;<span style="color:#8a7058;">5:30 PM</span></div>
               </div>
               <div class="em-section">
-                <div class="em-section-label">&#127942; WINS YESTERDAY</div>
+                <div class="em-section-label">WINS YESTERDAY</div>
                 <div class="em-item">• Closed the Holloway deal</div>
                 <div class="em-item">• Submitted Q3 report on time</div>
               </div>
-              <div class="em-footer">— Pip &#128063;</div>
+              <div class="em-footer">— Pip <img src="assets/squirrel_logo.png" style="width:16px;height:16px;vertical-align:middle;margin-left:4px;" alt=""></div>
             </div>
           </div>
 
@@ -908,7 +1174,7 @@
               <div class="bec-body">Sent when everything's done. Pip does the Three Spins. Go enjoy your evening.</div>
             </div>
             <div class="brief-extra-chip brief-extra-chip--orange">
-              <div class="bec-label bec-label--orange">4 PM CHECK-IN &#11088;</div>
+              <div class="bec-label bec-label--orange">4 PM CHECK-IN</div>
               <div class="bec-body">Only sent if items are pending. Exactly what's left — nothing more.</div>
             </div>
           </div>
@@ -923,7 +1189,7 @@
   <section id="memory">
     <div class="section-inner">
       <div style="text-align:center;">
-        <div class="sales-section-badge" style="background:#A78BFA18; border-color:#A78BFA44; color:#A78BFA;">&#128247; Memory &amp; Calendar</div>
+        <div class="sales-section-badge" style="background:#A78BFA18; border-color:#A78BFA44; color:#A78BFA;">Memory &amp; Calendar</div>
         <h2 class="section-title">Snap anything.<br>Find it instantly.</h2>
         <p class="section-sub">Voice notes, photos, screenshots — stashed in one searchable place. Never re-explain context to your AI.</p>
       </div>
@@ -990,7 +1256,7 @@
             </div>
             <div style="flex:1;min-width:0;">
               <div class="stash-card-type stash-card-type--orange">NOTE</div>
-              <div class="stash-card-title">&#128663; Pick up dry cleaning</div>
+              <div class="stash-card-title">Pick up dry cleaning</div>
               <div class="stash-card-body">Remember before Thursday</div>
               <div class="stash-card-meta">Oakwood Ave · 2h ago</div>
             </div>
@@ -1002,7 +1268,7 @@
             </div>
             <div style="flex:1;min-width:0;">
               <div class="stash-card-type stash-card-type--purple">PIXNOTE</div>
-              <div class="stash-card-title">&#128249; Floral wrap dress — Magnolia</div>
+              <div class="stash-card-title">Floral wrap dress — Magnolia</div>
               <div class="stash-card-body">$148 · sale starts Friday</div>
               <div class="stash-card-meta">Magnolia Boutique · 3h ago</div>
             </div>
@@ -1014,7 +1280,7 @@
             </div>
             <div style="flex:1;min-width:0;">
               <div class="stash-card-type stash-card-type--green">VOICE NOTE</div>
-              <div class="stash-card-title">&#128188; Follow up with Marcus</div>
+              <div class="stash-card-title">Follow up with Marcus</div>
               <div class="stash-card-body">Send revised pricing by Thursday</div>
               <div class="stash-card-meta">Cedar Creek Blvd · 1h ago</div>
             </div>
@@ -1030,7 +1296,7 @@
   <section id="dev-docs">
     <div class="section-inner">
       <div style="text-align:center;">
-        <div class="sales-section-badge" style="background:#22C55E18; border-color:#22C55E44; color:#4ade80;">&#129302; Developer Docs</div>
+        <div class="sales-section-badge" style="background:#22C55E18; border-color:#22C55E44; color:#4ade80;">Developer Docs</div>
         <h2 class="section-title">Connect any AI agent<br>to your brain.</h2>
         <p class="section-sub">Squirrel Brain has a built-in MCP server. Claude, ChatGPT, or any custom agent can set alarms, read your tasks, and send voice messages to your phone.</p>
       </div>
@@ -1039,7 +1305,7 @@
 
         <!-- For Humans card -->
         <a href="/mcp/" class="doc-card doc-card--humans">
-          <div class="doc-card-badge doc-card-badge--humans">&#128100; For Humans</div>
+          <div class="doc-card-badge doc-card-badge--humans">For Humans</div>
           <div class="doc-card-title">Get an API key &amp; connect</div>
           <div class="doc-card-desc">How to generate your key, configure Claude Desktop or Cursor, and test the connection in 5 minutes.</div>
           <div class="doc-card-features">
@@ -1053,7 +1319,7 @@
 
         <!-- For Agents card -->
         <a href="/mcp/#for-agents" class="doc-card doc-card--agents">
-          <div class="doc-card-badge doc-card-badge--agents">&#129302; For Agents</div>
+          <div class="doc-card-badge doc-card-badge--agents">For Agents</div>
           <div class="doc-card-title">MCP reference for AI agents</div>
           <div class="doc-card-desc">Endpoint, auth, all 11 tools, JSON-RPC format, and the session startup sequence — everything an agent needs to self-configure.</div>
           <div class="doc-card-features">
@@ -1134,6 +1400,24 @@
     </div>
     <div class="footer-copy">&copy; 2026 Acorn Labs LLC &middot; squirrelbrainapp.com</div>
   </footer>
+
+  <script>
+    function togglePanel(box) {
+      var panelId = 'panel-' + box.dataset.panel;
+      var panel = document.getElementById(panelId);
+      var isOpen = box.classList.contains('fbox-open');
+      // Close all
+      document.querySelectorAll('.fbox').forEach(function(b) { b.classList.remove('fbox-open'); });
+      document.querySelectorAll('.fbox-panel').forEach(function(p) { p.classList.remove('panel-open'); });
+      // Toggle open
+      if (!isOpen) {
+        box.classList.add('fbox-open');
+        panel.classList.add('panel-open');
+        // Scroll panel into view after brief delay for animation
+        setTimeout(function() { panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }, 100);
+      }
+    }
+  </script>
 
 </body>
 </html>
