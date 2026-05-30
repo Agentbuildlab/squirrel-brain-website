@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Squirrel Brain — Speak it. Snap it. Stash it.</title>
+  <meta name="description" content="Voice memo, photo, or screenshot — Squirrel Brain reads it, extracts every task and date, and turns it into alarms, notes, and calendar events. Automatically." />
+  <meta property="og:title" content="Squirrel Brain — Speak it. Snap it. Stash it." />
+  <meta property="og:description" content="Voice memo, photo, or screenshot — Squirrel Brain reads it, extracts every task and date, and turns it into alarms, notes, and calendar events. Automatically." />
+  <meta property="og:image" content="assets/squirrel_treehouse_banner.png" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:          #100a02;
+      --bg-card:     #1e1408;
+      --bg-section:  #160e04;
+      --text:        #fff5e8;
+      --orange:      #FF7A1A;
+      --gold:        #e8a84a;
+      --muted:       rgba(255, 220, 160, 0.5);
+      --border:      rgba(255, 122, 26, 0.2);
+      --radius:      20px;
+      --font:        system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* ────────────────── NAV ────────────────── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 200;
+      background: rgba(16, 10, 2, 0.75);
+      backdrop-filter: blur(20px) saturate(1.4);
+      -webkit-backdrop-filter: blur(20px) saturate(1.4);
+      border-bottom: 1px solid var(--border);
+      padding: 0 40px;
+      height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .nav-logo img {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      object-fit: cover;
+    }
+
+    .nav-wordmark {
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      color: var(--text);
+      text-transform: uppercase;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+
+    .nav-link {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+      transition: color 0.2s;
+    }
+    .nav-link:hover { color: var(--text); }
+
+    .btn-nav {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--orange);
+      color: #fff;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      padding: 10px 22px;
+      border-radius: 100px;
+      transition: opacity 0.2s, transform 0.15s;
+    }
+    .btn-nav:hover { opacity: 0.88; transform: translateY(-1px); }
+
+    /* ────────────────── HERO ────────────────── */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 140px 24px 120px;
+      overflow: hidden;
+    }
+
+    /* Treehouse background image */
+    .hero-bg-image {
+      position: absolute;
+      inset: 0;
+      background-image: url('assets/squirrel_treehouse.png');
+      background-size: cover;
+      background-position: center 30%;
+      opacity: 0.18;
+      z-index: 0;
+    }
+
+    /* Warm radial glow */
+    .hero-glow {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -55%);
+      width: 900px;
+      height: 900px;
+      background: radial-gradient(circle, rgba(255, 122, 26, 0.28) 0%, rgba(232, 168, 74, 0.10) 40%, transparent 70%);
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    /* Bottom fade */
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 220px;
+      background: linear-gradient(to bottom, transparent, var(--bg));
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 10;
+      max-width: 900px;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      background: rgba(232, 168, 74, 0.12);
+      border: 1px solid rgba(232, 168, 74, 0.25);
+      padding: 6px 16px;
+      border-radius: 100px;
+      margin-bottom: 36px;
+    }
+
+    .hero-eyebrow-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--gold);
+    }
+
+    .hero-h1 {
+      font-size: clamp(56px, 9vw, 100px);
+      font-weight: 900;
+      line-height: 0.95;
+      letter-spacing: -0.03em;
+      text-transform: uppercase;
+      color: var(--text);
+      margin-bottom: 0;
+    }
+
+    .hero-h1 .line-orange {
+      color: var(--orange);
+      display: block;
+    }
+
+    .hero-tagline {
+      font-size: clamp(16px, 2.2vw, 22px);
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-top: 32px;
+      margin-bottom: 20px;
+    }
+
+    .hero-copy {
+      font-size: clamp(15px, 1.8vw, 18px);
+      color: var(--muted);
+      max-width: 520px;
+      margin: 0 auto 48px;
+      line-height: 1.65;
+    }
+
+    .btn-hero {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--orange);
+      color: #fff;
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      padding: 18px 40px;
+      border-radius: 100px;
+      box-shadow: 0 8px 48px rgba(255, 122, 26, 0.40), 0 2px 12px rgba(255, 122, 26, 0.20);
+      transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
+    }
+    .btn-hero:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 16px 64px rgba(255, 122, 26, 0.55), 0 4px 16px rgba(255, 122, 26, 0.25);
+    }
+
+    .btn-hero-icon {
+      width: 28px;
+      height: 28px;
+      object-fit: contain;
+      filter: brightness(0) invert(1);
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      animation: bounce 2s infinite;
+    }
+
+    .hero-scroll-arrow {
+      width: 20px;
+      height: 20px;
+      border-right: 2px solid var(--muted);
+      border-bottom: 2px solid var(--muted);
+      transform: rotate(45deg);
+      margin-top: 4px;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50%       { transform: translateX(-50%) translateY(8px); }
+    }
+
+    /* ────────────────── HOW IT WORKS ────────────────── */
+    .how-strip {
+      padding: 80px 40px;
+      background: var(--bg-section);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-label {
+      text-align: center;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 12px;
+    }
+
+    .section-heading {
+      text-align: center;
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 64px;
+      line-height: 1.15;
+    }
+
+    .how-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .how-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-top: 3px solid var(--orange);
+      border-radius: var(--radius);
+      padding: 40px 32px 36px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .how-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 48px rgba(255, 122, 26, 0.12);
+    }
+
+    .how-card-icon {
+      width: 56px;
+      height: 56px;
+      object-fit: contain;
+    }
+
+    .how-card-title {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--orange);
+      letter-spacing: -0.01em;
+    }
+
+    .how-card-desc {
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    /* ────────────────── USE CASE: FIELD / SALES ────────────────── */
+    .use-case-section {
+      padding: 120px 40px;
+      background: var(--bg);
+      overflow: hidden;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .two-col.reverse {
+      direction: rtl;
+    }
+    .two-col.reverse > * {
+      direction: ltr;
+    }
+
+    .col-text {}
+
+    .col-text .section-label {
+      text-align: left;
+      margin-bottom: 16px;
+    }
+
+    .col-heading {
+      font-size: clamp(30px, 3.8vw, 52px);
+      font-weight: 900;
+      color: var(--text);
+      line-height: 1.1;
+      letter-spacing: -0.025em;
+      margin-bottom: 32px;
+    }
+
+    .col-heading em {
+      font-style: normal;
+      color: var(--orange);
+    }
+
+    .use-case-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .use-case-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.55;
+    }
+
+    .use-case-icon {
+      width: 32px;
+      height: 32px;
+      object-fit: contain;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .use-case-li-text strong {
+      display: block;
+      color: var(--text);
+      font-weight: 700;
+      font-size: 15px;
+      margin-bottom: 3px;
+    }
+
+    .use-case-li-text span {
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .col-image {
+      position: relative;
+    }
+
+    .col-image img {
+      width: 100%;
+      border-radius: 24px;
+      display: block;
+      object-fit: cover;
+    }
+
+    .col-image::before {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      border-radius: 26px;
+      background: linear-gradient(135deg, rgba(255, 122, 26, 0.35), transparent 60%);
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .col-image img {
+      position: relative;
+      z-index: 1;
+    }
+
+    .col-image-glow {
+      position: absolute;
+      bottom: -40px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 70%;
+      height: 120px;
+      background: radial-gradient(ellipse at center, rgba(255, 122, 26, 0.25) 0%, transparent 70%);
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* ────────────────── DAILY BRIEF ────────────────── */
+    .daily-brief-section {
+      padding: 120px 40px;
+      background: var(--bg-section);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      overflow: hidden;
+    }
+
+    .brief-col-text {}
+
+    .brief-stat {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+
+    .brief-stat-num {
+      font-size: 56px;
+      font-weight: 900;
+      color: var(--orange);
+      line-height: 1;
+      letter-spacing: -0.04em;
+    }
+
+    .brief-stat-label {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      line-height: 1.3;
+    }
+
+    .brief-copy {
+      font-size: 16px;
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 440px;
+    }
+
+    .brief-copy p + p {
+      margin-top: 16px;
+    }
+
+    /* ────────────────── CTA BAND ────────────────── */
+    .cta-section {
+      padding: 120px 40px;
+      background: linear-gradient(135deg, #200d00 0%, #2a1200 50%, #1a0a00 100%);
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    .cta-glow {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 800px;
+      height: 400px;
+      background: radial-gradient(ellipse at center, rgba(255, 122, 26, 0.22) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    .cta-section .section-label {
+      margin-bottom: 20px;
+    }
+
+    .cta-heading {
+      font-size: clamp(36px, 5vw, 68px);
+      font-weight: 900;
+      color: var(--text);
+      line-height: 1.08;
+      letter-spacing: -0.025em;
+      max-width: 700px;
+      margin: 0 auto 48px;
+    }
+
+    .cta-heading em {
+      font-style: normal;
+      color: var(--orange);
+    }
+
+    .cta-content {
+      position: relative;
+      z-index: 10;
+    }
+
+    .btn-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: #100a02;
+      color: var(--text);
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      padding: 20px 48px;
+      border-radius: 100px;
+      border: 2px solid rgba(255, 245, 232, 0.2);
+      box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5);
+      transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+    }
+    .btn-cta:hover {
+      transform: translateY(-3px);
+      background: #1e1408;
+      box-shadow: 0 16px 56px rgba(0, 0, 0, 0.6);
+    }
+
+    .btn-cta-icon {
+      width: 28px;
+      height: 28px;
+      object-fit: contain;
+    }
+
+    .cta-sub {
+      margin-top: 24px;
+      font-size: 13px;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+    }
+
+    /* ────────────────── FOOTER ────────────────── */
+    footer {
+      background: #0a0600;
+      border-top: 1px solid var(--border);
+      padding: 48px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .footer-logo img {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      object-fit: cover;
+    }
+
+    .footer-wordmark {
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255, 245, 232, 0.5);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 28px;
+    }
+
+    .footer-links a {
+      font-size: 13px;
+      color: rgba(255, 245, 232, 0.35);
+      letter-spacing: 0.04em;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--muted); }
+
+    .footer-copy {
+      font-size: 12px;
+      color: rgba(255, 245, 232, 0.25);
+      letter-spacing: 0.04em;
+    }
+
+    /* ────────────────── RESPONSIVE ────────────────── */
+    @media (max-width: 900px) {
+      nav { padding: 0 20px; }
+      .nav-link { display: none; }
+
+      .hero { padding: 120px 20px 100px; }
+
+      .how-strip { padding: 64px 20px; }
+      .how-cards {
+        grid-template-columns: 1fr;
+        max-width: 480px;
+      }
+
+      .use-case-section,
+      .daily-brief-section {
+        padding: 80px 20px;
+      }
+
+      .two-col {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+
+      .two-col.reverse { direction: ltr; }
+
+      .col-text .section-label { text-align: left; }
+
+      .col-image { order: -1; }
+
+      .cta-section { padding: 80px 24px; }
+
+      footer {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 40px 20px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .btn-hero { font-size: 16px; padding: 16px 32px; }
+      .col-heading { font-size: 32px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ════════════════════════════════════════
+       NAV
+  ════════════════════════════════════════ -->
+  <nav>
+    <a class="nav-logo" href="/">
+      <img src="assets/icon.png" alt="Squirrel Brain" />
+      <span class="nav-wordmark">Squirrel Brain</span>
+    </a>
+    <div class="nav-right">
+      <a class="nav-link" href="/mcp">Docs</a>
+      <a class="btn-nav" href="https://apps.apple.com/us/app/squirrel-brain/id6743542994">Get the App</a>
+    </div>
+  </nav>
+
+  <!-- ════════════════════════════════════════
+       HERO
+  ════════════════════════════════════════ -->
+  <section class="hero">
+    <div class="hero-bg-image"></div>
+    <div class="hero-glow"></div>
+
+    <div class="hero-content">
+      <div class="hero-eyebrow">
+        <div class="hero-eyebrow-dot"></div>
+        AI-Powered Personal Assistant
+      </div>
+
+      <h1 class="hero-h1">
+        YOUR BRAIN
+        <span class="line-orange">BUT ORGANIZED.</span>
+      </h1>
+
+      <p class="hero-tagline">Speak it.&nbsp;&nbsp;Snap it.&nbsp;&nbsp;Stash it.</p>
+
+      <p class="hero-copy">
+        Stop losing tasks in voice memos, photos, and sticky notes. One tap captures anything — Squirrel Brain turns it into alarms, notes, and calendar events. Automatically.
+      </p>
+
+      <a class="btn-hero" href="https://apps.apple.com/us/app/squirrel-brain/id6743542994">
+        <img class="btn-hero-icon" src="assets/acorn_mic_transparent.png" alt="" />
+        Download on the App Store
+      </a>
+    </div>
+
+    <div class="hero-scroll">
+      Scroll
+      <div class="hero-scroll-arrow"></div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       HOW IT WORKS
+  ════════════════════════════════════════ -->
+  <section class="how-strip">
+    <p class="section-label">How it works</p>
+    <h2 class="section-heading">Three ways to capture. One brain that handles the rest.</h2>
+
+    <div class="how-cards">
+      <div class="how-card">
+        <img class="how-card-icon" src="assets/acorn_mic_transparent.png" alt="Microphone" />
+        <div class="how-card-title">Speak It</div>
+        <p class="how-card-desc">
+          Tap once and talk. Squirrel Brain transcribes your voice, extracts tasks and deadlines, and sets alarms — all hands-free.
+        </p>
+      </div>
+
+      <div class="how-card">
+        <img class="how-card-icon" src="assets/alarm_wood_icon_transparent.png" alt="Alarm" />
+        <div class="how-card-title">Snap It</div>
+        <p class="how-card-desc">
+          Point your camera at a whiteboard, sticky note, receipt, or business card. AI reads it and turns every item into an action.
+        </p>
+      </div>
+
+      <div class="how-card">
+        <img class="how-card-icon" src="assets/calendar_branch_transparent.png" alt="Calendar" />
+        <div class="how-card-title">Stash It</div>
+        <p class="how-card-desc">
+          Save links, screenshots, and notes into your Memory Stash. Get a 5 AM daily brief so nothing falls through the cracks.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       USE CASE: FIELD / SALES
+  ════════════════════════════════════════ -->
+  <section class="use-case-section">
+    <div class="two-col">
+      <div class="col-text">
+        <p class="section-label">For the field</p>
+        <h2 class="col-heading">Built for people who work <em>outside a desk.</em></h2>
+
+        <ul class="use-case-list">
+          <li>
+            <img class="use-case-icon" src="assets/acorn_mic_transparent.png" alt="" />
+            <div class="use-case-li-text">
+              <strong>Voice to task — instantly</strong>
+              <span>Walk out of a meeting and dictate your follow-ups. Done before you reach your car.</span>
+            </div>
+          </li>
+          <li>
+            <img class="use-case-icon" src="assets/acorn_camera_transparent.png" alt="" />
+            <div class="use-case-li-text">
+              <strong>Photo to action</strong>
+              <span>Snap a whiteboard, business card, or signage. Every item extracted automatically.</span>
+            </div>
+          </li>
+          <li>
+            <img class="use-case-icon" src="assets/tree_link_transparent.png" alt="" />
+            <div class="use-case-li-text">
+              <strong>GPS-stamped notes</strong>
+              <span>Pin a note to a location so you remember what you spotted at every job site or account.</span>
+            </div>
+          </li>
+          <li>
+            <img class="use-case-icon" src="assets/calendar_branch_transparent.png" alt="" />
+            <div class="use-case-li-text">
+              <strong>Daily brief at 5 AM</strong>
+              <span>Wake up to an email summary of everything you need to do — sorted by urgency.</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="col-image">
+        <img src="assets/lifestyle_sales_walkout.png" alt="Sales rep walking out of building" />
+        <div class="col-image-glow"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       DAILY BRIEF
+  ════════════════════════════════════════ -->
+  <section class="daily-brief-section">
+    <div class="two-col reverse">
+      <div class="col-image">
+        <img src="assets/daily_brief_mockup.png" alt="Daily Brief email mockup" />
+        <div class="col-image-glow"></div>
+      </div>
+
+      <div class="col-text brief-col-text">
+        <p class="section-label">Daily Brief</p>
+
+        <div class="brief-stat">
+          <span class="brief-stat-num">5</span>
+          <span class="brief-stat-label">AM.<br/>Everything you<br/>need to know.</span>
+        </div>
+
+        <h2 class="col-heading" style="font-size: clamp(26px, 3vw, 42px); margin-bottom: 24px;">
+          Wake up already knowing<br/><em>what matters today.</em>
+        </h2>
+
+        <div class="brief-copy">
+          <p>Every morning at 5 AM, Squirrel Brain sends you a beautifully formatted email with your overdue items, today's events, your most important notes, and saved links waiting for your attention.</p>
+          <p>No more scanning five apps before breakfast. One brief. Everything in one place.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       CTA
+  ════════════════════════════════════════ -->
+  <section class="cta-section">
+    <div class="cta-glow"></div>
+    <div class="cta-content">
+      <p class="section-label">Ready to clear your head?</p>
+      <h2 class="cta-heading">
+        Stop forgetting.<br/>Start <em>doing.</em>
+      </h2>
+
+      <a class="btn-cta" href="https://apps.apple.com/us/app/squirrel-brain/id6743542994">
+        <img class="btn-cta-icon" src="assets/icon.png" alt="" style="border-radius: 7px;" />
+        Download on the App Store
+      </a>
+
+      <p class="cta-sub">Free to download &nbsp;&middot;&nbsp; iOS 16+ &nbsp;&middot;&nbsp; No account required to start</p>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       FOOTER
+  ════════════════════════════════════════ -->
+  <footer>
+    <div class="footer-logo">
+      <img src="assets/icon.png" alt="Squirrel Brain" />
+      <span class="footer-wordmark">Squirrel Brain</span>
+    </div>
+
+    <div class="footer-links">
+      <a href="/legal/privacy.html">Privacy</a>
+      <a href="/legal/terms.html">Terms</a>
+      <a href="/mcp">Docs</a>
+      <a href="mailto:hello@squirrelbrainapp.com">Contact</a>
+    </div>
+
+    <div class="footer-copy">&copy; 2026 Acorn Labs LLC</div>
+  </footer>
+
+</body>
+</html>

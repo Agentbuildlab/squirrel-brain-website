@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Design Variations</title>
+  <style>
+    body { margin: 0; font-family: system-ui, sans-serif; background: #111; color: #fff; }
+    .bar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 9999;
+      background: #1a1a1a; border-bottom: 1px solid #333;
+      display: flex; align-items: center; gap: 12px; padding: 10px 20px;
+    }
+    .bar span { font-size: 13px; color: #888; margin-right: 4px; }
+    .bar a {
+      padding: 8px 18px; border-radius: 8px; font-size: 14px; font-weight: 600;
+      text-decoration: none; border: 1.5px solid #444; color: #ccc;
+      transition: all 0.15s;
+    }
+    .bar a:hover { border-color: #FF7A1A; color: #FF7A1A; }
+    .bar a.active { background: #FF7A1A; color: #fff; border-color: #FF7A1A; }
+    iframe {
+      position: fixed; top: 49px; left: 0; right: 0; bottom: 0;
+      width: 100%; height: calc(100vh - 49px);
+      border: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="bar">
+    <span>Designs:</span>
+    <a href="#" onclick="show('v1-warm-cream.html', this)" class="active">V1 — Warm Cream</a>
+    <a href="#" onclick="show('v2-golden-hour.html', this)">V2 — Golden Hour</a>
+    <a href="#" onclick="show('v3-modern-clean.html', this)">V3 — Modern Clean</a>
+  </div>
+  <iframe id="frame" src="v1-warm-cream.html"></iframe>
+  <script>
+    function show(url, el) {
+      document.getElementById('frame').src = url;
+      document.querySelectorAll('.bar a').forEach(a => a.classList.remove('active'));
+      el.classList.add('active');
+      return false;
+    }
+  </script>
+</body>
+</html>

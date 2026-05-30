@@ -451,6 +451,18 @@
           <span class="atq-name">cancel_alarm</span>
           <div><div class="atq-desc">Cancel a pending alarm. Marks it done so it disappears on next sync.</div><div class="atq-note">Required: alarm_id.</div></div>
         </div>
+        <div class="atq-row">
+          <span class="atq-name">search_items</span>
+          <div><div class="atq-desc">Keyword search across all item titles, content, and notes. Use when you want to find something but don't have an ID.</div><div class="atq-note">Required: query. Optional: type, status, limit.</div></div>
+        </div>
+        <div class="atq-row">
+          <span class="atq-name">get_overdue_items</span>
+          <div><div class="atq-desc">All pending items whose alarm or due date is in the past. Call at session start to know what needs urgent attention.</div><div class="atq-note">No params.</div></div>
+        </div>
+        <div class="atq-row">
+          <span class="atq-name">get_squirrel_brain_help</span>
+          <div><div class="atq-desc">Full self-config guide returned as JSON: endpoint, hardcoded anon key, all tools with params, session start instructions. Call this first if you're a new agent or need a tool reference.</div><div class="atq-note">No params. No auth required beyond your sb_ key.</div></div>
+        </div>
       </div>
 
       <p style="font-size:12px;color:#7a6040;margin-top:14px;line-height:1.6;">
@@ -465,10 +477,11 @@
         <li><a href="#overview">What this is (for humans)</a></li>
         <li><a href="#auth">Authentication &amp; API key</a></li>
         <li><a href="#session-start">Session start sequence</a></li>
-        <li><a href="#tools">All 11 tools — full reference</a></li>
+        <li><a href="#tools">All 20 tools — full reference</a></li>
         <li><a href="#examples">curl examples</a></li>
         <li><a href="#checklist">Getting started checklist</a></li>
         <li><a href="#agent-configs">Copy-paste agent configs</a></li>
+        <li><a href="#error-codes">Error codes</a></li>
         <li><a href="#rate-limits">Rate limits</a></li>
       </ol>
     </div>
@@ -517,8 +530,12 @@
       <div class="code-label">Required headers on every request</div>
       <div class="code-block"><span class="co">Content-Type:</span>   <span class="cs">application/json</span>
 <span class="co">X-API-Key:</span>      <span class="cs">sb_your_api_key_here</span>
-<span class="co">Authorization:</span> <span class="cs">Bearer &lt;supabase-anon-key&gt;</span></div>
-      <p style="font-size:13px;color:#7a6040;margin-top:10px;line-height:1.6;">The <code>Authorization</code> header carries the public Supabase anon key (it's safe to expose) and is required by the gateway in addition to your private <code>X-API-Key</code>. The copy-paste configs below already include both — grab one from your <a href="/dashboard" style="color:var(--orange);font-weight:700;">dashboard</a> with your key pre-filled.</p>
+<span class="co">Authorization:</span> <span class="cs">Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imdlc3pidHNqZmJ2ZnVrZHpkZW1yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY0MDc3MzIsImV4cCI6MjA2MTk4MzczMn0.3bFqW0pV9q8Bh4hEKvfVFdPgAWjXHNFHg8cj3xMlRi8</span></div>
+      <p style="font-size:13px;color:#7a6040;margin-top:10px;line-height:1.6;">The <code>Authorization</code> header carries the public Supabase anon key — this value is safe to hardcode directly (it's a public gateway key, not a secret). It is required by the Supabase gateway in addition to your private <code>X-API-Key</code>. The copy-paste configs below already include it pre-filled.</p>
+      <div class="info-box green" style="margin-top:12px;">
+        <strong>Anon key (hardcode this — it is public):</strong><br>
+        <code style="font-size:11px;word-break:break-all;background:#d8ecd8;color:#16a34a;">eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imdlc3pidHNqZmJ2ZnVrZHpkZW1yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY0MDc3MzIsImV4cCI6MjA2MTk4MzczMn0.3bFqW0pV9q8Bh4hEKvfVFdPgAWjXHNFHg8cj3xMlRi8</code>
+      </div>
 
       <div class="code-label">Request body — JSON-RPC 2.0</div>
       <div class="code-block">{
@@ -573,7 +590,7 @@
     <!-- ──────────────────────────────────────────────────────── -->
     <div class="doc-section" id="tools">
       <div class="doc-section-label">Tools Reference</div>
-      <h2 class="doc-section-title">All 11 available tools</h2>
+      <h2 class="doc-section-title">All 20 available tools</h2>
       <p>Call <code>tools/list</code> at any time to get live JSON schemas. The table below matches the current schema exactly.</p>
 
       <table class="tools-table">
@@ -689,6 +706,60 @@
               <span class="tag-req">alarm_id</span>
             </td>
           </tr>
+          <tr>
+            <td><div class="tool-name"><code>list_alarms</code></div></td>
+            <td class="tool-desc">List all scheduled alarms. Check before creating alarms to avoid duplicates. Use <code>upcoming_only: true</code> to see only future alarms.</td>
+            <td class="tool-params">
+              <span class="tag-opt">status</span>
+              <span class="tag-opt">limit</span>
+              <span class="tag-opt">upcoming_only</span>
+            </td>
+          </tr>
+
+          <tr class="group-hdr"><td colspan="3">QUERY &amp; SEARCH</td></tr>
+          <tr>
+            <td><div class="tool-name"><code>get_item</code></div></td>
+            <td class="tool-desc">Get full detail on a single item by ID. Use when you have an item_id from <code>list_items</code> or <code>create_item</code> and need all fields.</td>
+            <td class="tool-params">
+              <span class="tag-req">item_id</span>
+            </td>
+          </tr>
+          <tr>
+            <td><div class="tool-name"><code>search_items</code></div></td>
+            <td class="tool-desc">Keyword search across all item titles, content, and notes. Use when you want to find an item but don't have its ID.</td>
+            <td class="tool-params">
+              <span class="tag-req">query</span>
+              <span class="tag-opt">type</span>
+              <span class="tag-opt">status</span>
+              <span class="tag-opt">limit</span>
+            </td>
+          </tr>
+          <tr>
+            <td><div class="tool-name"><code>delete_item</code></div></td>
+            <td class="tool-desc">Soft-delete an item. Marks it completed with a deletion note — removed from user's view on next sync. Prefer <code>mark_item_done</code> unless user explicitly asks to delete.</td>
+            <td class="tool-params">
+              <span class="tag-req">item_id</span>
+            </td>
+          </tr>
+
+          <tr class="group-hdr"><td colspan="3">BRIEF &amp; PRIORITIES</td></tr>
+          <tr>
+            <td><div class="tool-name"><code>get_overdue_items</code></div></td>
+            <td class="tool-desc">All pending items whose alarm/due date is in the past (within the last 30 days). Use to identify what the user has been missing. Good to call at session start alongside <code>get_daily_brief</code>.</td>
+            <td class="tool-params"><em style="color:#b8986e;">no params</em></td>
+          </tr>
+          <tr>
+            <td><div class="tool-name"><code>get_nudge_candidates</code></div></td>
+            <td class="tool-desc">Pending items flagged <code>is_important=true</code> — the 4 PM nudge email list. Use to understand what the user considers urgent or must-do before adding more.</td>
+            <td class="tool-params"><em style="color:#b8986e;">no params</em></td>
+          </tr>
+
+          <tr class="group-hdr"><td colspan="3">META</td></tr>
+          <tr>
+            <td><div class="tool-name"><code>get_squirrel_brain_help</code></div></td>
+            <td class="tool-desc">Returns a full self-configuration guide: endpoint, the hardcoded public anon key, all 20 tools with params, and session start instructions. Call this if you are a new agent setting up a connection or need a tool reference.</td>
+            <td class="tool-params"><em style="color:#b8986e;">no params</em></td>
+          </tr>
 
         </tbody>
       </table>
@@ -716,7 +787,7 @@
   https://geczbtsjfbvfukdzdemr.supabase.co/functions/v1/mcp-server \
   -H <span class="cs">"Content-Type: application/json"</span> \
   -H <span class="cs">"X-API-Key: sb_your_api_key_here"</span> \
-  -H <span class="cs">"Authorization: Bearer &lt;supabase-anon-key&gt;"</span> \
+  -H <span class="cs">"Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imdlc3pidHNqZmJ2ZnVrZHpkZW1yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY0MDc3MzIsImV4cCI6MjA2MTk4MzczMn0.3bFqW0pV9q8Bh4hEKvfVFdPgAWjXHNFHg8cj3xMlRi8"</span> \
   -d <span class="cs">'{"jsonrpc":"2.0","id":1,"method":"initialize","params":{}}'</span></div>
 
       <div class="code-label">Make Pip call the user (voice alarm in ~10s)</div>
@@ -724,7 +795,7 @@
   https://geczbtsjfbvfukdzdemr.supabase.co/functions/v1/mcp-server \
   -H <span class="cs">"Content-Type: application/json"</span> \
   -H <span class="cs">"X-API-Key: sb_your_api_key_here"</span> \
-  -H <span class="cs">"Authorization: Bearer &lt;supabase-anon-key&gt;"</span> \
+  -H <span class="cs">"Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imdlc3pidHNqZmJ2ZnVrZHpkZW1yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY0MDc3MzIsImV4cCI6MjA2MTk4MzczMn0.3bFqW0pV9q8Bh4hEKvfVFdPgAWjXHNFHg8cj3xMlRi8"</span> \
   -d <span class="cs">'{
     "jsonrpc": "2.0", "id": 1, "method": "tools/call",
     "params": {
@@ -741,7 +812,7 @@
   https://geczbtsjfbvfukdzdemr.supabase.co/functions/v1/mcp-server \
   -H <span class="cs">"Content-Type: application/json"</span> \
   -H <span class="cs">"X-API-Key: sb_your_api_key_here"</span> \
-  -H <span class="cs">"Authorization: Bearer &lt;supabase-anon-key&gt;"</span> \
+  -H <span class="cs">"Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imdlc3pidHNqZmJ2ZnVrZHpkZW1yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY0MDc3MzIsImV4cCI6MjA2MTk4MzczMn0.3bFqW0pV9q8Bh4hEKvfVFdPgAWjXHNFHg8cj3xMlRi8"</span> \
   -d <span class="cs">'{
     "jsonrpc": "2.0", "id": 2, "method": "tools/call",
     "params": {
@@ -760,7 +831,7 @@
   https://geczbtsjfbvfukdzdemr.supabase.co/functions/v1/mcp-server \
   -H <span class="cs">"Content-Type: application/json"</span> \
   -H <span class="cs">"X-API-Key: sb_your_api_key_here"</span> \
-  -H <span class="cs">"Authorization: Bearer &lt;supabase-anon-key&gt;"</span> \
+  -H <span class="cs">"Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imdlc3pidHNqZmJ2ZnVrZHpkZW1yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY0MDc3MzIsImV4cCI6MjA2MTk4MzczMn0.3bFqW0pV9q8Bh4hEKvfVFdPgAWjXHNFHg8cj3xMlRi8"</span> \
   -d <span class="cs">'{
     "jsonrpc": "2.0", "id": 3, "method": "tools/call",
     "params": {
@@ -781,7 +852,7 @@
   https://geczbtsjfbvfukdzdemr.supabase.co/functions/v1/mcp-server \
   -H <span class="cs">"Content-Type: application/json"</span> \
   -H <span class="cs">"X-API-Key: sb_your_api_key_here"</span> \
-  -H <span class="cs">"Authorization: Bearer &lt;supabase-anon-key&gt;"</span> \
+  -H <span class="cs">"Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imdlc3pidHNqZmJ2ZnVrZHpkZW1yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY0MDc3MzIsImV4cCI6MjA2MTk4MzczMn0.3bFqW0pV9q8Bh4hEKvfVFdPgAWjXHNFHg8cj3xMlRi8"</span> \
   -d <span class="cs">'{
     "jsonrpc": "2.0", "id": 4, "method": "tools/call",
     "params": {
@@ -801,7 +872,7 @@
   https://geczbtsjfbvfukdzdemr.supabase.co/functions/v1/mcp-server \
   -H <span class="cs">"Content-Type: application/json"</span> \
   -H <span class="cs">"X-API-Key: sb_your_api_key_here"</span> \
-  -H <span class="cs">"Authorization: Bearer &lt;supabase-anon-key&gt;"</span> \
+  -H <span class="cs">"Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imdlc3pidHNqZmJ2ZnVrZHpkZW1yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY0MDc3MzIsImV4cCI6MjA2MTk4MzczMn0.3bFqW0pV9q8Bh4hEKvfVFdPgAWjXHNFHg8cj3xMlRi8"</span> \
   -d <span class="cs">'{
     "jsonrpc": "2.0", "id": 5, "method": "tools/call",
     "params": {
@@ -815,7 +886,7 @@
   https://geczbtsjfbvfukdzdemr.supabase.co/functions/v1/mcp-server \
   -H <span class="cs">"Content-Type: application/json"</span> \
   -H <span class="cs">"X-API-Key: sb_your_api_key_here"</span> \
-  -H <span class="cs">"Authorization: Bearer &lt;supabase-anon-key&gt;"</span> \
+  -H <span class="cs">"Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imdlc3pidHNqZmJ2ZnVrZHpkZW1yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY0MDc3MzIsImV4cCI6MjA2MTk4MzczMn0.3bFqW0pV9q8Bh4hEKvfVFdPgAWjXHNFHg8cj3xMlRi8"</span> \
   -d <span class="cs">'{
     "jsonrpc": "2.0", "id": 6, "method": "tools/call",
     "params": { "name": "get_daily_brief", "arguments": {} }
@@ -850,7 +921,7 @@
         </li>
         <li>
           <span class="step-num">4</span>
-          <div><strong>Configure your MCP client</strong> using the copy-paste configs below (anon key pre-filled). Endpoint:<br><code>https://geczbtsjfbvfukdzdemr.supabase.co/functions/v1/mcp-server</code><br>with both an <code>X-API-Key: sb_...</code> and an <code>Authorization: Bearer &lt;anon&gt;</code> header.</div>
+          <div><strong>Configure your MCP client</strong> using the copy-paste configs below (anon key pre-filled). Endpoint:<br><code>https://geczbtsjfbvfukdzdemr.supabase.co/functions/v1/mcp-server</code><br>with both an <code>X-API-Key: sb_...</code> and <code>Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...</code> header. Or call <code>get_squirrel_brain_help</code> to get the full config as JSON.</div>
         </li>
         <li>
           <span class="step-num">5</span>
@@ -902,8 +973,8 @@
       "url": "https://geczbtsjfbvfukdzdemr.supabase.co/functions/v1/mcp-server",
       "headers": {
         "X-API-Key": "sb_YOUR_KEY_HERE",
-        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdlY3pidHNqZmJ2ZnVrZHpkZW1yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc4NTA1OTksImV4cCI6MjA5MzQyNjU5OX0.Rdn6ujhp8t1qJNBmAc8VmV5xst10tpSzXh5tt6VCptM",
-        "apikey": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdlY3pidHNqZmJ2ZnVrZHpkZW1yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc4NTA1OTksImV4cCI6MjA5MzQyNjU5OX0.Rdn6ujhp8t1qJNBmAc8VmV5xst10tpSzXh5tt6VCptM"
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imdlc3pidHNqZmJ2ZnVrZHpkZW1yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY0MDc3MzIsImV4cCI6MjA2MTk4MzczMn0.3bFqW0pV9q8Bh4hEKvfVFdPgAWjXHNFHg8cj3xMlRi8",
+        "apikey": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imdlc3pidHNqZmJ2ZnVrZHpkZW1yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY0MDc3MzIsImV4cCI6MjA2MTk4MzczMn0.3bFqW0pV9q8Bh4hEKvfVFdPgAWjXHNFHg8cj3xMlRi8"
       }
     }
   }
@@ -921,8 +992,8 @@
       "url": "https://geczbtsjfbvfukdzdemr.supabase.co/functions/v1/mcp-server",
       "headers": {
         "X-API-Key": "sb_YOUR_KEY_HERE",
-        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdlY3pidHNqZmJ2ZnVrZHpkZW1yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc4NTA1OTksImV4cCI6MjA5MzQyNjU5OX0.Rdn6ujhp8t1qJNBmAc8VmV5xst10tpSzXh5tt6VCptM",
-        "apikey": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdlY3pidHNqZmJ2ZnVrZHpkZW1yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc4NTA1OTksImV4cCI6MjA5MzQyNjU5OX0.Rdn6ujhp8t1qJNBmAc8VmV5xst10tpSzXh5tt6VCptM"
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imdlc3pidHNqZmJ2ZnVrZHpkZW1yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY0MDc3MzIsImV4cCI6MjA2MTk4MzczMn0.3bFqW0pV9q8Bh4hEKvfVFdPgAWjXHNFHg8cj3xMlRi8",
+        "apikey": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imdlc3pidHNqZmJ2ZnVrZHpkZW1yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY0MDc3MzIsImV4cCI6MjA2MTk4MzczMn0.3bFqW0pV9q8Bh4hEKvfVFdPgAWjXHNFHg8cj3xMlRi8"
       }
     }
   }
@@ -942,8 +1013,8 @@ client = MultiServerMCPClient({
         "transport": "streamable_http",
         "headers": {
             "X-API-Key": "sb_YOUR_KEY_HERE",
-            "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdlY3pidHNqZmJ2ZnVrZHpkZW1yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc4NTA1OTksImV4cCI6MjA5MzQyNjU5OX0.Rdn6ujhp8t1qJNBmAc8VmV5xst10tpSzXh5tt6VCptM",
-            "apikey": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdlY3pidHNqZmJ2ZnVrZHpkZW1yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc4NTA1OTksImV4cCI6MjA5MzQyNjU5OX0.Rdn6ujhp8t1qJNBmAc8VmV5xst10tpSzXh5tt6VCptM"
+            "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imdlc3pidHNqZmJ2ZnVrZHpkZW1yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY0MDc3MzIsImV4cCI6MjA2MTk4MzczMn0.3bFqW0pV9q8Bh4hEKvfVFdPgAWjXHNFHg8cj3xMlRi8",
+            "apikey": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imdlc3pidHNqZmJ2ZnVrZHpkZW1yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY0MDc3MzIsImV4cCI6MjA2MTk4MzczMn0.3bFqW0pV9q8Bh4hEKvfVFdPgAWjXHNFHg8cj3xMlRi8"
         }
     }
 })
@@ -965,7 +1036,7 @@ result = await client.call_tool("create_alarm", {
 <pre>Endpoint:       POST https://geczbtsjfbvfukdzdemr.supabase.co/functions/v1/mcp-server
 Content-Type:   application/json
 X-API-Key:      sb_YOUR_KEY_HERE
-Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdlY3pidHNqZmJ2ZnVrZHpkZW1yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc4NTA1OTksImV4cCI6MjA5MzQyNjU5OX0.Rdn6ujhp8t1qJNBmAc8VmV5xst10tpSzXh5tt6VCptM
+Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imdlc3pidHNqZmJ2ZnVrZHpkZW1yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY0MDc3MzIsImV4cCI6MjA2MTk4MzczMn0.3bFqW0pV9q8Bh4hEKvfVFdPgAWjXHNFHg8cj3xMlRi8
 
 Body (tools/call):
 {
@@ -984,7 +1055,76 @@ Body (tools/call):
     <hr class="doc-divider" />
 
     <!-- ──────────────────────────────────────────────────────── -->
-    <!-- SECTION 8: Rate limits                                  -->
+    <!-- SECTION 8: Error codes                                  -->
+    <!-- ──────────────────────────────────────────────────────── -->
+    <div class="doc-section" id="error-codes">
+      <div class="doc-section-label">Error Codes</div>
+      <h2 class="doc-section-title">What errors look like &amp; how to handle them</h2>
+      <p>All errors return HTTP 200 with a JSON-RPC error body. Check <code>response.error</code>, not the HTTP status code.</p>
+
+      <pre style="background:#1a1a1a;color:#e8d8c8;border-radius:8px;padding:16px;font-size:13px;overflow-x:auto;margin:16px 0;">{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "error": {
+    "code": -32601,
+    "message": "Unknown tool: get_foo"
+  }
+}</pre>
+
+      <table class="rate-table">
+        <thead>
+          <tr>
+            <th>Code</th>
+            <th>Meaning</th>
+            <th>How to fix</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="rate-action">HTTP 401</td>
+            <td>Missing or invalid <code>X-API-Key</code></td>
+            <td>Add the header. Regenerate key in Settings if revoked.</td>
+          </tr>
+          <tr>
+            <td class="rate-action">HTTP 403</td>
+            <td>Key is valid but user profile not found</td>
+            <td>Open the Squirrel Brain app once to create the profile, then retry.</td>
+          </tr>
+          <tr>
+            <td class="rate-action">-32600</td>
+            <td>Invalid JSON-RPC request (bad structure)</td>
+            <td>Check you're sending <code>{ jsonrpc: "2.0", id, method, params }</code>.</td>
+          </tr>
+          <tr>
+            <td class="rate-action">-32601</td>
+            <td>Unknown tool name</td>
+            <td>Check spelling. Call <code>get_squirrel_brain_help</code> for the full tool list.</td>
+          </tr>
+          <tr>
+            <td class="rate-action">-32602</td>
+            <td>Invalid params (missing required field)</td>
+            <td>The error message names the missing field. Add it.</td>
+          </tr>
+          <tr>
+            <td class="rate-action">-32603</td>
+            <td>Insufficient scope</td>
+            <td>Your key doesn't have permission for this tool. Regenerate a key with full scopes.</td>
+          </tr>
+          <tr>
+            <td class="rate-action">-32603</td>
+            <td>Internal error (Supabase query failed)</td>
+            <td>The <code>data</code> field has details. Usually a transient error — retry once.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="info-box">
+        <strong>Key lifecycle:</strong> Keys don't expire automatically — they're valid until you regenerate them in Settings → API Key.
+        If your key stops working, regenerate it in the app. Agents with an active key can also rotate their own key by calling <code>rotate_api_key</code> — the old key is revoked and the new one is returned in the same response.
+      </div>
+    </div>
+
+    <!-- SECTION 9: Rate limits                                  -->
     <!-- ──────────────────────────────────────────────────────── -->
     <div class="doc-section" id="rate-limits">
       <div class="doc-section-label">Rate Limits</div>
