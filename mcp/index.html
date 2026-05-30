@@ -477,7 +477,7 @@
         <li><a href="#overview">What this is (for humans)</a></li>
         <li><a href="#auth">Authentication &amp; API key</a></li>
         <li><a href="#session-start">Session start sequence</a></li>
-        <li><a href="#tools">All 20 tools — full reference</a></li>
+        <li><a href="#tools">All 24 tools — full reference</a></li>
         <li><a href="#examples">curl examples</a></li>
         <li><a href="#checklist">Getting started checklist</a></li>
         <li><a href="#agent-configs">Copy-paste agent configs</a></li>
@@ -520,8 +520,11 @@
       <h2 class="doc-section-title">Your API key</h2>
       <p>Every request must include your Squirrel Brain API key in the <code>X-API-Key</code> header. Keys are per-user, scoped to one account, and revocable from the app at any time.</p>
 
-      <div class="info-box">
-        <strong>How to get your key:</strong> Sign up at <a href="/signup" style="color:var(--orange);font-weight:700;">squirrelbrainapp.com/signup</a> and your <code>sb_</code> key is generated instantly — no waiting. Already have a key? View or regenerate it from your <a href="/dashboard" style="color:var(--orange);font-weight:700;">dashboard</a>. You can also generate one inside the iOS app under Settings.
+      <div class="info-box" style="border-left:4px solid var(--orange);background:#fff8f0;">
+        <strong>🔑 How the key flow works (industry standard)</strong><br><br>
+        <strong>Step 1 — Human gets the key.</strong> Download the Squirrel Brain iOS app, go to <strong>Settings → API Key</strong>, and tap <em>Generate</em>. Your <code>sb_</code> key appears instantly. This step requires your Apple ID and phone — no agent can do it for you.<br><br>
+        <strong>Step 2 — Human gives key to their agent.</strong> Paste it into your agent's environment variables or config file. That's it. This is exactly how you give Claude your Anthropic API key, or how you give GitHub Actions a deploy token.<br><br>
+        <strong>Step 3 — Agent self-manages from there.</strong> Once an agent has a valid key, it can call <code>rotate_api_key</code> to generate a fresh key anytime — no human needed. Keys are valid for <strong>1 year</strong>. The app sends a push notification 7 days before expiry.
       </div>
 
       <div class="code-label">Endpoint</div>
@@ -757,7 +760,7 @@
           <tr class="group-hdr"><td colspan="3">META</td></tr>
           <tr>
             <td><div class="tool-name"><code>get_squirrel_brain_help</code></div></td>
-            <td class="tool-desc">Returns a full self-configuration guide: endpoint, the hardcoded public anon key, all 20 tools with params, and session start instructions. Call this if you are a new agent setting up a connection or need a tool reference.</td>
+            <td class="tool-desc">Returns a full self-configuration guide: endpoint, the hardcoded public anon key, all 24 tools with params, and session start instructions. Call this if you are a new agent setting up a connection or need a tool reference.</td>
             <td class="tool-params"><em style="color:#b8986e;">no params</em></td>
           </tr>
 
