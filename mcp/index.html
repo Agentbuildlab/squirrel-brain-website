@@ -477,7 +477,7 @@
         <li><a href="#overview">What this is (for humans)</a></li>
         <li><a href="#auth">Authentication &amp; API key</a></li>
         <li><a href="#session-start">Session start sequence</a></li>
-        <li><a href="#tools">All 24 tools — full reference</a></li>
+        <li><a href="#tools">All 23 tools — full reference</a></li>
         <li><a href="#examples">curl examples</a></li>
         <li><a href="#checklist">Getting started checklist</a></li>
         <li><a href="#agent-configs">Copy-paste agent configs</a></li>
@@ -593,7 +593,7 @@
     <!-- ──────────────────────────────────────────────────────── -->
     <div class="doc-section" id="tools">
       <div class="doc-section-label">Tools Reference</div>
-      <h2 class="doc-section-title">All 20 available tools</h2>
+      <h2 class="doc-section-title">All 23 available tools</h2>
       <p>Call <code>tools/list</code> at any time to get live JSON schemas. The table below matches the current schema exactly.</p>
 
       <table class="tools-table">
@@ -617,7 +617,7 @@
           </tr>
           <tr>
             <td><div class="tool-name"><code>notify_human</code></div></td>
-            <td class="tool-desc">Instant push notification (banner, not full-screen). Fires via APNs + Telegram simultaneously. Use for quick status updates — not interruptions. For urgent use <code>pip_call</code>.</td>
+            <td class="tool-desc">Instant push notification (banner, not full-screen). Fires via APNs to your iPhone. Use for quick status updates — not interruptions. For urgent use <code>pip_call</code>.</td>
             <td class="tool-params">
               <span class="tag-req">title</span>
               <span class="tag-req">message</span>
@@ -784,7 +784,7 @@
           <tr class="group-hdr"><td colspan="3">META</td></tr>
           <tr>
             <td><div class="tool-name"><code>get_squirrel_brain_help</code></div></td>
-            <td class="tool-desc">Returns a full self-configuration guide: endpoint, the hardcoded public anon key, all 24 tools with params, and session start instructions. Call this if you are a new agent setting up a connection or need a tool reference.</td>
+            <td class="tool-desc">Returns a full self-configuration guide: endpoint, the hardcoded public anon key, all 23 tools with params, and session start instructions. Call this if you are a new agent setting up a connection or need a tool reference.</td>
             <td class="tool-params"><em style="color:#b8986e;">no params</em></td>
           </tr>
 
@@ -1134,13 +1134,8 @@ Body (tools/call):
           </tr>
           <tr>
             <td class="rate-action">-32603</td>
-            <td>Insufficient scope</td>
-            <td>Your key doesn't have permission for this tool. Regenerate a key with full scopes.</td>
-          </tr>
-          <tr>
-            <td class="rate-action">-32603</td>
-            <td>Internal error (Supabase query failed)</td>
-            <td>The <code>data</code> field has details. Usually a transient error — retry once.</td>
+            <td>Insufficient scope <em>or</em> internal error</td>
+            <td>Read the <code>message</code> field: "Insufficient scope" means your key lacks permission (regenerate a key in Settings &rarr; API Key). Any other message is a transient server error &mdash; retry once.</td>
           </tr>
         </tbody>
       </table>
