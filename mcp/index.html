@@ -433,7 +433,7 @@
         </div>
         <div class="atq-row">
           <span class="atq-name">create_item</span>
-          <div><div class="atq-desc">Write a note or checklist to the user's brain. Set type_label="context" to write persistent instructions future agents read at session start.</div><div class="atq-note">Required: type ("note"|"running"), title. Optional: content, type_label, is_important, agent_name, tts_text.</div></div>
+          <div><div class="atq-desc">Write a note or checklist to the user's brain. Set type_label="context" to write persistent instructions future agents read at session start.</div><div class="atq-note">Required: type ("note"|"running"), title. Optional: content, type_label, is_important, include_in_brief, agent_name, agent_context, tts_text, tts_voice.</div></div>
         </div>
         <div class="atq-row">
           <span class="atq-name">list_items</span>
@@ -534,7 +534,7 @@
       <div class="code-block"><span class="co">Content-Type:</span>   <span class="cs">application/json</span>
 <span class="co">X-API-Key:</span>      <span class="cs">sb_your_api_key_here</span>
 <span class="co">Authorization:</span> <span class="cs">Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imdlc3pidHNqZmJ2ZnVrZHpkZW1yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY0MDc3MzIsImV4cCI6MjA2MTk4MzczMn0.3bFqW0pV9q8Bh4hEKvfVFdPgAWjXHNFHg8cj3xMlRi8</span></div>
-      <p style="font-size:13px;color:#7a6040;margin-top:10px;line-height:1.6;">The <code>Authorization</code> header carries the public Supabase anon key — this value is safe to hardcode directly (it's a public gateway key, not a secret). It is required by the Supabase gateway in addition to your private <code>X-API-Key</code>. The copy-paste configs below already include it pre-filled.</p>
+      <p style="font-size:13px;color:#7a6040;margin-top:10px;line-height:1.6;">Only two headers are strictly required: <code>Content-Type</code> and your private <code>X-API-Key</code>. The <code>Authorization: Bearer &lt;anon-key&gt;</code> and <code>apikey</code> headers shown in the copy-paste configs below are optional — some MCP clients add them automatically, and they're harmless to include. Both carry the <em>public</em> Supabase anon key (safe to hardcode — it's a public gateway key, not a secret). The configs include them pre-filled so every client works out of the box.</p>
       <div class="info-box green" style="margin-top:12px;">
         <strong>Anon key (hardcode this — it is public):</strong><br>
         <code style="font-size:11px;word-break:break-all;background:#d8ecd8;color:#16a34a;">eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imdlc3pidHNqZmJ2ZnVrZHpkZW1yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY0MDc3MzIsImV4cCI6MjA2MTk4MzczMn0.3bFqW0pV9q8Bh4hEKvfVFdPgAWjXHNFHg8cj3xMlRi8</code>
@@ -669,7 +669,9 @@
               <span class="tag-opt">content</span>
               <span class="tag-opt">type_label</span>
               <span class="tag-opt">is_important</span>
+              <span class="tag-opt">include_in_brief</span>
               <span class="tag-opt">agent_name</span>
+              <span class="tag-opt">agent_context</span>
               <span class="tag-opt">tts_text</span>
               <span class="tag-opt">tts_voice</span>
             </td>
@@ -1135,14 +1137,14 @@ Body (tools/call):
           <tr>
             <td class="rate-action">-32603</td>
             <td>Insufficient scope <em>or</em> internal error</td>
-            <td>Read the <code>message</code> field: "Insufficient scope" means your key lacks permission (regenerate a key in Settings &rarr; API Key). Any other message is a transient server error &mdash; retry once.</td>
+            <td>Read the <code>message</code> field. Every key is issued with <strong>full permissions</strong> by default, so "Insufficient scope" is rare — if you hit it, regenerate your key in Settings &rarr; API Key. Any other <code>-32603</code> message is a transient server error &mdash; check the <code>data</code> field and retry once.</td>
           </tr>
         </tbody>
       </table>
 
       <div class="info-box">
         <strong>🔑 Routine annual renewal — this is normal, nothing is broken.</strong><br><br>
-        Keys are valid for <strong>1 year</strong>. When yours is about to expire, you'll get a push notification on your phone that says: <em>"Routine key renewal — X days left."</em> This is expected — it happens every year for security.<br><br>
+        Keys are valid for <strong>1 year</strong>. Starting <strong>7 days before</strong> expiry, you'll get a push notification on your phone that says: <em>"Routine key renewal — X days left"</em> (where X counts down from 7). This is expected — it happens every year for security.<br><br>
         <strong>What to do when you get that notification:</strong><br>
         1. Open the Squirrel Brain app<br>
         2. Go to <strong>Settings → API Key</strong><br>
