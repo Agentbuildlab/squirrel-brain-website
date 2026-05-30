@@ -1122,8 +1122,16 @@ Body (tools/call):
       </table>
 
       <div class="info-box">
-        <strong>Key lifecycle:</strong> Keys don't expire automatically — they're valid until you regenerate them in Settings → API Key.
-        If your key stops working, regenerate it in the app. Agents with an active key can also rotate their own key by calling <code>rotate_api_key</code> — the old key is revoked and the new one is returned in the same response.
+        <strong>🔑 Routine annual renewal — this is normal, nothing is broken.</strong><br><br>
+        Keys are valid for <strong>1 year</strong>. When yours is about to expire, you'll get a push notification on your phone that says: <em>"Routine key renewal — X days left."</em> This is expected — it happens every year for security.<br><br>
+        <strong>What to do when you get that notification:</strong><br>
+        1. Open the Squirrel Brain app<br>
+        2. Go to <strong>Settings → API Key</strong><br>
+        3. Tap <strong>Regenerate</strong><br>
+        4. Copy the new key<br>
+        5. Paste it into your agent's config (wherever you originally put the old key)<br>
+        6. Done — your agent picks up the new key on its next call<br><br>
+        Agents with an active key can also skip steps 1–4 by calling <code>rotate_api_key</code> — the old key is revoked and the fresh key is returned instantly. Either way, your agent will need step 5 (update its config with the new key).
       </div>
     </div>
 
