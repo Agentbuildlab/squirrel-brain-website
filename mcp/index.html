@@ -757,6 +757,30 @@
             <td class="tool-params"><em style="color:#b8986e;">no params</em></td>
           </tr>
 
+          <tr class="group-hdr"><td colspan="3">PORTAL — in-app chat thread</td></tr>
+          <tr>
+            <td><div class="tool-name"><code>get_portal_messages</code></div></td>
+            <td class="tool-desc">Read the conversation history in the user's MCP Agent Portal. Returns messages in chronological order and auto-marks unread inbound messages as read. Use to catch up on what the user said or to build context before responding.</td>
+            <td class="tool-params"><code>limit</code> (default 20, max 100) · <code>direction</code>: <code>"inbound"</code> | <code>"outbound"</code> | <code>"all"</code> (default)</td>
+          </tr>
+          <tr>
+            <td><div class="tool-name"><code>send_portal_message</code></div></td>
+            <td class="tool-desc">Send a message to the user in the MCP Agent Portal AND push-notify their phone. Appears instantly in the Portal UI. Always use this to close the loop after completing a task.</td>
+            <td class="tool-params"><code>content</code> (required) · <code>action_taken</code> (optional — shown below the message, e.g. <code>"Created alarm for 3 PM"</code>)</td>
+          </tr>
+
+          <tr class="group-hdr"><td colspan="3">API KEY — lifecycle management</td></tr>
+          <tr>
+            <td><div class="tool-name"><code>get_api_key_usage</code></div></td>
+            <td class="tool-desc">Check your key's usage stats: calls today, calls total, expiry date, and days until expiry. Call this to monitor activity or confirm your key is still valid.</td>
+            <td class="tool-params"><em style="color:#b8986e;">no params</em></td>
+          </tr>
+          <tr>
+            <td><div class="tool-name"><code>rotate_api_key</code></div></td>
+            <td class="tool-desc">Revoke the current <code>sb_</code> key and issue a new one instantly — no human needed. The old key stops working immediately. <strong>Update your config with the returned <code>new_api_key</code> before making any further calls.</strong></td>
+            <td class="tool-params"><code>label</code> (optional — label for the new key, e.g. <code>"Claude agent"</code>)</td>
+          </tr>
+
           <tr class="group-hdr"><td colspan="3">META</td></tr>
           <tr>
             <td><div class="tool-name"><code>get_squirrel_brain_help</code></div></td>
