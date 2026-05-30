@@ -454,7 +454,7 @@
       </div>
 
       <p style="font-size:12px;color:#7a6040;margin-top:14px;line-height:1.6;">
-        Key format: <code style="background:#d8ecd8;color:#16a34a;font-size:11px;">sb_&lt;hex&gt;</code> — obtained from the Squirrel Brain app or via email to <a href="mailto:hello@squirrelbrainapp.com" style="color:#16a34a88;">hello@squirrelbrainapp.com</a>. One key per user. Keys are revocable from the app at any time.
+        Key format: <code style="background:#d8ecd8;color:#16a34a;font-size:11px;">sb_&lt;hex&gt;</code> — generate one instantly at <a href="/signup" style="color:#16a34a;font-weight:700;">squirrelbrainapp.com/signup</a>, or from the Squirrel Brain app. One key per user. Revocable anytime from your <a href="/dashboard" style="color:#16a34a;font-weight:700;">dashboard</a>.
       </p>
     </div>
 
@@ -508,15 +508,17 @@
       <p>Every request must include your Squirrel Brain API key in the <code>X-API-Key</code> header. Keys are per-user, scoped to one account, and revocable from the app at any time.</p>
 
       <div class="info-box">
-        <strong>How to get your key:</strong> Email <a href="mailto:hello@squirrelbrainapp.com" style="color:var(--orange);font-weight:600;">hello@squirrelbrainapp.com</a> with your Squirrel Brain account email — we'll generate it and respond within 24 hours. In-app key generation is coming soon.
+        <strong>How to get your key:</strong> Sign up at <a href="/signup" style="color:var(--orange);font-weight:700;">squirrelbrainapp.com/signup</a> and your <code>sb_</code> key is generated instantly — no waiting. Already have a key? View or regenerate it from your <a href="/dashboard" style="color:var(--orange);font-weight:700;">dashboard</a>. You can also generate one inside the iOS app under Settings.
       </div>
 
       <div class="code-label">Endpoint</div>
       <div class="code-block"><span class="ck">POST</span> https://geczbtsjfbvfukdzdemr.supabase.co/functions/v1/mcp-server</div>
 
       <div class="code-label">Required headers on every request</div>
-      <div class="code-block"><span class="co">Content-Type:</span> <span class="cs">application/json</span>
-<span class="co">X-API-Key:</span>    <span class="cs">sb_your_api_key_here</span></div>
+      <div class="code-block"><span class="co">Content-Type:</span>   <span class="cs">application/json</span>
+<span class="co">X-API-Key:</span>      <span class="cs">sb_your_api_key_here</span>
+<span class="co">Authorization:</span> <span class="cs">Bearer &lt;supabase-anon-key&gt;</span></div>
+      <p style="font-size:13px;color:#7a6040;margin-top:10px;line-height:1.6;">The <code>Authorization</code> header carries the public Supabase anon key (it's safe to expose) and is required by the gateway in addition to your private <code>X-API-Key</code>. The copy-paste configs below already include both — grab one from your <a href="/dashboard" style="color:var(--orange);font-weight:700;">dashboard</a> with your key pre-filled.</p>
 
       <div class="code-label">Request body — JSON-RPC 2.0</div>
       <div class="code-block">{
@@ -714,6 +716,7 @@
   https://geczbtsjfbvfukdzdemr.supabase.co/functions/v1/mcp-server \
   -H <span class="cs">"Content-Type: application/json"</span> \
   -H <span class="cs">"X-API-Key: sb_your_api_key_here"</span> \
+  -H <span class="cs">"Authorization: Bearer &lt;supabase-anon-key&gt;"</span> \
   -d <span class="cs">'{"jsonrpc":"2.0","id":1,"method":"initialize","params":{}}'</span></div>
 
       <div class="code-label">Make Pip call the user (voice alarm in ~10s)</div>
@@ -721,6 +724,7 @@
   https://geczbtsjfbvfukdzdemr.supabase.co/functions/v1/mcp-server \
   -H <span class="cs">"Content-Type: application/json"</span> \
   -H <span class="cs">"X-API-Key: sb_your_api_key_here"</span> \
+  -H <span class="cs">"Authorization: Bearer &lt;supabase-anon-key&gt;"</span> \
   -d <span class="cs">'{
     "jsonrpc": "2.0", "id": 1, "method": "tools/call",
     "params": {
@@ -737,6 +741,7 @@
   https://geczbtsjfbvfukdzdemr.supabase.co/functions/v1/mcp-server \
   -H <span class="cs">"Content-Type: application/json"</span> \
   -H <span class="cs">"X-API-Key: sb_your_api_key_here"</span> \
+  -H <span class="cs">"Authorization: Bearer &lt;supabase-anon-key&gt;"</span> \
   -d <span class="cs">'{
     "jsonrpc": "2.0", "id": 2, "method": "tools/call",
     "params": {
@@ -755,6 +760,7 @@
   https://geczbtsjfbvfukdzdemr.supabase.co/functions/v1/mcp-server \
   -H <span class="cs">"Content-Type: application/json"</span> \
   -H <span class="cs">"X-API-Key: sb_your_api_key_here"</span> \
+  -H <span class="cs">"Authorization: Bearer &lt;supabase-anon-key&gt;"</span> \
   -d <span class="cs">'{
     "jsonrpc": "2.0", "id": 3, "method": "tools/call",
     "params": {
@@ -775,6 +781,7 @@
   https://geczbtsjfbvfukdzdemr.supabase.co/functions/v1/mcp-server \
   -H <span class="cs">"Content-Type: application/json"</span> \
   -H <span class="cs">"X-API-Key: sb_your_api_key_here"</span> \
+  -H <span class="cs">"Authorization: Bearer &lt;supabase-anon-key&gt;"</span> \
   -d <span class="cs">'{
     "jsonrpc": "2.0", "id": 4, "method": "tools/call",
     "params": {
@@ -794,6 +801,7 @@
   https://geczbtsjfbvfukdzdemr.supabase.co/functions/v1/mcp-server \
   -H <span class="cs">"Content-Type: application/json"</span> \
   -H <span class="cs">"X-API-Key: sb_your_api_key_here"</span> \
+  -H <span class="cs">"Authorization: Bearer &lt;supabase-anon-key&gt;"</span> \
   -d <span class="cs">'{
     "jsonrpc": "2.0", "id": 5, "method": "tools/call",
     "params": {
@@ -807,6 +815,7 @@
   https://geczbtsjfbvfukdzdemr.supabase.co/functions/v1/mcp-server \
   -H <span class="cs">"Content-Type: application/json"</span> \
   -H <span class="cs">"X-API-Key: sb_your_api_key_here"</span> \
+  -H <span class="cs">"Authorization: Bearer &lt;supabase-anon-key&gt;"</span> \
   -d <span class="cs">'{
     "jsonrpc": "2.0", "id": 6, "method": "tools/call",
     "params": { "name": "get_daily_brief", "arguments": {} }
@@ -833,7 +842,7 @@
         </li>
         <li>
           <span class="step-num">2</span>
-          <div><strong>Request your API key.</strong> Email <a href="mailto:hello@squirrelbrainapp.com" style="color:var(--orange);font-weight:600;">hello@squirrelbrainapp.com</a> with your account email. Your key starts with <code>sb_</code>. In-app key generation is coming soon.</div>
+          <div><strong>Generate your API key.</strong> Sign up at <a href="/signup" style="color:var(--orange);font-weight:700;">squirrelbrainapp.com/signup</a> and copy your <code>sb_</code> key — it's created instantly. (Or generate one in the iOS app under Settings.)</div>
         </li>
         <li>
           <span class="step-num">3</span>
@@ -841,7 +850,7 @@
         </li>
         <li>
           <span class="step-num">4</span>
-          <div><strong>Configure your MCP client</strong> using the copy-paste configs below. Endpoint:<br><code>https://geczbtsjfbvfukdzdemr.supabase.co/functions/v1/mcp-server</code><br>with <code>X-API-Key: sb_...</code> header.</div>
+          <div><strong>Configure your MCP client</strong> using the copy-paste configs below (anon key pre-filled). Endpoint:<br><code>https://geczbtsjfbvfukdzdemr.supabase.co/functions/v1/mcp-server</code><br>with both an <code>X-API-Key: sb_...</code> and an <code>Authorization: Bearer &lt;anon&gt;</code> header.</div>
         </li>
         <li>
           <span class="step-num">5</span>
@@ -892,7 +901,9 @@
     "squirrel-brain": {
       "url": "https://geczbtsjfbvfukdzdemr.supabase.co/functions/v1/mcp-server",
       "headers": {
-        "X-API-Key": "sb_YOUR_KEY_HERE"
+        "X-API-Key": "sb_YOUR_KEY_HERE",
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdlY3pidHNqZmJ2ZnVrZHpkZW1yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc4NTA1OTksImV4cCI6MjA5MzQyNjU5OX0.Rdn6ujhp8t1qJNBmAc8VmV5xst10tpSzXh5tt6VCptM",
+        "apikey": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdlY3pidHNqZmJ2ZnVrZHpkZW1yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc4NTA1OTksImV4cCI6MjA5MzQyNjU5OX0.Rdn6ujhp8t1qJNBmAc8VmV5xst10tpSzXh5tt6VCptM"
       }
     }
   }
@@ -909,7 +920,9 @@
     "squirrel-brain": {
       "url": "https://geczbtsjfbvfukdzdemr.supabase.co/functions/v1/mcp-server",
       "headers": {
-        "X-API-Key": "sb_YOUR_KEY_HERE"
+        "X-API-Key": "sb_YOUR_KEY_HERE",
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdlY3pidHNqZmJ2ZnVrZHpkZW1yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc4NTA1OTksImV4cCI6MjA5MzQyNjU5OX0.Rdn6ujhp8t1qJNBmAc8VmV5xst10tpSzXh5tt6VCptM",
+        "apikey": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdlY3pidHNqZmJ2ZnVrZHpkZW1yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc4NTA1OTksImV4cCI6MjA5MzQyNjU5OX0.Rdn6ujhp8t1qJNBmAc8VmV5xst10tpSzXh5tt6VCptM"
       }
     }
   }
@@ -927,7 +940,11 @@ client = MultiServerMCPClient({
     "squirrel-brain": {
         "url": "https://geczbtsjfbvfukdzdemr.supabase.co/functions/v1/mcp-server",
         "transport": "streamable_http",
-        "headers": {"X-API-Key": "sb_YOUR_KEY_HERE"}
+        "headers": {
+            "X-API-Key": "sb_YOUR_KEY_HERE",
+            "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdlY3pidHNqZmJ2ZnVrZHpkZW1yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc4NTA1OTksImV4cCI6MjA5MzQyNjU5OX0.Rdn6ujhp8t1qJNBmAc8VmV5xst10tpSzXh5tt6VCptM",
+            "apikey": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdlY3pidHNqZmJ2ZnVrZHpkZW1yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc4NTA1OTksImV4cCI6MjA5MzQyNjU5OX0.Rdn6ujhp8t1qJNBmAc8VmV5xst10tpSzXh5tt6VCptM"
+        }
     }
 })
 tools = await client.get_tools()
@@ -948,6 +965,7 @@ result = await client.call_tool("create_alarm", {
 <pre>Endpoint:       POST https://geczbtsjfbvfukdzdemr.supabase.co/functions/v1/mcp-server
 Content-Type:   application/json
 X-API-Key:      sb_YOUR_KEY_HERE
+Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdlY3pidHNqZmJ2ZnVrZHpkZW1yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc4NTA1OTksImV4cCI6MjA5MzQyNjU5OX0.Rdn6ujhp8t1qJNBmAc8VmV5xst10tpSzXh5tt6VCptM
 
 Body (tools/call):
 {

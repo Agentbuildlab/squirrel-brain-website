@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Get your API key — Squirrel Brain</title>
+  <meta name="description" content="Sign up and get an MCP API key for Squirrel Brain in seconds. Connect Claude, Cursor, or any AI agent to your phone." />
+  <link rel="icon" href="/assets/icon.png" />
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --bg:#f0e6d3; --bg2:#f5ece0; --bg3:#fdf5e8;
+      --orange:#FF7A1A; --orange-dim:#FF7A1A18; --orange-mid:#FF7A1A44;
+      --green:#16a34a; --ink:#2a1a08; --muted:#7a6040; --border:#d4b896;
+      --radius:16px;
+      --font:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      --mono:"SF Mono","Fira Code","Cascadia Code",monospace;
+    }
+    html{scroll-behavior:smooth}
+    body{background:var(--bg);color:var(--ink);font-family:var(--font);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;min-height:100vh}
+    nav.main-nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:14px 32px;background:rgba(240,230,211,.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid #d4b89644}
+    .nav-brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+    .nav-brand img{width:36px;height:36px;border-radius:9px}
+    .nav-brand span{font-size:14px;font-weight:800;letter-spacing:.08em;color:var(--ink)}
+    .nav-brand em{color:var(--orange);font-style:normal}
+    .nav-link{color:var(--muted);text-decoration:none;font-size:14px;font-weight:600}
+    .nav-link:hover{color:var(--ink)}
+    .wrap{max-width:540px;margin:0 auto;padding:130px 24px 80px}
+    .eyebrow{font-size:11px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--orange);margin-bottom:14px}
+    h1{font-size:34px;line-height:1.12;font-weight:850;letter-spacing:-.02em;margin-bottom:12px}
+    h1 em{color:var(--orange);font-style:normal}
+    .sub{color:var(--muted);font-size:16px;margin-bottom:30px}
+    .card{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:30px}
+    label{display:block;font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:7px;margin-top:18px}
+    label:first-of-type{margin-top:0}
+    input{width:100%;padding:13px 15px;font-size:16px;font-family:var(--font);border:1px solid var(--border);border-radius:12px;background:#fff;color:var(--ink)}
+    input:focus{outline:none;border-color:var(--orange);box-shadow:0 0 0 3px var(--orange-dim)}
+    .hint{font-size:12px;color:var(--muted);margin-top:6px}
+    button.primary{width:100%;margin-top:24px;padding:15px;font-size:16px;font-weight:800;color:#fff;background:var(--orange);border:none;border-radius:12px;cursor:pointer;transition:opacity .15s,transform .15s}
+    button.primary:hover:not(:disabled){opacity:.9;transform:translateY(-1px)}
+    button.primary:disabled{opacity:.55;cursor:not-allowed}
+    .msg{margin-top:16px;padding:12px 14px;border-radius:10px;font-size:14px;display:none}
+    .msg.error{display:block;background:#fdeaea;border:1px solid #e9a8a8;color:#a12626}
+    .foot{text-align:center;margin-top:22px;font-size:14px;color:var(--muted)}
+    .foot a{color:var(--orange);font-weight:700;text-decoration:none}
+    /* success */
+    #success{display:none}
+    .keybox{background:#0f1f12;border:1px solid var(--green);border-radius:12px;padding:16px;font-family:var(--mono);font-size:13px;color:#8ef0a8;word-break:break-all;line-height:1.6}
+    .copybtn{display:inline-flex;align-items:center;gap:8px;margin-top:12px;padding:11px 18px;font-size:14px;font-weight:800;color:#fff;background:var(--green);border:none;border-radius:10px;cursor:pointer}
+    .copybtn:hover{opacity:.9}
+    .warn{margin-top:14px;font-size:13px;color:var(--muted);background:var(--orange-dim);border:1px solid var(--orange-mid);border-radius:10px;padding:12px 14px}
+    .snip-label{font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:26px 0 8px}
+    pre{background:#0f1f12;border:1px solid #1f3a24;border-radius:12px;padding:16px;overflow-x:auto;font-family:var(--mono);font-size:12px;color:#bfe9c8;line-height:1.65}
+    .spin{display:inline-block;width:16px;height:16px;border:2px solid #ffffff66;border-top-color:#fff;border-radius:50%;animation:sp .7s linear infinite;vertical-align:-3px;margin-right:8px}
+    @keyframes sp{to{transform:rotate(360deg)}}
+  </style>
+</head>
+<body>
+  <nav class="main-nav">
+    <a href="/" class="nav-brand">
+      <img src="/assets/icon.png" alt="Squirrel Brain" />
+      <span>SQUIRREL <em>BRAIN</em></span>
+    </a>
+    <a href="/dashboard" class="nav-link">Have a key? Sign in &#8594;</a>
+  </nav>
+
+  <div class="wrap">
+    <!-- FORM -->
+    <div id="form-view">
+      <div class="eyebrow">Developer access</div>
+      <h1>Get your <em>API key</em></h1>
+      <p class="sub">Create an account and connect Claude, Cursor, or any AI agent to your Squirrel Brain in seconds. No email back-and-forth.</p>
+      <div class="card">
+        <form id="signup-form" autocomplete="on">
+          <label for="email">Email</label>
+          <input id="email" type="email" name="email" placeholder="you@example.com" required autocomplete="email" />
+          <label for="password">Password</label>
+          <input id="password" type="password" name="password" placeholder="At least 8 characters" required minlength="8" autocomplete="new-password" />
+          <div class="hint">Use this email later in the app and your phone + agent become one account.</div>
+          <button class="primary" id="submit-btn" type="submit">Create account &amp; get key</button>
+          <div class="msg error" id="err"></div>
+        </form>
+      </div>
+      <p class="foot">Already signed up? <a href="/dashboard">Go to your dashboard</a></p>
+    </div>
+
+    <!-- SUCCESS -->
+    <div id="success">
+      <div class="eyebrow" style="color:var(--green)">You're in &#127881;</div>
+      <h1>Your API key</h1>
+      <p class="sub">Copy this now and paste it into your agent. You can always retrieve or regenerate it from your dashboard.</p>
+      <div class="card">
+        <div class="keybox" id="keyval">sb_...</div>
+        <button class="copybtn" id="copy-btn" type="button">Copy key</button>
+        <div class="warn">&#128274; This key grants an agent access to create alarms, read your tasks, and send messages to your phone. Keep it secret — treat it like a password.</div>
+
+        <div class="snip-label">Connect your agent (MCP)</div>
+        <pre id="snippet"></pre>
+        <button class="copybtn" id="copy-snip" type="button" style="background:var(--orange)">Copy config</button>
+      </div>
+      <p class="foot"><a href="/dashboard">Manage your key &#8594;</a> &nbsp;·&nbsp; <a href="/mcp/">Read the docs</a></p>
+    </div>
+  </div>
+
+  <script>
+    const SUPABASE_URL = "https://geczbtsjfbvfukdzdemr.supabase.co";
+    const ANON = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdlY3pidHNqZmJ2ZnVrZHpkZW1yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc4NTA1OTksImV4cCI6MjA5MzQyNjU5OX0.Rdn6ujhp8t1qJNBmAc8VmV5xst10tpSzXh5tt6VCptM";
+    const FN = SUPABASE_URL + "/functions/v1/web-api-keys";
+    const MCP = SUPABASE_URL + "/functions/v1/mcp-server";
+
+    function mcpSnippet(key){
+      return JSON.stringify({
+        mcpServers: {
+          "squirrel-brain": {
+            url: MCP,
+            headers: {
+              "X-API-Key": key,
+              "Authorization": "Bearer " + ANON,
+              "apikey": ANON
+            }
+          }
+        }
+      }, null, 2);
+    }
+
+    const form = document.getElementById('signup-form');
+    const btn = document.getElementById('submit-btn');
+    const err = document.getElementById('err');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      err.style.display = 'none';
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value;
+      btn.disabled = true;
+      btn.innerHTML = '<span class="spin"></span>Creating your account…';
+      try {
+        const res = await fetch(FN, {
+          method: 'POST',
+          headers: { 'Content-Type':'application/json', 'apikey': ANON, 'Authorization': 'Bearer ' + ANON },
+          body: JSON.stringify({ action:'signup', email, password })
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || 'Something went wrong. Please try again.');
+        showKey(data.apiKey);
+      } catch (ex) {
+        err.textContent = ex.message;
+        err.style.display = 'block';
+        btn.disabled = false;
+        btn.textContent = 'Create account & get key';
+      }
+    });
+
+    function showKey(key){
+      document.getElementById('form-view').style.display = 'none';
+      document.getElementById('success').style.display = 'block';
+      document.getElementById('keyval').textContent = key;
+      document.getElementById('snippet').textContent = mcpSnippet(key);
+      window.scrollTo(0,0);
+
+      document.getElementById('copy-btn').onclick = () => copy(key, 'copy-btn', 'Copy key');
+      document.getElementById('copy-snip').onclick = () => copy(mcpSnippet(key), 'copy-snip', 'Copy config');
+    }
+
+    async function copy(text, btnId, label){
+      try { await navigator.clipboard.writeText(text); }
+      catch(_) {
+        const t=document.createElement('textarea');t.value=text;document.body.appendChild(t);t.select();document.execCommand('copy');t.remove();
+      }
+      const b = document.getElementById(btnId);
+      b.textContent = '✓ Copied!';
+      setTimeout(()=>{ b.textContent = label; }, 1600);
+    }
+  </script>
+</body>
+</html>
