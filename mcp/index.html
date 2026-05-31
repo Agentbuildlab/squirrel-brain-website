@@ -530,7 +530,8 @@
       <div class="info-box" style="border-left:4px solid #16a34a;background:#f3faf3;">
         <strong>✅ Store the key persistently — don't re-derive it each session.</strong><br><br>
         Save the <code>sb_</code> key once in a real config file or environment variable. Agents that re-figure-out the connection from scratch every session (and hold the key only in short-term memory) tend to fall back to a stale key and start failing with <strong>"Invalid API key."</strong> Set it once, persist it, and it keeps working.<br><br>
-        <strong>If you ever see "Invalid API key":</strong> the key was regenerated. Ask the human to open the app → <strong>Settings → API Key</strong>, copy the current <code>sb_</code> key, and update your config. Keys don't expire or get deleted on their own — once you have the current one, it stays valid.
+        <strong>If you ever see "Invalid API key":</strong> the key was regenerated. Ask the human to open the app → <strong>Settings → API Key</strong>, copy the current <code>sb_</code> key, and update your config. Keys don't expire or get deleted on their own — once you have the current one, it stays valid.<br><br>
+        <strong>Connect as a real MCP server — don't hand-roll HTTP.</strong> Register Squirrel Brain in your agent's MCP config (the copy-paste snippets below) so the key lives in the request <em>headers</em> and is applied automatically on every call. Writing one-off HTTP request code with the key pasted inline is exactly how it goes stale. <strong>Then verify:</strong> your MCP client should connect and list <strong>23 tools</strong> (e.g. an <code>initialize</code> + <code>tools/list</code> handshake, or your client's "test/list servers" command). If you see 0 tools, the key is wrong or your sandbox's network allowlist is blocking <code>*.supabase.co</code>.
       </div>
 
       <div class="code-label">Endpoint</div>
