@@ -662,7 +662,7 @@
           <tr class="group-hdr"><td colspan="3">WRITE</td></tr>
           <tr>
             <td><div class="tool-name"><code>create_item</code></div></td>
-            <td class="tool-desc">Save a note or checklist to the user's brain. Set <code>tts_text</code> to attach a voice message that plays when the user opens the card. Set <code>type_label="context"</code> to write persistent instructions all future agents read. Set <code>is_important: true</code> to flag for the 4 PM nudge email.</td>
+            <td class="tool-desc"><strong>Save a note or checklist to the user's Memory Stash.</strong> It appears there exactly like a note they captured themselves. <strong>Always start the <code>title</code> with one relevant emoji</strong> (e.g. <code>"🧹 Clean the house"</code>) — the app emoji-tags every user note, so match it. Set <code>tts_text</code> to attach a voice message that plays when the user opens the card. Set <code>type_label="context"</code> to write persistent instructions all future agents read. Set <code>is_important: true</code> to flag for the 4 PM nudge email.</td>
             <td class="tool-params">
               <span class="tag-req">type</span>
               <span class="tag-req">title</span>
@@ -678,12 +678,14 @@
           </tr>
           <tr>
             <td><div class="tool-name"><code>create_alarm</code></div></td>
-            <td class="tool-desc">Schedule a timed alarm on the user's iPhone. Sends a confirmation push immediately and stores the alarm for next app open. Fires at <code>trigger_at</code> time regardless of Do Not Disturb.</td>
+            <td class="tool-desc"><strong>This is the calendar tool.</strong> Puts a tappable event on the user's calendar <em>and</em> schedules an iPhone alarm, tagged <em>"Made by &lt;your agent_name&gt;"</em>. Use it for <strong>any appointment, event, deadline, or reminder with a time</strong> — when the user says "put it on my calendar" or "remind me," this is the tool. <strong>Start <code>label</code> with a relevant emoji</strong> (e.g. <code>"🦷 Dentist"</code>). Fires regardless of Do Not Disturb.</td>
             <td class="tool-params">
               <span class="tag-req">trigger_at</span>
               <span class="tag-req">label</span>
+              <span class="tag-opt">location</span>
               <span class="tag-opt">sound</span>
               <span class="tag-opt">notes</span>
+              <span class="tag-opt">agent_name</span>
             </td>
           </tr>
           <tr>
@@ -767,7 +769,7 @@
           </tr>
           <tr>
             <td><div class="tool-name"><code>send_portal_message</code></div></td>
-            <td class="tool-desc">Send a message to the user in the MCP Agent Portal AND push-notify their phone. Appears instantly in the Portal UI. Always use this to close the loop after completing a task.</td>
+            <td class="tool-desc">Send a chat message to the user in the MCP Agent Portal AND push-notify their phone. Use it to talk to the user or confirm what you did. <strong>Do NOT use this in place of an action</strong> — if the user gives you something to save (an appointment, a task, info to remember), call <code>create_alarm</code> or <code>create_item</code> instead of just messaging it, or it never reaches their calendar/stash.</td>
             <td class="tool-params"><code>content</code> (required) · <code>action_taken</code> (optional — shown below the message, e.g. <code>"Created alarm for 3 PM"</code>)</td>
           </tr>
 
@@ -794,6 +796,11 @@
       </table>
 
       <div class="info-box">
+        <strong>★ Golden rules (read these):</strong><br>
+        1. <strong>Act, don't just message.</strong> Something with a time → <code>create_alarm</code> (calendar). Info/notes/lists → <code>create_item</code> (Memory Stash). <code>send_portal_message</code> is only for chatting/confirming — a message alone never lands on the calendar or in the stash.<br>
+        2. <strong>Always start a <code>title</code> / <code>label</code> with one relevant emoji</strong> (📝 if nothing fits). The app emoji-tags every note the user captures; match it.<br>
+        3. <strong>Pass <code>agent_name</code></strong> on <code>create_item</code> / <code>create_alarm</code> so the user sees who made it.<br>
+        4. <strong>Not yet supported:</strong> there is no tool to attach an image, so agents can't make photo-notes ("PixNotes") — send the text via <code>create_item</code>.<br><br>
         <strong><code>create_item</code> type values:</strong> <code>"note"</code> for a single item, <code>"running"</code> for a checklist (use bullet format in content: <code>"• item1\n• item2"</code>).<br><br>
         <strong><code>type_label</code> options:</strong> <code>task</code>, <code>question</code>, <code>fyi</code>, <code>alert</code>, <code>confirmation</code>, <code>note</code>, <code>code</code>, <code>context</code>.<br><br>
         <strong><code>create_alarm</code> sound options:</strong> <code>chipmunk_squirrel</code>, <code>angry_squirrel</code>, <code>gentle_alarm</code>, <code>digital_alarm</code>, <code>fire_alarm</code>. Default: <code>gentle_alarm</code>.<br><br>
