@@ -527,6 +527,12 @@
         <strong>Step 3 — Agent self-manages from there.</strong> Once an agent has a valid key, it can call <code>rotate_api_key</code> to generate a fresh key anytime — no human needed. Keys are valid for <strong>1 year</strong>. The app sends a push notification 7 days before expiry.
       </div>
 
+      <div class="info-box" style="border-left:4px solid #16a34a;background:#f3faf3;">
+        <strong>✅ Store the key persistently — don't re-derive it each session.</strong><br><br>
+        Save the <code>sb_</code> key once in a real config file or environment variable. Agents that re-figure-out the connection from scratch every session (and hold the key only in short-term memory) tend to fall back to a stale key and start failing with <strong>"Invalid API key."</strong> Set it once, persist it, and it keeps working.<br><br>
+        <strong>If you ever see "Invalid API key":</strong> the key was regenerated. Ask the human to open the app → <strong>Settings → API Key</strong>, copy the current <code>sb_</code> key, and update your config. Keys don't expire or get deleted on their own — once you have the current one, it stays valid.
+      </div>
+
       <div class="code-label">Endpoint</div>
       <div class="code-block"><span class="ck">POST</span> https://geczbtsjfbvfukdzdemr.supabase.co/functions/v1/mcp-server</div>
 
