@@ -617,7 +617,7 @@
           <tr class="group-hdr"><td colspan="3">REACH THE USER NOW</td></tr>
           <tr>
             <td><div class="tool-name"><code>pip_call</code></div></td>
-            <td class="tool-desc">Voice alarm on the user's iPhone in ~10 seconds. Generates TTS in Pip's nova voice, sends a silent push, triggers a full-screen popup that auto-plays — no tap required. Use when something genuinely needs immediate attention.</td>
+            <td class="tool-desc"><strong>Urgent voice CALL.</strong> Rings the user's iPhone in ~10 seconds: TTS in the squirrel's nova voice, silent push, full-screen popup that auto-plays — no tap required. Use only when something genuinely needs <strong>immediate</strong> attention. <em>For a calm voice message they listen to later, use <code>create_item</code> with <code>tts_text</code> (a saved voice note) instead.</em></td>
             <td class="tool-params">
               <span class="tag-req">message</span>
               <span class="tag-opt">title</span>
@@ -670,7 +670,7 @@
           <tr class="group-hdr"><td colspan="3">WRITE</td></tr>
           <tr>
             <td><div class="tool-name"><code>create_item</code></div></td>
-            <td class="tool-desc"><strong>Save a note or checklist to the user's Memory Stash.</strong> It appears there exactly like a note they captured themselves. <strong>Always start the <code>title</code> with one relevant emoji</strong> (e.g. <code>"🧹 Clean the house"</code>) — the app emoji-tags every user note, so match it. Set <code>tts_text</code> to attach a voice message that plays when the user opens the card. Set <code>type_label="context"</code> to write persistent instructions all future agents read. Set <code>is_important: true</code> to flag for the 4 PM nudge email.</td>
+            <td class="tool-desc"><strong>Save a note or checklist to the user's Memory Stash.</strong> It appears there exactly like a note they captured themselves. <strong>Always start the <code>title</code> with one relevant emoji</strong> (e.g. <code>"🧹 Clean the house"</code>) — the app emoji-tags every user note, so match it. Set <code>tts_text</code> to send a <strong>voice note</strong> — your spoken message is saved into the Memory Stash as a playable voice note (green mic card + play button) that the user listens to whenever they open it. This is the <em>calm, non-urgent</em> way to talk to them; for a "right now" ringing call use <code>pip_call</code>. Set <code>type_label="context"</code> to write persistent instructions all future agents read. Set <code>is_important: true</code> to flag for the 4 PM nudge email.</td>
             <td class="tool-params">
               <span class="tag-req">type</span>
               <span class="tag-req">title</span>
