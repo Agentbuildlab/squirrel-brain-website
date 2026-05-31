@@ -1001,6 +1001,7 @@
 
       <div class="agent-tabs" id="agentTabs">
         <button class="agent-tab active" onclick="showAgent('claude')">Claude Desktop</button>
+        <button class="agent-tab" onclick="showAgent('claudecode')">Claude Code (web)</button>
         <button class="agent-tab" onclick="showAgent('cursor')">Cursor / Codex</button>
         <button class="agent-tab" onclick="showAgent('python')">Python (LangGraph)</button>
         <button class="agent-tab" onclick="showAgent('generic')">Generic HTTP</button>
@@ -1022,6 +1023,31 @@
     }
   }
 }</pre>
+        </div>
+      </div>
+
+      <div class="agent-config" id="config-claudecode">
+        <p style="color:var(--muted);font-size:14px;margin-bottom:10px;">Add a <code>.mcp.json</code> to your project root (or run <code>claude mcp add</code>). Works in the Claude Code CLI and in <strong>Claude Code on the web</strong>.</p>
+        <div class="copy-block" id="copy-claudecode">
+          <button class="copy-btn" onclick="copyBlock('copy-claudecode')">Copy</button>
+<pre>{
+  "mcpServers": {
+    "squirrel-brain": {
+      "type": "http",
+      "url": "https://geczbtsjfbvfukdzdemr.supabase.co/functions/v1/mcp-server",
+      "headers": {
+        "X-API-Key": "${SQUIRREL_BRAIN_API_KEY}",
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imdlc3pidHNqZmJ2ZnVrZHpkZW1yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY0MDc3MzIsImV4cCI6MjA2MTk4MzczMn0.3bFqW0pV9q8Bh4hEKvfVFdPgAWjXHNFHg8cj3xMlRi8"
+      }
+    }
+  }
+}</pre>
+        </div>
+        <p style="color:var(--muted);font-size:13px;margin-top:8px;line-height:1.6;">Or via CLI: <code>claude mcp add --transport http squirrel-brain https://geczbtsjfbvfukdzdemr.supabase.co/functions/v1/mcp-server --header "X-API-Key: ${SQUIRREL_BRAIN_API_KEY}"</code></p>
+        <div class="info-box" style="border-left:4px solid var(--orange);background:#fff8f0;margin-top:14px;">
+          <strong>⚠️ Claude Code on the web — two one-time steps in the session settings:</strong><br><br>
+          <strong>1. Allowlist the host.</strong> The web sandbox blocks outbound network calls by default. Add <code>geczbtsjfbvfukdzdemr.supabase.co</code> (or <code>*.supabase.co</code>) to your environment's allowed domains, or the MCP server is unreachable. <em>(This is also why an agent may report it "can't access" this site — it's the sandbox allowlist, not us; this site is public.)</em><br><br>
+          <strong>2. Add the key as a secret.</strong> Set an environment variable <code>SQUIRREL_BRAIN_API_KEY</code> = your <code>sb_</code> key (from the app → Settings → API Key). The config above references it, so the key never gets hardcoded. <code>${VAR}</code> is expanded by Claude Code in <code>.mcp.json</code> headers.
         </div>
       </div>
 
