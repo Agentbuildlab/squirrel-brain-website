@@ -1119,7 +1119,7 @@ Body (tools/call):
           <tr>
             <td class="rate-action">HTTP 401</td>
             <td>Missing or invalid <code>X-API-Key</code></td>
-            <td>Add the header. Regenerate key in Settings if revoked.</td>
+            <td><strong>"Invalid API key" almost always means the key was regenerated.</strong> Ask the user to open the app → <strong>Settings → API Key</strong>, copy the current <code>sb_</code> key, and update your config. Keys don't expire or get deleted on their own, so once you have the current one it keeps working — store it persistently (env var / config file), don't re-derive it each session.</td>
           </tr>
           <tr>
             <td class="rate-action">HTTP 403</td>
