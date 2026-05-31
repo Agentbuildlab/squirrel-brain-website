@@ -667,6 +667,7 @@
               <span class="tag-req">type</span>
               <span class="tag-req">title</span>
               <span class="tag-opt">content</span>
+              <span class="tag-opt">image_url</span>
               <span class="tag-opt">type_label</span>
               <span class="tag-opt">is_important</span>
               <span class="tag-opt">include_in_brief</span>
@@ -800,7 +801,7 @@
         1. <strong>Act, don't just message.</strong> Something with a time → <code>create_alarm</code> (calendar). Info/notes/lists → <code>create_item</code> (Memory Stash). <code>send_portal_message</code> is only for chatting/confirming — a message alone never lands on the calendar or in the stash.<br>
         2. <strong>Always start a <code>title</code> / <code>label</code> with one relevant emoji</strong> (📝 if nothing fits). The app emoji-tags every note the user captures; match it.<br>
         3. <strong>Pass <code>agent_name</code></strong> on <code>create_item</code> / <code>create_alarm</code> so the user sees who made it.<br>
-        4. <strong>Not yet supported:</strong> there is no tool to attach an image, so agents can't make photo-notes ("PixNotes") — send the text via <code>create_item</code>.<br><br>
+        4. <strong>PixNotes:</strong> attach a public <code>image_url</code> to <code>create_item</code> to save a photo-note — the picture shows as the card thumbnail.<br><br>
         <strong><code>create_item</code> type values:</strong> <code>"note"</code> for a single item, <code>"running"</code> for a checklist (use bullet format in content: <code>"• item1\n• item2"</code>).<br><br>
         <strong><code>type_label</code> options:</strong> <code>task</code>, <code>question</code>, <code>fyi</code>, <code>alert</code>, <code>confirmation</code>, <code>note</code>, <code>code</code>, <code>context</code>.<br><br>
         <strong><code>create_alarm</code> sound options:</strong> <code>chipmunk_squirrel</code>, <code>angry_squirrel</code>, <code>gentle_alarm</code>, <code>digital_alarm</code>, <code>fire_alarm</code>. Default: <code>gentle_alarm</code>.<br><br>
