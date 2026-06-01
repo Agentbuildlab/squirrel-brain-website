@@ -437,7 +437,7 @@
         </div>
         <div class="atq-row">
           <span class="atq-name">list_items</span>
-          <div><div class="atq-desc">Read current tasks, notes, alarms. Check this before creating items to avoid duplicates.</div><div class="atq-note">Optional: type, status ("pending"|"done"|"all"), limit, search.</div></div>
+          <div><div class="atq-desc">Read current tasks, notes, alarms. Check this before creating items to avoid duplicates.</div><div class="atq-note">Optional: type, status ("pending"|"done"|"all"), limit, search, maker_name.</div></div>
         </div>
         <div class="atq-row">
           <span class="atq-name">get_daily_brief</span>
@@ -453,7 +453,7 @@
         </div>
         <div class="atq-row">
           <span class="atq-name">search_items</span>
-          <div><div class="atq-desc">Keyword search across all item titles, content, and notes. Use when you want to find something but don't have an ID.</div><div class="atq-note">Required: query. Optional: type, status, limit.</div></div>
+          <div><div class="atq-desc">Keyword search across everything — every type and status, including calendar events — by default. Use when you want to find something but don't have an ID.</div><div class="atq-note">Required: query. Optional: type, status, limit, maker_name.</div></div>
         </div>
         <div class="atq-row">
           <span class="atq-name">get_overdue_items</span>
@@ -477,7 +477,7 @@
         <li><a href="#overview">What this is (for humans)</a></li>
         <li><a href="#auth">Authentication &amp; API key</a></li>
         <li><a href="#session-start">Session start sequence</a></li>
-        <li><a href="#tools">All 23 tools — full reference</a></li>
+        <li><a href="#tools">All 24 tools — full reference</a></li>
         <li><a href="#examples">curl examples</a></li>
         <li><a href="#checklist">Getting started checklist</a></li>
         <li><a href="#agent-configs">Copy-paste agent configs</a></li>
@@ -531,7 +531,7 @@
         <strong>✅ Store the key persistently — don't re-derive it each session.</strong><br><br>
         Save the <code>sb_</code> key once in a real config file or environment variable. Agents that re-figure-out the connection from scratch every session (and hold the key only in short-term memory) tend to fall back to a stale key and start failing with <strong>"Invalid API key."</strong> Set it once, persist it, and it keeps working.<br><br>
         <strong>If you ever see "Invalid API key":</strong> the key was regenerated. Ask the human to open the app → <strong>Settings → API Key</strong>, copy the current <code>sb_</code> key, and update your config. Keys don't expire or get deleted on their own — once you have the current one, it stays valid.<br><br>
-        <strong>Connect as a real MCP server — don't hand-roll HTTP.</strong> Register Squirrel Brain in your agent's MCP config (the copy-paste snippets below) so the key lives in the request <em>headers</em> and is applied automatically on every call. Writing one-off HTTP request code with the key pasted inline is exactly how it goes stale. <strong>Then verify:</strong> your MCP client should connect and list <strong>23 tools</strong> (e.g. an <code>initialize</code> + <code>tools/list</code> handshake, or your client's "test/list servers" command). If you see 0 tools, the key is wrong or your sandbox's network allowlist is blocking <code>*.supabase.co</code>.<br><br>
+        <strong>Connect as a real MCP server — don't hand-roll HTTP.</strong> Register Squirrel Brain in your agent's MCP config (the copy-paste snippets below) so the key lives in the request <em>headers</em> and is applied automatically on every call. Writing one-off HTTP request code with the key pasted inline is exactly how it goes stale. <strong>Then verify:</strong> your MCP client should connect and list <strong>24 tools</strong> (e.g. an <code>initialize</code> + <code>tools/list</code> handshake, or your client's "test/list servers" command). If you see 0 tools, the key is wrong or your sandbox's network allowlist is blocking <code>*.supabase.co</code>.<br><br>
         <strong>Once it's configured, just CALL the tools — don't go hunting for the key.</strong> A common failure mode: an agent forgets it already has the connection and starts trying to <em>fetch</em> the key (writing a Keychain/secret-lookup script, an <code>SB_API_KEY</code> env shim, a <code>get_*_key</code> helper) before every call. You never need to — the configured MCP connection injects the key for you. If you have the <code>squirrel_brain</code> tools, call <code>pip_call</code> / <code>create_alarm</code> / <code>create_item</code> directly. No scripts, no key retrieval.
       </div>
 
@@ -601,7 +601,7 @@
     <!-- ──────────────────────────────────────────────────────── -->
     <div class="doc-section" id="tools">
       <div class="doc-section-label">Tools Reference</div>
-      <h2 class="doc-section-title">All 23 available tools</h2>
+      <h2 class="doc-section-title">All 24 available tools</h2>
       <p>Call <code>tools/list</code> at any time to get live JSON schemas. The table below matches the current schema exactly.</p>
 
       <table class="tools-table">
@@ -658,12 +658,13 @@
           </tr>
           <tr>
             <td><div class="tool-name"><code>list_items</code></div></td>
-            <td class="tool-desc">Query tasks, notes, and alarms. Check this before creating items to avoid duplicates. Filter by type and status.</td>
+            <td class="tool-desc">Query tasks, notes, and alarms. Check this before creating items to avoid duplicates. Filter by type and status. Pass <code>maker_name</code> to return only items created by one maker — powers showing everything one agent created.</td>
             <td class="tool-params">
               <span class="tag-opt">type</span>
               <span class="tag-opt">status</span>
               <span class="tag-opt">limit</span>
               <span class="tag-opt">search</span>
+              <span class="tag-opt">maker_name</span>
             </td>
           </tr>
 
@@ -731,6 +732,13 @@
               <span class="tag-opt">upcoming_only</span>
             </td>
           </tr>
+          <tr>
+            <td><div class="tool-name"><code>delete_items_by_maker</code></div></td>
+            <td class="tool-desc">Bulk soft-delete <strong>every</strong> item created by one maker (an agent name, e.g. <code>"Hazel"</code>, or a stable <code>"Agent-xxxx"</code> id) in a single call — the fast way to clean up everything one agent put in, instead of deleting items one at a time. Soft-delete (recoverable). <strong>Use with care.</strong></td>
+            <td class="tool-params">
+              <span class="tag-req">maker_name</span>
+            </td>
+          </tr>
 
           <tr class="group-hdr"><td colspan="3">QUERY &amp; SEARCH</td></tr>
           <tr>
@@ -742,12 +750,13 @@
           </tr>
           <tr>
             <td><div class="tool-name"><code>search_items</code></div></td>
-            <td class="tool-desc">Keyword search across all item titles, content, and notes. Use when you want to find an item but don't have its ID.</td>
+            <td class="tool-desc">Keyword search across <strong>everything</strong> — all titles, content, and notes, spanning every type and status (including calendar events) by default. Use when you want to find an item but don't have its ID. Pass <code>maker_name</code> to scope the search to one maker's items.</td>
             <td class="tool-params">
               <span class="tag-req">query</span>
               <span class="tag-opt">type</span>
               <span class="tag-opt">status</span>
               <span class="tag-opt">limit</span>
+              <span class="tag-opt">maker_name</span>
             </td>
           </tr>
           <tr>
@@ -797,7 +806,7 @@
           <tr class="group-hdr"><td colspan="3">META</td></tr>
           <tr>
             <td><div class="tool-name"><code>get_squirrel_brain_help</code></div></td>
-            <td class="tool-desc">Returns a full self-configuration guide: endpoint, the hardcoded public anon key, all 23 tools with params, and session start instructions. Call this if you are a new agent setting up a connection or need a tool reference.</td>
+            <td class="tool-desc">Returns a full self-configuration guide: endpoint, the hardcoded public anon key, all 24 tools with params, and session start instructions. Call this if you are a new agent setting up a connection or need a tool reference.</td>
             <td class="tool-params"><em style="color:#b8986e;">no params</em></td>
           </tr>
 
@@ -810,6 +819,7 @@
         2. <strong>Always start a <code>title</code> / <code>label</code> with one relevant emoji</strong> (📝 if nothing fits). The app emoji-tags every note the user captures; match it.<br>
         3. <strong>Pass <code>agent_name</code></strong> on <code>create_item</code> / <code>create_alarm</code> so the user sees who made it.<br>
         4. <strong>PixNotes:</strong> attach a public <code>image_url</code> to <code>create_item</code> to save a photo-note — the picture shows as the card thumbnail.<br><br>
+        <strong>Maker attribution:</strong> every item records <em>who</em> created it — a <code>maker_kind</code> (<code>user</code> | <code>local_agent</code> | <code>external_agent</code>) and a <code>maker_name</code> shown on the card. External MCP agents are identified by their <code>X-Agent-Name</code> request header; if you don't send one, you're auto-assigned a stable <code>Agent-xxxx</code> id — so no agent write is ever anonymous. Set <code>X-Agent-Name</code> to your agent's name so the user sees it. Use <code>list_items</code> / <code>search_items</code> with <code>maker_name</code> to show everything one agent created, and <code>delete_items_by_maker</code> to bulk-remove it.<br><br>
         <strong><code>create_item</code> type values:</strong> <code>"note"</code> for a single item, <code>"running"</code> for a checklist (use bullet format in content: <code>"• item1\n• item2"</code>).<br><br>
         <strong><code>type_label</code> options:</strong> <code>task</code>, <code>question</code>, <code>fyi</code>, <code>alert</code>, <code>confirmation</code>, <code>note</code>, <code>code</code>, <code>context</code>.<br><br>
         <strong><code>create_alarm</code> sound options:</strong> <code>chipmunk_squirrel</code>, <code>angry_squirrel</code>, <code>gentle_alarm</code>, <code>digital_alarm</code>, <code>fire_alarm</code>. Default: <code>gentle_alarm</code>.<br><br>
