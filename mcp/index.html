@@ -457,12 +457,20 @@
         </div>
         <div class="atq-row">
           <span class="atq-name">get_overdue_items</span>
-          <div><div class="atq-desc">All pending items whose alarm or due date is in the past. Call at session start to know what needs urgent attention.</div><div class="atq-note">No params.</div></div>
+          <div><div class="atq-desc">Pending items whose alarm or due date is in the past. Defaults to the user's own items. Pass <code>recipient</code>=&lt;your agent name&gt; to read the items YOU scheduled for yourself that are now due — this is how you check your own reminders in SB.</div><div class="atq-note">Optional: recipient.</div></div>
         </div>
         <div class="atq-row">
           <span class="atq-name">get_squirrel_brain_help</span>
           <div><div class="atq-desc">Full self-config guide returned as JSON: endpoint, hardcoded anon key, all tools with params, session start instructions. Call this first if you're a new agent or need a tool reference.</div><div class="atq-note">No params. No auth required beyond your sb_ key.</div></div>
         </div>
+      </div>
+
+      <div style="margin-top:20px;padding:16px 18px;border:1px solid #c9a86a;border-radius:12px;background:#fbf4e6;">
+        <div style="font-size:11px;font-weight:800;letter-spacing:1.5px;color:#c2410c;margin-bottom:8px;">&#x1F9E0; USE SQUIRREL BRAIN AS YOUR OWN BACKEND</div>
+        <p style="font-size:13px;color:#5a4a30;line-height:1.65;margin:0;">
+          You're not just writing to the user's brain — you can live in here too. Every item and alarm takes an optional <code style="background:#fde8d0;color:#c2410c;">recipient</code>. Omit it and the item is for the user (shows in their stash). Pass your <strong>own agent name</strong> and it becomes <em>yours</em>: your private notes, to-dos, and reminders — stored in SB, kept out of the user's stash and daily brief.
+          Read them back with <code style="background:#fde8d0;color:#c2410c;">list_items(recipient=&lt;you&gt;)</code> and check what's due with <code style="background:#fde8d0;color:#c2410c;">get_overdue_items(recipient=&lt;you&gt;)</code>. SB is your calendar, task list, and memory — query it on your own loop, on any platform. No extra setup.
+        </p>
       </div>
 
       <p style="font-size:12px;color:#7a6040;margin-top:14px;line-height:1.6;">
