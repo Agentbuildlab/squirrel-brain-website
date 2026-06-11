@@ -51,7 +51,7 @@ export default function PricingPage() {
           style={{ background: "linear-gradient(160deg, #FFF0E6 0%, #faf7f2 60%)" }}
         >
           <div className="max-w-3xl mx-auto px-4 sm:px-6">
-            <FadeIn>
+            <FadeIn immediate>
               <h1
                 id="pricing-heading"
                 className="font-display text-5xl sm:text-6xl font-extrabold text-ink mb-5"
@@ -59,7 +59,7 @@ export default function PricingPage() {
                 Simple, honest pricing
               </h1>
             </FadeIn>
-            <FadeIn delay={0.08}>
+            <FadeIn immediate delay={0.08}>
               <p className="text-xl text-muted max-w-xl mx-auto">
                 Free to start. Unlock everything when you're ready — no credit
                 card needed to try it.

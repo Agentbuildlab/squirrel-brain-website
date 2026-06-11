@@ -104,7 +104,7 @@ export default function DemosPage() {
           style={{ background: "linear-gradient(160deg, #F5F0FF 0%, #faf7f2 60%)" }}
         >
           <div className="max-w-6xl mx-auto px-4 sm:px-6 text-center">
-            <FadeIn>
+            <FadeIn immediate>
               <div className="inline-flex items-center gap-2 bg-purple-50 text-purple-600 text-xs font-bold px-3 py-1.5 rounded-full mb-6">
                 <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
                   <rect x="1" y="2" width="10" height="8" rx="1.5" stroke="currentColor" strokeWidth="1.4" fill="none"/>
@@ -113,7 +113,7 @@ export default function DemosPage() {
                 Demo reel
               </div>
             </FadeIn>
-            <FadeIn delay={0.08}>
+            <FadeIn immediate delay={0.08}>
               <h1
                 id="demos-hero-heading"
                 className="font-display text-5xl sm:text-6xl font-extrabold text-ink leading-tight mb-5"
@@ -121,13 +121,13 @@ export default function DemosPage() {
                 Watch it work
               </h1>
             </FadeIn>
-            <FadeIn delay={0.15}>
+            <FadeIn immediate delay={0.15}>
               <p className="text-lg text-muted max-w-xl mx-auto mb-6">
                 Short, honest clips of Squirrel Brain doing its thing. No narration, no
                 polished ads — just real app behaviour.
               </p>
             </FadeIn>
-            <FadeIn delay={0.2}>
+            <FadeIn immediate delay={0.2}>
               <p className="text-sm text-muted/70">
                 Demo clips are in production — placeholders show what each clip covers.
               </p>

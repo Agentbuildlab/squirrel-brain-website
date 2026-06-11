@@ -57,7 +57,7 @@ export default function WorkPage() {
         >
           <div className="max-w-6xl mx-auto px-4 sm:px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
-              <FadeIn>
+              <FadeIn immediate>
                 <div className="inline-flex items-center gap-2 bg-accent-light text-accent text-xs font-bold px-3 py-1.5 rounded-full mb-6">
                   <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
                     <rect x="2" y="3" width="8" height="6" rx="1" stroke="currentColor" strokeWidth="1.4" fill="none"/>
@@ -66,7 +66,7 @@ export default function WorkPage() {
                   For the field
                 </div>
               </FadeIn>
-              <FadeIn delay={0.08}>
+              <FadeIn immediate delay={0.08}>
                 <h1
                   id="work-hero-heading"
                   className="font-display text-5xl sm:text-6xl font-extrabold text-ink leading-[1.05] mb-5 text-balance"
@@ -75,18 +75,18 @@ export default function WorkPage() {
                   <span className="text-accent">Your phone isn't.</span>
                 </h1>
               </FadeIn>
-              <FadeIn delay={0.15}>
+              <FadeIn immediate delay={0.15}>
                 <p className="text-lg text-muted leading-relaxed mb-8 max-w-lg">
                   For sales reps, delivery drivers, service techs, and contractors. Every
                   job detail captured between stops. Every follow-up handled before
                   end of day.
                 </p>
               </FadeIn>
-              <FadeIn delay={0.2}>
+              <FadeIn immediate delay={0.2}>
                 <CtaButton size="lg" />
               </FadeIn>
             </div>
-            <FadeIn from="right" delay={0.1} className="flex justify-center lg:justify-end">
+            <FadeIn immediate from="right" delay={0.1} className="flex justify-center lg:justify-end">
               <DeviceFrame
                 placeholderLabel={"DEMO: voice debrief\n→ follow-up tasks"}
                 imageSrc="/assets/lifestyle_sales_walkout.png"

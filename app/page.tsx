@@ -111,7 +111,7 @@ export default function HomePage() {
           <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center py-16 lg:py-24">
             {/* Left: copy */}
             <div>
-              <FadeIn delay={0.05}>
+              <FadeIn immediate delay={0.05}>
                 <div className="inline-flex items-center gap-2 bg-accent-light text-accent text-xs font-bold px-3 py-1.5 rounded-full mb-6 tracking-wide">
                   <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor" aria-hidden="true">
                     <circle cx="6" cy="6" r="6"/>
@@ -120,7 +120,7 @@ export default function HomePage() {
                 </div>
               </FadeIn>
 
-              <FadeIn delay={0.1}>
+              <FadeIn immediate delay={0.1}>
                 <h1
                   id="hero-heading"
                   className="font-display text-5xl sm:text-6xl lg:text-7xl font-extrabold text-ink leading-[1.05] tracking-tight text-balance"
@@ -132,7 +132,7 @@ export default function HomePage() {
                 </h1>
               </FadeIn>
 
-              <FadeIn delay={0.18}>
+              <FadeIn immediate delay={0.18}>
                 <p className="mt-5 text-lg sm:text-xl text-muted leading-relaxed max-w-md">
                   Squirrel Brain turns voice notes and photos into alarms,
                   reminders, and calendar events — then makes sure you follow
@@ -140,7 +140,7 @@ export default function HomePage() {
                 </p>
               </FadeIn>
 
-              <FadeIn delay={0.25}>
+              <FadeIn immediate delay={0.25}>
                 <div className="mt-8 flex flex-wrap gap-4 items-center">
                   <CtaButton size="lg" />
                   <Link
@@ -155,7 +155,7 @@ export default function HomePage() {
                 </div>
               </FadeIn>
 
-              <FadeIn delay={0.32}>
+              <FadeIn immediate delay={0.32}>
                 <p className="mt-4 text-xs text-muted/70">
                   Free to start · $9.99/mo · iOS only
                 </p>
@@ -163,7 +163,7 @@ export default function HomePage() {
             </div>
 
             {/* Right: hero device frame */}
-            <FadeIn delay={0.15} from="right" className="flex justify-center lg:justify-end">
+            <FadeIn immediate delay={0.15} from="right" className="flex justify-center lg:justify-end">
               <DeviceFrame
                 placeholderLabel={"DEMO: schedule photo\n→ alarms set"}
                 imageSrc="/assets/01-home.png"
