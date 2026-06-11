@@ -1,6 +1,6 @@
-// TODO: Replace "#" with the real public TestFlight link once Adam creates it in App Store Connect.
-// Swap to the App Store URL at launch.
-export const TESTFLIGHT_URL = "#";
+// Public TestFlight beta link (created 2026-06-11, serves build 87+).
+// Swap to the App Store URL at launch — real Apple app ID is 6766505549.
+export const TESTFLIGHT_URL = "https://testflight.apple.com/join/R7WRjGEC";
 
 export const SITE_NAME = "Squirrel Brain";
 export const SITE_TAGLINE = "Say it. Snap it. It's handled.";

@@ -17,6 +17,7 @@ const bricolage = Bricolage_Grotesque({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://squirrelbrainapp.com"),
   title: {
     default: `${SITE_NAME} — Say it. Snap it. It's handled.`,
     template: `%s — ${SITE_NAME}`,
