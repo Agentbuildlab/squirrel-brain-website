@@ -1,0 +1,1292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Developer Docs — Squirrel Brain MCP Server</title>
+  <meta name="description" content="Connect any AI agent to Squirrel Brain via MCP. Create alarms, read tasks, send voice messages to your phone — all from Claude or any agent." />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #f0e6d3;
+      --bg2:       #f5ece0;
+      --bg3:       #fdf5e8;
+      --orange:    #FF7A1A;
+      --orange-dim:#FF7A1A18;
+      --orange-mid:#FF7A1A44;
+      --white:     #2a1a08;
+      --muted:     #7a6040;
+      --border:    #d4b896;
+      --radius:    16px;
+      --font:      system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --mono:      "SF Mono", "Fira Code", "Cascadia Code", monospace;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--white);
+      font-family: var(--font);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ─────────────────────────────────────────────── */
+    nav.main-nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 32px;
+      background: rgba(240,230,211,0.92);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid #d4b89644;
+    }
+    .nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .nav-brand img { width: 36px; height: 36px; border-radius: 9px; }
+    .nav-brand span { font-size: 14px; font-weight: 800; letter-spacing: 0.08em; color: #2a1a08; }
+    .nav-brand em { color: var(--orange); font-style: normal; }
+    .nav-right { display: flex; align-items: center; gap: 14px; }
+    .nav-doc-badge {
+      font-size: 11px; font-weight: 800; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--orange);
+      background: var(--orange-dim); padding: 4px 12px; border-radius: 100px;
+      border: 1px solid var(--orange-mid);
+    }
+    .nav-cta {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--orange); color: #fff; text-decoration: none;
+      font-size: 14px; font-weight: 700; padding: 9px 20px;
+      min-height: 40px; border-radius: 100px; transition: opacity 0.2s;
+    }
+    .nav-cta:hover { opacity: 0.85; }
+
+    /* ── LAYOUT ──────────────────────────────────────────── */
+    .page-wrap { max-width: 900px; margin: 0 auto; padding: 110px 24px 80px; }
+
+    /* ── PAGE HEADER ─────────────────────────────────────── */
+    .back-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      color: #7a6040; font-size: 14px; font-weight: 600;
+      text-decoration: none; margin-bottom: 32px; transition: color 0.2s;
+    }
+    .back-link:hover { color: var(--orange); }
+
+    .page-label {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--orange-dim); border: 1px solid var(--orange-mid);
+      border-radius: 100px; padding: 5px 16px; margin-bottom: 20px;
+      font-size: 12px; font-weight: 800; color: var(--orange); letter-spacing: 0.12em; text-transform: uppercase;
+    }
+    .page-title {
+      font-size: clamp(32px, 5vw, 56px); font-weight: 900;
+      letter-spacing: -0.02em; line-height: 1.08; margin-bottom: 16px; color: #2a1a08;
+    }
+    .page-title span { color: var(--orange); }
+    .page-sub { font-size: 18px; color: #7a6040; line-height: 1.7; max-width: 620px; margin-bottom: 40px; }
+
+    /* Works with row */
+    .works-with {
+      display: flex; flex-wrap: wrap; align-items: center; gap: 10px;
+      margin-bottom: 8px;
+    }
+    .works-with-label { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; color: #8a7058; text-transform: uppercase; }
+    .works-pill {
+      display: inline-flex; align-items: center; gap: 6px;
+      border-radius: 100px; padding: 6px 14px; font-size: 13px; font-weight: 700;
+    }
+
+    /* ── SECTION DIVIDER ─────────────────────────────────── */
+    .doc-divider { border: none; border-top: 1px solid #d4b896; margin: 52px 0; }
+
+    /* ── SECTION STRUCTURE ───────────────────────────────── */
+    .doc-section { margin-bottom: 60px; }
+    .doc-section-label {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--orange); margin-bottom: 8px;
+    }
+    .doc-section-title {
+      font-size: clamp(22px, 3vw, 32px); font-weight: 900;
+      letter-spacing: -0.02em; line-height: 1.15; margin-bottom: 14px; color: #2a1a08;
+    }
+    .doc-section p { font-size: 15px; color: #7a6040; line-height: 1.75; margin-bottom: 14px; }
+    .doc-section p:last-child { margin-bottom: 0; }
+
+    /* ── CODE BLOCKS ─────────────────────────────────────── */
+    .code-block {
+      background: #fdf5e8; border: 1px solid #d4b896;
+      border-radius: 12px; padding: 18px 20px;
+      font-family: var(--mono); font-size: 13px; line-height: 1.8;
+      color: #5a4030; overflow-x: auto; white-space: pre; margin: 14px 0;
+      position: relative;
+    }
+    .code-block .ck { color: #1d6abf; }
+    .code-block .cs { color: #a0622a; }
+    .code-block .cn { color: #16a34a; }
+    .code-block .cc { color: #b8986e; }
+    .code-block .co { color: var(--orange); }
+    .code-block .cg { color: #16a34a; }
+
+    .code-label {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: #8a7058; margin-bottom: 5px;
+    }
+
+    code {
+      background: #f0e6d3; color: var(--orange);
+      padding: 2px 7px; border-radius: 6px;
+      font-family: var(--mono); font-size: 0.88em;
+    }
+
+    /* ── INFO BOXES ──────────────────────────────────────── */
+    .info-box {
+      padding: 16px 20px; border-radius: 12px;
+      border-left: 4px solid var(--orange);
+      background: #fdf0e0; font-size: 14px; color: #7a6040; line-height: 1.65; margin: 14px 0;
+    }
+    .info-box strong { color: #2a1a08; }
+    .info-box.green { border-left-color: #22C55E; background: #eef7ee; }
+    .info-box.blue  { border-left-color: #4A8FE7; background: #eef0f8; }
+    .info-box.purple { border-left-color: #a78bfa; background: #f3eeff; }
+
+    /* ── FOR AGENTS HERO BOX ─────────────────────────────── */
+    .for-agents-box {
+      background: #eef7ee; border: 1px solid #22C55E33;
+      border-radius: 18px; padding: 28px 30px; margin: 40px 0 52px;
+      position: relative; overflow: hidden;
+    }
+    .for-agents-box::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, #22C55E99, #22C55E22, transparent);
+    }
+    .for-agents-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: #22C55E22; border: 1px solid #22C55E44; color: #16a34a;
+      font-size: 11px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase;
+      padding: 4px 14px; border-radius: 100px; margin-bottom: 14px;
+    }
+    .for-agents-box h2 { font-size: 20px; font-weight: 800; color: #2a1a08; margin-bottom: 6px; }
+    .for-agents-box .agent-intro { font-size: 14px; color: #7a6040; margin-bottom: 22px; line-height: 1.6; }
+
+    .agent-fact-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px;
+    }
+    @media (max-width: 580px) { .agent-fact-grid { grid-template-columns: 1fr; } }
+
+    .agent-fact {
+      background: #e0f0e0; border: 1px solid #22C55E33; border-radius: 10px; padding: 13px 15px;
+    }
+    .agent-fact-label {
+      font-size: 10px; font-weight: 800; letter-spacing: 0.18em;
+      text-transform: uppercase; color: #16a34a99; margin-bottom: 6px;
+    }
+    .agent-fact-value {
+      font-family: var(--mono); font-size: 12px; color: #2a4a2a; line-height: 1.7; word-break: break-all;
+    }
+    .agent-fact-value .g { color: #16a34a; }
+    .agent-fact-value .d { color: #8a9a8a; }
+
+    .agent-startup {
+      background: #e0f0e0; border: 1px solid #22C55E33; border-radius: 10px; padding: 14px 16px; margin-bottom: 14px;
+    }
+    .agent-startup-label {
+      font-size: 10px; font-weight: 800; letter-spacing: 0.18em;
+      text-transform: uppercase; color: #16a34a99; margin-bottom: 10px;
+    }
+    .agent-startup ol { list-style: none; display: flex; flex-direction: column; gap: 8px; counter-reset: astep; }
+    .agent-startup ol li {
+      counter-increment: astep;
+      display: flex; align-items: flex-start; gap: 10px;
+      font-size: 13px; color: #5a4030; line-height: 1.5;
+    }
+    .agent-startup ol li::before {
+      content: counter(astep);
+      display: inline-flex; align-items: center; justify-content: center;
+      min-width: 20px; height: 20px; border-radius: 50%;
+      background: #22C55E22; color: #16a34a;
+      font-size: 11px; font-weight: 800; flex-shrink: 0; margin-top: 2px;
+    }
+    .agent-startup ol li strong { color: #2a1a08; }
+    .agent-startup ol li code { background: #d8ecd8; color: #16a34a; }
+
+    .agent-tools-quick {
+      background: #e0f0e0; border: 1px solid #22C55E33; border-radius: 10px; padding: 14px 16px;
+    }
+    .agent-tools-quick-label {
+      font-size: 10px; font-weight: 800; letter-spacing: 0.18em;
+      text-transform: uppercase; color: #16a34a99; margin-bottom: 10px;
+    }
+    .atq-row {
+      display: flex; align-items: flex-start; gap: 12px;
+      padding: 8px 0; border-bottom: 1px solid #c8e0c8; font-size: 13px;
+    }
+    .atq-row:last-child { border-bottom: none; padding-bottom: 0; }
+    .atq-name { color: #16a34a; font-family: var(--mono); font-size: 12px; min-width: 150px; flex-shrink: 0; }
+    .atq-desc { color: #5a4030; line-height: 1.5; }
+    .atq-note { font-size: 11px; color: #8a7058; margin-top: 2px; }
+
+    /* ── TOC ─────────────────────────────────────────────── */
+    .toc { background: #fdf5e8; border: 1px solid #d4b896; border-radius: 14px; padding: 20px 24px; margin-bottom: 52px; }
+    .toc-title { font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #8a7058; margin-bottom: 12px; }
+    .toc ol { list-style: none; display: flex; flex-direction: column; gap: 6px; counter-reset: toc; }
+    .toc ol li { counter-increment: toc; }
+    .toc ol li a {
+      display: flex; align-items: center; gap: 10px;
+      color: #5a4030; text-decoration: none; font-size: 15px; transition: color 0.18s;
+    }
+    .toc ol li a:hover { color: var(--orange); }
+    .toc ol li a::before {
+      content: counter(toc);
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 22px; height: 22px; border-radius: 50%;
+      background: #f0e6d3; border: 1px solid #d4b896;
+      font-size: 11px; font-weight: 800; color: var(--orange); flex-shrink: 0;
+    }
+
+    /* ── TOOLS TABLE ─────────────────────────────────────── */
+    .tools-table { width: 100%; border-collapse: collapse; font-size: 14px; margin: 18px 0; }
+    .tools-table thead tr { border-bottom: 1px solid #d4b896; }
+    .tools-table th {
+      text-align: left; font-size: 11px; font-weight: 700; letter-spacing: 0.14em;
+      text-transform: uppercase; color: #8a7058; padding: 8px 12px 10px;
+    }
+    .tools-table td { padding: 12px 12px; border-bottom: 1px solid #e8d8c0; vertical-align: top; line-height: 1.5; }
+    .tools-table tr:last-child td { border-bottom: none; }
+    .tools-table .tool-name { color: #2a1a08; font-weight: 700; white-space: nowrap; }
+    .tools-table .tool-desc { color: #7a6040; }
+    .tools-table .tool-params { color: #8a7058; font-size: 13px; font-family: var(--mono); }
+    .tools-table .tag-req { display: inline-block; font-size: 10px; font-weight: 800; padding: 2px 7px; border-radius: 100px; background: #FF7A1A18; color: var(--orange); margin: 2px 2px 2px 0; letter-spacing: 0.03em; }
+    .tools-table .tag-opt { display: inline-block; font-size: 10px; font-weight: 800; padding: 2px 7px; border-radius: 100px; background: #f0e6d3; color: #8a7058; margin: 2px 2px 2px 0; }
+    .tools-table .group-hdr td { background: #f0e6d3; color: #8a7058; font-size: 11px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; padding: 10px 12px 6px; }
+
+    /* ── CHECKLIST STEPS ─────────────────────────────────── */
+    .checklist { list-style: none; display: flex; flex-direction: column; gap: 12px; margin: 18px 0; }
+    .checklist li {
+      display: flex; align-items: flex-start; gap: 12px;
+      padding: 14px 18px; background: #fdf5e8;
+      border: 1px solid #d4b896; border-radius: 12px;
+      font-size: 15px; color: #7a6040; line-height: 1.5;
+    }
+    .step-num {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 26px; height: 26px; border-radius: 50%;
+      background: var(--orange); color: #fff;
+      font-size: 13px; font-weight: 800; flex-shrink: 0; margin-top: 1px;
+    }
+    .step-num.green { background: #22C55E; }
+    .checklist li strong { color: #2a1a08; }
+
+    /* ── PILL ROW ────────────────────────────────────────── */
+    .pill-row { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
+    .pill { font-size: 13px; font-weight: 700; background: #fdf5e8; border: 1px solid #d4b896; color: #7a6040; padding: 5px 14px; border-radius: 100px; }
+    .pill.orange { background: var(--orange-dim); border-color: var(--orange-mid); color: var(--orange); }
+
+    /* ── COPY BLOCKS ─────────────────────────────────────── */
+    .copy-block {
+      position: relative; background: #fdf5e8; border: 1px solid #d4b896;
+      border-radius: var(--radius); overflow: hidden; margin: 12px 0;
+    }
+    .copy-block pre {
+      font-family: var(--mono); font-size: 13px; line-height: 1.6;
+      color: #5a4030; padding: 18px 52px 18px 18px; overflow-x: auto; white-space: pre;
+    }
+    .copy-btn {
+      position: absolute; top: 10px; right: 10px;
+      background: #f0e6d3; color: #8a7058; border: 1px solid #d4b896;
+      border-radius: 8px; padding: 5px 12px; font-size: 12px; font-weight: 700;
+      cursor: pointer; font-family: var(--font); transition: all 0.15s;
+    }
+    .copy-btn:hover { color: #2a1a08; border-color: #b8986e; }
+    .copy-btn.copied { color: #16a34a; border-color: #22C55E44; }
+
+    /* ── AGENT CONFIG TABS ───────────────────────────────── */
+    .agent-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin: 20px 0 0; }
+    .agent-tab {
+      background: #fdf5e8; color: #7a6040; border: 1px solid #d4b896;
+      border-radius: 100px; padding: 7px 18px; font-size: 13px; font-weight: 700;
+      cursor: pointer; transition: all 0.15s; font-family: var(--font);
+    }
+    .agent-tab:hover { color: #2a1a08; border-color: #b8986e; }
+    .agent-tab.active { background: var(--orange-dim); color: var(--orange); border-color: var(--orange-mid); }
+    .agent-config { display: none; margin-top: 18px; }
+    .agent-config.active { display: block; }
+
+    /* ── RATE LIMIT TABLE ────────────────────────────────── */
+    .rate-table { width: 100%; border-collapse: collapse; font-size: 14px; margin: 16px 0; }
+    .rate-table th {
+      text-align: left; font-size: 11px; font-weight: 700; letter-spacing: 0.14em;
+      text-transform: uppercase; color: #8a7058; padding: 8px 12px 10px;
+      border-bottom: 1px solid #d4b896;
+    }
+    .rate-table td { padding: 10px 12px; border-bottom: 1px solid #e8d8c0; color: #7a6040; font-size: 14px; }
+    .rate-table tr:last-child td { border-bottom: none; }
+    .rate-table .rate-action { color: #2a1a08; font-weight: 600; }
+
+    /* ── FOOTER ──────────────────────────────────────────── */
+    footer {
+      background: #f5ece0; border-top: 1px solid #d4b896;
+      padding: 32px 24px; display: flex; flex-direction: column;
+      align-items: center; gap: 12px; text-align: center;
+    }
+    .footer-brand { display: flex; align-items: center; gap: 8px; }
+    .footer-brand img { width: 24px; height: 24px; }
+    .footer-brand span { font-size: 14px; font-weight: 700; color: #2a1a08; letter-spacing: 0.05em; }
+    .footer-brand span em { color: var(--orange); font-style: normal; }
+    .footer-links { display: flex; gap: 24px; flex-wrap: wrap; justify-content: center; }
+    .footer-links a { font-size: 14px; color: #7a6040; text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--orange); }
+    .footer-copy { font-size: 13px; color: #8a7058; }
+
+    /* ── RESPONSIVE ──────────────────────────────────────── */
+    @media (max-width: 640px) {
+      .page-wrap { padding: 96px 16px 60px; }
+      nav.main-nav { padding: 12px 16px; }
+      .nav-brand span { display: none; }
+      .tools-table th:nth-child(3), .tools-table td:nth-child(3) { display: none; }
+      .for-agents-box { padding: 20px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="main-nav">
+    <a href="/" class="nav-brand">
+      <img src="../assets/icon.png" alt="Squirrel Brain" />
+      <span>SQUIRREL <em>BRAIN</em></span>
+    </a>
+    <div class="nav-right">
+      <span class="nav-doc-badge">Developer Docs</span>
+      <a href="/" class="nav-cta">Get the App</a>
+    </div>
+  </nav>
+
+  <div class="page-wrap">
+
+    <a href="/" class="back-link">&#8592; squirrelbrainapp.com</a>
+
+    <!-- Page header -->
+    <div class="page-label">&#129302; MCP Server</div>
+    <h1 class="page-title">Connect Any AI Agent<br>to Your <span>Brain</span></h1>
+    <p class="page-sub">Squirrel Brain has a built-in MCP server. Any AI agent — Claude, a custom agent, or your own automation — can read your tasks, create alarms, and send voice messages directly to your phone.</p>
+
+    <!-- Works with -->
+    <div class="works-with">
+      <span class="works-with-label">Works with</span>
+      <span class="works-pill" style="background:#fdf0d8;color:#b45309;border:1px solid #f59e0b44;">&#x2726; Claude</span>
+      <span class="works-pill" style="background:#e8f5e8;color:#16a34a;border:1px solid #22C55E44;">&#x2726; Codex</span>
+      <span class="works-pill" style="background:#eef0f8;color:#2563eb;border:1px solid #60a5fa44;">&#x2726; LangGraph</span>
+      <span class="works-pill" style="background:#f3eeff;color:#7c3aed;border:1px solid #c084fc44;">&#x2726; Any MCP client</span>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════════ -->
+    <!-- FOR AGENTS — machine-readable self-setup block           -->
+    <!-- ══════════════════════════════════════════════════════════ -->
+    <div class="for-agents-box" id="for-agents">
+      <div class="for-agents-badge">&#x25CF; For AI Agents — read this first</div>
+      <h2>Self-setup guide — everything you need to connect</h2>
+      <p class="agent-intro">If you are an AI agent reading this page: the facts below are all you need. Follow the startup sequence and you are live in one round-trip. Read the tools table before taking any action.</p>
+
+      <div class="agent-fact-grid">
+        <div class="agent-fact">
+          <div class="agent-fact-label">Endpoint</div>
+          <div class="agent-fact-value"><span class="g">POST</span> https://geczbtsjfbvfukdzdemr<br>.supabase.co/functions/v1/mcp-server</div>
+        </div>
+        <div class="agent-fact">
+          <div class="agent-fact-label">Required Headers</div>
+          <div class="agent-fact-value">Content-Type: application/json<br><span class="g">X-API-Key: sb_&lt;your-key&gt;</span></div>
+        </div>
+        <div class="agent-fact">
+          <div class="agent-fact-label">Protocol</div>
+          <div class="agent-fact-value">JSON-RPC 2.0 over HTTPS<br><span class="d">method: "tools/call"</span><br><span class="d">params: { name, arguments }</span></div>
+        </div>
+        <div class="agent-fact">
+          <div class="agent-fact-label">Handshake</div>
+          <div class="agent-fact-value">{"method":"initialize","params":{}}<br>{"method":"tools/list","params":{}}</div>
+        </div>
+      </div>
+
+      <div class="agent-startup">
+        <div class="agent-startup-label">Session startup — call all three in parallel before doing anything else</div>
+        <ol>
+          <li><strong>Call <code>get_user_profile</code></strong> — get the user's name, timezone (IANA string), and notification preferences. You MUST have their timezone before creating any alarm or time-based item.</li>
+          <li><strong>Call <code>get_agent_context</code></strong> — read the user's persistent context notes (type_label=context). Treat these as standing orders for this session — they override your defaults.</li>
+          <li><strong>Call <code>get_current_time</code></strong> — get current UTC and user's local time. Never compute timezone offsets yourself — always use this.</li>
+        </ol>
+      </div>
+
+      <div class="agent-tools-quick">
+        <div class="agent-tools-quick-label">Key tools — full schema below at <a href="#tools" style="color:#16a34a;">&#35;tools</a></div>
+        <div class="atq-row">
+          <span class="atq-name">pip_call</span>
+          <div><div class="atq-desc">Voice alarm on user's phone in ~10s. TTS via nova voice, full-screen popup, auto-plays. No tap required. Use for anything genuinely urgent.</div><div class="atq-note">Required: message. Optional: title.</div></div>
+        </div>
+        <div class="atq-row">
+          <span class="atq-name">notify_human</span>
+          <div><div class="atq-desc">Instant push notification (banner). Fires via APNs. Use for status updates — not urgent. For urgent use pip_call.</div><div class="atq-note">Required: title, message. Optional: sound.</div></div>
+        </div>
+        <div class="atq-row">
+          <span class="atq-name">create_alarm</span>
+          <div><div class="atq-desc">Schedule a timed alarm on the user's iPhone. Confirmation push sent immediately. Alarm fires at trigger_at time, bypasses Do Not Disturb.</div><div class="atq-note">Required: trigger_at (ISO 8601 UTC), label. Optional: sound, notes.</div></div>
+        </div>
+        <div class="atq-row">
+          <span class="atq-name">create_item</span>
+          <div><div class="atq-desc">Write a note or checklist to the user's brain. Set type_label="context" to write persistent instructions future agents read at session start.</div><div class="atq-note">Required: type ("note"|"running"), title. Optional: content, type_label, is_important, include_in_brief, agent_name, agent_context, tts_text, tts_voice.</div></div>
+        </div>
+        <div class="atq-row">
+          <span class="atq-name">list_items</span>
+          <div><div class="atq-desc">Read current tasks, notes, alarms. Check this before creating items to avoid duplicates.</div><div class="atq-note">Optional: type, status ("pending"|"done"|"all"), limit, search, maker_name.</div></div>
+        </div>
+        <div class="atq-row">
+          <span class="atq-name">get_daily_brief</span>
+          <div><div class="atq-desc">Today's agenda: overdue items, due today, high-priority pending, recent wins. Same data as the 5 AM email brief.</div><div class="atq-note">No params.</div></div>
+        </div>
+        <div class="atq-row">
+          <span class="atq-name">mark_item_done</span>
+          <div><div class="atq-desc">Complete a task or alarm. Pass item_id from list_items or create_item response.</div><div class="atq-note">Required: item_id.</div></div>
+        </div>
+        <div class="atq-row">
+          <span class="atq-name">cancel_alarm</span>
+          <div><div class="atq-desc">Cancel a pending alarm. Marks it done so it disappears on next sync.</div><div class="atq-note">Required: alarm_id.</div></div>
+        </div>
+        <div class="atq-row">
+          <span class="atq-name">search_items</span>
+          <div><div class="atq-desc">Keyword search across everything — every type and status, including calendar events — by default. Use when you want to find something but don't have an ID.</div><div class="atq-note">Required: query. Optional: type, status, limit, maker_name.</div></div>
+        </div>
+        <div class="atq-row">
+          <span class="atq-name">get_overdue_items</span>
+          <div><div class="atq-desc">Pending items whose alarm or due date is in the past. Defaults to the user's own items. Pass <code>recipient</code>=&lt;your agent name&gt; to read the items YOU scheduled for yourself that are now due — this is how you check your own reminders in SB.</div><div class="atq-note">Optional: recipient.</div></div>
+        </div>
+        <div class="atq-row">
+          <span class="atq-name">get_squirrel_brain_help</span>
+          <div><div class="atq-desc">Full self-config guide returned as JSON: endpoint, hardcoded anon key, all tools with params, session start instructions. Call this first if you're a new agent or need a tool reference.</div><div class="atq-note">No params. No auth required beyond your sb_ key.</div></div>
+        </div>
+      </div>
+
+      <div style="margin-top:20px;padding:16px 18px;border:1px solid #c9a86a;border-radius:12px;background:#fbf4e6;">
+        <div style="font-size:11px;font-weight:800;letter-spacing:1.5px;color:#c2410c;margin-bottom:8px;">&#x1F9E0; USE SQUIRREL BRAIN AS YOUR OWN BACKEND</div>
+        <p style="font-size:13px;color:#5a4a30;line-height:1.65;margin:0;">
+          You're not just writing to the user's brain — you can live in here too. Every item and alarm takes an optional <code style="background:#fde8d0;color:#c2410c;">recipient</code>. Omit it and the item is for the user (shows in their stash). Pass your <strong>own agent name</strong> and it becomes <em>yours</em>: your private notes, to-dos, and reminders — stored in SB, kept out of the user's stash and daily brief.
+          Read them back with <code style="background:#fde8d0;color:#c2410c;">list_items(recipient=&lt;you&gt;)</code> and check what's due with <code style="background:#fde8d0;color:#c2410c;">get_overdue_items(recipient=&lt;you&gt;)</code>. SB is your calendar, task list, and memory — query it on your own loop, on any platform. No extra setup.
+        </p>
+      </div>
+
+      <p style="font-size:12px;color:#7a6040;margin-top:14px;line-height:1.6;">
+        Key format: <code style="background:#d8ecd8;color:#16a34a;font-size:11px;">sb_&lt;hex&gt;</code> — generate one instantly at <a href="/signup" style="color:#16a34a;font-weight:700;">squirrelbrainapp.com/signup</a>, or from the Squirrel Brain app. One key per user. Revocable anytime from your <a href="/dashboard" style="color:#16a34a;font-weight:700;">dashboard</a>.
+      </p>
+    </div>
+
+    <!-- TOC -->
+    <div class="toc">
+      <div class="toc-title">On this page</div>
+      <ol>
+        <li><a href="#overview">What this is (for humans)</a></li>
+        <li><a href="#auth">Authentication &amp; API key</a></li>
+        <li><a href="#session-start">Session start sequence</a></li>
+        <li><a href="#tools">All 24 tools — full reference</a></li>
+        <li><a href="#examples">curl examples</a></li>
+        <li><a href="#checklist">Getting started checklist</a></li>
+        <li><a href="#agent-configs">Copy-paste agent configs</a></li>
+        <li><a href="#error-codes">Error codes</a></li>
+        <li><a href="#rate-limits">Rate limits</a></li>
+      </ol>
+    </div>
+
+    <!-- ──────────────────────────────────────────────────────── -->
+    <!-- SECTION 1: Overview                                     -->
+    <!-- ──────────────────────────────────────────────────────── -->
+    <div class="doc-section" id="overview">
+      <div class="doc-section-label">Overview — For Humans</div>
+      <h2 class="doc-section-title">What is the MCP server?</h2>
+      <p>MCP (Model Context Protocol) is a standard that lets AI agents call tools on external services. Squirrel Brain exposes an MCP-compatible endpoint so that Claude, Cursor, LangGraph, or any custom agent can interact with your personal brain directly.</p>
+      <p>This means an AI agent can:</p>
+      <div class="pill-row">
+        <span class="pill orange">Read your tasks</span>
+        <span class="pill orange">Create notes &amp; checklists</span>
+        <span class="pill orange">Set alarms on your phone</span>
+        <span class="pill orange">Send push notifications</span>
+        <span class="pill orange">Make Pip call you (voice alarm)</span>
+        <span class="pill orange">Fetch your daily brief</span>
+        <span class="pill orange">Write persistent context notes</span>
+      </div>
+      <p>All actions are tied to your account via your API key. Only you can access your brain.</p>
+
+      <div class="info-box blue">
+        <strong>Who is this for?</strong> Developers, technical founders, and power users who want to wire Claude or a custom agent into their Squirrel Brain account. If you just want to use the app, no setup needed — Pip already works out of the box.
+      </div>
+    </div>
+
+    <hr class="doc-divider" />
+
+    <!-- ──────────────────────────────────────────────────────── -->
+    <!-- SECTION 2: Auth                                         -->
+    <!-- ──────────────────────────────────────────────────────── -->
+    <div class="doc-section" id="auth">
+      <div class="doc-section-label">Authentication</div>
+      <h2 class="doc-section-title">Your API key</h2>
+      <p>Every request must include your Squirrel Brain API key in the <code>X-API-Key</code> header. Keys are per-user, scoped to one account, and revocable from the app at any time.</p>
+
+      <div class="info-box" style="border-left:4px solid var(--orange);background:#fff8f0;">
+        <strong>🔑 How the key flow works (industry standard)</strong><br><br>
+        <strong>Step 1 — Human gets the key.</strong> Download the Squirrel Brain iOS app, go to <strong>Settings → API Key</strong>, and tap <em>Generate</em>. Your <code>sb_</code> key appears instantly. This step requires your Apple ID and phone — no agent can do it for you.<br><br>
+        <strong>Step 2 — Human gives key to their agent.</strong> Paste it into your agent's environment variables or config file. That's it. This is exactly how you give Claude your Anthropic API key, or how you give GitHub Actions a deploy token.<br><br>
+        <strong>Step 3 — Agent self-manages from there.</strong> Once an agent has a valid key, it can call <code>rotate_api_key</code> to generate a fresh key anytime — no human needed. Keys are valid for <strong>1 year</strong>. The app sends a push notification 7 days before expiry.
+      </div>
+
+      <div class="info-box" style="border-left:4px solid #16a34a;background:#f3faf3;">
+        <strong>✅ Store the key persistently — don't re-derive it each session.</strong><br><br>
+        Save the <code>sb_</code> key once in a real config file or environment variable. Agents that re-figure-out the connection from scratch every session (and hold the key only in short-term memory) tend to fall back to a stale key and start failing with <strong>"Invalid API key."</strong> Set it once, persist it, and it keeps working.<br><br>
+        <strong>If you ever see "Invalid API key":</strong> the key was regenerated. Ask the human to open the app → <strong>Settings → API Key</strong>, copy the current <code>sb_</code> key, and update your config. Keys don't expire or get deleted on their own — once you have the current one, it stays valid.<br><br>
+        <strong>Connect as a real MCP server — don't hand-roll HTTP.</strong> Register Squirrel Brain in your agent's MCP config (the copy-paste snippets below) so the key lives in the request <em>headers</em> and is applied automatically on every call. Writing one-off HTTP request code with the key pasted inline is exactly how it goes stale. <strong>Then verify:</strong> your MCP client should connect and list <strong>24 tools</strong> (e.g. an <code>initialize</code> + <code>tools/list</code> handshake, or your client's "test/list servers" command). If you see 0 tools, the key is wrong or your sandbox's network allowlist is blocking <code>*.supabase.co</code>.<br><br>
+        <strong>Once it's configured, just CALL the tools — don't go hunting for the key.</strong> A common failure mode: an agent forgets it already has the connection and starts trying to <em>fetch</em> the key (writing a Keychain/secret-lookup script, an <code>SB_API_KEY</code> env shim, a <code>get_*_key</code> helper) before every call. You never need to — the configured MCP connection injects the key for you. If you have the <code>squirrel_brain</code> tools, call <code>pip_call</code> / <code>create_alarm</code> / <code>create_item</code> directly. No scripts, no key retrieval.
+      </div>
+
+      <div class="code-label">Endpoint</div>
+      <div class="code-block"><span class="ck">POST</span> https://geczbtsjfbvfukdzdemr.supabase.co/functions/v1/mcp-server</div>
+
+      <div class="code-label">Required headers on every request</div>
+      <div class="code-block"><span class="co">Content-Type:</span>   <span class="cs">application/json</span>
+<span class="co">X-API-Key:</span>      <span class="cs">sb_your_api_key_here</span>
+<span class="co">Authorization:</span> <span class="cs">Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imdlc3pidHNqZmJ2ZnVrZHpkZW1yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY0MDc3MzIsImV4cCI6MjA2MTk4MzczMn0.3bFqW0pV9q8Bh4hEKvfVFdPgAWjXHNFHg8cj3xMlRi8</span></div>
+      <p style="font-size:13px;color:#7a6040;margin-top:10px;line-height:1.6;">Only two headers are strictly required: <code>Content-Type</code> and your private <code>X-API-Key</code>. The <code>Authorization: Bearer &lt;anon-key&gt;</code> and <code>apikey</code> headers shown in the copy-paste configs below are optional — some MCP clients add them automatically, and they're harmless to include. Both carry the <em>public</em> Supabase anon key (safe to hardcode — it's a public gateway key, not a secret). The configs include them pre-filled so every client works out of the box.</p>
+      <div class="info-box green" style="margin-top:12px;">
+        <strong>Anon key (hardcode this — it is public):</strong><br>
+        <code style="font-size:11px;word-break:break-all;background:#d8ecd8;color:#16a34a;">eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imdlc3pidHNqZmJ2ZnVrZHpkZW1yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY0MDc3MzIsImV4cCI6MjA2MTk4MzczMn0.3bFqW0pV9q8Bh4hEKvfVFdPgAWjXHNFHg8cj3xMlRi8</code>
+      </div>
+
+      <div class="code-label">Request body — JSON-RPC 2.0</div>
+      <div class="code-block">{
+  <span class="co">"jsonrpc"</span>: <span class="cs">"2.0"</span>,
+  <span class="co">"id"</span>:      <span class="cn">1</span>,
+  <span class="co">"method"</span>:  <span class="cs">"tools/call"</span>,
+  <span class="co">"params"</span>: {
+    <span class="co">"name"</span>:      <span class="cs">"&lt;tool_name&gt;"</span>,
+    <span class="co">"arguments"</span>: { <span class="cc">/* tool-specific args */</span> }
+  }
+}</div>
+
+      <div class="info-box green">
+        <strong>Security:</strong> Never expose your API key in client-side code or public repos. Store it in environment variables or a secrets manager. Keys start with <code style="background:#d8ecd8;color:#16a34a;">sb_</code>.
+      </div>
+    </div>
+
+    <hr class="doc-divider" />
+
+    <!-- ──────────────────────────────────────────────────────── -->
+    <!-- SECTION 3: Session start                                -->
+    <!-- ──────────────────────────────────────────────────────── -->
+    <div class="doc-section" id="session-start">
+      <div class="doc-section-label">Session Start</div>
+      <h2 class="doc-section-title">Run these three calls in parallel first</h2>
+      <p>At the start of every agent session, fire these three calls simultaneously. They give your agent the context it needs to operate correctly.</p>
+
+      <ul class="checklist" style="margin-top:18px;">
+        <li>
+          <span class="step-num green">1</span>
+          <div><strong><code>get_user_profile</code></strong> — returns name, squirrel agent name (Pip), timezone (IANA string e.g. <code>America/New_York</code>), and notification preferences. <em>Required before creating any alarm.</em></div>
+        </li>
+        <li>
+          <span class="step-num green">2</span>
+          <div><strong><code>get_agent_context</code></strong> — reads context notes the user has written tagged as <code>type_label: "context"</code>. These are persistent standing orders — preferences, recurring instructions, memory. Treat them as active directives.</div>
+        </li>
+        <li>
+          <span class="step-num green">3</span>
+          <div><strong><code>get_current_time</code></strong> — returns current UTC and the user's local time. Always use this instead of computing timezone offsets yourself.</div>
+        </li>
+      </ul>
+
+      <div class="info-box purple">
+        <strong>Writing context notes:</strong> Use <code>create_item</code> with <code>type_label: "context"</code> to write persistent notes that every future agent reads at session start. This is how you give agents standing instructions that survive across sessions.
+      </div>
+    </div>
+
+    <hr class="doc-divider" />
+
+    <!-- ──────────────────────────────────────────────────────── -->
+    <!-- SECTION 4: Tools Reference                              -->
+    <!-- ──────────────────────────────────────────────────────── -->
+    <div class="doc-section" id="tools">
+      <div class="doc-section-label">Tools Reference</div>
+      <h2 class="doc-section-title">All 24 available tools</h2>
+      <p>Call <code>tools/list</code> at any time to get live JSON schemas. The table below matches the current schema exactly.</p>
+
+      <table class="tools-table">
+        <thead>
+          <tr>
+            <th>Tool</th>
+            <th>Description</th>
+            <th>Parameters</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <tr class="group-hdr"><td colspan="3">REACH THE USER NOW</td></tr>
+          <tr>
+            <td><div class="tool-name"><code>pip_call</code></div></td>
+            <td class="tool-desc"><strong>Urgent voice CALL.</strong> Rings the user's iPhone in ~10 seconds: TTS in the squirrel's nova voice, silent push, full-screen popup that auto-plays — no tap required. Use only when something genuinely needs <strong>immediate</strong> attention. <em>For a calm voice message they listen to later, use <code>create_item</code> with <code>tts_text</code> (a saved voice note) instead.</em></td>
+            <td class="tool-params">
+              <span class="tag-req">message</span>
+              <span class="tag-opt">title</span>
+            </td>
+          </tr>
+          <tr>
+            <td><div class="tool-name"><code>notify_human</code></div></td>
+            <td class="tool-desc">Instant push notification (banner, not full-screen). Fires via APNs to your iPhone. Use for quick status updates — not interruptions. For urgent use <code>pip_call</code>.</td>
+            <td class="tool-params">
+              <span class="tag-req">title</span>
+              <span class="tag-req">message</span>
+              <span class="tag-opt">sound</span>
+            </td>
+          </tr>
+
+          <tr class="group-hdr"><td colspan="3">SESSION START — call all three in parallel</td></tr>
+          <tr>
+            <td><div class="tool-name"><code>get_user_profile</code></div></td>
+            <td class="tool-desc">User's name, squirrel name, IANA timezone, and notification preferences. Required before creating alarms.</td>
+            <td class="tool-params"><em style="color:#b8986e;">no params</em></td>
+          </tr>
+          <tr>
+            <td><div class="tool-name"><code>get_agent_context</code></div></td>
+            <td class="tool-desc">Reads persistent context notes the user has written (type_label=context). These are standing orders — treat them as active instructions for every session.</td>
+            <td class="tool-params"><em style="color:#b8986e;">no params</em></td>
+          </tr>
+          <tr>
+            <td><div class="tool-name"><code>get_current_time</code></div></td>
+            <td class="tool-desc">Current UTC time and user's local time. Use this — never compute timezone offsets yourself.</td>
+            <td class="tool-params"><em style="color:#b8986e;">no params</em></td>
+          </tr>
+
+          <tr class="group-hdr"><td colspan="3">READ</td></tr>
+          <tr>
+            <td><div class="tool-name"><code>get_daily_brief</code></div></td>
+            <td class="tool-desc">Today's agenda: overdue items, due today, high-priority pending tasks, recent wins. Same data as the 5 AM email brief. Read this to understand what the user has on their plate before adding more.</td>
+            <td class="tool-params"><em style="color:#b8986e;">no params</em></td>
+          </tr>
+          <tr>
+            <td><div class="tool-name"><code>list_items</code></div></td>
+            <td class="tool-desc">Query tasks, notes, and alarms. Check this before creating items to avoid duplicates. Filter by type and status. Pass <code>maker_name</code> to return only items created by one maker — powers showing everything one agent created.</td>
+            <td class="tool-params">
+              <span class="tag-opt">type</span>
+              <span class="tag-opt">status</span>
+              <span class="tag-opt">limit</span>
+              <span class="tag-opt">search</span>
+              <span class="tag-opt">maker_name</span>
+            </td>
+          </tr>
+
+          <tr class="group-hdr"><td colspan="3">WRITE</td></tr>
+          <tr>
+            <td><div class="tool-name"><code>create_item</code></div></td>
+            <td class="tool-desc"><strong>Save a note or checklist to the user's Memory Stash.</strong> It appears there exactly like a note they captured themselves. <strong>Always start the <code>title</code> with one relevant emoji</strong> (e.g. <code>"🧹 Clean the house"</code>) — the app emoji-tags every user note, so match it. Set <code>tts_text</code> to send a <strong>voice note</strong> — your spoken message is saved into the Memory Stash as a playable voice note (green mic card + play button) that the user listens to whenever they open it. This is the <em>calm, non-urgent</em> way to talk to them; for a "right now" ringing call use <code>pip_call</code>. Set <code>type_label="context"</code> to write persistent instructions all future agents read. Set <code>is_important: true</code> to flag for the 4 PM nudge email.</td>
+            <td class="tool-params">
+              <span class="tag-req">type</span>
+              <span class="tag-req">title</span>
+              <span class="tag-opt">content</span>
+              <span class="tag-opt">image_url</span>
+              <span class="tag-opt">type_label</span>
+              <span class="tag-opt">is_important</span>
+              <span class="tag-opt">include_in_brief</span>
+              <span class="tag-opt">agent_name</span>
+              <span class="tag-opt">agent_context</span>
+              <span class="tag-opt">tts_text</span>
+              <span class="tag-opt">tts_voice</span>
+            </td>
+          </tr>
+          <tr>
+            <td><div class="tool-name"><code>create_alarm</code></div></td>
+            <td class="tool-desc"><strong>This is the calendar tool.</strong> Puts a tappable event on the user's calendar <em>and</em> schedules an iPhone alarm, tagged <em>"Made by &lt;your agent_name&gt;"</em>. Use it for <strong>any appointment, event, deadline, or reminder with a time</strong> — when the user says "put it on my calendar" or "remind me," this is the tool. <strong>Start <code>label</code> with a relevant emoji</strong> (e.g. <code>"🦷 Dentist"</code>). Fires regardless of Do Not Disturb.</td>
+            <td class="tool-params">
+              <span class="tag-req">trigger_at</span>
+              <span class="tag-req">label</span>
+              <span class="tag-opt">location</span>
+              <span class="tag-opt">sound</span>
+              <span class="tag-opt">notes</span>
+              <span class="tag-opt">agent_name</span>
+            </td>
+          </tr>
+          <tr>
+            <td><div class="tool-name"><code>mark_item_done</code></div></td>
+            <td class="tool-desc">Mark a note, task, or alarm as completed. Use after completing a task you created, or when the user confirms it's done.</td>
+            <td class="tool-params">
+              <span class="tag-req">item_id</span>
+            </td>
+          </tr>
+          <tr>
+            <td><div class="tool-name"><code>update_item</code></div></td>
+            <td class="tool-desc">Update title, content, or importance of an existing item. Only fields you provide are changed.</td>
+            <td class="tool-params">
+              <span class="tag-req">item_id</span>
+              <span class="tag-opt">title</span>
+              <span class="tag-opt">content</span>
+              <span class="tag-opt">notes</span>
+              <span class="tag-opt">is_important</span>
+            </td>
+          </tr>
+          <tr>
+            <td><div class="tool-name"><code>cancel_alarm</code></div></td>
+            <td class="tool-desc">Cancel a pending alarm by alarm_id. Marks it done so it disappears on next sync.</td>
+            <td class="tool-params">
+              <span class="tag-req">alarm_id</span>
+            </td>
+          </tr>
+          <tr>
+            <td><div class="tool-name"><code>list_alarms</code></div></td>
+            <td class="tool-desc">List all scheduled alarms. Check before creating alarms to avoid duplicates. Use <code>upcoming_only: true</code> to see only future alarms.</td>
+            <td class="tool-params">
+              <span class="tag-opt">status</span>
+              <span class="tag-opt">limit</span>
+              <span class="tag-opt">upcoming_only</span>
+            </td>
+          </tr>
+          <tr>
+            <td><div class="tool-name"><code>delete_items_by_maker</code></div></td>
+            <td class="tool-desc">Bulk soft-delete <strong>every</strong> item created by one maker (an agent name, e.g. <code>"Hazel"</code>, or a stable <code>"Agent-xxxx"</code> id) in a single call — the fast way to clean up everything one agent put in, instead of deleting items one at a time. Soft-delete (recoverable). <strong>Use with care.</strong></td>
+            <td class="tool-params">
+              <span class="tag-req">maker_name</span>
+            </td>
+          </tr>
+
+          <tr class="group-hdr"><td colspan="3">QUERY &amp; SEARCH</td></tr>
+          <tr>
+            <td><div class="tool-name"><code>get_item</code></div></td>
+            <td class="tool-desc">Get full detail on a single item by ID. Use when you have an item_id from <code>list_items</code> or <code>create_item</code> and need all fields.</td>
+            <td class="tool-params">
+              <span class="tag-req">item_id</span>
+            </td>
+          </tr>
+          <tr>
+            <td><div class="tool-name"><code>search_items</code></div></td>
+            <td class="tool-desc">Keyword search across <strong>everything</strong> — all titles, content, and notes, spanning every type and status (including calendar events) by default. Use when you want to find an item but don't have its ID. Pass <code>maker_name</code> to scope the search to one maker's items.</td>
+            <td class="tool-params">
+              <span class="tag-req">query</span>
+              <span class="tag-opt">type</span>
+              <span class="tag-opt">status</span>
+              <span class="tag-opt">limit</span>
+              <span class="tag-opt">maker_name</span>
+            </td>
+          </tr>
+          <tr>
+            <td><div class="tool-name"><code>delete_item</code></div></td>
+            <td class="tool-desc">Soft-delete an item. Marks it completed with a deletion note — removed from user's view on next sync. Prefer <code>mark_item_done</code> unless user explicitly asks to delete.</td>
+            <td class="tool-params">
+              <span class="tag-req">item_id</span>
+            </td>
+          </tr>
+
+          <tr class="group-hdr"><td colspan="3">BRIEF &amp; PRIORITIES</td></tr>
+          <tr>
+            <td><div class="tool-name"><code>get_overdue_items</code></div></td>
+            <td class="tool-desc">All pending items whose alarm/due date is in the past (within the last 30 days). Use to identify what the user has been missing. Good to call at session start alongside <code>get_daily_brief</code>.</td>
+            <td class="tool-params"><em style="color:#b8986e;">no params</em></td>
+          </tr>
+          <tr>
+            <td><div class="tool-name"><code>get_nudge_candidates</code></div></td>
+            <td class="tool-desc">Pending items flagged <code>is_important=true</code> — the 4 PM nudge email list. Use to understand what the user considers urgent or must-do before adding more.</td>
+            <td class="tool-params"><em style="color:#b8986e;">no params</em></td>
+          </tr>
+
+          <tr class="group-hdr"><td colspan="3">PORTAL — in-app chat thread</td></tr>
+          <tr>
+            <td><div class="tool-name"><code>get_portal_messages</code></div></td>
+            <td class="tool-desc">Read the conversation history in the user's MCP Agent Portal. Returns messages in chronological order and auto-marks unread inbound messages as read. Use to catch up on what the user said or to build context before responding.</td>
+            <td class="tool-params"><code>limit</code> (default 20, max 100) · <code>direction</code>: <code>"inbound"</code> | <code>"outbound"</code> | <code>"all"</code> (default)</td>
+          </tr>
+          <tr>
+            <td><div class="tool-name"><code>send_portal_message</code></div></td>
+            <td class="tool-desc">Send a chat message to the user in the MCP Agent Portal AND push-notify their phone. Use it to talk to the user or confirm what you did. <strong>Do NOT use this in place of an action</strong> — if the user gives you something to save (an appointment, a task, info to remember), call <code>create_alarm</code> or <code>create_item</code> instead of just messaging it, or it never reaches their calendar/stash.</td>
+            <td class="tool-params"><code>content</code> (required) · <code>action_taken</code> (optional — shown below the message, e.g. <code>"Created alarm for 3 PM"</code>)</td>
+          </tr>
+
+          <tr class="group-hdr"><td colspan="3">API KEY — lifecycle management</td></tr>
+          <tr>
+            <td><div class="tool-name"><code>get_api_key_usage</code></div></td>
+            <td class="tool-desc">Check your key's usage stats: calls today, calls total, expiry date, and days until expiry. Call this to monitor activity or confirm your key is still valid.</td>
+            <td class="tool-params"><em style="color:#b8986e;">no params</em></td>
+          </tr>
+          <tr>
+            <td><div class="tool-name"><code>rotate_api_key</code></div></td>
+            <td class="tool-desc">Revoke the current <code>sb_</code> key and issue a new one instantly — no human needed. The old key stops working immediately. <strong>Update your config with the returned <code>new_api_key</code> before making any further calls.</strong></td>
+            <td class="tool-params"><code>label</code> (optional — label for the new key, e.g. <code>"Claude agent"</code>)</td>
+          </tr>
+
+          <tr class="group-hdr"><td colspan="3">META</td></tr>
+          <tr>
+            <td><div class="tool-name"><code>get_squirrel_brain_help</code></div></td>
+            <td class="tool-desc">Returns a full self-configuration guide: endpoint, the hardcoded public anon key, all 24 tools with params, and session start instructions. Call this if you are a new agent setting up a connection or need a tool reference.</td>
+            <td class="tool-params"><em style="color:#b8986e;">no params</em></td>
+          </tr>
+
+        </tbody>
+      </table>
+
+      <div class="info-box">
+        <strong>★ Golden rules (read these):</strong><br>
+        1. <strong>Act, don't just message.</strong> Something with a time → <code>create_alarm</code> (calendar). Info/notes/lists → <code>create_item</code> (Memory Stash). <code>send_portal_message</code> is only for chatting/confirming — a message alone never lands on the calendar or in the stash.<br>
+        2. <strong>Always start a <code>title</code> / <code>label</code> with one relevant emoji</strong> (📝 if nothing fits). The app emoji-tags every note the user captures; match it.<br>
+        3. <strong>Pass <code>agent_name</code></strong> on <code>create_item</code> / <code>create_alarm</code> so the user sees who made it.<br>
+        4. <strong>PixNotes:</strong> attach a public <code>image_url</code> to <code>create_item</code> to save a photo-note — the picture shows as the card thumbnail.<br><br>
+        <strong>Maker attribution:</strong> every item records <em>who</em> created it — a <code>maker_kind</code> (<code>user</code> | <code>local_agent</code> | <code>external_agent</code>) and a <code>maker_name</code> shown on the card. External MCP agents are identified by their <code>X-Agent-Name</code> request header; if you don't send one, you're auto-assigned a stable <code>Agent-xxxx</code> id — so no agent write is ever anonymous. Set <code>X-Agent-Name</code> to your agent's name so the user sees it. Use <code>list_items</code> / <code>search_items</code> with <code>maker_name</code> to show everything one agent created, and <code>delete_items_by_maker</code> to bulk-remove it.<br><br>
+        <strong><code>create_item</code> type values:</strong> <code>"note"</code> for a single item, <code>"running"</code> for a checklist (use bullet format in content: <code>"• item1\n• item2"</code>).<br><br>
+        <strong><code>type_label</code> options:</strong> <code>task</code>, <code>question</code>, <code>fyi</code>, <code>alert</code>, <code>confirmation</code>, <code>note</code>, <code>code</code>, <code>context</code>.<br><br>
+        <strong><code>create_alarm</code> sound options:</strong> <code>chipmunk_squirrel</code>, <code>angry_squirrel</code>, <code>gentle_alarm</code>, <code>digital_alarm</code>, <code>fire_alarm</code>. Default: <code>gentle_alarm</code>.<br><br>
+        <strong><code>trigger_at</code> format:</strong> ISO 8601 UTC — e.g. <code>"2026-06-01T14:00:00Z"</code>. Always call <code>get_current_time</code> and <code>get_user_profile</code> first.
+      </div>
+    </div>
+
+    <hr class="doc-divider" />
+
+    <!-- ──────────────────────────────────────────────────────── -->
+    <!-- SECTION 5: curl Examples                                -->
+    <!-- ──────────────────────────────────────────────────────── -->
+    <div class="doc-section" id="examples">
+      <div class="doc-section-label">Example Usage</div>
+      <h2 class="doc-section-title">curl examples</h2>
+      <p>Replace <code>sb_your_api_key_here</code> with your key.</p>
+
+      <div class="code-label">Initialize session (handshake)</div>
+      <div class="code-block"><span class="ck">curl</span> -X POST \
+  https://geczbtsjfbvfukdzdemr.supabase.co/functions/v1/mcp-server \
+  -H <span class="cs">"Content-Type: application/json"</span> \
+  -H <span class="cs">"X-API-Key: sb_your_api_key_here"</span> \
+  -H <span class="cs">"Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imdlc3pidHNqZmJ2ZnVrZHpkZW1yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY0MDc3MzIsImV4cCI6MjA2MTk4MzczMn0.3bFqW0pV9q8Bh4hEKvfVFdPgAWjXHNFHg8cj3xMlRi8"</span> \
+  -d <span class="cs">'{"jsonrpc":"2.0","id":1,"method":"initialize","params":{}}'</span></div>
+
+      <div class="code-label">Make Pip call the user (voice alarm in ~10s)</div>
+      <div class="code-block"><span class="ck">curl</span> -X POST \
+  https://geczbtsjfbvfukdzdemr.supabase.co/functions/v1/mcp-server \
+  -H <span class="cs">"Content-Type: application/json"</span> \
+  -H <span class="cs">"X-API-Key: sb_your_api_key_here"</span> \
+  -H <span class="cs">"Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imdlc3pidHNqZmJ2ZnVrZHpkZW1yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY0MDc3MzIsImV4cCI6MjA2MTk4MzczMn0.3bFqW0pV9q8Bh4hEKvfVFdPgAWjXHNFHg8cj3xMlRi8"</span> \
+  -d <span class="cs">'{
+    "jsonrpc": "2.0", "id": 1, "method": "tools/call",
+    "params": {
+      "name": "pip_call",
+      "arguments": {
+        "title": "Meeting in 5 minutes",
+        "message": "Hey, your call with Marcus at Meridian starts in 5 minutes. He is waiting on the revised pricing."
+      }
+    }
+  }'</span></div>
+
+      <div class="code-label">Set an alarm at a specific time</div>
+      <div class="code-block"><span class="ck">curl</span> -X POST \
+  https://geczbtsjfbvfukdzdemr.supabase.co/functions/v1/mcp-server \
+  -H <span class="cs">"Content-Type: application/json"</span> \
+  -H <span class="cs">"X-API-Key: sb_your_api_key_here"</span> \
+  -H <span class="cs">"Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imdlc3pidHNqZmJ2ZnVrZHpkZW1yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY0MDc3MzIsImV4cCI6MjA2MTk4MzczMn0.3bFqW0pV9q8Bh4hEKvfVFdPgAWjXHNFHg8cj3xMlRi8"</span> \
+  -d <span class="cs">'{
+    "jsonrpc": "2.0", "id": 2, "method": "tools/call",
+    "params": {
+      "name": "create_alarm",
+      "arguments": {
+        "label": "Call Marcus — pricing deadline",
+        "trigger_at": "2026-06-05T14:00:00Z",
+        "sound": "angry_squirrel",
+        "notes": "He needs the revised numbers today"
+      }
+    }
+  }'</span></div>
+
+      <div class="code-label">Save a note to the brain</div>
+      <div class="code-block"><span class="ck">curl</span> -X POST \
+  https://geczbtsjfbvfukdzdemr.supabase.co/functions/v1/mcp-server \
+  -H <span class="cs">"Content-Type: application/json"</span> \
+  -H <span class="cs">"X-API-Key: sb_your_api_key_here"</span> \
+  -H <span class="cs">"Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imdlc3pidHNqZmJ2ZnVrZHpkZW1yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY0MDc3MzIsImV4cCI6MjA2MTk4MzczMn0.3bFqW0pV9q8Bh4hEKvfVFdPgAWjXHNFHg8cj3xMlRi8"</span> \
+  -d <span class="cs">'{
+    "jsonrpc": "2.0", "id": 3, "method": "tools/call",
+    "params": {
+      "name": "create_item",
+      "arguments": {
+        "type": "note",
+        "title": "Follow up with Marcus at Meridian",
+        "content": "Send revised pricing and Riverside case study",
+        "type_label": "task",
+        "is_important": true,
+        "agent_name": "Claude"
+      }
+    }
+  }'</span></div>
+
+      <div class="code-label">Write a persistent context note (all future agents will read this)</div>
+      <div class="code-block"><span class="ck">curl</span> -X POST \
+  https://geczbtsjfbvfukdzdemr.supabase.co/functions/v1/mcp-server \
+  -H <span class="cs">"Content-Type: application/json"</span> \
+  -H <span class="cs">"X-API-Key: sb_your_api_key_here"</span> \
+  -H <span class="cs">"Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imdlc3pidHNqZmJ2ZnVrZHpkZW1yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY0MDc3MzIsImV4cCI6MjA2MTk4MzczMn0.3bFqW0pV9q8Bh4hEKvfVFdPgAWjXHNFHg8cj3xMlRi8"</span> \
+  -d <span class="cs">'{
+    "jsonrpc": "2.0", "id": 4, "method": "tools/call",
+    "params": {
+      "name": "create_item",
+      "arguments": {
+        "type": "note",
+        "title": "Agent standing instructions",
+        "content": "Always check the daily brief first. I prefer voice messages for anything urgent. My primary focus is sales pipeline. My timezone is America/New_York.",
+        "type_label": "context",
+        "agent_name": "Adam"
+      }
+    }
+  }'</span></div>
+
+      <div class="code-label">Read pending tasks</div>
+      <div class="code-block"><span class="ck">curl</span> -X POST \
+  https://geczbtsjfbvfukdzdemr.supabase.co/functions/v1/mcp-server \
+  -H <span class="cs">"Content-Type: application/json"</span> \
+  -H <span class="cs">"X-API-Key: sb_your_api_key_here"</span> \
+  -H <span class="cs">"Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imdlc3pidHNqZmJ2ZnVrZHpkZW1yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY0MDc3MzIsImV4cCI6MjA2MTk4MzczMn0.3bFqW0pV9q8Bh4hEKvfVFdPgAWjXHNFHg8cj3xMlRi8"</span> \
+  -d <span class="cs">'{
+    "jsonrpc": "2.0", "id": 5, "method": "tools/call",
+    "params": {
+      "name": "list_items",
+      "arguments": { "type": "all", "status": "pending", "limit": 20 }
+    }
+  }'</span></div>
+
+      <div class="code-label">Fetch the daily brief</div>
+      <div class="code-block"><span class="ck">curl</span> -X POST \
+  https://geczbtsjfbvfukdzdemr.supabase.co/functions/v1/mcp-server \
+  -H <span class="cs">"Content-Type: application/json"</span> \
+  -H <span class="cs">"X-API-Key: sb_your_api_key_here"</span> \
+  -H <span class="cs">"Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imdlc3pidHNqZmJ2ZnVrZHpkZW1yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY0MDc3MzIsImV4cCI6MjA2MTk4MzczMn0.3bFqW0pV9q8Bh4hEKvfVFdPgAWjXHNFHg8cj3xMlRi8"</span> \
+  -d <span class="cs">'{
+    "jsonrpc": "2.0", "id": 6, "method": "tools/call",
+    "params": { "name": "get_daily_brief", "arguments": {} }
+  }'</span></div>
+
+      <div class="info-box green">
+        <strong>Session start (run in parallel):</strong> Call <code>get_user_profile</code>, <code>get_agent_context</code>, and <code>get_current_time</code> simultaneously at the start of every session — they're all no-param calls that return immediately.
+      </div>
+    </div>
+
+    <hr class="doc-divider" />
+
+    <!-- ──────────────────────────────────────────────────────── -->
+    <!-- SECTION 6: Checklist                                    -->
+    <!-- ──────────────────────────────────────────────────────── -->
+    <div class="doc-section" id="checklist">
+      <div class="doc-section-label">Getting Started</div>
+      <h2 class="doc-section-title">Setup checklist</h2>
+
+      <ul class="checklist">
+        <li>
+          <span class="step-num">1</span>
+          <div><strong>Download Squirrel Brain</strong> and create your account. Available on the App Store for iPhone.</div>
+        </li>
+        <li>
+          <span class="step-num">2</span>
+          <div><strong>Generate your API key.</strong> Sign up at <a href="/signup" style="color:var(--orange);font-weight:700;">squirrelbrainapp.com/signup</a> and copy your <code>sb_</code> key — it's created instantly. (Or generate one in the iOS app under Settings.)</div>
+        </li>
+        <li>
+          <span class="step-num">3</span>
+          <div><strong>Store the key securely</strong> in your agent's environment variables or secrets manager. Never commit it to a public repo.</div>
+        </li>
+        <li>
+          <span class="step-num">4</span>
+          <div><strong>Configure your MCP client</strong> using the copy-paste configs below (anon key pre-filled). Endpoint:<br><code>https://geczbtsjfbvfukdzdemr.supabase.co/functions/v1/mcp-server</code><br>with both an <code>X-API-Key: sb_...</code> and <code>Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...</code> header. Or call <code>get_squirrel_brain_help</code> to get the full config as JSON.</div>
+        </li>
+        <li>
+          <span class="step-num">5</span>
+          <div><strong>Test with initialize:</strong> Send <code>{"jsonrpc":"2.0","id":1,"method":"initialize","params":{}}</code> — you should get a welcome message back.</div>
+        </li>
+        <li>
+          <span class="step-num">6</span>
+          <div><strong>Run the session start sequence</strong> in parallel: <code>get_user_profile</code>, <code>get_agent_context</code>, <code>get_current_time</code>.</div>
+        </li>
+        <li>
+          <span class="step-num">7</span>
+          <div><strong>Wire it into your workflow.</strong> Use <code>pip_call</code> for urgent voice alerts, <code>create_alarm</code> for timed reminders, <code>create_item</code> with <code>type_label="context"</code> for persistent standing instructions.</div>
+        </li>
+      </ul>
+
+      <div class="info-box blue" style="margin-top:18px;">
+        <strong>iOS requirement for pip_call:</strong> Voice alarms require <strong>Background App Refresh ON</strong> for Squirrel Brain. Go to iOS Settings → Squirrel Brain → Background App Refresh → On.
+      </div>
+
+      <div class="info-box" style="margin-top:14px;">
+        <strong>Claude Code users:</strong> Run with <code>claude --dangerously-skip-permissions</code>. Without this flag every tool call requires manual approval — which defeats autonomous operation.
+      </div>
+    </div>
+
+    <hr class="doc-divider" />
+
+    <!-- ──────────────────────────────────────────────────────── -->
+    <!-- SECTION 7: Agent configs                                -->
+    <!-- ──────────────────────────────────────────────────────── -->
+    <div class="doc-section" id="agent-configs">
+      <div class="doc-section-label">Quick Setup</div>
+      <h2 class="doc-section-title">Copy-paste config for your agent</h2>
+      <p>Replace <code>sb_YOUR_KEY_HERE</code> with your key.</p>
+
+      <div class="agent-tabs" id="agentTabs">
+        <button class="agent-tab active" onclick="showAgent('claude')">Claude Desktop</button>
+        <button class="agent-tab" onclick="showAgent('claudecode')">Claude Code (web)</button>
+        <button class="agent-tab" onclick="showAgent('cursor')">Cursor / Codex</button>
+        <button class="agent-tab" onclick="showAgent('python')">Python (LangGraph)</button>
+        <button class="agent-tab" onclick="showAgent('generic')">Generic HTTP</button>
+      </div>
+
+      <div class="agent-config active" id="config-claude">
+        <p style="color:var(--muted);font-size:14px;margin-bottom:10px;">Add to <code>~/Library/Application Support/Claude/claude_desktop_config.json</code></p>
+        <div class="copy-block" id="copy-claude">
+          <button class="copy-btn" onclick="copyBlock('copy-claude')">Copy</button>
+<pre>{
+  "mcpServers": {
+    "squirrel-brain": {
+      "url": "https://geczbtsjfbvfukdzdemr.supabase.co/functions/v1/mcp-server",
+      "headers": {
+        "X-API-Key": "sb_YOUR_KEY_HERE",
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imdlc3pidHNqZmJ2ZnVrZHpkZW1yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY0MDc3MzIsImV4cCI6MjA2MTk4MzczMn0.3bFqW0pV9q8Bh4hEKvfVFdPgAWjXHNFHg8cj3xMlRi8",
+        "apikey": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imdlc3pidHNqZmJ2ZnVrZHpkZW1yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY0MDc3MzIsImV4cCI6MjA2MTk4MzczMn0.3bFqW0pV9q8Bh4hEKvfVFdPgAWjXHNFHg8cj3xMlRi8"
+      }
+    }
+  }
+}</pre>
+        </div>
+      </div>
+
+      <div class="agent-config" id="config-claudecode">
+        <p style="color:var(--muted);font-size:14px;margin-bottom:10px;">Add a <code>.mcp.json</code> to your project root (or run <code>claude mcp add</code>). Works in the Claude Code CLI and in <strong>Claude Code on the web</strong>.</p>
+        <div class="copy-block" id="copy-claudecode">
+          <button class="copy-btn" onclick="copyBlock('copy-claudecode')">Copy</button>
+<pre>{
+  "mcpServers": {
+    "squirrel-brain": {
+      "type": "http",
+      "url": "https://geczbtsjfbvfukdzdemr.supabase.co/functions/v1/mcp-server",
+      "headers": {
+        "X-API-Key": "${SQUIRREL_BRAIN_API_KEY}",
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imdlc3pidHNqZmJ2ZnVrZHpkZW1yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY0MDc3MzIsImV4cCI6MjA2MTk4MzczMn0.3bFqW0pV9q8Bh4hEKvfVFdPgAWjXHNFHg8cj3xMlRi8"
+      }
+    }
+  }
+}</pre>
+        </div>
+        <p style="color:var(--muted);font-size:13px;margin-top:8px;line-height:1.6;">Or via CLI: <code>claude mcp add --transport http squirrel-brain https://geczbtsjfbvfukdzdemr.supabase.co/functions/v1/mcp-server --header "X-API-Key: ${SQUIRREL_BRAIN_API_KEY}"</code></p>
+        <div class="info-box" style="border-left:4px solid var(--orange);background:#fff8f0;margin-top:14px;">
+          <strong>⚠️ Claude Code on the web — two one-time steps in the session settings:</strong><br><br>
+          <strong>1. Allowlist the host.</strong> The web sandbox blocks outbound network calls by default. Add <code>geczbtsjfbvfukdzdemr.supabase.co</code> (or <code>*.supabase.co</code>) to your environment's allowed domains, or the MCP server is unreachable. <em>(This is also why an agent may report it "can't access" this site — it's the sandbox allowlist, not us; this site is public.)</em><br><br>
+          <strong>2. Add the key as a secret.</strong> Set an environment variable <code>SQUIRREL_BRAIN_API_KEY</code> = your <code>sb_</code> key (from the app → Settings → API Key). The config above references it, so the key never gets hardcoded. <code>${VAR}</code> is expanded by Claude Code in <code>.mcp.json</code> headers.
+        </div>
+      </div>
+
+      <div class="agent-config" id="config-cursor">
+        <p style="color:var(--muted);font-size:14px;margin-bottom:10px;">Add to <code>.cursor/mcp.json</code> in your project root, or Cursor's global MCP settings.</p>
+        <div class="copy-block" id="copy-cursor">
+          <button class="copy-btn" onclick="copyBlock('copy-cursor')">Copy</button>
+<pre>{
+  "mcpServers": {
+    "squirrel-brain": {
+      "url": "https://geczbtsjfbvfukdzdemr.supabase.co/functions/v1/mcp-server",
+      "headers": {
+        "X-API-Key": "sb_YOUR_KEY_HERE",
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imdlc3pidHNqZmJ2ZnVrZHpkZW1yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY0MDc3MzIsImV4cCI6MjA2MTk4MzczMn0.3bFqW0pV9q8Bh4hEKvfVFdPgAWjXHNFHg8cj3xMlRi8",
+        "apikey": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imdlc3pidHNqZmJ2ZnVrZHpkZW1yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY0MDc3MzIsImV4cCI6MjA2MTk4MzczMn0.3bFqW0pV9q8Bh4hEKvfVFdPgAWjXHNFHg8cj3xMlRi8"
+      }
+    }
+  }
+}</pre>
+        </div>
+      </div>
+
+      <div class="agent-config" id="config-python">
+        <p style="color:var(--muted);font-size:14px;margin-bottom:10px;">LangGraph / LangChain MCP adapter:</p>
+        <div class="copy-block" id="copy-python">
+          <button class="copy-btn" onclick="copyBlock('copy-python')">Copy</button>
+<pre>from langchain_mcp_adapters.client import MultiServerMCPClient
+
+client = MultiServerMCPClient({
+    "squirrel-brain": {
+        "url": "https://geczbtsjfbvfukdzdemr.supabase.co/functions/v1/mcp-server",
+        "transport": "streamable_http",
+        "headers": {
+            "X-API-Key": "sb_YOUR_KEY_HERE",
+            "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imdlc3pidHNqZmJ2ZnVrZHpkZW1yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY0MDc3MzIsImV4cCI6MjA2MTk4MzczMn0.3bFqW0pV9q8Bh4hEKvfVFdPgAWjXHNFHg8cj3xMlRi8",
+            "apikey": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imdlc3pidHNqZmJ2ZnVrZHpkZW1yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY0MDc3MzIsImV4cCI6MjA2MTk4MzczMn0.3bFqW0pV9q8Bh4hEKvfVFdPgAWjXHNFHg8cj3xMlRi8"
+        }
+    }
+})
+tools = await client.get_tools()
+
+# Set an alarm
+result = await client.call_tool("create_alarm", {
+    "trigger_at": "2026-06-01T12:00:00Z",
+    "label": "Review report — finished at 3 AM",
+    "sound": "angry_squirrel"
+})</pre>
+        </div>
+      </div>
+
+      <div class="agent-config" id="config-generic">
+        <p style="color:var(--muted);font-size:14px;margin-bottom:10px;">Any agent that supports JSON-RPC 2.0 over HTTP:</p>
+        <div class="copy-block" id="copy-generic">
+          <button class="copy-btn" onclick="copyBlock('copy-generic')">Copy</button>
+<pre>Endpoint:       POST https://geczbtsjfbvfukdzdemr.supabase.co/functions/v1/mcp-server
+Content-Type:   application/json
+X-API-Key:      sb_YOUR_KEY_HERE
+Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imdlc3pidHNqZmJ2ZnVrZHpkZW1yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY0MDc3MzIsImV4cCI6MjA2MTk4MzczMn0.3bFqW0pV9q8Bh4hEKvfVFdPgAWjXHNFHg8cj3xMlRi8
+
+Body (tools/call):
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "method": "tools/call",
+  "params": {
+    "name": "&lt;tool_name&gt;",
+    "arguments": { ... }
+  }
+}</pre>
+        </div>
+      </div>
+    </div>
+
+    <hr class="doc-divider" />
+
+    <!-- ──────────────────────────────────────────────────────── -->
+    <!-- SECTION 8: Error codes                                  -->
+    <!-- ──────────────────────────────────────────────────────── -->
+    <div class="doc-section" id="error-codes">
+      <div class="doc-section-label">Error Codes</div>
+      <h2 class="doc-section-title">What errors look like &amp; how to handle them</h2>
+      <p>All errors return HTTP 200 with a JSON-RPC error body. Check <code>response.error</code>, not the HTTP status code.</p>
+
+      <pre style="background:#1a1a1a;color:#e8d8c8;border-radius:8px;padding:16px;font-size:13px;overflow-x:auto;margin:16px 0;">{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "error": {
+    "code": -32601,
+    "message": "Unknown tool: get_foo"
+  }
+}</pre>
+
+      <table class="rate-table">
+        <thead>
+          <tr>
+            <th>Code</th>
+            <th>Meaning</th>
+            <th>How to fix</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="rate-action">HTTP 401</td>
+            <td>Missing or invalid <code>X-API-Key</code></td>
+            <td><strong>"Invalid API key" almost always means the key was regenerated.</strong> Ask the user to open the app → <strong>Settings → API Key</strong>, copy the current <code>sb_</code> key, and update your config. Keys don't expire or get deleted on their own, so once you have the current one it keeps working — store it persistently (env var / config file), don't re-derive it each session.</td>
+          </tr>
+          <tr>
+            <td class="rate-action">HTTP 403</td>
+            <td>Key is valid but user profile not found</td>
+            <td>Open the Squirrel Brain app once to create the profile, then retry.</td>
+          </tr>
+          <tr>
+            <td class="rate-action">-32600</td>
+            <td>Invalid JSON-RPC request (bad structure)</td>
+            <td>Check you're sending <code>{ jsonrpc: "2.0", id, method, params }</code>.</td>
+          </tr>
+          <tr>
+            <td class="rate-action">-32601</td>
+            <td>Unknown tool name</td>
+            <td>Check spelling. Call <code>get_squirrel_brain_help</code> for the full tool list.</td>
+          </tr>
+          <tr>
+            <td class="rate-action">-32602</td>
+            <td>Invalid params (missing required field)</td>
+            <td>The error message names the missing field. Add it.</td>
+          </tr>
+          <tr>
+            <td class="rate-action">-32603</td>
+            <td>Insufficient scope <em>or</em> internal error</td>
+            <td>Read the <code>message</code> field. Every key is issued with <strong>full permissions</strong> by default, so "Insufficient scope" is rare — if you hit it, regenerate your key in Settings &rarr; API Key. Any other <code>-32603</code> message is a transient server error &mdash; check the <code>data</code> field and retry once.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="info-box">
+        <strong>🔑 Routine annual renewal — this is normal, nothing is broken.</strong><br><br>
+        Keys are valid for <strong>1 year</strong>. Starting <strong>7 days before</strong> expiry, you'll get a push notification on your phone that says: <em>"Routine key renewal — X days left"</em> (where X counts down from 7). This is expected — it happens every year for security.<br><br>
+        <strong>What to do when you get that notification:</strong><br>
+        1. Open the Squirrel Brain app<br>
+        2. Go to <strong>Settings → API Key</strong><br>
+        3. Tap <strong>Regenerate</strong><br>
+        4. Copy the new key<br>
+        5. Paste it into your agent's config (wherever you originally put the old key)<br>
+        6. Done — your agent picks up the new key on its next call<br><br>
+        Agents with an active key can also skip steps 1–4 by calling <code>rotate_api_key</code> — the old key is revoked and the fresh key is returned instantly. Either way, your agent will need step 5 (update its config with the new key).
+      </div>
+    </div>
+
+    <!-- SECTION 9: Rate limits                                  -->
+    <!-- ──────────────────────────────────────────────────────── -->
+    <div class="doc-section" id="rate-limits">
+      <div class="doc-section-label">Rate Limits</div>
+      <h2 class="doc-section-title">Per-user limits</h2>
+      <p>All limits are per-user per-key — not global. Anomaly detection flags bulk reads (&gt; 1,000 reads in 10 minutes) and soft-suspends the token with a push notification to the user.</p>
+
+      <table class="rate-table">
+        <thead>
+          <tr>
+            <th>Action</th>
+            <th>Per minute</th>
+            <th>Per hour</th>
+            <th>Per day</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class="rate-action">Read queries</td><td>60</td><td>600</td><td>5,000</td></tr>
+          <tr><td class="rate-action">Write (items)</td><td>20</td><td>100</td><td>500</td></tr>
+          <tr><td class="rate-action">Alarm creates</td><td>5</td><td>10</td><td>30</td></tr>
+          <tr><td class="rate-action">Push notifications</td><td>10</td><td>20</td><td>50</td></tr>
+          <tr><td class="rate-action">pip_call (voice)</td><td>2</td><td>5</td><td>10</td></tr>
+          <tr><td class="rate-action">Brief trigger</td><td>1</td><td>2</td><td>3</td></tr>
+        </tbody>
+      </table>
+
+      <div class="info-box">
+        <strong>Why not just use Pushover / Ntfy / Twilio?</strong><br>
+        Pushover/Ntfy send banner notifications — silenced by Focus mode and DND. Twilio makes a phone call.<br>
+        Squirrel Brain fires a <em>real iPhone alarm</em> — same as your alarm clock, bypasses DND, keeps going until dismissed. Plus structured memory and tasks that survive between agent sessions.
+      </div>
+    </div>
+
+  </div><!-- /.page-wrap -->
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-brand">
+      <img src="../assets/squirrel_logo.png" alt="Squirrel Brain" />
+      <span>SQUIRREL <em>BRAIN</em></span>
+    </div>
+    <div class="footer-links">
+      <a href="/">Home</a>
+      <a href="/#sales">Sales &amp; Field</a>
+      <a href="/#daily-brief">Daily Brief</a>
+      <a href="/legal/privacy-policy.html">Privacy</a>
+      <a href="/legal/terms-of-use.html">Terms</a>
+    </div>
+    <div class="footer-copy">&copy; 2026 Acorn Labs LLC &middot; squirrelbrainapp.com</div>
+  </footer>
+
+  <script>
+    function showAgent(name) {
+      document.querySelectorAll('.agent-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.agent-config').forEach(c => c.classList.remove('active'));
+      document.querySelector('[onclick="showAgent(\'' + name + '\')"]').classList.add('active');
+      const cfg = document.getElementById('config-' + name);
+      if (cfg) cfg.classList.add('active');
+    }
+
+    function copyBlock(id) {
+      const block = document.getElementById(id);
+      const pre = block.querySelector('pre');
+      const btn = block.querySelector('.copy-btn');
+      navigator.clipboard.writeText(pre.textContent).then(() => {
+        btn.textContent = 'Copied!';
+        btn.classList.add('copied');
+        setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2000);
+      });
+    }
+  </script>
+
+</body>
+</html>
