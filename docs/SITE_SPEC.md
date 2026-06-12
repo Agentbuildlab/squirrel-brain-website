@@ -122,3 +122,12 @@ Performance budget: Lighthouse ≥95, LCP < 2s. No emoji-as-icons. Real app pixe
 4. Demo asset production (sim recordings + reskinned stills)
 5. Page builds (delegate: sonnet, CEO reviews each)
 6. Polish + Lighthouse + Vercel preview → Adam approves → production
+
+## 8. STATUS @ 2026-06-11 ~8:30 PM (session save)
+- Phases 1-3 + homepage wow-pass DONE on v2-rebuild. Next 16.2.9. vercel.json framework=nextjs.
+- PUBLIC preview: https://squirrel-brain-website-6f2gx5llf-squirrelbrain.vercel.app (protection off).
+- TestFlight CTA LIVE: https://testflight.apple.com/join/R7WRjGEC (build 87). Apple app ID 6766505549.
+- AWAITING: Adam's "flip production" → vercel --prod → squirrelbrainapp.com.
+- DEFERRED (budget, resume after Mon 1PM reset): demo clips (sim+Remotion+Pip TTS, sample first),
+  /mcp docs refresh (25 tools; FIX stale anon key in docs!), legal reskin, door-pages wow-pass,
+  PostHog, OG image. "Actual call" copy depends on app session shipping CallKit port.
