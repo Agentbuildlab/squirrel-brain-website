@@ -16,6 +16,13 @@ const config: Config = {
         border: "#f0e8dc",
         accent: "#FF7A1A",
         "accent-light": "#FFF0E6",
+        // Dark cinematic palette
+        dark: {
+          bg: "#100a02",
+          card: "#1e1408",
+          text: "#fff5e8",
+          gold: "#e8a84a",
+        },
       },
       fontFamily: {
         display: ["var(--font-bricolage)", "system-ui", "sans-serif"],
