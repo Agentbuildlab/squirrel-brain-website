@@ -31,8 +31,8 @@ const PROOF_BLOCKS: ProofBlock[] = [
   {
     id: "soccer",
     eyebrow: "Family scheduling",
-    headline: "Soccer schedule — every game, every alarm.",
-    body: "Snap the paper schedule. Your squirrel extracts every date, time, and field. All 12 games land in your calendar with reminders. You never miss kick-off.",
+    headline: "Snap a whole season in one shot.",
+    body: "Photograph the soccer schedule on the fridge — or the school-year calendar. Your squirrel fans every game and practice into your calendar all at once. One tap, the whole season done. And when it's game time, the address is already there — tap it and Maps opens with turn-by-turn directions. No typing.",
     photoSrc: "/assets/before_whiteboard.png",
     photoAlt: "Soccer schedule on a whiteboard, ready to snap",
     rows: [
@@ -92,7 +92,7 @@ const PROOF_BLOCKS: ProofBlock[] = [
     id: "meeting",
     eyebrow: "Work & field",
     headline: "Meeting recap in one sentence.",
-    body: "Walking out of the meeting, tap mic: \"Follow up with Sarah about the contract by Wednesday.\" That's it. Your squirrel handles the rest.",
+    body: "Walking out, tap mic: \"Follow up with Sarah about the contract by Wednesday.\" That's it. Your squirrel sets the reminder, logs the note, and follows through so you don't have to hold it in your head.",
     photoSrc: "/assets/lifestyle_sales_walkout.png",
     photoAlt: "Professional walking out after a meeting",
     rows: [

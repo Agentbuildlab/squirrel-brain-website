@@ -245,26 +245,34 @@ export default function CallSection() {
               id="call-heading"
               className="font-display font-extrabold leading-tight mb-6"
               style={{
-                fontSize: "clamp(2.4rem, 5vw, 4.5rem)",
+                fontSize: "clamp(2.2rem, 4.5vw, 4rem)",
                 color: "#fff5e8",
               }}
             >
-              When it really matters,{" "}
-              <span style={{ color: "#3fae6e" }}>your squirrel calls you.</span>
+              For the one thing you{" "}
+              <span style={{ color: "#3fae6e" }}>cannot miss — your squirrel calls you.</span>
             </h2>
             <p
-              className="text-lg leading-relaxed mb-6 max-w-lg"
-              style={{ color: "rgba(255,245,232,0.65)" }}
+              className="text-lg leading-relaxed mb-5 max-w-lg"
+              style={{ color: "rgba(255,245,232,0.75)" }}
             >
-              An actual incoming call. Your phone rings — your squirrel speaks in its own voice — to
-              make sure the one thing you can't miss gets handled.
+              Not a notification. Not a banner you swipe away. A{" "}
+              <strong style={{ color: "#fff5e8" }}>real incoming phone call</strong> — the kind
+              that rings through silent mode, through Do Not Disturb, through the 200 other
+              notifications you never opened.
             </p>
             <p
-              className="text-base leading-relaxed mb-10 max-w-lg"
-              style={{ color: "rgba(255,245,232,0.45)" }}
+              className="text-base leading-relaxed mb-5 max-w-lg"
+              style={{ color: "rgba(255,245,232,0.65)" }}
             >
-              You can opt into a voice call for any reminder. It's a real feature
-              in the app today — try it in the TestFlight beta.
+              Your squirrel speaks in its own voice and tells you exactly what's up. You hear it.
+              You can't ignore it. The thing gets done.
+            </p>
+            <p
+              className="text-sm leading-relaxed mb-10 max-w-lg"
+              style={{ color: "rgba(255,245,232,0.4)" }}
+            >
+              Opt in per reminder — your call, literally. Live in the TestFlight beta today.
             </p>
 
             <a

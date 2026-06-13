@@ -38,7 +38,7 @@ const STEPS = [
     headline: "Say it out loud.",
     sub: "\"Dentist Thursday at two, remind me the day before.\" Your squirrel extracts the date, time, and reminder. Alarm set in seconds.",
     beforeSrc: null, // no photo — voice step
-    screenSrc: "/assets/screens/home-v3.webp",
+    screenSrc: "/assets/screens/home-v4.webp",
     screenAlt: "Squirrel Brain home — captured calendar events",
     accentColor: T.orange,
     accentBg: "#FFF0E6",
@@ -60,7 +60,7 @@ const STEPS = [
     headline: "Snap a receipt.",
     sub: "\"Return window closes June 24 — remind you 2 days before?\" Your squirrel asks. You tap yes. Done.",
     beforeSrc: "/assets/before_wine_bottle.png",
-    screenSrc: "/assets/screens/notes.webp",
+    screenSrc: "/assets/screens/notes-v2.webp",
     screenAlt: "Squirrel Brain Notes — captured and organised",
     accentColor: T.orange,
     accentBg: "#FFF0E6",
@@ -118,7 +118,7 @@ export default function CapturesSection() {
             {STEPS.map((step, i) => (
               <FadeIn key={step.id} delay={i * 0.1}>
                 <div className="flex flex-col items-center gap-4">
-                  <PhoneShot src={step.screenSrc} alt={step.screenAlt} width={180} />
+                  <PhoneShot src={step.screenSrc} alt={step.screenAlt} width={280} />
                   <div className="text-center">
                     <p className="text-xs font-bold tracking-widest uppercase mb-2" style={{ color: step.accentColor }}>
                       {step.eyebrow}
@@ -230,7 +230,7 @@ export default function CapturesSection() {
           <div className="flex-shrink-0 flex items-center justify-center">
             <div className="relative">
               {/* Stack PhoneShot frames and cross-fade between them */}
-              <div style={{ position: "relative", width: 268, height: Math.round(268 * 2.165) }}>
+              <div style={{ position: "relative", width: 340, height: Math.round(340 * 2.165) }}>
                 {STEPS.map((step, i) => (
                   <motion.div
                     key={step.id}
@@ -243,7 +243,7 @@ export default function CapturesSection() {
                     <PhoneShot
                       src={step.screenSrc}
                       alt={step.screenAlt}
-                      width={268}
+                      width={340}
                     />
                   </motion.div>
                 ))}

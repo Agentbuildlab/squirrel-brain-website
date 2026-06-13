@@ -18,16 +18,16 @@ const DEMOS = [
     caption: "Say \"Dentist Thursday at 2\" — your squirrel sets the alarm",
     duration: "~8s",
     tags: ["voice", "calendar"],
-    screen: "/assets/screens/home-v3.webp",
-    screenAlt: "Home dashboard showing calendar events",
+    screen: "/assets/screens/home-v4.webp",
+    screenAlt: "Home dashboard showing calendar events with Daily Countdown",
   },
   {
     id: 2,
     title: "Receipt scan → return reminder",
-    caption: "Snap a receipt — squirrel reads the date and asks if you want a return reminder",
+    caption: "Snap a receipt — your squirrel reads the date and asks if you want a return reminder",
     duration: "~12s",
     tags: ["photo", "reminder"],
-    screen: "/assets/screens/notes.webp",
+    screen: "/assets/screens/notes-v2.webp",
     screenAlt: "Notes showing captured receipt details",
   },
   {
@@ -45,7 +45,7 @@ const DEMOS = [
     caption: "Ask your squirrel anything — smart chips surface what's next",
     duration: "~15s",
     tags: ["chat", "AI"],
-    screen: "/assets/screens/home-v3.webp",
+    screen: "/assets/screens/home-v4.webp",
     screenAlt: "Home showing squirrel suggestions",
   },
   {
@@ -54,16 +54,16 @@ const DEMOS = [
     caption: "Speak a search — your squirrel finds it instantly from everything you've captured",
     duration: "~12s",
     tags: ["voice", "search"],
-    screen: "/assets/screens/notes.webp",
+    screen: "/assets/screens/notes-v2.webp",
     screenAlt: "Notes search results",
   },
   {
     id: 7,
-    title: "Meeting Mode — record → extract",
-    caption: "Record your debrief — squirrel pulls out the follow-ups and action items",
+    title: "Meeting Mode — record → extract action items",
+    caption: "Record your post-meeting debrief — your squirrel pulls out the follow-ups and action items automatically",
     duration: "~20s",
     tags: ["voice", "meeting"],
-    screen: "/assets/screens/notes.webp",
+    screen: "/assets/screens/notes-v2.webp",
     screenAlt: "Notes with meeting action items extracted",
   },
   {
@@ -72,27 +72,36 @@ const DEMOS = [
     caption: "Drop a link into the Burrow — it lands in your stash with an optional reminder",
     duration: "~10s",
     tags: ["link", "reminder"],
-    screen: "/assets/screens/links.webp",
+    screen: "/assets/screens/links-v2.webp",
     screenAlt: "LinkStash with YouTube and other saved links",
   },
   {
     id: 10,
     title: "Whiteboard → checklist",
-    caption: "Snap a whiteboard — squirrel converts it to a tappable task list",
+    caption: "Snap a whiteboard — your squirrel converts it to a tappable task list",
     duration: "~12s",
     tags: ["photo", "tasks"],
-    screen: "/assets/screens/notes.webp",
+    screen: "/assets/screens/notes-v2.webp",
     screenAlt: "Notes with checklist extracted from whiteboard photo",
   },
   {
     id: 11,
     title: "Schedule photo → whole season of alarms",
-    caption: "Snap the soccer schedule — squirrel finds every game and adds them all at once",
+    caption: "Snap the soccer schedule — your squirrel finds every game and adds them all at once",
     duration: "~15s",
     tags: ["photo", "calendar"],
     featured: true,
-    screen: "/assets/screens/calendar.webp",
+    screen: "/assets/screens/calendar-v2.webp",
     screenAlt: "Calendar with soccer games added across the month",
+  },
+  {
+    id: 12,
+    title: "Outlook screenshot → calendar event",
+    caption: "Screenshot your Outlook event — it drops straight into Squirrel Brain with real reminders",
+    duration: "~10s",
+    tags: ["photo", "calendar"],
+    screen: "/assets/screens/calendar-v2.webp",
+    screenAlt: "Calendar showing imported Outlook event with reminders",
   },
 ];
 
@@ -153,15 +162,15 @@ export default function DemosPage() {
           </div>
         </section>
 
-        {/* Demo grid */}
+        {/* Demo grid — 2-up so phones are readable */}
         <section className="py-16" aria-labelledby="demo-grid-heading">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6">
+          <div className="max-w-5xl mx-auto px-4 sm:px-6">
             <h2 id="demo-grid-heading" className="sr-only">All demos</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
               {DEMOS.map((demo, i) => (
                 <FadeIn key={demo.id} delay={i * 0.06}>
                   <article
-                    className={`bg-white rounded-3xl border p-5 flex flex-col gap-4 h-full ${
+                    className={`bg-white rounded-3xl border p-6 flex flex-col gap-5 h-full ${
                       demo.featured ? "border-accent/30 ring-1 ring-accent/20" : "border-border"
                     }`}
                     aria-labelledby={`demo-title-${demo.id}`}
@@ -172,7 +181,7 @@ export default function DemosPage() {
                       </div>
                     )}
                     <div className="flex justify-center">
-                      <PhoneShot src={demo.screen} alt={demo.screenAlt} width={120} />
+                      <PhoneShot src={demo.screen} alt={demo.screenAlt} width={300} />
                     </div>
                     <div>
                       <h3
@@ -181,8 +190,8 @@ export default function DemosPage() {
                       >
                         {demo.title}
                       </h3>
-                      <p className="text-xs text-muted mb-1">{demo.duration}</p>
-                      <p className="text-xs text-muted/80 leading-snug">{demo.caption}</p>
+                      <p className="text-xs text-muted mb-2">{demo.duration}</p>
+                      <p className="text-sm text-muted/80 leading-snug">{demo.caption}</p>
                     </div>
                     <div className="flex flex-wrap gap-1.5 mt-auto">
                       {demo.tags.map((tag) => (

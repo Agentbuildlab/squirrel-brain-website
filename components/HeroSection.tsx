@@ -62,16 +62,16 @@ export default function HeroSection() {
       id="hero-heading"
       className="font-display font-extrabold text-ink leading-[0.95] tracking-tight"
       style={{
-        fontSize: "clamp(2.6rem, 6.5vw, 7rem)",
+        fontSize: "clamp(2rem, 5vw, 5.5rem)",
         // Always visible — SSR-safe via immediate pattern
         opacity: 1,
       }}
     >
-      Snap it.{" "}
-      <span style={{ color: T.orange }}>Say it.</span>
+      Your brain has{" "}
+      <span style={{ color: T.orange }}>too many tabs open.</span>
       <br />
-      Stash it.{" "}
-      <span style={{ color: T.orange }}>Done.</span>
+      Let’s close{" "}
+      <span style={{ color: T.orange }}>some of them.</span>
     </h1>
   );
 
@@ -108,7 +108,7 @@ export default function HeroSection() {
             </div>
           </div>
           <div className="flex justify-center lg:justify-end">
-            <PhoneShot src="/assets/screens/home.webp" alt="Squirrel Brain — your day at a glance" width={280} />
+            <PhoneShot src="/assets/screens/home-v4.webp" alt="Squirrel Brain — your day at a glance" width={360} />
           </div>
         </div>
       </section>
@@ -237,7 +237,7 @@ export default function HeroSection() {
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 transition={{ duration: 0.7, delay: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
               >
-                <PhoneShot src="/assets/screens/home.webp" alt="Squirrel Brain — your day at a glance" width={260} />
+                <PhoneShot src="/assets/screens/home-v4.webp" alt="Squirrel Brain — your day at a glance" width={380} />
               </motion.div>
             </motion.div>
           </div>

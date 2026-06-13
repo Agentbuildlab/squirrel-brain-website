@@ -141,7 +141,7 @@ export default function MascotSection() {
           {/* LEFT bubbles */}
           <div className="flex flex-col gap-5 lg:items-end flex-1 min-w-0 w-full lg:w-auto">
             <SpeechBubble
-              text="Your brain has too many tabs open. Let's close some of them."
+              text="One tap. Every alarm set. The whole season done."
               delay={0.25}
               inView={inView}
               align="right"

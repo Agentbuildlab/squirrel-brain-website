@@ -8,16 +8,22 @@ import { PhoneShot } from "@/components/v2/PhoneKit";
 export const metadata: Metadata = {
   title: "For the Family",
   description:
-    "Squirrel Brain for busy parents. Snap a soccer schedule and get every game as an alarm. Receipts, recipes, meds, school docs — all organised in Pix boards.",
+    "Squirrel Brain for busy parents. Snap a soccer schedule and get every game as an alarm. Receipts, pix boards, morning brief with weather and a joke — all organised.",
 };
 
 const FEATURES = [
   {
-    title: "Snap a schedule, get a whole season",
-    body: "Photo-only capture. Snap the crumpled soccer schedule pinned to the fridge. Squirrel Brain reads it, finds every game date, and asks: \"Found 6 games — add them all?\" One tap. Every alarm set.",
+    title: "Snap a whole season in one shot",
+    body: "Photograph the soccer schedule on the fridge — or the school-year calendar — and your squirrel fans it out into every single game and event, all at once. One tap, the whole season on your calendar.",
     highlight: true,
-    screen: "/assets/screens/calendar.webp",
-    screenAlt: "Calendar with soccer season games added",
+    screen: "/assets/screens/calendar-v2.webp",
+    screenAlt: "Calendar with soccer season games added from one photo",
+  },
+  {
+    title: "Game time? The address is already there.",
+    body: "The location was captured right along with the event. When it's game time, tap the address and it opens straight in your maps app — turn-by-turn, no typing required.",
+    screen: "/assets/screens/calendar-v2.webp",
+    screenAlt: "Calendar event with GPS address ready to tap",
   },
   {
     title: "Pix boards — for every pile on the counter",
@@ -27,21 +33,21 @@ const FEATURES = [
   },
   {
     title: "Return-window reminders",
-    body: "Snap a receipt. Squirrel Brain reads the store and the amount, then asks if you want a reminder before the return window closes. No more missed returns.",
-    screen: "/assets/screens/notes.webp",
+    body: "Snap a receipt. Your squirrel reads the store and the amount, then asks if you want a reminder before the return window closes. No more missed returns.",
+    screen: "/assets/screens/notes-v2.webp",
     screenAlt: "Notes showing return reminder extracted from receipt",
   },
   {
-    title: "Morning brief",
-    body: "Every morning, a short email: what's on the calendar today, what the kids have, and anything you captured yesterday that's still open. The whole family load in 30 seconds.",
-    screen: "/assets/screens/home-v3.webp",
-    screenAlt: "Home dashboard with today's family schedule",
+    title: "Voice recall — find anything you ever snapped",
+    body: "\"Find the permission slip for the science trip.\" \"What was the pediatrician's number?\" \"When does soccer practice start?\" Your squirrel searches everything you've ever captured and answers back.",
+    screen: "/assets/screens/home-v4.webp",
+    screenAlt: "Home showing voice search results",
   },
   {
-    title: "Voice recall",
-    body: "\"Find the permission slip for the science trip.\" \"What was the pediatrician's number?\" \"When does soccer practice start?\" Your squirrel searches everything you've ever captured and answers back.",
-    screen: "/assets/screens/home-v3.webp",
-    screenAlt: "Home showing voice search results",
+    title: "Outlook events? One screenshot.",
+    body: "Company calendar locked down? Screenshot the Outlook event. Your squirrel reads it and drops it straight into your calendar with reminders. Never miss a work event again.",
+    screen: "/assets/screens/calendar-v2.webp",
+    screenAlt: "Calendar showing imported Outlook event with reminders",
   },
 ];
 
@@ -73,13 +79,13 @@ export default function FamilyPage() {
                   id="family-hero-heading"
                   className="font-display text-5xl sm:text-6xl font-extrabold text-ink leading-[1.05] mb-5 text-balance"
                 >
-                  The whole family
-                  {" "}<span className="text-blue-500">in one brain.</span>
+                  The whole family{" "}
+                  <span className="text-blue-500">in one brain.</span>
                 </h1>
               </FadeIn>
               <FadeIn immediate delay={0.15}>
                 <p className="text-lg text-muted leading-relaxed mb-8 max-w-lg">
-                  Snap schedules, receipts, permission slips, and meds. Squirrel Brain
+                  Snap schedules, receipts, permission slips, and meds. Your squirrel
                   reads every photo, sets every alarm, and reminds you before anything
                   slips. Reads every calendar already on your iPhone — nothing new to
                   connect.
@@ -91,17 +97,17 @@ export default function FamilyPage() {
             </div>
             <FadeIn immediate from="right" delay={0.1} className="flex justify-center lg:justify-end">
               <PhoneShot
-                src="/assets/screens/calendar.webp"
+                src="/assets/screens/calendar-v2.webp"
                 alt="Calendar showing soccer season added from a single photo"
-                width={240}
+                width={320}
               />
             </FadeIn>
           </div>
         </section>
 
-        {/* The money demo — full-width highlight */}
+        {/* Soccer / season snap — the money demo */}
         <section className="py-16 bg-white border-y border-border" aria-labelledby="schedule-demo-heading">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+          <div className="max-w-5xl mx-auto px-4 sm:px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <FadeIn>
               <div>
                 <p className="text-xs font-bold tracking-widest uppercase text-accent mb-3">
@@ -111,30 +117,108 @@ export default function FamilyPage() {
                   id="schedule-demo-heading"
                   className="font-display text-3xl font-bold text-ink mb-4"
                 >
-                  One photo. An entire season of alarms.
+                  Snap a whole season in one shot.
                 </h2>
                 <p className="text-muted leading-relaxed mb-4">
-                  That crumpled soccer schedule on the fridge? Snap it. Your squirrel reads
-                  every date, every game, every practice. You see them listed out.
-                  Tap &ldquo;Add all&rdquo; — they land directly on your iPhone calendar with
-                  an alarm before each one.
+                  Photograph the soccer schedule on the fridge — or the school-year calendar
+                  hanging in the hallway — and your squirrel fans it out into every single
+                  game and event, all at once. You see them listed out. Tap &ldquo;Add all&rdquo; —
+                  the whole season lands on your calendar.
                 </p>
                 <p className="text-muted leading-relaxed">
-                  No typing. No calendar app. Just a phone camera and a tap.
+                  <strong className="text-ink">When it&rsquo;s game time, the address is already there.</strong>{" "}
+                  Tap the location and it opens straight in Maps — turn-by-turn, no typing.
+                  The address was captured right along with the event.
                 </p>
               </div>
             </FadeIn>
             <FadeIn from="right" delay={0.1} className="flex justify-center">
               <PhoneShot
-                src="/assets/screens/calendar.webp"
+                src="/assets/screens/calendar-v2.webp"
                 alt="Calendar with full soccer season automatically added"
-                width={180}
+                width={320}
               />
             </FadeIn>
           </div>
         </section>
 
-        {/* Feature grid */}
+        {/* Parking — never lose your car */}
+        <section className="py-16" style={{ background: "#faf6f0" }} aria-labelledby="parking-heading">
+          <div className="max-w-5xl mx-auto px-4 sm:px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <FadeIn from="right" delay={0.1} className="flex justify-center md:order-2">
+              <PhoneShot
+                src="/assets/screens/pix-v2.webp"
+                alt="Pix boards showing parking photo with GPS pin"
+                width={320}
+              />
+            </FadeIn>
+            <FadeIn className="md:order-1">
+              <div>
+                <p className="text-xs font-bold tracking-widest uppercase text-accent mb-3">
+                  Never lose your car again
+                </p>
+                <h2
+                  id="parking-heading"
+                  className="font-display text-3xl font-bold text-ink mb-4"
+                >
+                  Snap it. Pin it. Find it.
+                </h2>
+                <p className="text-muted leading-relaxed mb-4">
+                  Snap a photo of your car — or just the level and row sign. The photo gets
+                  a GPS pin automatically, right where you parked.
+                </p>
+                <p className="text-muted leading-relaxed">
+                  When you&rsquo;re done, pull the photo up, tap the pin, and your squirrel
+                  navigates you straight back to it. No more wandering the garage floor by floor.
+                </p>
+              </div>
+            </FadeIn>
+          </div>
+        </section>
+
+        {/* Morning brief — expanded with weather/history/joke */}
+        <section className="py-16 bg-white border-y border-border" aria-labelledby="brief-heading">
+          <div className="max-w-5xl mx-auto px-4 sm:px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <FadeIn>
+              <div>
+                <p className="text-xs font-bold tracking-widest uppercase text-accent mb-3">
+                  Morning brief
+                </p>
+                <h2
+                  id="brief-heading"
+                  className="font-display text-3xl font-bold text-ink mb-4"
+                >
+                  Two emails a day. Zero noise.
+                </h2>
+                <p className="text-muted leading-relaxed mb-4">
+                  Every morning, a short email with your day — what&rsquo;s on the calendar,
+                  what&rsquo;s open, and anything you captured that still needs handling.
+                </p>
+                <p className="text-muted leading-relaxed mb-4">
+                  Plus a little something extra:{" "}
+                  <strong className="text-ink">today&rsquo;s weather for where you are</strong>,
+                  a{" "}
+                  <strong className="text-ink">&ldquo;this day in history&rdquo;</strong> tidbit, and a{" "}
+                  <strong className="text-ink">joke of the day</strong> to start things off right.
+                  Because your squirrel likes context.
+                </p>
+                <p className="text-muted leading-relaxed">
+                  In the afternoon, if anything&rsquo;s still pending, a 4 PM nudge with exactly
+                  what&rsquo;s left. No fluff. Two emails, done.
+                </p>
+              </div>
+            </FadeIn>
+            <FadeIn from="right" delay={0.1} className="flex justify-center">
+              <PhoneShot
+                src="/assets/screens/home-v4.webp"
+                alt="Home dashboard with today's family schedule and Daily Countdown"
+                width={320}
+              />
+            </FadeIn>
+          </div>
+        </section>
+
+        {/* Feature grid — 2-up layout */}
         <section className="py-20" aria-labelledby="family-features-heading">
           <div className="max-w-6xl mx-auto px-4 sm:px-6">
             <FadeIn>
@@ -145,18 +229,18 @@ export default function FamilyPage() {
                 Less chaos. More done.
               </h2>
             </FadeIn>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {FEATURES.map((f, i) => (
                 <FadeIn key={f.title} delay={i * 0.07}>
                   <div
-                    className={`rounded-3xl border p-6 flex flex-col gap-4 h-full ${
+                    className={`rounded-3xl border p-6 flex flex-col gap-5 h-full ${
                       f.highlight
                         ? "bg-accent-light border-accent/20"
                         : "bg-white border-border"
                     }`}
                   >
                     <div className="flex justify-center">
-                      <PhoneShot src={f.screen} alt={f.screenAlt} width={100} />
+                      <PhoneShot src={f.screen} alt={f.screenAlt} width={260} />
                     </div>
                     <h3 className="font-display text-lg font-bold text-ink">{f.title}</h3>
                     <p className="text-sm text-muted leading-relaxed flex-1">{f.body}</p>
@@ -164,6 +248,41 @@ export default function FamilyPage() {
                 </FadeIn>
               ))}
             </div>
+          </div>
+        </section>
+
+        {/* "Your squirrel, your way" — naming + companion section */}
+        <section
+          className="py-20 border-y border-border"
+          style={{ background: "#faf6f0" }}
+          aria-labelledby="your-squirrel-heading"
+        >
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
+            <FadeIn>
+              <p className="text-xs font-bold tracking-widest uppercase text-accent mb-3">
+                Your squirrel, your way
+              </p>
+              <h2
+                id="your-squirrel-heading"
+                className="font-display text-3xl sm:text-4xl font-bold text-ink mb-5"
+              >
+                You name it. It becomes yours.
+              </h2>
+              <p className="text-lg text-muted leading-relaxed mb-6 max-w-2xl mx-auto">
+                When you set up Squirrel Brain, you name your squirrel. Call it Scuttle, Hazel, Nutmeg,
+                whatever feels right. From that moment, it&rsquo;s not just an app — it&rsquo;s a little
+                companion that actually knows your life.
+              </p>
+              <p className="text-base text-muted leading-relaxed mb-6 max-w-2xl mx-auto">
+                A morning hello. A nudge before the game. A &ldquo;hey, don&rsquo;t forget Sam&rsquo;s gift&rdquo; two days
+                before the birthday. It checks in through the day in its own voice — warm, a little
+                funny, and 100% on your side.
+              </p>
+              <p className="text-base text-muted leading-relaxed max-w-2xl mx-auto">
+                It knows your schedule. It knows what matters to you. And unlike every other app on
+                your phone, it actually follows through.
+              </p>
+            </FadeIn>
           </div>
         </section>
 
