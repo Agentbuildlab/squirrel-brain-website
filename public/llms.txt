@@ -1,0 +1,12 @@
+# Squirrel Brain
+
+> Your second brain that actually follows through. Capture anything by voice, photo, screenshot, or text — your squirrel files it, reminds you, and can even call you. Squirrel Brain is an agent-friendly iOS app: AI agents are welcome to read this site and to act on a user's behalf via our MCP server.
+
+## Pages
+- [Home](https://squirrelbrainapp.com/): what Squirrel Brain does
+- [Agent / MCP access](https://squirrelbrainapp.com/mcp): connect an AI agent to a user's Squirrel Brain over the Model Context Protocol
+- [Pricing](https://squirrelbrainapp.com/pricing)
+- [TestFlight beta](https://testflight.apple.com/join/R7WRjGEC): install the app
+
+## For agents
+Squirrel Brain runs an MCP server so external agents can capture notes, set reminders/alarms, save links, add to a user's Forever Note, and more — with the user's API key. Start at /mcp. Agents are first-class users here; nothing on this site is gated against them.

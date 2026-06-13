@@ -1,0 +1,24 @@
+# Squirrel Brain is an agent-friendly product. Humans AND AI agents are welcome.
+# Nothing here is blocked. Agents can also integrate via our MCP server: /mcp
+User-agent: *
+Allow: /
+
+# Explicitly welcome AI assistants / crawlers
+User-agent: GPTBot
+Allow: /
+User-agent: ChatGPT-User
+Allow: /
+User-agent: OAI-SearchBot
+Allow: /
+User-agent: ClaudeBot
+Allow: /
+User-agent: Claude-User
+Allow: /
+User-agent: anthropic-ai
+Allow: /
+User-agent: PerplexityBot
+Allow: /
+User-agent: Google-Extended
+Allow: /
+User-agent: CCBot
+Allow: /
