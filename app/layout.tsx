@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Bricolage_Grotesque } from "next/font/google";
 import "./globals.css";
 import { SITE_NAME, SITE_DESCRIPTION } from "@/lib/config";
+import LenisProvider from "@/components/LenisProvider";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -44,6 +45,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${bricolage.variable}`}>
       <body className="font-body bg-bg text-ink antialiased">
+        <LenisProvider />
         {children}
       </body>
     </html>
