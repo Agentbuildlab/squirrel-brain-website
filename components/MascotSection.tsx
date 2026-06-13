@@ -196,10 +196,10 @@ export default function MascotSection() {
                     alt="Your Squirrel Brain mascot"
                     width={180}
                     height={180}
-                    className="rounded-4xl"
                     style={{
-                      boxShadow:
-                        "0 28px 72px rgba(255,122,26,0.28), 0 10px 24px rgba(26,18,8,0.12)",
+                      // Shape-following shadow — just the squirrel, no tile
+                      filter:
+                        "drop-shadow(0 20px 28px rgba(26,18,8,0.20)) drop-shadow(0 5px 14px rgba(255,122,26,0.22))",
                       display: "block",
                     }}
                     priority={false}

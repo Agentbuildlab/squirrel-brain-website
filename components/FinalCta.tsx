@@ -95,10 +95,10 @@ export default function FinalCta() {
               alt="Your Squirrel Brain, pointing at the button below"
               width={120}
               height={120}
-              className="rounded-3xl"
               style={{
-                boxShadow:
-                  "0 20px 60px rgba(255,122,26,0.32), 0 8px 20px rgba(26,18,8,0.12)",
+                // Shape-following shadow — just the squirrel, no tile
+                filter:
+                  "drop-shadow(0 16px 24px rgba(26,18,8,0.20)) drop-shadow(0 4px 12px rgba(255,122,26,0.24))",
               }}
             />
           </motion.div>
