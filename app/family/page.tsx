@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import FadeIn from "@/components/FadeIn";
-import DeviceFrame from "@/components/DeviceFrame";
 import CtaButton from "@/components/CtaButton";
+import { PhoneShot } from "@/components/v2/PhoneKit";
 
 export const metadata: Metadata = {
   title: "For the Family",
@@ -15,28 +15,33 @@ const FEATURES = [
   {
     title: "Snap a schedule, get a whole season",
     body: "Photo-only capture. Snap the crumpled soccer schedule pinned to the fridge. Squirrel Brain reads it, finds every game date, and asks: \"Found 6 games — add them all?\" One tap. Every alarm set.",
-    demo: "DEMO: schedule photo → alarms",
     highlight: true,
+    screen: "/assets/screens/calendar.webp",
+    screenAlt: "Calendar with soccer season games added",
   },
   {
     title: "Pix boards — for every pile on the counter",
     body: "Receipts. Recipes. Meds. School permission slips. Snap and file them into the right board. Everything is searchable by voice later: \"find the field trip form\" just works.",
-    demo: "DEMO: Pix board wall pan",
+    screen: "/assets/screens/pix.webp",
+    screenAlt: "Pix photo boards showing organised family photos",
   },
   {
     title: "Return-window reminders",
     body: "Snap a receipt. Squirrel Brain reads the store and the amount, then asks if you want a reminder before the return window closes. No more missed returns.",
-    demo: "DEMO: receipt → return reminder",
+    screen: "/assets/screens/notes.webp",
+    screenAlt: "Notes showing return reminder extracted from receipt",
   },
   {
     title: "Morning brief",
     body: "Every morning, a short email: what's on the calendar today, what the kids have, and anything you captured yesterday that's still open. The whole family load in 30 seconds.",
-    demo: "PLACEHOLDER: morning brief email",
+    screen: "/assets/screens/home-v3.webp",
+    screenAlt: "Home dashboard with today's family schedule",
   },
   {
     title: "Voice recall",
     body: "\"Find the permission slip for the science trip.\" \"What was the pediatrician's number?\" \"When does soccer practice start?\" Your squirrel searches everything you've ever captured and answers back.",
-    demo: "DEMO: voice recall in the Burrow",
+    screen: "/assets/screens/home-v3.webp",
+    screenAlt: "Home showing voice search results",
   },
 ];
 
@@ -85,11 +90,10 @@ export default function FamilyPage() {
               </FadeIn>
             </div>
             <FadeIn immediate from="right" delay={0.1} className="flex justify-center lg:justify-end">
-              <DeviceFrame
-                imageSrc="/assets/squirrel_test_schedule.png"
-                imageAlt="A soccer schedule being processed by Squirrel Brain"
-                placeholderLabel={"DEMO: snap schedule\n→ whole season of alarms"}
-                className="w-52 lg:w-64"
+              <PhoneShot
+                src="/assets/screens/calendar.webp"
+                alt="Calendar showing soccer season added from a single photo"
+                width={240}
               />
             </FadeIn>
           </div>
@@ -121,9 +125,10 @@ export default function FamilyPage() {
               </div>
             </FadeIn>
             <FadeIn from="right" delay={0.1} className="flex justify-center">
-              <DeviceFrame
-                placeholderLabel={"DEMO: schedule photo\n→ \"Found 6 games — add them all?\""}
-                className="w-44 sm:w-52"
+              <PhoneShot
+                src="/assets/screens/calendar.webp"
+                alt="Calendar with full soccer season automatically added"
+                width={180}
               />
             </FadeIn>
           </div>
@@ -150,7 +155,9 @@ export default function FamilyPage() {
                         : "bg-white border-border"
                     }`}
                   >
-                    <DeviceFrame placeholderLabel={f.demo} className="w-28 mx-auto" />
+                    <div className="flex justify-center">
+                      <PhoneShot src={f.screen} alt={f.screenAlt} width={100} />
+                    </div>
                     <h3 className="font-display text-lg font-bold text-ink">{f.title}</h3>
                     <p className="text-sm text-muted leading-relaxed flex-1">{f.body}</p>
                   </div>

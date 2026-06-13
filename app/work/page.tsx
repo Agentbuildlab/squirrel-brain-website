@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import FadeIn from "@/components/FadeIn";
-import DeviceFrame from "@/components/DeviceFrame";
 import CtaButton from "@/components/CtaButton";
+import { PhoneShot } from "@/components/v2/PhoneKit";
 
 export const metadata: Metadata = {
   title: "For the Field",
@@ -15,32 +15,38 @@ const FEATURES = [
   {
     title: "Voice capture between stops",
     body: "Pull up to the next call, talk through what just happened. Squirrel Brain extracts the follow-ups, the promised callbacks, and the dates — so you never lose ground between windshield and front door.",
-    demo: "DEMO: voice → calendar in 8s",
+    screen: "/assets/screens/home-v3.webp",
+    screenAlt: "Home showing captured voice note in calendar",
   },
   {
     title: "GPS-stamped photo proof",
     body: "Snap what you left on-site. Squirrel Brain reads the photo, pulls the job details, and stores a timestamped record. Proof of delivery, service, or install — instantly in the Burrow.",
-    demo: "DEMO: whiteboard → checklist",
+    screen: "/assets/screens/pix.webp",
+    screenAlt: "Pix showing GPS-stamped photo boards",
   },
   {
     title: "Parking pin",
     body: "Tap once when you park. Days later, when you've walked three blocks in every direction — Squirrel Brain drops you straight back. No hunting.",
-    demo: "DEMO: parking → find my car",
+    screen: "/assets/screens/pix.webp",
+    screenAlt: "Pix showing parking photo saved",
   },
   {
     title: "Meeting Mode for windshield time",
     body: "Drive and debrief at the same time. Meeting Mode records and transcribes while you drive. You get a clean action list waiting at your next stop.",
-    demo: "DEMO: meeting mode record → extract",
+    screen: "/assets/screens/notes.webp",
+    screenAlt: "Notes with meeting action items extracted",
   },
   {
     title: "4 PM nudge",
     body: "Every weekday at 4 PM, your daily brief recaps open follow-ups, tomorrow's commitments, and anything you captured that hasn't been resolved. Nothing slips through end-of-day.",
-    demo: "PLACEHOLDER: daily brief email",
+    screen: "/assets/screens/home-v3.webp",
+    screenAlt: "Home dashboard with daily summary",
   },
   {
     title: "Follow-ups that ring your phone",
     body: "When a follow-up actually matters — your squirrel rings your phone and speaks in its own voice. Not a push notification. An actual call that you can't miss while driving.",
-    demo: "PLACEHOLDER: squirrel call UI",
+    screen: "/assets/screens/calendar.webp",
+    screenAlt: "Calendar showing upcoming follow-up with alarm",
   },
 ];
 
@@ -87,11 +93,10 @@ export default function WorkPage() {
               </FadeIn>
             </div>
             <FadeIn immediate from="right" delay={0.1} className="flex justify-center lg:justify-end">
-              <DeviceFrame
-                placeholderLabel={"DEMO: voice debrief\n→ follow-up tasks"}
-                imageSrc="/assets/lifestyle_sales_walkout.png"
-                imageAlt="Sales professional capturing a voice note between stops"
-                className="w-52 lg:w-64"
+              <PhoneShot
+                src="/assets/screens/home-v3.webp"
+                alt="Squirrel Brain home — voice capture lands as a calendar event"
+                width={240}
               />
             </FadeIn>
           </div>
@@ -112,7 +117,9 @@ export default function WorkPage() {
               {FEATURES.map((f, i) => (
                 <FadeIn key={f.title} delay={i * 0.07}>
                   <div className="bg-white rounded-3xl border border-border p-6 flex flex-col gap-4 h-full">
-                    <DeviceFrame placeholderLabel={f.demo} className="w-28 mx-auto" />
+                    <div className="flex justify-center">
+                      <PhoneShot src={f.screen} alt={f.screenAlt} width={100} />
+                    </div>
                     <h3 className="font-display text-lg font-bold text-ink">{f.title}</h3>
                     <p className="text-sm text-muted leading-relaxed flex-1">{f.body}</p>
                   </div>

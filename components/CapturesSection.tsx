@@ -5,11 +5,12 @@
  *
  * Motion idea: pinned scroll-scrub. As you scroll through ~150vh, the phone
  * transitions between 3 capture moments:
- *   Step A → voice note → scroll-box row with voice pill
- *   Step B → photo of parking spot → files into Stash
- *   Step C → receipt photo → gets a return-date alarm row
+ *   Step A → voice note → home screen (calendar + captured items)
+ *   Step B → photo of parking spot → Pix screen (photo boards)
+ *   Step C → receipt/document → notes screen (notes list)
  *
- * The "before" photo floats in from one side; the result card slides up.
+ * The "before" photo floats in from one side; the phone cross-fades to the
+ * matching real screenshot.
  * Uses before_* raster assets as the "thing you captured" — these are raw
  * input photos, NOT old app UI, so they are v2-compliant.
  */
@@ -24,240 +25,9 @@ import {
 } from "framer-motion";
 import FadeIn from "@/components/FadeIn";
 import {
-  PhoneShell,
-  StatusBar,
-  PageHeader,
-  ScrollBoxRow,
-  CaptureBar,
-  TabBar,
+  PhoneShot,
   T,
 } from "@/components/v2/PhoneKit";
-
-// ── Individual phone screens per capture step ──────────────────────────────
-
-function VoiceResultScreen() {
-  return (
-    <div
-      style={{
-        position: "absolute",
-        inset: 0,
-        display: "flex",
-        flexDirection: "column",
-        background: T.bg,
-        fontFamily: "var(--font-inter), system-ui, sans-serif",
-      }}
-    >
-      <StatusBar />
-      <PageHeader title="Squirrel Brain" sub="Just now" />
-      <div style={{ flex: 1, overflowY: "hidden", padding: "0 8px" }}>
-        <div style={{ fontSize: 9, fontWeight: 700, color: T.textSub, letterSpacing: 0.8, textTransform: "uppercase", marginBottom: 6, paddingLeft: 2 }}>
-          JUST CAPTURED
-        </div>
-
-        {/* Newly-added row animates in */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-        >
-          <ScrollBoxRow
-            accentColor={T.orange}
-            title="Dentist appointment — Thursday 2 PM"
-            date="Jun 19"
-            time="2:00 PM"
-            dayNum={19}
-            source="From Squirrel Brain · by You"
-            pills={[
-              { label: "🎤 VOICE ATTACHED", color: T.orange, bg: T.pastelPeach },
-              { label: "⏰ Day-before nudge ON", color: T.blue, bg: T.blueLight },
-            ]}
-          />
-        </motion.div>
-
-        <ScrollBoxRow
-          accentColor={T.blue}
-          title="Team standup"
-          date="Jun 14"
-          time="10:00 AM"
-          dayNum={14}
-          source="From Calendar · by You"
-        />
-      </div>
-      <CaptureBar liveText='"Dentist thursday at two pm, day-before reminder"' />
-      <TabBar active={0} />
-    </div>
-  );
-}
-
-function ParkingResultScreen() {
-  return (
-    <div
-      style={{
-        position: "absolute",
-        inset: 0,
-        display: "flex",
-        flexDirection: "column",
-        background: T.bg,
-        fontFamily: "var(--font-inter), system-ui, sans-serif",
-      }}
-    >
-      <StatusBar />
-      <PageHeader title="Pix" sub="Photos that do work" />
-      <div style={{ flex: 1, overflowY: "hidden", padding: "0 8px" }}>
-        <div style={{ fontSize: 9, fontWeight: 700, color: T.textSub, letterSpacing: 0.8, textTransform: "uppercase", marginBottom: 6, paddingLeft: 2 }}>
-          SAVED
-        </div>
-
-        {/* Parking photo thumbnail with overlay */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.96 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.45, delay: 0.15 }}
-        >
-          <div
-            style={{
-              borderRadius: 16,
-              overflow: "hidden",
-              marginBottom: 6,
-              position: "relative",
-              border: `1px solid ${T.border}`,
-              height: 100,
-              background: "#d0d0c8",
-            }}
-          >
-            <Image
-              src="/assets/before_parking_spot.png"
-              alt="Parking spot photo"
-              fill
-              className="object-cover"
-              sizes="260px"
-            />
-            {/* GPS badge overlay */}
-            <div
-              style={{
-                position: "absolute",
-                bottom: 8,
-                left: 8,
-                background: "rgba(26,18,8,0.75)",
-                borderRadius: 8,
-                padding: "4px 8px",
-                display: "flex",
-                alignItems: "center",
-                gap: 4,
-              }}
-            >
-              <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
-                <path d="M5 1C3.07 1 1.5 2.57 1.5 4.5c0 2.63 3.5 6 3.5 6s3.5-3.37 3.5-6C8.5 2.57 6.93 1 5 1z" fill="#FF7A1A" />
-                <circle cx="5" cy="4.5" r="1.2" fill="white" />
-              </svg>
-              <span style={{ fontSize: 8, color: "white", fontWeight: 700 }}>
-                Level 3 · Space B-14 · GPS saved
-              </span>
-            </div>
-          </div>
-        </motion.div>
-
-        <ScrollBoxRow
-          accentColor={T.orange}
-          title="📍 Parked — Level 3, Space B-14"
-          date="Jun 13"
-          time="2:15 PM"
-          source="From Squirrel Brain · Pix"
-          pills={[
-            { label: "📍 GPS PINNED", color: "#2a6aee", bg: T.blueLight },
-          ]}
-        />
-      </div>
-      <CaptureBar />
-      <TabBar active={2} />
-    </div>
-  );
-}
-
-function ReceiptResultScreen() {
-  return (
-    <div
-      style={{
-        position: "absolute",
-        inset: 0,
-        display: "flex",
-        flexDirection: "column",
-        background: T.bg,
-        fontFamily: "var(--font-inter), system-ui, sans-serif",
-      }}
-    >
-      <StatusBar />
-      <PageHeader title="Squirrel Brain" sub="Review & confirm" />
-      <div style={{ flex: 1, overflowY: "hidden", padding: "0 8px" }}>
-        <div style={{ fontSize: 9, fontWeight: 700, color: T.textSub, letterSpacing: 0.8, textTransform: "uppercase", marginBottom: 6, paddingLeft: 2 }}>
-          EXTRACTED
-        </div>
-
-        {/* Receipt thumbnail */}
-        <motion.div
-          initial={{ opacity: 0, x: 20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.4, delay: 0.1 }}
-        >
-          <div
-            style={{
-              borderRadius: 12,
-              overflow: "hidden",
-              marginBottom: 8,
-              height: 72,
-              background: "#e8e8e0",
-              position: "relative",
-              border: `1px solid ${T.border}`,
-            }}
-          >
-            <Image
-              src="/assets/before_wine_bottle.png"
-              alt="Receipt photo"
-              fill
-              className="object-cover"
-              sizes="260px"
-            />
-            <div
-              style={{
-                position: "absolute",
-                inset: 0,
-                background: "rgba(255,122,26,0.12)",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <span style={{ fontSize: 8, fontWeight: 700, color: T.orange, background: "white", borderRadius: 6, padding: "2px 8px" }}>
-                Reading…
-              </span>
-            </div>
-          </div>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-        >
-          <ScrollBoxRow
-            accentColor={T.orange}
-            title="📦 Return closes — Jun 24"
-            date="Jun 24"
-            time="11:59 PM"
-            dayNum={24}
-            source="From Squirrel Brain · Pix"
-            pills={[
-              { label: "📞 Call me ON", color: "#1a1208", bg: T.pastelPeach },
-              { label: "⏰ Jun 22 reminder", color: T.blue, bg: T.blueLight },
-            ]}
-          />
-        </motion.div>
-      </div>
-      <CaptureBar />
-      <TabBar active={0} />
-    </div>
-  );
-}
 
 // ── Capture steps config ──────────────────────────────────────────────────
 
@@ -267,8 +37,9 @@ const STEPS = [
     eyebrow: "Voice capture",
     headline: "Say it out loud.",
     sub: "\"Dentist Thursday at two, remind me the day before.\" Your squirrel extracts the date, time, and reminder. Alarm set in seconds.",
-    beforeSrc: null, // no photo — we show the mic waveform in-screen
-    Screen: VoiceResultScreen,
+    beforeSrc: null, // no photo — voice step
+    screenSrc: "/assets/screens/home-v3.webp",
+    screenAlt: "Squirrel Brain home — captured calendar events",
     accentColor: T.orange,
     accentBg: "#FFF0E6",
   },
@@ -278,7 +49,8 @@ const STEPS = [
     headline: "Snap where you parked.",
     sub: "GPS-stamped, location-named, saved forever. Ask \"where did I park?\" next time and your squirrel knows exactly.",
     beforeSrc: "/assets/before_parking_spot.png",
-    Screen: ParkingResultScreen,
+    screenSrc: "/assets/screens/pix.webp",
+    screenAlt: "Squirrel Brain Pix — photo boards",
     accentColor: "#2a6aee",
     accentBg: T.blueLight,
   },
@@ -288,7 +60,8 @@ const STEPS = [
     headline: "Snap a receipt.",
     sub: "\"Return window closes June 24 — remind you 2 days before?\" Your squirrel asks. You tap yes. Done.",
     beforeSrc: "/assets/before_wine_bottle.png",
-    Screen: ReceiptResultScreen,
+    screenSrc: "/assets/screens/notes.webp",
+    screenAlt: "Squirrel Brain Notes — captured and organised",
     accentColor: T.orange,
     accentBg: "#FFF0E6",
   },
@@ -321,7 +94,6 @@ export default function CapturesSection() {
   const stepOpacities = [step0Opacity, step1Opacity, step2Opacity];
   const stepYs = [step0Y, step1Y, step2Y];
   const screenOpacities = [screen0O, screen1O, screen2O];
-  const Screens = STEPS.map((s) => s.Screen);
 
   // Reduced motion: stacked static layout
   if (reduceMotion) {
@@ -345,12 +117,15 @@ export default function CapturesSection() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {STEPS.map((step, i) => (
               <FadeIn key={step.id} delay={i * 0.1}>
-                <div>
-                  <p className="text-xs font-bold tracking-widest uppercase mb-2" style={{ color: step.accentColor }}>
-                    {step.eyebrow}
-                  </p>
-                  <h3 className="font-display font-bold text-ink text-xl mb-2">{step.headline}</h3>
-                  <p className="text-muted text-sm leading-relaxed">{step.sub}</p>
+                <div className="flex flex-col items-center gap-4">
+                  <PhoneShot src={step.screenSrc} alt={step.screenAlt} width={180} />
+                  <div className="text-center">
+                    <p className="text-xs font-bold tracking-widest uppercase mb-2" style={{ color: step.accentColor }}>
+                      {step.eyebrow}
+                    </p>
+                    <h3 className="font-display font-bold text-ink text-xl mb-2">{step.headline}</h3>
+                    <p className="text-muted text-sm leading-relaxed">{step.sub}</p>
+                  </div>
                 </div>
               </FadeIn>
             ))}
@@ -451,20 +226,28 @@ export default function CapturesSection() {
             </div>
           </div>
 
-          {/* RIGHT: Phone with crossfading screens */}
+          {/* RIGHT: Phone with crossfading real screenshots */}
           <div className="flex-shrink-0 flex items-center justify-center">
             <div className="relative">
-              <PhoneShell width={268}>
-                {Screens.map((Screen, i) => (
+              {/* Stack PhoneShot frames and cross-fade between them */}
+              <div style={{ position: "relative", width: 268, height: Math.round(268 * 2.165) }}>
+                {STEPS.map((step, i) => (
                   <motion.div
-                    key={i}
-                    className="absolute inset-0"
-                    style={{ opacity: screenOpacities[i] }}
+                    key={step.id}
+                    style={{
+                      position: "absolute",
+                      inset: 0,
+                      opacity: screenOpacities[i],
+                    }}
                   >
-                    <Screen />
+                    <PhoneShot
+                      src={step.screenSrc}
+                      alt={step.screenAlt}
+                      width={268}
+                    />
                   </motion.div>
                 ))}
-              </PhoneShell>
+              </div>
 
               {/* "Before" photo floating beside the phone, crossfades with steps */}
               <motion.div

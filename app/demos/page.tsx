@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import FadeIn from "@/components/FadeIn";
-import DeviceFrame from "@/components/DeviceFrame";
 import CtaButton from "@/components/CtaButton";
+import { PhoneShot } from "@/components/v2/PhoneKit";
 
 export const metadata: Metadata = {
   title: "Watch it Work",
@@ -15,66 +15,84 @@ const DEMOS = [
   {
     id: 1,
     title: "Voice to calendar in 8 seconds",
-    label: "DEMO: \"Dentist Thursday at 2\" → alarm",
+    caption: "Say \"Dentist Thursday at 2\" — your squirrel sets the alarm",
     duration: "~8s",
     tags: ["voice", "calendar"],
+    screen: "/assets/screens/home-v3.webp",
+    screenAlt: "Home dashboard showing calendar events",
   },
   {
     id: 2,
     title: "Receipt scan → return reminder",
-    label: "DEMO: receipt snap → return-window prompt",
+    caption: "Snap a receipt — squirrel reads the date and asks if you want a return reminder",
     duration: "~12s",
     tags: ["photo", "reminder"],
+    screen: "/assets/screens/notes.webp",
+    screenAlt: "Notes showing captured receipt details",
   },
   {
     id: 3,
     title: "Parking pin → find my car",
-    label: "DEMO: park snap → exact pin days later",
+    caption: "Snap where you parked — GPS-stamped and waiting when you need it",
     duration: "~10s",
     tags: ["photo", "GPS"],
+    screen: "/assets/screens/pix.webp",
+    screenAlt: "Pix photo boards showing parking snap",
   },
   {
     id: 4,
     title: "Burrow chat + suggestion chips",
-    label: "DEMO: squirrel chat + smart chips",
+    caption: "Ask your squirrel anything — smart chips surface what's next",
     duration: "~15s",
     tags: ["chat", "AI"],
+    screen: "/assets/screens/home-v3.webp",
+    screenAlt: "Home showing squirrel suggestions",
   },
   {
     id: 5,
     title: "Voice recall: \"find the receipt\"",
-    label: "DEMO: voice search → squirrel finds it",
+    caption: "Speak a search — your squirrel finds it instantly from everything you've captured",
     duration: "~12s",
     tags: ["voice", "search"],
+    screen: "/assets/screens/notes.webp",
+    screenAlt: "Notes search results",
   },
   {
     id: 7,
     title: "Meeting Mode — record → extract",
-    label: "DEMO: meeting recording → action list",
+    caption: "Record your debrief — squirrel pulls out the follow-ups and action items",
     duration: "~20s",
     tags: ["voice", "meeting"],
+    screen: "/assets/screens/notes.webp",
+    screenAlt: "Notes with meeting action items extracted",
   },
   {
     id: 9,
     title: "YouTube link → stash + reminder",
-    label: "DEMO: link stash → reminder set",
+    caption: "Drop a link into the Burrow — it lands in your stash with an optional reminder",
     duration: "~10s",
     tags: ["link", "reminder"],
+    screen: "/assets/screens/links.webp",
+    screenAlt: "LinkStash with YouTube and other saved links",
   },
   {
     id: 10,
     title: "Whiteboard → checklist",
-    label: "DEMO: whiteboard photo → task list",
+    caption: "Snap a whiteboard — squirrel converts it to a tappable task list",
     duration: "~12s",
     tags: ["photo", "tasks"],
+    screen: "/assets/screens/notes.webp",
+    screenAlt: "Notes with checklist extracted from whiteboard photo",
   },
   {
     id: 11,
     title: "Schedule photo → whole season of alarms",
-    label: "DEMO: soccer schedule → 6 games added",
+    caption: "Snap the soccer schedule — squirrel finds every game and adds them all at once",
     duration: "~15s",
     tags: ["photo", "calendar"],
     featured: true,
+    screen: "/assets/screens/calendar.webp",
+    screenAlt: "Calendar with soccer games added across the month",
   },
 ];
 
@@ -153,7 +171,9 @@ export default function DemosPage() {
                         Featured demo
                       </div>
                     )}
-                    <DeviceFrame placeholderLabel={demo.label} className="w-32 mx-auto" />
+                    <div className="flex justify-center">
+                      <PhoneShot src={demo.screen} alt={demo.screenAlt} width={120} />
+                    </div>
                     <div>
                       <h3
                         id={`demo-title-${demo.id}`}
@@ -161,7 +181,8 @@ export default function DemosPage() {
                       >
                         {demo.title}
                       </h3>
-                      <p className="text-xs text-muted">{demo.duration}</p>
+                      <p className="text-xs text-muted mb-1">{demo.duration}</p>
+                      <p className="text-xs text-muted/80 leading-snug">{demo.caption}</p>
                     </div>
                     <div className="flex flex-wrap gap-1.5 mt-auto">
                       {demo.tags.map((tag) => (
