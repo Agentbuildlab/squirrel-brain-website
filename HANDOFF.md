@@ -1,0 +1,79 @@
+# Squirrel Brain Website — Session Handoff
+
+_Last updated: 2026-06-13 · branch `v2-rebuild`_
+
+## TL;DR for the next session
+The cinematic v2 rebuild is **built, deployed (preview), and verified**. Latest commit
+`32b3992` on `v2-rebuild`. Latest preview:
+**https://squirrel-brain-website-2ltf5f0ea-squirrelbrain.vercel.app** (HTTP 200, 0 broken images).
+Production is **NOT** flipped — wait for Adam to say **"flip production"**, then run:
+
+```bash
+cd ~/Projects/squirrel-brain-website && npx vercel --prod
+```
+
+## What this site is
+Marketing site for Squirrel Brain (squirrelbrainapp.com). Next.js 16 (Turbopack) +
+Tailwind + Framer Motion + Lenis smooth scroll. **V2 app design system only** — warm
+cream (#f8f4ee) + orange (#FF7A1A), real app screenshots in dark phone bezels, the
+squirrel mascot animating throughout. No legacy/flat-Tailwind cards.
+
+## Home page section order (`app/page.tsx`)
+1. **HeroSection** — mascot bobs in, big phone (`home-v4.webp` w/ Daily Countdown), headline
+   "Your brain has too many tabs open. Let's close some of them."
+2. **CapturesSection** — 3 clear stacked rows (Voice / Photo-parking / Document-receipt). No scroll-scrub.
+3. **CallSection** — dark band, CallKit "it actually calls you" screen, pumped-up copy (real call breaks through silent/DND).
+4. **MascotSection** — squirrel tilt/wave personality beat, speech bubbles.
+5. **OutlookSection** — "tired of missing Outlook reminders?" before→after import.
+6. **LinkStashSection** — saved by you, found by asking.
+7. **ProofSection** — real-life proof; soccer-season block + expanded Meds block (6 Rx bottles).
+8. **AgentBand** — "connect any AI agent to your brain."
+9. **FinalCta** — squirrel points at button, pulsing glow.
+
+Other pages: `/demos`, `/work`, `/family`, `/pricing` (all use real screenshots + `pix-v3.webp`).
+
+## State of the image work (Adam's "make everything professional" pass)
+**DONE:**
+- Pix boards show professional AI photos (receipt, invoice, package, modern toolbox) →
+  `screens/pix-v3.webp`. The website "before" photos line up with the app's Pix board thumbnails.
+- Modern job-site toolbox replaced the "horrible" rusty one (`before_toolbox.png`).
+- Parking + wine "before" photos are pro AI shots (`before_parking_v2.webp`, `before_wine_v2.webp`).
+- Meds block: 6 hand-drawn generic Rx bottles (`med1_bottle.png`..`med6_bottle.png`),
+  captions are generic (Generix / Calmitol / Snoozaprol / Allerfree / Pressurez / Vitamax).
+- Soccer "before" is a legible hand-drawn generic schedule (`before_soccer_schedule.png`).
+- Logo is just the squirrel with a **shape-following drop-shadow** (no white box).
+
+**DECISIONS (don't undo without reason):**
+- Documents (Rx labels, soccer schedule) stay **hand-rendered (PIL)**, not AI — AI garbles
+  small text. Objects/scenes use AI photos. Adam wants "not flat," but label legibility wins here.
+- Always **cache-bust by renaming** assets across deploys (Vercel image-opt cache serves stale
+  variants): home-v3→v4, pix-v2→v3, before_*_v2.webp.
+
+## How the image pipeline works (to make MORE photos)
+- **Generate objects/scenes:** `/tmp/sbgen.py` → `gen(prompt, outfile)`. Routes through the app's
+  **`ai-gemini` edge function** (transparent proxy that injects the server-side `GOOGLE_API_KEY`;
+  never exposes it). Model `gemini-2.5-flash-image` (Nano Banana).
+- **Seed app data via MCP** (so app screenshots match): `/tmp/sb_*.py`. MCP key for the sim user
+  in `/tmp/sb_simuser_key.txt`. Auth headers: `Authorization: Bearer <ANON>`, `X-API-Key: <sb_ key>`,
+  `X-Agent-Name: Scuttle`.
+- **Capture real app screens:** `xcrun simctl io booted screenshot out.png`, drive taps via
+  computer-use MCP (Simulator granted "full"). The `board` field on Pix items is LOCAL-ONLY —
+  set it directly in the AsyncStorage blob; `mergeMcpItems` preserves it across sync.
+- **NOTE:** `/tmp/*` files may not survive a reboot. The reusable logic is documented in CODEMAP.md;
+  regenerate from there if missing.
+
+## Pending / open
+- **Left-on-site board still has the old "horrible" toolbox item** assigned `leftonsite` (only the
+  modern one shows as cover). Low priority cleanup.
+- Task #3: "Build free rigged-character (Rive) concept preview for Adam" — not started.
+- If Adam wants the full "all night" photo pass continued: most directly-shown images are done;
+  what remains is judgment calls on documents (keep hand-rendered).
+
+## Hard constraints (do not violate)
+- App repo `/Volumes/ClawDrive/Adam/squirrel-brain` is **READ-ONLY / another session's** — never
+  discard its uncommitted work.
+- Access-control, sign-ins, payments, **production flips** = **Adam-only**. Wait for explicit
+  "flip production."
+- Never expose secret keys. Only the public ANON key goes in scripts; the Gemini key stays
+  server-side in the ai-gemini proxy.
+- Work only in `squirrel-brain-website` on branch `v2-rebuild`.
