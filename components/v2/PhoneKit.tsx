@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { ReactNode } from "react";
 
 // ── Shared v2 design tokens (mirrors app's theme.ts) ───────────────────────
@@ -90,6 +91,63 @@ export function PhoneShell({ children, width = 280, className = "", style }: Pho
         }}
         aria-hidden="true"
       />
+    </div>
+  );
+}
+
+// ── PhoneShot: bezel wrapping a REAL app screenshot ─────────────────────────
+// The screenshot already includes the iOS status bar + Dynamic Island, so this
+// frame is just the dark bezel — no code-drawn island/status bar (no doubles).
+
+export function PhoneShot({
+  src,
+  alt,
+  width = 280,
+  className = "",
+  style,
+}: {
+  src: string;
+  alt: string;
+  width?: number;
+  className?: string;
+  style?: React.CSSProperties;
+}) {
+  const height = Math.round(width * 2.165);
+  return (
+    <div
+      className={className}
+      style={{
+        width,
+        height,
+        borderRadius: width * 0.107,
+        background: T.darkBg,
+        padding: Math.round(width * 0.028),
+        boxShadow:
+          "0 48px 96px rgba(255,122,26,0.22), 0 12px 32px rgba(26,18,8,0.28), inset 0 0 0 1.5px rgba(255,255,255,0.08)",
+        position: "relative",
+        flexShrink: 0,
+        ...style,
+      }}
+    >
+      <div
+        style={{
+          position: "relative",
+          width: "100%",
+          height: "100%",
+          borderRadius: width * 0.083,
+          overflow: "hidden",
+          background: "#f0e6d3",
+        }}
+      >
+        <Image
+          src={src}
+          alt={alt}
+          fill
+          sizes={`${width}px`}
+          style={{ objectFit: "cover", objectPosition: "top center" }}
+          priority
+        />
+      </div>
     </div>
   );
 }

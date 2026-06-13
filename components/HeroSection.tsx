@@ -11,115 +11,7 @@ import {
   AnimatePresence,
 } from "framer-motion";
 import { TESTFLIGHT_URL } from "@/lib/config";
-import {
-  PhoneShell,
-  StatusBar,
-  PageHeader,
-  ScrollBoxRow,
-  CaptureBar,
-  TabBar,
-  T,
-} from "@/components/v2/PhoneKit";
-
-// ── Hero phone screen: the v2 Home screen ─────────────────────────────────
-
-function HomeScreen() {
-  return (
-    <div
-      style={{
-        position: "absolute",
-        inset: 0,
-        display: "flex",
-        flexDirection: "column",
-        background: T.bg,
-        fontFamily: "var(--font-inter), system-ui, sans-serif",
-      }}
-    >
-      <StatusBar />
-      <PageHeader title="Good morning ☀️" sub="Friday, June 13" />
-
-      {/* Cards list */}
-      <div style={{ flex: 1, overflowY: "hidden", padding: "0 8px" }}>
-        <div
-          style={{
-            fontSize: 9,
-            fontWeight: 700,
-            color: T.textSub,
-            letterSpacing: 0.8,
-            textTransform: "uppercase",
-            marginBottom: 6,
-            paddingLeft: 2,
-          }}
-        >
-          TODAY
-        </div>
-
-        <ScrollBoxRow
-          accentColor={T.blue}
-          title="☎️ Dentist appointment"
-          date="Jun 13"
-          time="2:00 PM"
-          dayNum={13}
-          location="456 Oak Ave"
-          source="From Calendar · by You"
-          pills={[
-            { label: "⏰ 1:30 PM nudge ON", color: T.blue, bg: T.blueLight },
-          ]}
-        />
-
-        <ScrollBoxRow
-          accentColor={T.orange}
-          title="Pick up kids at 3:30pm"
-          date="Jun 13"
-          time="3:30 PM"
-          dayNum={13}
-          source="From Squirrel Brain · by You"
-          pills={[
-            { label: "🎤 VOICE ATTACHED", color: T.orange, bg: T.pastelPeach },
-          ]}
-        />
-
-        <ScrollBoxRow
-          accentColor={T.orange}
-          title="📦 Return package — closes Jun 24"
-          date="Jun 24"
-          time="11:59 PM"
-          dayNum={24}
-          source="From Squirrel Brain · by You"
-          pills={[
-            { label: "📞 Call me ON", color: "#1a1208", bg: T.pastelPeach },
-          ]}
-        />
-
-        <div
-          style={{
-            fontSize: 9,
-            fontWeight: 700,
-            color: T.textSub,
-            letterSpacing: 0.8,
-            textTransform: "uppercase",
-            margin: "10px 0 6px 2px",
-          }}
-        >
-          THIS WEEK
-        </div>
-
-        <ScrollBoxRow
-          accentColor={T.blue}
-          title="⚽ Soccer — Riverside Park"
-          date="Jun 15"
-          time="10:00 AM"
-          dayNum={15}
-          location="Riverside Park, Field 3"
-          source="From Calendar · by You"
-        />
-      </div>
-
-      <CaptureBar />
-      <TabBar active={0} />
-    </div>
-  );
-}
+import { PhoneShot, T } from "@/components/v2/PhoneKit";
 
 // ── Static mascot bob animation ────────────────────────────────────────────
 
@@ -136,9 +28,10 @@ function MascotBob({ size = 120 }: { size?: number }) {
         alt="Squirrel Brain mascot"
         width={size}
         height={size}
-        className="rounded-3xl"
         style={{
-          boxShadow: "0 16px 48px rgba(255,122,26,0.28), 0 4px 16px rgba(26,18,8,0.12)",
+          // Shadow follows the squirrel's silhouette (alpha), not a square tile
+          filter:
+            "drop-shadow(0 14px 20px rgba(26,18,8,0.20)) drop-shadow(0 3px 9px rgba(255,122,26,0.20))",
         }}
         priority
       />
@@ -215,9 +108,7 @@ export default function HeroSection() {
             </div>
           </div>
           <div className="flex justify-center lg:justify-end">
-            <PhoneShell>
-              <HomeScreen />
-            </PhoneShell>
+            <PhoneShot src="/assets/screens/home.webp" alt="Squirrel Brain — your day at a glance" width={280} />
           </div>
         </div>
       </section>
@@ -346,9 +237,7 @@ export default function HeroSection() {
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 transition={{ duration: 0.7, delay: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
               >
-                <PhoneShell width={260}>
-                  <HomeScreen />
-                </PhoneShell>
+                <PhoneShot src="/assets/screens/home.webp" alt="Squirrel Brain — your day at a glance" width={260} />
               </motion.div>
             </motion.div>
           </div>
