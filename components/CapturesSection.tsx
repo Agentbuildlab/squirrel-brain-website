@@ -190,7 +190,7 @@ function ReceiptResultScreen() {
       <PageHeader title="Squirrel Brain" sub="Review & confirm" />
       <div style={{ flex: 1, overflowY: "hidden", padding: "0 8px" }}>
         <div style={{ fontSize: 9, fontWeight: 700, color: T.textSub, letterSpacing: 0.8, textTransform: "uppercase", marginBottom: 6, paddingLeft: 2 }}>
-          PIP FOUND
+          EXTRACTED
         </div>
 
         {/* Receipt thumbnail */}
@@ -228,7 +228,7 @@ function ReceiptResultScreen() {
               }}
             >
               <span style={{ fontSize: 8, fontWeight: 700, color: T.orange, background: "white", borderRadius: 6, padding: "2px 8px" }}>
-                📸 Pip reading…
+                Reading…
               </span>
             </div>
           </div>
@@ -266,7 +266,7 @@ const STEPS = [
     id: "voice",
     eyebrow: "Voice capture",
     headline: "Say it out loud.",
-    sub: "\"Dentist Thursday at two, remind me the day before.\" Pip extracts the date, time, and reminder. Alarm set in seconds.",
+    sub: "\"Dentist Thursday at two, remind me the day before.\" Your squirrel extracts the date, time, and reminder. Alarm set in seconds.",
     beforeSrc: null, // no photo — we show the mic waveform in-screen
     Screen: VoiceResultScreen,
     accentColor: T.orange,
@@ -276,7 +276,7 @@ const STEPS = [
     id: "parking",
     eyebrow: "Photo capture",
     headline: "Snap where you parked.",
-    sub: "GPS-stamped, location-named, saved forever. Ask \"where did I park?\" next time and Pip knows exactly.",
+    sub: "GPS-stamped, location-named, saved forever. Ask \"where did I park?\" next time and your squirrel knows exactly.",
     beforeSrc: "/assets/before_parking_spot.png",
     Screen: ParkingResultScreen,
     accentColor: "#2a6aee",
@@ -286,7 +286,7 @@ const STEPS = [
     id: "receipt",
     eyebrow: "Document capture",
     headline: "Snap a receipt.",
-    sub: "\"Return window closes June 24 — remind you 2 days before?\" Pip asks. You tap yes. Done.",
+    sub: "\"Return window closes June 24 — remind you 2 days before?\" Your squirrel asks. You tap yes. Done.",
     beforeSrc: "/assets/before_wine_bottle.png",
     Screen: ReceiptResultScreen,
     accentColor: T.orange,

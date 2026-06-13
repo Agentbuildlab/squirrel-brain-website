@@ -1,80 +1,101 @@
 "use client";
 
 /**
- * Section 4 — Mascot personality beat
+ * Section 4 — "Meet your squirrel" personality beat
  *
- * Motion idea: The squirrel mascot tilts and waves on scroll-reveal.
- * Brief, warm, a little playful. An acorn detail bobs in.
- * No phone here — just brand presence.
+ * The squirrel mascot is the focal point — large, animated, and reacting.
+ * Personality lines float around it as warm speech bubbles arranged organically,
+ * NOT a 3-column card grid. No emoji icons.
+ *
+ * Animations:
+ *   - Entrance: scale+rotate spring on scroll-into-view
+ *   - Idle: gentle vertical bob (respects prefers-reduced-motion)
+ *   - Hover: playful tilt/wave + acorn pops in
+ *   - Speech bubbles: staggered fade-up on reveal
  */
 
 import Image from "next/image";
 import { motion, useReducedMotion, useInView } from "framer-motion";
-import { useRef } from "react";
-import { TESTFLIGHT_URL } from "@/lib/config";
+import { useRef, useState } from "react";
 import { T } from "@/components/v2/PhoneKit";
 
 // ── Floating acorn SVG ────────────────────────────────────────────────────
 
-function AcornFloat({ style }: { style?: React.CSSProperties }) {
-  const reduceMotion = useReducedMotion();
+function Acorn({ className = "" }: { className?: string }) {
   return (
-    <motion.div
-      style={{
-        position: "absolute",
-        ...style,
-      }}
-      animate={
-        reduceMotion
-          ? {}
-          : {
-              y: [0, -12, 0],
-              rotate: [-5, 5, -5],
-            }
-      }
-      transition={{ duration: 3.2, repeat: Infinity, ease: "easeInOut" }}
+    <svg
+      width="36"
+      height="44"
+      viewBox="0 0 36 44"
+      fill="none"
+      className={className}
       aria-hidden="true"
     >
-      <svg width="40" height="48" viewBox="0 0 40 48" fill="none">
-        {/* Acorn body */}
-        <ellipse cx="20" cy="32" rx="14" ry="12" fill="#c8843a" />
-        <ellipse cx="20" cy="32" rx="14" ry="12" fill="url(#acorn-shine)" />
-        {/* Acorn cap */}
-        <ellipse cx="20" cy="21" rx="16" ry="8" fill="#6b4423" />
-        <ellipse cx="20" cy="21" rx="16" ry="8" fill="url(#cap-texture)" opacity="0.4" />
-        {/* Stem */}
-        <rect x="19" y="11" width="2.5" height="10" rx="1.25" fill="#4a2e14" />
-        {/* Cap lines */}
-        <path d="M8 21 Q20 25 32 21" stroke="rgba(255,255,255,0.15)" strokeWidth="1" />
-        <path d="M7 23 Q20 27 33 23" stroke="rgba(255,255,255,0.1)" strokeWidth="1" />
-        <defs>
-          <radialGradient id="acorn-shine" cx="35%" cy="35%">
-            <stop offset="0%" stopColor="rgba(255,255,255,0.2)" />
-            <stop offset="100%" stopColor="transparent" />
-          </radialGradient>
-          <pattern id="cap-texture" x="0" y="0" width="4" height="4" patternUnits="userSpaceOnUse">
-            <circle cx="2" cy="2" r="1" fill="rgba(0,0,0,0.3)" />
-          </pattern>
-        </defs>
-      </svg>
-    </motion.div>
+      <ellipse cx="18" cy="30" rx="12" ry="10.5" fill="#c8843a" />
+      <ellipse cx="18" cy="30" rx="12" ry="10.5" fill="url(#acorn-glow)" />
+      <ellipse cx="18" cy="19.5" rx="14" ry="7" fill="#6b4423" />
+      <rect x="17" y="11" width="2.2" height="9" rx="1.1" fill="#4a2e14" />
+      <path d="M7 19.5 Q18 23 29 19.5" stroke="rgba(255,255,255,0.14)" strokeWidth="1" />
+      <defs>
+        <radialGradient id="acorn-glow" cx="32%" cy="30%">
+          <stop offset="0%" stopColor="rgba(255,255,255,0.22)" />
+          <stop offset="100%" stopColor="transparent" />
+        </radialGradient>
+      </defs>
+    </svg>
   );
 }
 
-// ── Copy beats ────────────────────────────────────────────────────────────
+// ── Speech bubble component ───────────────────────────────────────────────
 
-const QUIPS = [
-  { emoji: "🧠", text: "Your brain has too many tabs open. Let's close some of them." },
-  { emoji: "🐿️", text: "I never lose track. It's kind of my whole thing." },
-  { emoji: "⚡", text: "Say it once. I'll remind you until it's done. You're welcome." },
-];
+interface BubbleProps {
+  text: string;
+  delay: number;
+  inView: boolean;
+  align?: "left" | "right";
+}
+
+function SpeechBubble({ text, delay, inView, align = "left" }: BubbleProps) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 14, scale: 0.96 }}
+      animate={inView ? { opacity: 1, y: 0, scale: 1 } : {}}
+      transition={{ duration: 0.5, delay, ease: [0.34, 1.2, 0.64, 1] }}
+      style={{ position: "relative", display: "inline-block", maxWidth: 280 }}
+    >
+      <div
+        style={{
+          background: "white",
+          border: `1.5px solid ${T.border}`,
+          borderRadius: align === "left" ? "4px 20px 20px 20px" : "20px 4px 20px 20px",
+          padding: "14px 18px",
+          boxShadow:
+            "0 4px 20px rgba(26,18,8,0.07), 0 1px 4px rgba(26,18,8,0.04)",
+        }}
+      >
+        <p
+          style={{
+            fontSize: "clamp(0.9rem, 2.2vw, 1.05rem)",
+            fontWeight: 500,
+            lineHeight: 1.5,
+            color: T.text,
+            margin: 0,
+          }}
+        >
+          {text}
+        </p>
+      </div>
+    </motion.div>
+  );
+}
 
 // ── Main section ──────────────────────────────────────────────────────────
 
 export default function MascotSection() {
   const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-80px" });
+  const inView = useInView(ref, { once: true, margin: "-60px" });
   const reduceMotion = useReducedMotion();
+  const [hovered, setHovered] = useState(false);
 
   return (
     <section
@@ -83,126 +104,166 @@ export default function MascotSection() {
       style={{ background: "#faf6f0" }}
       aria-labelledby="mascot-heading"
     >
-      {/* Warm blob behind mascot */}
+      {/* Warm radial glow behind mascot */}
       <div
         className="absolute pointer-events-none"
         style={{
-          width: 600,
-          height: 600,
+          width: 640,
+          height: 640,
           top: "50%",
           left: "50%",
           transform: "translate(-50%, -50%)",
           background:
-            "radial-gradient(circle, rgba(255,122,26,0.08) 0%, transparent 65%)",
-          filter: "blur(50px)",
+            "radial-gradient(circle, rgba(255,122,26,0.09) 0%, rgba(244,166,77,0.04) 45%, transparent 70%)",
+          filter: "blur(48px)",
         }}
         aria-hidden="true"
       />
 
-      {/* Floating acorns */}
-      <AcornFloat style={{ top: "10%", right: "8%", opacity: 0.7 }} />
-      <AcornFloat style={{ bottom: "15%", left: "6%", opacity: 0.5, transform: "scale(0.75)" }} />
-
-      <div className="relative z-10 max-w-5xl mx-auto px-6 lg:px-12 text-center">
-        {/* Mascot with entrance animation */}
-        <motion.div
-          className="inline-block mb-10"
-          initial={{ opacity: 0, scale: 0.8, rotate: -8 }}
-          animate={inView ? { opacity: 1, scale: 1, rotate: 0 } : {}}
-          transition={{ duration: 0.7, ease: [0.34, 1.56, 0.64, 1] }}
-        >
-          {/* Hover tilt */}
-          <motion.div
-            whileHover={
-              reduceMotion
-                ? {}
-                : {
-                    rotate: [0, -6, 6, -3, 0],
-                    scale: 1.06,
-                  }
-            }
-            transition={{ duration: 0.5 }}
-            style={{ display: "inline-block", cursor: "default" }}
-          >
-            <Image
-              src="/assets/squirrel_logo.png"
-              alt="Pip — your Squirrel Brain"
-              width={160}
-              height={160}
-              className="rounded-4xl"
-              style={{
-                boxShadow:
-                  "0 24px 64px rgba(255,122,26,0.28), 0 8px 20px rgba(26,18,8,0.12)",
-              }}
-            />
-          </motion.div>
-        </motion.div>
-
-        {/* Headline */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.55, delay: 0.18 }}
-        >
-          <h2
-            id="mascot-heading"
-            className="font-display font-extrabold text-ink mb-4 text-balance"
-            style={{ fontSize: "clamp(2rem, 4.5vw, 4rem)", lineHeight: 1.08 }}
-          >
-            Meet Pip. She never{" "}
-            <span style={{ color: T.orange }}>forgets a thing.</span>
-          </h2>
-          <p className="text-lg text-muted leading-relaxed max-w-xl mx-auto mb-12">
-            Pip is the squirrel inside Squirrel Brain. She reads your voice, your photos, your
-            calendar — and follows up until every last thing is handled.
-          </p>
-        </motion.div>
-
-        {/* Quip cards — staggered reveal */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-12">
-          {QUIPS.map((quip, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 16 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.45, delay: 0.3 + i * 0.1 }}
-            >
-              <div
-                className="rounded-3xl p-6 text-left h-full"
-                style={{
-                  background: "white",
-                  border: `1px solid ${T.border}`,
-                  boxShadow: "0 2px 12px rgba(26,18,8,0.05)",
-                }}
-              >
-                <div className="text-2xl mb-3" aria-hidden="true">{quip.emoji}</div>
-                <p className="text-sm font-medium leading-relaxed" style={{ color: T.text }}>
-                  {quip.text}
-                </p>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-
-        {/* Wordmark */}
-        <motion.div
-          className="flex items-center justify-center gap-3"
+      <div className="relative z-10 max-w-5xl mx-auto px-6 lg:px-12">
+        {/* Section label */}
+        <motion.p
+          className="text-xs font-bold tracking-widest uppercase mb-10 text-center"
+          style={{ color: `${T.orange}99` }}
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.5, delay: 0.55 }}
+          transition={{ duration: 0.45, delay: 0.05 }}
         >
-          <Image
-            src="/assets/squirrel_logo.png"
-            alt=""
-            width={32}
-            height={32}
-            className="rounded-xl"
-            aria-hidden="true"
-          />
-          <span className="font-display font-bold text-xl tracking-wide" style={{ color: T.text }}>
-            Squirrel <span style={{ color: T.orange }}>Brain</span>
-          </span>
-        </motion.div>
+          Meet your squirrel
+        </motion.p>
+
+        {/*
+         * Layout: on mobile — stacked (bubbles → mascot → bubbles).
+         * On desktop — two bubble columns flanking the mascot.
+         */}
+        <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-10">
+
+          {/* LEFT bubbles */}
+          <div className="flex flex-col gap-5 lg:items-end flex-1 min-w-0 w-full lg:w-auto">
+            <SpeechBubble
+              text="Your brain has too many tabs open. Let's close some of them."
+              delay={0.25}
+              inView={inView}
+              align="right"
+            />
+            <SpeechBubble
+              text="It never loses track — kind of its whole thing."
+              delay={0.38}
+              inView={inView}
+              align="right"
+            />
+          </div>
+
+          {/* CENTER: Mascot */}
+          <div className="flex-shrink-0 flex flex-col items-center">
+            {/* Entrance container */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.75, rotate: -10 }}
+              animate={inView ? { opacity: 1, scale: 1, rotate: 0 } : {}}
+              transition={{ duration: 0.75, ease: [0.34, 1.6, 0.64, 1] }}
+              style={{ position: "relative" }}
+            >
+              {/* Idle bob wrapper */}
+              <motion.div
+                animate={
+                  reduceMotion
+                    ? {}
+                    : { y: [0, -10, 0] }
+                }
+                transition={{
+                  duration: 3.2,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+                style={{ display: "inline-block" }}
+              >
+                {/* Hover tilt/wave wrapper */}
+                <motion.div
+                  onHoverStart={() => setHovered(true)}
+                  onHoverEnd={() => setHovered(false)}
+                  animate={
+                    reduceMotion
+                      ? {}
+                      : hovered
+                      ? { rotate: [0, -7, 7, -4, 2, 0], scale: 1.07 }
+                      : { rotate: 0, scale: 1 }
+                  }
+                  transition={{ duration: 0.55, ease: "easeOut" }}
+                  style={{ display: "inline-block", cursor: "default" }}
+                >
+                  <Image
+                    src="/assets/squirrel_logo.png"
+                    alt="Your Squirrel Brain mascot"
+                    width={180}
+                    height={180}
+                    className="rounded-4xl"
+                    style={{
+                      boxShadow:
+                        "0 28px 72px rgba(255,122,26,0.28), 0 10px 24px rgba(26,18,8,0.12)",
+                      display: "block",
+                    }}
+                    priority={false}
+                  />
+                </motion.div>
+              </motion.div>
+
+              {/* Acorn — pops in on hover */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.5, rotate: -20 }}
+                animate={
+                  reduceMotion
+                    ? {}
+                    : hovered
+                    ? { opacity: 1, scale: 1, rotate: 12, x: 8, y: -8 }
+                    : { opacity: 0, scale: 0.5, rotate: -20, x: 0, y: 0 }
+                }
+                transition={{ duration: 0.35, ease: [0.34, 1.4, 0.64, 1] }}
+                style={{
+                  position: "absolute",
+                  top: -16,
+                  right: -16,
+                  pointerEvents: "none",
+                }}
+                aria-hidden="true"
+              >
+                <Acorn />
+              </motion.div>
+            </motion.div>
+
+            {/* Wordmark below mascot */}
+            <motion.div
+              className="flex items-center gap-2.5 mt-6"
+              initial={{ opacity: 0 }}
+              animate={inView ? { opacity: 1 } : {}}
+              transition={{ duration: 0.5, delay: 0.6 }}
+            >
+              <span
+                className="font-display font-bold text-lg tracking-wide"
+                style={{ color: T.text }}
+              >
+                Squirrel{" "}
+                <span style={{ color: T.orange }}>Brain</span>
+              </span>
+            </motion.div>
+          </div>
+
+          {/* RIGHT bubble */}
+          <div className="flex flex-col gap-5 lg:items-start flex-1 min-w-0 w-full lg:w-auto">
+            <SpeechBubble
+              text="Say it once. It reminds you until it's done."
+              delay={0.48}
+              inView={inView}
+              align="left"
+            />
+            {/* Hidden screen-reader heading */}
+            <h2
+              id="mascot-heading"
+              className="sr-only"
+            >
+              Meet your squirrel
+            </h2>
+          </div>
+        </div>
       </div>
     </section>
   );

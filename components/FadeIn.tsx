@@ -26,7 +26,7 @@ export default function FadeIn({
   immediate = false,
 }: FadeInProps) {
   const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-60px" });
+  const inView = useInView(ref, { once: true, margin: "-20px" });
   const reduceMotion = useReducedMotion();
 
   const show = immediate || inView || reduceMotion;
@@ -37,9 +37,9 @@ export default function FadeIn({
     immediate || reduceMotion
       ? { opacity: 1, y: 0, x: 0 }
       : {
-          opacity: 0,
-          y: from === "bottom" ? 20 : 0,
-          x: from === "left" ? -20 : from === "right" ? 20 : 0,
+          opacity: 0.15,
+          y: from === "bottom" ? 18 : 0,
+          x: from === "left" ? -18 : from === "right" ? 18 : 0,
         };
 
   return (

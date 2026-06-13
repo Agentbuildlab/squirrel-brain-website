@@ -376,7 +376,7 @@
     <div class="works-with">
       <span class="works-with-label">Works with</span>
       <span class="works-pill" style="background:#fdf0d8;color:#b45309;border:1px solid #f59e0b44;">&#x2726; Claude</span>
-      <span class="works-pill" style="background:#e8f5e8;color:#16a34a;border:1px solid #22C55E44;">&#x2726; Codex</span>
+      <span class="works-pill" style="background:#e8f5e8;color:#16a34a;border:1px solid #22C55E44;">&#x2726; Custom agents</span>
       <span class="works-pill" style="background:#eef0f8;color:#2563eb;border:1px solid #60a5fa44;">&#x2726; LangGraph</span>
       <span class="works-pill" style="background:#f3eeff;color:#7c3aed;border:1px solid #c084fc44;">&#x2726; Any MCP client</span>
     </div>
@@ -485,7 +485,7 @@
         <li><a href="#overview">What this is (for humans)</a></li>
         <li><a href="#auth">Authentication &amp; API key</a></li>
         <li><a href="#session-start">Session start sequence</a></li>
-        <li><a href="#tools">All 24 tools — full reference</a></li>
+        <li><a href="#tools">All 29 tools — full reference</a></li>
         <li><a href="#examples">curl examples</a></li>
         <li><a href="#checklist">Getting started checklist</a></li>
         <li><a href="#agent-configs">Copy-paste agent configs</a></li>
@@ -539,7 +539,7 @@
         <strong>✅ Store the key persistently — don't re-derive it each session.</strong><br><br>
         Save the <code>sb_</code> key once in a real config file or environment variable. Agents that re-figure-out the connection from scratch every session (and hold the key only in short-term memory) tend to fall back to a stale key and start failing with <strong>"Invalid API key."</strong> Set it once, persist it, and it keeps working.<br><br>
         <strong>If you ever see "Invalid API key":</strong> the key was regenerated. Ask the human to open the app → <strong>Settings → API Key</strong>, copy the current <code>sb_</code> key, and update your config. Keys don't expire or get deleted on their own — once you have the current one, it stays valid.<br><br>
-        <strong>Connect as a real MCP server — don't hand-roll HTTP.</strong> Register Squirrel Brain in your agent's MCP config (the copy-paste snippets below) so the key lives in the request <em>headers</em> and is applied automatically on every call. Writing one-off HTTP request code with the key pasted inline is exactly how it goes stale. <strong>Then verify:</strong> your MCP client should connect and list <strong>24 tools</strong> (e.g. an <code>initialize</code> + <code>tools/list</code> handshake, or your client's "test/list servers" command). If you see 0 tools, the key is wrong or your sandbox's network allowlist is blocking <code>*.supabase.co</code>.<br><br>
+        <strong>Connect as a real MCP server — don't hand-roll HTTP.</strong> Register Squirrel Brain in your agent's MCP config (the copy-paste snippets below) so the key lives in the request <em>headers</em> and is applied automatically on every call. Writing one-off HTTP request code with the key pasted inline is exactly how it goes stale. <strong>Then verify:</strong> your MCP client should connect and list <strong>29 tools</strong> (e.g. an <code>initialize</code> + <code>tools/list</code> handshake, or your client's "test/list servers" command). If you see 0 tools, the key is wrong or your sandbox's network allowlist is blocking <code>*.supabase.co</code>.<br><br>
         <strong>Once it's configured, just CALL the tools — don't go hunting for the key.</strong> A common failure mode: an agent forgets it already has the connection and starts trying to <em>fetch</em> the key (writing a Keychain/secret-lookup script, an <code>SB_API_KEY</code> env shim, a <code>get_*_key</code> helper) before every call. You never need to — the configured MCP connection injects the key for you. If you have the <code>squirrel_brain</code> tools, call <code>pip_call</code> / <code>create_alarm</code> / <code>create_item</code> directly. No scripts, no key retrieval.
       </div>
 
@@ -549,11 +549,11 @@
       <div class="code-label">Required headers on every request</div>
       <div class="code-block"><span class="co">Content-Type:</span>   <span class="cs">application/json</span>
 <span class="co">X-API-Key:</span>      <span class="cs">sb_your_api_key_here</span>
-<span class="co">Authorization:</span> <span class="cs">Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imdlc3pidHNqZmJ2ZnVrZHpkZW1yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY0MDc3MzIsImV4cCI6MjA2MTk4MzczMn0.3bFqW0pV9q8Bh4hEKvfVFdPgAWjXHNFHg8cj3xMlRi8</span></div>
+<span class="co">Authorization:</span> <span class="cs">Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdlY3pidHNqZmJ2ZnVrZHpkZW1yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc4NTA1OTksImV4cCI6MjA5MzQyNjU5OX0.Rdn6ujhp8t1qJNBmAc8VmV5xst10tpSzXh5tt6VCptM</span></div>
       <p style="font-size:13px;color:#7a6040;margin-top:10px;line-height:1.6;">Only two headers are strictly required: <code>Content-Type</code> and your private <code>X-API-Key</code>. The <code>Authorization: Bearer &lt;anon-key&gt;</code> and <code>apikey</code> headers shown in the copy-paste configs below are optional — some MCP clients add them automatically, and they're harmless to include. Both carry the <em>public</em> Supabase anon key (safe to hardcode — it's a public gateway key, not a secret). The configs include them pre-filled so every client works out of the box.</p>
       <div class="info-box green" style="margin-top:12px;">
         <strong>Anon key (hardcode this — it is public):</strong><br>
-        <code style="font-size:11px;word-break:break-all;background:#d8ecd8;color:#16a34a;">eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imdlc3pidHNqZmJ2ZnVrZHpkZW1yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY0MDc3MzIsImV4cCI6MjA2MTk4MzczMn0.3bFqW0pV9q8Bh4hEKvfVFdPgAWjXHNFHg8cj3xMlRi8</code>
+        <code style="font-size:11px;word-break:break-all;background:#d8ecd8;color:#16a34a;">eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdlY3pidHNqZmJ2ZnVrZHpkZW1yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc4NTA1OTksImV4cCI6MjA5MzQyNjU5OX0.Rdn6ujhp8t1qJNBmAc8VmV5xst10tpSzXh5tt6VCptM</code>
       </div>
 
       <div class="code-label">Request body — JSON-RPC 2.0</div>
@@ -609,7 +609,7 @@
     <!-- ──────────────────────────────────────────────────────── -->
     <div class="doc-section" id="tools">
       <div class="doc-section-label">Tools Reference</div>
-      <h2 class="doc-section-title">All 24 available tools</h2>
+      <h2 class="doc-section-title">All 29 available tools</h2>
       <p>Call <code>tools/list</code> at any time to get live JSON schemas. The table below matches the current schema exactly.</p>
 
       <table class="tools-table">
@@ -666,20 +666,21 @@
           </tr>
           <tr>
             <td><div class="tool-name"><code>list_items</code></div></td>
-            <td class="tool-desc">Query tasks, notes, and alarms. Check this before creating items to avoid duplicates. Filter by type and status. Pass <code>maker_name</code> to return only items created by one maker — powers showing everything one agent created.</td>
+            <td class="tool-desc">Query tasks, notes, and alarms. Check this before creating items to avoid duplicates. Filter by type and status. Pass <code>maker_name</code> to return only items created by one maker. Pass <code>recipient</code> with your own agent name to see items addressed to you; pass <code>"user"</code> for the human's own items.</td>
             <td class="tool-params">
               <span class="tag-opt">type</span>
               <span class="tag-opt">status</span>
               <span class="tag-opt">limit</span>
               <span class="tag-opt">search</span>
               <span class="tag-opt">maker_name</span>
+              <span class="tag-opt">recipient</span>
             </td>
           </tr>
 
           <tr class="group-hdr"><td colspan="3">WRITE</td></tr>
           <tr>
             <td><div class="tool-name"><code>create_item</code></div></td>
-            <td class="tool-desc"><strong>Save a note or checklist to the user's Memory Stash.</strong> It appears there exactly like a note they captured themselves. <strong>Always start the <code>title</code> with one relevant emoji</strong> (e.g. <code>"🧹 Clean the house"</code>) — the app emoji-tags every user note, so match it. Set <code>tts_text</code> to send a <strong>voice note</strong> — your spoken message is saved into the Memory Stash as a playable voice note (green mic card + play button) that the user listens to whenever they open it. This is the <em>calm, non-urgent</em> way to talk to them; for a "right now" ringing call use <code>pip_call</code>. Set <code>type_label="context"</code> to write persistent instructions all future agents read. Set <code>is_important: true</code> to flag for the 4 PM nudge email.</td>
+            <td class="tool-desc"><strong>Save a note or checklist to the user's Memory Stash.</strong> It appears there exactly like a note they captured themselves. <strong>Always start the <code>title</code> with one relevant emoji</strong> (e.g. <code>"🧹 Clean the house"</code>) — the app emoji-tags every user note, so match it. Set <code>tts_text</code> to send a <strong>voice note</strong> — your spoken message is saved into the Memory Stash as a playable voice note (green mic card + play button) that the user listens to whenever they open it. This is the <em>calm, non-urgent</em> way to talk to them; for a "right now" ringing call use <code>pip_call</code>. Set <code>type_label="context"</code> to write persistent instructions all future agents read. Set <code>is_important: true</code> to flag for the 4 PM nudge email. Set <code>recipient</code> to your own agent name to address the item to yourself (lands in your SB inbox, not the user's stash).</td>
             <td class="tool-params">
               <span class="tag-req">type</span>
               <span class="tag-req">title</span>
@@ -690,13 +691,15 @@
               <span class="tag-opt">include_in_brief</span>
               <span class="tag-opt">agent_name</span>
               <span class="tag-opt">agent_context</span>
+              <span class="tag-opt">why_saved</span>
+              <span class="tag-opt">recipient</span>
               <span class="tag-opt">tts_text</span>
               <span class="tag-opt">tts_voice</span>
             </td>
           </tr>
           <tr>
             <td><div class="tool-name"><code>create_alarm</code></div></td>
-            <td class="tool-desc"><strong>This is the calendar tool.</strong> Puts a tappable event on the user's calendar <em>and</em> schedules an iPhone alarm, tagged <em>"Made by &lt;your agent_name&gt;"</em>. Use it for <strong>any appointment, event, deadline, or reminder with a time</strong> — when the user says "put it on my calendar" or "remind me," this is the tool. <strong>Start <code>label</code> with a relevant emoji</strong> (e.g. <code>"🦷 Dentist"</code>). Fires regardless of Do Not Disturb.</td>
+            <td class="tool-desc"><strong>This is the calendar tool.</strong> Puts a tappable event on the user's calendar <em>and</em> schedules an iPhone alarm, tagged <em>"Made by &lt;your agent_name&gt;"</em>. Use it for <strong>any appointment, event, deadline, or reminder with a time</strong> — when the user says "put it on my calendar" or "remind me," this is the tool. <strong>Start <code>label</code> with a relevant emoji</strong> (e.g. <code>"🦷 Dentist"</code>). Fires regardless of Do Not Disturb. Pass <code>recipient</code> with your own agent name to schedule the alarm for yourself — when it fires, it lands in your SB inbox instead of buzzing the user.</td>
             <td class="tool-params">
               <span class="tag-req">trigger_at</span>
               <span class="tag-req">label</span>
@@ -704,6 +707,7 @@
               <span class="tag-opt">sound</span>
               <span class="tag-opt">notes</span>
               <span class="tag-opt">agent_name</span>
+              <span class="tag-opt">recipient</span>
             </td>
           </tr>
           <tr>
@@ -715,13 +719,20 @@
           </tr>
           <tr>
             <td><div class="tool-name"><code>update_item</code></div></td>
-            <td class="tool-desc">Update title, content, or importance of an existing item. Only fields you provide are changed.</td>
+            <td class="tool-desc">Update an existing note, task, or alarm/calendar event IN PLACE and flip its switches. Use to <strong>reschedule</strong> (pass <code>datetime</code> to move an event), or to turn ON/OFF toggles: <code>call_alert</code> (real phone call ring at the item's time), <code>is_important</code> (4 PM nudge email), <code>countdown_enabled</code> (Daily Countdown on Home screen), and <code>reminder_at</code> (the item's reminder/notification time). Use <code>append_content</code> / <code>append_notes</code> to ADD to a note or list without erasing it. Only fields you provide are changed. <strong>Never create a new alarm to reschedule an existing one</strong> — that leaves a duplicate; use <code>update_item</code> instead.</td>
             <td class="tool-params">
               <span class="tag-req">item_id</span>
               <span class="tag-opt">title</span>
               <span class="tag-opt">content</span>
+              <span class="tag-opt">append_content</span>
               <span class="tag-opt">notes</span>
+              <span class="tag-opt">append_notes</span>
+              <span class="tag-opt">why_saved</span>
+              <span class="tag-opt">datetime</span>
+              <span class="tag-opt">reminder_at</span>
               <span class="tag-opt">is_important</span>
+              <span class="tag-opt">call_alert</span>
+              <span class="tag-opt">countdown_enabled</span>
             </td>
           </tr>
           <tr>
@@ -741,10 +752,46 @@
             </td>
           </tr>
           <tr>
+            <td><div class="tool-name"><code>create_link</code></div></td>
+            <td class="tool-desc">Save a web link or video into the user's Link Stash. The phone shows it as a rich link card (platform badge + thumbnail) alongside links the user saved themselves. Platform is auto-detected from the URL when omitted. HTTPS URLs only.</td>
+            <td class="tool-params">
+              <span class="tag-req">url</span>
+              <span class="tag-opt">title</span>
+              <span class="tag-opt">summary</span>
+              <span class="tag-opt">platform</span>
+              <span class="tag-opt">thumbnail_url</span>
+              <span class="tag-opt">why_saved</span>
+            </td>
+          </tr>
+          <tr>
+            <td><div class="tool-name"><code>add_to_forever_note</code></div></td>
+            <td class="tool-desc">Append checklist content to the user's Forever Note — a single pinned note that accumulates over time and is never erased. Lines are stored as <code>[ ] text</code> so the user can tap to check them off. Creates the Forever Note if it doesn't exist. For lists, pass the label as <code>text</code> and each entry in <code>items[]</code> — every entry becomes its own tappable sub-bullet under the label.</td>
+            <td class="tool-params">
+              <span class="tag-req">text</span>
+              <span class="tag-opt">items</span>
+            </td>
+          </tr>
+          <tr>
+            <td><div class="tool-name"><code>remove_from_forever_note</code></div></td>
+            <td class="tool-desc">Remove a line from the user's Forever Note — the inverse of <code>add_to_forever_note</code>. Match the line by its text content (case-insensitive, checkbox prefix ignored) or by its 0-based position. Returns <code>{ removed: 0 }</code> without error if the line isn't found.</td>
+            <td class="tool-params">
+              <span class="tag-opt">text</span>
+              <span class="tag-opt">line_index</span>
+            </td>
+          </tr>
+          <tr>
             <td><div class="tool-name"><code>delete_items_by_maker</code></div></td>
             <td class="tool-desc">Bulk soft-delete <strong>every</strong> item created by one maker (an agent name, e.g. <code>"Hazel"</code>, or a stable <code>"Agent-xxxx"</code> id) in a single call — the fast way to clean up everything one agent put in, instead of deleting items one at a time. Soft-delete (recoverable). <strong>Use with care.</strong></td>
             <td class="tool-params">
               <span class="tag-req">maker_name</span>
+            </td>
+          </tr>
+          <tr>
+            <td><div class="tool-name"><code>delete_items_by_status</code></div></td>
+            <td class="tool-desc">Bulk soft-delete <strong>every</strong> item with a given status in one call — e.g. <code>status="completed"</code> to clear all the user's done items. Optionally narrow to one <code>type</code> (e.g. <code>"note"</code>). The Forever Note is always protected. <code>status</code> is required — there is no blanket delete-all. Soft-delete (recoverable). <strong>Use with care.</strong></td>
+            <td class="tool-params">
+              <span class="tag-req">status</span>
+              <span class="tag-opt">type</span>
             </td>
           </tr>
 
@@ -778,8 +825,10 @@
           <tr class="group-hdr"><td colspan="3">BRIEF &amp; PRIORITIES</td></tr>
           <tr>
             <td><div class="tool-name"><code>get_overdue_items</code></div></td>
-            <td class="tool-desc">All pending items whose alarm/due date is in the past (within the last 30 days). Use to identify what the user has been missing. Good to call at session start alongside <code>get_daily_brief</code>.</td>
-            <td class="tool-params"><em style="color:#b8986e;">no params</em></td>
+            <td class="tool-desc">All pending items whose alarm/due date is in the past (within the last 30 days). Defaults to the user's own items. Pass <code>recipient</code> with your own agent name to get the items <em>you</em> scheduled for yourself that are now due — this is how an agent checks its own reminders in SB. Good to call at session start alongside <code>get_daily_brief</code>.</td>
+            <td class="tool-params">
+              <span class="tag-opt">recipient</span>
+            </td>
           </tr>
           <tr>
             <td><div class="tool-name"><code>get_nudge_candidates</code></div></td>
@@ -790,13 +839,31 @@
           <tr class="group-hdr"><td colspan="3">PORTAL — in-app chat thread</td></tr>
           <tr>
             <td><div class="tool-name"><code>get_portal_messages</code></div></td>
-            <td class="tool-desc">Read the conversation history in the user's MCP Agent Portal. Returns messages in chronological order and auto-marks unread inbound messages as read. Use to catch up on what the user said or to build context before responding.</td>
-            <td class="tool-params"><code>limit</code> (default 20, max 100) · <code>direction</code>: <code>"inbound"</code> | <code>"outbound"</code> | <code>"all"</code> (default)</td>
+            <td class="tool-desc">Read the conversation history in the user's MCP Agent Portal. Returns your own thread by default; pass <code>agent_name</code> to read another agent's thread or <code>"all"</code> for every thread. Auto-marks unread inbound messages as read.</td>
+            <td class="tool-params">
+              <span class="tag-opt">limit</span>
+              <span class="tag-opt">direction</span>
+              <span class="tag-opt">agent_name</span>
+            </td>
           </tr>
           <tr>
             <td><div class="tool-name"><code>send_portal_message</code></div></td>
             <td class="tool-desc">Send a chat message to the user in the MCP Agent Portal AND push-notify their phone. Use it to talk to the user or confirm what you did. <strong>Do NOT use this in place of an action</strong> — if the user gives you something to save (an appointment, a task, info to remember), call <code>create_alarm</code> or <code>create_item</code> instead of just messaging it, or it never reaches their calendar/stash.</td>
-            <td class="tool-params"><code>content</code> (required) · <code>action_taken</code> (optional — shown below the message, e.g. <code>"Created alarm for 3 PM"</code>)</td>
+            <td class="tool-params">
+              <span class="tag-req">content</span>
+              <span class="tag-opt">action_taken</span>
+              <span class="tag-opt">image_url</span>
+            </td>
+          </tr>
+
+          <tr>
+            <td><div class="tool-name"><code>delete_portal_messages</code></div></td>
+            <td class="tool-desc">Delete portal messages you previously sent — cleanup tool for removing stray or test messages from the agent portal thread. Supports deletion by explicit <code>message_ids</code> list, by <code>agent_name</code>, or by a cutoff <code>before</code> timestamp. Cap: 100 messages per call. Scoped to the current user only.</td>
+            <td class="tool-params">
+              <span class="tag-opt">message_ids</span>
+              <span class="tag-opt">agent_name</span>
+              <span class="tag-opt">before</span>
+            </td>
           </tr>
 
           <tr class="group-hdr"><td colspan="3">API KEY — lifecycle management</td></tr>
@@ -814,7 +881,7 @@
           <tr class="group-hdr"><td colspan="3">META</td></tr>
           <tr>
             <td><div class="tool-name"><code>get_squirrel_brain_help</code></div></td>
-            <td class="tool-desc">Returns a full self-configuration guide: endpoint, the hardcoded public anon key, all 24 tools with params, and session start instructions. Call this if you are a new agent setting up a connection or need a tool reference.</td>
+            <td class="tool-desc">Returns a full self-configuration guide: endpoint, the hardcoded public anon key, all 29 tools with params, and session start instructions. Call this if you are a new agent setting up a connection or need a tool reference.</td>
             <td class="tool-params"><em style="color:#b8986e;">no params</em></td>
           </tr>
 
@@ -850,7 +917,7 @@
   https://geczbtsjfbvfukdzdemr.supabase.co/functions/v1/mcp-server \
   -H <span class="cs">"Content-Type: application/json"</span> \
   -H <span class="cs">"X-API-Key: sb_your_api_key_here"</span> \
-  -H <span class="cs">"Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imdlc3pidHNqZmJ2ZnVrZHpkZW1yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY0MDc3MzIsImV4cCI6MjA2MTk4MzczMn0.3bFqW0pV9q8Bh4hEKvfVFdPgAWjXHNFHg8cj3xMlRi8"</span> \
+  -H <span class="cs">"Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdlY3pidHNqZmJ2ZnVrZHpkZW1yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc4NTA1OTksImV4cCI6MjA5MzQyNjU5OX0.Rdn6ujhp8t1qJNBmAc8VmV5xst10tpSzXh5tt6VCptM"</span> \
   -d <span class="cs">'{"jsonrpc":"2.0","id":1,"method":"initialize","params":{}}'</span></div>
 
       <div class="code-label">Make Pip call the user (voice alarm in ~10s)</div>
@@ -858,7 +925,7 @@
   https://geczbtsjfbvfukdzdemr.supabase.co/functions/v1/mcp-server \
   -H <span class="cs">"Content-Type: application/json"</span> \
   -H <span class="cs">"X-API-Key: sb_your_api_key_here"</span> \
-  -H <span class="cs">"Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imdlc3pidHNqZmJ2ZnVrZHpkZW1yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY0MDc3MzIsImV4cCI6MjA2MTk4MzczMn0.3bFqW0pV9q8Bh4hEKvfVFdPgAWjXHNFHg8cj3xMlRi8"</span> \
+  -H <span class="cs">"Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdlY3pidHNqZmJ2ZnVrZHpkZW1yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc4NTA1OTksImV4cCI6MjA5MzQyNjU5OX0.Rdn6ujhp8t1qJNBmAc8VmV5xst10tpSzXh5tt6VCptM"</span> \
   -d <span class="cs">'{
     "jsonrpc": "2.0", "id": 1, "method": "tools/call",
     "params": {
@@ -875,7 +942,7 @@
   https://geczbtsjfbvfukdzdemr.supabase.co/functions/v1/mcp-server \
   -H <span class="cs">"Content-Type: application/json"</span> \
   -H <span class="cs">"X-API-Key: sb_your_api_key_here"</span> \
-  -H <span class="cs">"Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imdlc3pidHNqZmJ2ZnVrZHpkZW1yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY0MDc3MzIsImV4cCI6MjA2MTk4MzczMn0.3bFqW0pV9q8Bh4hEKvfVFdPgAWjXHNFHg8cj3xMlRi8"</span> \
+  -H <span class="cs">"Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdlY3pidHNqZmJ2ZnVrZHpkZW1yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc4NTA1OTksImV4cCI6MjA5MzQyNjU5OX0.Rdn6ujhp8t1qJNBmAc8VmV5xst10tpSzXh5tt6VCptM"</span> \
   -d <span class="cs">'{
     "jsonrpc": "2.0", "id": 2, "method": "tools/call",
     "params": {
@@ -894,7 +961,7 @@
   https://geczbtsjfbvfukdzdemr.supabase.co/functions/v1/mcp-server \
   -H <span class="cs">"Content-Type: application/json"</span> \
   -H <span class="cs">"X-API-Key: sb_your_api_key_here"</span> \
-  -H <span class="cs">"Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imdlc3pidHNqZmJ2ZnVrZHpkZW1yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY0MDc3MzIsImV4cCI6MjA2MTk4MzczMn0.3bFqW0pV9q8Bh4hEKvfVFdPgAWjXHNFHg8cj3xMlRi8"</span> \
+  -H <span class="cs">"Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdlY3pidHNqZmJ2ZnVrZHpkZW1yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc4NTA1OTksImV4cCI6MjA5MzQyNjU5OX0.Rdn6ujhp8t1qJNBmAc8VmV5xst10tpSzXh5tt6VCptM"</span> \
   -d <span class="cs">'{
     "jsonrpc": "2.0", "id": 3, "method": "tools/call",
     "params": {
@@ -915,7 +982,7 @@
   https://geczbtsjfbvfukdzdemr.supabase.co/functions/v1/mcp-server \
   -H <span class="cs">"Content-Type: application/json"</span> \
   -H <span class="cs">"X-API-Key: sb_your_api_key_here"</span> \
-  -H <span class="cs">"Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imdlc3pidHNqZmJ2ZnVrZHpkZW1yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY0MDc3MzIsImV4cCI6MjA2MTk4MzczMn0.3bFqW0pV9q8Bh4hEKvfVFdPgAWjXHNFHg8cj3xMlRi8"</span> \
+  -H <span class="cs">"Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdlY3pidHNqZmJ2ZnVrZHpkZW1yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc4NTA1OTksImV4cCI6MjA5MzQyNjU5OX0.Rdn6ujhp8t1qJNBmAc8VmV5xst10tpSzXh5tt6VCptM"</span> \
   -d <span class="cs">'{
     "jsonrpc": "2.0", "id": 4, "method": "tools/call",
     "params": {
@@ -935,7 +1002,7 @@
   https://geczbtsjfbvfukdzdemr.supabase.co/functions/v1/mcp-server \
   -H <span class="cs">"Content-Type: application/json"</span> \
   -H <span class="cs">"X-API-Key: sb_your_api_key_here"</span> \
-  -H <span class="cs">"Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imdlc3pidHNqZmJ2ZnVrZHpkZW1yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY0MDc3MzIsImV4cCI6MjA2MTk4MzczMn0.3bFqW0pV9q8Bh4hEKvfVFdPgAWjXHNFHg8cj3xMlRi8"</span> \
+  -H <span class="cs">"Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdlY3pidHNqZmJ2ZnVrZHpkZW1yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc4NTA1OTksImV4cCI6MjA5MzQyNjU5OX0.Rdn6ujhp8t1qJNBmAc8VmV5xst10tpSzXh5tt6VCptM"</span> \
   -d <span class="cs">'{
     "jsonrpc": "2.0", "id": 5, "method": "tools/call",
     "params": {
@@ -949,7 +1016,7 @@
   https://geczbtsjfbvfukdzdemr.supabase.co/functions/v1/mcp-server \
   -H <span class="cs">"Content-Type: application/json"</span> \
   -H <span class="cs">"X-API-Key: sb_your_api_key_here"</span> \
-  -H <span class="cs">"Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imdlc3pidHNqZmJ2ZnVrZHpkZW1yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY0MDc3MzIsImV4cCI6MjA2MTk4MzczMn0.3bFqW0pV9q8Bh4hEKvfVFdPgAWjXHNFHg8cj3xMlRi8"</span> \
+  -H <span class="cs">"Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdlY3pidHNqZmJ2ZnVrZHpkZW1yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc4NTA1OTksImV4cCI6MjA5MzQyNjU5OX0.Rdn6ujhp8t1qJNBmAc8VmV5xst10tpSzXh5tt6VCptM"</span> \
   -d <span class="cs">'{
     "jsonrpc": "2.0", "id": 6, "method": "tools/call",
     "params": { "name": "get_daily_brief", "arguments": {} }
@@ -1022,7 +1089,7 @@
       <div class="agent-tabs" id="agentTabs">
         <button class="agent-tab active" onclick="showAgent('claude')">Claude Desktop</button>
         <button class="agent-tab" onclick="showAgent('claudecode')">Claude Code (web)</button>
-        <button class="agent-tab" onclick="showAgent('cursor')">Cursor / Codex</button>
+        <button class="agent-tab" onclick="showAgent('cursor')">Cursor</button>
         <button class="agent-tab" onclick="showAgent('python')">Python (LangGraph)</button>
         <button class="agent-tab" onclick="showAgent('generic')">Generic HTTP</button>
       </div>
@@ -1037,8 +1104,8 @@
       "url": "https://geczbtsjfbvfukdzdemr.supabase.co/functions/v1/mcp-server",
       "headers": {
         "X-API-Key": "sb_YOUR_KEY_HERE",
-        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imdlc3pidHNqZmJ2ZnVrZHpkZW1yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY0MDc3MzIsImV4cCI6MjA2MTk4MzczMn0.3bFqW0pV9q8Bh4hEKvfVFdPgAWjXHNFHg8cj3xMlRi8",
-        "apikey": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imdlc3pidHNqZmJ2ZnVrZHpkZW1yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY0MDc3MzIsImV4cCI6MjA2MTk4MzczMn0.3bFqW0pV9q8Bh4hEKvfVFdPgAWjXHNFHg8cj3xMlRi8"
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdlY3pidHNqZmJ2ZnVrZHpkZW1yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc4NTA1OTksImV4cCI6MjA5MzQyNjU5OX0.Rdn6ujhp8t1qJNBmAc8VmV5xst10tpSzXh5tt6VCptM",
+        "apikey": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdlY3pidHNqZmJ2ZnVrZHpkZW1yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc4NTA1OTksImV4cCI6MjA5MzQyNjU5OX0.Rdn6ujhp8t1qJNBmAc8VmV5xst10tpSzXh5tt6VCptM"
       }
     }
   }
@@ -1057,7 +1124,7 @@
       "url": "https://geczbtsjfbvfukdzdemr.supabase.co/functions/v1/mcp-server",
       "headers": {
         "X-API-Key": "${SQUIRREL_BRAIN_API_KEY}",
-        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imdlc3pidHNqZmJ2ZnVrZHpkZW1yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY0MDc3MzIsImV4cCI6MjA2MTk4MzczMn0.3bFqW0pV9q8Bh4hEKvfVFdPgAWjXHNFHg8cj3xMlRi8"
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdlY3pidHNqZmJ2ZnVrZHpkZW1yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc4NTA1OTksImV4cCI6MjA5MzQyNjU5OX0.Rdn6ujhp8t1qJNBmAc8VmV5xst10tpSzXh5tt6VCptM"
       }
     }
   }
@@ -1081,8 +1148,8 @@
       "url": "https://geczbtsjfbvfukdzdemr.supabase.co/functions/v1/mcp-server",
       "headers": {
         "X-API-Key": "sb_YOUR_KEY_HERE",
-        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imdlc3pidHNqZmJ2ZnVrZHpkZW1yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY0MDc3MzIsImV4cCI6MjA2MTk4MzczMn0.3bFqW0pV9q8Bh4hEKvfVFdPgAWjXHNFHg8cj3xMlRi8",
-        "apikey": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imdlc3pidHNqZmJ2ZnVrZHpkZW1yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY0MDc3MzIsImV4cCI6MjA2MTk4MzczMn0.3bFqW0pV9q8Bh4hEKvfVFdPgAWjXHNFHg8cj3xMlRi8"
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdlY3pidHNqZmJ2ZnVrZHpkZW1yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc4NTA1OTksImV4cCI6MjA5MzQyNjU5OX0.Rdn6ujhp8t1qJNBmAc8VmV5xst10tpSzXh5tt6VCptM",
+        "apikey": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdlY3pidHNqZmJ2ZnVrZHpkZW1yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc4NTA1OTksImV4cCI6MjA5MzQyNjU5OX0.Rdn6ujhp8t1qJNBmAc8VmV5xst10tpSzXh5tt6VCptM"
       }
     }
   }
@@ -1102,8 +1169,8 @@ client = MultiServerMCPClient({
         "transport": "streamable_http",
         "headers": {
             "X-API-Key": "sb_YOUR_KEY_HERE",
-            "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imdlc3pidHNqZmJ2ZnVrZHpkZW1yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY0MDc3MzIsImV4cCI6MjA2MTk4MzczMn0.3bFqW0pV9q8Bh4hEKvfVFdPgAWjXHNFHg8cj3xMlRi8",
-            "apikey": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imdlc3pidHNqZmJ2ZnVrZHpkZW1yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY0MDc3MzIsImV4cCI6MjA2MTk4MzczMn0.3bFqW0pV9q8Bh4hEKvfVFdPgAWjXHNFHg8cj3xMlRi8"
+            "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdlY3pidHNqZmJ2ZnVrZHpkZW1yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc4NTA1OTksImV4cCI6MjA5MzQyNjU5OX0.Rdn6ujhp8t1qJNBmAc8VmV5xst10tpSzXh5tt6VCptM",
+            "apikey": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdlY3pidHNqZmJ2ZnVrZHpkZW1yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc4NTA1OTksImV4cCI6MjA5MzQyNjU5OX0.Rdn6ujhp8t1qJNBmAc8VmV5xst10tpSzXh5tt6VCptM"
         }
     }
 })
@@ -1125,7 +1192,7 @@ result = await client.call_tool("create_alarm", {
 <pre>Endpoint:       POST https://geczbtsjfbvfukdzdemr.supabase.co/functions/v1/mcp-server
 Content-Type:   application/json
 X-API-Key:      sb_YOUR_KEY_HERE
-Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imdlc3pidHNqZmJ2ZnVrZHpkZW1yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY0MDc3MzIsImV4cCI6MjA2MTk4MzczMn0.3bFqW0pV9q8Bh4hEKvfVFdPgAWjXHNFHg8cj3xMlRi8
+Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdlY3pidHNqZmJ2ZnVrZHpkZW1yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc4NTA1OTksImV4cCI6MjA5MzQyNjU5OX0.Rdn6ujhp8t1qJNBmAc8VmV5xst10tpSzXh5tt6VCptM
 
 Body (tools/call):
 {

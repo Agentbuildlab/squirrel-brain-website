@@ -35,7 +35,7 @@ const FEATURES = [
   },
   {
     title: "Voice recall",
-    body: "\"Find the permission slip for the science trip.\" \"What was the pediatrician's number?\" \"When does soccer practice start?\" Pip searches everything you've ever captured and answers back.",
+    body: "\"Find the permission slip for the science trip.\" \"What was the pediatrician's number?\" \"When does soccer practice start?\" Your squirrel searches everything you've ever captured and answers back.",
     demo: "DEMO: voice recall in the Burrow",
   },
 ];
@@ -110,7 +110,7 @@ export default function FamilyPage() {
                   One photo. An entire season of alarms.
                 </h2>
                 <p className="text-muted leading-relaxed mb-4">
-                  That crumpled soccer schedule on the fridge? Snap it. Pip reads
+                  That crumpled soccer schedule on the fridge? Snap it. Your squirrel reads
                   every date, every game, every practice. You see them listed out.
                   Tap &ldquo;Add all&rdquo; — they land directly on your iPhone calendar with
                   an alarm before each one.

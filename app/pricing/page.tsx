@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 const FREE_FEATURES = [
   "Voice capture → alarm or reminder",
   "Photo capture (schedule, receipt, whiteboard)",
-  "Burrow chat with Pip",
+  "Burrow chat with your squirrel",
   "Reads every calendar already on your iPhone",
   "Parking pin",
   "Up to 10 captures per month",
@@ -27,7 +27,7 @@ const PRO_FEATURES = [
   "Morning brief email",
   "Voice recall — search everything you've captured",
   "YouTube & link stash",
-  "Priority Pip — call reminders ring your phone in Pip's voice",
+  "Call reminders — your squirrel rings your phone in its own voice",
 ];
 
 function CheckIcon({ color = "#FF7A1A" }: { color?: string }) {

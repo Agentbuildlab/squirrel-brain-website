@@ -16,7 +16,7 @@ import { T } from "@/components/v2/PhoneKit";
 
 export default function FinalCta() {
   const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-80px" });
+  const inView = useInView(ref, { once: true, margin: "-40px" });
   const reduceMotion = useReducedMotion();
 
   return (
@@ -60,9 +60,9 @@ export default function FinalCta() {
         {/* Mascot with pointing tilt */}
         <motion.div
           className="inline-block mb-8"
-          initial={{ opacity: 0, y: -24, scale: 0.9 }}
+          initial={{ opacity: 0.2, y: -16, scale: 0.92 }}
           animate={inView ? { opacity: 1, y: 0, scale: 1 } : {}}
-          transition={{ duration: 0.65, ease: [0.34, 1.4, 0.64, 1] }}
+          transition={{ duration: 0.55, ease: [0.34, 1.4, 0.64, 1] }}
         >
           <motion.div
             whileHover={
@@ -92,7 +92,7 @@ export default function FinalCta() {
           >
             <Image
               src="/assets/squirrel_logo.png"
-              alt="Pip — your Squirrel Brain, pointing at the button below"
+              alt="Your Squirrel Brain, pointing at the button below"
               width={120}
               height={120}
               className="rounded-3xl"
@@ -129,7 +129,7 @@ export default function FinalCta() {
           transition={{ duration: 0.55, delay: 0.2 }}
         >
           Your memory is full.{" "}
-          <span style={{ color: T.orange }}>Let Pip carry it.</span>
+          <span style={{ color: T.orange }}>Let your squirrel carry it.</span>
         </motion.h2>
 
         <motion.p
@@ -193,19 +193,70 @@ export default function FinalCta() {
           transition={{ duration: 0.5, delay: 0.65 }}
         >
           {[
-            "🎙️ Voice capture",
-            "📸 Photo capture",
-            "📅 Calendar sync",
-            "📞 Pip calls you",
-            "⏰ Escalating alarms",
-            "🌅 Daily brief",
-          ].map((feat) => (
+            {
+              label: "Voice capture",
+              icon: (
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                  <rect x="4.5" y="1" width="5" height="8" rx="2.5" stroke="currentColor" strokeWidth="1.4" fill="none" />
+                  <path d="M2 7a5 5 0 0010 0M7 12v2" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+                </svg>
+              ),
+            },
+            {
+              label: "Photo capture",
+              icon: (
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                  <rect x="1" y="3" width="12" height="9" rx="2" stroke="currentColor" strokeWidth="1.4" fill="none" />
+                  <circle cx="7" cy="7.5" r="2.2" stroke="currentColor" strokeWidth="1.3" fill="none" />
+                  <path d="M4.5 3l1-2h3l1 2" stroke="currentColor" strokeWidth="1.3" strokeLinejoin="round" />
+                </svg>
+              ),
+            },
+            {
+              label: "Calendar sync",
+              icon: (
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                  <rect x="1" y="2.5" width="12" height="10.5" rx="2" stroke="currentColor" strokeWidth="1.4" fill="none" />
+                  <path d="M1 6h12M4.5 1v3M9.5 1v3" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+                </svg>
+              ),
+            },
+            {
+              label: "Your squirrel calls",
+              icon: (
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                  <path d="M2 3.5C2 2.95 2.45 2.5 3 2.5h1.5a.5.5 0 01.49.38l.6 2.4a.5.5 0 01-.16.49l-.9.75c.65 1.3 1.75 2.4 3.05 3.05l.75-.9a.5.5 0 01.49-.16l2.4.6a.5.5 0 01.38.49V10.5a1 1 0 01-1 1C5.27 11.5 2 8.23 2 3.5z" stroke="currentColor" strokeWidth="1.3" fill="none" />
+                  <path d="M10 2.5c.83 0 1.5.67 1.5 1.5M10 .5C11.93.5 13.5 2.07 13.5 4" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
+                </svg>
+              ),
+            },
+            {
+              label: "Escalating alarms",
+              icon: (
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                  <circle cx="7" cy="8" r="4.5" stroke="currentColor" strokeWidth="1.4" fill="none" />
+                  <path d="M7 6v2.5l1.5 1.5" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
+                  <path d="M3 2.5L1.5 1M11 2.5L12.5 1" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+                </svg>
+              ),
+            },
+            {
+              label: "Daily brief",
+              icon: (
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                  <circle cx="7" cy="7" r="3" stroke="currentColor" strokeWidth="1.4" fill="none" />
+                  <path d="M7 1v1.5M7 11.5V13M1 7h1.5M11.5 7H13M2.93 2.93l1.06 1.06M10.01 10.01l1.06 1.06M11.07 2.93l-1.06 1.06M3.99 10.01l-1.06 1.06" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
+                </svg>
+              ),
+            },
+          ].map(({ label, icon }) => (
             <span
-              key={feat}
-              className="text-sm"
+              key={label}
+              className="inline-flex items-center gap-1.5 text-sm"
               style={{ color: "rgba(138,112,96,0.7)", fontWeight: 500 }}
             >
-              {feat}
+              {icon}
+              {label}
             </span>
           ))}
         </motion.div>

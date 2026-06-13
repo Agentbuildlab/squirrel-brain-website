@@ -492,7 +492,7 @@ const TABS = [
   { label: "Home", icon: "M3 9l3-3 3 3 3-3 3 3M3 13h12" },
   { label: "Calendar", icon: "M2 5h10M2 3h10v9H2zM5 3V1M7 3V1" },
   { label: "Stash", icon: "M2 9l3.5-5 3 4 2-2 3 3" },
-  { label: "Pip", icon: "M7 3a4 4 0 110 8 4 4 0 010-8z" },
+  { label: "Scuttle", icon: "M7 3a4 4 0 110 8 4 4 0 010-8z" },
   { label: "Settings", icon: "M6 1.5A4.5 4.5 0 106 10.5M3 8l1.5 1.5M9 1.5l1.5 1.5" },
 ];
 

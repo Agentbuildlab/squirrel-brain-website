@@ -70,7 +70,7 @@ function CallScreen() {
         <PulseRing color="#3fae6e" size={80}>
           <Image
             src="/assets/squirrel_logo.png"
-            alt="Pip — your Squirrel Brain"
+            alt="Your squirrel — Squirrel Brain"
             width={56}
             height={56}
             style={{ borderRadius: "50%", objectFit: "cover" }}
@@ -81,7 +81,7 @@ function CallScreen() {
           <div
             style={{ fontSize: 20, fontWeight: 800, color: "white", letterSpacing: -0.3, marginBottom: 2 }}
           >
-            Pip
+            Scuttle
           </div>
           <div style={{ fontSize: 10, color: "rgba(255,255,255,0.55)", fontWeight: 500 }}>
             Squirrel Brain
@@ -189,7 +189,7 @@ function CallScreen() {
 export default function CallSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const reduceMotion = useReducedMotion();
-  const inView = useInView(sectionRef, { once: true, margin: "-80px" });
+  const inView = useInView(sectionRef, { once: true, margin: "-40px" });
 
   return (
     <section
@@ -231,9 +231,9 @@ export default function CallSection() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           {/* LEFT: copy */}
           <motion.div
-            initial={{ opacity: 0, x: -24 }}
+            initial={{ opacity: 0.15, x: -24 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.65, ease: [0.25, 0.1, 0.25, 1] }}
+            transition={{ duration: 0.55, ease: [0.25, 0.1, 0.25, 1] }}
           >
             <p
               className="text-xs font-bold tracking-widest uppercase mb-4"
@@ -250,13 +250,13 @@ export default function CallSection() {
               }}
             >
               When it really matters,{" "}
-              <span style={{ color: "#3fae6e" }}>Pip calls you.</span>
+              <span style={{ color: "#3fae6e" }}>your squirrel calls you.</span>
             </h2>
             <p
               className="text-lg leading-relaxed mb-6 max-w-lg"
               style={{ color: "rgba(255,245,232,0.65)" }}
             >
-              An actual incoming call. Your phone rings — Pip speaks in her own voice — to
+              An actual incoming call. Your phone rings — your squirrel speaks in its own voice — to
               make sure the one thing you can't miss gets handled.
             </p>
             <p
@@ -283,9 +283,9 @@ export default function CallSection() {
           {/* RIGHT: phone ringing */}
           <motion.div
             className="flex justify-center lg:justify-end"
-            initial={{ opacity: 0, y: 40 }}
+            initial={{ opacity: 0.15, y: 28 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.18, ease: [0.25, 0.1, 0.25, 1] }}
+            transition={{ duration: 0.6, delay: 0.12, ease: [0.25, 0.1, 0.25, 1] }}
           >
             {/* Phone wrapper with glow */}
             <div

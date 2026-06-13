@@ -36,14 +36,14 @@ const DEMOS = [
   {
     id: 4,
     title: "Burrow chat + suggestion chips",
-    label: "DEMO: Pip chat + smart chips",
+    label: "DEMO: squirrel chat + smart chips",
     duration: "~15s",
     tags: ["chat", "AI"],
   },
   {
     id: 5,
     title: "Voice recall: \"find the receipt\"",
-    label: "DEMO: voice search → Pip finds it",
+    label: "DEMO: voice search → squirrel finds it",
     duration: "~12s",
     tags: ["voice", "search"],
   },

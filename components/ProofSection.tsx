@@ -32,7 +32,7 @@ const PROOF_BLOCKS: ProofBlock[] = [
     id: "soccer",
     eyebrow: "Family scheduling",
     headline: "Soccer schedule — every game, every alarm.",
-    body: "Snap the paper schedule. Pip extracts every date, time, and field. All 12 games land in your calendar with reminders. You never miss kick-off.",
+    body: "Snap the paper schedule. Your squirrel extracts every date, time, and field. All 12 games land in your calendar with reminders. You never miss kick-off.",
     photoSrc: "/assets/before_whiteboard.png",
     photoAlt: "Soccer schedule on a whiteboard, ready to snap",
     rows: [
@@ -61,7 +61,7 @@ const PROOF_BLOCKS: ProofBlock[] = [
     id: "meds",
     eyebrow: "Health reminders",
     headline: "Meds, refills, follow-ups. Never slip.",
-    body: "Say \"refill prescription Friday\" or snap the bottle. Pip sets the alarm and calls you if you don't act on it. Your health doesn't wait.",
+    body: "Say \"refill prescription Friday\" or snap the bottle. Your squirrel sets the alarm and calls you if you don't act on it. Your health doesn't wait.",
     photoSrc: "/assets/before_grocery_list.png",
     photoAlt: "Handwritten grocery and meds list",
     rows: [
@@ -92,7 +92,7 @@ const PROOF_BLOCKS: ProofBlock[] = [
     id: "meeting",
     eyebrow: "Work & field",
     headline: "Meeting recap in one sentence.",
-    body: "Walking out of the meeting, tap mic: \"Follow up with Sarah about the contract by Wednesday.\" That's it. Pip handles the rest.",
+    body: "Walking out of the meeting, tap mic: \"Follow up with Sarah about the contract by Wednesday.\" That's it. Your squirrel handles the rest.",
     photoSrc: "/assets/lifestyle_sales_walkout.png",
     photoAlt: "Professional walking out after a meeting",
     rows: [
@@ -125,9 +125,9 @@ function ProofBlockCard({ block, index }: { block: ProofBlock; index: number }) 
       {/* Copy side — alternates left/right */}
       <motion.div
         className={isEven ? "lg:order-1" : "lg:order-2"}
-        initial={{ opacity: 0, x: isEven ? -20 : 20 }}
+        initial={{ opacity: 0.2, x: isEven ? -20 : 20 }}
         animate={inView ? { opacity: 1, x: 0 } : {}}
-        transition={{ duration: 0.55, ease: [0.25, 0.1, 0.25, 1] }}
+        transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
       >
         <p
           className="text-xs font-bold tracking-widest uppercase mb-3"
@@ -238,7 +238,7 @@ function ProofBlockCard({ block, index }: { block: ProofBlock; index: number }) 
               <span style={{ fontSize: 14, lineHeight: 1 }} aria-hidden="true">🐿️</span>
               <div>
                 <div style={{ fontSize: 8, fontWeight: 700, color: "#e8a84a", marginBottom: 2 }}>
-                  Pip
+                  Scuttle
                 </div>
                 <div style={{ fontSize: 9, color: "rgba(255,245,232,0.75)", lineHeight: 1.5 }}>
                   Got it. Alarms are set. I'll follow up.

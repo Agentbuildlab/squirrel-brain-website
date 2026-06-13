@@ -39,8 +39,8 @@ const FEATURES = [
   },
   {
     title: "Follow-ups that ring your phone",
-    body: "When a follow-up actually matters — Pip rings your phone and speaks in Pip's voice. Not a push notification. An actual call that you can't miss while driving.",
-    demo: "PLACEHOLDER: Pip call UI",
+    body: "When a follow-up actually matters — your squirrel rings your phone and speaks in its own voice. Not a push notification. An actual call that you can't miss while driving.",
+    demo: "PLACEHOLDER: squirrel call UI",
   },
 ];
 
