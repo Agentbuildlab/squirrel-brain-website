@@ -21,13 +21,13 @@ const FEATURES = [
   {
     title: "GPS-stamped photo proof",
     body: "Snap what you left on-site. Squirrel Brain reads the photo, pulls the job details, and stores a timestamped record. Proof of delivery, service, or install — instantly in the Burrow.",
-    screen: "/assets/screens/pix.webp",
+    screen: "/assets/screens/pix-v2.webp",
     screenAlt: "Pix showing GPS-stamped photo boards",
   },
   {
     title: "Parking pin",
     body: "Tap once when you park. Days later, when you've walked three blocks in every direction — Squirrel Brain drops you straight back. No hunting.",
-    screen: "/assets/screens/pix.webp",
+    screen: "/assets/screens/pix-v2.webp",
     screenAlt: "Pix showing parking photo saved",
   },
   {

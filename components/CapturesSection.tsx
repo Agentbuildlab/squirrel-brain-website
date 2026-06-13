@@ -49,7 +49,7 @@ const STEPS = [
     headline: "Snap where you parked.",
     sub: "GPS-stamped, location-named, saved forever. Ask \"where did I park?\" next time and your squirrel knows exactly.",
     beforeSrc: "/assets/before_parking_spot.png",
-    screenSrc: "/assets/screens/pix.webp",
+    screenSrc: "/assets/screens/pix-v2.webp",
     screenAlt: "Squirrel Brain Pix — photo boards",
     accentColor: "#2a6aee",
     accentBg: T.blueLight,

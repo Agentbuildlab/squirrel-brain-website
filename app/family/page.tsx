@@ -22,7 +22,7 @@ const FEATURES = [
   {
     title: "Pix boards — for every pile on the counter",
     body: "Receipts. Recipes. Meds. School permission slips. Snap and file them into the right board. Everything is searchable by voice later: \"find the field trip form\" just works.",
-    screen: "/assets/screens/pix.webp",
+    screen: "/assets/screens/pix-v2.webp",
     screenAlt: "Pix photo boards showing organised family photos",
   },
   {
