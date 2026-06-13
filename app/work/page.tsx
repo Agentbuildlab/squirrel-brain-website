@@ -22,7 +22,7 @@ const FEATURES = [
   {
     title: "GPS-stamped photo proof",
     body: "Snap what you left on-site. Your squirrel reads the photo, logs the job details, and stores a timestamped record with GPS. Proof of delivery, service, or install — in the Burrow instantly.",
-    screen: "/assets/screens/pix-v2.webp",
+    screen: "/assets/screens/pix-v3.webp",
     screenAlt: "Pix showing GPS-stamped photo boards",
   },
   {

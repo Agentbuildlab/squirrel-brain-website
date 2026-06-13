@@ -36,7 +36,7 @@ const ROWS = [
     sub: "GPS-stamped, location-named, saved forever. Ask \"where did I park?\" next time and your squirrel knows exactly. No more wandering a garage.",
     beforeSrc: "/assets/before_parking_v2.webp",
     beforeAlt: "Parking spot photo to capture",
-    screenSrc: "/assets/screens/pix-v2.webp",
+    screenSrc: "/assets/screens/pix-v3.webp",
     screenAlt: "Squirrel Brain Pix — photo boards",
     accentColor: "#2a6aee",
   },

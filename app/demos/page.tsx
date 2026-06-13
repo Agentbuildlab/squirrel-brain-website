@@ -36,7 +36,7 @@ const DEMOS = [
     caption: "Snap where you parked — GPS-stamped and waiting when you need it",
     duration: "~10s",
     tags: ["photo", "GPS"],
-    screen: "/assets/screens/pix-v2.webp",
+    screen: "/assets/screens/pix-v3.webp",
     screenAlt: "Pix photo boards showing parking snap",
   },
   {

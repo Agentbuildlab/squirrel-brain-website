@@ -28,7 +28,7 @@ const FEATURES = [
   {
     title: "Pix boards — for every pile on the counter",
     body: "Receipts. Recipes. Meds. School permission slips. Snap and file them into the right board. Everything is searchable by voice later: \"find the field trip form\" just works.",
-    screen: "/assets/screens/pix-v2.webp",
+    screen: "/assets/screens/pix-v3.webp",
     screenAlt: "Pix photo boards showing organised family photos",
   },
   {
@@ -147,7 +147,7 @@ export default function FamilyPage() {
           <div className="max-w-5xl mx-auto px-4 sm:px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <FadeIn from="right" delay={0.1} className="flex justify-center md:order-2">
               <PhoneShot
-                src="/assets/screens/pix-v2.webp"
+                src="/assets/screens/pix-v3.webp"
                 alt="Pix boards showing parking photo with GPS pin"
                 width={320}
               />
