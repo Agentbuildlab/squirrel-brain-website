@@ -86,12 +86,12 @@ const PROOF_BLOCKS: ProofBlock[] = [
 // ── Med bottles grid ─────────────────────────────────────────────────────────
 
 const MED_BOTTLES = [
-  { src: "/assets/med1_bottle.png", label: "Lisinopril 10mg" },
-  { src: "/assets/med2_bottle.png", label: "Metformin 500mg" },
-  { src: "/assets/med3_bottle.png", label: "Atorvastatin 20mg" },
-  { src: "/assets/med4_bottle.png", label: "Omeprazole 20mg" },
-  { src: "/assets/med5_bottle.png", label: "Levothyroxine 50mcg" },
-  { src: "/assets/med6_bottle.png", label: "Amlodipine 5mg" },
+  { src: "/assets/med1_bottle.png", label: "Generix 10 mg" },
+  { src: "/assets/med2_bottle.png", label: "Calmitol 25 mg" },
+  { src: "/assets/med3_bottle.png", label: "Snoozaprol 5 mg" },
+  { src: "/assets/med4_bottle.png", label: "Allerfree 180 mg" },
+  { src: "/assets/med5_bottle.png", label: "Pressurez 20 mg" },
+  { src: "/assets/med6_bottle.png", label: "Vitamax D3 2000 IU" },
 ];
 
 function MedsBottleGrid({ inView }: { inView: boolean }) {
@@ -294,7 +294,7 @@ function MedsBlock({ index }: { index: number }) {
           {[
             {
               accentColor: T.orange,
-              title: "Refill Lisinopril",
+              title: "Refill Generix",
               date: "Jun 20",
               time: "10:00 AM",
               dayNum: 20,
