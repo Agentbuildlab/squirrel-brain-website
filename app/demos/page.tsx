@@ -15,11 +15,11 @@ const DEMOS = [
   {
     id: 1,
     title: "Voice to calendar, easily",
-    caption: "Say \"Dentist Thursday at 2\" — your squirrel sets the alarm. No typing, no menus.",
+    caption: "Say \"Dentist Thursday at 2\" — your squirrel sets the event. No typing, no menus.",
     duration: "voice",
     tags: ["voice", "calendar"],
-    screen: "/assets/screens/home-v4.webp",
-    screenAlt: "Home dashboard showing calendar events with Daily Countdown",
+    screen: "/assets/screens/calendar-v2.webp",
+    screenAlt: "Calendar showing the event your squirrel set from your voice",
   },
   {
     id: 2,
