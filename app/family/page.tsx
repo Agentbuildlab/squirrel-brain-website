@@ -28,7 +28,7 @@ const FEATURES = [
   },
   {
     title: "Pix boards — for every pile on the counter",
-    body: "Receipts. Recipes. Meds. School permission slips. Snap and file them into the right board. Everything is searchable by voice later: \"find the field trip form\" just works.",
+    body: "Receipts. Recipes. Meds. School permission slips. Snap three of a kind and the board makes itself — no folders to set up. Everything's searchable by voice later: \"find the field trip form\" just works.",
     screen: "/assets/screens/pix-v3.webp",
     screenAlt: "Pix photo boards showing organised family photos",
   },

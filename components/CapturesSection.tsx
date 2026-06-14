@@ -185,6 +185,33 @@ export default function CapturesSection() {
             <br />
             <span style={{ color: T.orange }}>All handled.</span>
           </h2>
+
+          {/* Auto-box rule — snap 3 of a kind → a board is born */}
+          <div
+            className="mt-7 inline-flex items-start gap-3 rounded-2xl px-5 py-4"
+            style={{
+              background: T.pastelPeach,
+              border: `1px solid ${T.orange}33`,
+              maxWidth: 600,
+            }}
+          >
+            <span
+              aria-hidden="true"
+              style={{
+                fontSize: 22,
+                lineHeight: 1.1,
+                flexShrink: 0,
+              }}
+            >
+              🗂️
+            </span>
+            <p className="text-sm lg:text-base leading-relaxed" style={{ color: "#7a4a18" }}>
+              <strong style={{ color: T.text }}>Snap three of the same kind of thing</strong> —
+              receipts, recipes, where you parked — and your squirrel{" "}
+              <strong style={{ color: T.orange }}>births a board for it automatically</strong>.
+              No folders to make, nothing to set up. It just appears.
+            </p>
+          </div>
         </FadeIn>
 
         {/* Three rows — scroll down and read each one */}

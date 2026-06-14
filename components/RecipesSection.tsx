@@ -93,8 +93,9 @@ export default function RecipesSection() {
             </h2>
             <p className="text-lg text-muted leading-relaxed mb-4">
               Grandma&rsquo;s handwritten card. That pasta reel you saved at midnight. The
-              back of the soup can. Snap it and your squirrel drops it straight into your{" "}
-              <strong className="text-ink">Recipes board</strong>.
+              back of the soup can. Snap a few and your squirrel{" "}
+              <strong className="text-ink">births a Recipes board on its own</strong> — three of
+              a kind is all it takes. You never make a folder.
             </p>
             <p className="text-base text-muted leading-relaxed mb-6">
               Then just ask while you&rsquo;re cooking —{" "}
