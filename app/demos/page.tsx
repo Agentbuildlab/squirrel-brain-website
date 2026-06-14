@@ -27,8 +27,8 @@ const DEMOS = [
     caption: "Snap a receipt — your squirrel reads the date and asks if you want a return reminder",
     duration: "~12s",
     tags: ["photo", "reminder"],
-    screen: "/assets/screens/notes-v2.webp",
-    screenAlt: "Notes showing captured receipt details",
+    screen: "/assets/screens/receipts-board.webp",
+    screenAlt: "Receipts board with the snapped receipt filed and a return reminder",
   },
   {
     id: 3,
@@ -36,8 +36,8 @@ const DEMOS = [
     caption: "Snap where you parked — GPS-stamped and waiting when you need it",
     duration: "~10s",
     tags: ["photo", "GPS"],
-    screen: "/assets/screens/pix-v3.webp",
-    screenAlt: "Pix photo boards showing parking snap",
+    screen: "/assets/screens/parking-board.webp",
+    screenAlt: "Parking board with your P3 spot and a Find my car button",
   },
   {
     id: 4,
@@ -54,8 +54,8 @@ const DEMOS = [
     caption: "Speak a search — your squirrel finds it instantly from everything you've captured",
     duration: "~12s",
     tags: ["voice", "search"],
-    screen: "/assets/screens/notes-v2.webp",
-    screenAlt: "Notes search results",
+    screen: "/assets/screens/burrow.webp",
+    screenAlt: "The Burrow answering a recall question in plain language",
   },
   {
     id: 7,

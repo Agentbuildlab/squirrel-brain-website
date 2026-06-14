@@ -29,14 +29,14 @@ const FEATURES = [
   {
     title: "Pix boards — for every pile on the counter",
     body: "Receipts. Recipes. Meds. School permission slips. Snap three of a kind and the board makes itself — no folders to set up. Everything's searchable by voice later: \"find the field trip form\" just works.",
-    screen: "/assets/screens/pix-v3.webp",
-    screenAlt: "Pix photo boards showing organised family photos",
+    screen: "/assets/screens/pix-wall-v2.webp",
+    screenAlt: "Pix board wall — every board your squirrel built, with a location banner",
   },
   {
     title: "Return-window reminders",
     body: "Snap a receipt. Your squirrel reads the store and the amount, then asks if you want a reminder before the return window closes. No more missed returns.",
-    screen: "/assets/screens/notes-v2.webp",
-    screenAlt: "Notes showing return reminder extracted from receipt",
+    screen: "/assets/screens/receipts-board.webp",
+    screenAlt: "Receipts board with snapped receipts and a return reminder",
   },
   {
     title: "Voice recall — find anything you ever snapped",
@@ -172,8 +172,8 @@ export default function FamilyPage() {
           <div className="max-w-5xl mx-auto px-4 sm:px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <FadeIn from="right" delay={0.1} className="flex justify-center md:order-2">
               <PhoneShot
-                src="/assets/screens/pix-v3.webp"
-                alt="Pix boards showing parking photo with GPS pin"
+                src="/assets/screens/parking-board.webp"
+                alt="Parking board — your P3 spot saved with a Find my car button"
                 width={320}
               />
             </FadeIn>
