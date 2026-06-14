@@ -49,22 +49,22 @@ export default function ScreenshotGotchaSection() {
             invites too: if there&rsquo;s something to do in it, it becomes a task you won&rsquo;t drop.
           </p>
 
-          {/* The screenshot you take */}
+          {/* The flood you're up against */}
           <div className="flex items-center gap-4">
             <div
               className="relative rounded-2xl overflow-hidden flex-shrink-0"
-              style={{ width: 150, border: `1.5px solid ${T.border}`, boxShadow: "0 8px 24px rgba(26,18,8,0.12)" }}
+              style={{ width: 172, border: `1.5px solid ${T.border}`, boxShadow: "0 10px 28px rgba(26,18,8,0.14)" }}
             >
-              <Image src="/assets/before_worktext.webp" alt="A work text you screenshot" width={560} height={720} className="w-full h-auto" />
-              <div className="absolute bottom-1.5 left-1.5 rounded-md px-2 py-1" style={{ background: "rgba(26,18,8,0.7)" }}>
-                <span className="text-[10px] font-semibold" style={{ color: "rgba(255,245,232,0.9)" }}>
-                  You screenshot this
+              <Image src="/assets/texts_flood.webp" alt="A phone inbox flooded with texts — three of them are things you actually have to do" width={560} height={772} className="w-full h-auto" />
+              <div className="absolute bottom-1.5 left-1.5 rounded-md px-2 py-1" style={{ background: "rgba(26,18,8,0.72)" }}>
+                <span className="text-[10px] font-semibold" style={{ color: "rgba(255,245,232,0.92)" }}>
+                  20 a day · 3 you have to act on
                 </span>
               </div>
             </div>
             <span aria-hidden="true" style={{ fontSize: 26, color: T.orange, fontWeight: 700 }}>→</span>
             <p className="text-sm text-muted leading-snug max-w-[150px]">
-              …and it reads it, extracts it, and files the event for you.
+              Forward the ones that matter; they come back as to-dos you won&rsquo;t drop.
             </p>
           </div>
         </motion.div>

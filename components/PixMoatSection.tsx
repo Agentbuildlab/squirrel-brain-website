@@ -12,6 +12,7 @@
  * "you're at X — N pix here" location banner). Custom SVG icons (no emoji).
  */
 
+import Image from "next/image";
 import { motion, useInView } from "framer-motion";
 import { useRef, type ReactNode } from "react";
 import { PhoneShot, T } from "@/components/v2/PhoneKit";
@@ -133,16 +134,37 @@ export default function PixMoatSection() {
             transition={{ duration: 0.6, delay: 0.1 }}
           >
             <div className="relative">
+              {/* BEFORE — the messy camera roll, peeking from behind (desktop) */}
+              <motion.div
+                className="hidden lg:block absolute"
+                style={{ width: 150, top: -34, left: -96, zIndex: 1, transform: "rotate(-7deg)" }}
+                initial={{ opacity: 0, scale: 0.85 }}
+                animate={inView ? { opacity: 1, scale: 1 } : {}}
+                transition={{ duration: 0.55, delay: 0.25 }}
+                aria-hidden="true"
+              >
+                <div
+                  className="relative rounded-2xl overflow-hidden"
+                  style={{ border: "4px solid #2a2018", boxShadow: "0 16px 34px rgba(0,0,0,0.45)" }}
+                >
+                  <Image src="/assets/camera_roll_mess.webp" alt="" width={560} height={932} className="w-full h-auto" />
+                  <div className="absolute top-1.5 left-1.5 rounded-md px-2 py-0.5" style={{ background: "rgba(0,0,0,0.6)" }}>
+                    <span className="text-[10px] font-bold tracking-wide" style={{ color: "rgba(255,245,232,0.92)" }}>BEFORE</span>
+                  </div>
+                </div>
+              </motion.div>
+
               <PhoneShot
                 src="/assets/screens/pix-wall-v2.webp"
                 alt="Squirrel Brain Pix board wall — auto-built boards and a live location banner showing photos taken nearby"
                 width={320}
+                style={{ position: "relative", zIndex: 2 }}
               />
               <div
                 className="absolute -bottom-3 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full px-4 py-2"
-                style={{ background: T.orange, boxShadow: "0 8px 24px rgba(255,122,26,0.4)" }}
+                style={{ background: T.orange, boxShadow: "0 8px 24px rgba(255,122,26,0.4)", zIndex: 3 }}
               >
-                <span className="text-xs font-bold text-white">It built every one of these boards for you</span>
+                <span className="text-xs font-bold text-white">After: it built every one of these boards for you</span>
               </div>
             </div>
           </motion.div>
