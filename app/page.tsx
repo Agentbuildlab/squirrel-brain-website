@@ -2,6 +2,7 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import HeroSection from "@/components/HeroSection";
 import CapturesSection from "@/components/CapturesSection";
+import PixMoatSection from "@/components/PixMoatSection";
 import CallSection from "@/components/CallSection";
 import MascotSection from "@/components/MascotSection";
 import ProofSection from "@/components/ProofSection";
@@ -21,6 +22,9 @@ export default function HomePage() {
 
         {/* 2 — IT CAPTURES EVERYTHING: scroll-scrubbed phone transformation */}
         <CapturesSection />
+
+        {/* 2.5 — THE PIX MOAT: auto-ingestion, auto-filing, find-the-link, GPS, location surfacing */}
+        <PixMoatSection />
 
         {/* 3 — IT ACTUALLY CALLS YOU: dark band, CallKit screen, pumped-up copy */}
         <CallSection />

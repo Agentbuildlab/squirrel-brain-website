@@ -40,9 +40,9 @@ const FEATURES = [
   },
   {
     title: "Voice recall — find anything you ever snapped",
-    body: "\"Find the permission slip for the science trip.\" \"What was the pediatrician's number?\" \"When does soccer practice start?\" Your squirrel searches everything you've ever captured and answers back.",
-    screen: "/assets/screens/home-v4.webp",
-    screenAlt: "Home showing voice search results",
+    body: "\"Find the permission slip for the science trip.\" \"What was the pediatrician's number?\" \"Am I free Sunday?\" Open the Burrow and just ask — your squirrel searches everything you've ever captured and answers back in plain language.",
+    screen: "/assets/screens/burrow.webp",
+    screenAlt: "The Burrow — chat with Scuttle to find anything you've captured",
   },
   {
     title: "Outlook events? One screenshot.",
