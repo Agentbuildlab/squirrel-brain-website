@@ -213,7 +213,7 @@ export default function WorkPage() {
                 Your squirrel becomes the memory layer for every AI tool you use.
               </p>
               <a
-                href="/mcp"
+                href="/mcp-docs"
                 className="inline-flex items-center gap-2 text-accent font-bold hover:opacity-80 transition-opacity"
               >
                 Developer docs
