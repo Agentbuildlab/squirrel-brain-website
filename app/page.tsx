@@ -7,6 +7,7 @@ import MascotSection from "@/components/MascotSection";
 import ProofSection from "@/components/ProofSection";
 import OutlookSection from "@/components/OutlookSection";
 import LinkStashSection from "@/components/LinkStashSection";
+import RecipesSection from "@/components/RecipesSection";
 import AgentBand from "@/components/AgentBand";
 import FinalCta from "@/components/FinalCta";
 
@@ -33,7 +34,10 @@ export default function HomePage() {
         {/* 6 — LINKSTASH: saved by you, found by asking */}
         <LinkStashSection />
 
-        {/* 7 — PROOF / REAL LIFE: staggered scroll-box reveals, before photos */}
+        {/* 7 — RECIPES: snap any recipe → Recipes board → ask at the stove */}
+        <RecipesSection />
+
+        {/* 8 — PROOF / REAL LIFE: staggered scroll-box reveals, before photos */}
         <ProofSection />
 
         {/* 8 — AGENT BAND: connect any AI agent to your brain */}
