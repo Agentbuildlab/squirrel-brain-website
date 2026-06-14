@@ -36,8 +36,8 @@ const ROWS = [
     sub: "GPS-stamped, location-named, saved forever. Ask \"where did I park?\" next time and your squirrel knows exactly. No more wandering a garage.",
     beforeSrc: "/assets/car_parked.webp",
     beforeAlt: "Your car parked in the garage on level P3",
-    screenSrc: "/assets/screens/pix-v3.webp",
-    screenAlt: "Squirrel Brain Pix — photo boards",
+    screenSrc: "/assets/screens/parking-board.webp",
+    screenAlt: "Squirrel Brain Parking board — your P3 spot saved with a Find my car button",
     accentColor: "#2a6aee",
   },
   {
@@ -47,8 +47,8 @@ const ROWS = [
     sub: '"Return window closes June 24 — remind you 2 days before?" Your squirrel asks. You tap yes. Done. Receipts, forms, labels — whatever has info you\'ll need later.',
     beforeSrc: "/assets/receipt_real.webp",
     beforeAlt: "A store receipt you snap",
-    screenSrc: "/assets/screens/notes-v2.webp",
-    screenAlt: "Squirrel Brain Notes — captured and organised",
+    screenSrc: "/assets/screens/receipts-board.webp",
+    screenAlt: "Squirrel Brain Receipts board — your snapped receipts filed and searchable",
     accentColor: T.orange,
   },
 ];

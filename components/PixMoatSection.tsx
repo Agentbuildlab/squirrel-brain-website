@@ -134,7 +134,7 @@ export default function PixMoatSection() {
           >
             <div className="relative">
               <PhoneShot
-                src="/assets/screens/pix-wall.webp"
+                src="/assets/screens/pix-wall-v2.webp"
                 alt="Squirrel Brain Pix board wall — auto-built boards and a live location banner showing photos taken nearby"
                 width={320}
               />
