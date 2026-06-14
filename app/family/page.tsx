@@ -5,6 +5,8 @@ import Footer from "@/components/Footer";
 import FadeIn from "@/components/FadeIn";
 import CtaButton from "@/components/CtaButton";
 import { PhoneShot } from "@/components/v2/PhoneKit";
+import RecipesSection from "@/components/RecipesSection";
+import ProofSection from "@/components/ProofSection";
 
 export const metadata: Metadata = {
   title: "For the Family",
@@ -257,6 +259,12 @@ export default function FamilyPage() {
             </div>
           </div>
         </section>
+
+        {/* RECIPES (moved from home) */}
+        <RecipesSection />
+
+        {/* MEDS (moved from home) */}
+        <ProofSection />
 
         {/* "Your squirrel, your way" — naming + companion section */}
         <section

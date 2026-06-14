@@ -1,15 +1,12 @@
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import HeroSection from "@/components/HeroSection";
-import CapturesSection from "@/components/CapturesSection";
+import ScreenshotGotchaSection from "@/components/ScreenshotGotchaSection";
+import ProofGotchaSection from "@/components/ProofGotchaSection";
 import PixMoatSection from "@/components/PixMoatSection";
 import CallSection from "@/components/CallSection";
-import MascotSection from "@/components/MascotSection";
 import MorningBriefSection from "@/components/MorningBriefSection";
-import ProofSection from "@/components/ProofSection";
-import OutlookSection from "@/components/OutlookSection";
-import LinkStashSection from "@/components/LinkStashSection";
-import RecipesSection from "@/components/RecipesSection";
+import MascotSection from "@/components/MascotSection";
 import AgentBand from "@/components/AgentBand";
 import ExploreSection from "@/components/ExploreSection";
 import FinalCta from "@/components/FinalCta";
@@ -19,43 +16,34 @@ export default function HomePage() {
     <>
       <Nav />
       <main id="main-content">
-        {/* 1 — HERO: mascot bobs in, big phone with Daily Countdown, canonical headline */}
+        {/* 1 — HERO */}
         <HeroSection />
 
-        {/* 2 — IT CAPTURES EVERYTHING: scroll-scrubbed phone transformation */}
-        <CapturesSection />
+        {/* GOTCHA 1 — Screenshot it → it's on your calendar */}
+        <ScreenshotGotchaSection />
 
-        {/* 2.5 — THE PIX MOAT: auto-ingestion, auto-filing, find-the-link, GPS, location surfacing */}
+        {/* GOTCHA 2 — "We never got it." → here's the proof */}
+        <ProofGotchaSection />
+
+        {/* GOTCHA 3 — Your camera roll, sorted for you (auto-ingestion moat) */}
         <PixMoatSection />
 
-        {/* 3 — IT ACTUALLY CALLS YOU: dark band, CallKit screen, pumped-up copy */}
+        {/* GOTCHA 4 — For the one thing you can't miss, it calls you */}
         <CallSection />
 
-        {/* 4 — MASCOT BEAT: squirrel tilts/waves, personality + warmth */}
-        <MascotSection />
-
-        {/* 4.5 — MORNING BRIEF: two emails a day (real email pictures) */}
+        {/* HIT — Two emails a day (real email pictures) */}
         <MorningBriefSection />
 
-        {/* 5 — OUTLOOK IMPORT: tired of missing Outlook reminders? before→after */}
-        <OutlookSection />
+        {/* HIT — Meet your squirrel (brand warmth) */}
+        <MascotSection />
 
-        {/* 6 — LINKSTASH: saved by you, found by asking */}
-        <LinkStashSection />
-
-        {/* 7 — RECIPES: snap any recipe → Recipes board → ask at the stove */}
-        <RecipesSection />
-
-        {/* 8 — PROOF / REAL LIFE: staggered scroll-box reveals, before photos */}
-        <ProofSection />
-
-        {/* 8 — AGENT BAND: connect any AI agent to your brain */}
+        {/* HIT — Connect any AI agent (MCP moat) */}
         <AgentBand />
 
-        {/* 8.5 — EXPLORE: three big cards (Work / Family / Demos) */}
+        {/* EXPLORE — three big cards (Work / Family / Demos) */}
         <ExploreSection />
 
-        {/* 9 — FINAL CTA: squirrel points at button, pulsing glow */}
+        {/* FINAL CTA */}
         <FinalCta />
       </main>
       <Footer />
