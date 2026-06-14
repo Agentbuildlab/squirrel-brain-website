@@ -65,12 +65,18 @@ export default function MeetingSection() {
           >
             Record the whole meeting. Keep what matters.
           </h2>
-          <p className="text-base text-muted leading-relaxed mb-6">
+          <p className="text-base text-muted leading-relaxed mb-4">
             Under Notes, tap <strong className="text-ink">Meeting</strong> and just let it run. Your
             squirrel records the whole conversation in short chunks — so nothing rides on one long
             file — then transcribes it and pulls out what&rsquo;s important: the action items, the
             follow-ups, the deadlines, as best as the AI can. Turn any of them into a reminder with
             one tap.
+          </p>
+          <p className="text-base text-muted leading-relaxed mb-6">
+            <strong className="text-ink">Interviewing someone?</strong> Have everyone introduce
+            themselves at the start, then go back later and hear exactly what each person said —
+            word for word. A lifesaver after a long day of <strong className="text-ink">panel
+            interviews</strong>, when every candidate starts to blur together.
           </p>
 
           <div className="rounded-3xl p-5" style={{ background: "#fff", border: `1px solid ${T.border}` }}>
