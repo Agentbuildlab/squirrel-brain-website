@@ -45,7 +45,7 @@ function FloatingDish({
         overflow: "hidden",
         border: "4px solid #fff",
         boxShadow: "0 14px 30px rgba(26,18,8,0.18)",
-        zIndex: 3,
+        zIndex: 1, // tuck BEHIND the phone (z-2) so dishes peek from its edges, never covering content
         ...style,
       }}
     >
@@ -168,7 +168,7 @@ export default function RecipesSection() {
                 rotate={-8}
                 inView={inView}
                 delay={0.3}
-                style={{ top: -28, left: -64 }}
+                style={{ top: -34, left: -68 }}
               />
               <FloatingDish
                 src="/assets/recipe_cookies.png"
@@ -176,7 +176,7 @@ export default function RecipesSection() {
                 rotate={9}
                 inView={inView}
                 delay={0.42}
-                style={{ bottom: 8, left: -78 }}
+                style={{ bottom: -6, left: -82 }}
               />
               <FloatingDish
                 src="/assets/recipe_tacos.png"
@@ -184,7 +184,7 @@ export default function RecipesSection() {
                 rotate={7}
                 inView={inView}
                 delay={0.5}
-                style={{ top: 56, right: -54 }}
+                style={{ top: 84, right: -72 }}
               />
 
               <PhoneShot
