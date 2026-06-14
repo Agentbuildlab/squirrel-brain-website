@@ -16,9 +16,9 @@ export const metadata: Metadata = {
 const FEATURES = [
   {
     title: "Voice capture — say it, it's saved",
-    body: "Walk out of a meeting and talk through what just happened. Your squirrel extracts the follow-ups, the promised callbacks, and the dates — so nothing slips between conversations.",
-    screen: "/assets/screens/home-v4.webp",
-    screenAlt: "Home showing captured voice note landing as a calendar event",
+    body: "Walk out of a meeting and talk through what just happened. Your squirrel extracts the follow-ups, the promised callbacks, and the dates — ask it later in plain language and it answers back.",
+    screen: "/assets/screens/burrow.webp",
+    screenAlt: "The Burrow — ask your squirrel and it answers from everything you've captured",
   },
   {
     title: "GPS-stamped photo proof",
@@ -28,9 +28,9 @@ const FEATURES = [
   },
   {
     title: "4 PM nudge",
-    body: "Every weekday at 4 PM, your daily brief recaps open follow-ups, tomorrow's commitments, and anything you captured that hasn't been resolved. Nothing slips through end of day.",
+    body: "Every weekday at 4 PM, your daily brief recaps open follow-ups, tomorrow's commitments, and anything you captured that hasn't been resolved — right when you thought you were done. Nothing slips through end of day.",
     screen: "/assets/screens/home-v4.webp",
-    screenAlt: "Home dashboard with daily summary",
+    screenAlt: "Home dashboard with the daily countdown and what's still open",
   },
   {
     title: "Follow-ups that ring your phone",

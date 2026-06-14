@@ -16,19 +16,6 @@ export const metadata: Metadata = {
 
 const FEATURES = [
   {
-    title: "Snap a whole season in one shot",
-    body: "Photograph the soccer schedule on the fridge — or the school-year calendar — and your squirrel fans it out into every single game and event, all at once. One tap, the whole season on your calendar.",
-    highlight: true,
-    screen: "/assets/screens/calendar-v2.webp",
-    screenAlt: "Calendar with soccer season games added from one photo",
-  },
-  {
-    title: "Game time? The address is already there.",
-    body: "The location was captured right along with the event. When it's game time, tap the address and it opens straight in your maps app — turn-by-turn, no typing required.",
-    screen: "/assets/screens/calendar-v2.webp",
-    screenAlt: "Calendar event with GPS address ready to tap",
-  },
-  {
     title: "Pix boards — for every pile on the counter",
     body: "Receipts. Recipes. Meds. School permission slips. Snap three of a kind and the board makes itself — no folders to set up. Everything's searchable by voice later: \"find the field trip form\" just works.",
     screen: "/assets/screens/pix-wall-v2.webp",
@@ -45,12 +32,6 @@ const FEATURES = [
     body: "\"Find the permission slip for the science trip.\" \"What was the pediatrician's number?\" \"Am I free Sunday?\" Open the Burrow and just ask — your squirrel searches everything you've ever captured and answers back in plain language.",
     screen: "/assets/screens/burrow.webp",
     screenAlt: "The Burrow — chat with Scuttle to find anything you've captured",
-  },
-  {
-    title: "Outlook events? One screenshot.",
-    body: "Company calendar locked down? Screenshot the Outlook event. Your squirrel reads it and drops it straight into your calendar with reminders. Never miss a work event again.",
-    screen: "/assets/screens/calendar-v2.webp",
-    screenAlt: "Calendar showing imported Outlook event with reminders",
   },
 ];
 
@@ -100,8 +81,8 @@ export default function FamilyPage() {
             </div>
             <FadeIn immediate from="right" delay={0.1} className="flex justify-center lg:justify-end">
               <PhoneShot
-                src="/assets/screens/calendar-v2.webp"
-                alt="Calendar showing soccer season added from a single photo"
+                src="/assets/screens/home-v4.webp"
+                alt="Squirrel Brain home — the whole family's day at a glance"
                 width={320}
               />
             </FadeIn>
@@ -241,13 +222,7 @@ export default function FamilyPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {FEATURES.map((f, i) => (
                 <FadeIn key={f.title} delay={i * 0.07}>
-                  <div
-                    className={`rounded-3xl border p-6 flex flex-col gap-5 h-full ${
-                      f.highlight
-                        ? "bg-accent-light border-accent/20"
-                        : "bg-white border-border"
-                    }`}
-                  >
+                  <div className="rounded-3xl border border-border bg-white p-6 flex flex-col gap-5 h-full">
                     <div className="flex justify-center">
                       <PhoneShot src={f.screen} alt={f.screenAlt} width={260} />
                     </div>
