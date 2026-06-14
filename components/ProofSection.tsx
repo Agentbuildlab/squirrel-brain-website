@@ -10,7 +10,7 @@
 import Image from "next/image";
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { T, ScrollBoxRow } from "@/components/v2/PhoneKit";
+import { T, ScrollBoxRow, PhoneShot } from "@/components/v2/PhoneKit";
 
 // ── Types ────────────────────────────────────────────────────────────────────
 
@@ -55,29 +55,6 @@ const PROOF_BLOCKS: ProofBlock[] = [
         dayNum: 22,
         location: "City Center, Field A",
         source: "From Calendar · by You",
-      },
-    ],
-  },
-  {
-    id: "meeting",
-    eyebrow: "Meeting Mode",
-    headline: "Record the whole meeting. Keep what matters.",
-    body: "Under Notes, tap Meeting and just let it run. Your squirrel records the whole conversation in short chunks — so nothing rides on one long file — then transcribes it and pulls out what's important: the action items, the follow-ups, the deadlines, as best as the AI can. Turn any of them into a reminder with one tap.",
-    rows: [
-      {
-        accentColor: T.orange,
-        title: "📊 Send the Q3 deck to the team",
-        source: "From Meeting Mode · by Scuttle",
-        pills: [{ label: "Pulled from your meeting", color: T.orange, bg: T.pastelPeach }],
-      },
-      {
-        accentColor: T.orange,
-        title: "📋 Follow up with Sarah re: contract",
-        date: "Jun 18",
-        time: "by Wed",
-        dayNum: 18,
-        source: "From Meeting Mode · by Scuttle",
-        pills: [{ label: "⏰ Reminder set", color: T.blue, bg: T.blueLight }],
       },
     ],
   },
@@ -395,6 +372,125 @@ function MedsBlock({ index }: { index: number }) {
   );
 }
 
+// ── Meeting Mode block (record → extract → reminder) ───────────────────────
+
+function MeetingBlock({ index }: { index: number }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-60px" });
+  const phoneLeft = index % 2 === 0;
+
+  const rows: React.ComponentProps<typeof ScrollBoxRow>[] = [
+    {
+      accentColor: T.orange,
+      title: "📊 Send the Q3 deck to the team",
+      source: "From Meeting Mode · by Scuttle",
+      pills: [{ label: "Pulled from your meeting", color: T.orange, bg: T.pastelPeach }],
+    },
+    {
+      accentColor: T.orange,
+      title: "📋 Follow up with Sarah re: contract",
+      date: "Jun 18",
+      time: "by Wed",
+      dayNum: 18,
+      source: "From Meeting Mode · by Scuttle",
+      pills: [{ label: "⏰ Reminder set", color: T.blue, bg: T.blueLight }],
+    },
+  ];
+
+  return (
+    <div ref={ref} className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+      {/* Copy + extracted action items */}
+      <motion.div
+        className={phoneLeft ? "lg:order-2" : "lg:order-1"}
+        initial={{ opacity: 0.15, x: phoneLeft ? 20 : -20 }}
+        animate={inView ? { opacity: 1, x: 0 } : {}}
+        transition={{ duration: 0.55, ease: [0.25, 0.1, 0.25, 1], delay: 0.06 }}
+      >
+        <p className="text-xs font-bold tracking-widest uppercase mb-3" style={{ color: T.orange }}>
+          Meeting Mode
+        </p>
+        <h3
+          className="font-display font-bold text-ink mb-4 text-balance"
+          style={{ fontSize: "clamp(1.5rem, 3vw, 2.2rem)", lineHeight: 1.15 }}
+        >
+          Record the whole meeting. Keep what matters.
+        </h3>
+        <p className="text-base text-muted leading-relaxed mb-6">
+          Under Notes, tap <strong className="text-ink">Meeting</strong> and just let it run. Your
+          squirrel records the whole conversation in short chunks — so nothing rides on one long
+          file — then transcribes it and pulls out what&rsquo;s important: the action items, the
+          follow-ups, the deadlines, as best as the AI can. Turn any of them into a reminder with
+          one tap.
+        </p>
+
+        {/* Extracted box */}
+        <div className="rounded-3xl p-5" style={{ background: "#faf6f0", border: `1px solid ${T.border}` }}>
+          <div
+            style={{
+              fontSize: 9,
+              fontWeight: 700,
+              color: T.textSub,
+              letterSpacing: 0.8,
+              textTransform: "uppercase",
+              marginBottom: 8,
+            }}
+          >
+            Pulled from your meeting
+          </div>
+          {rows.map((row, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 14 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.45, delay: 0.3 + i * 0.12 }}
+            >
+              <ScrollBoxRow {...row} />
+            </motion.div>
+          ))}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={inView ? { opacity: 1 } : {}}
+            transition={{ duration: 0.4, delay: 0.6 }}
+            style={{
+              background: "#1a1208",
+              borderRadius: 12,
+              padding: "8px 10px",
+              display: "flex",
+              alignItems: "flex-start",
+              gap: 8,
+              marginTop: 4,
+            }}
+          >
+            <span style={{ fontSize: 14, lineHeight: 1 }} aria-hidden="true">🐿️</span>
+            <div>
+              <div style={{ fontSize: 8, fontWeight: 700, color: "#e8a84a", marginBottom: 2 }}>
+                Your squirrel
+              </div>
+              <div style={{ fontSize: 9, color: "rgba(255,245,232,0.75)", lineHeight: 1.5 }}>
+                Pulled 3 action items from your meeting. Want a reminder on any?
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </motion.div>
+
+      {/* Recording phone */}
+      <motion.div
+        className={`flex justify-center ${phoneLeft ? "lg:order-1" : "lg:order-2"}`}
+        initial={{ opacity: 0.15, x: phoneLeft ? -20 : 20 }}
+        animate={inView ? { opacity: 1, x: 0 } : {}}
+        transition={{ duration: 0.55, ease: [0.25, 0.1, 0.25, 1] }}
+      >
+        <PhoneShot
+          src="/assets/screens/meeting-record-v2.webp"
+          alt="Meeting Mode recording — counting up in short chunks, with Stop & Review"
+          width={300}
+        />
+      </motion.div>
+    </div>
+  );
+}
+
 // ── Single standard proof block ───────────────────────────────────────────────
 
 function ProofBlockCard({ block, index }: { block: ProofBlock; index: number }) {
@@ -579,11 +675,24 @@ export default function ProofSection() {
           </p>
         </motion.div>
 
-        {/* Blocks — soccer, then meds (expanded), then meeting */}
+        {/* Blocks — meeting (moved up, important), then soccer, then meds */}
         <div className="space-y-20 lg:space-y-28">
+          {/* Meeting Mode — record → extract → reminder */}
+          <div>
+            <MeetingBlock index={0} />
+            <div
+              className="mt-20 lg:mt-28"
+              style={{
+                height: 1,
+                background: `linear-gradient(to right, transparent, ${T.border}, transparent)`,
+              }}
+              aria-hidden="true"
+            />
+          </div>
+
           {/* Soccer */}
           <div>
-            <ProofBlockCard block={PROOF_BLOCKS[0]} index={0} />
+            <ProofBlockCard block={PROOF_BLOCKS[0]} index={1} />
             <div
               className="mt-20 lg:mt-28"
               style={{
@@ -595,20 +704,7 @@ export default function ProofSection() {
           </div>
 
           {/* Meds — expanded featured block */}
-          <div>
-            <MedsBlock index={1} />
-            <div
-              className="mt-20 lg:mt-28"
-              style={{
-                height: 1,
-                background: `linear-gradient(to right, transparent, ${T.border}, transparent)`,
-              }}
-              aria-hidden="true"
-            />
-          </div>
-
-          {/* Meeting */}
-          <ProofBlockCard block={PROOF_BLOCKS[1]} index={2} />
+          <MedsBlock index={2} />
         </div>
       </div>
     </section>

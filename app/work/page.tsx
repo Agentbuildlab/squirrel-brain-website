@@ -28,8 +28,8 @@ const FEATURES = [
   {
     title: "Meeting Mode — record your debriefs",
     body: "Tap record and let the meeting run. Your squirrel captures it in short chunks, transcribes in the background, then pulls out the action items, follow-ups, and deadlines — and drops them straight into your notes. Clean list, no effort.",
-    screen: "/assets/screens/meeting-record.webp",
-    screenAlt: "Meeting Mode recording — chunked transcription running in the background",
+    screen: "/assets/screens/meeting-record-v2.webp",
+    screenAlt: "Meeting Mode recording — counting up in short chunks, with Stop & Review",
   },
   {
     title: "4 PM nudge",
