@@ -4,8 +4,19 @@ _Last updated: 2026-06-13 · branch `v2-rebuild`_
 
 ## TL;DR for the next session
 The cinematic v2 rebuild is **built, deployed (preview), and verified**. Latest preview:
-**https://squirrel-brain-website-80e6ldg8p-squirrelbrain.vercel.app** (HTTP 200, 0 broken images across all 29).
+**https://squirrel-brain-website-ku61olhex-squirrelbrain.vercel.app** (HTTP 200, 0 broken).
 Production is **NOT** flipped — wait for Adam to say **"flip production"**, then run:
+
+### Big pass (2026-06-13) — all done & live
+- **Pix MOAT section** (`PixMoatSection.tsx`, home, dark band): auto-ingestion / review-from-bed lead, SVG-icon capability cards (files, 3-births-a-box, rearrange, snap-a-thing→IDs+where-to-buy, GPS, daily re-shuffle). Hero = real board wall `pix-wall-v2.webp`.
+- **Real photos in the PHONE** (re-seeded app boards, no drills): parking row → `parking-board.webp` (P3 + Find my car), receipt row → `receipts-board.webp`, fresh board covers (ladder/hard-hat, cafe receipt, packages, invoice, biz card, plant, ticket, sneakers — `pb_*.webp`).
+- **Real photoreal Rx bottles** (`rx_item_1-6.webp`, `rx_snap.webp`), real `car_parked.webp` + `receipt_real.webp` befores.
+- **Meeting Mode** 2 shots: `meeting-record.webp` (Work), `meeting-extract.webp` (Demos).
+- **Burrow** `burrow.webp` (family voice-recall + demos). **Recipes** section + `recipes-board.webp`.
+- **Auto-box rule** ("snap 3 of a kind → a board is born") in Captures callout + Recipes + family.
+- **Fun soccer schedule** `soccer_schedule_fun.webp` (Acorn FC, squirrel-pun teams).
+- Outlook bigger print; demos cleaned (dropped 8s claim, removed 4 redundant cards); dedup pass on deep pages.
+- App seeding via blob edits; HWM/photo-review trigger is gated (couldn't headlessly fire the literal review popup).
 
 ```bash
 cd ~/Projects/squirrel-brain-website && npx vercel --prod
