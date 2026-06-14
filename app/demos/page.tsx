@@ -60,11 +60,11 @@ const DEMOS = [
   {
     id: 7,
     title: "Meeting Mode — record → extract action items",
-    caption: "Record your post-meeting debrief — your squirrel pulls out the follow-ups and action items automatically",
-    duration: "~20s",
+    caption: "Record your debrief — your squirrel files the action items (Send the Q3 deck, Follow up with Sarah) straight into your notes",
+    duration: "meeting",
     tags: ["voice", "meeting"],
-    screen: "/assets/screens/notes-v2.webp",
-    screenAlt: "Notes with meeting action items extracted",
+    screen: "/assets/screens/meeting-extract.webp",
+    screenAlt: "Notes showing action items Scuttle extracted from a meeting",
   },
 ];
 
