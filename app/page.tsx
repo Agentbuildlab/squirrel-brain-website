@@ -8,6 +8,7 @@ import CallSection from "@/components/CallSection";
 import MorningBriefSection from "@/components/MorningBriefSection";
 import MascotSection from "@/components/MascotSection";
 import AgentBand from "@/components/AgentBand";
+import FounderStorySection from "@/components/FounderStorySection";
 import ExploreSection from "@/components/ExploreSection";
 import FinalCta from "@/components/FinalCta";
 
@@ -39,6 +40,9 @@ export default function HomePage() {
 
         {/* HIT — Connect any AI agent (MCP moat) */}
         <AgentBand />
+
+        {/* WHY THIS EXISTS — the vague founder origin */}
+        <FounderStorySection />
 
         {/* EXPLORE — three big cards (Work / Family / Demos) */}
         <ExploreSection />

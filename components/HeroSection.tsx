@@ -96,7 +96,8 @@ export default function HeroSection() {
             </a>
             {headline}
             <p className="mt-6 text-xl text-muted leading-relaxed max-w-md">
-              Your squirrel handles the rest.
+              You&rsquo;re not forgetful — you&rsquo;re outnumbered. Your squirrel hands it back
+              exactly when it matters.
             </p>
             <div className="mt-10 flex flex-wrap gap-4 items-center">
               <a
@@ -183,7 +184,8 @@ export default function HeroSection() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.55, delay: 0.25 }}
             >
-              Snap it, say it, stash it — your squirrel handles the rest.
+              You&rsquo;re not forgetful — you&rsquo;re outnumbered. Snap it, say it, or forward it,
+              and your squirrel hands it back exactly when it matters.
             </motion.p>
 
             {/* CTAs */}

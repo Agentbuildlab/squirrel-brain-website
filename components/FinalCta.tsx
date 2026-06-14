@@ -138,7 +138,8 @@ export default function FinalCta() {
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5, delay: 0.32 }}
         >
-          Join the beta. Say one thing. Watch it become an alarm. That&rsquo;s the whole demo.
+          Nothing slips anymore — not because you got more disciplined, but because you stopped
+          having to be. You&rsquo;re one forgotten text away from wishing you&rsquo;d had this.
         </motion.p>
 
         {/* CTA button — pulsing glow */}
