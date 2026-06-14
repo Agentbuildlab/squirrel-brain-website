@@ -225,48 +225,6 @@ export default function FamilyPage() {
           </div>
         </section>
 
-        {/* Morning brief — expanded with weather/history/joke */}
-        <section className="py-16 bg-white border-y border-border" aria-labelledby="brief-heading">
-          <div className="max-w-5xl mx-auto px-4 sm:px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            <FadeIn>
-              <div>
-                <p className="text-xs font-bold tracking-widest uppercase text-accent mb-3">
-                  Morning brief
-                </p>
-                <h2
-                  id="brief-heading"
-                  className="font-display text-3xl font-bold text-ink mb-4"
-                >
-                  Two emails a day. Zero noise.
-                </h2>
-                <p className="text-muted leading-relaxed mb-4">
-                  Every morning, a short email with your day — what&rsquo;s on the calendar,
-                  what&rsquo;s open, and anything you captured that still needs handling.
-                </p>
-                <p className="text-muted leading-relaxed mb-4">
-                  Plus a little something extra:{" "}
-                  <strong className="text-ink">today&rsquo;s weather for where you are</strong>,
-                  a{" "}
-                  <strong className="text-ink">&ldquo;this day in history&rdquo;</strong> tidbit, and a{" "}
-                  <strong className="text-ink">joke of the day</strong> to start things off right.
-                  Because your squirrel likes context.
-                </p>
-                <p className="text-muted leading-relaxed">
-                  In the afternoon, if anything&rsquo;s still pending, a 4 PM nudge with exactly
-                  what&rsquo;s left. No fluff. Two emails, done.
-                </p>
-              </div>
-            </FadeIn>
-            <FadeIn from="right" delay={0.1} className="flex justify-center">
-              <PhoneShot
-                src="/assets/screens/home-v4.webp"
-                alt="Home dashboard with today's family schedule and Daily Countdown"
-                width={320}
-              />
-            </FadeIn>
-          </div>
-        </section>
-
         {/* Feature grid — 2-up layout */}
         <section className="py-20" aria-labelledby="family-features-heading">
           <div className="max-w-6xl mx-auto px-4 sm:px-6">

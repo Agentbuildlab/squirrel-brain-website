@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import FadeIn from "@/components/FadeIn";
 import CtaButton from "@/components/CtaButton";
 import { PhoneShot } from "@/components/v2/PhoneKit";
+import MeetingSection from "@/components/MeetingSection";
 import Image from "next/image";
 
 export const metadata: Metadata = {
@@ -24,12 +25,6 @@ const FEATURES = [
     body: "Snap what you left on-site. Your squirrel reads the photo, logs the job details, and stores a timestamped record with GPS. Proof of delivery, service, or install — in the Burrow instantly.",
     screen: "/assets/screens/pix-wall-v2.webp",
     screenAlt: "Pix board wall — GPS-stamped photos auto-filed into boards",
-  },
-  {
-    title: "Meeting Mode — record your debriefs",
-    body: "Tap record and let the meeting run. Your squirrel captures it in short chunks, transcribes in the background, then pulls out the action items, follow-ups, and deadlines — and drops them straight into your notes. Clean list, no effort.",
-    screen: "/assets/screens/meeting-record-v2.webp",
-    screenAlt: "Meeting Mode recording — counting up in short chunks, with Stop & Review",
   },
   {
     title: "4 PM nudge",
@@ -164,6 +159,9 @@ export default function WorkPage() {
             </FadeIn>
           </div>
         </section>
+
+        {/* Meeting Mode — record → extract → reminder (moved here from home) */}
+        <MeetingSection />
 
         {/* Feature grid — 2-up layout, bigger phones */}
         <section className="py-20" aria-labelledby="work-features-heading">
