@@ -33,9 +33,9 @@ const PROOF_BLOCKS: ProofBlock[] = [
     eyebrow: "Family scheduling",
     headline: "Snap a whole season in one shot.",
     body: "Photograph the soccer schedule on the fridge — or the school-year calendar. Your squirrel fans every game and practice into your calendar all at once. One tap, the whole season done. And when it's game time, the address is already there — tap it and Maps opens with turn-by-turn directions. No typing.",
-    photoSrc: "/assets/before_soccer_schedule.png",
-    photoAlt: "Printed soccer season schedule, ready to snap",
-    photoHeight: 220,
+    photoSrc: "/assets/soccer_schedule_fun.webp",
+    photoAlt: "Acorn FC fall season schedule — ten games, ready to snap",
+    photoHeight: 260,
     rows: [
       {
         accentColor: T.blue,

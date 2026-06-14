@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import FadeIn from "@/components/FadeIn";
@@ -125,11 +126,35 @@ export default function FamilyPage() {
                   game and event, all at once. You see them listed out. Tap &ldquo;Add all&rdquo; —
                   the whole season lands on your calendar.
                 </p>
-                <p className="text-muted leading-relaxed">
+                <p className="text-muted leading-relaxed mb-6">
                   <strong className="text-ink">When it&rsquo;s game time, the address is already there.</strong>{" "}
                   Tap the location and it opens straight in Maps — turn-by-turn, no typing.
                   The address was captured right along with the event.
                 </p>
+                {/* The actual schedule you snap */}
+                <div
+                  className="relative rounded-2xl overflow-hidden border border-border max-w-sm"
+                  style={{ boxShadow: "0 8px 24px rgba(26,18,8,0.10)" }}
+                >
+                  <Image
+                    src="/assets/soccer_schedule_fun.webp"
+                    alt="Acorn FC fall season schedule — ten games"
+                    width={780}
+                    height={1000}
+                    className="w-full h-auto"
+                  />
+                  <div
+                    className="absolute bottom-2 left-2 rounded-md px-2 py-1"
+                    style={{ background: "rgba(26,18,8,0.7)" }}
+                  >
+                    <span
+                      className="text-[10px] font-semibold"
+                      style={{ color: "rgba(255,245,232,0.9)" }}
+                    >
+                      You snap this
+                    </span>
+                  </div>
+                </div>
               </div>
             </FadeIn>
             <FadeIn from="right" delay={0.1} className="flex justify-center">
@@ -167,10 +192,34 @@ export default function FamilyPage() {
                   Snap a photo of your car — or just the level and row sign. The photo gets
                   a GPS pin automatically, right where you parked.
                 </p>
-                <p className="text-muted leading-relaxed">
+                <p className="text-muted leading-relaxed mb-6">
                   When you&rsquo;re done, pull the photo up, tap the pin, and your squirrel
                   navigates you straight back to it. No more wandering the garage floor by floor.
                 </p>
+                {/* The actual car photo you snap */}
+                <div
+                  className="relative rounded-2xl overflow-hidden border border-border max-w-sm"
+                  style={{ boxShadow: "0 8px 24px rgba(26,18,8,0.10)" }}
+                >
+                  <Image
+                    src="/assets/car_parked.webp"
+                    alt="Your car parked in the garage on level P3"
+                    width={900}
+                    height={900}
+                    className="w-full h-auto"
+                  />
+                  <div
+                    className="absolute bottom-2 left-2 rounded-md px-2 py-1"
+                    style={{ background: "rgba(26,18,8,0.7)" }}
+                  >
+                    <span
+                      className="text-[10px] font-semibold"
+                      style={{ color: "rgba(255,245,232,0.9)" }}
+                    >
+                      You snap this — GPS pinned automatically
+                    </span>
+                  </div>
+                </div>
               </div>
             </FadeIn>
           </div>
