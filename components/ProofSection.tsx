@@ -86,12 +86,12 @@ const PROOF_BLOCKS: ProofBlock[] = [
 // ── Med bottles grid ─────────────────────────────────────────────────────────
 
 const MED_BOTTLES = [
-  { src: "/assets/med1_bottle.png", label: "Generix 10 mg" },
-  { src: "/assets/med2_bottle.png", label: "Calmitol 25 mg" },
-  { src: "/assets/med3_bottle.png", label: "Snoozaprol 5 mg" },
-  { src: "/assets/med4_bottle.png", label: "Allerfree 180 mg" },
-  { src: "/assets/med5_bottle.png", label: "Pressurez 20 mg" },
-  { src: "/assets/med6_bottle.png", label: "Vitamax D3 2000 IU" },
+  { src: "/assets/rx_item_1.webp", label: "Lisoril 10 mg" },
+  { src: "/assets/rx_item_2.webp", label: "Metaform 850 mg" },
+  { src: "/assets/rx_item_3.webp", label: "Ventair inhaler" },
+  { src: "/assets/rx_item_4.webp", label: "Optifresh drops" },
+  { src: "/assets/rx_item_5.webp", label: "Cardiplex 20 mg" },
+  { src: "/assets/rx_item_6.webp", label: "Vitamin D3 2000 IU" },
 ];
 
 function MedsBottleGrid({ inView }: { inView: boolean }) {
@@ -111,7 +111,7 @@ function MedsBottleGrid({ inView }: { inView: boolean }) {
         Your prescriptions — all saved
       </div>
 
-      {/* Snap-this bottle */}
+      {/* Snap-this bottle — bigger, real photo */}
       <motion.div
         initial={{ opacity: 0, scale: 0.96 }}
         animate={inView ? { opacity: 1, scale: 1 } : {}}
@@ -119,22 +119,21 @@ function MedsBottleGrid({ inView }: { inView: boolean }) {
         style={{
           position: "relative",
           width: "100%",
-          maxWidth: 240,
-          height: 180,
+          maxWidth: 320,
+          height: 214,
           borderRadius: 16,
           overflow: "hidden",
           border: `1.5px solid ${T.border}`,
-          boxShadow: "0 6px 20px rgba(26,18,8,0.1)",
+          boxShadow: "0 8px 24px rgba(26,18,8,0.12)",
           marginBottom: 14,
         }}
       >
         <Image
-          src="/assets/med1_bottle.png"
-          alt="Pill bottle you snap"
+          src="/assets/rx_snap.webp"
+          alt="Your prescription bottles — the photo you snap"
           fill
-          className="object-contain"
-          style={{ background: "#faf6f0", padding: "8px" }}
-          sizes="240px"
+          className="object-cover"
+          sizes="320px"
         />
         <div
           style={{
@@ -146,8 +145,8 @@ function MedsBottleGrid({ inView }: { inView: boolean }) {
             padding: "3px 8px",
           }}
         >
-          <span style={{ fontSize: 9, color: "rgba(255,245,232,0.85)", fontWeight: 600 }}>
-            You snap each bottle
+          <span style={{ fontSize: 10, color: "rgba(255,245,232,0.9)", fontWeight: 600 }}>
+            You snap your bottles
           </span>
         </div>
       </motion.div>
@@ -178,13 +177,21 @@ function MedsBottleGrid({ inView }: { inView: boolean }) {
               gap: 4,
             }}
           >
-            <div style={{ position: "relative", width: 52, height: 64 }}>
+            <div
+              style={{
+                position: "relative",
+                width: 56,
+                height: 64,
+                borderRadius: 8,
+                overflow: "hidden",
+              }}
+            >
               <Image
                 src={bottle.src}
                 alt={bottle.label}
                 fill
-                className="object-contain"
-                sizes="52px"
+                className="object-cover"
+                sizes="56px"
               />
             </div>
             <span
@@ -294,7 +301,7 @@ function MedsBlock({ index }: { index: number }) {
           {[
             {
               accentColor: T.orange,
-              title: "Refill Generix",
+              title: "Refill Lisoril",
               date: "Jun 20",
               time: "10:00 AM",
               dayNum: 20,

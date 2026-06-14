@@ -14,9 +14,9 @@ export const metadata: Metadata = {
 const DEMOS = [
   {
     id: 1,
-    title: "Voice to calendar in 8 seconds",
-    caption: "Say \"Dentist Thursday at 2\" — your squirrel sets the alarm",
-    duration: "~8s",
+    title: "Voice to calendar, easily",
+    caption: "Say \"Dentist Thursday at 2\" — your squirrel sets the alarm. No typing, no menus.",
+    duration: "voice",
     tags: ["voice", "calendar"],
     screen: "/assets/screens/home-v4.webp",
     screenAlt: "Home dashboard showing calendar events with Daily Countdown",
@@ -41,12 +41,12 @@ const DEMOS = [
   },
   {
     id: 4,
-    title: "Burrow chat + suggestion chips",
-    caption: "Ask your squirrel anything — smart chips surface what's next",
-    duration: "~15s",
-    tags: ["chat", "AI"],
+    title: "Your day at a glance — Daily Countdown",
+    caption: "Open the app and the Daily Countdown shows exactly what's next and how long you've got",
+    duration: "glance",
+    tags: ["calendar", "AI"],
     screen: "/assets/screens/home-v4.webp",
-    screenAlt: "Home showing squirrel suggestions",
+    screenAlt: "Home showing the Daily Countdown to the next event",
   },
   {
     id: 5,
@@ -65,43 +65,6 @@ const DEMOS = [
     tags: ["voice", "meeting"],
     screen: "/assets/screens/notes-v2.webp",
     screenAlt: "Notes with meeting action items extracted",
-  },
-  {
-    id: 9,
-    title: "YouTube link → stash + reminder",
-    caption: "Drop a link into the Burrow — it lands in your stash with an optional reminder",
-    duration: "~10s",
-    tags: ["link", "reminder"],
-    screen: "/assets/screens/links-v2.webp",
-    screenAlt: "LinkStash with YouTube and other saved links",
-  },
-  {
-    id: 10,
-    title: "Whiteboard → checklist",
-    caption: "Snap a whiteboard — your squirrel converts it to a tappable task list",
-    duration: "~12s",
-    tags: ["photo", "tasks"],
-    screen: "/assets/screens/notes-v2.webp",
-    screenAlt: "Notes with checklist extracted from whiteboard photo",
-  },
-  {
-    id: 11,
-    title: "Schedule photo → whole season of alarms",
-    caption: "Snap the soccer schedule — your squirrel finds every game and adds them all at once",
-    duration: "~15s",
-    tags: ["photo", "calendar"],
-    featured: true,
-    screen: "/assets/screens/calendar-v2.webp",
-    screenAlt: "Calendar with soccer games added across the month",
-  },
-  {
-    id: 12,
-    title: "Outlook screenshot → calendar event",
-    caption: "Screenshot your Outlook event — it drops straight into Squirrel Brain with real reminders",
-    duration: "~10s",
-    tags: ["photo", "calendar"],
-    screen: "/assets/screens/calendar-v2.webp",
-    screenAlt: "Calendar showing imported Outlook event with reminders",
   },
 ];
 
@@ -170,16 +133,9 @@ export default function DemosPage() {
               {DEMOS.map((demo, i) => (
                 <FadeIn key={demo.id} delay={i * 0.06}>
                   <article
-                    className={`bg-white rounded-3xl border p-6 flex flex-col gap-5 h-full ${
-                      demo.featured ? "border-accent/30 ring-1 ring-accent/20" : "border-border"
-                    }`}
+                    className="bg-white rounded-3xl border border-border p-6 flex flex-col gap-5 h-full"
                     aria-labelledby={`demo-title-${demo.id}`}
                   >
-                    {demo.featured && (
-                      <div className="text-xs font-bold text-accent tracking-wide uppercase">
-                        Featured demo
-                      </div>
-                    )}
                     <div className="flex justify-center">
                       <PhoneShot src={demo.screen} alt={demo.screenAlt} width={300} />
                     </div>

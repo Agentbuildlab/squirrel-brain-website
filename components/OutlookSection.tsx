@@ -75,11 +75,11 @@ export default function OutlookSection() {
             </div>
             <p
               style={{
-                fontSize: 11,
-                fontWeight: 700,
-                color: T.textSub,
+                fontSize: 15,
+                fontWeight: 800,
+                color: T.text,
                 textTransform: "uppercase",
-                letterSpacing: 0.8,
+                letterSpacing: 0.6,
               }}
             >
               The screenshot you take
@@ -94,22 +94,23 @@ export default function OutlookSection() {
             transition={{ duration: 0.4, delay: 0.28 }}
             aria-hidden="true"
           >
-            <svg width="48" height="24" viewBox="0 0 48 24" fill="none">
+            <svg width="64" height="30" viewBox="0 0 64 30" fill="none">
               <path
-                d="M4 12h36M32 4l12 8-12 8"
+                d="M5 15h47M43 5l16 10-16 10"
                 stroke={T.orange}
-                strokeWidth="2.5"
+                strokeWidth="3"
                 strokeLinecap="round"
                 strokeLinejoin="round"
               />
             </svg>
             <span
               style={{
-                fontSize: 10,
-                fontWeight: 700,
+                fontSize: 24,
+                fontWeight: 800,
                 color: T.orange,
                 letterSpacing: 0.5,
                 textTransform: "uppercase",
+                lineHeight: 1,
               }}
             >
               One tap
@@ -130,11 +131,11 @@ export default function OutlookSection() {
             />
             <p
               style={{
-                fontSize: 11,
-                fontWeight: 700,
-                color: T.textSub,
+                fontSize: 15,
+                fontWeight: 800,
+                color: T.text,
                 textTransform: "uppercase",
-                letterSpacing: 0.8,
+                letterSpacing: 0.6,
               }}
             >
               Lives in your squirrel now

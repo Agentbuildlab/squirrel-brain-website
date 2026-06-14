@@ -85,7 +85,7 @@ export default function WorkPage() {
               <FadeIn immediate delay={0.15}>
                 <p className="text-lg text-muted leading-relaxed mb-8 max-w-lg">
                   For sales reps, service techs, and contractors. Every job detail captured
-                  in seconds. Every follow-up handled before end of day.
+                  the moment it happens. Every follow-up handled before end of day.
                 </p>
               </FadeIn>
               <FadeIn immediate delay={0.2}>
