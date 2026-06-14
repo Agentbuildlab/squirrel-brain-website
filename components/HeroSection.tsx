@@ -58,21 +58,34 @@ export default function HeroSection() {
   const scrollCueOpacity = useTransform(scrollYProgress, [0, 0.08], [1, 0]);
 
   const headline = (
-    <h1
-      id="hero-heading"
-      className="font-display font-extrabold text-ink leading-[0.95] tracking-tight"
-      style={{
-        fontSize: "clamp(2rem, 5vw, 5.5rem)",
-        // Always visible — SSR-safe via immediate pattern
-        opacity: 1,
-      }}
-    >
-      Your brain has{" "}
-      <span style={{ color: T.orange }}>too many tabs open.</span>
-      <br />
-      Let’s close{" "}
-      <span style={{ color: T.orange }}>some of them.</span>
-    </h1>
+    <>
+      <p
+        className="font-display font-extrabold mb-3"
+        style={{
+          fontSize: "clamp(1.05rem, 2.1vw, 1.7rem)",
+          color: T.orange,
+          lineHeight: 1.1,
+          letterSpacing: -0.2,
+        }}
+      >
+        You&rsquo;re not forgetful. You&rsquo;re just outnumbered.
+      </p>
+      <h1
+        id="hero-heading"
+        className="font-display font-extrabold text-ink leading-[0.95] tracking-tight"
+        style={{
+          fontSize: "clamp(2rem, 5vw, 5.5rem)",
+          // Always visible — SSR-safe via immediate pattern
+          opacity: 1,
+        }}
+      >
+        Your brain has{" "}
+        <span style={{ color: T.orange }}>too many tabs open.</span>
+        <br />
+        Let’s close{" "}
+        <span style={{ color: T.orange }}>some of them.</span>
+      </h1>
+    </>
   );
 
   // Reduced motion: static layout
@@ -96,8 +109,7 @@ export default function HeroSection() {
             </a>
             {headline}
             <p className="mt-6 text-xl text-muted leading-relaxed max-w-md">
-              You&rsquo;re not forgetful — you&rsquo;re outnumbered. Your squirrel hands it back
-              exactly when it matters.
+              Snap it, say it, or forward it — your squirrel hands it back exactly when it matters.
             </p>
             <div className="mt-10 flex flex-wrap gap-4 items-center">
               <a
@@ -184,8 +196,8 @@ export default function HeroSection() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.55, delay: 0.25 }}
             >
-              You&rsquo;re not forgetful — you&rsquo;re outnumbered. Snap it, say it, or forward it,
-              and your squirrel hands it back exactly when it matters.
+              Snap it, say it, or forward it — and your squirrel hands it back exactly when it
+              matters.
             </motion.p>
 
             {/* CTAs */}

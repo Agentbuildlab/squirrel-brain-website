@@ -65,6 +65,21 @@ const CARDS: Card[] = [
       </svg>
     ),
   },
+  {
+    href: "/mcp",
+    eyebrow: "External agents",
+    title: "Plug your AI in",
+    body: "A built-in MCP portal. Connect Claude, ChatGPT, or any agent to set alarms, read your tasks, and send a voice message straight to your phone.",
+    tint: "#E2F5EC",
+    accent: "#2f9e63",
+    icon: (
+      <svg width="34" height="34" viewBox="0 0 24 24" fill="none">
+        <path d="M9 7V4M15 7V4M9 17v3M15 17v3" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" />
+        <rect x="6.5" y="7" width="11" height="10" rx="2.5" stroke="currentColor" strokeWidth="1.7" />
+        <path d="M10 11.5h4" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" />
+      </svg>
+    ),
+  },
 ];
 
 function ExploreCard({ card, i, inView }: { card: Card; i: number; inView: boolean }) {
@@ -130,21 +145,21 @@ export default function ExploreSection() {
           transition={{ duration: 0.5 }}
         >
           <p className="text-xs font-bold tracking-widest uppercase mb-3" style={{ color: `${T.orange}cc` }}>
-            Dig in
+            Take a look around
           </p>
           <h2
             id="explore-heading"
             className="font-display font-extrabold text-ink text-balance"
             style={{ fontSize: "clamp(2rem, 4vw, 3.2rem)", lineHeight: 1.1 }}
           >
-            Three ways to go deeper.
+            Where do you want to start?
           </h2>
           <p className="mt-4 text-lg text-muted leading-relaxed">
-            Pick the one that fits your life and have a real look around.
+            For work, for family, the demos, or plugging in your own AI — jump into whichever fits.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-7">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-6">
           {CARDS.map((card, i) => (
             <ExploreCard key={card.href} card={card} i={i} inView={inView} />
           ))}

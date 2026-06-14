@@ -57,6 +57,9 @@ export default function Nav() {
           <Link href="/demos" className="text-sm font-semibold text-muted hover:text-ink transition-colors">
             Demos
           </Link>
+          <Link href="/mcp" className="text-sm font-semibold text-muted hover:text-ink transition-colors">
+            Agents
+          </Link>
           <Link href="/pricing" className="text-sm font-semibold text-muted hover:text-ink transition-colors">
             Pricing
           </Link>
@@ -96,6 +99,7 @@ export default function Nav() {
               { href: "/work", label: "For Work" },
               { href: "/family", label: "For Family" },
               { href: "/demos", label: "Demos" },
+              { href: "/mcp", label: "Agents" },
               { href: "/pricing", label: "Pricing" },
             ].map(({ href, label }) => (
               <Link
