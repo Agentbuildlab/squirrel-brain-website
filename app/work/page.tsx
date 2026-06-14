@@ -13,7 +13,13 @@ export const metadata: Metadata = {
     "Squirrel Brain for sales reps, service techs, and contractors. Voice capture, GPS photo proof, Outlook import, and follow-ups that ring your phone.",
 };
 
-const FEATURES = [
+const FEATURES: {
+  kind?: "email";
+  title: string;
+  body: string;
+  screen: string;
+  screenAlt: string;
+}[] = [
   {
     title: "Voice capture — say it, it's saved",
     body: "Walk out of a meeting and talk through what just happened. Your squirrel extracts the follow-ups, the promised callbacks, and the dates — ask it later in plain language and it answers back.",
@@ -27,10 +33,18 @@ const FEATURES = [
     screenAlt: "Pix board wall — GPS-stamped photos auto-filed into boards",
   },
   {
-    title: "4 PM nudge",
-    body: "Every weekday at 4 PM, your daily brief recaps open follow-ups, tomorrow's commitments, and anything you captured that hasn't been resolved — right when you thought you were done. Nothing slips through end of day.",
-    screen: "/assets/screens/home-v4.webp",
-    screenAlt: "Home dashboard with the daily countdown and what's still open",
+    kind: "email",
+    title: "Good-morning email",
+    body: "Every workday opens with a short email: today's meetings, the follow-ups you owe, and anything you captured that's still open. Your whole plate, before your first coffee — no app to open.",
+    screen: "/assets/work_email_morning.webp",
+    screenAlt: "The morning brief email for a business person — today's meetings and open follow-ups",
+  },
+  {
+    kind: "email",
+    title: "4 PM nudge email",
+    body: "At 4 PM — right when you think you're done — an email recaps what's still open and what's due tomorrow, so nothing slips between end of day and the drive home.",
+    screen: "/assets/work_email_4pm.webp",
+    screenAlt: "The 4 PM nudge email for a business person — what's still open and what's due tomorrow",
   },
   {
     title: "Follow-ups that ring your phone",
@@ -138,21 +152,33 @@ export default function WorkPage() {
               <FadeIn from="right" delay={0.1}>
                 <div className="flex flex-col items-center gap-4">
                   <PhoneShot
-                    src="/assets/screens/calendar-v2.webp"
-                    alt="Calendar — Outlook event now lives in Squirrel Brain with reminders"
+                    src="/assets/screens/countdown-budget.webp"
+                    alt="Squirrel Brain home — the Daily Countdown ticking down to the Budget Review at 2:00 PM in Conference Room B"
                     width={320}
                   />
                   <p className="text-sm font-semibold text-muted text-center">
-                    2. It drops straight into your squirrel — one tap
+                    2. It lands in your squirrel — and the Daily Countdown starts ticking
                   </p>
                 </div>
               </FadeIn>
             </div>
             <FadeIn delay={0.15}>
-              <div className="mt-10 max-w-2xl mx-auto text-center">
-                <p className="text-base text-muted leading-relaxed">
-                  Now it lives with everything else: reminders, the daily countdown, and a real phone
-                  call before it if it matters.{" "}
+              <div
+                className="mt-12 max-w-3xl mx-auto text-center rounded-3xl px-6 py-10"
+                style={{ background: "linear-gradient(160deg, #FFF4EA 0%, #fff 100%)", border: "1px solid #efe7db" }}
+              >
+                <p className="text-xs font-bold tracking-widest uppercase text-accent mb-3">
+                  The best part
+                </p>
+                <p
+                  className="font-display font-extrabold text-ink text-balance"
+                  style={{ fontSize: "clamp(1.7rem, 3.4vw, 2.6rem)", lineHeight: 1.12 }}
+                >
+                  It joins your <span className="text-accent">Daily Countdown</span> — a live timer to
+                  your next thing, right on the home screen.
+                </p>
+                <p className="text-base sm:text-lg text-muted leading-relaxed mt-5 max-w-xl mx-auto">
+                  Reminders, the countdown, and a real phone call before it if it matters.{" "}
                   <strong className="text-ink">Never miss an Outlook event again.</strong>
                 </p>
               </div>
@@ -178,11 +204,26 @@ export default function WorkPage() {
               {FEATURES.map((f, i) => (
                 <FadeIn key={f.title} delay={i * 0.07}>
                   <div className="bg-white rounded-3xl border border-border p-6 flex flex-col gap-5 h-full">
-                    <div className="flex justify-center">
-                      <PhoneShot src={f.screen} alt={f.screenAlt} width={260} />
+                    <div className="flex justify-center items-center flex-1">
+                      {f.kind === "email" ? (
+                        <div
+                          className="rounded-2xl overflow-hidden border border-border w-full max-w-[300px]"
+                          style={{ boxShadow: "0 10px 28px rgba(26,18,8,0.12)" }}
+                        >
+                          <Image
+                            src={f.screen}
+                            alt={f.screenAlt}
+                            width={720}
+                            height={812}
+                            className="w-full h-auto"
+                          />
+                        </div>
+                      ) : (
+                        <PhoneShot src={f.screen} alt={f.screenAlt} width={260} />
+                      )}
                     </div>
                     <h3 className="font-display text-lg font-bold text-ink">{f.title}</h3>
-                    <p className="text-sm text-muted leading-relaxed flex-1">{f.body}</p>
+                    <p className="text-sm text-muted leading-relaxed">{f.body}</p>
                   </div>
                 </FadeIn>
               ))}
@@ -239,7 +280,7 @@ export default function WorkPage() {
                 Your next meeting is in 20 minutes. Capture this one first.
               </h2>
               <p className="text-muted text-lg mb-8">
-                Free to start. No setup. Just tap and talk.
+                Join the launch list — we&rsquo;ll tell you the moment it&rsquo;s ready.
               </p>
               <CtaButton size="lg" />
             </FadeIn>

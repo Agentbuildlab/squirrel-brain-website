@@ -42,12 +42,12 @@ const IconCycle = (
 const CAPABILITIES: { icon: ReactNode; title: string; body: string }[] = [
   {
     icon: IconFiles,
-    title: "It files everything for you",
-    body: "Every photo you keep gets read and dropped into the right board on its own — receipts with receipts, recipes with recipes. No tagging, no folders, no thinking about it.",
+    title: "Selected photos get filed",
+    body: "The photos you keep get read and dropped into the right board on their own — receipts with receipts, recipes with recipes. No tagging, no folders, no thinking about it.",
   },
   {
     icon: IconBox,
-    title: "Three of a kind births a box",
+    title: "Three of a kind creates a category box",
     body: "Snap three similar things and your squirrel spins up a brand-new board for them automatically. The app starts you with boards ready to go — keep them, rename them, or delete them.",
   },
   {
@@ -63,12 +63,12 @@ const CAPABILITIES: { icon: ReactNode; title: string; body: string }[] = [
   {
     icon: IconPin,
     title: "Every photo, pinned to its place",
-    body: "Each shot quietly remembers exactly where you took it. Where you parked, the house you toured, that shelf you loved — walk back near it and your squirrel surfaces everything you snapped there.",
+    body: "Each shot quietly remembers exactly where you took it. Go back somewhere you've been before — a store, a friend's street, the open house you toured last month — and your squirrel resurfaces every photo you took there last time.",
   },
   {
     icon: IconCycle,
     title: "It re-shuffles itself, every day",
-    body: "Your squirrel sweeps your photos on its own, daily — re-sorting and re-birthing boards as your life changes. The categories aren't fixed; they grow and shift right along with what you're actually snapping.",
+    body: "Your squirrel sweeps your photos on its own, daily — re-sorting and making new boards as your life changes. The categories aren't fixed; they grow and shift right along with what you're actually snapping.",
   },
 ];
 
@@ -204,7 +204,7 @@ export default function PixMoatSection() {
           animate={inView ? { opacity: 1 } : {}}
           transition={{ duration: 0.5, delay: 0.7 }}
         >
-          You never file a thing. You never name a folder. You just keep taking photos like you already do —{" "}
+          You just keep taking photos like you already do —{" "}
           <strong style={{ color: T.orange }}>and your squirrel quietly turns them into something you can actually use.</strong>
         </motion.p>
       </div>

@@ -45,25 +45,24 @@ export default function FounderStorySection() {
             className="font-display font-extrabold text-ink text-balance mb-8"
             style={{ fontSize: "clamp(1.8rem, 3.4vw, 2.8rem)", lineHeight: 1.12 }}
           >
-            Built by someone drowning in the same way.
+            Built by a small team who needed it first.
           </h2>
 
           <div className="space-y-5 text-left mx-auto max-w-2xl">
             <p className="text-lg leading-relaxed text-muted">
-              It started with a busy working person carrying more than any brain is built to hold —
+              It started with a few of us carrying more than any brain is built to hold —
               appointments that dinged once and vanished, things handed off and forgotten, the slow
-              dread of a dispute they couldn&rsquo;t prove their side of, and the one text in a flood
+              dread of a dispute we couldn&rsquo;t prove our side of, and the one text in a flood
               of twenty that actually needed an answer.
             </p>
             <p className="text-lg leading-relaxed text-muted">
-              They tried every notes app and reminder list and kept hitting the same wall: capturing
-              a thing is easy, but a captured thing just <em>sits there</em>. So they built the
+              We tried every notes app and reminder list and kept hitting the same wall: capturing
+              a thing is easy, but a captured thing just <em>sits there</em>. So we built the
               opposite — <strong className="text-ink">something that catches what slips the instant
               it happens and hands it back exactly when it counts.</strong>
             </p>
             <p className="text-lg leading-relaxed text-muted">
-              They built it for themselves first. It turned out everyone they showed was drowning in
-              the same way.
+              We built it for ourselves first. Turned out everyone we showed needed it just as badly.
             </p>
           </div>
 

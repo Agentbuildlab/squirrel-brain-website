@@ -3,26 +3,50 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import FadeIn from "@/components/FadeIn";
 import CtaButton from "@/components/CtaButton";
-import { TESTFLIGHT_URL } from "@/lib/config";
+import { WAITLIST_HREF } from "@/lib/config";
 
 export const metadata: Metadata = {
   title: "Connect any AI agent",
   description:
-    "Squirrel Brain has a built-in MCP portal. Connect Claude, ChatGPT, or any agent to set alarms, read your day, file photos, and send a voice message — or a real call — straight to your phone.",
+    "Squirrel Brain has a built-in MCP portal. Connect Claude, ChatGPT, OpenClaw, or any agent to set alarms, read your day, file photos, and send a voice message — or a real call — straight to your phone.",
 };
 
-const TOOLS = [
-  "create_alarm",
-  "create_item",
-  "pip_call",
-  "notify_human",
-  "list_items",
-  "get_daily_brief",
-  "add_to_forever_note",
-  "create_link",
-  "get_agent_context",
-  "generate_api_key",
+// The COMPLETE live tool set (31), grouped. Names must match the server's
+// tools/list exactly — agents and directory reviewers read both.
+const TOOL_GROUPS: { label: string; tools: string[] }[] = [
+  { label: "Capture & save", tools: ["create_item", "create_alarm", "create_link", "add_to_forever_note"] },
+  { label: "Reminders & the call", tools: ["cell_alert", "cancel_alarm", "list_alarms"] },
+  {
+    label: "Recall the user's brain",
+    tools: [
+      "search_items",
+      "list_items",
+      "get_item",
+      "get_daily_brief",
+      "get_overdue_items",
+      "get_nudge_candidates",
+      "list_boards",
+      "get_agent_context",
+      "get_user_profile",
+      "get_current_time",
+    ],
+  },
+  { label: "Organize & update", tools: ["update_item", "mark_item_done", "move_to_board", "remove_from_forever_note"] },
+  { label: "Reach the human", tools: ["notify_human", "send_portal_message", "get_portal_messages"] },
+  {
+    label: "Account & cleanup",
+    tools: [
+      "get_squirrel_brain_help",
+      "get_api_key_usage",
+      "rotate_api_key",
+      "delete_item",
+      "delete_items_by_status",
+      "delete_items_by_maker",
+      "delete_portal_messages",
+    ],
+  },
 ];
+const TOOL_COUNT = TOOL_GROUPS.reduce((n, g) => n + g.tools.length, 0);
 
 const CAPABILITIES = [
   {
@@ -118,40 +142,59 @@ export default function McpPage() {
                 className="text-lg lg:text-xl leading-relaxed max-w-2xl mx-auto mb-8"
                 style={{ color: "rgba(255,245,232,0.72)" }}
               >
-                Squirrel Brain has a built-in MCP portal. Let Claude, ChatGPT, or your own agent set
-                alarms, read your day, file what it finds, and reach you with a message — or a real
+                Squirrel Brain has a built-in MCP portal. Let Claude, ChatGPT, OpenClaw, or your own
+                agent set alarms, read your day, file what it finds, and reach you with a message — or a real
                 phone call — straight on your phone. Your squirrel becomes the memory layer for every
                 AI tool you use.
               </p>
             </FadeIn>
 
-            {/* Tool pills */}
+            {/* The complete tool set — all {TOOL_COUNT}, grouped */}
             <FadeIn immediate delay={0.18}>
-              <div className="flex flex-wrap justify-center gap-2 mb-9 max-w-2xl mx-auto">
-                {TOOLS.map((t) => (
-                  <span
-                    key={t}
-                    className="font-mono text-xs px-3 py-1.5 rounded-full"
-                    style={{
-                      background: "rgba(255,122,26,0.12)",
-                      border: "1px solid rgba(255,122,26,0.25)",
-                      color: "#FF7A1A",
-                    }}
-                  >
-                    {t}
-                  </span>
+              <p className="text-sm font-bold tracking-wide mb-5" style={{ color: "rgba(255,245,232,0.6)" }}>
+                {TOOL_COUNT} tools your agent can call — the whole set:
+              </p>
+              <div className="flex flex-col gap-4 mb-9 max-w-2xl mx-auto">
+                {TOOL_GROUPS.map((g) => (
+                  <div key={g.label} className="flex flex-col sm:flex-row sm:items-baseline gap-2">
+                    <span
+                      className="text-xs font-bold uppercase tracking-widest flex-shrink-0 sm:w-44 sm:text-right"
+                      style={{ color: "rgba(255,245,232,0.4)" }}
+                    >
+                      {g.label}
+                    </span>
+                    <div className="flex flex-wrap gap-2">
+                      {g.tools.map((t) => (
+                        <span
+                          key={t}
+                          className="font-mono text-xs px-3 py-1.5 rounded-full"
+                          style={{
+                            background: "rgba(255,122,26,0.12)",
+                            border: "1px solid rgba(255,122,26,0.25)",
+                            color: "#FF7A1A",
+                          }}
+                        >
+                          {t}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
                 ))}
               </div>
+              <p className="text-sm mb-9" style={{ color: "rgba(255,245,232,0.5)" }}>
+                Every tool, with parameters, is in the{" "}
+                <a href="/mcp-docs" style={{ color: "#FF7A1A" }} className="hover:underline">developer docs</a>.
+              </p>
             </FadeIn>
 
             <FadeIn immediate delay={0.24}>
               <div className="flex flex-wrap items-center justify-center gap-4">
                 <a
-                  href={TESTFLIGHT_URL}
+                  href={WAITLIST_HREF}
                   className="inline-flex items-center gap-2 font-bold text-base px-7 py-3.5 rounded-full hover:opacity-90 active:scale-[0.98] transition-all"
                   style={{ background: "#FF7A1A", color: "white", boxShadow: "0 4px 24px rgba(255,122,26,0.4)" }}
                 >
-                  Get the beta — it&rsquo;s free
+                  Join the launch list
                 </a>
                 <a
                   href="/mcp-docs"
@@ -244,7 +287,7 @@ export default function McpPage() {
               <h2 id="mcp-cta-heading" className="font-display text-3xl sm:text-4xl font-bold text-ink mb-5 text-balance">
                 Give your AI a memory that lives on your phone.
               </h2>
-              <p className="text-muted text-lg mb-8">Free to start. iOS · $9.99/mo to unlock everything.</p>
+              <p className="text-muted text-lg mb-8">Pre-beta — join the launch list and developer invites go out first.</p>
               <CtaButton size="lg" />
             </FadeIn>
           </div>

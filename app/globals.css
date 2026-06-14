@@ -8,7 +8,8 @@
 }
 
 html {
-  scroll-behavior: smooth;
+  /* NOTE: no `scroll-behavior: smooth` here — it fights Lenis's smoothWheel and
+     makes the wheel feel sticky/resistant. Lenis owns smooth scrolling. */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

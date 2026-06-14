@@ -3,6 +3,7 @@ import { Inter, Bricolage_Grotesque } from "next/font/google";
 import "./globals.css";
 import { SITE_NAME, SITE_DESCRIPTION } from "@/lib/config";
 import LenisProvider from "@/components/LenisProvider";
+import StructuredData from "@/components/StructuredData";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -24,16 +25,32 @@ export const metadata: Metadata = {
     template: `%s — ${SITE_NAME}`,
   },
   description: SITE_DESCRIPTION,
+  keywords: [
+    "AI agent reminders",
+    "set alarm from ChatGPT",
+    "MCP server for reminders",
+    "AI that can call my phone",
+    "second brain app that takes action",
+    "photo to calendar app",
+    "voice note to reminder",
+    "agent-friendly app",
+  ],
+  alternates: { canonical: "/" },
   openGraph: {
     title: `${SITE_NAME} — Say it. Snap it. It's handled.`,
     description: SITE_DESCRIPTION,
-    images: ["/assets/squirrel_treehouse.png"],
+    url: "https://squirrelbrainapp.com",
+    siteName: SITE_NAME,
+    images: [
+      { url: "/og-image.png", width: 1200, height: 630, alt: "Squirrel Brain — for work, family, and AI agents" },
+    ],
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
     title: `${SITE_NAME} — Say it. Snap it. It's handled.`,
     description: SITE_DESCRIPTION,
+    images: ["/og-image.png"],
   },
 };
 
@@ -45,6 +62,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${bricolage.variable}`}>
       <body className="font-body bg-bg text-ink antialiased">
+        <StructuredData />
         <LenisProvider />
         {children}
       </body>

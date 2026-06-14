@@ -1,8 +1,44 @@
 "use client";
 
 import Link from "next/link";
+import { useState } from "react";
 
 export default function Footer() {
+  const [email, setEmail] = useState("");
+  const [website, setWebsite] = useState(""); // honeypot
+  const [status, setStatus] = useState<"idle" | "loading" | "done" | "error">("idle");
+  const [message, setMessage] = useState("");
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    if (status === "loading") return;
+    setStatus("loading");
+    setMessage("");
+    try {
+      const res = await fetch("/api/launch-signup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, website }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (res.ok) {
+        setStatus("done");
+        setMessage(
+          data.already
+            ? "You're already on the list — we'll be in touch the moment it's ready."
+            : "You're on the list! We'll email you the moment Squirrel Brain is ready."
+        );
+        setEmail("");
+      } else {
+        setStatus("error");
+        setMessage(data.error || "Something went wrong. Please try again.");
+      }
+    } catch {
+      setStatus("error");
+      setMessage("Something went wrong. Please try again.");
+    }
+  }
+
   return (
     <footer className="bg-bg border-t border-border mt-24" role="contentinfo">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 py-14">
@@ -42,40 +78,67 @@ export default function Footer() {
             </nav>
           </div>
 
-          {/* Newsletter + legal column */}
-          <div>
-            <p className="text-xs font-bold tracking-widest uppercase text-muted mb-4">
-              Stay in the loop
+          {/* Newsletter + legal column — this IS the launch list (CTAs anchor here) */}
+          <div id="launch-list" className="scroll-mt-24">
+            <p className="text-xs font-bold tracking-widest uppercase text-accent mb-4">
+              Join the launch list
             </p>
             <p className="text-sm text-muted mb-3">
-              Get launch updates when Squirrel Brain hits the App Store.
+              We&rsquo;ll email you the moment Squirrel Brain is ready — and you&rsquo;ll be
+              first into the beta.
             </p>
-            {/* Placeholder — no backend yet */}
-            <form
-              className="flex gap-2"
-              onSubmit={(e) => e.preventDefault()}
-              aria-label="Launch updates signup"
-            >
-              <label htmlFor="footer-email" className="sr-only">
-                Email address
-              </label>
-              <input
-                id="footer-email"
-                type="email"
-                placeholder="you@example.com"
-                className="flex-1 min-w-0 text-sm bg-white border border-border rounded-lg px-3 py-2 text-ink placeholder:text-muted/60 focus:outline-none focus:ring-2 focus:ring-accent/30 focus:border-accent transition"
-                autoComplete="email"
-              />
-              <button
-                type="submit"
-                className="text-sm font-semibold bg-accent text-white px-4 py-2 rounded-lg hover:opacity-90 transition-opacity whitespace-nowrap"
+            {status === "done" ? (
+              <div
+                className="flex items-start gap-2.5 rounded-lg px-3.5 py-3 text-sm"
+                style={{ background: "#E2F5EC", border: "1px solid rgba(63,174,110,0.3)", color: "#1f6b43" }}
+                role="status"
               >
-                Notify me
-              </button>
-            </form>
-            <p className="text-xs text-muted/60 mt-2">
-              No spam. Unsubscribe any time.
-            </p>
+                <span aria-hidden="true">🐿️</span>
+                <span>{message}</span>
+              </div>
+            ) : (
+              <form className="flex gap-2" onSubmit={handleSubmit} aria-label="Launch list signup">
+                <label htmlFor="footer-email" className="sr-only">
+                  Email address
+                </label>
+                <input
+                  id="footer-email"
+                  type="email"
+                  required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="you@example.com"
+                  className="flex-1 min-w-0 text-sm bg-white border border-border rounded-lg px-3 py-2 text-ink placeholder:text-muted/60 focus:outline-none focus:ring-2 focus:ring-accent/30 focus:border-accent transition"
+                  autoComplete="email"
+                />
+                {/* Honeypot — hidden from real users, catches bots */}
+                <input
+                  type="text"
+                  name="website"
+                  value={website}
+                  onChange={(e) => setWebsite(e.target.value)}
+                  tabIndex={-1}
+                  autoComplete="off"
+                  aria-hidden="true"
+                  style={{ position: "absolute", left: "-9999px", width: 1, height: 1, opacity: 0 }}
+                />
+                <button
+                  type="submit"
+                  disabled={status === "loading"}
+                  className="text-sm font-semibold bg-accent text-white px-4 py-2 rounded-lg hover:opacity-90 transition-opacity whitespace-nowrap disabled:opacity-60"
+                >
+                  {status === "loading" ? "Joining…" : "Join the list"}
+                </button>
+              </form>
+            )}
+            {status === "error" && (
+              <p className="text-xs mt-2" style={{ color: "#c0392b" }} role="alert">
+                {message}
+              </p>
+            )}
+            {status !== "done" && (
+              <p className="text-xs text-muted/60 mt-2">No spam. Unsubscribe any time.</p>
+            )}
 
             <div className="mt-6 flex flex-wrap gap-4">
               <Link
@@ -104,7 +167,7 @@ export default function Footer() {
           <p className="text-xs text-muted">
             &copy; {new Date().getFullYear()} Squirrel Brain. Made for people with too much to remember.
           </p>
-          <p className="text-xs text-muted">iOS app — free to start · $9.99/mo</p>
+          <p className="text-xs text-muted">iOS · launching soon · free to start</p>
         </div>
       </div>
     </footer>

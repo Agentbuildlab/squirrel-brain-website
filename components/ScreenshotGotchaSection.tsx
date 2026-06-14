@@ -37,7 +37,7 @@ export default function ScreenshotGotchaSection() {
             className="font-display font-extrabold text-ink text-balance mb-5"
             style={{ fontSize: "clamp(1.9rem, 3.6vw, 3rem)", lineHeight: 1.08 }}
           >
-            30 texts a day. The one you had to <em>act</em> on?{" "}
+            30 or more texts a day? The one you needed to <em>act</em> on but missed?{" "}
             <span style={{ color: T.orange }}>Now it&rsquo;s a to-do that nudges you.</span>
           </h2>
           <p className="text-lg text-muted leading-relaxed mb-6 max-w-lg">
@@ -58,13 +58,13 @@ export default function ScreenshotGotchaSection() {
               <Image src="/assets/texts_flood.webp" alt="A phone inbox flooded with texts — three of them are things you actually have to do" width={560} height={772} className="w-full h-auto" />
               <div className="absolute bottom-1.5 left-1.5 rounded-md px-2 py-1" style={{ background: "rgba(26,18,8,0.72)" }}>
                 <span className="text-[10px] font-semibold" style={{ color: "rgba(255,245,232,0.92)" }}>
-                  20 a day · 3 you have to act on
+                  30+ a day · 3 you act on
                 </span>
               </div>
             </div>
             <span aria-hidden="true" style={{ fontSize: 26, color: T.orange, fontWeight: 700 }}>→</span>
             <p className="text-sm text-muted leading-snug max-w-[150px]">
-              Forward the ones that matter; they come back as to-dos you won&rsquo;t drop.
+              Screenshot the ones that matter — they come back as to-dos, right under your calendar.
             </p>
           </div>
         </motion.div>

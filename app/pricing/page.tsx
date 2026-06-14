@@ -61,8 +61,8 @@ export default function PricingPage() {
             </FadeIn>
             <FadeIn immediate delay={0.08}>
               <p className="text-xl text-muted max-w-xl mx-auto">
-                Free to start. Unlock everything when you're ready — no credit
-                card needed to try it.
+                Free to start when we launch. Unlock everything for $9.99/mo — no
+                credit card to get on the launch list.
               </p>
             </FadeIn>
           </div>
@@ -93,7 +93,7 @@ export default function PricingPage() {
                     </li>
                   ))}
                 </ul>
-                <CtaButton label="Start for free" className="w-full justify-center" />
+                <CtaButton label="Join the launch list" className="w-full justify-center" />
               </div>
             </FadeIn>
 
@@ -103,7 +103,7 @@ export default function PricingPage() {
                 {/* Recommended badge */}
                 <div className="absolute top-6 right-6">
                   <span className="text-xs font-bold bg-accent text-white px-3 py-1 rounded-full">
-                    Beta price locked
+                    Launch price locked
                   </span>
                 </div>
                 <div className="mb-6">
@@ -124,7 +124,7 @@ export default function PricingPage() {
                     </li>
                   ))}
                 </ul>
-                <CtaButton label="Get the beta" className="w-full justify-center" />
+                <CtaButton label="Join the launch list" className="w-full justify-center" />
               </div>
             </FadeIn>
           </div>
@@ -156,7 +156,7 @@ export default function PricingPage() {
                 },
                 {
                   q: "What devices does it run on?",
-                  a: "iPhone only right now. iOS app available via TestFlight beta.",
+                  a: "iPhone only. The TestFlight beta opens soon — join the launch list and you'll be among the first in.",
                 },
                 {
                   q: "Can I cancel anytime?",
@@ -182,10 +182,10 @@ export default function PricingPage() {
                 id="pricing-cta-heading"
                 className="font-display text-3xl font-bold text-ink mb-5"
               >
-                Start free today
+                Be first when it opens
               </h2>
               <p className="text-muted text-lg mb-8">
-                No card. No commitment. Just tap and talk.
+                Join the launch list — we&rsquo;ll email you the moment it&rsquo;s ready.
               </p>
               <CtaButton size="lg" />
             </FadeIn>

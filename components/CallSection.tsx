@@ -16,7 +16,7 @@ import {
   useInView,
 } from "framer-motion";
 import { useRef } from "react";
-import { TESTFLIGHT_URL } from "@/lib/config";
+import { WAITLIST_HREF } from "@/lib/config";
 import { T, PulseRing } from "@/components/v2/PhoneKit";
 
 // ── CallKit-style call screen ─────────────────────────────────────────────
@@ -268,15 +268,10 @@ export default function CallSection() {
               Your squirrel speaks in its own voice and tells you exactly what's up. You hear it.
               You can't ignore it. The thing gets done.
             </p>
-            <p
-              className="text-sm leading-relaxed mb-10 max-w-lg"
-              style={{ color: "rgba(255,245,232,0.4)" }}
-            >
-              Opt in per reminder — your call, literally. Live in the TestFlight beta today.
-            </p>
+            <div className="mb-10" />
 
             <a
-              href={TESTFLIGHT_URL}
+              href={WAITLIST_HREF}
               className="inline-flex items-center gap-2 font-bold text-base px-8 py-4 rounded-full hover:opacity-90 active:scale-[0.98] transition-all"
               style={{
                 background: "#3fae6e",
@@ -284,7 +279,7 @@ export default function CallSection() {
                 boxShadow: "0 4px 20px rgba(63,174,110,0.4)",
               }}
             >
-              Try it — it's free
+              Join the launch list
             </a>
           </motion.div>
 

@@ -174,10 +174,10 @@ export default function DemosPage() {
                 id="demos-cta-heading"
                 className="font-display text-3xl font-bold text-ink mb-5"
               >
-                Seen enough? Try the real thing.
+                Seen enough? Get on the launch list.
               </h2>
               <p className="text-muted text-lg mb-8">
-                Free to start. Your first capture takes 5 seconds.
+                We&rsquo;ll email you the moment it opens — and you&rsquo;ll be first into the beta.
               </p>
               <CtaButton size="lg" />
             </FadeIn>

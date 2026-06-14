@@ -11,7 +11,7 @@
 import Image from "next/image";
 import { motion, useReducedMotion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { TESTFLIGHT_URL } from "@/lib/config";
+import { WAITLIST_HREF } from "@/lib/config";
 import { T } from "@/components/v2/PhoneKit";
 
 export default function FinalCta() {
@@ -150,7 +150,7 @@ export default function FinalCta() {
           transition={{ duration: 0.5, delay: 0.44, ease: [0.34, 1.3, 0.64, 1] }}
         >
           <motion.a
-            href={TESTFLIGHT_URL}
+            href={WAITLIST_HREF}
             className="inline-flex items-center gap-3 text-white font-bold text-lg lg:text-xl px-10 py-5 rounded-full hover:opacity-90 active:scale-[0.98]"
             style={{
               background: T.orange,
@@ -170,9 +170,9 @@ export default function FinalCta() {
             transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
           >
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-              <path d="M10 1.5C5.36 1.5 1.5 5.36 1.5 10S5.36 18.5 10 18.5 18.5 14.64 18.5 10 14.64 1.5 10 1.5zm-1.5 10.53V7.97a.5.5 0 01.76-.43l3.5 2.28a.5.5 0 010 .86l-3.5 2.28a.5.5 0 01-.76-.43z" fill="currentColor" />
+              <path d="M10 2.2a3.8 3.8 0 00-3.8 3.8c0 4.3-1.7 5.4-1.7 5.4h11s-1.7-1.1-1.7-5.4A3.8 3.8 0 0010 2.2zM8.6 14.9a1.4 1.4 0 002.8 0" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
-            Get the beta — it&rsquo;s free
+            Join the launch list
           </motion.a>
         </motion.div>
 
@@ -183,7 +183,7 @@ export default function FinalCta() {
           animate={inView ? { opacity: 1 } : {}}
           transition={{ duration: 0.4, delay: 0.56 }}
         >
-          iOS only · free to start · $9.99/mo to unlock everything
+We&rsquo;ll email you the moment it&rsquo;s ready · iOS · free to start
         </motion.p>
 
         {/* Features summary strip */}

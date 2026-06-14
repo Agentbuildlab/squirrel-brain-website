@@ -23,16 +23,16 @@ interface Card {
 
 const CARDS: Card[] = [
   {
-    href: "/work",
-    eyebrow: "For Work",
-    title: "On the move all day",
-    body: "Reps, techs, contractors — capture every job detail, get GPS photo proof, import Outlook, and never miss a follow-up.",
-    tint: "#FFF0E6",
-    accent: T.orange,
+    href: "/demos",
+    eyebrow: "Watch the Demos",
+    title: "See it actually work",
+    body: "Short, honest clips of Squirrel Brain doing its thing — voice to calendar, receipt scans, the Burrow, Meeting Mode and more.",
+    tint: "#F1EAFE",
+    accent: "#7c4ddb",
     icon: (
       <svg width="34" height="34" viewBox="0 0 24 24" fill="none">
-        <rect x="3" y="7" width="18" height="13" rx="2" stroke="currentColor" strokeWidth="1.7" />
-        <path d="M8 7V5.5A1.5 1.5 0 019.5 4h5A1.5 1.5 0 0116 5.5V7M3 12h18" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" />
+        <rect x="3" y="5" width="18" height="14" rx="2.5" stroke="currentColor" strokeWidth="1.7" />
+        <path d="M10.5 9.5l4 2.5-4 2.5v-5z" fill="currentColor" />
       </svg>
     ),
   },
@@ -52,16 +52,16 @@ const CARDS: Card[] = [
     ),
   },
   {
-    href: "/demos",
-    eyebrow: "Watch the Demos",
-    title: "See it actually work",
-    body: "Short, honest clips of Squirrel Brain doing its thing — voice to calendar, receipt scans, the Burrow, Meeting Mode and more.",
-    tint: "#F1EAFE",
-    accent: "#7c4ddb",
+    href: "/work",
+    eyebrow: "For Work",
+    title: "On the move all day",
+    body: "Reps, techs, contractors — capture every job detail, get GPS photo proof, import Outlook, and never miss a follow-up.",
+    tint: "#FFF0E6",
+    accent: T.orange,
     icon: (
       <svg width="34" height="34" viewBox="0 0 24 24" fill="none">
-        <rect x="3" y="5" width="18" height="14" rx="2.5" stroke="currentColor" strokeWidth="1.7" />
-        <path d="M10.5 9.5l4 2.5-4 2.5v-5z" fill="currentColor" />
+        <rect x="3" y="7" width="18" height="13" rx="2" stroke="currentColor" strokeWidth="1.7" />
+        <path d="M8 7V5.5A1.5 1.5 0 019.5 4h5A1.5 1.5 0 0116 5.5V7M3 12h18" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" />
       </svg>
     ),
   },
@@ -69,7 +69,7 @@ const CARDS: Card[] = [
     href: "/mcp",
     eyebrow: "External agents",
     title: "Plug your AI in",
-    body: "A built-in MCP portal. Connect Claude, ChatGPT, or any agent to set alarms, read your tasks, and send a voice message straight to your phone.",
+    body: "A built-in MCP portal. Connect Claude, ChatGPT, OpenClaw, or any agent to set alarms, read your tasks, and send a voice message straight to your phone.",
     tint: "#E2F5EC",
     accent: "#2f9e63",
     icon: (
@@ -155,7 +155,7 @@ export default function ExploreSection() {
             Where do you want to start?
           </h2>
           <p className="mt-4 text-lg text-muted leading-relaxed">
-            For work, for family, the demos, or plugging in your own AI — jump into whichever fits.
+            The demos, for family, for work, or plugging in your own AI — jump into whichever fits.
           </p>
         </motion.div>
 

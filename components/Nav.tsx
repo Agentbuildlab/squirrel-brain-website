@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
-import { TESTFLIGHT_URL } from "@/lib/config";
+import { WAITLIST_HREF } from "@/lib/config";
 
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
@@ -68,13 +68,13 @@ export default function Nav() {
         {/* CTA */}
         <div className="flex items-center gap-3">
           <a
-            href={TESTFLIGHT_URL}
+            href={WAITLIST_HREF}
             className="hidden sm:inline-flex items-center gap-2 bg-accent text-white text-sm font-bold px-5 py-2.5 rounded-full hover:opacity-90 transition-opacity focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent"
           >
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-              <path d="M8 1.5C4.41 1.5 1.5 4.41 1.5 8S4.41 14.5 8 14.5 14.5 11.59 14.5 8 11.59 1.5 8 1.5zm-1 8.06V6.44a.5.5 0 01.76-.43l2.5 1.56a.5.5 0 010 .86l-2.5 1.56a.5.5 0 01-.76-.43z" fill="currentColor"/>
+              <path d="M8 1.8a3 3 0 00-3 3c0 3.4-1.3 4.3-1.3 4.3h8.6S11 8.2 11 4.8a3 3 0 00-3-3zM6.8 11.8a1.2 1.2 0 002.4 0" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
-            Get the beta
+            Join the list
           </a>
 
           {/* Mobile hamburger */}
@@ -112,11 +112,11 @@ export default function Nav() {
               </Link>
             ))}
             <a
-              href={TESTFLIGHT_URL}
+              href={WAITLIST_HREF}
               className="mt-3 inline-flex items-center justify-center gap-2 bg-accent text-white text-sm font-bold px-5 py-3 rounded-full"
               onClick={() => setMobileOpen(false)}
             >
-              Get the beta
+              Join the launch list
             </a>
           </nav>
         </div>

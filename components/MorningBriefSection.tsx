@@ -76,10 +76,11 @@ export default function MorningBriefSection() {
             Two emails a day. <span style={{ color: T.orange }}>Zero noise.</span>
           </h2>
           <p className="text-lg text-muted leading-relaxed">
-            No app to open. A short <strong className="text-ink">morning brief</strong> lands in your
-            inbox — your day, plus today&rsquo;s weather, a &ldquo;this day in history&rdquo;, and a
-            joke to start things off. Then a <strong className="text-ink">4 PM check-in</strong> with
-            anything still open. That&rsquo;s it. Two emails, done.
+            No app to open. A short <strong className="text-ink">morning brief</strong>{" "}
+            lands in your inbox — your day, plus today&rsquo;s weather, a &ldquo;this day in
+            history&rdquo;, and a joke to start things off. Then a{" "}
+            <strong className="text-ink">4 PM check-in</strong>{" "}
+            with anything still open. That&rsquo;s it. Two emails, done.
           </p>
         </motion.div>
 
@@ -87,14 +88,14 @@ export default function MorningBriefSection() {
           <EmailCard
             src="/assets/email_morning.webp"
             alt="The morning brief email — weather, your day, this day in history, and a joke"
-            label="Every morning"
+            label="Every morning email"
             delay={0.15}
             inView={inView}
           />
           <EmailCard
             src="/assets/email_afternoon.webp"
             alt="The 4 PM check-in email — what's still open today"
-            label="Every afternoon · 4 PM"
+            label="Every afternoon email · 4 PM"
             delay={0.28}
             inView={inView}
           />

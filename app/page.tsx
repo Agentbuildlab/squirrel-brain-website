@@ -8,6 +8,7 @@ import PixMoatSection from "@/components/PixMoatSection";
 import CallSection from "@/components/CallSection";
 import MorningBriefSection from "@/components/MorningBriefSection";
 import FounderStorySection from "@/components/FounderStorySection";
+import FaqSection from "@/components/FaqSection";
 import FinalCta from "@/components/FinalCta";
 
 export default function HomePage() {
@@ -38,6 +39,9 @@ export default function HomePage() {
 
         {/* WHY THIS EXISTS — the vague founder origin */}
         <FounderStorySection />
+
+        {/* FAQ — targets "can my AI set a reminder on my phone" search/AEO lane */}
+        <FaqSection />
 
         {/* FINAL CTA */}
         <FinalCta />

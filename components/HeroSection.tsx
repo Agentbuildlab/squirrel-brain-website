@@ -1,16 +1,9 @@
 "use client";
 
-import { useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import {
-  motion,
-  useScroll,
-  useTransform,
-  useReducedMotion,
-  AnimatePresence,
-} from "framer-motion";
-import { TESTFLIGHT_URL } from "@/lib/config";
+import { motion, useReducedMotion } from "framer-motion";
+import { WAITLIST_HREF } from "@/lib/config";
 import { PhoneShot, T } from "@/components/v2/PhoneKit";
 
 // ── Static mascot bob animation ────────────────────────────────────────────
@@ -39,24 +32,13 @@ function MascotBob({ size = 120 }: { size?: number }) {
   );
 }
 
-// ── The scroll-scrubbed hero (desktop: pinned, mobile: static) ────────────
+// ── Hero — a normal full-height section (NOT scroll-pinned) ────────────────
+// Previously this used a 250vh container + a sticky inner pane driven by
+// useScroll. Combined with Lenis smooth-scroll that made the first screen feel
+// like it "wouldn't scroll" — you had to force the wheel. Now it's a plain
+// min-h-screen section: scroll behaves normally everywhere.
 
 export default function HeroSection() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const reduceMotion = useReducedMotion();
-
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end end"],
-  });
-
-  // Phone gentle rise as user enters
-  const phoneY = useTransform(scrollYProgress, [0, 1], [0, -30]);
-  // Tagline fade — shows at rest, fades as scroll begins
-  const taglineOpacity = useTransform(scrollYProgress, [0, 0.12], [1, 0]);
-  // Scroll cue fades out fast
-  const scrollCueOpacity = useTransform(scrollYProgress, [0, 0.08], [1, 0]);
-
   const headline = (
     <>
       <p
@@ -68,14 +50,13 @@ export default function HeroSection() {
           letterSpacing: -0.2,
         }}
       >
-        You&rsquo;re not forgetful. You&rsquo;re just outnumbered.
+        You&rsquo;re not forgetful. You&rsquo;re just overloaded.
       </p>
       <h1
         id="hero-heading"
         className="font-display font-extrabold text-ink leading-[0.95] tracking-tight"
         style={{
           fontSize: "clamp(2rem, 5vw, 5.5rem)",
-          // Always visible — SSR-safe via immediate pattern
           opacity: 1,
         }}
       >
@@ -88,194 +69,134 @@ export default function HeroSection() {
     </>
   );
 
-  // Reduced motion: static layout
-  if (reduceMotion) {
-    return (
-      <section
-        className="relative min-h-screen flex items-center overflow-hidden"
-        aria-labelledby="hero-heading"
-        style={{
-          background: `radial-gradient(ellipse 90% 70% at 50% -10%, #FFF0E6 0%, #faf7f2 60%)`,
-        }}
-      >
-        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center py-28">
-          <div>
-            <a
-              href={TESTFLIGHT_URL}
-              className="inline-flex items-center gap-2 bg-accent-light text-accent text-xs font-bold px-3.5 py-1.5 rounded-full mb-8 tracking-wide"
-            >
-              <span className="w-1.5 h-1.5 rounded-full bg-accent" />
-              Now in TestFlight · iOS only
-            </a>
-            {headline}
-            <p className="mt-6 text-xl text-muted leading-relaxed max-w-md">
-              Snap it, say it, or forward it — your squirrel hands it back exactly when it matters.
-            </p>
-            <div className="mt-10 flex flex-wrap gap-4 items-center">
-              <a
-                href={TESTFLIGHT_URL}
-                className="inline-flex items-center gap-2 bg-accent text-white font-bold text-lg px-9 py-4 rounded-full hover:opacity-90 transition-opacity"
-              >
-                Join the TestFlight
-              </a>
-            </div>
-          </div>
-          <div className="flex justify-center lg:justify-end">
-            <PhoneShot src="/assets/screens/home-v4.webp" alt="Squirrel Brain — your day at a glance" width={360} />
-          </div>
-        </div>
-      </section>
-    );
-  }
+  const subhead =
+    "Snap it, say it, stash it — and your squirrel hands it back exactly when it matters.";
 
   return (
-    // Scroll container — 250vh gives enough scroll to let the pinned hero breathe
-    <div ref={containerRef} style={{ height: "250vh", position: "relative" }}>
-      {/* Sticky viewport — on mobile we use min-h-screen + overflow-visible so all content shows */}
+    <section
+      className="relative min-h-screen flex items-center overflow-hidden"
+      aria-labelledby="hero-heading"
+    >
+      {/* Background */}
       <div
-        className="sticky top-0 md:h-screen md:overflow-hidden flex flex-col min-h-screen"
-        aria-labelledby="hero-heading"
+        className="absolute inset-0"
+        style={{
+          background: `radial-gradient(ellipse 100% 80% at 50% -15%, #FFF0E6 0%, #faf6f0 55%, #f8f4ee 100%)`,
+        }}
+        aria-hidden="true"
+      />
+
+      {/* Subtle noise grain */}
+      <svg
+        className="absolute inset-0 w-full h-full pointer-events-none"
+        style={{ opacity: 0.02 }}
+        aria-hidden="true"
       >
-        {/* Background */}
-        <div
-          className="absolute inset-0"
-          style={{
-            background: `radial-gradient(ellipse 100% 80% at 50% -15%, #FFF0E6 0%, #faf6f0 55%, #f8f4ee 100%)`,
-          }}
-          aria-hidden="true"
-        />
+        <filter id="hero-grain">
+          <feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="4" stitchTiles="stitch" />
+          <feColorMatrix type="saturate" values="0" />
+        </filter>
+        <rect width="100%" height="100%" filter="url(#hero-grain)" />
+      </svg>
 
-        {/* Subtle noise grain */}
-        <svg
-          className="absolute inset-0 w-full h-full pointer-events-none"
-          style={{ opacity: 0.02 }}
-          aria-hidden="true"
-        >
-          <filter id="hero-grain">
-            <feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="4" stitchTiles="stitch" />
-            <feColorMatrix type="saturate" values="0" />
-          </filter>
-          <rect width="100%" height="100%" filter="url(#hero-grain)" />
-        </svg>
-
-        {/* Main layout */}
-        <div className="relative z-10 flex-1 flex items-start md:items-center w-full px-6 lg:px-12 gap-6 lg:gap-16" style={{ maxWidth: 1280, margin: "0 auto" }}>
-          {/* LEFT: copy */}
-          <div className="flex-1 min-w-0 pt-20 md:pt-0">
-            {/* Beta badge */}
-            <motion.div
-              initial={{ opacity: 0, y: -8 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
+      {/* Main layout */}
+      <div
+        className="relative z-10 w-full flex items-center px-6 lg:px-12 gap-6 lg:gap-16 pt-28 pb-16 md:py-24"
+        style={{ maxWidth: 1280, margin: "0 auto" }}
+      >
+        {/* LEFT: copy */}
+        <div className="flex-1 min-w-0">
+          {/* Beta badge */}
+          <motion.div
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+          >
+            <a
+              href={WAITLIST_HREF}
+              className="inline-flex items-center gap-2 text-xs font-bold px-3.5 py-1.5 rounded-full mb-6 lg:mb-8 tracking-wide hover:opacity-80 transition-opacity"
+              style={{ background: "#FFF0E6", color: T.orange }}
             >
-              <a
-                href={TESTFLIGHT_URL}
-                className="inline-flex items-center gap-2 text-xs font-bold px-3.5 py-1.5 rounded-full mb-6 lg:mb-8 tracking-wide hover:opacity-80 transition-opacity"
-                style={{ background: "#FFF0E6", color: T.orange }}
-              >
-                <span
-                  className="w-1.5 h-1.5 rounded-full"
-                  style={{ background: T.orange }}
-                />
-                Now in TestFlight · iOS only
-              </a>
-            </motion.div>
+              <span
+                className="w-1.5 h-1.5 rounded-full"
+                style={{ background: T.orange }}
+              />
+              Launching soon · join the list · iOS
+            </a>
+          </motion.div>
 
-            {/* Mascot on mobile — compact, shows above headline */}
-            <div className="flex md:hidden mb-4">
-              <MascotBob size={72} />
-            </div>
-
-            {/* Headline — SSR-visible (opacity 1 inline, no animation on mount) */}
-            {headline}
-
-            {/* Sub */}
-            <motion.p
-              className="mt-5 text-lg lg:text-xl text-muted leading-relaxed max-w-md"
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.55, delay: 0.25 }}
-            >
-              Snap it, say it, or forward it — and your squirrel hands it back exactly when it
-              matters.
-            </motion.p>
-
-            {/* CTAs */}
-            <motion.div
-              className="mt-5 flex flex-wrap gap-3 items-center"
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.55, delay: 0.38 }}
-            >
-              <a
-                href={TESTFLIGHT_URL}
-                className="inline-flex items-center gap-2 text-white font-bold text-base lg:text-lg px-7 lg:px-9 py-3.5 lg:py-4 rounded-full hover:opacity-90 active:scale-[0.98] transition-all"
-                style={{ background: T.orange, boxShadow: "0 4px 24px rgba(255,122,26,0.35)" }}
-              >
-                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
-                  <path d="M9 1.5C4.86 1.5 1.5 4.86 1.5 9S4.86 16.5 9 16.5 16.5 13.14 16.5 9 13.14 1.5 9 1.5zm-1.25 9.4V7.1a.5.5 0 01.76-.43l3 1.9a.5.5 0 010 .86l-3 1.9a.5.5 0 01-.76-.43z" fill="currentColor" />
-                </svg>
-                Join the TestFlight
-              </a>
-              <Link
-                href="/demos"
-                className="text-sm font-semibold text-muted hover:text-ink transition-colors flex items-center gap-1.5"
-              >
-                See how it works
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                  <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </Link>
-            </motion.div>
-
-            <motion.p
-              className="mt-3 text-xs"
-              style={{ color: "rgba(138,112,96,0.6)" }}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.5 }}
-            >
-              Free to start · $9.99/mo to unlock everything · iOS only
-            </motion.p>
+          {/* Mascot on mobile — compact, shows above headline */}
+          <div className="flex md:hidden mb-4">
+            <MascotBob size={72} />
           </div>
 
-          {/* RIGHT: mascot + phone */}
-          <div className="hidden md:flex flex-col items-center gap-8 flex-shrink-0">
-            {/* Mascot above phone */}
-            <MascotBob />
+          {/* Headline */}
+          {headline}
 
-            {/* Phone — rises gently as you scroll */}
-            <motion.div style={{ y: phoneY }}>
-              <motion.div
-                initial={{ opacity: 0, y: 40, scale: 0.96 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                transition={{ duration: 0.7, delay: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
-              >
-                <PhoneShot src="/assets/screens/home-v4.webp" alt="Squirrel Brain — your day at a glance" width={380} />
-              </motion.div>
-            </motion.div>
-          </div>
+          {/* Sub */}
+          <motion.p
+            className="mt-5 text-lg lg:text-xl text-muted leading-relaxed max-w-md"
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55, delay: 0.25 }}
+          >
+            {subhead}
+          </motion.p>
+
+          {/* CTAs */}
+          <motion.div
+            className="mt-5 flex flex-wrap gap-3 items-center"
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55, delay: 0.38 }}
+          >
+            <a
+              href={WAITLIST_HREF}
+              className="inline-flex items-center gap-2 text-white font-bold text-base lg:text-lg px-7 lg:px-9 py-3.5 lg:py-4 rounded-full hover:opacity-90 active:scale-[0.98] transition-all"
+              style={{ background: T.orange, boxShadow: "0 4px 24px rgba(255,122,26,0.35)" }}
+            >
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+                <path d="M9 2a3.4 3.4 0 00-3.4 3.4c0 3.9-1.5 4.9-1.5 4.9h9.8s-1.5-1-1.5-4.9A3.4 3.4 0 009 2zM7.7 13.4a1.3 1.3 0 002.6 0" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+              Join the launch list
+            </a>
+            <Link
+              href="/demos"
+              className="text-sm font-semibold text-muted hover:text-ink transition-colors flex items-center gap-1.5"
+            >
+              See how it works
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </Link>
+          </motion.div>
+
+          <motion.p
+            className="mt-3 text-xs"
+            style={{ color: "rgba(138,112,96,0.6)" }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.5 }}
+          >
+We&rsquo;ll email you the moment it&rsquo;s ready · free to start · iOS
+          </motion.p>
         </div>
 
-        {/* Scroll cue */}
-        <motion.div
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
-          style={{ opacity: scrollCueOpacity }}
-          aria-hidden="true"
-        >
-          <span className="text-xs font-medium" style={{ color: "rgba(138,112,96,0.55)" }}>
-            Scroll to see it work
-          </span>
+        {/* RIGHT: mascot + phone */}
+        <div className="hidden md:flex flex-col items-center gap-8 flex-shrink-0">
+          {/* Mascot above phone */}
+          <MascotBob />
+
+          {/* Phone */}
           <motion.div
-            className="w-5 h-8 rounded-full border-2 flex items-start justify-center pt-1.5"
-            style={{ borderColor: "rgba(138,112,96,0.3)" }}
-            animate={{ opacity: [1, 0.4, 1] }}
-            transition={{ duration: 1.8, repeat: Infinity }}
+            initial={{ opacity: 0, y: 40, scale: 0.96 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 0.7, delay: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
           >
-            <div className="w-1.5 h-1.5 rounded-full" style={{ background: T.orange }} />
+            <PhoneShot src="/assets/screens/home-v4.webp" alt="Squirrel Brain — your day at a glance" width={380} />
           </motion.div>
-        </motion.div>
+        </div>
       </div>
-    </div>
+    </section>
   );
 }

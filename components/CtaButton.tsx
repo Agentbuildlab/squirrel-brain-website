@@ -1,4 +1,4 @@
-import { TESTFLIGHT_URL } from "@/lib/config";
+import { WAITLIST_HREF } from "@/lib/config";
 
 interface CtaButtonProps {
   label?: string;
@@ -7,7 +7,7 @@ interface CtaButtonProps {
 }
 
 export default function CtaButton({
-  label = "Get the beta",
+  label = "Join the launch list",
   className = "",
   size = "md",
 }: CtaButtonProps) {
@@ -19,13 +19,16 @@ export default function CtaButton({
 
   return (
     <a
-      href={TESTFLIGHT_URL}
+      href={WAITLIST_HREF}
       className={`inline-flex items-center justify-center font-bold rounded-full bg-accent text-white hover:opacity-90 active:scale-[0.98] transition-all ${sizeClasses[size]} ${className}`}
     >
       <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
         <path
-          d="M9 1.5C4.86 1.5 1.5 4.86 1.5 9S4.86 16.5 9 16.5 16.5 13.14 16.5 9 13.14 1.5 9 1.5zm-1.25 9.4V7.1a.5.5 0 01.76-.43l3 1.9a.5.5 0 010 .86l-3 1.9a.5.5 0 01-.76-.43z"
-          fill="currentColor"
+          d="M9 2a3.4 3.4 0 00-3.4 3.4c0 3.9-1.5 4.9-1.5 4.9h9.8s-1.5-1-1.5-4.9A3.4 3.4 0 009 2zM7.7 13.4a1.3 1.3 0 002.6 0"
+          stroke="currentColor"
+          strokeWidth="1.4"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
       </svg>
       {label}

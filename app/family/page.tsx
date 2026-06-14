@@ -114,28 +114,41 @@ export default function FamilyPage() {
                   Tap the location and it opens straight in Maps — turn-by-turn, no typing.
                   The address was captured right along with the event.
                 </p>
-                {/* The actual schedule you snap */}
-                <div
-                  className="relative rounded-2xl overflow-hidden border border-border max-w-sm"
-                  style={{ boxShadow: "0 8px 24px rgba(26,18,8,0.10)" }}
-                >
-                  <Image
-                    src="/assets/soccer_schedule_fun.webp"
-                    alt="Acorn FC fall season schedule — ten games"
-                    width={780}
-                    height={1000}
-                    className="w-full h-auto"
-                  />
+                {/* The actual schedule you snap — make it unmistakable this is the INPUT */}
+                <div className="max-w-sm">
                   <div
-                    className="absolute bottom-2 left-2 rounded-md px-2 py-1"
-                    style={{ background: "rgba(26,18,8,0.7)" }}
+                    className="flex items-start gap-2.5 rounded-xl px-3.5 py-2.5 mb-3"
+                    style={{ background: "#fde8d8", border: "1px solid rgba(255,122,26,0.25)" }}
                   >
-                    <span
-                      className="text-[10px] font-semibold"
-                      style={{ color: "rgba(255,245,232,0.9)" }}
+                    <span aria-hidden="true" style={{ fontSize: 18, lineHeight: 1.1 }}>📸</span>
+                    <p className="text-sm leading-snug" style={{ color: "#7a4a18" }}>
+                      <strong className="text-ink">You take a photo of this.</strong> It&rsquo;s the
+                      paper schedule on your fridge — Squirrel Brain doesn&rsquo;t make it, it{" "}
+                      <em>reads</em> it and turns it into every game on your calendar.
+                    </p>
+                  </div>
+                  <div
+                    className="relative rounded-2xl overflow-hidden border border-border"
+                    style={{ boxShadow: "0 8px 24px rgba(26,18,8,0.10)" }}
+                  >
+                    <Image
+                      src="/assets/soccer_schedule_fun.webp"
+                      alt="Acorn FC fall season schedule on the fridge — the photo you snap"
+                      width={780}
+                      height={1000}
+                      className="w-full h-auto"
+                    />
+                    <div
+                      className="absolute bottom-2 left-2 rounded-md px-2 py-1"
+                      style={{ background: "rgba(26,18,8,0.72)" }}
                     >
-                      You snap this
-                    </span>
+                      <span
+                        className="text-[10px] font-semibold"
+                        style={{ color: "rgba(255,245,232,0.92)" }}
+                      >
+                        📸 The photo you take
+                      </span>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -172,12 +185,15 @@ export default function FamilyPage() {
                   Snap it. Pin it. Find it.
                 </h2>
                 <p className="text-muted leading-relaxed mb-4">
-                  Snap a photo of your car — or just the level and row sign. The photo gets
-                  a GPS pin automatically, right where you parked.
+                  The stadium lot after the game. The mall when you&rsquo;ve forgotten which entrance
+                  you came in. The airport when you fly back a week later with no idea where you left
+                  it. Snap a photo of your car — or just the level-and-row sign — and it gets a GPS pin
+                  automatically, right where you parked.
                 </p>
                 <p className="text-muted leading-relaxed mb-6">
-                  When you&rsquo;re done, pull the photo up, tap the pin, and your squirrel
-                  navigates you straight back to it. No more wandering the garage floor by floor.
+                  Whenever you&rsquo;re ready — an hour later or a week later — pull the photo up, tap
+                  the pin, and your squirrel navigates you straight back to it. No more wandering the
+                  lot row by row.
                 </p>
                 {/* The actual car photo you snap */}
                 <div
@@ -272,27 +288,10 @@ export default function FamilyPage() {
                 It knows your schedule. It knows what matters to you. And unlike every other app on
                 your phone, it actually follows through.
               </p>
-            </FadeIn>
-          </div>
-        </section>
-
-        {/* CTA */}
-        <section
-          className="py-20 bg-white border-t border-border"
-          aria-labelledby="family-cta-heading"
-        >
-          <div className="max-w-2xl mx-auto px-4 sm:px-6 text-center">
-            <FadeIn>
-              <h2
-                id="family-cta-heading"
-                className="font-display text-3xl sm:text-4xl font-bold text-ink mb-5"
-              >
-                The next schedule lands on the fridge tomorrow.
-              </h2>
-              <p className="text-muted text-lg mb-8">
-                Snap it. Free to start.
-              </p>
-              <CtaButton size="lg" />
+              <div className="mt-12 flex flex-col items-center gap-4">
+                <CtaButton size="lg" />
+                <p className="text-muted text-base">Join the launch list — be first when it opens.</p>
+              </div>
             </FadeIn>
           </div>
         </section>
