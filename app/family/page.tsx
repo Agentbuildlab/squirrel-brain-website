@@ -172,8 +172,8 @@ export default function FamilyPage() {
           <div className="max-w-5xl mx-auto px-4 sm:px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <FadeIn from="right" delay={0.1} className="flex justify-center md:order-2">
               <PhoneShot
-                src="/assets/screens/parking-board.webp"
-                alt="Parking board — your P3 spot saved with a Find my car button"
+                src="/assets/screens/parking-board-v2.webp"
+                alt="Parking board — your P3 spot saved and GPS-pinned"
                 width={320}
               />
             </FadeIn>
