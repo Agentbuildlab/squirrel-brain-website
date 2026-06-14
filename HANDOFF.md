@@ -3,9 +3,8 @@
 _Last updated: 2026-06-13 · branch `v2-rebuild`_
 
 ## TL;DR for the next session
-The cinematic v2 rebuild is **built, deployed (preview), and verified**. Latest commit
-`32b3992` on `v2-rebuild`. Latest preview:
-**https://squirrel-brain-website-2ltf5f0ea-squirrelbrain.vercel.app** (HTTP 200, 0 broken images).
+The cinematic v2 rebuild is **built, deployed (preview), and verified**. Latest preview:
+**https://squirrel-brain-website-80e6ldg8p-squirrelbrain.vercel.app** (HTTP 200, 0 broken images across all 29).
 Production is **NOT** flipped — wait for Adam to say **"flip production"**, then run:
 
 ```bash
@@ -26,9 +25,10 @@ squirrel mascot animating throughout. No legacy/flat-Tailwind cards.
 4. **MascotSection** — squirrel tilt/wave personality beat, speech bubbles.
 5. **OutlookSection** — "tired of missing Outlook reminders?" before→after import.
 6. **LinkStashSection** — saved by you, found by asking.
-7. **ProofSection** — real-life proof; soccer-season block + expanded Meds block (6 Rx bottles).
-8. **AgentBand** — "connect any AI agent to your brain."
-9. **FinalCta** — squirrel points at button, pulsing glow.
+7. **RecipesSection** — "Snap the recipe. Find it at the stove." Real in-app Recipes board screenshot + handwritten recipe-card "before" + floating dish polaroids (behind the phone).
+8. **ProofSection** — real-life proof; soccer-season block + expanded Meds block (6 Rx bottles).
+9. **AgentBand** — "connect any AI agent to your brain."
+10. **FinalCta** — squirrel points at button, pulsing glow.
 
 Other pages: `/demos`, `/work`, `/family`, `/pricing` (all use real screenshots + `pix-v3.webp`).
 
@@ -42,6 +42,17 @@ Other pages: `/demos`, `/work`, `/family`, `/pricing` (all use real screenshots 
   captions are generic (Generix / Calmitol / Snoozaprol / Allerfree / Pressurez / Vitamax).
 - Soccer "before" is a legible hand-drawn generic schedule (`before_soccer_schedule.png`).
 - Logo is just the squirrel with a **shape-following drop-shadow** (no white box).
+- **Recipes:** 7 AI food photos (`recipe_card/pasta/cookies/salad/curry/pancakes/tacos.png`). Seeded a
+  REAL Recipes board in the app (recipes IS a first-class board — `lib/pixBoards.ts`), captured the
+  feed → `screens/recipes-board.webp`. Injected the 7 as the user's OWN pix (no `fromMcp` → survives
+  sync reconcile; see `store.ts:393`) directly in the AsyncStorage blob. Board wall = `getAllBoards()`
+  in a SCROLLABLE grid (NOT count-ranked) — Recipes is below the fold; tap its tile → "Open Recipes".
+
+### Verification gotcha (this session)
+- Local `preview_*` harness served a stale static dir (not Next) and `Google Chrome` isn't a
+  computer-use-visible app, so a **website pixel screenshot wasn't obtainable** — verified the deploy
+  via Chrome-MCP DOM checks (image `naturalWidth`, geometry, 0 broken) instead. The app-side capture
+  `/tmp/cap_recipes_feed2.png` is the real Recipes board (also the section's centerpiece).
 
 **DECISIONS (don't undo without reason):**
 - Documents (Rx labels, soccer schedule) stay **hand-rendered (PIL)**, not AI — AI garbles
