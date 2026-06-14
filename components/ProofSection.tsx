@@ -60,24 +60,24 @@ const PROOF_BLOCKS: ProofBlock[] = [
   },
   {
     id: "meeting",
-    eyebrow: "Work & field",
-    headline: "Meeting recap in one sentence.",
-    body: "Walking out, tap mic: \"Follow up with Sarah about the contract by Wednesday.\" That's it. Your squirrel sets the reminder, logs the note, and follows through so you don't have to hold it in your head.",
-    photoSrc: "/assets/lifestyle_sales_walkout.png",
-    photoAlt: "Professional walking out after a meeting",
-    photoHeight: 180,
+    eyebrow: "Meeting Mode",
+    headline: "Record the whole meeting. Keep what matters.",
+    body: "Under Notes, tap Meeting and just let it run. Your squirrel records the whole conversation in short chunks — so nothing rides on one long file — then transcribes it and pulls out what's important: the action items, the follow-ups, the deadlines, as best as the AI can. Turn any of them into a reminder with one tap.",
     rows: [
       {
         accentColor: T.orange,
-        title: "📋 Follow up — Sarah re: contract",
+        title: "📊 Send the Q3 deck to the team",
+        source: "From Meeting Mode · by Scuttle",
+        pills: [{ label: "Pulled from your meeting", color: T.orange, bg: T.pastelPeach }],
+      },
+      {
+        accentColor: T.orange,
+        title: "📋 Follow up with Sarah re: contract",
         date: "Jun 18",
-        time: "5:00 PM",
+        time: "by Wed",
         dayNum: 18,
-        source: "From Squirrel Brain · by You",
-        pills: [
-          { label: "🎤 VOICE ATTACHED", color: T.orange, bg: T.pastelPeach },
-          { label: "⏰ Jun 17 reminder", color: T.blue, bg: T.blueLight },
-        ],
+        source: "From Meeting Mode · by Scuttle",
+        pills: [{ label: "⏰ Reminder set", color: T.blue, bg: T.blueLight }],
       },
     ],
   },
@@ -276,6 +276,21 @@ function MedsBlock({ index }: { index: number }) {
           your phone. No more fumbling, no more forgotten scripts, no more "I think it's the one
           that starts with an L."
         </p>
+
+        {/* Side note — snap the bottle, set it as the reminder */}
+        <div
+          className="flex items-start gap-3 rounded-2xl px-4 py-3 mb-6"
+          style={{ background: T.pastelPeach, border: `1px solid ${T.orange}33` }}
+        >
+          <span aria-hidden="true" style={{ fontSize: 18, lineHeight: 1.2, flexShrink: 0 }}>
+            💊
+          </span>
+          <p className="text-sm leading-relaxed" style={{ color: "#7a4a18" }}>
+            <strong style={{ color: T.text }}>Little trick:</strong> snap a photo of the bottle and
+            set it as the reminder. When it&rsquo;s time, the alert shows that exact photo — so you
+            know precisely which one to open. No squinting at labels, no mix-ups.
+          </p>
+        </div>
 
         {/* Reminder rows */}
         <div
