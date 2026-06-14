@@ -395,6 +395,12 @@ function MeetingBlock({ index }: { index: number }) {
       source: "From Meeting Mode · by Scuttle",
       pills: [{ label: "⏰ Reminder set", color: T.blue, bg: T.blueLight }],
     },
+    {
+      accentColor: T.orange,
+      title: "📅 Budget review moved to Friday 2pm",
+      source: "From Meeting Mode · by Scuttle",
+      pills: [{ label: "Pulled from your meeting", color: T.orange, bg: T.pastelPeach }],
+    },
   ];
 
   return (
@@ -435,7 +441,7 @@ function MeetingBlock({ index }: { index: number }) {
               marginBottom: 8,
             }}
           >
-            Pulled from your meeting
+            Meeting review · action items found
           </div>
           {rows.map((row, i) => (
             <motion.div
