@@ -7,27 +7,40 @@ import CtaButton from "@/components/CtaButton";
 export const metadata: Metadata = {
   title: "Pricing",
   description:
-    "Squirrel Brain is free to start. Unlock everything for $9.99/month. No credit card required.",
+    "Two simple plans: Standard at $9.99/month (10 hours of meeting recording) and Plus at $14.99/month (20 hours). Everything else is unlimited on both. 7-day free trial, cancel anytime.",
 };
 
-const FREE_FEATURES = [
-  "Voice capture → alarm or reminder",
-  "Photo capture (schedule, receipt, whiteboard)",
-  "Burrow chat with your squirrel",
-  "Reads every calendar already on your iPhone",
-  "Parking pin",
-  "Up to 10 captures per month",
+// Everything except meeting recording is UNLIMITED on both plans — the bundle is
+// identical, the only difference is monthly recording hours. Both cards render
+// this same list so the "unlimited on both" point reads at a glance.
+const EVERYTHING = [
+  "Unlimited photos, notes & reminders",
+  "Voice capture → alarm, reminder, or calendar event",
+  "A real phone call when it matters — rings through Silent, Focus & a locked screen",
+  "Pix boards: receipts, recipes, meds, schedules",
+  "The Burrow — AI chat with your squirrel",
+  "Link & YouTube stash + a forever note",
+  "Morning brief email + 4 PM nudge",
+  "Built-in MCP server — let any AI agent drive it",
 ];
 
-const PRO_FEATURES = [
-  "Everything in Free",
-  "Unlimited captures",
-  "Pix boards (Receipts, Recipes, Meds, School)",
-  "Meeting Mode — record + transcribe + extract",
-  "Morning brief email",
-  "Voice recall — search everything you've captured",
-  "YouTube & link stash",
-  "Call reminders — your squirrel rings your phone in its own voice",
+const PLANS = [
+  {
+    name: "Standard",
+    price: "$9.99",
+    hours: "10 hours",
+    tagline: "Everything in Squirrel Brain, plus 10 hours of meeting recording each month.",
+    featured: false,
+    badge: null as string | null,
+  },
+  {
+    name: "Plus",
+    price: "$14.99",
+    hours: "20 hours",
+    tagline: "Everything in Standard — with 20 hours of meeting recording each month.",
+    featured: true,
+    badge: "Double the recording",
+  },
 ];
 
 function CheckIcon({ color = "#FF7A1A" }: { color?: string }) {
@@ -61,8 +74,14 @@ export default function PricingPage() {
             </FadeIn>
             <FadeIn immediate delay={0.08}>
               <p className="text-xl text-muted max-w-xl mx-auto">
-                Free to start when we launch. Unlock everything for $9.99/mo — no
-                credit card to get on the launch list.
+                Your whole brain in one app — captures, reminders, the Burrow, and meeting
+                notes. Everything&rsquo;s unlimited except meeting recording, so the only
+                choice is how many hours you need.
+              </p>
+            </FadeIn>
+            <FadeIn immediate delay={0.14}>
+              <p className="text-sm font-semibold text-accent mt-4">
+                7-day free trial · monthly billing · cancel anytime
               </p>
             </FadeIn>
           </div>
@@ -72,60 +91,70 @@ export default function PricingPage() {
         <section className="py-16" aria-labelledby="plans-heading">
           <h2 id="plans-heading" className="sr-only">Pricing plans</h2>
           <div className="max-w-5xl mx-auto px-4 sm:px-6 grid grid-cols-1 md:grid-cols-2 gap-6">
-            {/* Free plan */}
-            <FadeIn>
-              <div className="bg-white rounded-3xl border border-border p-8 flex flex-col h-full">
-                <div className="mb-6">
-                  <p className="text-xs font-bold tracking-widest uppercase text-muted mb-2">
-                    Free
-                  </p>
-                  <div className="flex items-end gap-1 mb-1">
-                    <span className="font-display text-5xl font-extrabold text-ink">$0</span>
-                    <span className="text-muted pb-1">/month</span>
+            {PLANS.map((plan, i) => (
+              <FadeIn key={plan.name} delay={i * 0.1}>
+                <div
+                  className={
+                    plan.featured
+                      ? "bg-accent-light rounded-3xl border border-accent/30 p-8 flex flex-col h-full relative overflow-hidden"
+                      : "bg-white rounded-3xl border border-border p-8 flex flex-col h-full relative overflow-hidden"
+                  }
+                >
+                  {plan.badge && (
+                    <div className="absolute top-6 right-6">
+                      <span className="text-xs font-bold bg-accent text-white px-3 py-1 rounded-full">
+                        {plan.badge}
+                      </span>
+                    </div>
+                  )}
+                  <div className="mb-6">
+                    <p
+                      className={
+                        plan.featured
+                          ? "text-xs font-bold tracking-widest uppercase text-accent mb-2"
+                          : "text-xs font-bold tracking-widest uppercase text-muted mb-2"
+                      }
+                    >
+                      {plan.name}
+                    </p>
+                    <div className="flex items-end gap-1 mb-2">
+                      <span className="font-display text-5xl font-extrabold text-ink">{plan.price}</span>
+                      <span className="text-muted pb-1">/month</span>
+                    </div>
+                    <p className="text-sm text-muted">{plan.tagline}</p>
                   </div>
-                  <p className="text-sm text-muted">No credit card. No time limit.</p>
+                  <ul className="flex flex-col gap-3 flex-1 mb-6" role="list">
+                    {EVERYTHING.map((f) => (
+                      <li key={f} className="flex items-start gap-2.5 text-sm text-ink">
+                        <CheckIcon color={plan.featured ? "#FF7A1A" : "#8a7060"} />
+                        {f}
+                      </li>
+                    ))}
+                  </ul>
+                  {/* The one differentiator — monthly meeting-recording hours */}
+                  <div
+                    className="rounded-2xl px-4 py-3 mb-8 flex items-center gap-2.5"
+                    style={{ background: "#FF7A1A14", border: "1px solid #FF7A1A33" }}
+                  >
+                    <span className="text-lg" aria-hidden="true">🎙️</span>
+                    <span className="text-sm font-bold text-ink">
+                      {plan.hours} of meeting recording <span className="font-normal text-muted">/ month</span>
+                    </span>
+                  </div>
+                  <CtaButton label="Join the launch list" className="w-full justify-center" />
                 </div>
-                <ul className="flex flex-col gap-3 flex-1 mb-8" role="list">
-                  {FREE_FEATURES.map((f) => (
-                    <li key={f} className="flex items-start gap-2.5 text-sm text-ink">
-                      <CheckIcon color="#8a7060" />
-                      {f}
-                    </li>
-                  ))}
-                </ul>
-                <CtaButton label="Join the launch list" className="w-full justify-center" />
-              </div>
-            </FadeIn>
+              </FadeIn>
+            ))}
+          </div>
 
-            {/* Pro plan */}
-            <FadeIn delay={0.1}>
-              <div className="bg-accent-light rounded-3xl border border-accent/30 p-8 flex flex-col h-full relative overflow-hidden">
-                {/* Recommended badge */}
-                <div className="absolute top-6 right-6">
-                  <span className="text-xs font-bold bg-accent text-white px-3 py-1 rounded-full">
-                    Launch price locked
-                  </span>
-                </div>
-                <div className="mb-6">
-                  <p className="text-xs font-bold tracking-widest uppercase text-accent mb-2">
-                    Pro
-                  </p>
-                  <div className="flex items-end gap-1 mb-1">
-                    <span className="font-display text-5xl font-extrabold text-ink">$9.99</span>
-                    <span className="text-muted pb-1">/month</span>
-                  </div>
-                  <p className="text-sm text-muted">Unlimited captures. Everything unlocked.</p>
-                </div>
-                <ul className="flex flex-col gap-3 flex-1 mb-8" role="list">
-                  {PRO_FEATURES.map((f) => (
-                    <li key={f} className="flex items-start gap-2.5 text-sm text-ink">
-                      <CheckIcon />
-                      {f}
-                    </li>
-                  ))}
-                </ul>
-                <CtaButton label="Join the launch list" className="w-full justify-center" />
-              </div>
+          {/* The only difference, spelled out plainly */}
+          <div className="max-w-2xl mx-auto px-4 sm:px-6 mt-8">
+            <FadeIn>
+              <p className="text-center text-sm text-muted leading-relaxed">
+                Everything except meeting recording is <span className="font-semibold text-ink">unlimited on both plans</span>.
+                The only difference is your monthly recording hours — <span className="font-semibold text-ink">10 on Standard, 20 on Plus</span>.
+                Both start with a 7-day free trial and are billed monthly; cancel anytime.
+              </p>
             </FadeIn>
           </div>
         </section>
@@ -147,20 +176,20 @@ export default function PricingPage() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               {[
                 {
+                  q: "What's the difference between Standard and Plus?",
+                  a: "Only meeting-recording hours: Standard includes 10 hours a month, Plus includes 20. Everything else — photos, notes, reminders, voice capture, phone-call alarms, link stash, and the Burrow — is unlimited on both.",
+                },
+                {
+                  q: "Is there a free trial?",
+                  a: "Yes — every plan starts with a 7-day free trial. After that it's $9.99/month for Standard or $14.99/month for Plus, billed monthly. Cancel anytime.",
+                },
+                {
                   q: "Does it need Google or Outlook?",
                   a: "No. Squirrel Brain reads every calendar already on your iPhone — no new accounts, no integrations.",
                 },
                 {
-                  q: "Is there a free trial for Pro?",
-                  a: "The free tier is unlimited in time — try it as long as you need. Pro unlocks the higher capture limits and advanced features.",
-                },
-                {
-                  q: "What devices does it run on?",
-                  a: "iPhone only. The TestFlight beta opens soon — join the launch list and you'll be among the first in.",
-                },
-                {
-                  q: "Can I cancel anytime?",
-                  a: "Yes. Managed through your normal App Store subscription — cancel any time from Settings.",
+                  q: "What devices does it run on, and can I cancel?",
+                  a: "iPhone only for now. Subscriptions are managed through your normal App Store subscription, so you can cancel any time from Settings. The TestFlight beta opens soon — join the launch list and you'll be among the first in.",
                 },
               ].map(({ q, a }) => (
                 <FadeIn key={q}>

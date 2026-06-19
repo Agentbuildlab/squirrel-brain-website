@@ -3,177 +3,170 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import FadeIn from "@/components/FadeIn";
 import CtaButton from "@/components/CtaButton";
-import { PhoneShot } from "@/components/v2/PhoneKit";
 
 export const metadata: Metadata = {
   title: "Watch it Work",
   description:
-    "Short demo clips showing Squirrel Brain in action — voice-to-alarm, receipt scanning, parking pin, meeting mode, and more.",
+    "Short films of Squirrel Brain in action — for work, for family, and for your AI agents. Voice and photos turned into reminders, alarms, boards, and a phone call that rings right through Silent mode, Focus, and a locked screen.",
 };
 
-const DEMOS = [
+type Film = { src: string; title: string; sub: string; og?: boolean };
+type Lane = { label: string; accent: string; band: string; blurb: string; films: Film[] };
+
+const LANES: Lane[] = [
   {
-    id: 1,
-    title: "Voice to calendar, easily",
-    caption: "Say \"Dentist Thursday at 2\" — your squirrel sets the event. No typing, no menus.",
-    duration: "voice",
-    tags: ["voice", "calendar"],
-    screen: "/assets/screens/calendar-v2.webp",
-    screenAlt: "Calendar showing the event your squirrel set from your voice",
+    label: "For Work",
+    accent: "#FF7A1A",
+    band: "linear-gradient(160deg, #FFF0E6 0%, #ffffff 72%)",
+    blurb: "Catch what slips between jobs — follow-ups, proof, and the things you leave behind.",
+    films: [
+      { src: "FlagshipFollowup", title: "The Follow-Up That Would Have Slipped", sub: "Snap a card, catch the promise.", og: true },
+      { src: "TheCall", title: "The Call Before You Blow the Call", sub: "It doesn't just remind you — it talks you through it." },
+      { src: "ScuttleCheckin", title: "Your Squirrel Checks In", sub: "Every day, a call — not a notification you'll swipe away." },
+      { src: "MeetingRamble", title: "Walk Out. Ramble. Done.", sub: "Talk it through; it writes the to-dos." },
+      { src: "WhereDidILeave", title: "Where Did I Leave That?", sub: "Proof for the things you leave behind." },
+    ],
   },
   {
-    id: 2,
-    title: "Receipt scan → return reminder",
-    caption: "Snap a receipt — your squirrel reads the date and asks if you want a return reminder",
-    duration: "~12s",
-    tags: ["photo", "reminder"],
-    screen: "/assets/screens/receipts-board.webp",
-    screenAlt: "Receipts board with the snapped receipt filed and a return reminder",
+    label: "For Family",
+    accent: "#2a6aee",
+    band: "linear-gradient(160deg, #E8F1FF 0%, #ffffff 72%)",
+    blurb: "The whole household in one brain — schedules, receipts, doses, and piles that sort themselves.",
+    films: [
+      { src: "InvisibleLoad", title: "The Invisible Load", sub: "The hundred little things — remembered before they slip." },
+      { src: "TwoJobs", title: "Two Jobs. One Brain.", sub: "Carrying work and family at the same time — both worlds, one brain." },
+      { src: "FamilyLoad", title: "The Family Load, Finally Caught", sub: "One photo of the season → every date on your calendar.", og: true },
+      { src: "BoxesOrganize", title: "The Boxes Organize Themselves", sub: "Snap it. Restash it. Find it later." },
+      { src: "SortYourDay", title: "Your Day, Waiting to Be Sorted", sub: "Snap the pile; it sorts itself." },
+      { src: "ForeverNote", title: "The List That Never Gets Lost", sub: "A note that never erases." },
+    ],
   },
   {
-    id: 3,
-    title: "Parking pin → find my car",
-    caption: "Snap where you parked — GPS-stamped and waiting when you need it",
-    duration: "~10s",
-    tags: ["photo", "GPS"],
-    screen: "/assets/screens/parking-board-v2.webp",
-    screenAlt: "Parking board with your P3 spot, GPS-pinned on the photo",
-  },
-  {
-    id: 4,
-    title: "Your day at a glance — Daily Countdown",
-    caption: "Open the app and the Daily Countdown shows exactly what's next and how long you've got",
-    duration: "glance",
-    tags: ["calendar", "AI"],
-    screen: "/assets/screens/home-v4.webp",
-    screenAlt: "Home showing the Daily Countdown to the next event",
-  },
-  {
-    id: 5,
-    title: "Voice recall: \"find the receipt\"",
-    caption: "Speak a search — your squirrel finds it instantly from everything you've captured",
-    duration: "~12s",
-    tags: ["voice", "search"],
-    screen: "/assets/screens/burrow.webp",
-    screenAlt: "The Burrow answering a recall question in plain language",
-  },
-  {
-    id: 7,
-    title: "Meeting Mode — record → extract action items",
-    caption: "Record your debrief — your squirrel files the action items (Send the Q3 deck, Follow up with Sarah) straight into your notes",
-    duration: "meeting",
-    tags: ["voice", "meeting"],
-    screen: "/assets/screens/meeting-extract.webp",
-    screenAlt: "Notes showing action items Scuttle extracted from a meeting",
+    label: "For your AI",
+    accent: "#2f9e63",
+    band: "linear-gradient(160deg, #E2F5EC 0%, #ffffff 72%)",
+    blurb: "Give your AI hands — real alarms, real calls, and your boards, over MCP.",
+    films: [
+      { src: "FlagshipAI", title: "Your AI Finally Has Hands", sub: "Claude can't set an alarm on your phone. This lets it.", og: true },
+      { src: "AgentCleanup", title: "The Agent That Cleans Up Your Day", sub: "Your AI tidies the pile and files it." },
+    ],
   },
 ];
 
-const TAG_COLORS: Record<string, string> = {
-  voice: "bg-orange-50 text-orange-600",
-  calendar: "bg-blue-50 text-blue-600",
-  photo: "bg-purple-50 text-purple-600",
-  reminder: "bg-green-50 text-green-600",
-  GPS: "bg-yellow-50 text-yellow-700",
-  chat: "bg-pink-50 text-pink-600",
-  AI: "bg-indigo-50 text-indigo-600",
-  search: "bg-teal-50 text-teal-600",
-  meeting: "bg-rose-50 text-rose-600",
-  link: "bg-cyan-50 text-cyan-600",
-  tasks: "bg-lime-50 text-lime-700",
-};
+function FilmCard({ film, accent, label }: { film: Film; accent: string; label: string }) {
+  return (
+    <div className="flex flex-col gap-3">
+      <div
+        className="relative rounded-3xl overflow-hidden bg-black mx-auto w-full"
+        style={{ aspectRatio: "9 / 16", maxWidth: 320, border: `1px solid ${accent}33`, boxShadow: "0 18px 44px rgba(26,18,8,0.16)" }}
+      >
+        {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
+        <video
+          src={`/demos/${film.src}.mp4`}
+          poster={`/demos/posters/${film.src}.jpg`}
+          playsInline
+          controls
+          preload="none"
+          className="w-full h-full object-cover"
+        />
+        {film.og && (
+          <span
+            className="pointer-events-none absolute top-3 left-3 text-[11px] font-bold text-white px-2.5 py-1 rounded-full"
+            style={{ background: accent, boxShadow: "0 4px 14px rgba(0,0,0,0.25)" }}
+          >
+            ★ The original
+          </span>
+        )}
+        <span
+          className="pointer-events-none absolute bottom-3 left-1/2 -translate-x-1/2 text-[11px] font-semibold text-white/90 px-2.5 py-1 rounded-full"
+          style={{ background: "rgba(0,0,0,0.45)" }}
+        >
+          ▶ Tap for sound
+        </span>
+      </div>
+      <div className="text-center max-w-[320px] mx-auto">
+        <span
+          className="inline-block text-[11px] font-bold tracking-widest uppercase px-2.5 py-1 rounded-full mb-1.5"
+          style={{ background: `${accent}1a`, color: accent }}
+        >
+          {label}
+        </span>
+        <h3 className="font-display font-bold text-ink" style={{ fontSize: "1.05rem", lineHeight: 1.2 }}>
+          {film.title}
+        </h3>
+        <p className="text-sm text-muted leading-snug mt-1">{film.sub}</p>
+      </div>
+    </div>
+  );
+}
 
 export default function DemosPage() {
   return (
     <>
       <Nav />
       <main id="main-content">
-        {/* Hero */}
         <section
-          className="pt-28 pb-16"
+          className="pt-28 pb-14"
           aria-labelledby="demos-hero-heading"
           style={{ background: "linear-gradient(160deg, #F5F0FF 0%, #faf7f2 60%)" }}
         >
           <div className="max-w-6xl mx-auto px-4 sm:px-6 text-center">
             <FadeIn immediate>
               <div className="inline-flex items-center gap-2 bg-purple-50 text-purple-600 text-xs font-bold px-3 py-1.5 rounded-full mb-6">
-                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
-                  <rect x="1" y="2" width="10" height="8" rx="1.5" stroke="currentColor" strokeWidth="1.4" fill="none"/>
-                  <path d="M5 4.5l3 1.5-3 1.5V4.5z" fill="currentColor"/>
-                </svg>
-                Demo reel
+                <span className="w-1.5 h-1.5 rounded-full bg-purple-500" />
+                Short films · work · family · your AI
               </div>
             </FadeIn>
             <FadeIn immediate delay={0.08}>
-              <h1
-                id="demos-hero-heading"
-                className="font-display text-5xl sm:text-6xl font-extrabold text-ink leading-tight mb-5"
-              >
+              <h1 id="demos-hero-heading" className="font-display text-5xl sm:text-6xl font-extrabold text-ink leading-tight mb-5">
                 Watch it work
               </h1>
             </FadeIn>
             <FadeIn immediate delay={0.15}>
-              <p className="text-lg text-muted max-w-xl mx-auto mb-6">
-                Short, honest clips of Squirrel Brain doing its thing. No narration, no
-                polished ads — just real app behaviour.
-              </p>
-            </FadeIn>
-            <FadeIn immediate delay={0.2}>
-              <p className="text-sm text-muted/70">
-                Demo clips are in production — placeholders show what each clip covers.
+              <p className="text-lg text-muted max-w-xl mx-auto">
+                Short, narrated films of Squirrel Brain doing its thing — grouped by what it&rsquo;s for.
+                Tap any one to play with sound.
               </p>
             </FadeIn>
           </div>
         </section>
 
-        {/* Demo grid — 2-up so phones are readable */}
-        <section className="py-16" aria-labelledby="demo-grid-heading">
-          <div className="max-w-5xl mx-auto px-4 sm:px-6">
-            <h2 id="demo-grid-heading" className="sr-only">All demos</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
-              {DEMOS.map((demo, i) => (
-                <FadeIn key={demo.id} delay={i * 0.06}>
-                  <article
-                    className="bg-white rounded-3xl border border-border p-6 flex flex-col gap-5 h-full"
-                    aria-labelledby={`demo-title-${demo.id}`}
+        {LANES.map((lane, li) => (
+          <section
+            key={lane.label}
+            className="py-16 border-b border-border"
+            style={{ background: lane.band }}
+            aria-label={lane.label}
+          >
+            <div className="max-w-6xl mx-auto px-4 sm:px-6">
+              <FadeIn>
+                <div className="text-center mb-10">
+                  <span
+                    className="inline-block text-xs font-bold tracking-widest uppercase px-3.5 py-1.5 rounded-full mb-3"
+                    style={{ background: lane.accent, color: "#fff" }}
                   >
-                    <div className="flex justify-center">
-                      <PhoneShot src={demo.screen} alt={demo.screenAlt} width={300} />
-                    </div>
-                    <div>
-                      <h3
-                        id={`demo-title-${demo.id}`}
-                        className="font-display text-base font-bold text-ink mb-1"
-                      >
-                        {demo.title}
-                      </h3>
-                      <p className="text-xs text-muted mb-2">{demo.duration}</p>
-                      <p className="text-sm text-muted/80 leading-snug">{demo.caption}</p>
-                    </div>
-                    <div className="flex flex-wrap gap-1.5 mt-auto">
-                      {demo.tags.map((tag) => (
-                        <span
-                          key={tag}
-                          className={`text-xs font-semibold px-2 py-0.5 rounded-full ${TAG_COLORS[tag] ?? "bg-bg text-muted"}`}
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                  </article>
-                </FadeIn>
-              ))}
+                    {lane.label}
+                  </span>
+                  <p className="text-muted max-w-xl mx-auto" style={{ fontSize: "1.02rem" }}>
+                    {lane.blurb}
+                  </p>
+                </div>
+              </FadeIn>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-12 justify-items-center">
+                {lane.films.map((film, i) => (
+                  <FadeIn key={film.src} delay={i * 0.05}>
+                    <FilmCard film={film} accent={lane.accent} label={lane.label} />
+                  </FadeIn>
+                ))}
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
+        ))}
 
-        {/* CTA */}
-        <section className="py-20 bg-white border-t border-border" aria-labelledby="demos-cta-heading">
+        <section className="py-20 bg-white" aria-labelledby="demos-cta-heading">
           <div className="max-w-2xl mx-auto px-4 sm:px-6 text-center">
             <FadeIn>
-              <h2
-                id="demos-cta-heading"
-                className="font-display text-3xl font-bold text-ink mb-5"
-              >
+              <h2 id="demos-cta-heading" className="font-display text-3xl font-bold text-ink mb-5">
                 Seen enough? Get on the launch list.
               </h2>
               <p className="text-muted text-lg mb-8">

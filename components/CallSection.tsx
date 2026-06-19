@@ -257,9 +257,10 @@ export default function CallSection() {
               style={{ color: "rgba(255,245,232,0.75)" }}
             >
               Not a notification. Not a banner you swipe away. A{" "}
-              <strong style={{ color: "#fff5e8" }}>real incoming phone call</strong> — the kind
-              that rings through silent mode, through Do Not Disturb, through the 200 other
-              notifications you never opened.
+              <strong style={{ color: "#fff5e8" }}>real incoming phone call</strong> — it rings
+              right through Silent mode, Focus, and a locked screen, even with the app closed and
+              your phone face-down across the room. It cuts through the 200 other notifications you
+              never opened.
             </p>
             <p
               className="text-base leading-relaxed mb-5 max-w-lg"

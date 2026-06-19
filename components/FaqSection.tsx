@@ -12,7 +12,7 @@ const FAQS: { q: string; a: string }[] = [
   },
   {
     q: "What is Squirrel Brain?",
-    a: "Squirrel Brain is an iOS app that turns photos, voice notes, screenshots, and forwarded texts into reminders, alarms, and calendar events — then makes sure you follow through, including a real phone call that rings through silent mode. It's built for three jobs at once: work, family, and AI agents.",
+    a: "Squirrel Brain is an iOS app that turns photos, voice notes, screenshots, and forwarded texts into reminders, alarms, and calendar events — then makes sure you follow through, including a real phone call that rings right through Silent mode, Focus, and a locked screen. It's built for three jobs at once: work, family, and AI agents.",
   },
   {
     q: "How does an AI agent actually do things on my phone with Squirrel Brain?",
@@ -28,7 +28,7 @@ const FAQS: { q: string; a: string }[] = [
   },
   {
     q: "What does it cost, and what devices does it run on?",
-    a: "iPhone only for now, and free to start. A Pro plan is $9.99/month for unlimited captures, Pix boards, Meeting Mode, the morning brief, voice recall, and call reminders. Squirrel Brain is pre-launch — join the launch list and you'll be first into the beta.",
+    a: "iPhone only for now. Two simple plans, billed monthly with a 7-day free trial: Standard is $9.99/month with 10 hours of meeting recording, and Plus is $14.99/month with 20 hours. Everything else — photos, notes, reminders, voice capture, phone-call alarms, link stash, and the Burrow — is unlimited on both. Squirrel Brain is pre-launch — join the launch list and you'll be first into the beta.",
   },
 ];
 

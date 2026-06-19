@@ -37,12 +37,12 @@ const graph = {
       url: ORIGIN,
       image: `${ORIGIN}/og-image.png`,
       description:
-        "Squirrel Brain is an iOS app that turns photos, voice notes, screenshots, and forwarded texts into reminders, alarms, and calendar events, then makes sure you follow through — including a real phone call that rings through silent mode. It has a built-in MCP server, so AI agents like Claude and ChatGPT can set alarms, read your day, file notes to boards, append to a forever note, and call your phone on your behalf. Built for three jobs at once: work, family, and AI agents.",
+        "Squirrel Brain is an iOS app that turns photos, voice notes, screenshots, and forwarded texts into reminders, alarms, and calendar events, then makes sure you follow through — including a real phone call that rings right through Silent mode, Focus, and a locked screen. It has a built-in MCP server, so AI agents like Claude and ChatGPT can set alarms, read your day, file notes to boards, append to a forever note, and call your phone on your behalf. Built for three jobs at once: work, family, and AI agents.",
       featureList: [
         "Turn a photo, voice note, screenshot, or forwarded text into a reminder, alarm, or calendar event",
         "Built-in MCP (Model Context Protocol) server — connect Claude, ChatGPT, OpenClaw, or any AI agent",
         "An AI agent can set alarms, read your day, file items, append to a forever note, and call your phone",
-        "Real phone-call reminders that ring through silent mode and Do Not Disturb",
+        "Real phone-call reminders — they ring right through Silent mode, Focus, and a locked screen",
         "Pix boards: photos auto-sorted into boards (receipts, meds, schedules, parking)",
         "GPS-stamped photo proof for field work",
         "Reads every calendar already on your iPhone; import Outlook events by screenshot",
@@ -51,18 +51,19 @@ const graph = {
       offers: [
         {
           "@type": "Offer",
-          name: "Free",
-          price: "0",
-          priceCurrency: "USD",
-          description: "Free to start — voice and photo capture, reminders, and the Burrow.",
-        },
-        {
-          "@type": "Offer",
-          name: "Pro",
+          name: "Standard",
           price: "9.99",
           priceCurrency: "USD",
           description:
-            "Unlimited captures, Pix boards, Meeting Mode, morning brief, voice recall, and call reminders.",
+            "Everything in Squirrel Brain — unlimited photos, notes, reminders, voice capture, phone-call alarms, link stash, and the Burrow — plus 10 hours of meeting recording each month. 7-day free trial, billed monthly.",
+        },
+        {
+          "@type": "Offer",
+          name: "Plus",
+          price: "14.99",
+          priceCurrency: "USD",
+          description:
+            "Everything in Standard, with 20 hours of meeting recording each month. 7-day free trial, billed monthly.",
         },
       ],
       publisher: { "@id": `${ORIGIN}/#org` },
