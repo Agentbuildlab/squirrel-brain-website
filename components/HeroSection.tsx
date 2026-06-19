@@ -50,7 +50,7 @@ export default function HeroSection() {
           letterSpacing: -0.2,
         }}
       >
-        You&rsquo;re not forgetful. You&rsquo;re just overloaded.
+        You&rsquo;re not forgetful, you&rsquo;re outnumbered.
       </p>
       <h1
         id="hero-heading"
@@ -178,7 +178,7 @@ export default function HeroSection() {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.5 }}
           >
-We&rsquo;ll email you the moment it&rsquo;s ready · free to start · iOS
+We&rsquo;ll email you the moment it&rsquo;s ready · 7-day free trial · iOS
           </motion.p>
         </div>
 

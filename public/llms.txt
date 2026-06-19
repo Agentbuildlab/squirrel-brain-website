@@ -13,7 +13,7 @@ Status: pre-launch. Humans join a launch list; the MCP server is already live fo
 - [For AI agents / MCP](https://squirrelbrainapp.com/mcp): connect Claude, ChatGPT, or any agent over the Model Context Protocol
 - [Developer docs](https://squirrelbrainapp.com/mcp-docs): MCP server endpoint, the tool list, and auth (per-user API key)
 - [FAQ](https://squirrelbrainapp.com/#faq): "Can my AI set a reminder on my phone?", what it is, how the agent integration works
-- [Pricing](https://squirrelbrainapp.com/pricing): free to start; Pro is $9.99/month
+- [Pricing](https://squirrelbrainapp.com/pricing): 7-day free trial, then $9.99/mo (Standard) or $14.99/mo (Plus)
 
 ## For AI agents
 Squirrel Brain runs a hosted MCP server. A user generates a personal API key in the app and connects their agent. The agent can then, on the user's behalf:

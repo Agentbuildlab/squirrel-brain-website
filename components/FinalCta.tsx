@@ -183,7 +183,7 @@ export default function FinalCta() {
           animate={inView ? { opacity: 1 } : {}}
           transition={{ duration: 0.4, delay: 0.56 }}
         >
-We&rsquo;ll email you the moment it&rsquo;s ready · iOS · free to start
+We&rsquo;ll email you the moment it&rsquo;s ready · iOS · 7-day free trial
         </motion.p>
 
         {/* Features summary strip */}
