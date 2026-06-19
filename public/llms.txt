@@ -1,6 +1,6 @@
 # Squirrel Brain
 
-> Squirrel Brain is an agent-friendly iOS app that turns photos, voice notes, screenshots, and forwarded texts into reminders, alarms, and calendar events — then makes sure you follow through, including a real phone call that rings through silent mode. It has a built-in MCP (Model Context Protocol) server, so AI agents like Claude, ChatGPT, OpenClaw, or a custom agent can set alarms, read the user's day, file things to boards, append to a forever note, and call the user's phone on their behalf.
+> Squirrel Brain is an agent-friendly iOS app that turns photos, voice notes, screenshots, and forwarded texts into reminders, alarms, and calendar events — then makes sure you follow through, including a real phone call that rings right through Silent mode, Focus, and a locked screen. It has a built-in MCP (Model Context Protocol) server, so AI agents like Claude, ChatGPT, OpenClaw, or a custom agent can set alarms, read the user's day, file things to boards, append to a forever note, and call the user's phone on their behalf.
 
 Squirrel Brain is built for three jobs at once: **work** (field reps, techs, contractors), **family** (busy parents), and **AI agents** (a memory + action layer on the user's real phone).
 
@@ -21,7 +21,7 @@ Squirrel Brain runs a hosted MCP server. A user generates a personal API key in 
 - create and read items, tasks, and the daily brief
 - append to the user's "forever note"
 - save a link
-- place a real ringing phone call to the user (for urgent, must-not-miss alerts)
+- place a real ringing phone call to the user — it rings right through Silent mode, Focus, and a locked screen (for urgent, must-not-miss alerts)
 - and more — every write is attributed to the agent that made it.
 
 Agents are first-class users here; nothing on this site is gated against them. Start at /mcp and read the tool list at /mcp-docs.

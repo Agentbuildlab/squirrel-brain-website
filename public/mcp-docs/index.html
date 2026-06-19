@@ -420,16 +420,16 @@
       <div class="agent-tools-quick">
         <div class="agent-tools-quick-label">Key tools — full schema below at <a href="#tools" style="color:#16a34a;">&#35;tools</a></div>
         <div class="atq-row">
-          <span class="atq-name">pip_call</span>
+          <span class="atq-name">cell_alert</span>
           <div><div class="atq-desc">Voice alarm on user's phone in ~10s. TTS via nova voice, full-screen popup, auto-plays. No tap required. Use for anything genuinely urgent.</div><div class="atq-note">Required: message. Optional: title.</div></div>
         </div>
         <div class="atq-row">
           <span class="atq-name">notify_human</span>
-          <div><div class="atq-desc">Instant push notification (banner). Fires via APNs. Use for status updates — not urgent. For urgent use pip_call.</div><div class="atq-note">Required: title, message. Optional: sound.</div></div>
+          <div><div class="atq-desc">Instant push notification (banner). Fires via APNs. Use for status updates — not urgent. For urgent use cell_alert.</div><div class="atq-note">Required: title, message. Optional: sound.</div></div>
         </div>
         <div class="atq-row">
           <span class="atq-name">create_alarm</span>
-          <div><div class="atq-desc">Schedule a timed alarm on the user's iPhone. Confirmation push sent immediately. Alarm fires at trigger_at time, bypasses Do Not Disturb.</div><div class="atq-note">Required: trigger_at (ISO 8601 UTC), label. Optional: sound, notes.</div></div>
+          <div><div class="atq-desc">Put a timed event on the user's calendar + schedule an iPhone alarm. Confirmation push sent immediately. Set call_alert=true (with tts_text) to ALSO ring them with a real phone call at that time — it rings right through Silent mode, Focus, and a locked screen.</div><div class="atq-note">Required: trigger_at (ISO 8601), label. Optional: sound, notes, recurrence, call_alert, tts_text.</div></div>
         </div>
         <div class="atq-row">
           <span class="atq-name">create_item</span>
@@ -485,7 +485,7 @@
         <li><a href="#overview">What this is (for humans)</a></li>
         <li><a href="#auth">Authentication &amp; API key</a></li>
         <li><a href="#session-start">Session start sequence</a></li>
-        <li><a href="#tools">All 29 tools — full reference</a></li>
+        <li><a href="#tools">All 31 tools — full reference</a></li>
         <li><a href="#examples">curl examples</a></li>
         <li><a href="#checklist">Getting started checklist</a></li>
         <li><a href="#agent-configs">Copy-paste agent configs</a></li>
@@ -539,8 +539,8 @@
         <strong>✅ Store the key persistently — don't re-derive it each session.</strong><br><br>
         Save the <code>sb_</code> key once in a real config file or environment variable. Agents that re-figure-out the connection from scratch every session (and hold the key only in short-term memory) tend to fall back to a stale key and start failing with <strong>"Invalid API key."</strong> Set it once, persist it, and it keeps working.<br><br>
         <strong>If you ever see "Invalid API key":</strong> the key was regenerated. Ask the human to open the app → <strong>Settings → API Key</strong>, copy the current <code>sb_</code> key, and update your config. Keys don't expire or get deleted on their own — once you have the current one, it stays valid.<br><br>
-        <strong>Connect as a real MCP server — don't hand-roll HTTP.</strong> Register Squirrel Brain in your agent's MCP config (the copy-paste snippets below) so the key lives in the request <em>headers</em> and is applied automatically on every call. Writing one-off HTTP request code with the key pasted inline is exactly how it goes stale. <strong>Then verify:</strong> your MCP client should connect and list <strong>29 tools</strong> (e.g. an <code>initialize</code> + <code>tools/list</code> handshake, or your client's "test/list servers" command). If you see 0 tools, the key is wrong or your sandbox's network allowlist is blocking <code>*.supabase.co</code>.<br><br>
-        <strong>Once it's configured, just CALL the tools — don't go hunting for the key.</strong> A common failure mode: an agent forgets it already has the connection and starts trying to <em>fetch</em> the key (writing a Keychain/secret-lookup script, an <code>SB_API_KEY</code> env shim, a <code>get_*_key</code> helper) before every call. You never need to — the configured MCP connection injects the key for you. If you have the <code>squirrel_brain</code> tools, call <code>pip_call</code> / <code>create_alarm</code> / <code>create_item</code> directly. No scripts, no key retrieval.
+        <strong>Connect as a real MCP server — don't hand-roll HTTP.</strong> Register Squirrel Brain in your agent's MCP config (the copy-paste snippets below) so the key lives in the request <em>headers</em> and is applied automatically on every call. Writing one-off HTTP request code with the key pasted inline is exactly how it goes stale. <strong>Then verify:</strong> your MCP client should connect and list <strong>31 tools</strong> (e.g. an <code>initialize</code> + <code>tools/list</code> handshake, or your client's "test/list servers" command). If you see 0 tools, the key is wrong or your sandbox's network allowlist is blocking <code>*.supabase.co</code>.<br><br>
+        <strong>Once it's configured, just CALL the tools — don't go hunting for the key.</strong> A common failure mode: an agent forgets it already has the connection and starts trying to <em>fetch</em> the key (writing a Keychain/secret-lookup script, an <code>SB_API_KEY</code> env shim, a <code>get_*_key</code> helper) before every call. You never need to — the configured MCP connection injects the key for you. If you have the <code>squirrel_brain</code> tools, call <code>cell_alert</code> / <code>create_alarm</code> / <code>create_item</code> directly. No scripts, no key retrieval.
       </div>
 
       <div class="code-label">Endpoint</div>
@@ -609,7 +609,7 @@
     <!-- ──────────────────────────────────────────────────────── -->
     <div class="doc-section" id="tools">
       <div class="doc-section-label">Tools Reference</div>
-      <h2 class="doc-section-title">All 29 available tools</h2>
+      <h2 class="doc-section-title">All 31 available tools</h2>
       <p>Call <code>tools/list</code> at any time to get live JSON schemas. The table below matches the current schema exactly.</p>
 
       <table class="tools-table">
@@ -624,8 +624,8 @@
 
           <tr class="group-hdr"><td colspan="3">REACH THE USER NOW</td></tr>
           <tr>
-            <td><div class="tool-name"><code>pip_call</code></div></td>
-            <td class="tool-desc"><strong>Urgent voice CALL.</strong> Rings the user's iPhone in ~10 seconds: TTS in the squirrel's nova voice, silent push, full-screen popup that auto-plays — no tap required. Use only when something genuinely needs <strong>immediate</strong> attention. <em>For a calm voice message they listen to later, use <code>create_item</code> with <code>tts_text</code> (a saved voice note) instead.</em></td>
+            <td><div class="tool-name"><code>cell_alert</code></div></td>
+            <td class="tool-desc"><strong>Urgent voice CALL — right now.</strong> Rings the user's iPhone in ~10 seconds: TTS in the squirrel's nova voice, silent push, full-screen call popup that auto-plays — no tap required, and it rings right through <strong>Silent mode, Focus, and a locked screen</strong>. Use only when something genuinely needs <strong>immediate</strong> attention. <em>For a call at a SET TIME, use <code>create_alarm</code> with <code>call_alert: true</code> + <code>tts_text</code>. For a calm voice message they listen to later, use <code>create_item</code> with <code>tts_text</code> (a saved voice note).</em></td>
             <td class="tool-params">
               <span class="tag-req">message</span>
               <span class="tag-opt">title</span>
@@ -633,7 +633,7 @@
           </tr>
           <tr>
             <td><div class="tool-name"><code>notify_human</code></div></td>
-            <td class="tool-desc">Instant push notification (banner, not full-screen). Fires via APNs to your iPhone. Use for quick status updates — not interruptions. For urgent use <code>pip_call</code>.</td>
+            <td class="tool-desc">Instant push notification (banner, not full-screen). Fires via APNs to your iPhone. Use for quick status updates — not interruptions. For urgent use <code>cell_alert</code>.</td>
             <td class="tool-params">
               <span class="tag-req">title</span>
               <span class="tag-req">message</span>
@@ -680,7 +680,7 @@
           <tr class="group-hdr"><td colspan="3">WRITE</td></tr>
           <tr>
             <td><div class="tool-name"><code>create_item</code></div></td>
-            <td class="tool-desc"><strong>Save a note or checklist to the user's Memory Stash.</strong> It appears there exactly like a note they captured themselves. <strong>Always start the <code>title</code> with one relevant emoji</strong> (e.g. <code>"🧹 Clean the house"</code>) — the app emoji-tags every user note, so match it. Set <code>tts_text</code> to send a <strong>voice note</strong> — your spoken message is saved into the Memory Stash as a playable voice note (green mic card + play button) that the user listens to whenever they open it. This is the <em>calm, non-urgent</em> way to talk to them; for a "right now" ringing call use <code>pip_call</code>. Set <code>type_label="context"</code> to write persistent instructions all future agents read. Set <code>is_important: true</code> to flag for the 4 PM nudge email. Set <code>recipient</code> to your own agent name to address the item to yourself (lands in your SB inbox, not the user's stash).</td>
+            <td class="tool-desc"><strong>Save a note or checklist to the user's Memory Stash.</strong> It appears there exactly like a note they captured themselves. <strong>Always start the <code>title</code> with one relevant emoji</strong> (e.g. <code>"🧹 Clean the house"</code>) — the app emoji-tags every user note, so match it. Set <code>tts_text</code> to send a <strong>voice note</strong> — your spoken message is saved into the Memory Stash as a playable voice note (green mic card + play button) that the user listens to whenever they open it. This is the <em>calm, non-urgent</em> way to talk to them; for a "right now" ringing call use <code>cell_alert</code>. Set <code>type_label="context"</code> to write persistent instructions all future agents read. Set <code>is_important: true</code> to flag for the 4 PM nudge email. Set <code>recipient</code> to your own agent name to address the item to yourself (lands in your SB inbox, not the user's stash).</td>
             <td class="tool-params">
               <span class="tag-req">type</span>
               <span class="tag-req">title</span>
@@ -699,13 +699,17 @@
           </tr>
           <tr>
             <td><div class="tool-name"><code>create_alarm</code></div></td>
-            <td class="tool-desc"><strong>This is the calendar tool.</strong> Puts a tappable event on the user's calendar <em>and</em> schedules an iPhone alarm, tagged <em>"Made by &lt;your agent_name&gt;"</em>. Use it for <strong>any appointment, event, deadline, or reminder with a time</strong> — when the user says "put it on my calendar" or "remind me," this is the tool. <strong>Start <code>label</code> with a relevant emoji</strong> (e.g. <code>"🦷 Dentist"</code>). Fires regardless of Do Not Disturb. Pass <code>recipient</code> with your own agent name to schedule the alarm for yourself — when it fires, it lands in your SB inbox instead of buzzing the user.</td>
+            <td class="tool-desc"><strong>This is the calendar tool.</strong> Puts a tappable event on the user's calendar <em>and</em> schedules an iPhone alarm, tagged <em>"Made by &lt;your agent_name&gt;"</em>. Use it for <strong>any appointment, event, deadline, or reminder with a time</strong> — when the user says "put it on my calendar" or "remind me," this is the tool. <strong>Start <code>label</code> with a relevant emoji</strong> (e.g. <code>"🦷 Dentist"</code>). Set <code>call_alert: true</code> to ALSO ring the user with a <strong>real phone call</strong> at <code>trigger_at</code> — and pass <code>tts_text</code> with the exact words the squirrel speaks when it rings (your own message, in its own voice). The call rings right through <strong>Silent mode, Focus, and a locked screen</strong>. For a <strong>repeating</strong> alarm, pass <code>recurrence</code> ONCE (never loop create_alarm). Pass <code>recipient</code> with your own agent name to schedule it for yourself instead of the user.</td>
             <td class="tool-params">
               <span class="tag-req">trigger_at</span>
               <span class="tag-req">label</span>
               <span class="tag-opt">location</span>
               <span class="tag-opt">sound</span>
               <span class="tag-opt">notes</span>
+              <span class="tag-opt">recurrence</span>
+              <span class="tag-opt">add_reminder_at</span>
+              <span class="tag-opt">call_alert</span>
+              <span class="tag-opt">tts_text</span>
               <span class="tag-opt">agent_name</span>
               <span class="tag-opt">recipient</span>
             </td>
@@ -719,7 +723,7 @@
           </tr>
           <tr>
             <td><div class="tool-name"><code>update_item</code></div></td>
-            <td class="tool-desc">Update an existing note, task, or alarm/calendar event IN PLACE and flip its switches. Use to <strong>reschedule</strong> (pass <code>datetime</code> to move an event), or to turn ON/OFF toggles: <code>call_alert</code> (real phone call ring at the item's time), <code>is_important</code> (4 PM nudge email), <code>countdown_enabled</code> (Daily Countdown on Home screen), and <code>reminder_at</code> (the item's reminder/notification time). Use <code>append_content</code> / <code>append_notes</code> to ADD to a note or list without erasing it. Only fields you provide are changed. <strong>Never create a new alarm to reschedule an existing one</strong> — that leaves a duplicate; use <code>update_item</code> instead.</td>
+            <td class="tool-desc">Update an existing note, task, or alarm/calendar event IN PLACE and flip its switches. Use to <strong>reschedule</strong> (pass <code>datetime</code> to move an event), or to turn ON/OFF toggles: <code>call_alert</code> (a real phone call that rings the user at the item's time — pass <code>tts_text</code> with it to set the exact words the squirrel speaks), <code>is_important</code> (4 PM nudge email), <code>countdown_enabled</code> (Daily Countdown on Home screen), and <code>reminder_at</code> (the item's reminder/notification time). Use <code>append_content</code> / <code>append_notes</code> to ADD to a note or list without erasing it. Only fields you provide are changed. <strong>Never create a new alarm to reschedule an existing one</strong> — that leaves a duplicate; use <code>update_item</code> instead.</td>
             <td class="tool-params">
               <span class="tag-req">item_id</span>
               <span class="tag-opt">title</span>
@@ -730,9 +734,14 @@
               <span class="tag-opt">why_saved</span>
               <span class="tag-opt">datetime</span>
               <span class="tag-opt">reminder_at</span>
+              <span class="tag-opt">add_reminder_at</span>
               <span class="tag-opt">is_important</span>
               <span class="tag-opt">call_alert</span>
+              <span class="tag-opt">tts_text</span>
               <span class="tag-opt">countdown_enabled</span>
+              <span class="tag-opt">board</span>
+              <span class="tag-opt">recurrence</span>
+              <span class="tag-opt">recurrence_clear</span>
             </td>
           </tr>
           <tr>
@@ -822,6 +831,21 @@
             </td>
           </tr>
 
+          <tr class="group-hdr"><td colspan="3">PIX BOARDS — photo boxes</td></tr>
+          <tr>
+            <td><div class="tool-name"><code>list_boards</code></div></td>
+            <td class="tool-desc">List the Pix boards (boxes) currently in use, with how many items each holds. Call this before <code>move_to_board</code> to see what boxes exist, or to answer "what's in my receipts box?". Returns the board keys and counts; only boards that actually hold items are returned.</td>
+            <td class="tool-params"><em style="color:#b8986e;">no params</em></td>
+          </tr>
+          <tr>
+            <td><div class="tool-name"><code>move_to_board</code></div></td>
+            <td class="tool-desc">File a Pix photo into a board (box) by the board's key — e.g. move a receipt photo into <code>receipts</code>. Syncs to every device. Pass <code>board_key=""</code> to clear the board. Staple keys: <code>receipts, invoices, shipment, leftonsite, schedules, recipes, meds, parking, whiteboards, cards, other</code>.</td>
+            <td class="tool-params">
+              <span class="tag-req">item_id</span>
+              <span class="tag-req">board_key</span>
+            </td>
+          </tr>
+
           <tr class="group-hdr"><td colspan="3">BRIEF &amp; PRIORITIES</td></tr>
           <tr>
             <td><div class="tool-name"><code>get_overdue_items</code></div></td>
@@ -881,7 +905,7 @@
           <tr class="group-hdr"><td colspan="3">META</td></tr>
           <tr>
             <td><div class="tool-name"><code>get_squirrel_brain_help</code></div></td>
-            <td class="tool-desc">Returns a full self-configuration guide: endpoint, the hardcoded public anon key, all 29 tools with params, and session start instructions. Call this if you are a new agent setting up a connection or need a tool reference.</td>
+            <td class="tool-desc">Returns a full self-configuration guide: endpoint, the hardcoded public anon key, all 31 tools with params, and session start instructions. Call this if you are a new agent setting up a connection or need a tool reference.</td>
             <td class="tool-params"><em style="color:#b8986e;">no params</em></td>
           </tr>
 
@@ -929,7 +953,7 @@
   -d <span class="cs">'{
     "jsonrpc": "2.0", "id": 1, "method": "tools/call",
     "params": {
-      "name": "pip_call",
+      "name": "cell_alert",
       "arguments": {
         "title": "Meeting in 5 minutes",
         "message": "Hey, your call with Marcus at Meridian starts in 5 minutes. He is waiting on the revised pricing."
@@ -952,6 +976,24 @@
         "trigger_at": "2026-06-05T14:00:00Z",
         "sound": "angry_squirrel",
         "notes": "He needs the revised numbers today"
+      }
+    }
+  }'</span></div>
+
+      <div class="code-label">Schedule a call at a set time — in the squirrel's own words</div>
+      <div class="code-block"><span class="ck">curl</span> -X POST \
+  https://geczbtsjfbvfukdzdemr.supabase.co/functions/v1/mcp-server \
+  -H <span class="cs">"Content-Type: application/json"</span> \
+  -H <span class="cs">"X-API-Key: sb_your_api_key_here"</span> \
+  -d <span class="cs">'{
+    "jsonrpc": "2.0", "id": 4, "method": "tools/call",
+    "params": {
+      "name": "create_alarm",
+      "arguments": {
+        "label": "🦷 Dentist",
+        "trigger_at": "2026-06-05T18:30:00Z",
+        "call_alert": true,
+        "tts_text": "Hey, your dentist appointment is in 30 minutes — time to head out. You've got this!"
       }
     }
   }'</span></div>
@@ -1063,12 +1105,12 @@
         </li>
         <li>
           <span class="step-num">7</span>
-          <div><strong>Wire it into your workflow.</strong> Use <code>pip_call</code> for urgent voice alerts, <code>create_alarm</code> for timed reminders, <code>create_item</code> with <code>type_label="context"</code> for persistent standing instructions.</div>
+          <div><strong>Wire it into your workflow.</strong> Use <code>cell_alert</code> for urgent voice alerts, <code>create_alarm</code> for timed reminders, <code>create_item</code> with <code>type_label="context"</code> for persistent standing instructions.</div>
         </li>
       </ul>
 
       <div class="info-box blue" style="margin-top:18px;">
-        <strong>iOS requirement for pip_call:</strong> Voice alarms require <strong>Background App Refresh ON</strong> for Squirrel Brain. Go to iOS Settings → Squirrel Brain → Background App Refresh → On.
+        <strong>iOS requirement for cell_alert:</strong> Voice alarms require <strong>Background App Refresh ON</strong> for Squirrel Brain. Go to iOS Settings → Squirrel Brain → Background App Refresh → On.
       </div>
 
       <div class="info-box" style="margin-top:14px;">
@@ -1304,7 +1346,7 @@ Body (tools/call):
           <tr><td class="rate-action">Write (items)</td><td>20</td><td>100</td><td>500</td></tr>
           <tr><td class="rate-action">Alarm creates</td><td>5</td><td>10</td><td>30</td></tr>
           <tr><td class="rate-action">Push notifications</td><td>10</td><td>20</td><td>50</td></tr>
-          <tr><td class="rate-action">pip_call (voice)</td><td>2</td><td>5</td><td>10</td></tr>
+          <tr><td class="rate-action">cell_alert (voice)</td><td>2</td><td>5</td><td>10</td></tr>
           <tr><td class="rate-action">Brief trigger</td><td>1</td><td>2</td><td>3</td></tr>
         </tbody>
       </table>
@@ -1312,7 +1354,7 @@ Body (tools/call):
       <div class="info-box">
         <strong>Why not just use Pushover / Ntfy / Twilio?</strong><br>
         Pushover/Ntfy send banner notifications — silenced by Focus mode and DND. Twilio makes a phone call.<br>
-        Squirrel Brain fires a <em>real iPhone alarm</em> — same as your alarm clock, bypasses DND, keeps going until dismissed. Plus structured memory and tasks that survive between agent sessions.
+        Squirrel Brain fires a <em>real iPhone alarm</em> — same as your alarm clock — or a real phone call, both ringing right through Silent mode, Focus, and a locked screen, and it keeps going until dismissed. Plus structured memory and tasks that survive between agent sessions.
       </div>
     </div>
 

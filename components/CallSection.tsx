@@ -3,8 +3,8 @@
 /**
  * Section 3 — "It Actually Calls You"
  *
- * Motion idea: the PHONE RINGS. Deep warm-dark band. A CallKit-style
- * incoming call screen built in v2 tokens, the squirrel avatar pulsing rings.
+ * Motion idea: the PHONE RINGS. Deep warm-dark band. A full-screen
+ * incoming-call screen built in v2 tokens, the squirrel avatar pulsing rings.
  * Scroll triggers the screen animating in from below + pulsing rings starting.
  * This is the scroll-stopper moment.
  */
@@ -19,7 +19,7 @@ import { useRef } from "react";
 import { WAITLIST_HREF } from "@/lib/config";
 import { T, PulseRing } from "@/components/v2/PhoneKit";
 
-// ── CallKit-style call screen ─────────────────────────────────────────────
+// ── Full-screen incoming-call screen ──────────────────────────────────────
 
 function CallScreen() {
   const reduceMotion = useReducedMotion();
