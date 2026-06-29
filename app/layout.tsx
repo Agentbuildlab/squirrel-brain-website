@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { Inter, Bricolage_Grotesque } from "next/font/google";
 import "./globals.css";
 import { SITE_NAME, SITE_DESCRIPTION } from "@/lib/config";
 import LenisProvider from "@/components/LenisProvider";
 import StructuredData from "@/components/StructuredData";
+import Analytics from "@/components/Analytics";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -40,6 +42,11 @@ export const metadata: Metadata = {
     icon: "/assets/squirrel_logo.png",
     apple: "/assets/squirrel_logo.png",
   },
+  // Set NEXT_PUBLIC_GSC_VERIFICATION in Vercel to the token from Google Search
+  // Console's "HTML tag" verification method; omitted automatically if unset.
+  verification: process.env.NEXT_PUBLIC_GSC_VERIFICATION
+    ? { google: process.env.NEXT_PUBLIC_GSC_VERIFICATION }
+    : undefined,
   openGraph: {
     title: `${SITE_NAME} — Say it. Snap it. It's handled.`,
     description: SITE_DESCRIPTION,
@@ -67,6 +74,9 @@ export default function RootLayout({
     <html lang="en" className={`${inter.variable} ${bricolage.variable}`}>
       <body className="font-body bg-bg text-ink antialiased">
         <StructuredData />
+        <Suspense fallback={null}>
+          <Analytics />
+        </Suspense>
         <LenisProvider />
         {children}
       </body>

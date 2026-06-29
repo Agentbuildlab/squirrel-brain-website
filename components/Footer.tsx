@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import posthog from "posthog-js";
 
 export default function Footer() {
   const [email, setEmail] = useState("");
@@ -22,6 +23,10 @@ export default function Footer() {
       });
       const data = await res.json().catch(() => ({}));
       if (res.ok) {
+        // Conversion event — tie the signup to a PostHog person (identified_only)
+        // and record the waitlist join for funnels.
+        if (email) posthog.identify(email, { email });
+        posthog.capture("waitlist_signup", { already: !!data.already });
         setStatus("done");
         setMessage(
           data.already
