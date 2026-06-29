@@ -564,13 +564,13 @@ export const LANDING_PAGES: LandingPageData[] = [
 
   {
     slug: "reminder-app-that-calls-you",
-    title: "A Reminder App That Calls You — Reminders You Can't Ignore | Squirrel Brain",
+    title: "A Reminder App That Calls You — an AI Voice, Not a Banner | Squirrel Brain",
     description:
-      "Squirrel Brain reminds you with a phone-call-style reminder that rings your phone — not a banner you swipe away. For the things you truly can't miss, get a reminder you can't ignore.",
+      "Squirrel Brain doesn't just remind you — it calls you. The call rings through Silent mode, and when you pick up an AI voice actually talks to you: your day, a pep talk, or a quick prep before your next meeting.",
     eyebrow: "It calls you",
     h1: "A reminder app that actually calls you",
     subhead:
-      "A push notification is easy to swipe away and forget. For the one thing you can't miss, Squirrel Brain rings your phone with a phone-call-style reminder that speaks to you.",
+      "Not a banner you swipe away — a real call that rings through Silent mode. And it's not a robocall: pick up and an AI voice talks to you about your day, hypes you up, or walks you through the meeting you're about to walk into.",
     heroShot: {
       src: "/assets/screens/calendar-v2.webp",
       alt: "Squirrel Brain calendar showing a reminder set to ring the phone like a call",
@@ -582,37 +582,46 @@ export const LANDING_PAGES: LandingPageData[] = [
         body: "It's not a discipline problem. A banner notification competes with fifty others, disappears when your phone is face-down, and is gone the moment you swipe. For something that genuinely matters, a quiet, dismissible alert is the wrong tool.",
       },
       {
-        eyebrow: "It rings",
-        h2: "A reminder that rings your phone like a call",
-        body: "For the reminders you flag as important, Squirrel Brain doesn't send a banner — it rings your phone with a phone-call-style reminder and speaks to you in its own voice. It's the difference between a note you might see and a call you actually answer.",
+        eyebrow: "It talks to you",
+        h2: "It's not a beep — an AI voice actually talks to you",
+        body: "Pick up and it isn't a pre-recorded chime. An AI voice tells you what it called about in plain language — the reminder, what's on your day, or the points you asked it to cover. It rings through Silent mode, so it reaches you even when everything else is muted.",
         bullets: [
-          "Phone-call-style reminders that ring your phone, not a silent banner",
-          "It speaks the reminder out loud when you pick up",
-          "You choose which reminders are important enough to call",
+          "Rings through Silent mode, Focus, and a locked screen",
+          "An AI voice speaks your reminder and your day — not a canned recording",
+          "Call it back and ask, or have it call you — both directions",
         ],
       },
       {
-        eyebrow: "Capture, then call",
-        h2: "And it captures the reminder however you think of it",
-        body: "Unlike single-purpose call-reminder apps, Squirrel Brain also catches the thing in the first place — speak it, snap it, or screenshot it — and turns it into the reminder that later rings you. Capture and unignorable delivery, in one app.",
+        eyebrow: "Tell it what to say",
+        h2: "A pep talk, a daily brief, or a prep call before your meeting",
+        body: "Ask it to call you twice a day with a pep talk about your day. Tell it you've got a meeting at 2 and to ring you beforehand and run through the five main points. It's a reminder, a morning brief, a hype call, and a meeting prep — in your ear, exactly when you need it.",
+        bullets: [
+          "Schedule recurring check-in or pep-talk calls",
+          "A prep call before a meeting that covers your key points",
+          "You pick which reminders are worth a call",
+        ],
       },
     ],
     faqs: [
       {
-        q: "What reminder app actually calls your phone?",
-        a: "Squirrel Brain can reach you with a phone-call-style reminder that rings your phone and speaks the reminder out loud, instead of a push notification you can swipe away. You choose which reminders are important enough to ring you.",
+        q: "Does it really ring through Silent mode?",
+        a: "Yes. The reminder comes through like a real phone call, so it rings even when your phone is on Silent or in a Focus mode, and on a locked screen — for the reminders you flag as important.",
       },
       {
-        q: "Why a call instead of a notification?",
-        a: "Notifications pile up, get swiped, and vanish when your phone is face-down. A call-style reminder is hard to miss — it's the right tool for the handful of things you truly can't let slip.",
+        q: "What does it say when it calls?",
+        a: "An AI voice tells you what it called about in plain language — your reminder, what's coming up on your day, or the points you asked it to cover. It's generated for you in the moment, not a pre-recorded message.",
+      },
+      {
+        q: "Can it call me before a meeting and prep me?",
+        a: "Yes. Tell it about the meeting and ask it to call beforehand and go over your main points, and it will ring you and walk through them so you go in ready.",
+      },
+      {
+        q: "Can it call me with a daily pep talk or check-in?",
+        a: "Yes. You can have it call you on a schedule — for example twice a day — with a check-in or a pep talk about your day.",
       },
       {
         q: "Does every reminder call me?",
         a: "No. You decide which reminders escalate to a call and which stay as a normal nudge, so a ring always means it matters.",
-      },
-      {
-        q: "Does it also capture the reminder for me?",
-        a: "Yes. Unlike apps that only call you, Squirrel Brain captures the thing first — by voice, photo, or screenshot — and turns it into the reminder that later rings your phone.",
       },
     ],
     related: ["loud-reminder-app", "ai-reminder-app", "voice-note-reminder-app", "outlook-screenshot-reminder"],

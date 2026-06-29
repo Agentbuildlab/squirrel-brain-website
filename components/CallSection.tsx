@@ -266,8 +266,9 @@ export default function CallSection() {
               className="text-base leading-relaxed mb-5 max-w-lg"
               style={{ color: "rgba(255,245,232,0.65)" }}
             >
-              Your squirrel speaks in its own voice and tells you exactly what's up. You hear it.
-              You can't ignore it. The thing gets done.
+              Your squirrel speaks in its own voice and tells you exactly what's up — and you choose
+              what it says: a quick pep talk, a rundown of your day, or the main points before your
+              big meeting. You hear it. You can't ignore it. The thing gets done.
             </p>
             <div className="mb-10" />
 
