@@ -32,6 +32,12 @@ export default function Analytics() {
       person_profiles: "identified_only",
       capture_pageview: false, // we capture pageviews manually for the App Router
       capture_pageleave: true,
+      // Click maps / scroll maps on the marketing pages.
+      capture_heatmaps: true,
+      // Session replay — only records once you flip "Record user sessions" ON in
+      // the PostHog project settings. Inputs are masked so the email someone
+      // types into the launch-list form is never captured.
+      session_recording: { maskAllInputs: true },
     });
     inited = true;
   }, []);
