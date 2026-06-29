@@ -104,6 +104,12 @@ export default function Footer() {
               <Link href="/second-brain-app" className="text-sm text-muted hover:text-ink transition-colors">
                 Second brain app
               </Link>
+              <Link href="/reminder-app-that-calls-you" className="text-sm text-muted hover:text-ink transition-colors">
+                Reminder app that calls you
+              </Link>
+              <Link href="/can-chatgpt-set-iphone-reminder" className="text-sm text-muted hover:text-ink transition-colors">
+                Can ChatGPT set a reminder?
+              </Link>
             </nav>
           </div>
 

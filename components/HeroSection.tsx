@@ -61,7 +61,7 @@ export default function HeroSection() {
         }}
       >
         Your brain has{" "}
-        <span style={{ color: T.orange }}>too many tabs open.</span>
+        <span style={{ color: T.orange }}>too many tabs open.</span>{" "}
         <br />
         Let’s close{" "}
         <span style={{ color: T.orange }}>some of them.</span>

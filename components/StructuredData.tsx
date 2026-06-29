@@ -54,6 +54,8 @@ const graph = {
           name: "Standard",
           price: "9.99",
           priceCurrency: "USD",
+          availability: "https://schema.org/PreOrder",
+          priceValidUntil: "2027-12-31",
           description:
             "Everything in Squirrel Brain — unlimited photos, notes, reminders, voice capture, phone-call alarms, link stash, and the Burrow — plus 10 hours of meeting recording each month. 7-day free trial, billed monthly.",
         },
@@ -62,6 +64,8 @@ const graph = {
           name: "Plus",
           price: "14.99",
           priceCurrency: "USD",
+          availability: "https://schema.org/PreOrder",
+          priceValidUntil: "2027-12-31",
           description:
             "Everything in Standard, with 20 hours of meeting recording each month. 7-day free trial, billed monthly.",
         },

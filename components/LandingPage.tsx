@@ -31,15 +31,21 @@ export function landingMetadata(slug: string): Metadata {
     description: p.description,
     alternates: { canonical: `/${p.slug}` },
     openGraph: {
-      title: p.title,
+      // Shorter, brand-free title reads better in a link unfurl (the platform
+      // shows the site name separately).
+      title: p.h1,
       description: p.description,
       url,
       type: "website",
+      // Without this, a per-page openGraph object drops the layout's image and
+      // the page unfurls as a blank "summary_large_image" card.
+      images: [{ url: "/og-image.png", width: 1200, height: 630, alt: `Squirrel Brain — ${p.eyebrow}` }],
     },
     twitter: {
       card: "summary_large_image",
-      title: p.title,
+      title: p.h1,
       description: p.description,
+      images: ["/og-image.png"],
     },
   };
 }

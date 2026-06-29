@@ -50,6 +50,11 @@ export const LANDING_ANCHORS: Record<string, string> = {
   "second-brain-app": "second brain app",
   "reminder-app-for-sales-reps": "reminder app for sales reps",
   "outlook-screenshot-reminder": "Outlook screenshot reminders",
+  "can-chatgpt-set-iphone-reminder": "can ChatGPT set an iPhone reminder?",
+  "reminder-app-that-calls-you": "a reminder app that calls you",
+  "ai-agent-reminder-app": "let an AI agent set reminders",
+  "reminder-app-for-field-service": "reminder app for field service",
+  "reminder-app-for-parents": "reminder app for busy parents",
 };
 
 export const LANDING_PAGES: LandingPageData[] = [
@@ -106,7 +111,7 @@ export const LANDING_PAGES: LandingPageData[] = [
         a: "iPhone, for now. Squirrel Brain is pre-launch — join the launch list and you'll be first into the beta.",
       },
     ],
-    related: ["screenshot-to-reminder-app", "voice-note-reminder-app", "photo-to-reminder-app", "second-brain-app"],
+    related: ["can-chatgpt-set-iphone-reminder", "reminder-app-that-calls-you", "screenshot-to-reminder-app", "voice-note-reminder-app", "photo-to-reminder-app", "second-brain-app"],
   },
 
   {
@@ -330,7 +335,7 @@ export const LANDING_PAGES: LandingPageData[] = [
         a: "Yes, Squirrel Brain is an iPhone app. It's pre-launch — join the launch list to be first into the beta.",
       },
     ],
-    related: ["ai-reminder-app", "voice-note-reminder-app", "outlook-screenshot-reminder", "reminder-app-for-sales-reps"],
+    related: ["reminder-app-that-calls-you", "ai-reminder-app", "voice-note-reminder-app", "outlook-screenshot-reminder", "reminder-app-for-sales-reps"],
   },
 
   {
@@ -386,7 +391,7 @@ export const LANDING_PAGES: LandingPageData[] = [
         a: "iPhone, for now. Squirrel Brain is pre-launch — join the launch list to get early access.",
       },
     ],
-    related: ["ai-reminder-app", "voice-note-reminder-app", "photo-to-reminder-app", "loud-reminder-app"],
+    related: ["ai-agent-reminder-app", "ai-reminder-app", "voice-note-reminder-app", "photo-to-reminder-app", "loud-reminder-app"],
   },
 
   {
@@ -442,7 +447,7 @@ export const LANDING_PAGES: LandingPageData[] = [
         a: "Two simple plans billed monthly with a 7-day free trial. See the pricing page for current details. Squirrel Brain is pre-launch — join the launch list to get early access.",
       },
     ],
-    related: ["outlook-screenshot-reminder", "photo-to-reminder-app", "voice-note-reminder-app", "loud-reminder-app"],
+    related: ["reminder-app-for-field-service", "outlook-screenshot-reminder", "photo-to-reminder-app", "voice-note-reminder-app", "loud-reminder-app"],
   },
 
   {
@@ -499,6 +504,286 @@ export const LANDING_PAGES: LandingPageData[] = [
       },
     ],
     related: ["screenshot-to-reminder-app", "loud-reminder-app", "reminder-app-for-sales-reps", "ai-reminder-app"],
+  },
+
+  {
+    slug: "can-chatgpt-set-iphone-reminder",
+    title: "Can ChatGPT Set a Reminder on My iPhone? | Squirrel Brain",
+    description:
+      "ChatGPT and Claude can't set a real alarm or reminder on your iPhone on their own — their tasks only fire inside their app. Squirrel Brain's built-in MCP server bridges the gap so an AI agent can set a real reminder, alarm, or call.",
+    eyebrow: "ChatGPT + your iPhone",
+    h1: "Can ChatGPT set a reminder on your iPhone?",
+    subhead:
+      "Short answer: not on its own. ChatGPT and Claude can only nudge you inside their own app — they can't fire a real iPhone alarm or reminder. Squirrel Brain is the bridge that lets them.",
+    heroShot: {
+      src: "/assets/screens/burrow.webp",
+      alt: "The Burrow in Squirrel Brain, where an AI agent can read your day and set reminders on your behalf",
+    },
+    sections: [
+      {
+        eyebrow: "The honest answer",
+        h2: "Why ChatGPT can't ring your phone by itself",
+        body: "ChatGPT's and Claude's built-in \"tasks\" or \"reminders\" only run inside the assistant's own app — they can't reach into iOS to set a real alarm, add a calendar event, or ring your phone. Apple doesn't let a chat app schedule system alarms for you. So if you've asked ChatGPT to \"remind me at 3 PM\" and nothing happened on your lock screen, that's why.",
+      },
+      {
+        eyebrow: "The bridge",
+        h2: "Squirrel Brain gives an AI agent real actions on your phone",
+        body: "Squirrel Brain has a built-in MCP (Model Context Protocol) server. You generate a personal key in the app, connect ChatGPT, Claude, or any agent, and it gets a real set of tools — set an alarm, create a reminder, read your day, file a note, and even trigger a phone-call-style reminder — all on your behalf, on your actual phone.",
+        bullets: [
+          "Connect Claude, ChatGPT, OpenClaw, or your own agent over MCP",
+          "The agent sets real alarms, reminders, and calendar events — not in-chat notes",
+          "Every action is traceable back to the agent that made it",
+        ],
+      },
+      {
+        eyebrow: "Optional, not required",
+        h2: "You don't need an AI agent to use it",
+        body: "The MCP server is a power-up, not a requirement. Squirrel Brain works great on its own — speak it, snap it, or screenshot it and it becomes a reminder. The agent connection is there for people who want their assistant to actually do things on their phone.",
+      },
+    ],
+    faqs: [
+      {
+        q: "Can ChatGPT or Claude set a reminder or alarm on my iPhone?",
+        a: "Not on their own. ChatGPT and Claude can only create tasks that live inside their own app — they can't set a real iOS alarm, reminder, or calendar event. Squirrel Brain closes that gap with a built-in MCP server, so a connected agent can set a real reminder, alarm, or call on your behalf.",
+      },
+      {
+        q: "How does Squirrel Brain let an AI agent act on my phone?",
+        a: "You generate a personal key in the app and connect your agent over MCP (Model Context Protocol). The agent then gets real tools — set an alarm, create an item, read your daily brief, save a link, and trigger a phone-call-style reminder — and every action is traceable to the agent that made it.",
+      },
+      {
+        q: "Which AI assistants work with it?",
+        a: "Any MCP-compatible agent — including Claude and ChatGPT — plus your own custom agents. It's standard MCP, so it isn't locked to one assistant.",
+      },
+      {
+        q: "Do I have to connect an agent at all?",
+        a: "No. Squirrel Brain works fully on its own — voice, photo, and screenshot capture all become reminders without any AI agent. Connecting an agent is an optional power feature.",
+      },
+    ],
+    related: ["ai-agent-reminder-app", "ai-reminder-app", "reminder-app-that-calls-you", "second-brain-app"],
+  },
+
+  {
+    slug: "reminder-app-that-calls-you",
+    title: "A Reminder App That Calls You — Reminders You Can't Ignore | Squirrel Brain",
+    description:
+      "Squirrel Brain reminds you with a phone-call-style reminder that rings your phone — not a banner you swipe away. For the things you truly can't miss, get a reminder you can't ignore.",
+    eyebrow: "It calls you",
+    h1: "A reminder app that actually calls you",
+    subhead:
+      "A push notification is easy to swipe away and forget. For the one thing you can't miss, Squirrel Brain rings your phone with a phone-call-style reminder that speaks to you.",
+    heroShot: {
+      src: "/assets/screens/calendar-v2.webp",
+      alt: "Squirrel Brain calendar showing a reminder set to ring the phone like a call",
+    },
+    sections: [
+      {
+        eyebrow: "Notifications fail",
+        h2: "You've swiped away a reminder and forgotten it 30 seconds later",
+        body: "It's not a discipline problem. A banner notification competes with fifty others, disappears when your phone is face-down, and is gone the moment you swipe. For something that genuinely matters, a quiet, dismissible alert is the wrong tool.",
+      },
+      {
+        eyebrow: "It rings",
+        h2: "A reminder that rings your phone like a call",
+        body: "For the reminders you flag as important, Squirrel Brain doesn't send a banner — it rings your phone with a phone-call-style reminder and speaks to you in its own voice. It's the difference between a note you might see and a call you actually answer.",
+        bullets: [
+          "Phone-call-style reminders that ring your phone, not a silent banner",
+          "It speaks the reminder out loud when you pick up",
+          "You choose which reminders are important enough to call",
+        ],
+      },
+      {
+        eyebrow: "Capture, then call",
+        h2: "And it captures the reminder however you think of it",
+        body: "Unlike single-purpose call-reminder apps, Squirrel Brain also catches the thing in the first place — speak it, snap it, or screenshot it — and turns it into the reminder that later rings you. Capture and unignorable delivery, in one app.",
+      },
+    ],
+    faqs: [
+      {
+        q: "What reminder app actually calls your phone?",
+        a: "Squirrel Brain can reach you with a phone-call-style reminder that rings your phone and speaks the reminder out loud, instead of a push notification you can swipe away. You choose which reminders are important enough to ring you.",
+      },
+      {
+        q: "Why a call instead of a notification?",
+        a: "Notifications pile up, get swiped, and vanish when your phone is face-down. A call-style reminder is hard to miss — it's the right tool for the handful of things you truly can't let slip.",
+      },
+      {
+        q: "Does every reminder call me?",
+        a: "No. You decide which reminders escalate to a call and which stay as a normal nudge, so a ring always means it matters.",
+      },
+      {
+        q: "Does it also capture the reminder for me?",
+        a: "Yes. Unlike apps that only call you, Squirrel Brain captures the thing first — by voice, photo, or screenshot — and turns it into the reminder that later rings your phone.",
+      },
+    ],
+    related: ["loud-reminder-app", "ai-reminder-app", "voice-note-reminder-app", "outlook-screenshot-reminder"],
+  },
+
+  {
+    slug: "ai-agent-reminder-app",
+    title: "Let an AI Agent Set Reminders on Your Phone | Squirrel Brain",
+    description:
+      "Connect Claude, ChatGPT, or any AI agent to Squirrel Brain's built-in MCP server and let it set real alarms, reminders, and calendar events on your iPhone — and even call your phone — on your behalf.",
+    eyebrow: "AI agents",
+    h1: "Let your AI agent set reminders on your phone",
+    subhead:
+      "Squirrel Brain is the action layer for your AI assistant. Through a built-in MCP server, Claude, ChatGPT, or any agent can set real reminders, alarms, and calendar events on your actual phone.",
+    heroShot: {
+      src: "/assets/screens/burrow.webp",
+      alt: "The Burrow in Squirrel Brain, where a connected AI agent reads the day and sets reminders",
+    },
+    sections: [
+      {
+        eyebrow: "The missing layer",
+        h2: "Your AI assistant is smart, but it can't touch your phone",
+        body: "AI agents can plan your week and draft your messages, but they hit a wall at your phone — they can't set a real alarm, add a calendar event, or ring you. There's no consumer app that gives an agent those actions. Squirrel Brain is that missing layer.",
+      },
+      {
+        eyebrow: "Built-in MCP server",
+        h2: "Real tools, over the standard your agent already speaks",
+        body: "Squirrel Brain ships an MCP (Model Context Protocol) server. Connect your agent with a personal key and it gets a real toolset: set an alarm, create a reminder or note, read your daily brief, save a link, append to a forever note, and trigger a phone-call-style reminder — every action logged to the agent that made it.",
+        bullets: [
+          "Standard MCP — works with Claude, ChatGPT, OpenClaw, or your own agent",
+          "Set alarms, reminders, calendar events, notes, and calls",
+          "Read your day so the agent acts with real context",
+        ],
+      },
+      {
+        eyebrow: "On your terms",
+        h2: "You hold the key",
+        body: "Nothing happens without the key you generate in the app, and every agent action is traceable. Connect one agent or several; revoke access any time. Your phone, your rules — the agent just gets a safe, auditable way to help.",
+      },
+    ],
+    faqs: [
+      {
+        q: "Can an AI agent set reminders on my phone?",
+        a: "Yes — through Squirrel Brain. Connect Claude, ChatGPT, or any MCP-compatible agent to Squirrel Brain's built-in MCP server and it can set real alarms, reminders, and calendar events on your phone, and even trigger a phone-call-style reminder, on your behalf.",
+      },
+      {
+        q: "What is MCP?",
+        a: "MCP (Model Context Protocol) is an open standard that lets AI agents use external tools. Squirrel Brain exposes a set of tools over MCP, so any MCP-compatible agent can act on your phone in a structured, auditable way.",
+      },
+      {
+        q: "Is it safe to connect an agent?",
+        a: "You generate a personal key to connect an agent, every action it takes is traceable back to it, and you can revoke access at any time. Nothing happens without your key.",
+      },
+      {
+        q: "Do I need an agent to use Squirrel Brain?",
+        a: "No. The app works fully on its own — voice, photo, and screenshot capture all become reminders. The AI-agent layer is an optional power feature.",
+      },
+    ],
+    related: ["can-chatgpt-set-iphone-reminder", "second-brain-app", "ai-reminder-app", "reminder-app-that-calls-you"],
+  },
+
+  {
+    slug: "reminder-app-for-field-service",
+    title: "Reminder App for Field Service Techs & Contractors | Squirrel Brain",
+    description:
+      "Squirrel Brain captures the job, reminds you loud enough to catch, and keeps GPS-stamped photo proof — all in one app for field service techs, contractors, and installers.",
+    eyebrow: "For field service",
+    h1: "The reminder app for field service techs and contractors",
+    subhead:
+      "Capture the job between stops, get a reminder loud enough to actually catch, and keep timestamped, GPS-stamped photo proof of every site — all in one app.",
+    heroShot: {
+      src: "/assets/screens/pix-wall-v2.webp",
+      alt: "Pix board wall in Squirrel Brain showing GPS-stamped job-site photos sorted into boards",
+    },
+    sections: [
+      {
+        eyebrow: "Capture on site",
+        h2: "Catch the job detail before you're on to the next one",
+        body: "The part number, the thing the customer asked for, the follow-up you promised — it all happens on site, not at a desk. Talk it out or snap a photo and Squirrel Brain reads it, logs the detail, and sets the reminder before you've pulled out of the driveway.",
+        bullets: [
+          "Voice capture for follow-ups and job notes between stops",
+          "Photo capture for equipment, serial numbers, and conditions",
+          "Reminders that ring your phone when a job can't slip",
+        ],
+      },
+      {
+        eyebrow: "Proof of work",
+        h2: "GPS-stamped photo proof, filed automatically",
+        body: "Snap what you installed, delivered, or serviced and Squirrel Brain stores it with a timestamp and GPS location on the right board. When a customer disputes it, the proof is one search away — not buried in a camera roll of 5,000 photos.",
+      },
+      {
+        eyebrow: "One app, not five",
+        h2: "Reminders and proof in the same place",
+        body: "Most crews juggle a reminder app, a notes app, and a camera roll. Squirrel Brain does capture, loud reminders, and proof together — so the follow-up that rings you and the photo that proves the job are in one searchable place.",
+      },
+    ],
+    faqs: [
+      {
+        q: "How does Squirrel Brain help field service techs?",
+        a: "It captures job details by voice or photo on site, sets reminders that ring your phone when something can't slip, and stores timestamped, GPS-stamped photo proof of every job — all in one searchable app.",
+      },
+      {
+        q: "Can it store proof of service or install?",
+        a: "Yes. Photos are saved with a timestamp and GPS location and sorted onto boards, so proof of delivery, service, or install is searchable in seconds.",
+      },
+      {
+        q: "Will I actually catch the reminders?",
+        a: "For jobs that can't slip, Squirrel Brain can ring your phone with a phone-call-style reminder instead of a quiet banner — so a reminder reaches you even on a noisy site.",
+      },
+      {
+        q: "What device does it run on?",
+        a: "iPhone, for now. Squirrel Brain is pre-launch — join the launch list to get early access.",
+      },
+    ],
+    related: ["reminder-app-for-sales-reps", "photo-to-reminder-app", "loud-reminder-app", "outlook-screenshot-reminder"],
+  },
+
+  {
+    slug: "reminder-app-for-parents",
+    title: "Reminder App for Busy Parents — Snap It, Don't Forget It | Squirrel Brain",
+    description:
+      "Snap the permission slip, the flyer, the field-trip date — Squirrel Brain turns it into a reminder and calendar event so busy parents never miss the things scattered across backpacks, texts, and the fridge.",
+    eyebrow: "For busy parents",
+    h1: "The reminder app for busy parents",
+    subhead:
+      "Permission slips, soccer schedules, party invites, school flyers — snap a photo and Squirrel Brain turns it into a reminder and a calendar event, so the thing on the fridge doesn't become the thing you forgot.",
+    heroShot: {
+      src: "/assets/screens/pix-wall-v2.webp",
+      alt: "Pix board wall in Squirrel Brain with snapped schedules, receipts, and school papers sorted into boards",
+    },
+    sections: [
+      {
+        eyebrow: "It's everywhere",
+        h2: "The family calendar lives in backpacks, texts, and the fridge",
+        body: "A permission slip in a backpack, a field-trip date in a class text, a party invite stuck to the fridge, a coach's schedule screenshot — no single calendar has all of it, which is exactly why things get missed. Squirrel Brain pulls the scattered pieces into one place.",
+      },
+      {
+        eyebrow: "Snap it",
+        h2: "Photograph it, and it becomes the reminder",
+        body: "Take a picture of the slip, the flyer, or the schedule and Squirrel Brain reads the dates and details, sets the reminders, and adds the calendar events. Snap a soccer schedule and every game can become an alarm — no typing each one in.",
+        bullets: [
+          "Snap schedules, slips, flyers, and invites — it reads the dates",
+          "Reminders and calendar events created for you",
+          "A reminder that rings your phone for the things you can't miss",
+        ],
+      },
+      {
+        eyebrow: "Find it later",
+        h2: "And everything's searchable when you need it",
+        body: "Receipts for returns, the field-trip form, the birthday party address — Squirrel Brain sorts your photos onto boards so months later you just ask instead of scrolling. The mental load of remembering it all moves off your plate.",
+      },
+    ],
+    faqs: [
+      {
+        q: "How does Squirrel Brain help busy parents?",
+        a: "Snap a permission slip, schedule, flyer, or invite and Squirrel Brain reads the dates and turns it into reminders and calendar events. It keeps the scattered family to-dos — from backpacks, texts, and the fridge — in one searchable place.",
+      },
+      {
+        q: "Can it turn a soccer or activity schedule into reminders?",
+        a: "Yes. Photograph the schedule and Squirrel Brain can read the dates and create reminders or calendar events for each one, instead of you typing them in by hand.",
+      },
+      {
+        q: "Will it remind me loudly enough?",
+        a: "For the things you truly can't miss, Squirrel Brain can ring your phone with a phone-call-style reminder rather than a quiet banner you might swipe away.",
+      },
+      {
+        q: "Does it work on iPhone?",
+        a: "Yes — Squirrel Brain is an iPhone app. It's pre-launch, so join the launch list to be first into the beta.",
+      },
+    ],
+    related: ["photo-to-reminder-app", "screenshot-to-reminder-app", "loud-reminder-app", "second-brain-app"],
   },
 ];
 

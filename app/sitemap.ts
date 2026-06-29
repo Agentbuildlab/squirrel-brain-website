@@ -15,8 +15,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/pricing", priority: 0.7 },
     { path: "/mcp-docs", priority: 0.6 },
   ];
+  const lastModified = new Date();
   return routes.map((r) => ({
     url: `${BASE}${r.path}`,
+    lastModified,
     changeFrequency: "weekly",
     priority: r.priority,
   }));
