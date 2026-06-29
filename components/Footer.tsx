@@ -76,6 +76,30 @@ export default function Footer() {
                 For Developers
               </Link>
             </nav>
+
+            <p className="text-xs font-bold tracking-widest uppercase text-muted mt-6 mb-4">
+              By use case
+            </p>
+            <nav className="flex flex-col gap-2.5" aria-label="Use-case links">
+              <Link href="/ai-reminder-app" className="text-sm text-muted hover:text-ink transition-colors">
+                AI reminder app
+              </Link>
+              <Link href="/screenshot-to-reminder-app" className="text-sm text-muted hover:text-ink transition-colors">
+                Turn screenshots into reminders
+              </Link>
+              <Link href="/voice-note-reminder-app" className="text-sm text-muted hover:text-ink transition-colors">
+                Turn voice notes into reminders
+              </Link>
+              <Link href="/photo-to-reminder-app" className="text-sm text-muted hover:text-ink transition-colors">
+                Turn photos into reminders
+              </Link>
+              <Link href="/loud-reminder-app" className="text-sm text-muted hover:text-ink transition-colors">
+                Loud reminder app
+              </Link>
+              <Link href="/second-brain-app" className="text-sm text-muted hover:text-ink transition-colors">
+                Second brain app
+              </Link>
+            </nav>
           </div>
 
           {/* Newsletter + legal column — this IS the launch list (CTAs anchor here) */}

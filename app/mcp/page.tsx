@@ -9,6 +9,7 @@ export const metadata: Metadata = {
   title: "Connect any AI agent",
   description:
     "Squirrel Brain has a built-in MCP portal. Connect Claude, ChatGPT, OpenClaw, or any agent to set alarms, read your day, file photos, and send a voice message — or a real call — straight to your phone.",
+  alternates: { canonical: "/mcp" },
 };
 
 // The COMPLETE live tool set (31), grouped. Names must match the server's

@@ -11,6 +11,7 @@ export const metadata: Metadata = {
   title: "For the Field",
   description:
     "Squirrel Brain for sales reps, service techs, and contractors. Voice capture, GPS photo proof, Outlook import, and follow-ups that ring your phone.",
+  alternates: { canonical: "/work" },
 };
 
 const FEATURES: {

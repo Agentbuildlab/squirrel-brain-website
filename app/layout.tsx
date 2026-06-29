@@ -36,6 +36,10 @@ export const metadata: Metadata = {
     "agent-friendly app",
   ],
   alternates: { canonical: "/" },
+  icons: {
+    icon: "/assets/squirrel_logo.png",
+    apple: "/assets/squirrel_logo.png",
+  },
   openGraph: {
     title: `${SITE_NAME} — Say it. Snap it. It's handled.`,
     description: SITE_DESCRIPTION,

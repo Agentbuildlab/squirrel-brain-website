@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   title: "Watch it Work",
   description:
     "Short films of Squirrel Brain in action — for work, for family, and for your AI agents. Voice and photos turned into reminders, alarms, boards, and a phone call that rings right through Silent mode, Focus, and a locked screen.",
+  alternates: { canonical: "/demos" },
 };
 
 type Film = { src: string; title: string; sub: string; og?: boolean };

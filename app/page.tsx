@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import HeroSection from "@/components/HeroSection";
@@ -10,6 +11,19 @@ import MorningBriefSection from "@/components/MorningBriefSection";
 import FounderStorySection from "@/components/FounderStorySection";
 import FaqSection from "@/components/FaqSection";
 import FinalCta from "@/components/FinalCta";
+
+// Homepage-specific SEO. The hero H1 stays as the brand line ("Your brain has
+// too many tabs open") because it converts; the keyword target lives in the
+// <title> + description instead. `absolute` bypasses the "%s — Squirrel Brain"
+// template so the brand still reads first.
+export const metadata: Metadata = {
+  title: {
+    absolute: "Squirrel Brain | AI Reminder App for Voice Notes, Photos & Screenshots",
+  },
+  description:
+    "Squirrel Brain is an AI reminder app that turns voice notes, photos, screenshots, texts, and emails into reminders, alarms, notes, and calendar events so busy people don't forget what matters.",
+  alternates: { canonical: "/" },
+};
 
 export default function HomePage() {
   return (

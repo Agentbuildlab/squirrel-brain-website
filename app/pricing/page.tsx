@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   title: "Pricing",
   description:
     "Two simple plans: Standard at $9.99/month (10 hours of meeting recording) and Plus at $14.99/month (20 hours). Everything else is unlimited on both. 7-day free trial, cancel anytime.",
+  alternates: { canonical: "/pricing" },
 };
 
 // Everything except meeting recording is UNLIMITED on both plans — the bundle is

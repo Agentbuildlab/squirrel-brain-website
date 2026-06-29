@@ -12,6 +12,7 @@ export const metadata: Metadata = {
   title: "For the Family",
   description:
     "Squirrel Brain for busy parents. Snap a soccer schedule and get every game as an alarm. Receipts, pix boards, morning brief with weather and a joke — all organised.",
+  alternates: { canonical: "/family" },
 };
 
 const FEATURES = [
