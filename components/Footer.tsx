@@ -107,6 +107,9 @@ export default function Footer() {
               <Link href="/reminder-app-that-calls-you" className="text-sm text-muted hover:text-ink transition-colors">
                 Reminder app that calls you
               </Link>
+              <Link href="/daily-pep-talk-call-app" className="text-sm text-muted hover:text-ink transition-colors">
+                Daily pep-talk &amp; encouragement calls
+              </Link>
               <Link href="/can-chatgpt-set-iphone-reminder" className="text-sm text-muted hover:text-ink transition-colors">
                 Can ChatGPT set a reminder?
               </Link>

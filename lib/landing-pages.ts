@@ -55,6 +55,7 @@ export const LANDING_ANCHORS: Record<string, string> = {
   "ai-agent-reminder-app": "let an AI agent set reminders",
   "reminder-app-for-field-service": "reminder app for field service",
   "reminder-app-for-parents": "reminder app for busy parents",
+  "daily-pep-talk-call-app": "daily pep-talk & encouragement calls",
 };
 
 export const LANDING_PAGES: LandingPageData[] = [
@@ -593,16 +594,20 @@ export const LANDING_PAGES: LandingPageData[] = [
       },
       {
         eyebrow: "Tell it what to say",
-        h2: "A pep talk, a daily brief, or a prep call before your meeting",
-        body: "Ask it to call you twice a day with a pep talk about your day. Tell it you've got a meeting at 2 and to ring you beforehand and run through the five main points. It's a reminder, a morning brief, a hype call, and a meeting prep — in your ear, exactly when you need it.",
+        h2: "A pep talk, a daily word, or a prep call before your meeting",
+        body: "Ask it to call you twice a day with a pep talk about your day, or a word of encouragement or scripture to start your morning. Tell it you've got a meeting at 2 and to ring you beforehand and run through the five main points. It's a reminder, a morning brief, a hype call, and a meeting prep — in your ear, exactly when you need it.",
         bullets: [
-          "Schedule recurring check-in or pep-talk calls",
+          "Schedule recurring check-in, pep-talk, or daily-encouragement calls",
           "A prep call before a meeting that covers your key points",
-          "You pick which reminders are worth a call",
+          "You pick exactly what it says and which reminders are worth a call",
         ],
       },
     ],
     faqs: [
+      {
+        q: "Can it call me daily with a pep talk, scripture, or word of encouragement?",
+        a: "Yes. Schedule a recurring call and ask it to greet you with a pep talk, a daily scripture, or a few encouraging words. An AI voice delivers it in a real call that rings through Silent mode.",
+      },
       {
         q: "Does it really ring through Silent mode?",
         a: "Yes. The reminder comes through like a real phone call, so it rings even when your phone is on Silent or in a Focus mode, and on a locked screen — for the reminders you flag as important.",
@@ -624,7 +629,7 @@ export const LANDING_PAGES: LandingPageData[] = [
         a: "No. You decide which reminders escalate to a call and which stay as a normal nudge, so a ring always means it matters.",
       },
     ],
-    related: ["loud-reminder-app", "ai-reminder-app", "voice-note-reminder-app", "outlook-screenshot-reminder"],
+    related: ["daily-pep-talk-call-app", "loud-reminder-app", "ai-reminder-app", "voice-note-reminder-app", "outlook-screenshot-reminder"],
   },
 
   {
@@ -793,6 +798,71 @@ export const LANDING_PAGES: LandingPageData[] = [
       },
     ],
     related: ["photo-to-reminder-app", "screenshot-to-reminder-app", "loud-reminder-app", "second-brain-app"],
+  },
+
+  {
+    slug: "daily-pep-talk-call-app",
+    title: "An App That Calls You With a Daily Pep Talk or Scripture | Squirrel Brain",
+    description:
+      "Squirrel Brain can call your phone on a schedule and an AI voice gives you a pep talk, a daily word of encouragement or scripture, a prep before a big meeting, or a reminder you can't miss — a real call that rings through Silent mode.",
+    eyebrow: "Daily calls that lift you up",
+    h1: "A real call that talks you through your day",
+    subhead:
+      "Ask your squirrel to call you a couple times a day — and an AI voice picks up with a pep talk, an encouraging word or scripture, a prep before your big meeting, or the thing you can't forget. A real phone call that rings through Silent mode.",
+    heroShot: {
+      src: "/assets/screens/calendar-v2.webp",
+      alt: "Squirrel Brain showing a recurring daily call scheduled to deliver an encouraging message",
+    },
+    sections: [
+      {
+        eyebrow: "Start the day encouraged",
+        h2: "A morning call with a word of encouragement",
+        body: "Ask for a call every morning and your squirrel rings you with a quick pep talk and a word of encouragement — a scripture to set your mind right, something to steady you before the day gets loud. It isn't a text you scroll past; it's a call you answer, in a real voice that speaks just to you.",
+        bullets: [
+          "Schedule a morning (and midday) call on your terms — once or twice a day",
+          "Ask for a daily scripture, an affirmation, or a few encouraging words",
+          "It rings through Silent mode, so the encouragement actually reaches you",
+        ],
+      },
+      {
+        eyebrow: "Walk in ready",
+        h2: "A pep talk right before the moment that matters",
+        body: "Big meeting at 2? A hard conversation coming up? Tell your squirrel and it calls you beforehand, hypes you up, and runs through the main points, so you walk in steady and ready instead of scrambling.",
+      },
+      {
+        eyebrow: "And the things you'd forget",
+        h2: "The reminders that ring like a call, not a banner",
+        body: "Same call, for the things you can't let slip — take the meds, call them back, leave now. Instead of a notification you swipe away, your phone rings and an AI voice tells you in plain words. You choose exactly what it says and when it calls.",
+        bullets: [
+          "Recurring calls — once, twice a day, or whenever you set them",
+          "An AI voice that actually speaks to you, not a canned recording",
+          "Rings through Silent mode, Focus, and a locked screen",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        q: "Can it call me every day with a pep talk or a scripture?",
+        a: "Yes. You can schedule recurring calls and ask your squirrel to greet you with a pep talk, a word of encouragement, or a daily scripture. An AI voice delivers it in a real phone call — not a text you scroll past.",
+      },
+      {
+        q: "Is it actually a phone call?",
+        a: "Yes. It rings your phone like a real call and comes through Silent mode, Focus, and a locked screen. When you pick up, an AI voice talks to you in plain language.",
+      },
+      {
+        q: "Can it call me right before a meeting to prep me?",
+        a: "Yes. Tell it about the meeting and ask it to call beforehand — it'll ring you and run through your main points so you go in ready.",
+      },
+      {
+        q: "Can I choose what it says and when it calls?",
+        a: "Yes. You set the schedule and what you want to hear — encouragement, a scripture, a recap of your day, a meeting prep, or a specific reminder. It's your call, your words.",
+      },
+      {
+        q: "Does it work on iPhone?",
+        a: "Yes — Squirrel Brain is an iPhone app. It's pre-launch, so join the launch list to be first in.",
+      },
+    ],
+    related: ["reminder-app-that-calls-you", "loud-reminder-app", "ai-reminder-app", "voice-note-reminder-app"],
   },
 ];
 
