@@ -140,9 +140,19 @@ async function sendWelcomeEmail(email: string): Promise<void> {
 
 async function addToAudience(email: string): Promise<void> {
   const apiKey = process.env.RESEND_API_KEY;
-  const audienceId = process.env.RESEND_AUDIENCE_ID;
-  if (!apiKey || !audienceId) return; // dormant until configured
+  if (!apiKey) return; // dormant until the key is configured
   try {
+    // Use an explicit audience if provided, else auto-discover the account's
+    // first (default) audience — so only RESEND_API_KEY is required to set up.
+    let audienceId = process.env.RESEND_AUDIENCE_ID;
+    if (!audienceId) {
+      const list = await fetch("https://api.resend.com/audiences", {
+        headers: { Authorization: `Bearer ${apiKey}` },
+      });
+      const json = await list.json().catch(() => null);
+      audienceId = json?.data?.[0]?.id;
+    }
+    if (!audienceId) return;
     await fetch(`https://api.resend.com/audiences/${audienceId}/contacts`, {
       method: "POST",
       headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
