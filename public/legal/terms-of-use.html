@@ -77,14 +77,9 @@
       .then(function(md) {
         document.getElementById('content').innerHTML = marked.parse(md);
         // Highlight [PLACEHOLDER] markers
+        // Internal counsel-review notes are not part of the public policy.
         document.querySelectorAll('#content p, #content li, #content td').forEach(function(el) {
-          if (el.textContent.includes('[PLACEHOLDER')) {
-            el.style.background = '#1a1200';
-            el.style.borderLeft = '3px solid #FF7A1A55';
-            el.style.padding = '6px 10px';
-            el.style.borderRadius = '0 6px 6px 0';
-            el.style.marginBottom = '8px';
-          }
+          if (el.textContent.includes('[PLACEHOLDER')) el.remove();
         });
       })
       .catch(function() {

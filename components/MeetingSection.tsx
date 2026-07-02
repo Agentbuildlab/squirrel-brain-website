@@ -66,7 +66,8 @@ export default function MeetingSection() {
             Record the whole meeting. Keep what matters.
           </h2>
           <p className="text-base text-muted leading-relaxed mb-4">
-            Under Notes, tap <strong className="text-ink">Meeting</strong> and just let it run. Your
+            Under Notes, tap <strong className="text-ink">Meeting</strong>{" "}
+            and just let it run. Your
             squirrel records the whole conversation in short chunks — so nothing rides on one long
             file — then transcribes it and pulls out what&rsquo;s important: the action items, the
             follow-ups, the deadlines, as best as the AI can. Turn any of them into a reminder with
