@@ -26,7 +26,12 @@ export default function Footer() {
         // Conversion event — tie the signup to a PostHog person (identified_only)
         // and record the waitlist join for funnels.
         if (email) posthog.identify(email, { email });
-        posthog.capture("waitlist_signup", { already: !!data.already });
+        // source_path = which page converted this visitor — the per-segment
+        // scoreboard for the "one design, many segments" experiment.
+        posthog.capture("waitlist_signup", {
+          already: !!data.already,
+          source_path: typeof window !== "undefined" ? window.location.pathname : "unknown",
+        });
         setStatus("done");
         setMessage(
           data.already

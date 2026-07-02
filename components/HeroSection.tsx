@@ -4,7 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
 import { WAITLIST_HREF } from "@/lib/config";
-import { PhoneShot, T } from "@/components/v2/PhoneKit";
+import { T } from "@/components/v2/PhoneKit";
+import { RingingPhone } from "@/components/v2/CallScreen";
 
 // ── Static mascot bob animation ────────────────────────────────────────────
 
@@ -32,46 +33,13 @@ function MascotBob({ size = 120 }: { size?: number }) {
   );
 }
 
-// ── Hero — a normal full-height section (NOT scroll-pinned) ────────────────
-// Previously this used a 250vh container + a sticky inner pane driven by
-// useScroll. Combined with Lenis smooth-scroll that made the first screen feel
-// like it "wouldn't scroll" — you had to force the wheel. Now it's a plain
-// min-h-screen section: scroll behaves normally everywhere.
+// ── Hero — ONE promise above the fold: the phone that rings you back ───────
+// Research-backed layout (2026-07-02 redesign): a single differentiating hook
+// shown, not told (the ringing call screen — pure CSS, no video to degrade),
+// ONE primary CTA, and the honest capture trio as the subhead. The segment
+// doors right below carry the "which busy are you?" routing.
 
 export default function HeroSection() {
-  const headline = (
-    <>
-      <p
-        className="font-display font-extrabold mb-3"
-        style={{
-          fontSize: "clamp(1.05rem, 2.1vw, 1.7rem)",
-          color: T.orange,
-          lineHeight: 1.1,
-          letterSpacing: -0.2,
-        }}
-      >
-        You&rsquo;re not forgetful, you&rsquo;re outnumbered.
-      </p>
-      <h1
-        id="hero-heading"
-        className="font-display font-extrabold text-ink leading-[0.95] tracking-tight"
-        style={{
-          fontSize: "clamp(2rem, 5vw, 5.5rem)",
-          opacity: 1,
-        }}
-      >
-        Your brain has{" "}
-        <span style={{ color: T.orange }}>too many tabs open.</span>{" "}
-        <br />
-        Let’s close{" "}
-        <span style={{ color: T.orange }}>some of them.</span>
-      </h1>
-    </>
-  );
-
-  const subhead =
-    "Snap it, say it, stash it — and your squirrel hands it back exactly when it matters.";
-
   return (
     <section
       className="relative min-h-screen flex items-center overflow-hidden"
@@ -127,23 +95,45 @@ export default function HeroSection() {
 
           {/* Mascot on mobile — compact, shows above headline */}
           <div className="flex md:hidden mb-4">
-            <MascotBob size={72} />
+            <MascotBob size={64} />
           </div>
 
-          {/* Headline */}
-          {headline}
+          {/* Kicker */}
+          <p
+            className="font-display font-extrabold mb-3"
+            style={{
+              fontSize: "clamp(1.05rem, 2.1vw, 1.7rem)",
+              color: T.orange,
+              lineHeight: 1.1,
+              letterSpacing: -0.2,
+            }}
+          >
+            You&rsquo;re not forgetful — you&rsquo;re outnumbered.
+          </p>
 
-          {/* Sub */}
+          {/* Headline — the one thing nobody else can say */}
+          <h1
+            id="hero-heading"
+            className="font-display font-extrabold text-ink leading-[0.95] tracking-tight"
+            style={{ fontSize: "clamp(2rem, 5vw, 5.5rem)" }}
+          >
+            The second brain that{" "}
+            <span style={{ color: T.orange }}>rings you back.</span>
+          </h1>
+
+          {/* Sub — the honest capture trio + what the call really is */}
           <motion.p
             className="mt-5 text-lg lg:text-xl text-muted leading-relaxed max-w-md"
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.55, delay: 0.25 }}
           >
-            {subhead}
+            Speak it. Snap it. Stash it. Your squirrel files everything — and for
+            the one thing you can&rsquo;t miss, it <strong>calls your phone</strong> in
+            its own voice.
           </motion.p>
 
-          {/* CTAs */}
+          {/* CTAs — one primary action */}
           <motion.div
             className="mt-5 flex flex-wrap gap-3 items-center"
             initial={{ opacity: 0, y: 8 }}
@@ -178,22 +168,29 @@ export default function HeroSection() {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.5 }}
           >
-We&rsquo;ll email you the moment it&rsquo;s ready · 7-day free trial · iOS
+            We&rsquo;ll email you the moment it&rsquo;s ready · 7-day free trial · iOS
           </motion.p>
+
+          {/* Ringing phone on mobile — the hook has to be visible on a phone */}
+          <motion.div
+            className="flex md:hidden justify-center mt-10"
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.45 }}
+          >
+            <RingingPhone width={200} />
+          </motion.div>
         </div>
 
-        {/* RIGHT: mascot + phone */}
+        {/* RIGHT: mascot + the phone, RINGING — show the moat, don't say it */}
         <div className="hidden md:flex flex-col items-center gap-8 flex-shrink-0">
-          {/* Mascot above phone */}
           <MascotBob />
-
-          {/* Phone */}
           <motion.div
             initial={{ opacity: 0, y: 40, scale: 0.96 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ duration: 0.7, delay: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
           >
-            <PhoneShot src="/assets/screens/home-v4.webp" alt="Squirrel Brain — your day at a glance" width={380} />
+            <RingingPhone width={272} />
           </motion.div>
         </div>
       </div>
