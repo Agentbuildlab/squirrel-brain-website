@@ -12,5 +12,5 @@ export const SITE_TAGLINE = "Say it. Snap it. It's handled.";
 export const SITE_DESCRIPTION =
   "Squirrel Brain turns voice notes, photos, screenshots, texts, and emails into reminders, alarms, notes, and calendar events — so busy people don't forget what matters.";
 
-export const POSTHOG_KEY = "phc_mtTXNiTrgfZwWnh6akwidh82ZNnWM2zrdFxjw8MYUC2B";
+export const POSTHOG_KEY = "phc_mtTXNiTrgfZWWnh6akwidh82ZNnWM2zrdFxjw8MYUC2B";
 export const POSTHOG_HOST = "https://us.i.posthog.com";
