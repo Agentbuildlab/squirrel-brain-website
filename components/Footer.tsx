@@ -1,14 +1,68 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import posthog from "posthog-js";
+
+// Referral state shape returned by /api/launch-signup (see lib/referral.ts).
+type SignupResult = {
+  position?: number | null;
+  referrals?: number;
+  referralCode?: string;
+  referralUrl?: string;
+};
+
+const REF_STORAGE_KEY = "sb_ref";
 
 export default function Footer() {
   const [email, setEmail] = useState("");
   const [website, setWebsite] = useState(""); // honeypot
   const [status, setStatus] = useState<"idle" | "loading" | "done" | "error">("idle");
   const [message, setMessage] = useState("");
+  const [result, setResult] = useState<SignupResult>({});
+  const [copied, setCopied] = useState(false);
+
+  // Referral capture: a ?ref=CODE landing sticks for the whole visit (and
+  // future visits) so the credit survives navigation before signup.
+  useEffect(() => {
+    try {
+      const ref = new URLSearchParams(window.location.search).get("ref");
+      if (ref && /^[a-z0-9]{6,12}$/.test(ref)) {
+        if (localStorage.getItem(REF_STORAGE_KEY) !== ref) {
+          localStorage.setItem(REF_STORAGE_KEY, ref);
+          posthog.capture("referral_landing", { ref });
+        }
+      }
+    } catch {
+      /* storage unavailable — referral credit just won't persist */
+    }
+  }, []);
+
+  async function copyReferral() {
+    if (!result.referralUrl) return;
+    try {
+      await navigator.clipboard.writeText(result.referralUrl);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+      posthog.capture("referral_share_click", { method: "copy" });
+    } catch {
+      /* clipboard blocked — the link is still visible to select manually */
+    }
+  }
+
+  async function shareReferral() {
+    if (!result.referralUrl) return;
+    posthog.capture("referral_share_click", { method: "native_share" });
+    try {
+      await navigator.share({
+        title: "Squirrel Brain",
+        text: "The second brain that rings you back — join the launch list with my link:",
+        url: result.referralUrl,
+      });
+    } catch {
+      /* user cancelled the share sheet */
+    }
+  }
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -16,10 +70,16 @@ export default function Footer() {
     setStatus("loading");
     setMessage("");
     try {
+      let ref: string | null = null;
+      try {
+        ref = localStorage.getItem(REF_STORAGE_KEY);
+      } catch {
+        /* no storage */
+      }
       const res = await fetch("/api/launch-signup", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, website }),
+        body: JSON.stringify({ email, website, ...(ref ? { ref } : {}) }),
       });
       const data = await res.json().catch(() => ({}));
       if (res.ok) {
@@ -31,7 +91,10 @@ export default function Footer() {
         posthog.capture("waitlist_signup", {
           already: !!data.already,
           source_path: typeof window !== "undefined" ? window.location.pathname : "unknown",
+          position: data.position ?? null,
+          referred: !!(typeof window !== "undefined" && localStorage.getItem(REF_STORAGE_KEY)),
         });
+        setResult(data);
         setStatus("done");
         setMessage(
           data.already
@@ -115,6 +178,9 @@ export default function Footer() {
               <Link href="/daily-pep-talk-call-app" className="text-sm text-muted hover:text-ink transition-colors">
                 Daily pep-talk &amp; encouragement calls
               </Link>
+              <Link href="/daily-bible-verse-call" className="text-sm text-muted hover:text-ink transition-colors">
+                A daily Bible verse by phone call
+              </Link>
               <Link href="/can-chatgpt-set-iphone-reminder" className="text-sm text-muted hover:text-ink transition-colors">
                 Can ChatGPT set a reminder?
               </Link>
@@ -132,12 +198,58 @@ export default function Footer() {
             </p>
             {status === "done" ? (
               <div
-                className="flex items-start gap-2.5 rounded-lg px-3.5 py-3 text-sm"
+                className="rounded-lg px-3.5 py-3 text-sm"
                 style={{ background: "#E2F5EC", border: "1px solid rgba(63,174,110,0.3)", color: "#1f6b43" }}
                 role="status"
               >
-                <span aria-hidden="true">🐿️</span>
-                <span>{message}</span>
+                <p className="flex items-start gap-2.5">
+                  <span aria-hidden="true">🐿️</span>
+                  <span>
+                    {typeof result.position === "number" ? (
+                      <>
+                        You&rsquo;re <strong>#{result.position}</strong> on the launch list!
+                        {result.referrals ? ` (${result.referrals} friend${result.referrals === 1 ? "" : "s"} joined with your link)` : ""}
+                      </>
+                    ) : (
+                      message
+                    )}
+                  </span>
+                </p>
+                {result.referralUrl && (
+                  <div className="mt-3">
+                    <p className="text-xs mb-1.5" style={{ color: "#1f6b43" }}>
+                      Every friend who joins with your link moves you up <strong>5 spots</strong>:
+                    </p>
+                    <div className="flex gap-1.5">
+                      <input
+                        readOnly
+                        value={result.referralUrl}
+                        onFocus={(e) => e.target.select()}
+                        className="flex-1 min-w-0 text-xs bg-white border rounded-md px-2 py-1.5"
+                        style={{ borderColor: "rgba(63,174,110,0.3)", color: "#1f6b43" }}
+                        aria-label="Your referral link"
+                      />
+                      <button
+                        type="button"
+                        onClick={copyReferral}
+                        className="text-xs font-bold px-2.5 py-1.5 rounded-md text-white whitespace-nowrap"
+                        style={{ background: "#3fae6e" }}
+                      >
+                        {copied ? "Copied!" : "Copy"}
+                      </button>
+                      {typeof navigator !== "undefined" && "share" in navigator && (
+                        <button
+                          type="button"
+                          onClick={shareReferral}
+                          className="text-xs font-bold px-2.5 py-1.5 rounded-md whitespace-nowrap"
+                          style={{ background: "white", color: "#1f6b43", border: "1px solid rgba(63,174,110,0.3)" }}
+                        >
+                          Share
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                )}
               </div>
             ) : (
               <form className="flex gap-2" onSubmit={handleSubmit} aria-label="Launch list signup">

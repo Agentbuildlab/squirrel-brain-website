@@ -25,6 +25,8 @@ Status: pre-launch. Humans join a launch list; the MCP server is already live fo
 - [Second brain app](https://squirrelbrainapp.com/second-brain-app): a second brain that takes action, not just stores notes
 - [Reminder app for sales reps](https://squirrelbrainapp.com/reminder-app-for-sales-reps) and [field service](https://squirrelbrainapp.com/reminder-app-for-field-service): capture + loud reminders + GPS photo proof
 - [Reminder app for busy parents](https://squirrelbrainapp.com/reminder-app-for-parents): snap the slip/schedule → reminders and calendar events
+- [Daily pep-talk & encouragement calls](https://squirrelbrainapp.com/daily-pep-talk-call-app): a scheduled real call with a pep talk, encouragement, or meeting prep
+- [A daily Bible verse by phone call](https://squirrelbrainapp.com/daily-bible-verse-call): a morning call that reads you a verse and a word of encouragement
 - [Outlook screenshot reminder](https://squirrelbrainapp.com/outlook-screenshot-reminder): screenshot a locked-down Outlook event → a reminder
 - [Can ChatGPT set a reminder on my iPhone?](https://squirrelbrainapp.com/can-chatgpt-set-iphone-reminder): honest explainer + how the MCP bridge works
 - [Let an AI agent set reminders on your phone](https://squirrelbrainapp.com/ai-agent-reminder-app): give Claude/ChatGPT a real action layer via MCP

@@ -7,6 +7,7 @@ import ScreenshotGotchaSection from "@/components/ScreenshotGotchaSection";
 import ProofGotchaSection from "@/components/ProofGotchaSection";
 import PixMoatSection from "@/components/PixMoatSection";
 import CallSection from "@/components/CallSection";
+import CallMeDemo from "@/components/CallMeDemo";
 import FounderStorySection from "@/components/FounderStorySection";
 import FaqSection from "@/components/FaqSection";
 import FinalCta from "@/components/FinalCta";
@@ -51,6 +52,10 @@ export default function HomePage() {
 
         {/* THE DEEP DIVE — the call, full story (hero promised it; this proves it) */}
         <CallSection />
+
+        {/* LIVE DEMO — "Scuttle calls you right now" (renders null until
+            CALL_ME_DEMO_ENABLED + the app-side endpoint exist — see spec) */}
+        <CallMeDemo />
 
         {/* WHY THIS EXISTS — the vague founder origin */}
         <FounderStorySection />

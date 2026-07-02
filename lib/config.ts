@@ -14,3 +14,8 @@ export const SITE_DESCRIPTION =
 
 export const POSTHOG_KEY = "phc_mtTXNiTrgfZWWnh6akwidh82ZNnWM2zrdFxjw8MYUC2B";
 export const POSTHOG_HOST = "https://us.i.posthog.com";
+
+// "Scuttle calls you right now" live demo — the widget ships DARK until the
+// app-side endpoint exists (spec: docs/CALL_ME_DEMO_SPEC.md). Flip this to
+// true AND set CALL_DEMO_ENDPOINT + CALL_DEMO_KEY in Vercel env to go live.
+export const CALL_ME_DEMO_ENABLED = false;

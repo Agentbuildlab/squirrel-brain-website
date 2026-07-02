@@ -56,6 +56,7 @@ export const LANDING_ANCHORS: Record<string, string> = {
   "reminder-app-for-field-service": "reminder app for field service",
   "reminder-app-for-parents": "reminder app for busy parents",
   "daily-pep-talk-call-app": "daily pep-talk & encouragement calls",
+  "daily-bible-verse-call": "a daily Bible verse by phone call",
 };
 
 export const LANDING_PAGES: LandingPageData[] = [
@@ -862,7 +863,72 @@ export const LANDING_PAGES: LandingPageData[] = [
         a: "Yes — Squirrel Brain is an iPhone app. It's pre-launch, so join the launch list to be first in.",
       },
     ],
-    related: ["reminder-app-that-calls-you", "loud-reminder-app", "ai-reminder-app", "voice-note-reminder-app"],
+    related: ["daily-bible-verse-call", "reminder-app-that-calls-you", "loud-reminder-app", "ai-reminder-app"],
+  },
+
+  {
+    slug: "daily-bible-verse-call",
+    title: "An App That Calls You With a Daily Bible Verse | Squirrel Brain",
+    description:
+      "Squirrel Brain calls your phone each morning and an AI voice reads you a Bible verse and a word of encouragement — a real call that rings through Silent mode, so your daily verse actually reaches you.",
+    eyebrow: "Your daily verse, out loud",
+    h1: "A morning call with a Bible verse — not another app to open",
+    subhead:
+      "Devotional apps wait for you to remember them. Squirrel Brain calls YOU: every morning your phone rings, and a warm voice reads a verse and a short word of encouragement to start your day anchored. A real call that rings through Silent mode.",
+    heroShot: {
+      src: "/assets/screens/calendar-v2.webp",
+      alt: "Squirrel Brain showing a recurring morning call scheduled to deliver a daily Bible verse",
+    },
+    sections: [
+      {
+        eyebrow: "The difference",
+        h2: "Reading plans need discipline. A phone call finds you.",
+        body: "Every devotional app has the same weak spot: you have to remember to open it, and the streak dies by February. A call flips that. Your phone rings at the time you chose, you answer, and the verse is simply read to you — while you make coffee, drive to work, or catch a quiet minute before the kids wake up.",
+        bullets: [
+          "You pick the time — every morning, midday, or both",
+          "A real voice reads the verse to you; nothing to open, nothing to scroll",
+          "It rings through Silent mode, so it reaches you even when everything else is muted",
+        ],
+      },
+      {
+        eyebrow: "Make it yours",
+        h2: "Your walk, your words",
+        body: "Tell your squirrel what you want to hear: a verse and a short encouragement, a morning prayer prompt, or a word for what you're carrying right now. You set it once, in plain words, and the call comes the way you asked.",
+      },
+      {
+        eyebrow: "More than mornings",
+        h2: "The same call holds the rest of your day together",
+        body: "The app behind the call is a full second brain: speak a thought, snap a photo, screenshot a text — it becomes reminders, notes, and calendar events that follow through. The verse call gets you started; the rest keeps the day from slipping.",
+        bullets: [
+          "Speak it, snap it, stash it — everything files itself",
+          "Phone-call reminders for the things you can't miss",
+          "One app for encouragement AND follow-through",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        q: "Can it really call me with a Bible verse every morning?",
+        a: "Yes. Schedule a recurring morning call and ask for a daily verse with a word of encouragement. Your phone rings like a real call and an AI voice reads it to you.",
+      },
+      {
+        q: "Is it a real phone call or a notification?",
+        a: "A real call — it rings through Silent mode, Focus, and a locked screen. No banner to swipe away, nothing to remember to open.",
+      },
+      {
+        q: "Can I choose the time and what it says?",
+        a: "Yes. You set the schedule and tell it what you want — a verse, a short devotional word, an encouraging thought, or a prayer prompt. Plain words, no setup screens.",
+      },
+      {
+        q: "Does it replace my devotional or reading plan?",
+        a: "No — it's the nudge that keeps them alive. Many people use the call as the start, then go deeper in their Bible or devotional after. The call makes sure the day never starts without the Word.",
+      },
+      {
+        q: "Does it work on iPhone?",
+        a: "Yes — Squirrel Brain is an iPhone app. It's pre-launch, so join the launch list to be first in.",
+      },
+    ],
+    related: ["daily-pep-talk-call-app", "reminder-app-that-calls-you", "loud-reminder-app", "ai-reminder-app"],
   },
 ];
 

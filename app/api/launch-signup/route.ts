@@ -1,17 +1,77 @@
 import { NextResponse } from "next/server";
+import {
+  codeForEmail,
+  refTag,
+  isValidRefCode,
+  effectivePosition,
+  referralUrl,
+} from "@/lib/referral";
 
 // Server-only endpoint: adds an email to the Supabase `waitlist` table.
 // Uses the service-role key (server env, never sent to the client) because RLS
 // blocks anonymous inserts. A Supabase DB webhook on INSERT fires the
 // `waitlist-notification` edge function, which emails hello@squirrelbrainapp.com.
+//
+// REFERRALS (2026-07-02): the response now carries {position, referralCode,
+// referralUrl, referrals} so the form can show "you're #N — share to move up".
+// Who-referred-me rides in the unused `name` column as "ref:<code>" (zero-DDL;
+// see lib/referral.ts). Every referral stat is BEST-EFFORT — a failure there
+// never fails the signup.
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 const SUPABASE_URL = "https://geczbtsjfbvfukdzdemr.supabase.co";
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+function sbHeaders(key: string): Record<string, string> {
+  return {
+    apikey: key,
+    Authorization: `Bearer ${key}`,
+    "Content-Type": "application/json",
+  };
+}
+
+// Count rows matching a PostgREST filter without fetching them.
+async function sbCount(key: string, filter: string): Promise<number | null> {
+  try {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/waitlist?select=email&${filter}`, {
+      headers: { ...sbHeaders(key), Prefer: "count=exact", Range: "0-0" },
+    });
+    if (!res.ok && res.status !== 206) return null;
+    const range = res.headers.get("content-range"); // e.g. "0-0/42"
+    const total = range?.split("/")[1];
+    return total && total !== "*" ? parseInt(total, 10) : null;
+  } catch {
+    return null;
+  }
+}
+
+// Queue position + referral credit for an email already on the list.
+async function waitlistStats(key: string, email: string, myCode: string) {
+  try {
+    const rowRes = await fetch(
+      `${SUPABASE_URL}/rest/v1/waitlist?email=eq.${encodeURIComponent(email)}&select=created_at&limit=1`,
+      { headers: sbHeaders(key) }
+    );
+    const rows = rowRes.ok ? await rowRes.json().catch(() => []) : [];
+    const createdAt: string | undefined = rows?.[0]?.created_at;
+    if (!createdAt) return { position: null, referrals: 0 };
+
+    const rank = await sbCount(key, `created_at=lte.${encodeURIComponent(createdAt)}`);
+    // May 400 if the `name` column doesn't exist — sbCount returns null then.
+    const referrals =
+      (await sbCount(key, `name=eq.${encodeURIComponent(refTag(myCode))}`)) ?? 0;
+    return {
+      position: rank == null ? null : effectivePosition(rank, referrals),
+      referrals,
+    };
+  } catch {
+    return { position: null, referrals: 0 };
+  }
+}
+
 export async function POST(req: Request) {
-  let body: { email?: string; website?: string };
+  let body: { email?: string; website?: string; ref?: string };
   try {
     body = await req.json();
   } catch {
@@ -32,62 +92,68 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Signup is temporarily unavailable." }, { status: 500 });
   }
 
+  const myCode = codeForEmail(email);
+  // Self-referrals are quietly ignored.
+  const ref = isValidRefCode(body.ref) && body.ref !== myCode ? body.ref : null;
+
+  async function insert(record: Record<string, string>): Promise<Response> {
+    return fetch(`${SUPABASE_URL}/rest/v1/waitlist`, {
+      method: "POST",
+      headers: { ...sbHeaders(key!), Prefer: "return=minimal" },
+      body: JSON.stringify(record),
+    });
+  }
+
   let res: Response;
   try {
-    res = await fetch(`${SUPABASE_URL}/rest/v1/waitlist`, {
-      method: "POST",
-      headers: {
-        apikey: key,
-        Authorization: `Bearer ${key}`,
-        "Content-Type": "application/json",
-        Prefer: "return=minimal",
-      },
-      body: JSON.stringify({ email }),
-    });
+    res = await insert(ref ? { email, name: refTag(ref) } : { email });
+    // If the `name` column doesn't exist (schema drift), retry without credit —
+    // the signup itself must never be lost to referral bookkeeping.
+    if (res.status === 400 && ref) res = await insert({ email });
   } catch (e) {
     console.error("launch-signup: fetch to Supabase failed", e);
     return NextResponse.json({ error: "Something went wrong. Please try again." }, { status: 502 });
   }
 
-  if (res.ok) {
+  const already = res.status === 409; // unique-violation → already on the list
+  if (!res.ok && !already) {
+    const text = await res.text().catch(() => "");
+    console.error("launch-signup: insert failed", res.status, text);
+    return NextResponse.json({ error: "Something went wrong. Please try again." }, { status: 502 });
+  }
+
+  if (!already) {
     // Fire the alert email ourselves (don't rely on the Supabase DB webhook,
-    // which isn't dependably triggering). The waitlist-notification edge
-    // function sends to hello@squirrelbrainapp.com, which forwards (via
-    // forwardemail.net) to the founder's Gmail. Never fail the signup if this
-    // errors — the email is already stored.
+    // which isn't dependably triggering). Never fail the signup if this errors.
     try {
       await fetch(`${SUPABASE_URL}/functions/v1/waitlist-notification`, {
         method: "POST",
-        headers: {
-          apikey: key,
-          Authorization: `Bearer ${key}`,
-          "Content-Type": "application/json",
-        },
+        headers: sbHeaders(key),
         body: JSON.stringify({
           type: "INSERT",
           table: "waitlist",
-          record: { email, name: null, created_at: new Date().toISOString() },
+          record: { email, name: ref ? refTag(ref) : null, created_at: new Date().toISOString() },
         }),
       });
     } catch (e) {
       console.error("launch-signup: alert notification failed", e);
     }
-    // Welcome the new subscriber and add them to the Resend audience so the
-    // founder can see the list and broadcast updates. Both are best-effort and
-    // dormant until RESEND_API_KEY (+ RESEND_AUDIENCE_ID) are set — a missing
-    // key simply skips them, never failing the signup.
     await sendWelcomeEmail(email);
     await addToAudience(email);
-    return NextResponse.json({ ok: true }, { status: 200 });
-  }
-  // 409 = unique-violation (already on the list) → treat as success (no re-alert).
-  if (res.status === 409) {
-    return NextResponse.json({ ok: true, already: true }, { status: 200 });
   }
 
-  const text = await res.text().catch(() => "");
-  console.error("launch-signup: insert failed", res.status, text);
-  return NextResponse.json({ error: "Something went wrong. Please try again." }, { status: 502 });
+  const stats = await waitlistStats(key, email, myCode);
+  return NextResponse.json(
+    {
+      ok: true,
+      ...(already ? { already: true } : {}),
+      position: stats.position,
+      referrals: stats.referrals,
+      referralCode: myCode,
+      referralUrl: referralUrl(myCode),
+    },
+    { status: 200 }
+  );
 }
 
 // ── Subscriber-facing email + list sync (Resend) ────────────────────────────
