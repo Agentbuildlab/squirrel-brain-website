@@ -223,7 +223,7 @@ export default function PricingPage() {
           </div>
         </section>
       </main>
-      <CallDemoSection />
+      <CallDemoSection theme="pricingpage" />
       <Footer />
     </>
   );

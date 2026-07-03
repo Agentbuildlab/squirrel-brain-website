@@ -295,7 +295,7 @@ export default function McpPage() {
           </div>
         </section>
       </main>
-      <CallDemoSection theme="agents" />
+      <CallDemoSection theme="mcppage" />
       <Footer />
     </>
   );

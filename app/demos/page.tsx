@@ -179,7 +179,7 @@ export default function DemosPage() {
           </div>
         </section>
       </main>
-      <CallDemoSection />
+      <CallDemoSection theme="demospage" />
       <Footer />
     </>
   );

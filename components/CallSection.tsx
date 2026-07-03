@@ -13,6 +13,7 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { WAITLIST_HREF } from "@/lib/config";
 import InteractiveCall from "@/components/InteractiveCall";
+import { DEMO_VOICES } from "@/lib/demoVoices";
 
 // ── Main section ──────────────────────────────────────────────────────────
 
@@ -121,8 +122,9 @@ export default function CallSection() {
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.12, ease: [0.25, 0.1, 0.25, 1] }}
           >
-            {/* Interactive: tap Answer → hear Scuttle's real voice, in-browser. */}
-            <InteractiveCall />
+            {/* Interactive: tap the phone → hear Scuttle. Distinct "moat" voice so it
+                doesn't repeat the hero phone's message on the same page. */}
+            <InteractiveCall audioSrc={DEMO_VOICES.moat.audio} transcript={DEMO_VOICES.moat.transcript} />
           </motion.div>
         </div>
       </div>

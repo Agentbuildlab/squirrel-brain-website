@@ -245,7 +245,7 @@ export default function InteractiveCall({
           }}
         >
           <span style={{ width: 7, height: 7, borderRadius: 999, background: "white" }} aria-hidden="true" />
-          Live demo &mdash; tap to answer
+          👆 Tap the phone to play the demo
         </motion.div>
       )}
 
@@ -275,14 +275,32 @@ export default function InteractiveCall({
             }}
             aria-hidden="true"
           />
-          {/* Screen */}
-          <div style={{ borderRadius: width * 0.15, overflow: "hidden", aspectRatio: "9 / 19.5", position: "relative" }}>
+          {/* Screen — the WHOLE phone is tappable to play the demo (ringing state). */}
+          <div
+            onClick={status === "ringing" ? answer : undefined}
+            role={status === "ringing" ? "button" : undefined}
+            tabIndex={status === "ringing" ? 0 : undefined}
+            aria-label={status === "ringing" ? "Tap the phone to play the demo" : undefined}
+            onKeyDown={
+              status === "ringing"
+                ? (e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      answer();
+                    }
+                  }
+                : undefined
+            }
+            style={{
+              borderRadius: width * 0.15,
+              overflow: "hidden",
+              aspectRatio: "9 / 19.5",
+              position: "relative",
+              cursor: status === "ringing" ? "pointer" : "default",
+            }}
+          >
             {status === "ringing" ? (
-              <CallScreen
-                onAnswer={answer}
-                highlight="INCOMING CALL"
-                transcript={<>Tap the green button to answer &mdash; hear your squirrel.</>}
-              />
+              <CallScreen highlight="INCOMING CALL" transcript={<>Tap anywhere to play the demo.</>} />
             ) : (
               <ConnectedScreen elapsed={elapsed} playing={playing} onHangUp={hangUp} transcript={transcript} />
             )}
@@ -319,7 +337,7 @@ export default function InteractiveCall({
               boxShadow: "0 4px 20px rgba(63,174,110,0.4)",
             }}
           >
-            📞 Answer &mdash; hear Scuttle
+            ▶ Play the demo
           </motion.button>
         )}
         {status === "ended" && (
@@ -335,7 +353,7 @@ export default function InteractiveCall({
               cursor: "pointer",
             }}
           >
-            ↺ Call me again
+            ↺ Play it again
           </button>
         )}
         {status === "connected" && (
