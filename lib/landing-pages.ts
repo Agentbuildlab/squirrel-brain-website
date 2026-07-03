@@ -40,6 +40,27 @@ export type LandingPageData = {
   related: string[];
 };
 
+/**
+ * Landing pages where "your squirrel calls you" is a featured capability — these
+ * get the interactive call demo (tap Answer → hear Scuttle) embedded under the
+ * hero. Derived from which pages actually pitch the call feature (≥3 mentions);
+ * the pure capture-mechanic pages (screenshot/voice-note/photo) are excluded.
+ */
+export const CALL_FEATURING_SLUGS: ReadonlySet<string> = new Set([
+  "reminder-app-that-calls-you",
+  "daily-pep-talk-call-app",
+  "daily-bible-verse-call",
+  "loud-reminder-app",
+  "can-chatgpt-set-iphone-reminder",
+  "ai-agent-reminder-app",
+  "ai-reminder-app",
+  "reminder-app-for-field-service",
+  "reminder-app-for-sales-reps",
+  "second-brain-app",
+  "outlook-screenshot-reminder",
+  "reminder-app-for-parents",
+]);
+
 // Descriptive anchor text for internal links (no "click here").
 export const LANDING_ANCHORS: Record<string, string> = {
   "ai-reminder-app": "AI reminder app",

@@ -5,7 +5,7 @@ import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
 import { WAITLIST_HREF } from "@/lib/config";
 import { T } from "@/components/v2/PhoneKit";
-import { RingingPhone } from "@/components/v2/CallScreen";
+import InteractiveCall from "@/components/InteractiveCall";
 
 // ── Static mascot bob animation ────────────────────────────────────────────
 
@@ -171,26 +171,26 @@ export default function HeroSection() {
             We&rsquo;ll email you the moment it&rsquo;s ready · 7-day free trial · iOS
           </motion.p>
 
-          {/* Ringing phone on mobile — the hook has to be visible on a phone */}
+          {/* Interactive demo on mobile — the hook has to be tappable on a phone */}
           <motion.div
             className="flex md:hidden justify-center mt-10"
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.45 }}
           >
-            <RingingPhone width={200} />
+            <InteractiveCall width={215} />
           </motion.div>
         </div>
 
-        {/* RIGHT: mascot + the phone, RINGING — show the moat, don't say it */}
-        <div className="hidden md:flex flex-col items-center gap-8 flex-shrink-0">
+        {/* RIGHT: mascot + the phone, INTERACTIVE — let them try the moat, don't just say it */}
+        <div className="hidden md:flex flex-col items-center gap-6 flex-shrink-0">
           <MascotBob />
           <motion.div
             initial={{ opacity: 0, y: 40, scale: 0.96 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ duration: 0.7, delay: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
           >
-            <RingingPhone width={272} />
+            <InteractiveCall width={272} />
           </motion.div>
         </div>
       </div>

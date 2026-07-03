@@ -10,10 +10,12 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import FadeIn from "@/components/FadeIn";
 import CtaButton from "@/components/CtaButton";
+import CallDemoSection from "@/components/CallDemoSection";
 import { PhoneShot } from "@/components/v2/PhoneKit";
 import {
   getLandingPage,
   LANDING_ANCHORS,
+  CALL_FEATURING_SLUGS,
   type LandingPageData,
 } from "@/lib/landing-pages";
 
@@ -123,6 +125,9 @@ export default function LandingPage({ slug }: { slug: string }) {
             </FadeIn>
           </div>
         </section>
+
+        {/* Live demo — only on pages where "it calls you" is a featured capability. */}
+        {CALL_FEATURING_SLUGS.has(p.slug) && <CallDemoSection />}
 
         {/* Value sections */}
         <section className="py-16 lg:py-20" aria-label={`How ${p.eyebrow} works`}>

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
+import CallDemoSection from "@/components/CallDemoSection";
 import FadeIn from "@/components/FadeIn";
 import CtaButton from "@/components/CtaButton";
 
@@ -222,6 +223,7 @@ export default function PricingPage() {
           </div>
         </section>
       </main>
+      <CallDemoSection />
       <Footer />
     </>
   );

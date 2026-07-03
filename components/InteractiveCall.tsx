@@ -212,6 +212,31 @@ export default function InteractiveCall({ width = 250 }: { width?: number }) {
 
   return (
     <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 16 }}>
+      {/* Unmistakable "this is a tappable demo" badge — only while ringing. */}
+      {status === "ringing" && (
+        <motion.div
+          animate={reduceMotion ? {} : { scale: [1, 1.05, 1] }}
+          transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+          style={{
+            display: "inline-flex",
+            alignItems: "center",
+            gap: 6,
+            background: "#3fae6e",
+            color: "white",
+            fontSize: 12,
+            fontWeight: 800,
+            letterSpacing: 0.6,
+            textTransform: "uppercase",
+            padding: "6px 14px",
+            borderRadius: 999,
+            boxShadow: "0 4px 16px rgba(63,174,110,0.45)",
+          }}
+        >
+          <span style={{ width: 7, height: 7, borderRadius: 999, background: "white" }} aria-hidden="true" />
+          Live demo &mdash; tap to answer
+        </motion.div>
+      )}
+
       {/* Phone: dark bezel + glow; shakes only while ringing. */}
       <div
         style={{

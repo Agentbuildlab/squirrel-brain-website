@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
+import CallDemoSection from "@/components/CallDemoSection";
 import FadeIn from "@/components/FadeIn";
 import CtaButton from "@/components/CtaButton";
 import { WAITLIST_HREF } from "@/lib/config";
@@ -294,6 +295,7 @@ export default function McpPage() {
           </div>
         </section>
       </main>
+      <CallDemoSection />
       <Footer />
     </>
   );

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
+import CallDemoSection from "@/components/CallDemoSection";
 import FadeIn from "@/components/FadeIn";
 import CtaButton from "@/components/CtaButton";
 import { PhoneShot } from "@/components/v2/PhoneKit";
@@ -297,6 +298,7 @@ export default function FamilyPage() {
           </div>
         </section>
       </main>
+      <CallDemoSection />
       <Footer />
     </>
   );

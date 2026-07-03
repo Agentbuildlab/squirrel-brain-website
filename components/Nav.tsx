@@ -48,6 +48,9 @@ export default function Nav() {
 
         {/* Desktop links */}
         <div className="hidden md:flex items-center gap-6" role="list">
+          <Link href="/" className="text-sm font-semibold text-muted hover:text-ink transition-colors">
+            Home
+          </Link>
           <Link href="/work" className="text-sm font-semibold text-muted hover:text-ink transition-colors">
             For Work
           </Link>
@@ -96,6 +99,7 @@ export default function Nav() {
         <div className="md:hidden bg-bg/98 backdrop-blur-md border-b border-border px-4 pb-5 pt-2">
           <nav className="flex flex-col gap-1" aria-label="Mobile navigation">
             {[
+              { href: "/", label: "Home" },
               { href: "/work", label: "For Work" },
               { href: "/family", label: "For Family" },
               { href: "/demos", label: "Demos" },
