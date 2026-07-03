@@ -17,7 +17,7 @@ import { T } from "@/components/v2/PhoneKit";
 type Door = {
   segment: string; // PostHog event property — stable id, don't rename casually
   href: string;
-  emoji: string;
+  label: string; // short category tag shown where the emoji used to be
   title: string;
   line: string;
   accent: string;
@@ -27,7 +27,7 @@ const DOORS: Door[] = [
   {
     segment: "secondbrain",
     href: "/second-brain-app",
-    emoji: "🧠",
+    label: "Second Brain",
     title: "My brain never shuts off",
     line: "Dump every thought the second it hits — it files itself.",
     accent: T.pastelPurple,
@@ -35,7 +35,7 @@ const DOORS: Door[] = [
   {
     segment: "parents",
     href: "/reminder-app-for-parents",
-    emoji: "🎒",
+    label: "For Parents",
     title: "Running the whole household",
     line: "Forms, practices, meds, snack day — snapped once, never dropped.",
     accent: T.pastelBlue,
@@ -43,7 +43,7 @@ const DOORS: Door[] = [
   {
     segment: "faith",
     href: "/daily-pep-talk-call-app",
-    emoji: "🌅",
+    label: "Daily Encouragement",
     title: "Start my day encouraged",
     line: "A real morning call — a pep talk, a verse, a word that lands.",
     accent: T.pastelYellow,
@@ -51,7 +51,7 @@ const DOORS: Door[] = [
   {
     segment: "field",
     href: "/reminder-app-for-field-service",
-    emoji: "🧰",
+    label: "Field Work",
     title: "On job sites all day",
     line: "Snap it with gloves on. GPS-stamped proof you were there.",
     accent: T.pastelPeach,
@@ -59,7 +59,7 @@ const DOORS: Door[] = [
   {
     segment: "sales",
     href: "/reminder-app-for-sales-reps",
-    emoji: "📞",
+    label: "Sales",
     title: "Juggling deals & follow-ups",
     line: "Say it after the meeting — it calls you before the next one.",
     accent: T.pastelGreen,
@@ -67,7 +67,7 @@ const DOORS: Door[] = [
   {
     segment: "ai",
     href: "/mcp",
-    emoji: "🤖",
+    label: "AI Agents",
     title: "I want my AI to call me",
     line: "Claude & ChatGPT set real alarms — and ring your actual phone.",
     accent: T.pastelGreen,
@@ -88,11 +88,10 @@ function DoorCard({ door, i, inView }: { door: Door; i: number; inView: boolean 
         style={{ background: T.card, border: `1px solid ${T.border}`, boxShadow: "0 2px 12px rgba(26,18,8,0.05)" }}
       >
         <span
-          className="inline-flex items-center justify-center w-10 h-10 rounded-xl text-xl mb-3"
-          style={{ background: door.accent }}
-          aria-hidden="true"
+          className="inline-flex items-center self-start rounded-full px-3 py-1 text-xs font-extrabold uppercase tracking-wide mb-3"
+          style={{ background: door.accent, color: T.text }}
         >
-          {door.emoji}
+          {door.label}
         </span>
         <span className="font-display font-extrabold text-ink text-lg leading-snug">
           {door.title}
