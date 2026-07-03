@@ -11,6 +11,7 @@ import Footer from "@/components/Footer";
 import FadeIn from "@/components/FadeIn";
 import CtaButton from "@/components/CtaButton";
 import CallDemoSection from "@/components/CallDemoSection";
+import { LANDING_DEMO_THEME } from "@/lib/demoVoices";
 import { PhoneShot } from "@/components/v2/PhoneKit";
 import {
   getLandingPage,
@@ -126,8 +127,11 @@ export default function LandingPage({ slug }: { slug: string }) {
           </div>
         </section>
 
-        {/* Live demo — only on pages where "it calls you" is a featured capability. */}
-        {CALL_FEATURING_SLUGS.has(p.slug) && <CallDemoSection />}
+        {/* Live demo — only on pages where "it calls you" is a featured capability;
+            the phone's message is themed to the page (faith, sales, pep-talk, …). */}
+        {CALL_FEATURING_SLUGS.has(p.slug) && (
+          <CallDemoSection theme={LANDING_DEMO_THEME[p.slug] ?? "default"} />
+        )}
 
         {/* Value sections */}
         <section className="py-16 lg:py-20" aria-label={`How ${p.eyebrow} works`}>

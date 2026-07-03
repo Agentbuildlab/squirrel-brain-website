@@ -298,7 +298,7 @@ export default function FamilyPage() {
           </div>
         </section>
       </main>
-      <CallDemoSection />
+      <CallDemoSection theme="family" />
       <Footer />
     </>
   );

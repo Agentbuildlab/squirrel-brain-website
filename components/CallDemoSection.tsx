@@ -1,18 +1,29 @@
 // Reusable "try the live demo" section — drops the interactive call demo onto
-// any page that features the call-you capability (segment pages + the call
-// landing pages). Server component; it just frames the client <InteractiveCall>.
+// any page that features the call-you capability. Each placement passes a
+// `theme` so the phone plays a message that fits the page (faith, sales, etc.).
+// Server component; it just frames the client <InteractiveCall>.
 
 import InteractiveCall from "@/components/InteractiveCall";
+import { DEMO_VOICES, type DemoTheme } from "@/lib/demoVoices";
 
 export default function CallDemoSection({
-  heading = "Let Scuttle call you — right now",
-  sub = "This is the real thing: tap Answer and your squirrel rings you in its own voice — the same call that reaches you when something actually matters. No download, no sign-up.",
-  eyebrow = "See it for yourself",
+  theme = "default",
+  heading,
+  sub,
+  eyebrow,
 }: {
+  /** Picks the voice + transcript + section copy that fit the page. */
+  theme?: DemoTheme;
+  /** Optional overrides (default to the theme's copy). */
   heading?: string;
   sub?: string;
   eyebrow?: string;
 }) {
+  const v = DEMO_VOICES[theme];
+  const eb = eyebrow ?? v.eyebrow;
+  const hd = heading ?? v.heading;
+  const sb = sub ?? v.sub;
+
   return (
     <section
       className="relative overflow-hidden py-20 lg:py-24"
@@ -35,19 +46,19 @@ export default function CallDemoSection({
       />
       <div className="relative z-10 max-w-xl mx-auto px-6 text-center flex flex-col items-center">
         <p className="text-xs font-bold tracking-widest uppercase mb-4" style={{ color: "#3fae6e" }}>
-          {eyebrow}
+          {eb}
         </p>
         <h2
           id="calldemo-heading"
           className="font-display font-extrabold leading-tight mb-4"
           style={{ fontSize: "clamp(1.9rem, 4vw, 3rem)", color: "#fff5e8" }}
         >
-          {heading}
+          {hd}
         </h2>
         <p className="text-base mb-10 max-w-md" style={{ color: "rgba(255,245,232,0.72)" }}>
-          {sub}
+          {sb}
         </p>
-        <InteractiveCall />
+        <InteractiveCall audioSrc={v.audio} transcript={v.transcript} />
       </div>
     </section>
   );

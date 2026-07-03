@@ -289,7 +289,7 @@ export default function WorkPage() {
           </div>
         </section>
       </main>
-      <CallDemoSection />
+      <CallDemoSection theme="work" />
       <Footer />
     </>
   );

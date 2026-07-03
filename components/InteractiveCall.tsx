@@ -53,10 +53,12 @@ function ConnectedScreen({
   elapsed,
   playing,
   onHangUp,
+  transcript,
 }: {
   elapsed: number;
   playing: boolean;
   onHangUp: () => void;
+  transcript: string;
 }) {
   return (
     <div
@@ -140,7 +142,7 @@ function ConnectedScreen({
           }}
         >
           <p style={{ fontSize: 9, color: "rgba(255,255,255,0.8)", lineHeight: 1.55, textAlign: "center", margin: 0 }}>
-            &ldquo;{GREETING}&rdquo;
+            &ldquo;{transcript}&rdquo;
           </p>
         </div>
       </div>
@@ -177,7 +179,17 @@ function ConnectedScreen({
   );
 }
 
-export default function InteractiveCall({ width = 250 }: { width?: number }) {
+export default function InteractiveCall({
+  width = 250,
+  audioSrc = AUDIO_SRC,
+  transcript = GREETING,
+}: {
+  width?: number;
+  /** The mp3 to play on answer (per-section themed voice). */
+  audioSrc?: string;
+  /** The words spoken — shown as the on-call caption; must match the audio. */
+  transcript?: string;
+}) {
   const reduceMotion = useReducedMotion();
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [status, setStatus] = useState<Status>("ringing");
@@ -272,7 +284,7 @@ export default function InteractiveCall({ width = 250 }: { width?: number }) {
                 transcript={<>Tap the green button to answer &mdash; hear your squirrel.</>}
               />
             ) : (
-              <ConnectedScreen elapsed={elapsed} playing={playing} onHangUp={hangUp} />
+              <ConnectedScreen elapsed={elapsed} playing={playing} onHangUp={hangUp} transcript={transcript} />
             )}
           </div>
           {/* Home bar */}
@@ -336,7 +348,7 @@ export default function InteractiveCall({ width = 250 }: { width?: number }) {
       {/* The voice. Preloaded so Answer is instant. */}
       <audio
         ref={audioRef}
-        src={AUDIO_SRC}
+        src={audioSrc}
         preload="auto"
         onEnded={() => setStatus("ended")}
       />
