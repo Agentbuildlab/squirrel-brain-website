@@ -3,12 +3,9 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import HeroSection from "@/components/HeroSection";
 import SegmentDoors from "@/components/SegmentDoors";
-import ScreenshotGotchaSection from "@/components/ScreenshotGotchaSection";
-import ProofGotchaSection from "@/components/ProofGotchaSection";
 import PixMoatSection from "@/components/PixMoatSection";
 import CallSection from "@/components/CallSection";
 import CallMeDemo from "@/components/CallMeDemo";
-import FounderStorySection from "@/components/FounderStorySection";
 import FaqSection from "@/components/FaqSection";
 import FinalCta from "@/components/FinalCta";
 
@@ -28,8 +25,10 @@ export const metadata: Metadata = {
 // 2026-07-02 redesign (research-backed): ONE promise above the fold (the call,
 // shown ringing), a single primary CTA, then the segment doors ("which busy are
 // you?") that route + tag each audience for the PostHog segment experiment.
-// Homepage keeps THREE gotchas max before the call deep-dive — feature overload
-// was measurably hurting comprehension (14 concepts → ~8).
+// 2026-07-03 (Adam): trimmed to SIX sections — hero · segment doors · the AI-sort
+// wow · the call deep-dive · FAQ · final CTA — to cut the "too busy" feeling.
+// Removed from the homepage (components kept for the landing pages): the screenshot
+// gotcha, the proof gotcha, and the founder-story band.
 export default function HomePage() {
   return (
     <>
@@ -41,29 +40,20 @@ export default function HomePage() {
         {/* 2 — SEGMENT DOORS: six kinds of busy, instrumented (segment_door_click) */}
         <SegmentDoors />
 
-        {/* GOTCHA 1 — Screenshot a text/email → a to-do that nudges you */}
-        <ScreenshotGotchaSection />
-
-        {/* GOTCHA 2 — Your camera roll, sorted for you (auto-ingestion moat) */}
+        {/* 3 — THE AI WOW: your camera roll, sorted for you (auto-ingestion moat) */}
         <PixMoatSection />
 
-        {/* GOTCHA 3 — "We never got it." → here's the proof */}
-        <ProofGotchaSection />
-
-        {/* THE DEEP DIVE — the call, full story (hero promised it; this proves it) */}
+        {/* 4 — THE DEEP DIVE: the call, full story (hero promised it; this proves it) */}
         <CallSection />
 
         {/* LIVE DEMO — "Scuttle calls you right now" (renders null until
             CALL_ME_DEMO_ENABLED + the app-side endpoint exist — see spec) */}
         <CallMeDemo />
 
-        {/* WHY THIS EXISTS — the vague founder origin */}
-        <FounderStorySection />
-
-        {/* FAQ — targets "can my AI set a reminder on my phone" search/AEO lane */}
+        {/* 5 — FAQ: targets "can my AI set a reminder on my phone" search/AEO lane */}
         <FaqSection />
 
-        {/* FINAL CTA */}
+        {/* 6 — FINAL CTA */}
         <FinalCta />
       </main>
       <Footer />
