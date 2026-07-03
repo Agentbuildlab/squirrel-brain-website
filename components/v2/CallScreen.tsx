@@ -12,13 +12,39 @@ import { PulseRing } from "@/components/v2/PhoneKit";
 export default function CallScreen({
   transcript,
   highlight,
+  onAnswer,
+  onDecline,
 }: {
   /** The spoken line inside the transcript bubble. */
   transcript?: React.ReactNode;
   /** Optional short highlight chip text under the caller name. */
   highlight?: string;
+  /** When provided, the green Accept button becomes a real, clickable control
+   *  (the interactive demo). Omitted on the static hero/section visuals, which
+   *  then render exactly as before. */
+  onAnswer?: () => void;
+  /** Optional: makes the red Decline button clickable. */
+  onDecline?: () => void;
 }) {
   const reduceMotion = useReducedMotion();
+
+  // Turn a decorative action group into an accessible button when a handler is
+  // supplied; otherwise it stays a plain (non-interactive) div — backward-compatible.
+  const actionProps = (handler: (() => void) | undefined, label: string) =>
+    handler
+      ? {
+          role: "button" as const,
+          tabIndex: 0,
+          "aria-label": label,
+          onClick: handler,
+          onKeyDown: (e: React.KeyboardEvent) => {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              handler();
+            }
+          },
+        }
+      : {};
 
   return (
     <div
@@ -133,7 +159,10 @@ export default function CallScreen({
         }}
       >
         {/* Decline */}
-        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 4 }}>
+        <div
+          {...actionProps(onDecline, "Decline call")}
+          style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 4, cursor: onDecline ? "pointer" : undefined }}
+        >
           <div
             style={{
               width: 44,
@@ -157,7 +186,10 @@ export default function CallScreen({
         </div>
 
         {/* Accept */}
-        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 4 }}>
+        <div
+          {...actionProps(onAnswer, "Answer call — hear Scuttle")}
+          style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 4, cursor: onAnswer ? "pointer" : undefined }}
+        >
           <div
             style={{
               width: 44,

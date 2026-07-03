@@ -9,20 +9,15 @@
  * This is the scroll-stopper moment.
  */
 
-import {
-  motion,
-  useReducedMotion,
-  useInView,
-} from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { WAITLIST_HREF } from "@/lib/config";
-import CallScreen from "@/components/v2/CallScreen";
+import InteractiveCall from "@/components/InteractiveCall";
 
 // ── Main section ──────────────────────────────────────────────────────────
 
 export default function CallSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const reduceMotion = useReducedMotion();
   const inView = useInView(sectionRef, { once: true, margin: "-40px" });
 
   return (
@@ -126,70 +121,8 @@ export default function CallSection() {
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.12, ease: [0.25, 0.1, 0.25, 1] }}
           >
-            {/* Phone wrapper with glow */}
-            <div
-              style={{
-                width: 240,
-                borderRadius: 44,
-                background: "#1a1208",
-                padding: "12px 8px",
-                boxShadow:
-                  "0 0 60px rgba(63,174,110,0.22), 0 48px 80px rgba(0,0,0,0.5), inset 0 0 0 1.5px rgba(255,255,255,0.08)",
-                position: "relative",
-              }}
-            >
-              {/* Shake animation on ring */}
-              <motion.div
-                animate={
-                  reduceMotion
-                    ? {}
-                    : {
-                        rotate: [0, -2, 2, -2, 1, 0],
-                        x: [0, -2, 2, -2, 1, 0],
-                      }
-                }
-                transition={{
-                  duration: 0.5,
-                  repeat: Infinity,
-                  repeatDelay: 2.5,
-                  ease: "easeInOut",
-                }}
-              >
-                {/* Dynamic island */}
-                <div
-                  style={{
-                    width: 86,
-                    height: 24,
-                    background: "#0e0a02",
-                    borderRadius: 999,
-                    margin: "0 auto 8px",
-                  }}
-                  aria-hidden="true"
-                />
-                {/* Screen */}
-                <div
-                  style={{
-                    borderRadius: 36,
-                    overflow: "hidden",
-                    aspectRatio: "9 / 19.5",
-                    position: "relative",
-                  }}
-                >
-                  <CallScreen />
-                </div>
-                {/* Home bar */}
-                <div
-                  style={{
-                    width: 72,
-                    height: 4,
-                    borderRadius: 2,
-                    background: "rgba(255,255,255,0.15)",
-                    margin: "8px auto 0",
-                  }}
-                  aria-hidden="true"
-                />
-              </motion.div>
-            </div>
+            {/* Interactive: tap Answer → hear Scuttle's real voice, in-browser. */}
+            <InteractiveCall />
           </motion.div>
         </div>
       </div>
