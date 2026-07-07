@@ -1,6 +1,25 @@
 # Squirrel Brain Website — Session Handoff
 
-_Last updated: 2026-06-13 · branch `v2-rebuild`_
+_Last updated: 2026-06-17 · production is LIVE at squirrelbrainapp.com_
+
+## 2026-06-17 — Films / QA / social session (all DONE + live)
+Canonical detail in `~/Projects/squirrel-brain-promo/memory.md` §7b–7f. Highlights:
+- **Photoreal Runway mockup library (24 stills)** replaced the rejected fake composites →
+  `public/review/runway/*` + contact sheet; gallery is `public/review.html` (films + mockups +
+  a 1-clip "motion test"). Old `/review/clip_*`,`/review/still_*`,`/preview/realapp_*` deleted.
+- **`/demos` = 13 vertical films**, all re-rendered + live (13/13 200). Added **"The Call Before
+  You Blow the Call"** (For-Work). Tagline **"Speak it. Snap it. Stash it."** now on EVERY demo end
+  card (consistent). Ring SFX −10 dB globally. Caption-overlap bug fixed (was only in The Call).
+- **CALLBACK CLAIM corrected site-wide** (Adam: it does NOT break through silent): `app/mcp/page.tsx`,
+  `app/pricing/page.tsx`, `app/demos/page.tsx`, `components/CallSection.tsx`, `components/FaqSection.tsx`,
+  `components/StructuredData.tsx` (×2) → all now "rings if your ringer's on, buzzes on silent." Live
+  audit = 0 overclaims across all 6 pages. (The ALARM "rings through silent" IS accurate — left alone.)
+- **Social export:** all 13 films + a posting guide on Adam's Desktop → `Squirrel Brain Videos/`
+  (For Work 5 / For Family 6 / For Your AI 2). 24 mockups on Desktop → `SB Mockups/`.
+- **2 OPEN DECISIONS for Adam (flagged, not done):** (1) unify the PAGE slogans (`app/layout.tsx`
+  title "Say it. Snap it. It's handled.", `HeroSection.tsx` "Snap it, say it, stash it",
+  `app/family/page.tsx` "Snap it. Pin it. Find it.") to the tagline, or leave as-is; (2) build a
+  motion-clip set (i2v garbles small-phone UI → use Remotion Ken Burns on stills for wide shots).
 
 ## TL;DR for the next session
 The cinematic v2 rebuild is **built, deployed (preview), and verified**. Latest preview:
@@ -99,3 +118,38 @@ Other pages: `/demos`, `/work`, `/family`, `/pricing` (all use real screenshots 
 - Never expose secret keys. Only the public ANON key goes in scripts; the Gemini key stays
   server-side in the ai-gemini proxy.
 - Work only in `squirrel-brain-website` on branch `v2-rebuild`.
+
+## 2026-07-02 — Homepage conversion redesign (LIVE on prod)
+Research-backed rebuild (competitor + conversion research in session; Fable 5):
+- **Hero = the callback, shown ringing**: H1 "The second brain that rings you back.",
+  CallScreen extracted to `components/v2/CallScreen.tsx` (+ `RingingPhone` shake wrapper),
+  ringing phone above the fold on desktop AND mobile. Canonical tagline in subhead. One primary CTA.
+- **SegmentDoors** (`components/SegmentDoors.tsx`) replaced ExploreSection on home: 6 doors
+  (secondbrain/parents/faith/field/sales/ai) → existing landing pages; every click fires PostHog
+  `segment_door_click {segment}`. `waitlist_signup` now carries `source_path`. This is the
+  "one design, many segments — let data pick the customer" experiment (Adam's wife's question).
+- Homepage 11→9 sections: MorningBriefSection removed from home (component kept), call deep-dive stays.
+- **Claim check (IMPORTANT)**: "rings through Silent" copy VERIFIED-KEPT — the call alarm is Apple
+  AlarmKit (OS-level, Clock-app behavior; Adam device-verified 07-01). The app's own in-app
+  "Silence all reminders" toggle mutes calls by design (R33/R34, 06-30) — that's honest behavior,
+  not an overclaim. Do NOT revert to the old 06-17 "rings if ringer's on" guidance (that described
+  the pre-AlarmKit CallKit/VoIP path).
+- Read segment results in PostHog (project 440057): `segment_door_click` grouped by `segment`;
+  `waitlist_signup` grouped by `source_path`; funnel door→signup per segment.
+
+## 2026-07-02 (later) — Growth trio SHIPPED (Adam: "do all of it")
+1. **Referral waitlist LIVE + e2e-proven on prod**: signup → {position, referralCode, referralUrl,
+   referrals}; success UI = "you're #N — every friend moves you up 5 spots" + copy/share.
+   Zero-DDL design (lib/referral.ts): code = salted email hash; referred_by rides the `name`
+   column as "ref:<code>" (column confirmed to exist — credit verified live: reftest1 went
+   #7→#2 after reftest2 joined with the code). Test rows agent.build.lab+reftest1/2@gmail.com
+   left in waitlist + Resend audience (welcome emails fired — they're Adam's own aliases).
+2. **Call-me-demo widget shipped DARK** (CALL_ME_DEMO_ENABLED=false in lib/config.ts):
+   components/CallMeDemo.tsx + /api/call-me-demo (503 until CALL_DEMO_ENDPOINT+CALL_DEMO_KEY env).
+   App-side ticket = docs/CALL_ME_DEMO_SPEC.md (Twilio PSTN — the in-app call stack can't dial
+   arbitrary numbers). A spawn-task chip targets the app repo.
+3. **/daily-bible-verse-call** landing page live (registry+route+footer+llms.txt+pep-talk cross-link).
+PostHog additions: referral_landing, referral_share_click, call_demo_*, waitlist_signup.position/referred.
+
+## 2026-07-07 (app-session Claude, cross-repo note)
+Added app/open/page.tsx — email-CTA bounce page (tries squirrelbrain:// scheme, fallback button + site link). Daily-brief/nudge email CTAs now point at /open. Replace with Universal Links (AASA + associatedDomains) when the next app BINARY ships.
