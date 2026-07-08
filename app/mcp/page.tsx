@@ -372,8 +372,7 @@ export default function McpPage() {
           </div>
         </section>
       </main>
-      {/* "agents" voice — the mcppage one names ChatGPT (inaccurate); audio re-render queued */}
-      <CallDemoSection theme="agents" />
+      <CallDemoSection theme="mcppage" />
       <Footer />
     </>
   );

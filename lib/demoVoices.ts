@@ -182,13 +182,10 @@ export const DEMO_VOICES: Record<DemoTheme, DemoVoice> = {
     heading: "Hear what it does — right now",
     sub: "Tap the phone: this call — the one that saves you from the costly slip-up — is what you're paying for. No download, no sign-up.",
   },
-  // UNUSED since 2026-07-07 (/mcp now uses the 'agents' theme): this audio names ChatGPT as a
-  // connectable agent, which is inaccurate. Do NOT re-use without re-rendering the MP3 + fixing
-  // the transcript to match.
   mcppage: {
     audio: "/audio/scuttle-mcppage.mp3",
     transcript:
-      "Hey, it's Scuttle. Connect me over M-C-P, and your A-I agents get a voice — they can ring your actual phone, and I'll speak for them, out loud. Claude, ChatGPT, your own scripts — they finally reach you in the real world, not just a chat window. Talk soon!",
+      "Hey, it's Scuttle. Connect me over M-C-P, and your A-I agents get a voice — they can ring your actual phone, and I'll speak for them, out loud. Claude Code, Cursor, your own scripts — they finally reach you in the real world, not just a chat window. Talk soon!",
     eyebrow: "Give your agents a voice",
     heading: "Let your agents call you — right now",
     sub: "Tap the phone and hear how an agent reaches you over MCP: it rings your phone and Scuttle speaks for it. No download, no sign-up.",
