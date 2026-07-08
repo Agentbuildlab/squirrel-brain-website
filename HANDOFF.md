@@ -153,3 +153,10 @@ PostHog additions: referral_landing, referral_share_click, call_demo_*, waitlist
 
 ## 2026-07-07 (app-session Claude, cross-repo note)
 Added app/open/page.tsx — email-CTA bounce page (tries squirrelbrain:// scheme, fallback button + site link). Daily-brief/nudge email CTAs now point at /open. Replace with Universal Links (AASA + associatedDomains) when the next app BINARY ships.
+
+## 2026-07-07 — De-AI / accuracy pass (LIVE on prod)
+Adam: too much AI spread across the site + wrong claims. Fixed site-wide (commit ddb3aba, deployed + live-verified):
+- Every 'connect ChatGPT' overclaim removed. Ground truth: the portal needs an X-API-Key header, so MCP clients connect (Claude Code / Claude Desktop / Cursor / self-hosted agents — OpenClaw, LangChain, scripts); consumer ChatGPT can't — now said explicitly where relevant.
+- AI content concentrated on /mcp: new MCP FAQ section + FAQPage JSON-LD @id /mcp#faq, compatibility honesty strip, 'app works with no AI at all' reassurance. Home FAQ is product-first ('Questions, answered.' — 5 Qs incl. new AlarmKit rings-through-Silent Q) with ONE small AI pointer Q. /work MCP band shrunk to an optional-power-up pointer -> /mcp. Pricing bullet, StructuredData, 4 landing pages, llms.txt all aligned to the same truth.
+- /mcp call demo switched to the 'agents' voice; the mcppage voice entry is UNUSED + comment-flagged (its MP3 names ChatGPT) — audio re-render queued.
+- Mobile launch review at 375px (home, /mcp, /work, can-chatgpt): clean, no console errors, no overflow — verdict: launch-ready. code-guardian PASS_WITH_WARNINGS (one advisory llms.txt pointer, fixed pre-ship). Live sweep: 9 pages 200, 0 overclaims.
