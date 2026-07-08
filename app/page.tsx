@@ -50,7 +50,7 @@ export default function HomePage() {
             CALL_ME_DEMO_ENABLED + the app-side endpoint exist — see spec) */}
         <CallMeDemo />
 
-        {/* 5 — FAQ: targets "can my AI set a reminder on my phone" search/AEO lane */}
+        {/* 5 — FAQ: product questions — the AI/AEO lane lives on /mcp now */}
         <FaqSection />
 
         {/* 6 — FINAL CTA */}

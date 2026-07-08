@@ -23,7 +23,7 @@ const EVERYTHING = [
   "The Burrow — AI chat with your squirrel",
   "Link & YouTube stash + a forever note",
   "Morning brief email + 4 PM nudge",
-  "Built-in MCP server — let any AI agent drive it",
+  "Optional MCP portal — your AI tools can plug in",
 ];
 
 const PLANS = [

@@ -127,7 +127,7 @@ export const LANDING_PAGES: LandingPageData[] = [
       },
       {
         q: "Does it use AI?",
-        a: "Yes. Squirrel Brain uses AI to read your voice notes, photos, screenshots, and messages, understand what matters, and turn it into the right reminder, alarm, note, or calendar event. It can also connect to AI assistants like Claude and ChatGPT through a built-in MCP server.",
+        a: "Yes. Squirrel Brain uses AI to read your voice notes, photos, screenshots, and messages, understand what matters, and turn it into the right reminder, alarm, note, or calendar event. It can also connect to MCP-capable AI tools — Claude Code, Cursor, or your own agent — through a built-in MCP server.",
       },
       {
         q: "What device does it run on?",
@@ -393,7 +393,7 @@ export const LANDING_PAGES: LandingPageData[] = [
       {
         eyebrow: "Talk to it both ways",
         h2: "A memory you can talk to — and that talks back",
-        body: "Ask \"what did I say I'd do for Mom this week?\" and your squirrel answers from everything you've captured. And through a built-in MCP server, AI assistants like Claude and ChatGPT can use your second brain too — reading your day and setting things up on your behalf.",
+        body: "Ask \"what did I say I'd do for Mom this week?\" and your squirrel answers from everything you've captured. And through a built-in MCP server, MCP-capable agents — Claude Code, Cursor, or your own — can use your second brain too, reading your day and setting things up on your behalf.",
       },
     ],
     faqs: [
@@ -407,7 +407,7 @@ export const LANDING_PAGES: LandingPageData[] = [
       },
       {
         q: "Can my AI assistant use it?",
-        a: "Yes. Squirrel Brain has a built-in MCP server, so AI assistants like Claude and ChatGPT can read your day and set reminders, notes, and alarms on your behalf. Setting up an agent is optional — the app works great on its own.",
+        a: "Yes, optionally. Squirrel Brain has a built-in MCP server, so MCP-capable agents (Claude Code, Cursor, or your own) can read your day and set reminders, notes, and alarms on your behalf. Setting up an agent is optional — the app works great on its own.",
       },
       {
         q: "What device does it run on?",
@@ -533,11 +533,11 @@ export const LANDING_PAGES: LandingPageData[] = [
     slug: "can-chatgpt-set-iphone-reminder",
     title: "Can ChatGPT Set a Reminder on My iPhone? | Squirrel Brain",
     description:
-      "ChatGPT and Claude can't set a real alarm or reminder on your iPhone on their own — their tasks only fire inside their app. Squirrel Brain's built-in MCP server bridges the gap so an AI agent can set a real reminder, alarm, or call.",
+      "ChatGPT and Claude can't set a real alarm or reminder on your iPhone on their own — their tasks only fire inside their app. Squirrel Brain does the job itself — and MCP-capable agents like Claude Code can drive it directly.",
     eyebrow: "ChatGPT + your iPhone",
     h1: "Can ChatGPT set a reminder on your iPhone?",
     subhead:
-      "Short answer: not on its own. ChatGPT and Claude can only nudge you inside their own app — they can't fire a real iPhone alarm or reminder. Squirrel Brain is the bridge that lets them.",
+      "Short answer: no. ChatGPT and Claude can only nudge you inside their own app — they can't fire a real iPhone alarm or reminder. Squirrel Brain is the app that actually does it: say it, snap it, or forward it, and it becomes a real alarm — even a phone call.",
     heroShot: {
       src: "/assets/screens/burrow.webp",
       alt: "The Burrow in Squirrel Brain, where an AI agent can read your day and set reminders on your behalf",
@@ -551,9 +551,9 @@ export const LANDING_PAGES: LandingPageData[] = [
       {
         eyebrow: "The bridge",
         h2: "Squirrel Brain gives an AI agent real actions on your phone",
-        body: "Squirrel Brain has a built-in MCP (Model Context Protocol) server. You generate a personal key in the app, connect ChatGPT, Claude, or any agent, and it gets a real set of tools — set an alarm, create a reminder, read your day, file a note, and even trigger a phone-call-style reminder — all on your behalf, on your actual phone.",
+        body: "Squirrel Brain has a built-in MCP (Model Context Protocol) server. You generate a personal key in the app, connect an MCP-capable agent — Claude Code, Cursor, or one you run yourself — and it gets a real set of tools — set an alarm, create a reminder, read your day, file a note, and even trigger a phone-call-style reminder — all on your behalf, on your actual phone.",
         bullets: [
-          "Connect Claude, ChatGPT, OpenClaw, or your own agent over MCP",
+          "Connect Claude Code, Cursor, OpenClaw, or your own agent over MCP",
           "The agent sets real alarms, reminders, and calendar events — not in-chat notes",
           "Every action is traceable back to the agent that made it",
         ],
@@ -567,7 +567,7 @@ export const LANDING_PAGES: LandingPageData[] = [
     faqs: [
       {
         q: "Can ChatGPT or Claude set a reminder or alarm on my iPhone?",
-        a: "Not on their own. ChatGPT and Claude can only create tasks that live inside their own app — they can't set a real iOS alarm, reminder, or calendar event. Squirrel Brain closes that gap with a built-in MCP server, so a connected agent can set a real reminder, alarm, or call on your behalf.",
+        a: "Not on their own. ChatGPT and Claude can only create tasks that live inside their own app — they can't set a real iOS alarm, reminder, or calendar event. Squirrel Brain does it for you: capture anything and it becomes a real alarm. MCP-capable agents like Claude Code can also drive it directly — though ChatGPT itself can't connect custom MCP servers yet.",
       },
       {
         q: "How does Squirrel Brain let an AI agent act on my phone?",
@@ -575,7 +575,7 @@ export const LANDING_PAGES: LandingPageData[] = [
       },
       {
         q: "Which AI assistants work with it?",
-        a: "Any MCP-compatible agent — including Claude and ChatGPT — plus your own custom agents. It's standard MCP, so it isn't locked to one assistant.",
+        a: "Any MCP-compatible agent that can send an API key: Claude Code, Claude Desktop, Cursor, plus custom agents you run yourself. It's standard MCP, so it isn't locked to one assistant — though consumer ChatGPT can't connect custom MCP servers yet.",
       },
       {
         q: "Do I have to connect an agent at all?",
@@ -658,11 +658,11 @@ export const LANDING_PAGES: LandingPageData[] = [
     slug: "ai-agent-reminder-app",
     title: "Let an AI Agent Set Reminders on Your Phone | Squirrel Brain",
     description:
-      "Connect Claude, ChatGPT, or any AI agent to Squirrel Brain's built-in MCP server and let it set real alarms, reminders, and calendar events on your iPhone — and even call your phone — on your behalf.",
+      "Connect Claude Code, Cursor, or any agent you run to Squirrel Brain's built-in MCP server and let it set real alarms, reminders, and calendar events on your iPhone — and even call your phone — on your behalf.",
     eyebrow: "AI agents",
     h1: "Let your AI agent set reminders on your phone",
     subhead:
-      "Squirrel Brain is the action layer for your AI assistant. Through a built-in MCP server, Claude, ChatGPT, or any agent can set real reminders, alarms, and calendar events on your actual phone.",
+      "Squirrel Brain is the action layer for your AI assistant. Through a built-in MCP server, Claude Code, Cursor, or any agent you run can set real reminders, alarms, and calendar events on your actual phone.",
     heroShot: {
       src: "/assets/screens/burrow.webp",
       alt: "The Burrow in Squirrel Brain, where a connected AI agent reads the day and sets reminders",
@@ -678,7 +678,7 @@ export const LANDING_PAGES: LandingPageData[] = [
         h2: "Real tools, over the standard your agent already speaks",
         body: "Squirrel Brain ships an MCP (Model Context Protocol) server. Connect your agent with a personal key and it gets a real toolset: set an alarm, create a reminder or note, read your daily brief, save a link, append to a forever note, and trigger a phone-call-style reminder — every action logged to the agent that made it.",
         bullets: [
-          "Standard MCP — works with Claude, ChatGPT, OpenClaw, or your own agent",
+          "Standard MCP — works with Claude Code, Cursor, OpenClaw, or your own agent",
           "Set alarms, reminders, calendar events, notes, and calls",
           "Read your day so the agent acts with real context",
         ],
@@ -692,7 +692,7 @@ export const LANDING_PAGES: LandingPageData[] = [
     faqs: [
       {
         q: "Can an AI agent set reminders on my phone?",
-        a: "Yes — through Squirrel Brain. Connect Claude, ChatGPT, or any MCP-compatible agent to Squirrel Brain's built-in MCP server and it can set real alarms, reminders, and calendar events on your phone, and even trigger a phone-call-style reminder, on your behalf.",
+        a: "Yes — through Squirrel Brain. Connect Claude Code, Cursor, or any MCP-capable agent you run to Squirrel Brain's built-in MCP server and it can set real alarms, reminders, and calendar events on your phone, and even trigger a phone-call-style reminder, on your behalf.",
       },
       {
         q: "What is MCP?",

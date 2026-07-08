@@ -24,7 +24,7 @@ const graph = {
       url: ORIGIN,
       name: "Squirrel Brain",
       description:
-        "Squirrel Brain turns photos, voice notes, screenshots, and forwarded texts into reminders, alarms, and calendar events — and lets any AI agent do it for you over MCP.",
+        "Squirrel Brain turns photos, voice notes, screenshots, and forwarded texts into reminders, alarms, and calendar events — and, optionally, lets MCP-capable AI agents drive it for you.",
       publisher: { "@id": `${ORIGIN}/#org` },
       inLanguage: "en-US",
     },
@@ -37,11 +37,11 @@ const graph = {
       url: ORIGIN,
       image: `${ORIGIN}/og-image.png`,
       description:
-        "Squirrel Brain is an iOS app that turns photos, voice notes, screenshots, and forwarded texts into reminders, alarms, and calendar events, then makes sure you follow through — including a real phone call that rings right through Silent mode, Focus, and a locked screen. It has a built-in MCP server, so AI agents like Claude and ChatGPT can set alarms, read your day, file notes to boards, append to a forever note, and call your phone on your behalf. Built for three jobs at once: work, family, and AI agents.",
+        "Squirrel Brain is an iOS app that turns photos, voice notes, screenshots, and forwarded texts into reminders, alarms, and calendar events, then makes sure you follow through — including a real phone call that rings right through Silent mode, Focus, and a locked screen. It also has an optional built-in MCP server, so MCP-capable AI agents (Claude Code, Cursor, or your own) can set alarms, read your day, file notes to boards, append to a forever note, and call your phone on your behalf. Built for work and family first — the AI hookup is there if you want it.",
       featureList: [
         "Turn a photo, voice note, screenshot, or forwarded text into a reminder, alarm, or calendar event",
-        "Built-in MCP (Model Context Protocol) server — connect Claude, ChatGPT, OpenClaw, or any AI agent",
-        "An AI agent can set alarms, read your day, file items, append to a forever note, and call your phone",
+        "Optional built-in MCP (Model Context Protocol) server — connect Claude Code, Cursor, OpenClaw, or your own agent",
+        "A connected agent can set alarms, read your day, file items, append to a forever note, and call your phone",
         "Real phone-call reminders — they ring right through Silent mode, Focus, and a locked screen",
         "Pix boards: photos auto-sorted into boards (receipts, meds, schedules, parking)",
         "GPS-stamped photo proof for field work",

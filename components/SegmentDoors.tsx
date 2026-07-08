@@ -69,7 +69,7 @@ const DOORS: Door[] = [
     href: "/mcp",
     label: "AI Agents",
     title: "I want my AI to call me",
-    line: "Claude & ChatGPT set real alarms — and ring your actual phone.",
+    line: "Your agents file, remind — and ring your actual phone, over MCP.",
     accent: T.pastelGreen,
   },
 ];

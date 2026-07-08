@@ -7,9 +7,9 @@ import CtaButton from "@/components/CtaButton";
 import { WAITLIST_HREF } from "@/lib/config";
 
 export const metadata: Metadata = {
-  title: "Connect any AI agent",
+  title: "The MCP portal for your AI agents",
   description:
-    "Squirrel Brain has a built-in MCP portal. Connect Claude, ChatGPT, OpenClaw, or any agent to set alarms, read your day, file photos, and send a voice message — or a real call — straight to your phone.",
+    "Squirrel Brain has a built-in MCP portal. Connect Claude Code, Cursor, or any agent you run yourself, and it can set alarms, read your day, file photos, and send a voice message — or a real call — straight to your phone.",
   alternates: { canonical: "/mcp" },
 };
 
@@ -86,7 +86,7 @@ const STEPS = [
   {
     n: "2",
     title: "Point your agent at the portal",
-    body: "Add the MCP server to Claude, ChatGPT, or any custom agent. The tools show up automatically — no glue code.",
+    body: "Add the portal to Claude Code, Claude Desktop, or Cursor — or wire it into your own agent. The tools show up automatically — no glue code.",
   },
   {
     n: "3",
@@ -94,6 +94,32 @@ const STEPS = [
     body: "Now your agent can set reminders, read your day, file things, and reach you on your terms — every write is traceable to the agent that made it.",
   },
 ];
+
+const MCP_FAQS: { q: string; a: string }[] = [
+  {
+    q: "Can Claude or ChatGPT set a reminder or alarm on my phone?",
+    a: "Not on their own — chat assistants can't fire a real, time-based alarm on your iPhone. Squirrel Brain closes that gap two ways: the app itself turns whatever you say, snap, or forward into real alarms — no AI setup needed — and MCP-capable agents like Claude Code, Cursor, or your own agent can drive it directly. ChatGPT can't connect custom MCP servers like this yet.",
+  },
+  {
+    q: "How does an agent actually do things on my phone?",
+    a: "Through the built-in MCP server. You generate a personal key in the app and connect your agent — Claude Code, Cursor, or one you run yourself. The agent then gets a real tool set: set an alarm, create an item, read your daily brief, append to a forever note, save a link, and trigger a real phone call — and every action it takes is traceable back to the agent that made it.",
+  },
+  {
+    q: "Which AI tools can connect?",
+    a: "Anything that speaks MCP and can send an API-key header: Claude Code, Claude Desktop, Cursor, and custom agents you host yourself — OpenClaw, LangChain, or plain scripts. Consumer chat apps like ChatGPT can't connect custom MCP tool servers yet.",
+  },
+];
+
+const mcpFaqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "@id": "https://squirrelbrainapp.com/mcp#faq",
+  mainEntity: MCP_FAQS.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a },
+  })),
+};
 
 export default function McpPage() {
   return (
@@ -135,7 +161,7 @@ export default function McpPage() {
                 className="font-display font-extrabold text-balance mb-6"
                 style={{ fontSize: "clamp(2.2rem, 5vw, 4rem)", lineHeight: 1.06, color: "#fff5e8" }}
               >
-                Connect any AI agent{" "}
+                Connect your AI agents{" "}
                 <span style={{ color: "#FF7A1A" }}>to your brain.</span>
               </h1>
             </FadeIn>
@@ -144,10 +170,19 @@ export default function McpPage() {
                 className="text-lg lg:text-xl leading-relaxed max-w-2xl mx-auto mb-8"
                 style={{ color: "rgba(255,245,232,0.72)" }}
               >
-                Squirrel Brain has a built-in MCP portal. Let Claude, ChatGPT, OpenClaw, or your own
-                agent set alarms, read your day, file what it finds, and reach you with a message — or a real
-                phone call — straight on your phone. Your squirrel becomes the memory layer for every
-                AI tool you use.
+                Squirrel Brain has a built-in MCP portal. Point Claude Code, Cursor, or an agent you run
+                yourself at it, and it can set alarms, read your day, file what it finds, and reach you with a
+                message — or a real phone call. Your squirrel becomes the memory layer for the AI tools you
+                already use.
+              </p>
+            </FadeIn>
+
+            <FadeIn immediate delay={0.15}>
+              <p className="text-sm leading-relaxed max-w-xl mx-auto mb-8" style={{ color: "rgba(255,245,232,0.45)" }}>
+                Works with anything that speaks MCP and can send an API key — Claude Code, Claude
+                Desktop, Cursor, and agents you host yourself (OpenClaw, LangChain, your own scripts).
+                Consumer chat apps like ChatGPT can&rsquo;t connect custom MCP servers yet. And if you
+                never touch any of this: the app does everything on its own.
               </p>
             </FadeIn>
 
@@ -282,6 +317,48 @@ export default function McpPage() {
           </div>
         </section>
 
+        {/* FAQ — MCP-specific; carries its own FAQPage JSON-LD */}
+        <section className="py-20 bg-white border-t border-border" aria-labelledby="mcp-faq-heading">
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(mcpFaqJsonLd) }}
+          />
+          <div className="max-w-3xl mx-auto px-6 lg:px-12">
+            <div className="text-center mb-12">
+              <p className="text-xs font-bold tracking-widest uppercase text-accent mb-3">
+                MCP FAQ
+              </p>
+              <h2
+                id="mcp-faq-heading"
+                className="font-display font-extrabold text-ink text-balance"
+                style={{ fontSize: "clamp(1.9rem, 3.6vw, 3rem)", lineHeight: 1.1 }}
+              >
+                Agent questions, <span className="text-accent">answered.</span>
+              </h2>
+            </div>
+            <div className="flex flex-col gap-3">
+              {MCP_FAQS.map((f) => (
+                <details
+                  key={f.q}
+                  className="group rounded-2xl border border-border bg-bg px-5 py-4 [&_summary::-webkit-details-marker]:hidden"
+                >
+                  <summary className="flex cursor-pointer items-center justify-between gap-4 font-display font-bold text-ink list-none">
+                    <span style={{ fontSize: "1.05rem" }}>{f.q}</span>
+                    <span
+                      className="flex-shrink-0 text-accent transition-transform group-open:rotate-45"
+                      aria-hidden="true"
+                      style={{ fontSize: "1.5rem", lineHeight: 1 }}
+                    >
+                      +
+                    </span>
+                  </summary>
+                  <p className="mt-3 text-muted leading-relaxed">{f.a}</p>
+                </details>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* CTA */}
         <section className="py-20 bg-white border-t border-border" aria-labelledby="mcp-cta-heading">
           <div className="max-w-2xl mx-auto px-6 text-center">
@@ -295,7 +372,8 @@ export default function McpPage() {
           </div>
         </section>
       </main>
-      <CallDemoSection theme="mcppage" />
+      {/* "agents" voice — the mcppage one names ChatGPT (inaccurate); audio re-render queued */}
+      <CallDemoSection theme="agents" />
       <Footer />
     </>
   );

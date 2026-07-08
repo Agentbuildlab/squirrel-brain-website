@@ -1,30 +1,24 @@
-// Visible FAQ + matching FAQPage JSON-LD. Two jobs:
-// 1) SEO/AEO: these questions target the near-empty, high-intent search lane the
-//    competitive analysis surfaced — "can Claude/ChatGPT set a reminder on my
-//    phone", "AI that can call me", "second brain that takes action". The answers
-//    are written to be quotable verbatim by AI answer engines.
-// 2) Native <details> keeps every answer in the DOM (crawlable) with no client JS.
+// Visible FAQ + matching FAQPage JSON-LD. Product-first: the AI/agent questions
+// (and their AEO lane — "can Claude/ChatGPT set a reminder on my phone") moved to
+// /mcp, which carries its own FAQPage JSON-LD. Native <details> keeps every answer
+// in the DOM (crawlable) with no client JS.
 
 const FAQS: { q: string; a: string }[] = [
   {
-    q: "Can Claude or ChatGPT set a reminder or alarm on my phone?",
-    a: "Not on their own — AI assistants like Claude and ChatGPT can't fire a real, time-based alarm or reminder on your phone. Squirrel Brain closes that gap. It has a built-in MCP (Model Context Protocol) server, so you can connect Claude, ChatGPT, or any AI agent and it can set a real alarm, read your day, file things to boards, and even call your phone — all on your behalf.",
-  },
-  {
     q: "What is Squirrel Brain?",
-    a: "Squirrel Brain is an iOS app that turns photos, voice notes, screenshots, and forwarded texts into reminders, alarms, and calendar events — then makes sure you follow through, including a real phone call that rings right through Silent mode, Focus, and a locked screen. It's built for three jobs at once: work, family, and AI agents.",
-  },
-  {
-    q: "How does an AI agent actually do things on my phone with Squirrel Brain?",
-    a: "Through the built-in MCP server. You generate a personal key in the app and connect your agent (Claude, ChatGPT, OpenClaw, or your own). The agent then gets a set of tools — set an alarm, create an item, read your daily brief, append to a forever note, save a link, and trigger a real phone call — and every action it takes is traceable back to the agent that made it.",
-  },
-  {
-    q: "Do I need to set up an AI agent to use it?",
-    a: "No. Squirrel Brain works great entirely on its own — snap a photo, say it, or forward a text and it becomes a reminder. The AI-agent and MCP features are an optional power-up for people who want their assistant to act on their phone.",
+    a: "Squirrel Brain is an iOS app that turns photos, voice notes, screenshots, and forwarded texts into reminders, alarms, and calendar events — then makes sure you follow through, including a real phone call that rings right through Silent mode, Focus, and a locked screen.",
   },
   {
     q: "How is it different from a notes app or the Reminders app?",
-    a: "Most apps only store what you capture — it just sits there. Squirrel Brain acts on it: it sets alarms, adds calendar events, organizes photos into boards, and calls you when something can't slip. And unlike any of them, an AI agent can drive the whole thing for you.",
+    a: "Most apps only store what you capture — it just sits there. Squirrel Brain acts on it: it sets alarms, adds calendar events, organizes photos into boards, and calls you when something can't slip.",
+  },
+  {
+    q: "Does the call really ring through Silent mode?",
+    a: "Yes. The call alarm is built on Apple's AlarmKit — the same OS-level machinery as the built-in Clock alarm — so it rings through Silent mode, Focus, and a locked screen. The only thing that mutes it is you, with the app's own 'Silence all reminders' switch.",
+  },
+  {
+    q: "Can my AI tools use it too?",
+    a: "If you want — it's completely optional, and the app never needs it. Squirrel Brain has a built-in MCP portal, so an MCP-capable agent — Claude Code, Cursor, or one you run yourself — can set alarms, file notes, and even have your squirrel call you. Everything about it lives on the MCP page.",
   },
   {
     q: "What does it cost, and what devices does it run on?",
@@ -61,7 +55,7 @@ export default function FaqSection() {
             className="font-display font-extrabold text-ink text-balance"
             style={{ fontSize: "clamp(1.9rem, 3.6vw, 3rem)", lineHeight: 1.1 }}
           >
-            Wait — my AI can do <span className="text-accent">that?</span>
+            Questions, <span className="text-accent">answered.</span>
           </h2>
         </div>
         <div className="flex flex-col gap-3">

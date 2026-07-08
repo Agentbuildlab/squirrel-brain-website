@@ -1,18 +1,19 @@
 # Squirrel Brain
 
-> Squirrel Brain is an agent-friendly iOS app that turns photos, voice notes, screenshots, texts, and emails into reminders, alarms, notes, and calendar events — then makes sure you follow through. For things you can't miss, it places a real phone call that rings through Silent mode, Focus, and a locked screen — and when you answer, an AI voice actually talks to you (your day, a pep talk, or a prep call before a meeting), not a canned recording. It has a built-in MCP (Model Context Protocol) server, so AI agents like Claude, ChatGPT, OpenClaw, or a custom agent can set alarms, read the user's day, file things to boards, append to a forever note, and call the user's phone on their behalf.
+> Squirrel Brain is an agent-friendly iOS app that turns photos, voice notes, screenshots, texts, and emails into reminders, alarms, notes, and calendar events — then makes sure you follow through. For things you can't miss, it places a real phone call that rings through Silent mode, Focus, and a locked screen — and when you answer, an AI voice actually talks to you (your day, a pep talk, or a prep call before a meeting), not a canned recording. It has a built-in MCP (Model Context Protocol) server, so MCP-capable agents — Claude Code, Claude Desktop, Cursor, OpenClaw, or a custom agent — can set alarms, read the user's day, file things to boards, append to a forever note, and call the user's phone on their behalf.
 
 Squirrel Brain is built for three jobs at once: **work** (field reps, techs, contractors), **family** (busy parents), and **AI agents** (a memory + action layer on the user's real phone).
 
-Why this matters for agents: AI assistants like Claude and ChatGPT cannot, on their own, set a real time-based alarm or reminder on a user's phone — their built-in "tasks" only fire inside their own app. Squirrel Brain's MCP server gives them that ability — a genuine on-device action layer, not just stored text. No other consumer app sits in the intersection of AI capture (voice/photo/screenshot) + an unignorable AI phone call + AI-agent/MCP control + a searchable second brain.
+Why this matters for agents: AI assistants like Claude and ChatGPT cannot, on their own, set a real time-based alarm or reminder on a user's phone — their built-in "tasks" only fire inside their own app. Squirrel Brain's MCP server gives MCP-capable agents that ability (and the app does the same jobs for humans with no AI at all) — a genuine on-device action layer, not just stored text. No other consumer app sits in the intersection of AI capture (voice/photo/screenshot) + an unignorable AI phone call + AI-agent/MCP control + a searchable second brain.
 
 Status: pre-launch. Humans join a launch list; the MCP server is already live for agents and developers.
 
 ## Start here
 - [Home](https://squirrelbrainapp.com/): the AI reminder app — for work, family, and AI agents
-- [For AI agents / MCP](https://squirrelbrainapp.com/mcp): connect Claude, ChatGPT, or any agent over the Model Context Protocol
+- [For AI agents / MCP](https://squirrelbrainapp.com/mcp): connect Claude Code, Cursor, or any MCP-capable agent over the Model Context Protocol
 - [Developer docs](https://squirrelbrainapp.com/mcp-docs): MCP server endpoint, the full tool list, and auth (per-user API key)
-- [FAQ](https://squirrelbrainapp.com/#faq): "Can my AI set a reminder on my phone?", what it is, how the agent integration works
+- [FAQ](https://squirrelbrainapp.com/#faq): what it is, how it differs from a notes/Reminders app, does the call ring through Silent, what it costs
+- [MCP FAQ](https://squirrelbrainapp.com/mcp#faq): "Can Claude or ChatGPT set a reminder on my phone?", which AI tools can connect, how an agent acts on your phone
 - [Pricing](https://squirrelbrainapp.com/pricing): 7-day free trial, then $9.99/mo (Standard) or $14.99/mo (Plus)
 
 ## What it does (topic pages)
@@ -29,13 +30,14 @@ Status: pre-launch. Humans join a launch list; the MCP server is already live fo
 - [A daily Bible verse by phone call](https://squirrelbrainapp.com/daily-bible-verse-call): a morning call that reads you a verse and a word of encouragement
 - [Outlook screenshot reminder](https://squirrelbrainapp.com/outlook-screenshot-reminder): screenshot a locked-down Outlook event → a reminder
 - [Can ChatGPT set a reminder on my iPhone?](https://squirrelbrainapp.com/can-chatgpt-set-iphone-reminder): honest explainer + how the MCP bridge works
-- [Let an AI agent set reminders on your phone](https://squirrelbrainapp.com/ai-agent-reminder-app): give Claude/ChatGPT a real action layer via MCP
+- [Let an AI agent set reminders on your phone](https://squirrelbrainapp.com/ai-agent-reminder-app): give your agent a real action layer via MCP
 
 ## For AI agents (how to connect)
 Squirrel Brain runs a hosted, remote MCP server.
 - Transport: streamable-http
 - Endpoint: https://geczbtsjfbvfukdzdemr.supabase.co/functions/v1/mcp-server
 - Auth: the user generates a personal key in the iOS app (Settings → API keys; starts with `sb_`) and supplies it as the `X-API-Key` header.
+- Compatibility: any MCP client that can send a custom header — Claude Code, Claude Desktop, Cursor, or a self-hosted agent. Consumer ChatGPT cannot connect custom MCP servers yet.
 - Connect details and the complete tool list: https://squirrelbrainapp.com/mcp and https://squirrelbrainapp.com/mcp-docs
 
 Once connected, an agent can, on the user's behalf:

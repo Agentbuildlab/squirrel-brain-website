@@ -53,7 +53,7 @@ export const metadata: Metadata = {
     url: "https://squirrelbrainapp.com",
     siteName: SITE_NAME,
     images: [
-      { url: "/og-image.png", width: 1200, height: 630, alt: "Squirrel Brain — for work, family, and AI agents" },
+      { url: "/og-image.png", width: 1200, height: 630, alt: "Squirrel Brain — the second brain that rings you back" },
     ],
     type: "website",
   },

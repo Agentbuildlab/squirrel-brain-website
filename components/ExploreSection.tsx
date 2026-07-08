@@ -69,7 +69,7 @@ const CARDS: Card[] = [
     href: "/mcp",
     eyebrow: "External agents",
     title: "Plug your AI in",
-    body: "A built-in MCP portal. Connect Claude, ChatGPT, OpenClaw, or any agent to set alarms, read your tasks, and send a voice message straight to your phone.",
+    body: "A built-in MCP portal. Connect Claude Code, Cursor, OpenClaw, or any agent you run to set alarms, read your tasks, and send a voice message straight to your phone.",
     tint: "#E2F5EC",
     accent: "#2f9e63",
     icon: (

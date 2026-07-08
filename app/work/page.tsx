@@ -233,7 +233,7 @@ export default function WorkPage() {
           </div>
         </section>
 
-        {/* MCP / agent moat — connect any AI */}
+        {/* MCP — optional pointer band; the full story lives on /mcp */}
         <section
           className="py-20 border-y border-border"
           style={{ background: "#faf6f0" }}
@@ -242,24 +242,24 @@ export default function WorkPage() {
           <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
             <FadeIn>
               <p className="text-xs font-bold tracking-widest uppercase text-accent mb-3">
-                Agent-friendly
+                Optional power-up
               </p>
               <h2
                 id="work-mcp-heading"
                 className="font-display text-3xl font-bold text-ink mb-4"
               >
-                Connect any AI agent to your brain.
+                Use AI tools? They can plug in.
               </h2>
               <p className="text-lg text-muted leading-relaxed mb-6 max-w-2xl mx-auto">
-                Squirrel Brain has a built-in MCP server. Claude, ChatGPT, or any custom agent can
-                set alarms, read your tasks, and send voice messages straight to your phone.
-                Your squirrel becomes the memory layer for every AI tool you use.
+                Squirrel Brain has an optional MCP portal: coding agents like Claude Code — or agents you
+                run yourself — can set alarms, read your tasks, and send voice messages straight to your
+                phone. Don&rsquo;t use AI? Everything here works without it.
               </p>
               <a
-                href="/mcp-docs"
+                href="/mcp"
                 className="inline-flex items-center gap-2 text-accent font-bold hover:opacity-80 transition-opacity"
               >
-                Developer docs
+                See the MCP portal
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
                   <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
