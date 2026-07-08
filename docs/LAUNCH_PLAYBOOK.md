@@ -60,7 +60,7 @@ All link to https://squirrelbrainapp.com. Swap to your App Store link once live.
 > I'm building Squirrel Brain: speak it, snap it, or screenshot it — and it becomes a real reminder,
 > alarm, or calendar event. For the stuff you can't miss, it rings your phone like a call.
 >
-> It even lets Claude/ChatGPT set reminders on your phone (built-in MCP).
+> It even lets Claude, Cursor, or your own agents set reminders on your phone (built-in MCP).
 > Early access → squirrelbrainapp.com
 
 ### LinkedIn
@@ -71,7 +71,7 @@ All link to https://squirrelbrainapp.com. Swap to your App Store link once live.
 > a reminder, alarm, or calendar event — then follows up so it doesn't slip. For the few things that
 > truly can't slip, it rings your phone like a call instead of a banner you swipe away.
 >
-> It also connects to AI assistants (Claude, ChatGPT) so they can set reminders on your actual phone.
+> It also connects to your AI tools (Claude, Claude Code, Cursor, your own agents) so they can set reminders on your actual phone.
 > We're pre-launch and opening early access: squirrelbrainapp.com
 
 ### Reddit (communities that fit — read each sub's rules first; lead with the problem, not the link)
@@ -80,7 +80,7 @@ Good fits: r/productivity, r/iphone, r/apple, r/shortcuts, r/Entrepreneur (post 
 > I kept asking ChatGPT to remind me of things and nothing ever fired on my lock screen — turns out it
 > can only nudge you inside its own app. So I built Squirrel Brain: snap/say/screenshot something and it
 > becomes a real reminder, alarm, or calendar event, and for the important stuff it rings your phone like
-> a call. It also exposes an MCP server so Claude/ChatGPT can set reminders on your phone for you.
+> a call. It also exposes an MCP server so Claude, Cursor, or your own scripts can set reminders on your phone for you.
 > It's iOS, pre-launch — would love feedback on whether this solves a real problem for you.
 > [link in comments to respect sub rules]
 
@@ -93,7 +93,7 @@ Good fits: r/productivity, r/iphone, r/apple, r/shortcuts, r/Entrepreneur (post 
 - Tagline: **The AI reminder app for everything you forget**
 - Description: Speak it, snap it, or screenshot it — Squirrel Brain turns voice notes, photos,
   screenshots, texts, and emails into reminders, alarms, notes, and calendar events. For the things you
-  can't miss, it rings your phone like a call. Connect Claude or ChatGPT to set reminders for you.
+  can't miss, it rings your phone like a call. Connect Claude, Cursor, or your own AI agents to set reminders for you.
 
 ### Hacker News (save for actual launch day — "Show HN")
 > Show HN: Squirrel Brain – turn voice/photos/screenshots into reminders; AI agents can set them too

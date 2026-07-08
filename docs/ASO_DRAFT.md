@@ -63,8 +63,8 @@ Suggested body sections (each a short paragraph or bulleted feature):
   numbers — read, filed, and searchable later.
 - **Built for work and family** — sales reps, service techs, busy parents, and anyone
   whose to-dos are scattered everywhere.
-- **Connect your AI assistant (optional)** — a built-in MCP server lets Claude, ChatGPT,
-  or any agent set reminders on your behalf.
+- **Connect your AI tools (optional)** — a built-in MCP server lets Claude, Claude Code,
+  Cursor, or your own agents and scripts set reminders on your behalf.
 
 Close with: pricing line + "iPhone only · 7-day free trial."
 
