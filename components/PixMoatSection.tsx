@@ -120,8 +120,11 @@ export default function PixMoatSection() {
             Then, whenever you get a minute — lying in bed at the end of the day — open Squirrel Brain
             and it&rsquo;s already pulled in everything new and{" "}
             <strong style={{ color: "#fff5e8" }}>laid it out for you to tick: keep this one, skip that one.</strong>{" "}
-            The keepers get filed into the right board automatically. The rest stay in your camera roll,
-            untouched. That&rsquo;s the whole effort.
+            The keepers get filed into the right board automatically — so you can{" "}
+            <strong style={{ color: "#fff5e8" }}>find them the second you need them</strong>, and anything
+            with a date on it can go{" "}
+            <strong style={{ color: "#fff5e8" }}>straight onto your calendar</strong>. The rest stay in
+            your camera roll, untouched. That&rsquo;s the whole effort.
           </p>
         </motion.div>
 
