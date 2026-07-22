@@ -129,8 +129,8 @@ export default function HeroSection() {
             transition={{ duration: 0.55, delay: 0.25 }}
           >
             Speak it. Snap it. Stash it. Your squirrel files everything — and for
-            the one thing you can&rsquo;t miss, it <strong>calls your phone</strong> in
-            its own voice.
+            the one thing you can&rsquo;t miss, it <strong>calls your phone</strong> — and
+            you can talk right back.
           </motion.p>
 
           {/* CTAs — one primary action */}

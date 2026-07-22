@@ -59,6 +59,11 @@ export default function CallDemoSection({
           {sb}
         </p>
         <InteractiveCall audioSrc={v.audio} transcript={v.transcript} />
+        <p className="text-xs mt-6 max-w-sm" style={{ color: "rgba(255,245,232,0.5)" }}>
+          That&rsquo;s Scuttle&rsquo;s real voice. In the app it&rsquo;s a{" "}
+          <span style={{ color: "#3fae6e", fontWeight: 700 }}>two-way call</span> — you answer and
+          talk back, and it does what you ask.
+        </p>
       </div>
     </section>
   );

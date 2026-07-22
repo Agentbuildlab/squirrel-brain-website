@@ -12,8 +12,7 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { WAITLIST_HREF } from "@/lib/config";
-import InteractiveCall from "@/components/InteractiveCall";
-import { DEMO_VOICES } from "@/lib/demoVoices";
+import TwoWayCallDemo from "@/components/TwoWayCallDemo";
 
 // ── Main section ──────────────────────────────────────────────────────────
 
@@ -96,9 +95,10 @@ export default function CallSection() {
               className="text-base leading-relaxed mb-5 max-w-lg"
               style={{ color: "rgba(255,245,232,0.65)" }}
             >
-              Your squirrel speaks in its own voice and tells you exactly what's up — and you choose
-              what it says: a quick pep talk, a rundown of your day, or the main points before your
-              big meeting. You hear it. You can't ignore it. The thing gets done.
+              Answer it and you&rsquo;re not just listening — you talk back. Tell your squirrel to move
+              the meeting, add a note, or walk you through your day, and it handles it right there on
+              the call, out loud, in its own voice. A real back-and-forth conversation, not a recording.
+              You can&rsquo;t ignore it. The thing gets done.
             </p>
             <div className="mb-10" />
 
@@ -122,9 +122,10 @@ export default function CallSection() {
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.12, ease: [0.25, 0.1, 0.25, 1] }}
           >
-            {/* Interactive: tap the phone → hear Scuttle. Distinct "moat" voice so it
-                doesn't repeat the hero phone's message on the same page. */}
-            <InteractiveCall audioSrc={DEMO_VOICES.moat.audio} transcript={DEMO_VOICES.moat.transcript} />
+            {/* Interactive TWO-WAY call: the visitor answers and picks what THEY
+                say back; Scuttle acts on it. Shows the real differentiator — a
+                conversation, not a voicemail. */}
+            <TwoWayCallDemo />
           </motion.div>
         </div>
       </div>

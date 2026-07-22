@@ -50,7 +50,7 @@ const FEATURES: {
   },
   {
     title: "Follow-ups that ring your phone",
-    body: "When a follow-up actually matters, your squirrel rings your phone and speaks in its own voice. Not a push notification. A real call that rings right through Silent mode, Focus, and a locked screen.",
+    body: "When a follow-up actually matters, your squirrel rings your phone — and you pick up and talk it through, out loud, in a real back-and-forth. Not a push notification. A real call that rings right through Silent mode, Focus, and a locked screen.",
     screen: "/assets/screens/calendar-v2.webp",
     screenAlt: "Calendar showing upcoming follow-up with alarm",
   },
