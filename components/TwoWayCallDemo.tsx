@@ -260,6 +260,7 @@ export default function TwoWayCallDemo({ width = 340 }: { width?: number }) {
   const scrollRef = useRef<HTMLDivElement>(null);
   const voicesRef = useRef<SpeechSynthesisVoice[]>([]);
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const primedAudioRef = useRef(false); // true once s_open was started in the tap gesture
   const speechOn = typeof window !== "undefined" && "speechSynthesis" in window;
 
   // The device's TTS voices populate asynchronously — load + keep them fresh.
@@ -333,18 +334,24 @@ export default function TwoWayCallDemo({ width = 340 }: { width?: number }) {
     const el = audioRef.current;
     if (last.audio && el && !reduceMotion) {
       try {
-        el.pause();
+        el.muted = false;
         el.onended = done;
         el.onerror = () => {
           if (!cancelled) speakOrTime();
         };
-        el.src = last.audio;
-        el.currentTime = 0;
-        const p = el.play();
-        if (p && typeof p.then === "function")
-          p.catch(() => {
-            if (!cancelled) speakOrTime();
-          });
+        if (primedAudioRef.current) {
+          // s_open was already started in the tap gesture — just await its end.
+          primedAudioRef.current = false;
+        } else {
+          el.pause();
+          el.src = last.audio;
+          el.currentTime = 0;
+          const p = el.play();
+          if (p && typeof p.then === "function")
+            p.catch(() => {
+              if (!cancelled) speakOrTime();
+            });
+        }
         // Safety only if the element never fires "ended" — sized generously so
         // it can never cut a clip off.
         safety = setTimeout(done, last.text.length * 130 + 6000);
@@ -384,7 +391,7 @@ export default function TwoWayCallDemo({ width = 340 }: { width?: number }) {
   // Kick the first beat right after answering.
   useEffect(() => {
     if (state.status === "live" && state.bubbles.length === 0 && !state.choices && state.queue.length) {
-      const t = setTimeout(() => dispatch({ type: "advance" }), 450);
+      const t = setTimeout(() => dispatch({ type: "advance" }), 140);
       return () => clearTimeout(t);
     }
   }, [state.status, state.bubbles.length, state.choices, state.queue.length]);
@@ -396,26 +403,25 @@ export default function TwoWayCallDemo({ width = 340 }: { width?: number }) {
   }, [state.bubbles, state.choices, reduceMotion]);
 
   const answer = useCallback(() => {
-    // Unlock audio playback inside the user gesture (iOS/Safari won't play the
-    // — slightly later — mp3 lines otherwise). Silently prime the element.
+    // Start the FIRST line's audio right inside the tap (unmuted) — iOS only
+    // allows sound from a real gesture, and this also unlocks the element for
+    // every later line. The effect then just waits for it to end.
     const el = audioRef.current;
     if (el) {
       try {
-        el.muted = true;
+        el.muted = false;
         el.src = "/audio/twoway/s_open.mp3";
-        el.load();
+        el.currentTime = 0;
+        primedAudioRef.current = true;
         const pr = el.play();
         if (pr && typeof pr.then === "function")
-          pr
-            .then(() => {
-              el.pause();
-              el.currentTime = 0;
-              el.muted = false;
-            })
-            .catch(() => {
-              el.muted = false;
-            });
-      } catch {}
+          pr.catch(() => {
+            // Blocked → let the effect play it (and fall back to speech if needed).
+            primedAudioRef.current = false;
+          });
+      } catch {
+        primedAudioRef.current = false;
+      }
     }
     // Also unlock speech synthesis as the fallback voice path.
     if (speechOn) {
@@ -661,10 +667,10 @@ export default function TwoWayCallDemo({ width = 340 }: { width?: number }) {
         )}
       </div>
 
-      {/* Honest micro-label */}
-      <p style={{ fontSize: 11, color: "rgba(138,112,96,0.7)", margin: 0, textAlign: "center", maxWidth: 320 }}>
+      {/* Honest label under the phone */}
+      <p style={{ fontSize: 14, lineHeight: 1.55, color: "rgba(120,96,80,0.92)", margin: 0, textAlign: "center", maxWidth: 400 }}>
         A preview of a real two-way call. In the app, you speak — out loud, in your own words —{" "}
-        <span style={{ color: ORANGE }}>and your squirrel does it.</span>
+        <span style={{ color: ORANGE, fontWeight: 600 }}>and your squirrel does it.</span>
       </p>
 
       {/* Two-voice audio: Scuttle = Sarah, You = Daniel. Preloaded so each line
