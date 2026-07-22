@@ -22,7 +22,7 @@ import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 // what they say next, then splices in that branch. Tags are the on-screen proof
 // pills — each maps to a REAL app capability.
 
-type Say = { kind: "say"; by: "scuttle" | "you"; text: string; tag?: string };
+type Say = { kind: "say"; by: "scuttle" | "you"; text: string; tag?: string; audio?: string };
 type Choose = { kind: "choose"; options: { label: string; then: Say[] }[] };
 type Beat = Say | Choose;
 
@@ -32,6 +32,7 @@ const OPENING: Beat[] = [
     by: "scuttle",
     text: "Morning, Alex — it's Scuttle. You asked me to call before your 9:30 with the Hendersons. Heads up: you promised them the revised quote first.",
     tag: "A scheduled call that knows why it's calling",
+    audio: "/audio/twoway/s_open.mp3",
   },
   {
     kind: "choose",
@@ -39,36 +40,39 @@ const OPENING: Beat[] = [
       {
         label: "Move the meeting to 11",
         then: [
-          { kind: "say", by: "you", text: "Push the Hendersons to eleven." },
+          { kind: "say", by: "you", text: "Push the Hendersons to eleven.", audio: "/audio/twoway/u_move.mp3" },
           {
             kind: "say",
             by: "scuttle",
             text: "Done — moved to 11:00. I'll ring you at 10:30 so you walk in ready.",
             tag: "Rescheduled on the call — your calendar's already updated",
+            audio: "/audio/twoway/s_move.mp3",
           },
         ],
       },
       {
         label: "What else is on my plate?",
         then: [
-          { kind: "say", by: "you", text: "What else have I got today?" },
+          { kind: "say", by: "you", text: "What else have I got today?", audio: "/audio/twoway/u_else.mp3" },
           {
             kind: "say",
             by: "scuttle",
             text: "Three things: the quote to the Hendersons, pick up the prescription, and Mia's recital at 6.",
             tag: "Read back from everything you've ever captured",
+            audio: "/audio/twoway/s_else.mp3",
           },
         ],
       },
       {
         label: "Remind me to send the quote",
         then: [
-          { kind: "say", by: "you", text: "Remind me to send that quote first." },
+          { kind: "say", by: "you", text: "Remind me to send that quote first.", audio: "/audio/twoway/u_remind.mp3" },
           {
             kind: "say",
             by: "scuttle",
             text: "Got it — I'll remind you to send the quote at 9:00 sharp.",
             tag: "Added a reminder — by voice, right on the call",
+            audio: "/audio/twoway/s_remind.mp3",
           },
         ],
       },
@@ -79,6 +83,7 @@ const OPENING: Beat[] = [
     by: "scuttle",
     text: "Oh — that parking receipt you snapped in the garage yesterday? Filed under Expenses, GPS-stamped with where and when. Want me to text you the photo?",
     tag: "Your snapshots become filed, searchable proof",
+    audio: "/audio/twoway/s_pix.mp3",
   },
   {
     kind: "choose",
@@ -86,24 +91,26 @@ const OPENING: Beat[] = [
       {
         label: "Yes, text it to me",
         then: [
-          { kind: "say", by: "you", text: "Yeah, text it over." },
+          { kind: "say", by: "you", text: "Yeah, text it over.", audio: "/audio/twoway/u_yes.mp3" },
           {
             kind: "say",
             by: "scuttle",
             text: "Sent. Talk soon, Alex — I'll call the moment the next thing actually matters.",
             tag: "It calls you when it counts — not another notification to ignore",
+            audio: "/audio/twoway/s_yes.mp3",
           },
         ],
       },
       {
         label: "No — I'm good, thanks",
         then: [
-          { kind: "say", by: "you", text: "Nah, I'm good. Thanks, Scuttle." },
+          { kind: "say", by: "you", text: "Nah, I'm good. Thanks, Scuttle.", audio: "/audio/twoway/u_no.mp3" },
           {
             kind: "say",
             by: "scuttle",
             text: "You got it. Talk soon — I'll call the moment the next thing actually matters.",
             tag: "It calls you when it counts — not another notification to ignore",
+            audio: "/audio/twoway/s_no.mp3",
           },
         ],
       },
@@ -113,7 +120,7 @@ const OPENING: Beat[] = [
 
 // ── Reducer: walk the script, pausing at choices ─────────────────────────────
 
-type Bubble = { id: number; by: "scuttle" | "you"; text: string; tag?: string };
+type Bubble = { id: number; by: "scuttle" | "you"; text: string; tag?: string; audio?: string };
 type Status = "ringing" | "live" | "ended";
 type State = {
   status: Status;
@@ -156,7 +163,7 @@ function reducer(state: State, action: Action): State {
         speaking: next.by,
         bubbles: [
           ...state.bubbles,
-          { id: state.nextId, by: next.by, text: next.text, tag: next.tag },
+          { id: state.nextId, by: next.by, text: next.text, tag: next.tag, audio: next.audio },
         ],
         nextId: state.nextId + 1,
       };
@@ -252,6 +259,7 @@ export default function TwoWayCallDemo({ width = 340 }: { width?: number }) {
   const [state, dispatch] = useReducer(reducer, initial);
   const scrollRef = useRef<HTMLDivElement>(null);
   const voicesRef = useRef<SpeechSynthesisVoice[]>([]);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
   const speechOn = typeof window !== "undefined" && "speechSynthesis" in window;
 
   // The device's TTS voices populate asynchronously — load + keep them fresh.
@@ -272,11 +280,15 @@ export default function TwoWayCallDemo({ width = 340 }: { width?: number }) {
 
   const lastId = state.bubbles.length ? state.bubbles[state.bubbles.length - 1].id : 0;
 
-  // Speak the newest line out loud (two voices), then advance when it finishes.
-  // Falls back to a timed beat when speech is unavailable or reduced-motion is on
-  // — so the conversation never stalls even where audio can't play.
+  // Play the newest line in its real recorded voice (two-voice ElevenLabs
+  // audio: Scuttle = Sarah, You = Daniel), then advance when it finishes.
+  // Fallback chain if the mp3 can't play: browser speech → a timed beat, so the
+  // conversation never stalls.
   useEffect(() => {
     if (state.status !== "live") {
+      try {
+        audioRef.current?.pause();
+      } catch {}
       if (speechOn) {
         try {
           window.speechSynthesis.cancel();
@@ -289,40 +301,82 @@ export default function TwoWayCallDemo({ width = 340 }: { width?: number }) {
     if (!last) return; // the very first advance is handled by the kick effect below
     let cancelled = false;
     const queueEmpty = state.queue.length === 0;
+    let timer: ReturnType<typeof setTimeout> | undefined;
+    let safety: ReturnType<typeof setTimeout> | undefined;
     const done = () => {
       if (cancelled) return;
       cancelled = true;
       dispatch({ type: queueEmpty ? "hangup" : "advance" });
     };
-    if (speechOn && !reduceMotion && voicesRef.current.length > 0) {
+    const speakOrTime = () => {
+      if (cancelled) return;
+      if (speechOn && !reduceMotion && voicesRef.current.length > 0) {
+        try {
+          window.speechSynthesis.cancel();
+          const u = new SpeechSynthesisUtterance(last.text);
+          const v = chooseVoice(voicesRef.current, last.by);
+          if (v) u.voice = v;
+          u.rate = last.by === "scuttle" ? 1.02 : 1.0;
+          u.pitch = last.by === "scuttle" ? 1.1 : 0.8;
+          u.onend = done;
+          u.onerror = done;
+          window.speechSynthesis.speak(u);
+          return;
+        } catch {
+          /* fall to timer */
+        }
+      }
+      timer = setTimeout(done, reduceMotion ? Math.min(speakMs(last.text), 700) : speakMs(last.text));
+    };
+
+    // Preferred path: play the real recorded voice.
+    const el = audioRef.current;
+    if (last.audio && el && !reduceMotion) {
       try {
-        window.speechSynthesis.cancel();
-        const u = new SpeechSynthesisUtterance(last.text);
-        const v = chooseVoice(voicesRef.current, last.by);
-        if (v) u.voice = v;
-        u.rate = last.by === "scuttle" ? 1.02 : 1.0;
-        u.pitch = last.by === "scuttle" ? 1.1 : 0.8;
-        u.onend = done;
-        u.onerror = done;
-        // Safety net ONLY for devices that swallow onend — must be comfortably
-        // longer than real speech (~85ms/char) so it never cuts a line off.
-        const safety = setTimeout(done, Math.max(speakMs(last.text) + 3500, last.text.length * 105 + 4500));
-        window.speechSynthesis.speak(u);
+        el.pause();
+        el.onended = done;
+        el.onerror = () => {
+          if (!cancelled) speakOrTime();
+        };
+        el.src = last.audio;
+        el.currentTime = 0;
+        const p = el.play();
+        if (p && typeof p.then === "function")
+          p.catch(() => {
+            if (!cancelled) speakOrTime();
+          });
+        // Safety only if the element never fires "ended" — sized generously so
+        // it can never cut a clip off.
+        safety = setTimeout(done, last.text.length * 130 + 6000);
         return () => {
           cancelled = true;
-          clearTimeout(safety);
+          if (safety) clearTimeout(safety);
+          if (timer) clearTimeout(timer);
           try {
-            window.speechSynthesis.cancel();
+            el.pause();
+            el.onended = null;
+            el.onerror = null;
           } catch {}
+          if (speechOn) {
+            try {
+              window.speechSynthesis.cancel();
+            } catch {}
+          }
         };
       } catch {
-        /* fall through to the timer */
+        /* fall through to speech/timer */
       }
     }
-    const t = setTimeout(done, reduceMotion ? Math.min(speakMs(last.text), 700) : speakMs(last.text));
+
+    speakOrTime();
     return () => {
       cancelled = true;
-      clearTimeout(t);
+      if (timer) clearTimeout(timer);
+      if (speechOn) {
+        try {
+          window.speechSynthesis.cancel();
+        } catch {}
+      }
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [lastId, state.choices, state.status, speechOn, reduceMotion]);
@@ -342,8 +396,28 @@ export default function TwoWayCallDemo({ width = 340 }: { width?: number }) {
   }, [state.bubbles, state.choices, reduceMotion]);
 
   const answer = useCallback(() => {
-    // Unlock speech synthesis inside the user gesture (iOS/Safari requires a
-    // gesture before the first — slightly later — spoken line will play).
+    // Unlock audio playback inside the user gesture (iOS/Safari won't play the
+    // — slightly later — mp3 lines otherwise). Silently prime the element.
+    const el = audioRef.current;
+    if (el) {
+      try {
+        el.muted = true;
+        el.src = "/audio/twoway/s_open.mp3";
+        el.load();
+        const pr = el.play();
+        if (pr && typeof pr.then === "function")
+          pr
+            .then(() => {
+              el.pause();
+              el.currentTime = 0;
+              el.muted = false;
+            })
+            .catch(() => {
+              el.muted = false;
+            });
+      } catch {}
+    }
+    // Also unlock speech synthesis as the fallback voice path.
     if (speechOn) {
       try {
         window.speechSynthesis.cancel();
@@ -357,6 +431,9 @@ export default function TwoWayCallDemo({ width = 340 }: { width?: number }) {
     dispatch({ type: "answer" });
   }, [speechOn]);
   const restart = useCallback(() => {
+    try {
+      audioRef.current?.pause();
+    } catch {}
     if (speechOn) {
       try {
         window.speechSynthesis.cancel();
@@ -589,6 +666,10 @@ export default function TwoWayCallDemo({ width = 340 }: { width?: number }) {
         A preview of a real two-way call. In the app, you speak — out loud, in your own words —{" "}
         <span style={{ color: ORANGE }}>and your squirrel does it.</span>
       </p>
+
+      {/* Two-voice audio: Scuttle = Sarah, You = Daniel. Preloaded so each line
+          plays instantly; src is swapped per line as the call advances. */}
+      <audio ref={audioRef} preload="auto" />
     </div>
   );
 }
