@@ -6,15 +6,15 @@
 const FAQS: { q: string; a: string }[] = [
   {
     q: "What is Squirrel Brain?",
-    a: "Squirrel Brain is an iOS app that turns photos, voice notes, screenshots, and forwarded texts into reminders, alarms, and calendar events — then makes sure you follow through, including a real phone call that rings right through Silent mode, Focus, and a locked screen.",
+    a: "Squirrel Brain is an iOS app that turns photos, voice notes, screenshots, and forwarded texts into reminders, alarms, and calendar events — then makes sure you follow through, including a real phone call that rings when your ringer's on, vibrates on silent, and reaches you on a locked screen.",
   },
   {
     q: "How is it different from a notes app or the Reminders app?",
     a: "Most apps only store what you capture — it just sits there. Squirrel Brain acts on it: it sets alarms, adds calendar events, organizes photos into boards, and calls you when something can't slip.",
   },
   {
-    q: "Does the call really ring through Silent mode?",
-    a: "Yes. The call alarm is built on Apple's AlarmKit — the same OS-level machinery as the built-in Clock alarm — so it rings through Silent mode, Focus, and a locked screen. The only thing that mutes it is you, with the app's own 'Silence all reminders' switch.",
+    q: "What happens to the call when my phone's on silent?",
+    a: "It comes through like a real phone call: it rings when your ringer's on, and vibrates on silent — exactly like any incoming call — and it shows on your locked screen either way. Because it's a real call, not a system alarm, the silent switch mutes the ring the same as it does for any call. You can also turn it off entirely with the app's own 'Silence all reminders' switch.",
   },
   {
     q: "Can my AI tools use it too?",

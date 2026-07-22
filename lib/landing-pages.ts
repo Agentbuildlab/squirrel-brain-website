@@ -589,11 +589,11 @@ export const LANDING_PAGES: LandingPageData[] = [
     slug: "reminder-app-that-calls-you",
     title: "A Reminder App That Calls You — an AI Voice, Not a Banner | Squirrel Brain",
     description:
-      "Squirrel Brain doesn't just remind you — it calls you. The call rings through Silent mode, and when you pick up an AI voice actually talks to you: your day, a pep talk, or a quick prep before your next meeting.",
+      "Squirrel Brain doesn't just remind you — it calls you. It's a real phone call — it rings when your ringer's on and vibrates on silent — and when you pick up, an AI voice actually talks to you: your day, a pep talk, or a quick prep before your next meeting.",
     eyebrow: "It calls you",
     h1: "A reminder app that actually calls you",
     subhead:
-      "Not a banner you swipe away — a real call that rings through Silent mode. And it's not a robocall: pick up and an AI voice talks to you about your day, hypes you up, or walks you through the meeting you're about to walk into.",
+      "Not a banner you swipe away — a real phone call that rings when your ringer's on and vibrates on silent. And it's not a robocall: pick up and an AI voice talks to you about your day, hypes you up, or walks you through the meeting you're about to walk into.",
     heroShot: {
       src: "/assets/screens/calendar-v2.webp",
       alt: "Squirrel Brain calendar showing a reminder set to ring the phone like a call",
@@ -607,9 +607,9 @@ export const LANDING_PAGES: LandingPageData[] = [
       {
         eyebrow: "It talks to you",
         h2: "It's not a beep — an AI voice actually talks to you",
-        body: "Pick up and it isn't a pre-recorded chime. An AI voice tells you what it called about in plain language — the reminder, what's on your day, or the points you asked it to cover. It rings through Silent mode, so it reaches you even when everything else is muted.",
+        body: "Pick up and it isn't a pre-recorded chime. An AI voice tells you what it called about in plain language — the reminder, what's on your day, or the points you asked it to cover. It comes through like a real call — ringing when your ringer's on, vibrating on silent — so it reaches you even when a notification wouldn't.",
         bullets: [
-          "Rings through Silent mode, Focus, and a locked screen",
+          "Rings on your ringer, vibrates on silent, on a locked screen",
           "An AI voice speaks your reminder and your day — not a canned recording",
           "Call it back and ask, or have it call you — both directions",
         ],
@@ -628,11 +628,11 @@ export const LANDING_PAGES: LandingPageData[] = [
     faqs: [
       {
         q: "Can it call me daily with a pep talk, scripture, or word of encouragement?",
-        a: "Yes. Schedule a recurring call and ask it to greet you with a pep talk, a daily scripture, or a few encouraging words. An AI voice delivers it in a real call that rings through Silent mode.",
+        a: "Yes. Schedule a recurring call and ask it to greet you with a pep talk, a daily scripture, or a few encouraging words. An AI voice delivers it in a real phone call that rings when your ringer's on and vibrates on silent.",
       },
       {
-        q: "Does it really ring through Silent mode?",
-        a: "Yes. The reminder comes through like a real phone call, so it rings even when your phone is on Silent or in a Focus mode, and on a locked screen — for the reminders you flag as important.",
+        q: "What happens when my phone's on silent?",
+        a: "The reminder comes through like a real phone call — it rings when your ringer's on, and vibrates on silent, just like any incoming call — and it shows on your locked screen either way, for the reminders you flag as important.",
       },
       {
         q: "What does it say when it calls?",
@@ -826,11 +826,11 @@ export const LANDING_PAGES: LandingPageData[] = [
     slug: "daily-pep-talk-call-app",
     title: "An App That Calls You With a Daily Pep Talk or Scripture | Squirrel Brain",
     description:
-      "Squirrel Brain can call your phone on a schedule and an AI voice gives you a pep talk, a daily word of encouragement or scripture, a prep before a big meeting, or a reminder you can't miss — a real call that rings through Silent mode.",
+      "Squirrel Brain can call your phone on a schedule and an AI voice gives you a pep talk, a daily word of encouragement or scripture, a prep before a big meeting, or a reminder you can't miss — a real phone call that rings when your ringer's on and vibrates on silent.",
     eyebrow: "Daily calls that lift you up",
     h1: "A real call that talks you through your day",
     subhead:
-      "Ask your squirrel to call you a couple times a day — and an AI voice picks up with a pep talk, an encouraging word or scripture, a prep before your big meeting, or the thing you can't forget. A real phone call that rings through Silent mode.",
+      "Ask your squirrel to call you a couple times a day — and an AI voice picks up with a pep talk, an encouraging word or scripture, a prep before your big meeting, or the thing you can't forget. A real phone call that rings when your ringer's on and vibrates on silent.",
     heroShot: {
       src: "/assets/screens/calendar-v2.webp",
       alt: "Squirrel Brain showing a recurring daily call scheduled to deliver an encouraging message",
@@ -843,7 +843,7 @@ export const LANDING_PAGES: LandingPageData[] = [
         bullets: [
           "Schedule a morning (and midday) call on your terms — once or twice a day",
           "Ask for a daily scripture, an affirmation, or a few encouraging words",
-          "It rings through Silent mode, so the encouragement actually reaches you",
+          "Rings on your ringer, vibrates on silent — so the encouragement reaches you",
         ],
       },
       {
@@ -858,7 +858,7 @@ export const LANDING_PAGES: LandingPageData[] = [
         bullets: [
           "Recurring calls — once, twice a day, or whenever you set them",
           "An AI voice that actually speaks to you, not a canned recording",
-          "Rings through Silent mode, Focus, and a locked screen",
+          "Rings on your ringer, vibrates on silent, on a locked screen",
         ],
       },
     ],
@@ -869,7 +869,7 @@ export const LANDING_PAGES: LandingPageData[] = [
       },
       {
         q: "Is it actually a phone call?",
-        a: "Yes. It rings your phone like a real call and comes through Silent mode, Focus, and a locked screen. When you pick up, an AI voice talks to you in plain language.",
+        a: "Yes. It rings your phone like a real call — ringing when your ringer's on, vibrating on silent — and shows on your locked screen. When you pick up, an AI voice talks to you in plain language.",
       },
       {
         q: "Can it call me right before a meeting to prep me?",
@@ -891,11 +891,11 @@ export const LANDING_PAGES: LandingPageData[] = [
     slug: "daily-bible-verse-call",
     title: "An App That Calls You With a Daily Bible Verse | Squirrel Brain",
     description:
-      "Squirrel Brain calls your phone each morning and an AI voice reads you a Bible verse and a word of encouragement — a real call that rings through Silent mode, so your daily verse actually reaches you.",
+      "Squirrel Brain calls your phone each morning and an AI voice reads you a Bible verse and a word of encouragement — a real phone call that rings when your ringer's on and vibrates on silent, so your daily verse actually reaches you.",
     eyebrow: "Your daily verse, out loud",
     h1: "A morning call with a Bible verse — not another app to open",
     subhead:
-      "Devotional apps wait for you to remember them. Squirrel Brain calls YOU: every morning your phone rings, and a warm voice reads a verse and a short word of encouragement to start your day anchored. A real call that rings through Silent mode.",
+      "Devotional apps wait for you to remember them. Squirrel Brain calls YOU: every morning your phone rings, and a warm voice reads a verse and a short word of encouragement to start your day anchored. A real phone call that rings when your ringer's on and vibrates on silent.",
     heroShot: {
       src: "/assets/screens/calendar-v2.webp",
       alt: "Squirrel Brain showing a recurring morning call scheduled to deliver a daily Bible verse",
@@ -908,7 +908,7 @@ export const LANDING_PAGES: LandingPageData[] = [
         bullets: [
           "You pick the time — every morning, midday, or both",
           "A real voice reads the verse to you; nothing to open, nothing to scroll",
-          "It rings through Silent mode, so it reaches you even when everything else is muted",
+          "Rings on your ringer, vibrates on silent — so it reaches you even when a notification wouldn't",
         ],
       },
       {
@@ -934,7 +934,7 @@ export const LANDING_PAGES: LandingPageData[] = [
       },
       {
         q: "Is it a real phone call or a notification?",
-        a: "A real call — it rings through Silent mode, Focus, and a locked screen. No banner to swipe away, nothing to remember to open.",
+        a: "A real call — it rings when your ringer's on, vibrates on silent, and shows on your locked screen. No banner to swipe away, nothing to remember to open.",
       },
       {
         q: "Can I choose the time and what it says?",

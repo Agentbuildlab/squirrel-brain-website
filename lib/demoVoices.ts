@@ -49,10 +49,10 @@ export const DEMO_VOICES: Record<DemoTheme, DemoVoice> = {
   moat: {
     audio: "/audio/scuttle-moat.mp3",
     transcript:
-      "Hey, it's Scuttle again. Here's what makes me different from every other reminder: for the one thing you truly can't miss, I don't send a notification you'll ignore — I call your phone and say it out loud, in my own voice, right through silent mode and a locked screen. That's the call that actually saves you. Talk soon!",
+      "Hey, it's Scuttle again. Here's what makes me different from every other reminder: for the one thing you truly can't miss, I don't send a notification you'll ignore — I call your phone and say it out loud, in my own voice, and reach you on a locked screen when it counts. That's the call that actually saves you. Talk soon!",
     eyebrow: "Why it works",
     heading: "The call you can't miss",
-    sub: "Tap the phone and hear the call that breaks through silent mode and a locked screen — in Scuttle's own voice. No download, no sign-up.",
+    sub: "Tap the phone and hear the call that reaches you on a locked screen when it counts — in Scuttle's own voice. No download, no sign-up.",
   },
   faith: {
     audio: "/audio/scuttle-faith.mp3",
@@ -177,7 +177,7 @@ export const DEMO_VOICES: Record<DemoTheme, DemoVoice> = {
   pricingpage: {
     audio: "/audio/scuttle-pricingpage.mp3",
     transcript:
-      "Hey, it's Scuttle. Wondering if I'm worth it? This call — the one that rings through silent mode and saves you from forgetting the thing that really costs you — that's what you're paying for. One saved slip-up pays for the whole year. Talk soon!",
+      "Hey, it's Scuttle. Wondering if I'm worth it? This call — the one that reaches you and saves you from forgetting the thing that really costs you — that's what you're paying for. One saved slip-up pays for the whole year. Talk soon!",
     eyebrow: "What you're paying for",
     heading: "Hear what it does — right now",
     sub: "Tap the phone: this call — the one that saves you from the costly slip-up — is what you're paying for. No download, no sign-up.",

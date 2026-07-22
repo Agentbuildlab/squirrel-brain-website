@@ -87,9 +87,9 @@ export default function CallSection() {
             >
               Not a notification. Not a banner you swipe away. A{" "}
               <strong style={{ color: "#fff5e8" }}>real incoming phone call</strong> — it rings
-              right through Silent mode, Focus, and a locked screen, even with the app closed and
-              your phone face-down across the room. It cuts through the 200 other notifications you
-              never opened.
+              when your ringer&rsquo;s on, vibrates on silent like any call, and reaches you on a
+              locked screen, even with the app closed and your phone face-down across the room. It
+              cuts through the 200 other notifications you never opened.
             </p>
             <p
               className="text-base leading-relaxed mb-5 max-w-lg"

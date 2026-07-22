@@ -216,9 +216,10 @@ function MedsBlock({ index }: { index: number }) {
           </span>
           <p className="text-sm leading-relaxed" style={{ color: "#7a4a18" }}>
             <strong style={{ color: T.text }}>The part that actually saves you:</strong> snap the
-            bottle and set it as a reminder. When it&rsquo;s time, your squirrel doesn&rsquo;t just
-            buzz — it <strong style={{ color: T.text }}>calls your phone</strong>, ringing right
-            through Silent mode, Focus, and a locked screen, to tell you something important is due. You open it up and
+            bottle and set it as a reminder. When it&rsquo;s time, your squirrel{" "}
+            <strong style={{ color: T.text }}>calls your phone</strong> — a real call that rings when
+            your ringer&rsquo;s on, vibrates on silent, and reaches you on a locked screen, to tell you
+            something important is due. You open it up and
             the alert shows that exact photo — so you know precisely which one to take. No missed dose,
             no squinting at labels, no mix-ups.
           </p>

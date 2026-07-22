@@ -61,7 +61,7 @@ const CAPABILITIES = [
   },
   {
     title: "Call you for real",
-    body: "For the one thing that can't slip, an agent can have your squirrel call your phone — at a set time or right now — a real call that rings through Silent mode, Focus, and a locked screen, on its own, in your squirrel's own voice. Not a notification you'll swipe away.",
+    body: "For the one thing that can't slip, an agent can have your squirrel call your phone — at a set time or right now — a real call that rings when your ringer's on, vibrates on silent, and reaches you on a locked screen, on its own, in your squirrel's own voice. Not a notification you'll swipe away.",
   },
   {
     title: "File to your boards",

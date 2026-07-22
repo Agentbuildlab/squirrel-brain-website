@@ -8,7 +8,7 @@ import CtaButton from "@/components/CtaButton";
 export const metadata: Metadata = {
   title: "Watch it Work",
   description:
-    "Short films of Squirrel Brain in action — for work, for family, and for your AI agents. Voice and photos turned into reminders, alarms, boards, and a phone call that rings right through Silent mode, Focus, and a locked screen.",
+    "Short films of Squirrel Brain in action — for work, for family, and for your AI agents. Voice and photos turned into reminders, alarms, boards, and a phone call that rings when your ringer's on, vibrates on silent, and reaches you on a locked screen.",
   alternates: { canonical: "/demos" },
 };
 

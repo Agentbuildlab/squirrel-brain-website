@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 const EVERYTHING = [
   "Unlimited photos, notes & reminders",
   "Voice capture → alarm, reminder, or calendar event",
-  "A real phone call when it matters — rings through Silent, Focus & a locked screen",
+  "A real phone call when it matters — rings if your ringer's on, vibrates on silent, on a locked screen",
   "Pix boards: receipts, recipes, meds, schedules",
   "The Burrow — AI chat with your squirrel",
   "Link & YouTube stash + a forever note",
@@ -223,7 +223,12 @@ export default function PricingPage() {
           </div>
         </section>
       </main>
-      <CallDemoSection theme="pricingpage" />
+      <CallDemoSection
+        theme="default"
+        eyebrow="What you're paying for"
+        heading="Hear what it does — right now"
+        sub="This call — the one that saves you from the costly slip-up — is what you're paying for. Tap the phone and hear it in Scuttle's own voice. No download, no sign-up."
+      />
       <Footer />
     </>
   );
