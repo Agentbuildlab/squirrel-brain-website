@@ -27,11 +27,11 @@ LINES = [
     ("s_else",   SARAH,  "Three things: the quote to the Hendersons, pick up the prescription, and Mia's recital at 6."),
     ("u_remind", DANIEL, "Remind me to send that quote first."),
     ("s_remind", SARAH,  "Got it — I'll remind you to send the quote at 9:00 sharp."),
-    ("s_pix",    SARAH,  "Oh — that parking receipt you snapped in the garage yesterday? Filed under Expenses, GPS-stamped with where and when. Want me to text you the photo?"),
-    ("u_yes",    DANIEL, "Yeah, text it over."),
-    ("s_yes",    SARAH,  "Sent. Talk soon, Alex — I'll call the moment the next thing actually matters."),
-    ("u_no",     DANIEL, "Nah, I'm good. Thanks, Scuttle."),
-    ("s_no",     SARAH,  "You got it. Talk soon — I'll call the moment the next thing actually matters."),
+    ("s_pix",     SARAH,  "Oh — that parking receipt you snapped in the garage yesterday? It's filed under Expenses, GPS-stamped with where and when, so it's right there whenever you need it. Anything else before I let you go?"),
+    ("u_done",    DANIEL, "No, that's everything — thanks, Scuttle."),
+    ("s_done",    SARAH,  "You got it. Talk soon — I'll call the moment the next thing actually matters."),
+    ("u_expense", DANIEL, "Actually, remind me to expense it Friday."),
+    ("s_expense", SARAH,  "Done — I'll ring you Friday to file it. Talk soon!"),
 ]
 
 

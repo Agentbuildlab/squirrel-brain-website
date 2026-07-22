@@ -81,36 +81,36 @@ const OPENING: Beat[] = [
   {
     kind: "say",
     by: "scuttle",
-    text: "Oh — that parking receipt you snapped in the garage yesterday? Filed under Expenses, GPS-stamped with where and when. Want me to text you the photo?",
-    tag: "Your snapshots become filed, searchable proof",
+    text: "Oh — that parking receipt you snapped in the garage yesterday? It's filed under Expenses, GPS-stamped with where and when, so it's right there whenever you need it. Anything else before I let you go?",
+    tag: "Your snapshots become filed, GPS-stamped proof — findable anytime",
     audio: "/audio/twoway/s_pix.mp3",
   },
   {
     kind: "choose",
     options: [
       {
-        label: "Yes, text it to me",
+        label: "No, that's everything",
         then: [
-          { kind: "say", by: "you", text: "Yeah, text it over.", audio: "/audio/twoway/u_yes.mp3" },
-          {
-            kind: "say",
-            by: "scuttle",
-            text: "Sent. Talk soon, Alex — I'll call the moment the next thing actually matters.",
-            tag: "It calls you when it counts — not another notification to ignore",
-            audio: "/audio/twoway/s_yes.mp3",
-          },
-        ],
-      },
-      {
-        label: "No — I'm good, thanks",
-        then: [
-          { kind: "say", by: "you", text: "Nah, I'm good. Thanks, Scuttle.", audio: "/audio/twoway/u_no.mp3" },
+          { kind: "say", by: "you", text: "No, that's everything — thanks, Scuttle.", audio: "/audio/twoway/u_done.mp3" },
           {
             kind: "say",
             by: "scuttle",
             text: "You got it. Talk soon — I'll call the moment the next thing actually matters.",
             tag: "It calls you when it counts — not another notification to ignore",
-            audio: "/audio/twoway/s_no.mp3",
+            audio: "/audio/twoway/s_done.mp3",
+          },
+        ],
+      },
+      {
+        label: "Remind me to expense it",
+        then: [
+          { kind: "say", by: "you", text: "Actually, remind me to expense it Friday.", audio: "/audio/twoway/u_expense.mp3" },
+          {
+            kind: "say",
+            by: "scuttle",
+            text: "Done — I'll ring you Friday to file it. Talk soon!",
+            tag: "Added a reminder — right there on the call",
+            audio: "/audio/twoway/s_expense.mp3",
           },
         ],
       },
