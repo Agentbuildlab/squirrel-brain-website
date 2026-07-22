@@ -48,6 +48,7 @@ export type LandingPageData = {
  */
 export const CALL_FEATURING_SLUGS: ReadonlySet<string> = new Set([
   "reminder-app-that-calls-you",
+  "talking-reminder-app",
   "daily-pep-talk-call-app",
   "daily-bible-verse-call",
   "loud-reminder-app",
@@ -73,6 +74,7 @@ export const LANDING_ANCHORS: Record<string, string> = {
   "outlook-screenshot-reminder": "Outlook screenshot reminders",
   "can-chatgpt-set-iphone-reminder": "can ChatGPT set an iPhone reminder?",
   "reminder-app-that-calls-you": "a reminder app that calls you",
+  "talking-reminder-app": "a talking reminder app",
   "ai-agent-reminder-app": "let an AI agent set reminders",
   "reminder-app-for-field-service": "reminder app for field service",
   "reminder-app-for-parents": "reminder app for busy parents",
@@ -358,7 +360,7 @@ export const LANDING_PAGES: LandingPageData[] = [
         a: "Yes, Squirrel Brain is an iPhone app. It's pre-launch — join the launch list to be first into the beta.",
       },
     ],
-    related: ["reminder-app-that-calls-you", "ai-reminder-app", "voice-note-reminder-app", "outlook-screenshot-reminder", "reminder-app-for-sales-reps"],
+    related: ["reminder-app-that-calls-you", "talking-reminder-app", "ai-reminder-app", "voice-note-reminder-app", "reminder-app-for-sales-reps"],
   },
 
   {
@@ -651,16 +653,76 @@ export const LANDING_PAGES: LandingPageData[] = [
         a: "No. You decide which reminders escalate to a call and which stay as a normal nudge, so a ring always means it matters.",
       },
     ],
-    related: ["daily-pep-talk-call-app", "loud-reminder-app", "ai-reminder-app", "voice-note-reminder-app", "outlook-screenshot-reminder"],
+    related: ["talking-reminder-app", "daily-pep-talk-call-app", "loud-reminder-app", "ai-reminder-app", "voice-note-reminder-app"],
+  },
+
+  {
+    // GSC 2026-07: "talking reminder" / "verbal reminder" queries were showing with no
+    // dedicated coverage — this page owns the reminders-you-HEAR cluster. Claim copy is
+    // reused verbatim from reminder-app-that-calls-you / loud-reminder-app (truth rules).
+    slug: "talking-reminder-app",
+    title: "Talking Reminder App — Reminders That Speak to You Out Loud | Squirrel Brain",
+    description:
+      "Squirrel Brain is a talking reminder app: say the reminder in plain words, and when it's time an AI voice speaks it to you in a real phone call — it rings when your ringer's on and vibrates on silent.",
+    eyebrow: "Reminders that talk",
+    h1: "The talking reminder app — reminders you hear, not read",
+    subhead:
+      "Verbal in, verbal out. Say the reminder in plain words, and when it's time your phone rings and an AI voice speaks it to you — not a silent banner you swipe away.",
+    heroShot: {
+      src: "/assets/screens/calendar-v2.webp",
+      alt: "Squirrel Brain calendar showing a reminder set to ring the phone and speak out loud",
+    },
+    sections: [
+      {
+        eyebrow: "Why talking beats buzzing",
+        h2: "A reminder you hear is a reminder you catch",
+        body: "A banner notification competes with fifty others, disappears when your phone is face-down, and is gone the moment you swipe. A spoken reminder is different: your phone rings like a real call, you answer, and an AI voice tells you in plain words what you asked it to remember. Eyes on the road, hands in the sink, phone in your pocket — it still reaches you.",
+      },
+      {
+        eyebrow: "Verbal both directions",
+        h2: "Say it in, hear it back",
+        body: "Capture is verbal too. Tap once and say it — \"remind me to take the chicken out at 4\" — and Squirrel Brain understands and sets it. When the moment comes, the reminder returns the same way it went in: out loud, in a voice, not a line of gray text.",
+        bullets: [
+          "One tap — say the reminder in plain language",
+          "An AI voice speaks it back in a real call — rings on your ringer, vibrates on silent",
+          "You choose which reminders talk and which stay quiet",
+        ],
+      },
+      {
+        eyebrow: "More than a beep",
+        h2: "It doesn't just talk at you — it talks with you",
+        body: "Pick up and it isn't a pre-recorded chime. The voice tells you what it called about in plain language — the reminder, what's on your day, or the points you asked it to cover before a meeting. It's a reminder you can actually listen to, generated for you in the moment.",
+      },
+    ],
+    faqs: [
+      {
+        q: "Is there a reminder app that talks to you?",
+        a: "Yes — Squirrel Brain speaks your reminders out loud. When it's time, your phone rings like a real call and an AI voice tells you what you asked it to remember. It rings when your ringer's on and vibrates on silent, so it reaches you when a silent banner wouldn't.",
+      },
+      {
+        q: "Can I set a verbal reminder just by speaking?",
+        a: "Yes. Tap once and say it in plain language — Squirrel Brain listens, understands what you said, and turns it into a reminder, alarm, or calendar event. You can review what it captured before it's set.",
+      },
+      {
+        q: "What does the voice actually say?",
+        a: "An AI voice tells you what it called about in plain language — your reminder, what's coming up on your day, or the points you asked it to cover. It's generated for you in the moment, not a pre-recorded message.",
+      },
+      {
+        q: "Does every reminder talk out loud?",
+        a: "No. You choose which reminders escalate to a spoken call and which stay as a normal nudge, so a ring always means it matters.",
+      },
+    ],
+    related: ["reminder-app-that-calls-you", "loud-reminder-app", "voice-note-reminder-app", "daily-pep-talk-call-app"],
   },
 
   {
     slug: "ai-agent-reminder-app",
-    title: "Let an AI Agent Set Reminders on Your Phone | Squirrel Brain",
+    // GSC 2026-07: "ai reminder agent" is our top-shown query — title/h1 carry the exact phrase.
+    title: "AI Reminder Agent — Let Your Agent Set Real Reminders on Your Phone | Squirrel Brain",
     description:
-      "Connect Claude Code, Cursor, or any agent you run to Squirrel Brain's built-in MCP server and let it set real alarms, reminders, and calendar events on your iPhone — and even call your phone — on your behalf.",
-    eyebrow: "AI agents",
-    h1: "Let your AI agent set reminders on your phone",
+      "Squirrel Brain turns your AI into a real AI reminder agent: connect Claude Code, Cursor, or any agent you run to its built-in MCP server and it sets real alarms, reminders, and calendar events on your iPhone — and can even call your phone.",
+    eyebrow: "AI reminder agent",
+    h1: "The AI reminder agent for your iPhone",
     subhead:
       "Squirrel Brain is the action layer for your AI assistant. Through a built-in MCP server, Claude Code, Cursor, or any agent you run can set real reminders, alarms, and calendar events on your actual phone.",
     heroShot: {
@@ -690,6 +752,10 @@ export const LANDING_PAGES: LandingPageData[] = [
       },
     ],
     faqs: [
+      {
+        q: "What is an AI reminder agent?",
+        a: "An AI reminder agent is an AI assistant that doesn't just draft a to-do list — it actually sets the reminders for you. With Squirrel Brain, an MCP-capable agent (Claude Code, Cursor, or one you run yourself) gets real tools on your iPhone: it can set alarms, create reminders and calendar events, read your day, and even trigger a phone-call-style reminder.",
+      },
       {
         q: "Can an AI agent set reminders on my phone?",
         a: "Yes — through Squirrel Brain. Connect Claude Code, Cursor, or any MCP-capable agent you run to Squirrel Brain's built-in MCP server and it can set real alarms, reminders, and calendar events on your phone, and even trigger a phone-call-style reminder, on your behalf.",

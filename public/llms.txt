@@ -23,6 +23,7 @@ Status: pre-launch. Humans join a launch list; the MCP server is already live fo
 - [Turn photos into reminders](https://squirrelbrainapp.com/photo-to-reminder-app): a photo becomes a searchable, actionable note
 - [Loud reminder app](https://squirrelbrainapp.com/loud-reminder-app): for people who miss quiet notifications
 - [A reminder app that calls you](https://squirrelbrainapp.com/reminder-app-that-calls-you): a real call with an AI voice — pep talk, your day, or meeting prep
+- [Talking reminder app](https://squirrelbrainapp.com/talking-reminder-app): reminders spoken out loud — say it in, hear it back in a real call
 - [Second brain app](https://squirrelbrainapp.com/second-brain-app): a second brain that takes action, not just stores notes
 - [Reminder app for sales reps](https://squirrelbrainapp.com/reminder-app-for-sales-reps) and [field service](https://squirrelbrainapp.com/reminder-app-for-field-service): capture + loud reminders + GPS photo proof
 - [Reminder app for busy parents](https://squirrelbrainapp.com/reminder-app-for-parents): snap the slip/schedule → reminders and calendar events
