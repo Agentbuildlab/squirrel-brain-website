@@ -281,8 +281,8 @@ export default function TwoWayCallDemo({ width = 340 }: { width?: number }) {
 
   const lastId = state.bubbles.length ? state.bubbles[state.bubbles.length - 1].id : 0;
 
-  // Play the newest line in its real recorded voice (two-voice ElevenLabs
-  // audio: Scuttle = Sarah, You = Daniel), then advance when it finishes.
+  // Play the newest line in its real recorded voice (two-voice OpenAI audio:
+  // Scuttle = nova (the app's voice), You = onyx), then advance when it finishes.
   // Fallback chain if the mp3 can't play: browser speech → a timed beat, so the
   // conversation never stalls.
   useEffect(() => {
@@ -673,7 +673,7 @@ export default function TwoWayCallDemo({ width = 340 }: { width?: number }) {
         <span style={{ color: ORANGE, fontWeight: 600 }}>and your squirrel does it.</span>
       </p>
 
-      {/* Two-voice audio: Scuttle = Sarah, You = Daniel. Preloaded so each line
+      {/* Two-voice audio: Scuttle = nova (the app's voice), You = onyx. Preloaded so each line
           plays instantly; src is swapped per line as the call advances. */}
       <audio ref={audioRef} preload="auto" />
     </div>
