@@ -176,9 +176,36 @@ function reducer(state: State, action: Action): State {
   }
 }
 
-// Rough "speaking time" so Scuttle's longer lines hold a beat before the next.
+// Rough "speaking time" so Scuttle's longer lines hold a beat before the next
+// (used as the fallback timing when speech isn't available).
 function speakMs(text: string): number {
-  return Math.min(4200, 900 + text.length * 34);
+  return Math.min(4600, 1100 + text.length * 42);
+}
+
+// Pick a distinct browser voice per speaker so it's a real TWO-voice call. If
+// the device exposes only one voice, the speakers are still differentiated by
+// the pitch/rate applied at speak time.
+function chooseVoice(
+  voices: SpeechSynthesisVoice[],
+  by: "scuttle" | "you"
+): SpeechSynthesisVoice | undefined {
+  const en = voices.filter((v) => /^en/i.test(v.lang));
+  const pool = en.length ? en : voices;
+  if (!pool.length) return undefined;
+  if (by === "scuttle") {
+    return (
+      pool.find((v) => /samantha|karen|moira|tessa|serena|fiona|zira|female|nova|allison/i.test(v.name)) ||
+      pool.find((v) => /google us english/i.test(v.name)) ||
+      pool[0]
+    );
+  }
+  return (
+    pool.find((v) => /daniel|alex|fred|arthur|david|aaron|tom|male/i.test(v.name)) ||
+    pool.find((v) => /google uk english male/i.test(v.name)) ||
+    pool.find((v) => v !== chooseVoice(voices, "scuttle")) ||
+    pool[1] ||
+    pool[0]
+  );
 }
 
 // ── Small pieces ─────────────────────────────────────────────────────────────
@@ -224,22 +251,81 @@ export default function TwoWayCallDemo({ width = 340 }: { width?: number }) {
   const reduceMotion = useReducedMotion();
   const [state, dispatch] = useReducer(reducer, initial);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const voicesRef = useRef<SpeechSynthesisVoice[]>([]);
+  const speechOn = typeof window !== "undefined" && "speechSynthesis" in window;
 
-  // Drive the auto-advance of "say" beats.
+  // The device's TTS voices populate asynchronously — load + keep them fresh.
   useEffect(() => {
-    if (state.status !== "live" || state.choices) return;
-    if (state.queue.length === 0) {
-      // Conversation exhausted → end after a short beat.
-      const t = setTimeout(() => dispatch({ type: "hangup" }), 1400);
-      return () => clearTimeout(t);
+    if (!speechOn) return;
+    const load = () => {
+      voicesRef.current = window.speechSynthesis.getVoices();
+    };
+    load();
+    window.speechSynthesis.addEventListener("voiceschanged", load);
+    return () => {
+      window.speechSynthesis.removeEventListener("voiceschanged", load);
+      try {
+        window.speechSynthesis.cancel();
+      } catch {}
+    };
+  }, [speechOn]);
+
+  const lastId = state.bubbles.length ? state.bubbles[state.bubbles.length - 1].id : 0;
+
+  // Speak the newest line out loud (two voices), then advance when it finishes.
+  // Falls back to a timed beat when speech is unavailable or reduced-motion is on
+  // — so the conversation never stalls even where audio can't play.
+  useEffect(() => {
+    if (state.status !== "live") {
+      if (speechOn) {
+        try {
+          window.speechSynthesis.cancel();
+        } catch {}
+      }
+      return;
     }
-    const nextBeat = state.queue[0];
+    if (state.choices) return;
     const last = state.bubbles[state.bubbles.length - 1];
-    // Hold on the just-spoken line before the next one.
-    const delay = last ? speakMs(last.text) : 300;
-    const t = setTimeout(() => dispatch({ type: "advance" }), reduceMotion ? Math.min(delay, 700) : delay);
-    return () => clearTimeout(t);
-  }, [state.status, state.choices, state.queue, state.bubbles, reduceMotion]);
+    if (!last) return; // the very first advance is handled by the kick effect below
+    let cancelled = false;
+    const queueEmpty = state.queue.length === 0;
+    const done = () => {
+      if (cancelled) return;
+      cancelled = true;
+      dispatch({ type: queueEmpty ? "hangup" : "advance" });
+    };
+    if (speechOn && !reduceMotion && voicesRef.current.length > 0) {
+      try {
+        window.speechSynthesis.cancel();
+        const u = new SpeechSynthesisUtterance(last.text);
+        const v = chooseVoice(voicesRef.current, last.by);
+        if (v) u.voice = v;
+        u.rate = last.by === "scuttle" ? 1.02 : 1.0;
+        u.pitch = last.by === "scuttle" ? 1.1 : 0.8;
+        u.onend = done;
+        u.onerror = done;
+        // Safety net ONLY for devices that swallow onend — must be comfortably
+        // longer than real speech (~85ms/char) so it never cuts a line off.
+        const safety = setTimeout(done, Math.max(speakMs(last.text) + 3500, last.text.length * 105 + 4500));
+        window.speechSynthesis.speak(u);
+        return () => {
+          cancelled = true;
+          clearTimeout(safety);
+          try {
+            window.speechSynthesis.cancel();
+          } catch {}
+        };
+      } catch {
+        /* fall through to the timer */
+      }
+    }
+    const t = setTimeout(done, reduceMotion ? Math.min(speakMs(last.text), 700) : speakMs(last.text));
+    return () => {
+      cancelled = true;
+      clearTimeout(t);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [lastId, state.choices, state.status, speechOn, reduceMotion]);
 
   // Kick the first beat right after answering.
   useEffect(() => {
@@ -255,8 +341,29 @@ export default function TwoWayCallDemo({ width = 340 }: { width?: number }) {
     if (el) el.scrollTo({ top: el.scrollHeight, behavior: reduceMotion ? "auto" : "smooth" });
   }, [state.bubbles, state.choices, reduceMotion]);
 
-  const answer = useCallback(() => dispatch({ type: "answer" }), []);
-  const restart = useCallback(() => dispatch({ type: "restart" }), []);
+  const answer = useCallback(() => {
+    // Unlock speech synthesis inside the user gesture (iOS/Safari requires a
+    // gesture before the first — slightly later — spoken line will play).
+    if (speechOn) {
+      try {
+        window.speechSynthesis.cancel();
+        window.speechSynthesis.resume();
+        const warm = new SpeechSynthesisUtterance(" ");
+        warm.volume = 0;
+        window.speechSynthesis.speak(warm);
+        voicesRef.current = window.speechSynthesis.getVoices();
+      } catch {}
+    }
+    dispatch({ type: "answer" });
+  }, [speechOn]);
+  const restart = useCallback(() => {
+    if (speechOn) {
+      try {
+        window.speechSynthesis.cancel();
+      } catch {}
+    }
+    dispatch({ type: "restart" });
+  }, [speechOn]);
 
   const ORANGE = "#FF7A1A";
   const GREEN = "#3fae6e";
@@ -332,8 +439,10 @@ export default function TwoWayCallDemo({ width = 340 }: { width?: number }) {
                 <Image src="/assets/squirrel_logo.png" alt="Scuttle calling" width={58} height={58} style={{ borderRadius: "50%" }} />
               </div>
             </div>
-            <p style={{ fontSize: 13, color: "rgba(255,245,232,0.75)", margin: 0, maxWidth: 240, lineHeight: 1.5 }}>
+            <p style={{ fontSize: 13, color: "rgba(255,245,232,0.75)", margin: 0, maxWidth: 250, lineHeight: 1.5 }}>
               Your squirrel is calling. Answer it — then <strong style={{ color: "white" }}>talk back like a real call.</strong>
+              <br />
+              <span style={{ fontSize: 11, color: "rgba(255,245,232,0.5)" }}>🔊 turn your sound on — it speaks out loud</span>
             </p>
             <button
               onClick={answer}
