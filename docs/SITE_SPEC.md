@@ -16,7 +16,7 @@
 | Design: V3 layout skeleton + V1 warm-cream/orange palette (matches app v2) | ✅ From audit |
 | Primary CTA: **TestFlight beta link** ("Get the beta") — swaps to App Store button at launch | ✅ Adam chose B (2026-06-11). Needs: Adam creates the public TestFlight link in App Store Connect; site reads it from one config constant. Small "get launch updates" email field in footer as backup. |
 | Demo videos: AI-produced — simulator recordings + Remotion compositions (device frame, kinetic captions, zooms) + Pip (nova) TTS narration | ✅ Adam: "find a way to AI the demos" — first sample clip goes to him for approval before batch production |
-| Pricing shown: $9.99/mo (locked 2026-06-10) | ✅ show as "free to start · $9.99/mo" |
+| Pricing shown: two plans — Standard $9.99/mo (10h recording) + Plus $14.99/mo (20h recording); updated 2026-06-15 | ✅ everything unlimited on both except meeting-recording hours; 7-day free trial, monthly billing, cancel anytime |
 
 ## 1. Sitemap
 
@@ -26,7 +26,7 @@
 /family            Door: "I run the family" (busy parents)
 /demos             Door: "Watch it work" (the demo reel — all clips)
 /mcp               Door (small): "For developers & AI agents" (existing docs, refreshed)
-/pricing           Simple: free to start, $9.99/mo
+/pricing           Two plans: Standard $9.99/mo (10h) · Plus $14.99/mo (20h)
 /legal/*           Privacy + Terms (reskin to warm-cream)
 ```
 
@@ -87,7 +87,7 @@ Plus: submit server to MCP registries (one-time, ~2h task).
    phone-call UI (CallKit UI pending binary).
 6. ❌ Family sharing / multi-user.
 7. ❌ "Hundreds of users" or any unverified count.
-8. ✅ Pricing honesty: free to start, $9.99/mo.
+8. ✅ Pricing honesty: Standard $9.99/mo (10h recording) · Plus $14.99/mo (20h recording); everything else unlimited on both; 7-day free trial, monthly, cancel anytime.
 
 ## 5. Demo asset shot list (production checklist)
 

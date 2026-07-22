@@ -23,7 +23,7 @@ const bricolage = Bricolage_Grotesque({
 export const metadata: Metadata = {
   metadataBase: new URL("https://squirrelbrainapp.com"),
   title: {
-    default: `${SITE_NAME} — Say it. Snap it. It's handled.`,
+    default: `${SITE_NAME} — Speak it. Snap it. Stash it.`,
     template: `%s — ${SITE_NAME}`,
   },
   description: SITE_DESCRIPTION,
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
     ? { google: process.env.NEXT_PUBLIC_GSC_VERIFICATION }
     : undefined,
   openGraph: {
-    title: `${SITE_NAME} — Say it. Snap it. It's handled.`,
+    title: `${SITE_NAME} — Speak it. Snap it. Stash it.`,
     description: SITE_DESCRIPTION,
     url: "https://squirrelbrainapp.com",
     siteName: SITE_NAME,
@@ -59,7 +59,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: `${SITE_NAME} — Say it. Snap it. It's handled.`,
+    title: `${SITE_NAME} — Speak it. Snap it. Stash it.`,
     description: SITE_DESCRIPTION,
     images: ["/og-image.png"],
   },

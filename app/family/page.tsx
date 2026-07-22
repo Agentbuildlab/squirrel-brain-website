@@ -77,6 +77,13 @@ export default function FamilyPage() {
                   connect.
                 </p>
               </FadeIn>
+              <FadeIn immediate delay={0.18}>
+                <p className="text-sm text-muted/80 leading-relaxed mb-8 max-w-lg">
+                  Private by design: it only touches the photos you hand it — never
+                  your camera roll — and everything lives in your own account, visible
+                  only to you.
+                </p>
+              </FadeIn>
               <FadeIn immediate delay={0.2}>
                 <CtaButton size="lg" />
               </FadeIn>

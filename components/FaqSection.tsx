@@ -21,6 +21,10 @@ const FAQS: { q: string; a: string }[] = [
     a: "If you want — it's completely optional, and the app never needs it. Squirrel Brain has a built-in MCP portal, so an MCP-capable agent — Claude Code, Cursor, or one you run yourself — can set alarms, file notes, and even have your squirrel call you. Everything about it lives on the MCP page.",
   },
   {
+    q: "Where do my photos and voice notes go?",
+    a: "They're processed to pull out what matters — a date, a name, an amount — and stored in your own private account, visible only to you. Your camera roll stays yours: Squirrel Brain only touches the photos you hand it, never scans your library, and you can delete anything you've saved at any time.",
+  },
+  {
     q: "What does it cost, and what devices does it run on?",
     a: "iPhone only for now. Two simple plans, billed monthly with a 7-day free trial: Standard is $9.99/month with 10 hours of meeting recording, and Plus is $14.99/month with 20 hours. Everything else — photos, notes, reminders, voice capture, phone-call alarms, link stash, and the Burrow — is unlimited on both. Squirrel Brain is pre-launch — join the launch list and you'll be first into the beta.",
   },

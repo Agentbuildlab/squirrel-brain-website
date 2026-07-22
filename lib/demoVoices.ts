@@ -98,9 +98,9 @@ export const DEMO_VOICES: Record<DemoTheme, DemoVoice> = {
     audio: "/audio/scuttle-loud.mp3",
     transcript:
       "Hey — it's Scuttle, and this is the reminder you can't sleep through. When it really matters, I don't send a quiet little notification you'll swipe away — I call your phone, out loud, until you've actually got it. No more, I forgot. Talk soon!",
-    eyebrow: "Impossible to ignore",
+    eyebrow: "Not another quiet ping",
     heading: "Get the reminder you can't miss — right now",
-    sub: "Tap the phone and hear the call that gets loud until you've actually got it — not a notification you'll swipe away. No download, no sign-up.",
+    sub: "Tap the phone and hear the call that says it out loud in a real voice — not a notification you'll swipe away. No download, no sign-up.",
   },
   agents: {
     audio: "/audio/scuttle-agents.mp3",

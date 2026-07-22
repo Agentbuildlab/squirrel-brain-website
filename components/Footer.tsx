@@ -122,8 +122,9 @@ export default function Footer() {
               Squirrel <span className="text-accent">Brain</span>
             </p>
             <p className="text-sm text-muted leading-relaxed max-w-xs">
-              Your second brain that actually reminds you. Voice notes and photos
-              turned into alarms, reminders, and calendar events.
+              Your second brain that actually reminds you. Voice notes, photos,
+              and screenshots turned into alarms and calendar events — and a real
+              phone call for the one thing you can&rsquo;t miss.
             </p>
           </div>
 
@@ -140,13 +141,13 @@ export default function Footer() {
                 For Family
               </Link>
               <Link href="/demos" className="text-sm text-muted hover:text-ink transition-colors">
-                Watch it Work
+                Demos
               </Link>
               <Link href="/pricing" className="text-sm text-muted hover:text-ink transition-colors">
                 Pricing
               </Link>
               <Link href="/mcp" className="text-sm text-muted hover:text-ink transition-colors">
-                For Developers
+                For AI Agents
               </Link>
             </nav>
 

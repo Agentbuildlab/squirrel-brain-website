@@ -9,7 +9,7 @@ import MeetingSection from "@/components/MeetingSection";
 import Image from "next/image";
 
 export const metadata: Metadata = {
-  title: "For the Field",
+  title: "For Work — Capture, Follow-Ups & GPS Proof",
   description:
     "Squirrel Brain for sales reps, service techs, and contractors. Voice capture, GPS photo proof, Outlook import, and follow-ups that ring your phone.",
   alternates: { canonical: "/work" },

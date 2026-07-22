@@ -8,7 +8,7 @@ export const TESTFLIGHT_URL = "https://testflight.apple.com/join/R7WRjGEC";
 export const WAITLIST_HREF = "#launch-list";
 
 export const SITE_NAME = "Squirrel Brain";
-export const SITE_TAGLINE = "Say it. Snap it. It's handled.";
+export const SITE_TAGLINE = "Speak it. Snap it. Stash it.";
 export const SITE_DESCRIPTION =
   "Squirrel Brain turns voice notes, photos, screenshots, texts, and emails into reminders, alarms, notes, and calendar events — so busy people don't forget what matters.";
 

@@ -85,9 +85,12 @@ export const LANDING_ANCHORS: Record<string, string> = {
 export const LANDING_PAGES: LandingPageData[] = [
   {
     slug: "ai-reminder-app",
-    title: "AI Reminder App for Voice Notes, Photos & Screenshots | Squirrel Brain",
+    // Deliberately NOT a twin of the homepage <title> — the homepage owns
+    // "AI Reminder App for Voice Notes, Photos & Screenshots"; this page takes
+    // the iPhone-qualified head term so the two don't cannibalize each other.
+    title: "AI Reminder App for iPhone — From Capture to Done | Squirrel Brain",
     description:
-      "Squirrel Brain is an AI reminder app that turns voice notes, photos, screenshots, texts, and emails into reminders, alarms, notes, and calendar events — then makes sure you follow through.",
+      "The AI reminder app for iPhone: speak it, snap it, or screenshot it, and Squirrel Brain turns it into the reminder, alarm, note, or calendar event — then follows through, with a real phone call for the one you can't miss.",
     eyebrow: "AI reminder app",
     h1: "The AI reminder app for everything you forget",
     subhead:

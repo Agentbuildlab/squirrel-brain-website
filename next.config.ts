@@ -4,10 +4,9 @@ const nextConfig: NextConfig = {
   // Preserve legacy static pages that live in /public
   async rewrites() {
     return [
-      {
-        source: "/mcp",
-        destination: "/mcp/index.html",
-      },
+      // NOTE: /mcp is an App Router page (app/mcp/page.tsx) — no rewrite. A
+      // rewrite to /mcp/index.html previously lived here; it was dead config
+      // (no public/mcp/ exists) and could silently shadow the real page.
       {
         source: "/signup",
         destination: "/signup.html",
