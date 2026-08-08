@@ -149,6 +149,9 @@ export default function Footer() {
               <Link href="/mcp" className="text-sm text-muted hover:text-ink transition-colors">
                 For AI Agents
               </Link>
+              <Link href="/skills" className="text-sm text-muted hover:text-ink transition-colors">
+                Agent Skills
+              </Link>
             </nav>
 
             <p className="text-xs font-bold tracking-widest uppercase text-muted mt-6 mb-4">
@@ -317,6 +320,12 @@ export default function Footer() {
                 className="text-xs text-muted hover:text-ink transition-colors"
               >
                 MCP / API
+              </Link>
+              <Link
+                href="/skills"
+                className="text-xs text-muted hover:text-ink transition-colors"
+              >
+                Skills
               </Link>
             </div>
           </div>

@@ -12,6 +12,7 @@ Status: pre-launch. Humans join a launch list; the MCP server is already live fo
 - [Home](https://squirrelbrainapp.com/): the AI reminder app — for work, family, and AI agents
 - [For AI agents / MCP](https://squirrelbrainapp.com/mcp): connect Claude Code, Cursor, or any MCP-capable agent over the Model Context Protocol
 - [Developer docs](https://squirrelbrainapp.com/mcp-docs): MCP server endpoint, the full tool list, and auth (per-user API key)
+- [Agent skills](https://squirrelbrainapp.com/skills): ready-made Contact Your Human and Supervisor Loop skill downloads
 - [FAQ](https://squirrelbrainapp.com/#faq): what it is, how it differs from a notes/Reminders app, what happens to the call on silent, what it costs
 - [MCP FAQ](https://squirrelbrainapp.com/mcp#faq): "Can Claude or ChatGPT set a reminder on my phone?", which AI tools can connect, how an agent acts on your phone
 - [Pricing](https://squirrelbrainapp.com/pricing): 7-day free trial, then $9.99/mo (Standard) or $14.99/mo (Plus)

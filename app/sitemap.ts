@@ -7,6 +7,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const routes: { path: string; priority: number }[] = [
     { path: "", priority: 1.0 },
     { path: "/mcp", priority: 0.9 },
+    { path: "/skills", priority: 0.85 },
     { path: "/work", priority: 0.8 },
     { path: "/family", priority: 0.8 },
     // SEO landing pages (long-tail intent)
@@ -18,7 +19,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // A real date (bump when content meaningfully changes). `new Date()` here
   // made every URL claim it changed "today" on every crawl, which search
   // engines learn to ignore — a static honest date is a stronger signal.
-  const lastModified = new Date("2026-07-22");
+  const lastModified = new Date("2026-08-08");
   return routes.map((r) => ({
     url: `${BASE}${r.path}`,
     lastModified,
