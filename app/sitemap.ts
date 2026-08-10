@@ -19,7 +19,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // A real date (bump when content meaningfully changes). `new Date()` here
   // made every URL claim it changed "today" on every crawl, which search
   // engines learn to ignore — a static honest date is a stronger signal.
-  const lastModified = new Date("2026-08-08");
+  const lastModified = new Date("2026-08-09");
   return routes.map((r) => ({
     url: `${BASE}${r.path}`,
     lastModified,
