@@ -124,7 +124,7 @@ export default function SkillsPage() {
             <div className="grid md:grid-cols-3 gap-5">
               {[
                 ["Codex Desktop", "Turnkey task discovery, bounded task reads, messaging, and heartbeat automation."],
-                ["Claude Code", "The same skill installs directly. Claude must prove and wire its own team/session adapter and persistent timer before claiming unattended supervision is active."],
+                ["Claude Code", "Built-in session tools handle discovery, bounded reads, and messaging—Agent Teams are not required. CronCreate supplies the session-scoped heartbeat; it fires only while Claude is idle, must be listed and deduplicated after resume, and expires within seven days."],
                 ["Other agents", "Supported when the host can list work, read a bounded tail, message the owner, keep private state, and run a recurring coordinator."],
               ].map(([title, body]) => (
                 <FadeIn key={title}>
