@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import HeroSection from "@/components/HeroSection";
@@ -32,6 +33,7 @@ export const metadata: Metadata = {
 export default function HomePage() {
   return (
     <>
+      <Script src="/pixel-intro.js" strategy="afterInteractive" />
       <Nav />
       <main id="main-content">
         {/* 1 — HERO: the second brain that RINGS YOU BACK (phone shown ringing) */}
