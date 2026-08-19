@@ -1,6 +1,19 @@
 # Squirrel Brain Website — Session Handoff
 
-_Last updated: 2026-06-17 · production is LIVE at squirrelbrainapp.com_
+_Last updated: 2026-08-19 · production is LIVE at squirrelbrainapp.com_
+
+## 2026-08-19 — Logo-only pixel intro (LIVE + verified)
+
+- Commit `25f8e7d` on `v2-rebuild` adds the homepage-only squirrel pixel intro.
+- The animation samples the existing transparent squirrel mark, then crossfades to the untouched
+  2048×2048 original for a sharp landed hold. There is no wordmark, tile, scale, filter, or shadow.
+- Reduced-motion users skip it; it plays once per tab session; Skip and every failure path clean up.
+- Local gates: `node --check`, `npx tsc --noEmit`, `npm run build`, and scoped diff checks all green.
+- Independent Guardian: PASS. Driven proof covered landing, same-session no replay, `/pricing`
+  exclusion, and zero console errors.
+- Production deployment `dpl_8NomHcC57VxyjW4xEU7rbuJtLs2M` is Ready on apex + `www`.
+  Homepage/script/2048px asset returned 200; `/pricing` remained intro-free.
+- Rollback target retained: `dpl_JrdKCkejyLQHAa5jCVVvrEXW9Uk5`.
 
 ## 2026-06-17 — Films / QA / social session (all DONE + live)
 Canonical detail in `~/Projects/squirrel-brain-promo/memory.md` §7b–7f. Highlights:
