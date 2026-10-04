@@ -168,7 +168,7 @@ export default function HeroSection() {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.5 }}
           >
-            We&rsquo;ll email you the moment it&rsquo;s ready · 7-day free trial · iOS
+            We&rsquo;ll email you the moment it&rsquo;s ready · free to use · iOS
           </motion.p>
 
           {/* Interactive demo on mobile — the hook has to be tappable on a phone */}

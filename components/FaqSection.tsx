@@ -26,7 +26,7 @@ const FAQS: { q: string; a: string }[] = [
   },
   {
     q: "What does it cost, and what devices does it run on?",
-    a: "iPhone only for now. Two simple plans, billed monthly with a 7-day free trial: Standard is $9.99/month with 10 hours of meeting recording, and Plus is $14.99/month with 20 hours. Everything else — photos, notes, reminders, voice capture, phone-call alarms, link stash, and the Burrow — is unlimited on both. Squirrel Brain is pre-launch — join the launch list and you'll be first into the beta.",
+    a: "iPhone only for now. Squirrel Brain is free to use at launch: there is nothing to buy and no trial to start. Paid plans may come later, and if they do we will say so clearly before anyone is asked to pay. Join the launch list and we'll email you when it's ready.",
   },
 ];
 

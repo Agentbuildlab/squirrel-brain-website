@@ -290,6 +290,12 @@ export default function Footer() {
                 Terms of Use
               </Link>
               <Link
+                href="/support"
+                className="text-xs text-muted hover:text-ink transition-colors"
+              >
+                Support
+              </Link>
+              <Link
                 href="/mcp-docs"
                 className="text-xs text-muted hover:text-ink transition-colors"
               >
@@ -309,7 +315,7 @@ export default function Footer() {
           <p className="text-xs text-muted">
             &copy; {new Date().getFullYear()} Squirrel Brain. Made for people with too much to remember.
           </p>
-          <p className="text-xs text-muted">iOS · launching soon · 7-day free trial</p>
+          <p className="text-xs text-muted">iOS · launching soon · free to use</p>
         </div>
       </div>
     </footer>

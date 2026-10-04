@@ -482,7 +482,7 @@ export const LANDING_PAGES: LandingPageData[] = [
       },
       {
         q: "What does it cost?",
-        a: "Two simple plans billed monthly with a 7-day free trial. See the pricing page for current details. Squirrel Brain is pre-launch — join the launch list to get early access.",
+        a: "Squirrel Brain is free to use at launch: nothing to buy and no trial to start. Paid plans may come later, and we will say so clearly first. Join the launch list to hear when it is ready.",
       },
     ],
     related: ["reminder-app-for-field-service", "outlook-screenshot-reminder", "photo-to-reminder-app", "voice-note-reminder-app", "loud-reminder-app"],
