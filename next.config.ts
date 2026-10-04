@@ -2,6 +2,12 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   // Preserve legacy static pages that live in /public
+  async redirects() {
+    return [
+      { source: "/legal/privacy-policy.html", destination: "/legal/privacy-policy", permanent: true },
+      { source: "/legal/terms-of-use.html", destination: "/legal/terms-of-use", permanent: true },
+    ];
+  },
   async rewrites() {
     return [
       // NOTE: /mcp is an App Router page (app/mcp/page.tsx) — no rewrite. A
@@ -15,15 +21,8 @@ const nextConfig: NextConfig = {
         source: "/dashboard",
         destination: "/dashboard.html",
       },
-      // Footer legal links (were 404 — the docs lived outside /public until 2026-07-02)
-      {
-        source: "/legal/privacy-policy",
-        destination: "/legal/privacy-policy.html",
-      },
-      {
-        source: "/legal/terms-of-use",
-        destination: "/legal/terms-of-use.html",
-      },
+      // Old static loaders (public/legal/*.html) were replaced by server-rendered
+      // App Router pages at /legal/privacy-policy and /legal/terms-of-use.
     ];
   },
 };

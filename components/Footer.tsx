@@ -290,6 +290,12 @@ export default function Footer() {
                 Terms of Use
               </Link>
               <Link
+                href="/support"
+                className="text-xs text-muted hover:text-ink transition-colors"
+              >
+                Support
+              </Link>
+              <Link
                 href="/mcp-docs"
                 className="text-xs text-muted hover:text-ink transition-colors"
               >
