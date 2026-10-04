@@ -48,28 +48,14 @@ const graph = {
         "Reads every calendar already on your iPhone; import Outlook events by screenshot",
         "Daily morning-brief email and a 4 PM check-in nudge",
       ],
-      offers: [
-        {
-          "@type": "Offer",
-          name: "Standard",
-          price: "9.99",
-          priceCurrency: "USD",
-          availability: "https://schema.org/PreOrder",
-          priceValidUntil: "2027-12-31",
-          description:
-            "Everything in Squirrel Brain — unlimited photos, notes, reminders, voice capture, phone-call alarms, link stash, and the Burrow — plus 10 hours of meeting recording each month. 7-day free trial, billed monthly.",
-        },
-        {
-          "@type": "Offer",
-          name: "Plus",
-          price: "14.99",
-          priceCurrency: "USD",
-          availability: "https://schema.org/PreOrder",
-          priceValidUntil: "2027-12-31",
-          description:
-            "Everything in Standard, with 20 hours of meeting recording each month. 7-day free trial, billed monthly.",
-        },
-      ],
+      offers: {
+        "@type": "Offer",
+        name: "Free",
+        price: "0",
+        priceCurrency: "USD",
+        availability: "https://schema.org/PreOrder",
+        description: "Free to use at launch. Nothing to buy and no trial to start.",
+      },
       publisher: { "@id": `${ORIGIN}/#org` },
     },
   ],

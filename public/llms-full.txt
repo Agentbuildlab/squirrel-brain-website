@@ -77,13 +77,9 @@ https://squirrelbrainapp.com/pricing
 
 Pricing
 
-Simple, honest pricing. Your whole brain in one app — captures, reminders, the Burrow, and meeting notes. Everything's unlimited except meeting recording, so the only choice is how many hours you need. 7-day free trial, monthly billing, cancel anytime.
+Free to use
 
-Two simple plans: Standard at $9.99/month (10 hours of meeting recording) and Plus at $14.99/month (20 hours). Everything else is unlimited on both.
-
-Unlimited on both plans: photos, notes, and reminders; voice capture into an alarm, reminder, or calendar event; a real phone call when it matters — rings if your ringer's on, vibrates on silent, on a locked screen; pix boards for receipts, recipes, meds, and schedules; the Burrow (AI chat with your squirrel); a link and YouTube stash plus a forever note; a morning brief email and a 4 PM nudge; and an optional MCP portal so your AI tools can plug in.
-
-Standard is everything in Squirrel Brain, plus 10 hours of meeting recording each month. Plus is everything in Standard, with 20 hours of meeting recording each month.
+Squirrel Brain is free to use at launch. There is nothing to buy and no trial to start. Paid plans may come later, and we will say so clearly before anyone is asked to pay.
 
 ## Developer docs
 https://squirrelbrainapp.com/mcp-docs

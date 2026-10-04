@@ -16,7 +16,7 @@ Status: pre-launch. Humans join a launch list; the MCP server is already live fo
 - [Agent skills](https://squirrelbrainapp.com/skills): free Contact Your Human and Supervisor Loop downloads for Squirrel Brain users, with Codex and Claude Code installation guidance
 - [FAQ](https://squirrelbrainapp.com/#faq): what it is, how it differs from a notes/Reminders app, what happens to the call on silent, what it costs
 - [MCP FAQ](https://squirrelbrainapp.com/mcp#faq): "Can Claude or ChatGPT set a reminder on my phone?", which AI tools can connect, how an agent acts on your phone
-- [Pricing](https://squirrelbrainapp.com/pricing): 7-day free trial, then $9.99/mo (Standard) or $14.99/mo (Plus)
+- [Pricing](https://squirrelbrainapp.com/pricing): free to use at launch; nothing to buy and no trial
 
 ## What it does (topic pages)
 - [AI reminder app](https://squirrelbrainapp.com/ai-reminder-app): capture anything, turn it into a reminder, alarm, note, or calendar event
