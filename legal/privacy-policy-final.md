@@ -114,15 +114,9 @@ We use Resend to deliver all transactional and Daily Brief emails. Your email ad
 
 We use Apple's Sign In with Apple for authentication. Apple provides us with a unique anonymous user identifier and, at your option, your email address. We do not receive your Apple ID password. Your Apple Sign In credentials are managed by Apple under Apple's Privacy Policy.
 
-### 3.9 Analytics Data (Planned — Not Yet Active)
+### 3.9 Analytics Data in the App
 
-We plan to integrate PostHog to collect anonymized usage data (feature usage, screen visits, button taps, crash events). When activated:
-
-- Analytics data will not include note content, voice recording content, image content, or GPS coordinates
-- Data will be aggregated and analyzed to improve app features and reliability
-- You will be able to opt out of analytics collection
-
-This policy will be updated with specific PostHog data practices before activation. When PostHog is activated in the app, this policy will be updated in advance with the specific data processing region, retention period, and IP address handling for that integration, and Section 5 will name PostHog as a subprocessor with the same disclosures we give every other processor in this policy.
+Version 1.0 of the Squirrel Brain app does not send product-usage analytics to PostHog or to any other third-party analytics service. If we add analytics to the app in the future, we will update this policy in advance and describe what is collected, where it is processed and how to opt out. Analytics on our website are described in Section 3.12.
 
 ### 3.11 Technical and Device Data
 
@@ -136,13 +130,17 @@ We automatically collect:
 
 This information is used to maintain, improve, and debug the app. We do not link crash reports to your notes or voice recordings. Crash logs are retained for approximately 90 days.
 
+Crash and performance reports: We use Sentry to receive crash reports and performance traces from the app. These reports are not intended to contain the content of your notes, voice recordings or photos. See Section 5.9.
+
+Purchase status: We use RevenueCat, our subscription provider, which receives your purchase status and an app user ID so the app can unlock your plan. See Section 5.10.
+
 ### 3.12 Website Data (squirrelbrainapp.com)
 
 When you visit squirrelbrainapp.com:
 
 - Standard web server logs (IP address, browser type, referrer, page visited, timestamp) may be collected by our hosting provider (Vercel)
 - If you submit the waitlist form, your email is stored in Supabase for pre-launch communications
-- PostHog analytics are active on squirrelbrainapp.com (activated May 27, 2026). PostHog collects anonymized usage events — pages visited, button clicks, session data. PostHog is configured with `person_profiles: 'identified_only'`, meaning anonymous visitors are not profiled. No note content, voice recordings, or personal account data is collected via the website analytics. See Section 5.8 for more on PostHog data practices.
+- PostHog analytics are active on squirrelbrainapp.com (activated May 27, 2026). PostHog collects anonymized usage events — pages visited, button clicks, session data. PostHog is configured with `person_profiles: 'identified_only'`, meaning anonymous visitors are not profiled. No note content, voice recordings, or personal account data is collected via the website analytics. See Section 5.8 for more on PostHog on the website.
 
 Before PostHog is configured to set cookies or device identifiers for visitors in the EEA, UK, or Switzerland, squirrelbrainapp.com will present a cookie/tracking consent banner offering those visitors the choice to accept or decline non-essential analytics cookies, consistent with the ePrivacy Directive and GDPR. Today, PostHog on the website is configured to identified-only profiles and does not set cross-site advertising cookies.
 
@@ -160,7 +158,6 @@ Before PostHog is configured to set cookies or device identifiers for visitors i
 | Calendar event creation | Calendar access, extracted dates | Performance of contract + Consent (Art. 6(1)(a)/(b)) |
 | App quality improvement | Aggregated/anonymized patterns, crash logs | Legitimate interests (Art. 6(1)(f)) |
 | Pre-launch waitlist communications | Email (waitlist) | Consent (Art. 6(1)(a)) |
-| Analytics (when activated) | Anonymized usage events | Legitimate interests / Consent (Art. 6(1)(a)/(f)) |
 | Legal compliance and fraud prevention | As required | Legal obligation (Art. 6(1)(c)) |
 
 We do not use your personal information for any purpose incompatible with the purposes listed above. If we wish to use your data for a new purpose, we will update this policy and, where required, seek your consent.
@@ -238,13 +235,25 @@ Apple Privacy Policy: https://www.apple.com/legal/privacy/
 
 Note: Apple's Sign In with Apple and APNs operate under Apple's Developer Program agreements and Privacy Policy. Apple is a data controller for its own processing of your Apple ID and APNs delivery.
 
-### 5.8 PostHog (Planned — Not Yet Active)
+### 5.8 PostHog (Website Only; Not Used in the App)
 
-What we share (when activated): Anonymized usage events — feature interactions, screen views, button taps. No note content, voice recordings, photos, GPS coordinates, or email content.
-Why: Product analytics to understand how features are used and improve the app.
+What we share: On squirrelbrainapp.com only, anonymized usage events such as pages visited and button clicks (see Section 3.12). PostHog is not used in version 1.0 of the app and receives no data from the app.
+Why: Understanding how the website is used.
 PostHog Privacy Policy: https://posthog.com/privacy
 
-Before activating PostHog in the app (it is already active on the website, see Section 3.12), we will confirm and disclose here the data processing region (EU or US Cloud), whether IP addresses are collected and how they are masked, the applicable GDPR legal basis, and the specific retention period for analytics events.
+If we add PostHog or any other analytics to the app, we will update this policy in advance and disclose the data processing region, how IP addresses are handled, the legal basis and the retention period.
+
+### 5.9 Sentry
+
+What we share: Crash reports and performance traces from the app, which can include device type and model, operating system and app version, and technical error details. These reports are not intended to include the content of your notes, voice recordings or photos.
+Why: Finding and fixing crashes and performance problems.
+Sentry Privacy Policy: https://sentry.io/privacy/
+
+### 5.10 RevenueCat
+
+What we share: Your purchase status and an app user ID.
+Why: RevenueCat is our subscription provider. It uses your purchase status to unlock your plan. Payments are handled by Apple, and we never see your card details.
+RevenueCat Privacy Policy: https://www.revenuecat.com/privacy
 
 ---
 
@@ -257,7 +266,7 @@ We believe in being explicit about what we do not do with your data:
 - We do not use your data for advertising targeting on any platform.
 - We do not share your data with other Squirrel Brain users. All data is private to your account.
 - We do not share your data with data brokers or marketing companies.
-- We do not collect payment information. If in-app purchases or subscriptions are introduced, they will be processed exclusively by Apple's App Store and governed by Apple's payment terms.
+- Payments are handled by Apple. Our subscription provider RevenueCat receives your purchase status and an app user ID to unlock your plan. We never see your card details.
 - We do not use your voice recordings, photos, or note content for any purpose other than providing the app features you request and, only in aggregated, anonymized form, improving those features.
 - We do not use your voice recordings or photos to create biometric profiles, train facial recognition systems, or identify you by voice or facial geometry.
 - We do not retain biometric identifiers (voice patterns, facial geometry) beyond the period necessary to complete the specific AI processing transaction you initiated.
@@ -296,7 +305,6 @@ We retain personal information only as long as necessary for the purposes descri
 | Email address | Until account deletion; waitlist emails until you unsubscribe or list is dissolved | Deleted/anonymized within 30 days of account deletion |
 | Calendar data | Not stored independently; transient cache cleared on logout | N/A |
 | Account identifiers (Apple user ID) | Until account deletion | Deleted within 30 days; may be retained longer if required by applicable law |
-| Analytics data (when activated) | 12 months | Anonymized on account deletion; not linked to personal data |
 | Crash logs | 90 days from generation | N/A |
 | AI provider processing logs | Subject to OpenAI/Anthropic/Google/xAI API terms — see Section 5 | Per each provider's API terms |
 | Pre-launch waitlist emails | Until account created, list dissolved, or unsubscription | Deleted within 30 days of dissolution/unsubscription |
@@ -377,9 +385,9 @@ Revoke location, microphone, camera, photo library, calendar, or notification pe
 
 We do not sell or share your personal information. This right is therefore automatically honored. If you wish to confirm or document this, contact us.
 
-### 10.10 Opt Out of Analytics (When Activated)
+### 10.10 Analytics in the App
 
-When PostHog analytics are activated, we will provide an in-app opt-out mechanism. we will provide an in-app toggle under Settings > Privacy to opt out, in addition to the rights described elsewhere in this Section 10.
+Version 1.0 of the app does not collect product-usage analytics, so there is nothing to opt out of. If that changes, we will update this policy in advance and provide an in-app opt-out.
 
 ---
 
@@ -395,7 +403,7 @@ For EEA, UK, and Swiss users: Data transfers to the United States must be made u
 | Google (Gemini / Google Cloud) | EU-US Data Privacy Framework (Google LLC is certified); SCCs also available via Google Cloud DPA |
 | Supabase | Standard Contractual Clauses via Supabase's underlying AWS infrastructure |
 | Resend | Standard Contractual Clauses (per Resend's Data Processing Agreement) |
-| PostHog | To be confirmed before activation; PostHog offers an EU-hosted Cloud option we will evaluate for EEA/UK/Swiss users |
+| PostHog (website analytics only) | To be confirmed; PostHog offers an EU-hosted Cloud option we will evaluate for EEA/UK/Swiss users |
 
 We are executing GDPR Article 28 Data Processing Agreements with each processor named in Section 5 that may handle EU personal data, relying on Standard Contractual Clauses or an applicable adequacy/Data Privacy Framework certification as the transfer mechanism, and we have performed a preliminary Transfer Impact Assessment for our US-based processors.
 
@@ -430,7 +438,6 @@ We are in the process of designating an EU Representative under GDPR Article 27 
 | Calendar event creation | Consent / Performance of contract | Art. 6(1)(a)/(b) |
 | Daily Brief emails | Consent | Art. 6(1)(a) |
 | Push notifications and alarms you configure | Performance of contract | Art. 6(1)(b) |
-| Analytics (when activated) | Legitimate interests / Consent | Art. 6(1)(a)/(f) |
 | Security and fraud prevention | Legitimate interests | Art. 6(1)(f) |
 | Legal compliance | Legal obligation | Art. 6(1)(c) |
 
@@ -612,7 +619,9 @@ We respond to all privacy inquiries within 30 days.
 | Supabase | Cloud database / storage | All user data | In progress | supabase.com/privacy |
 | Resend | Email delivery | Email address, email content | In progress | resend.com/legal/privacy-policy |
 | Apple | Auth, push notifications | Apple user ID, notification payloads | N/A (Apple Developer Agreement) | apple.com/legal/privacy |
-| PostHog | Analytics (planned) | Anonymized usage events | Before activation | posthog.com/privacy |
+| Sentry | Crash reports and performance traces | Device and app details, technical error data | To be confirmed | sentry.io/privacy |
+| RevenueCat | Subscription management | Purchase status, app user ID | To be confirmed | revenuecat.com/privacy |
+| PostHog | Website analytics only (not used in the app) | Anonymized website usage events | To be confirmed | posthog.com/privacy |
 
 ---
 
