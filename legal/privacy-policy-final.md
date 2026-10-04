@@ -126,7 +126,7 @@ We automatically collect:
 - Operating system version
 - App version
 - Crash reports and error logs
-- General usage patterns (e.g., which features are used, how often)
+- Operational records needed to run and protect the service (for example, usage limits and error logs). Version 1.0 of the app does not include in-app usage analytics (see Section 3.9).
 
 This information is used to maintain, improve, and debug the app. We do not link crash reports to your notes or voice recordings. Crash logs are retained for approximately 90 days.
 
@@ -172,8 +172,8 @@ We share your data with the following third-party services solely to operate the
 
 ### 5.1 OpenAI
 
-What we share: Audio files of your voice recordings (for transcription), and, for automated phone-call reminders, the text Squirrel Brain reads aloud to you (for text-to-speech).
-Why: Speech-to-text transcription of voice memos and meeting audio (Whisper), and text-to-speech generation for scheduled calls.
+What we share: Audio files of your voice recordings (for transcription); audio from live voice calls and other voice features, which is sent to OpenAI's real-time voice service; and, for automated phone-call reminders, the text Squirrel Brain reads aloud to you (for text-to-speech).
+Why: Speech-to-text transcription of voice memos and meeting audio (Whisper), real-time voice conversation for live calls and voice features (OpenAI's real-time voice service), and text-to-speech generation for scheduled calls.
 Data processing location: United States
 OpenAI Privacy Policy: https://openai.com/policies/privacy-policy
 OpenAI API Terms: https://openai.com/policies/terms-of-use

@@ -111,7 +111,7 @@ The App provides searchable archives of your AI-structured notes ("Memory Stash"
 
 ### 4.8 AI Assistant (Pip)
 
-Squirrel Brain includes a personalized AI assistant named "Pip." Pip is AI, not a human. Pip's replies and actions are generated primarily by xAI's Grok model, with specific tasks (such as structuring a note) sometimes handled by Anthropic's Claude instead; see Section 5. Pip may be accessed within the App and optionally through a Telegram bot. Telegram interactions are subject to Telegram's own Terms of Service and Privacy Policy; see Section 15.2.
+Squirrel Brain includes a personalized AI assistant named "Pip." Pip is AI, not a human. Pip's replies and actions are generated primarily by xAI's Grok model, with specific tasks (such as structuring a note) sometimes handled by Anthropic's Claude instead; see Section 5. Pip is accessed within the App.
 
 ### 4.9 iOS Share Extension
 
@@ -136,6 +136,7 @@ Squirrel Brain's AI features are built on four AI subprocessors, each handling d
 | Photos / screenshots / meeting audio | Google LLC (Gemini) | Visual analysis, text extraction, meeting diarization, search embeddings |
 | Pip assistant conversations; some photos | xAI Corp. (Grok) | Primary conversational assistant, tool actions, web search, some photo vision |
 | Automated call reminders | OpenAI, Inc. | Text-to-speech generation |
+| Live voice calls and other voice features | OpenAI, Inc. | Real-time voice conversation (OpenAI's real-time voice service) |
 
 By using features that involve AI processing, you explicitly consent to transmission of your content to OpenAI, Inc., Anthropic, PBC, Google LLC, and/or xAI Corp. — as applicable to the feature you use, per the table above — for AI processing in accordance with their respective terms.
 
@@ -161,9 +162,9 @@ You are also subject to:
 | Authentication | Apple Inc. | Sign in with Apple |
 | Push notifications | Apple Inc. | Alarms and reminders |
 | Calendar access | Apple Inc. | Event creation and Daily Brief |
-| App Store billing | Apple Inc. | Subscription management |
-| Telegram bot | Telegram Messenger Inc. | Optional AI assistant ("Pip") |
-| Analytics | PostHog, Inc. | Usage analytics |
+| App Store billing | Apple Inc. | Payments, if paid plans are introduced |
+| Subscription management | RevenueCat | Purchase status and plan unlocking |
+| Crash and performance reports | Sentry | Finding and fixing crashes and performance problems |
 
 ### 5.4 AI Training Data
 
@@ -175,9 +176,9 @@ We do not use your voice recordings, images, or personal notes to train our own 
 
 Core features of the App, including voice transcription, photo analysis, note structuring, and the Pip assistant, are entirely dependent on third-party AI services (OpenAI, Anthropic, Google, xAI). Outages, rate limits, API changes, or discontinuation of any of these services will disable corresponding App features. We are not liable for service degradation or unavailability caused by third-party AI service failures. See also Sections 15.4 and 24.5.
 
-### 5.6 Telegram Infrastructure
+### 5.6 [Reserved]
 
-Messages sent to Pip via Telegram pass through Telegram's servers and infrastructure. Telegram operates its own data collection and retention practices independently of ours. We have no control over how Telegram processes, stores, or uses messages transmitted through its platform. Do not send sensitive, confidential, regulated, or private information through the Telegram bot.
+This section number is intentionally unused.
 
 ---
 
@@ -397,43 +398,45 @@ All commercial email communications will comply with the U.S. CAN-SPAM Act and, 
 
 ## 13. SUBSCRIPTIONS AND PAYMENTS
 
-### 13.1 Free Tier
+### 13.1 Free to Use at Launch
 
-Squirrel Brain does not currently offer a free tier. The App requires a paid subscription to access all features.
+Squirrel Brain is free to use at launch. No purchase is required and there is no free trial. Paid plans may be introduced later; if they are, we will announce them in advance, they will be billed through Apple, and Apple's subscription terms will apply to them.
 
-### 13.2 Paid Subscriptions
+### 13.2 Paid Plans (If Introduced)
 
-Squirrel Brain offers paid subscription tiers. All subscriptions are billed through Apple App Store In-App Purchases and are governed by Apple's Media Services Terms and Conditions: https://www.apple.com/legal/internet-services/itunes/. We do not directly process payment card information. Pricing and tier details are displayed in the App and on the App Store listing at the time of purchase.
+If we introduce paid subscription plans, they will be billed through Apple App Store In-App Purchases and governed by Apple's Media Services Terms and Conditions: https://www.apple.com/legal/internet-services/itunes/. We do not directly process payment card information. Pricing and plan details would be displayed in the App and on the App Store listing at the time of purchase. You will not be charged unless you choose to subscribe.
 
-### 13.3 Automatic Renewal Disclosure
+### 13.3 Automatic Renewal Disclosure (If Paid Plans Are Introduced)
 
-IMPORTANT — SUBSCRIPTIONS AUTO-RENEW UNLESS CANCELLED.
+This Section 13.3 applies only if paid plans are introduced and you choose to subscribe. It does not apply to the free launch.
 
-Your subscription automatically renews at the end of each billing period (monthly or annual, as applicable) at the then-current price, unless you cancel at least 24 hours before the end of the current billing period. Renewal charges are applied through your Apple ID. The renewal charge will appear on your Apple ID account statement.
+IMPORTANT — PAID SUBSCRIPTIONS AUTO-RENEW UNLESS CANCELLED.
+
+A paid subscription automatically renews at the end of each billing period (monthly or annual, as applicable) at the then-current price, unless you cancel at least 24 hours before the end of the current billing period. Renewal charges are applied through your Apple ID. The renewal charge will appear on your Apple ID account statement.
 
 Price changes: We will provide advance notice of any price increase before it takes effect. If you do not cancel, you consent to the new price at the next renewal.
 
 HOW TO CANCEL: Go to Settings > [Your Name] > Subscriptions on your iOS device. Select Squirrel Brain. Tap "Cancel Subscription." Cancellation takes effect at the end of the current paid billing period. You will not be charged again after cancellation, but you will retain access through the end of the current period.
 
-Cancellation of a free trial: You must cancel at least 24 hours before the end of the free trial period to avoid being charged for the first subscription period.
+If a free trial is ever offered with a paid plan: You must cancel at least 24 hours before the end of the free trial period to avoid being charged for the first subscription period.
 
 *This disclosure is provided pursuant to Apple App Store Guidelines and applicable consumer protection laws.*
 
 ### 13.4 Free Trials
 
-If a free trial is offered, the trial period and conditions will be disclosed at the time of sign-up. Unless you cancel at least 24 hours before the trial ends, your subscription will automatically begin and you will be charged. You may not receive a separate notice that your trial is ending.
+There is no free trial at launch. If a free trial is offered with a paid plan in the future, the trial period and conditions will be disclosed at the time of sign-up. Unless you cancel at least 24 hours before the trial ends, your subscription will automatically begin and you will be charged. You may not receive a separate notice that your trial is ending.
 
 ### 13.5 Refunds
 
-All refund requests must be directed to Apple. Squirrel Brain does not directly process refunds for App Store purchases. To request a refund: https://support.apple.com/billing. Apple's refund policies govern. No refunds are provided for partial subscription periods, except as required by applicable law or Apple policy.
+If you buy a paid plan, all refund requests must be directed to Apple. Squirrel Brain does not directly process refunds for App Store purchases. To request a refund: https://support.apple.com/billing. Apple's refund policies govern. No refunds are provided for partial subscription periods, except as required by applicable law or Apple policy.
 
 ### 13.6 Subscription Management
 
-You can view and manage your subscriptions at any time in your Apple ID account settings. Squirrel Brain has no ability to issue refunds, modify charges, or cancel subscriptions on your behalf — these actions must be performed through Apple.
+If you subscribe to a paid plan, you can view and manage your subscriptions at any time in your Apple ID account settings. Squirrel Brain has no ability to issue refunds, modify charges, or cancel subscriptions on your behalf — these actions must be performed through Apple.
 
-### 13.7 Future Pricing
+### 13.7 Future Paid Plans and Pricing
 
-Squirrel Brain may introduce additional subscription tiers or adjust pricing in the future. Any changes will be communicated with at least 30 days' notice and will not affect your current subscription period.
+Squirrel Brain may introduce paid plans or subscription tiers, or adjust pricing, in the future. We will announce any paid plan in advance. Once a paid plan exists, changes to it will be communicated with at least 30 days' notice and will not affect your current subscription period.
 
 ---
 
@@ -464,11 +467,11 @@ You agree not to use the Services for any of the following:
 
 ### 15.1 Third-Party Integrations
 
-Use of third-party services integrated with the App (OpenAI, Anthropic, Google, xAI, Supabase, Resend, Apple, Telegram, PostHog) is governed by those parties' respective terms of service and privacy policies. We are not responsible for those services' practices, content, security, availability, or performance.
+Use of third-party services integrated with the App (OpenAI, Anthropic, Google, xAI, Supabase, Resend, RevenueCat, Sentry, Apple) is governed by those parties' respective terms of service and privacy policies. We are not responsible for those services' practices, content, security, availability, or performance.
 
-### 15.2 Telegram Bot (Pip via Telegram)
+### 15.2 [Reserved]
 
-If you choose to interact with Pip via Telegram: (a) your messages pass through Telegram's servers and infrastructure; (b) Telegram operates under its own Privacy Policy (https://telegram.org/privacy) and Terms of Service (https://telegram.org/tos); (c) we do not control how Telegram stores, retains, or processes message data; (d) we are not responsible for Telegram's availability, security, data practices, or any data breach affecting Telegram infrastructure; (e) do not send sensitive, confidential, regulated, or private personal data through the Telegram bot; and (f) Telegram may store your message history according to its own retention policies, independent of our data deletion obligations to you.
+This section number is intentionally unused.
 
 ### 15.3 Third-Party Links
 
@@ -476,7 +479,7 @@ The App and Site may contain links to third-party websites. These links are prov
 
 ### 15.4 Third-Party Service Availability and Force Majeure
 
-We are not liable for Service interruptions, feature degradation, or unavailability of the Services caused by the unavailability of third-party services, including without limitation OpenAI, Anthropic, Google, xAI, Supabase, Apple, Resend, Telegram, or other providers. Extended unavailability of any of our four AI processing partners (OpenAI, Anthropic, Google, xAI) will disable the corresponding AI processing features in the App.
+We are not liable for Service interruptions, feature degradation, or unavailability of the Services caused by the unavailability of third-party services, including without limitation OpenAI, Anthropic, Google, xAI, Supabase, Apple, Resend, RevenueCat, Sentry, or other providers. Extended unavailability of any of our four AI processing partners (OpenAI, Anthropic, Google, xAI) will disable the corresponding AI processing features in the App.
 
 ---
 
@@ -566,7 +569,7 @@ WE EXPRESSLY DISCLAIM LIABILITY FOR:
 (b) Missed alarms or notifications resulting from iOS system behavior, Focus Modes, Low Power Mode, device power state, app restrictions, iOS updates, or any other iOS condition;
 (c) Incorrect, duplicated, missing, or conflicting calendar entries created by the App;
 (d) Third-party AI errors, failures, hallucinations, data loss, or service unavailability (OpenAI, Anthropic, Google, xAI);
-(e) Third-party service outages, errors, or unavailability (OpenAI, Anthropic, Google, xAI, Supabase, Apple, Resend, Telegram, PostHog, or any other service provider);
+(e) Third-party service outages, errors, or unavailability (OpenAI, Anthropic, Google, xAI, Supabase, Apple, Resend, RevenueCat, Sentry, or any other service provider);
 (f) Consequences arising from your decision to capture, process, store, or transmit sensitive, confidential, regulated, or private content through the App;
 (g) Failed, delayed, blocked, or spam-filtered email delivery;
 (h) Reliance on AI output for professional, medical, legal, financial, or safety-critical decisions;
@@ -724,7 +727,7 @@ You may not assign, transfer, or sublicense your rights or obligations under the
 
 ### 24.5 Force Majeure
 
-Squirrel Brain is not liable for delay or failure in performance of our obligations to the extent caused by circumstances beyond our reasonable control, including acts of God, natural disasters, government actions, war, civil unrest, pandemic, infrastructure failures, Internet outages, third-party service provider outages (including OpenAI, Anthropic, Google, xAI, Supabase, Apple, Resend, Telegram, and other service providers), labor disputes, or other events beyond our reasonable control ("Force Majeure Events"). For avoidance of doubt, third-party AI service outages (OpenAI, Anthropic, Google, xAI) are Force Majeure Events that disable corresponding App features without triggering liability.
+Squirrel Brain is not liable for delay or failure in performance of our obligations to the extent caused by circumstances beyond our reasonable control, including acts of God, natural disasters, government actions, war, civil unrest, pandemic, infrastructure failures, Internet outages, third-party service provider outages (including OpenAI, Anthropic, Google, xAI, Supabase, Apple, Resend, RevenueCat, Sentry, and other service providers), labor disputes, or other events beyond our reasonable control ("Force Majeure Events"). For avoidance of doubt, third-party AI service outages (OpenAI, Anthropic, Google, xAI) are Force Majeure Events that disable corresponding App features without triggering liability.
 
 ### 24.6 No Third-Party Beneficiaries
 
