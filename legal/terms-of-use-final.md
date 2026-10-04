@@ -735,7 +735,7 @@ Except as provided in Section 24.9 (Apple) and Section 24.10 (indemnified partie
 
 ### 24.7 Notices
 
-Notices from us to you may be provided via in-app notification, push notification, email to your registered address, or posting to the Site. Legal notices to Squirrel Brain must be provided in writing to: Acorn Labs LLC, 116 Agnes Rd, Suite 200, Knoxville, TN 37919, USA.
+Notices from us to you may be provided via in-app notification, push notification, email to your registered address, or posting to the Site. Legal notices to Squirrel Brain must be provided in writing by email to hello@squirrelbrainapp.com.
 
 ### 24.8 Export Controls and Sanctions Compliance
 
@@ -779,6 +779,5 @@ Email (DMCA / Copyright Notices): hello@squirrelbrainapp.com
 Email (Arbitration Opt-Out): hello@squirrelbrainapp.com
 Email (Dispute Resolution): hello@squirrelbrainapp.com
 Website: https://squirrelbrainapp.com
-Physical Address (for legal service): Acorn Labs LLC, 116 Agnes Rd, Suite 200, Knoxville, TN 37919, USA
 
 Our DMCA agent is registered with the U.S. Copyright Office. Registration No. DMCA-1073455. Registered May 27, 2026.

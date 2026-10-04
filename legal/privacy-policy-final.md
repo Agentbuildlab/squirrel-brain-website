@@ -25,7 +25,6 @@ Data Controller and Contact for Privacy Matters:
 Squirrel Brain / Acorn Labs LLC
 Email: hello@squirrelbrainapp.com
 Website: https://squirrelbrainapp.com
-Mailing address: 116 Agnes Rd, Suite 200, Knoxville, TN 37919, USA
 
 We respond to all privacy inquiries within 30 days.
 
@@ -599,7 +598,6 @@ If you have any questions, concerns, or requests regarding this Privacy Policy o
 
 Email: hello@squirrelbrainapp.com
 Website: https://squirrelbrainapp.com
-Mailing address: 116 Agnes Rd, Suite 200, Knoxville, TN 37919, USA
 
 To be appointed under GDPR Article 27 — see Section 12.1. In the meantime, direct EU inquiries to hello@squirrelbrainapp.com.
 To be appointed under UK GDPR Article 27 — see Section 12.1. In the meantime, direct UK inquiries to hello@squirrelbrainapp.com.
