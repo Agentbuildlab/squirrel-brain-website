@@ -60,6 +60,8 @@ export const CALL_FEATURING_SLUGS: ReadonlySet<string> = new Set([
   "second-brain-app",
   "outlook-screenshot-reminder",
   "reminder-app-for-parents",
+  "adhd-reminder-app",
+  "live-call-assistant-reminders",
 ]);
 
 // Descriptive anchor text for internal links (no "click here").
@@ -80,6 +82,8 @@ export const LANDING_ANCHORS: Record<string, string> = {
   "reminder-app-for-parents": "reminder app for busy parents",
   "daily-pep-talk-call-app": "daily pep-talk & encouragement calls",
   "daily-bible-verse-call": "a daily Bible verse by phone call",
+  "adhd-reminder-app": "ADHD reminders that call you",
+  "live-call-assistant-reminders": "a live call assistant for reminders",
 };
 
 export const LANDING_PAGES: LandingPageData[] = [
@@ -139,16 +143,18 @@ export const LANDING_PAGES: LandingPageData[] = [
         a: "iPhone, for now. Squirrel Brain is pre-launch — join the launch list and you'll be first into the beta.",
       },
     ],
-    related: ["can-chatgpt-set-iphone-reminder", "reminder-app-that-calls-you", "screenshot-to-reminder-app", "voice-note-reminder-app", "photo-to-reminder-app", "second-brain-app"],
+    related: ["can-chatgpt-set-iphone-reminder", "reminder-app-that-calls-you", "live-call-assistant-reminders", "screenshot-to-reminder-app", "voice-note-reminder-app", "photo-to-reminder-app", "second-brain-app"],
   },
 
   {
     slug: "screenshot-to-reminder-app",
-    title: "Screenshot to Reminder App — Turn Screenshots Into Reminders | Squirrel Brain",
+    // GSC: "alarm screenshot" / screenshot → alarm or reminder. The body already
+    // says a screenshot becomes a reminder, calendar event, or loud alarm.
+    title: "Alarm Screenshot — Screenshot to Alarm or Reminder | Squirrel Brain",
     description:
-      "Screenshot a text, email, appointment, or to-do and Squirrel Brain turns it into a reminder, alarm, or calendar event — so the things you screenshot don't vanish in your camera roll.",
-    eyebrow: "Screenshot → reminder",
-    h1: "Turn screenshots into reminders",
+      "Alarm screenshot: screenshot a text, email, appointment, or to-do and Squirrel Brain turns it into a reminder, alarm, or calendar event — so the things you screenshot don't vanish in your camera roll.",
+    eyebrow: "Screenshot → alarm",
+    h1: "Turn a screenshot into an alarm or reminder",
     subhead:
       "Screenshot a text, an email, an appointment, or a to-do — Squirrel Brain reads it and turns it into a reminder, alarm, or calendar event so it never gets buried in your camera roll.",
     heroShot: {
@@ -195,16 +201,18 @@ export const LANDING_PAGES: LandingPageData[] = [
         a: "Yes — Squirrel Brain is an iPhone app. It's pre-launch, so join the launch list to be first into the beta.",
       },
     ],
-    related: ["outlook-screenshot-reminder", "photo-to-reminder-app", "ai-reminder-app", "loud-reminder-app"],
+    related: ["outlook-screenshot-reminder", "loud-reminder-app", "live-call-assistant-reminders", "photo-to-reminder-app", "ai-reminder-app"],
   },
 
   {
     slug: "voice-note-reminder-app",
-    title: "Voice Note Reminder App — Speak a Thought, Get a Reminder | Squirrel Brain",
+    // GSC: "voice reminder app". Same product facts as before — voice notes
+    // become tasks, alarms, reminders, and calendar events.
+    title: "Voice Reminder App — Speak a Thought, Get a Reminder | Squirrel Brain",
     description:
-      "Squirrel Brain turns voice notes into tasks, alarms, reminders, and calendar events. Speak a thought on the move and your squirrel hands it back exactly when it matters.",
-    eyebrow: "Voice note → reminder",
-    h1: "Turn voice notes into tasks, alarms, and calendar events",
+      "A voice reminder app for iPhone. Squirrel Brain turns voice notes into tasks, alarms, reminders, and calendar events. Speak a thought on the move and your squirrel hands it back exactly when it matters.",
+    eyebrow: "Voice reminder app",
+    h1: "The voice reminder app — speak it, get a reminder",
     subhead:
       "Speak a thought — walking, driving, between meetings — and Squirrel Brain turns it into a task, note, alarm, or calendar event, then hands it back exactly when it matters.",
     heroShot: {
@@ -251,7 +259,7 @@ export const LANDING_PAGES: LandingPageData[] = [
         a: "Squirrel Brain is an iPhone app built around fast, one-tap voice capture for hands-busy moments. It's pre-launch — join the launch list to get early access.",
       },
     ],
-    related: ["ai-reminder-app", "second-brain-app", "photo-to-reminder-app", "loud-reminder-app"],
+    related: ["ai-reminder-app", "second-brain-app", "photo-to-reminder-app", "loud-reminder-app", "adhd-reminder-app"],
   },
 
   {
@@ -312,11 +320,13 @@ export const LANDING_PAGES: LandingPageData[] = [
 
   {
     slug: "loud-reminder-app",
-    title: "Loud Reminder App — Hard-to-Miss Reminders & Alarms | Squirrel Brain",
+    // GSC: "loud reminder". Same facts: loud alarms and phone-call-style
+    // reminders that ring your phone, for people who miss quiet notifications.
+    title: "Loud Reminder — Hard-to-Miss Alarms That Ring Your Phone | Squirrel Brain",
     description:
-      "For people who miss quiet notifications. Squirrel Brain sends loud alarms and phone-call-style reminders that ring your phone — so the one thing you can't miss actually reaches you.",
-    eyebrow: "Loud reminders",
-    h1: "A loud reminder app for people who miss quiet notifications",
+      "A loud reminder for people who miss quiet notifications. Squirrel Brain sends loud alarms and phone-call-style reminders that ring your phone — so the one thing you can't miss actually reaches you.",
+    eyebrow: "Loud reminder",
+    h1: "A loud reminder for people who miss quiet notifications",
     subhead:
       "A normal notification is one gray banner in a stack of fifty. For the things you truly can't miss, Squirrel Brain gets loud — with alarms and phone-call-style reminders that ring your phone.",
     heroShot: {
@@ -363,7 +373,7 @@ export const LANDING_PAGES: LandingPageData[] = [
         a: "Yes, Squirrel Brain is an iPhone app. It's pre-launch — join the launch list to be first into the beta.",
       },
     ],
-    related: ["reminder-app-that-calls-you", "talking-reminder-app", "ai-reminder-app", "voice-note-reminder-app", "reminder-app-for-sales-reps"],
+    related: ["reminder-app-that-calls-you", "adhd-reminder-app", "live-call-assistant-reminders", "talking-reminder-app", "ai-reminder-app", "voice-note-reminder-app", "reminder-app-for-sales-reps"],
   },
 
   {
@@ -656,7 +666,7 @@ export const LANDING_PAGES: LandingPageData[] = [
         a: "No. You decide which reminders escalate to a call and which stay as a normal nudge, so a ring always means it matters.",
       },
     ],
-    related: ["talking-reminder-app", "daily-pep-talk-call-app", "loud-reminder-app", "ai-reminder-app", "voice-note-reminder-app"],
+    related: ["talking-reminder-app", "live-call-assistant-reminders", "adhd-reminder-app", "daily-pep-talk-call-app", "loud-reminder-app", "ai-reminder-app", "voice-note-reminder-app"],
   },
 
   {
@@ -715,7 +725,7 @@ export const LANDING_PAGES: LandingPageData[] = [
         a: "No. You choose which reminders escalate to a spoken call and which stay as a normal nudge, so a ring always means it matters.",
       },
     ],
-    related: ["reminder-app-that-calls-you", "loud-reminder-app", "voice-note-reminder-app", "daily-pep-talk-call-app"],
+    related: ["reminder-app-that-calls-you", "live-call-assistant-reminders", "adhd-reminder-app", "loud-reminder-app", "voice-note-reminder-app", "daily-pep-talk-call-app"],
   },
 
   {
@@ -953,7 +963,7 @@ export const LANDING_PAGES: LandingPageData[] = [
         a: "Yes — Squirrel Brain is an iPhone app. It's pre-launch, so join the launch list to be first in.",
       },
     ],
-    related: ["daily-bible-verse-call", "reminder-app-that-calls-you", "loud-reminder-app", "ai-reminder-app"],
+    related: ["daily-bible-verse-call", "live-call-assistant-reminders", "reminder-app-that-calls-you", "loud-reminder-app", "ai-reminder-app"],
   },
 
   {
@@ -1019,6 +1029,140 @@ export const LANDING_PAGES: LandingPageData[] = [
       },
     ],
     related: ["daily-pep-talk-call-app", "reminder-app-that-calls-you", "loud-reminder-app", "ai-reminder-app"],
+  },
+
+  {
+    // Query: "ADHD reminders that call you". Not a medical page — every product
+    // sentence below is copied from the existing call / loud-reminder copy
+    // (llms.txt, reminder-app-that-calls-you, loud-reminder-app, CallSection).
+    slug: "adhd-reminder-app",
+    title: "ADHD Reminders That Call You | Squirrel Brain",
+    description:
+      "ADHD reminders that call you means a real phone call, not a treatment. Squirrel Brain does not diagnose or treat ADHD. For the one thing you can't miss, it places a real phone call that rings when your ringer's on, vibrates on silent, and reaches you on a locked screen.",
+    eyebrow: "Reminders that call you",
+    h1: "ADHD reminders that call you",
+    subhead:
+      "Not a banner you swipe away — a real phone call that rings when your ringer's on and vibrates on silent. Pick up and an AI voice talks to you. Squirrel Brain does not diagnose or treat ADHD.",
+    heroShot: {
+      src: "/assets/screens/calendar-v2.webp",
+      alt: "Squirrel Brain calendar showing a reminder set to ring the phone like a call",
+    },
+    sections: [
+      {
+        eyebrow: "Quiet notifications fail",
+        h2: "A banner you don't see is not a reminder",
+        body: "Push notifications pile up, get swiped away, and vanish while your phone is face-down. If you've ever missed something important because the alert was silent or buried, the problem isn't you — it's that the reminder was too quiet to do its job.",
+      },
+      {
+        eyebrow: "It calls you",
+        h2: "A real phone call for the one thing you can't miss",
+        body: "For things you can't miss, Squirrel Brain places a real phone call that rings when your ringer's on, vibrates on silent like any call, and reaches you on a locked screen. When you answer, an AI voice talks with you — your day, a pep talk, or a prep call before a meeting — and you can talk right back. Not a canned recording.",
+        bullets: [
+          "Rings on your ringer, vibrates on silent, on a locked screen",
+          "An AI voice speaks your reminder and your day — not a canned recording",
+          "You choose which reminders escalate to a call and which stay gentle",
+        ],
+      },
+      {
+        eyebrow: "You decide",
+        h2: "Loud only when it matters",
+        body: "Not everything should shout. You pick which reminders escalate to a loud alarm or a call, and which stay gentle. The big ones get loud; the small ones stay quiet — so the volume always means something.",
+      },
+    ],
+    faqs: [
+      {
+        q: "What does \"ADHD reminders that call you\" mean here?",
+        a: "It means a reminder that reaches you by phone call instead of a quiet banner. Squirrel Brain can ring your phone like a call and an AI voice speaks to you. It does not diagnose, treat, or give medical advice about ADHD — it is an iPhone reminder app.",
+      },
+      {
+        q: "What is a phone-call-style reminder?",
+        a: "Instead of a silent push notification, Squirrel Brain can reach you with a reminder that rings your phone like a call and speaks to you — designed to be hard to miss even when your screen is locked. It rings when your ringer's on and vibrates on silent.",
+      },
+      {
+        q: "Does every reminder call me?",
+        a: "No. You decide which reminders escalate to a call and which stay as a normal nudge, so a ring always means it matters.",
+      },
+      {
+        q: "What device does it run on?",
+        a: "iPhone, for now. There is no Android app. Squirrel Brain is pre-launch — join the launch list and you'll be first into the beta.",
+      },
+    ],
+    related: [
+      "reminder-app-that-calls-you",
+      "loud-reminder-app",
+      "live-call-assistant-reminders",
+      "talking-reminder-app",
+      "voice-note-reminder-app",
+    ],
+  },
+
+  {
+    // Query: "live call assistant for reminders" (GSC: impressions, 0 clicks).
+    // Copy is the site's existing two-way call description (llms.txt, CallSection,
+    // reminder-app-that-calls-you) — not a separate product.
+    slug: "live-call-assistant-reminders",
+    title: "Live Call Assistant for Reminders | Squirrel Brain",
+    description:
+      "A live call assistant for reminders: Squirrel Brain places a real phone call that rings when your ringer's on, vibrates on silent, and reaches you on a locked screen. When you answer, it's a live two-way conversation — an AI voice talks with you, and you can talk right back.",
+    eyebrow: "Live call",
+    h1: "A live call assistant for reminders",
+    subhead:
+      "Squirrel Brain places a real phone call for the reminder you can't miss. When you answer, it's a live two-way conversation — an AI voice talks with you, and you can talk right back. Not a canned recording.",
+    heroShot: {
+      src: "/assets/screens/calendar-v2.webp",
+      alt: "Squirrel Brain calendar showing a reminder set to ring the phone like a call",
+    },
+    sections: [
+      {
+        eyebrow: "Notifications fail",
+        h2: "A banner you swipe away is not a reminder",
+        body: "A banner notification competes with fifty others, disappears when your phone is face-down, and is gone the moment you swipe. For something that genuinely matters, a quiet, dismissible alert is the wrong tool.",
+      },
+      {
+        eyebrow: "You talk back",
+        h2: "Answer, and it's a live two-way conversation",
+        body: "Answer it and you're not just listening — you talk back. Tell your squirrel to move the meeting, add a note, or walk you through your day, and it handles it right there on the call, out loud, in its own voice. A real back-and-forth conversation, not a recording. You can also call it back and ask, or have it call you — both directions.",
+        bullets: [
+          "Rings on your ringer, vibrates on silent, on a locked screen",
+          "Move a meeting, ask what's next, or add a reminder — mid-call",
+          "An AI voice speaks your reminder and your day — not a canned recording",
+        ],
+      },
+      {
+        eyebrow: "You decide",
+        h2: "You pick what it says and which reminders are worth a call",
+        body: "You set the schedule and what you want to hear — a reminder, a pep talk, a recap of your day, or a prep call before a meeting that covers your key points. Not every reminder calls you. You decide which ones escalate to a call and which stay as a normal nudge, so a ring always means it matters.",
+      },
+    ],
+    faqs: [
+      {
+        q: "What is a live call assistant for reminders?",
+        a: "It's Squirrel Brain's phone-call reminder. For things you can't miss, it places a real phone call that rings when your ringer's on, vibrates on silent, and reaches you on a locked screen. When you answer, it's a live two-way conversation: an AI voice talks with you, and you can talk right back — move a meeting, ask what's next, add a reminder — mid-call. Not a canned recording.",
+      },
+      {
+        q: "Is it actually a phone call?",
+        a: "Yes. It rings your phone like a real call — ringing when your ringer's on, vibrating on silent — and shows on your locked screen. When you pick up, an AI voice talks to you in plain language.",
+      },
+      {
+        q: "Can I talk back on the call?",
+        a: "Yes. You can talk right back — move a meeting, ask what's next, or add a reminder — mid-call. You can also call it back and ask, or have it call you. Both directions.",
+      },
+      {
+        q: "Does every reminder call me?",
+        a: "No. You decide which reminders escalate to a call and which stay as a normal nudge, so a ring always means it matters.",
+      },
+      {
+        q: "Does it work on iPhone?",
+        a: "Yes — Squirrel Brain is an iPhone app. There is no Android app. It's pre-launch, so join the launch list to be first into the beta.",
+      },
+    ],
+    related: [
+      "reminder-app-that-calls-you",
+      "talking-reminder-app",
+      "adhd-reminder-app",
+      "daily-pep-talk-call-app",
+      "loud-reminder-app",
+    ],
   },
 ];
 
