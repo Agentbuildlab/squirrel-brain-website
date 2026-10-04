@@ -196,14 +196,14 @@ function MedsBlock({ index }: { index: number }) {
         </h3>
         <p className="text-base text-muted leading-relaxed mb-6">
           Snap a photo of each pill bottle — or several at once — and your squirrel keeps all your
-          prescriptions saved and labeled. At the doctor's office, when they hand you that long form
-          asking for every medication and dose, you've already got them: easy to find, easy to read
+          prescriptions saved and labeled. At the doctor&rsquo;s office, when they hand you that long form
+          asking for every medication and dose, you&rsquo;ve already got them: easy to find, easy to read
           off, easy to erase when you stop one.
         </p>
         <p className="text-base text-muted leading-relaxed mb-6">
           And if the doctor has a question, pull up the actual photo of the label right there on
-          your phone. No more fumbling, no more forgotten scripts, no more "I think it's the one
-          that starts with an L."
+          your phone. No more fumbling, no more forgotten scripts, no more &ldquo;I think it&rsquo;s the one
+          that starts with an L.&rdquo;
         </p>
 
         {/* Side note — snap the bottle, set it as the reminder */}

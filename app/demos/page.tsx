@@ -62,7 +62,6 @@ function FilmCard({ film, accent, label }: { film: Film; accent: string; label: 
         className="relative rounded-3xl overflow-hidden bg-black mx-auto w-full"
         style={{ aspectRatio: "9 / 16", maxWidth: 320, border: `1px solid ${accent}33`, boxShadow: "0 18px 44px rgba(26,18,8,0.16)" }}
       >
-        {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
         <video
           src={`/demos/${film.src}.mp4`}
           poster={`/demos/posters/${film.src}.jpg`}
