@@ -1,0 +1,273 @@
+# Squirrel Brain — full descriptions of public product pages
+
+> Companion to https://squirrelbrainapp.com/llms.txt. These are the public product pages listed in https://squirrelbrainapp.com/sitemap.xml, described in each page's own words. This file does not add reviews, ratings, or statistics.
+
+Squirrel Brain is an iOS app. It is pre-launch: humans join a launch list. The MCP server is already live for agents and developers.
+
+## Home
+https://squirrelbrainapp.com/
+
+Squirrel Brain | AI Reminder App for Voice Notes, Photos & Screenshots
+
+The second brain that rings you back. You're not forgetful — you're outnumbered. Speak it. Snap it. Stash it. Your squirrel files everything — and for the one thing you can't miss, it calls your phone — and you can talk right back.
+
+Squirrel Brain is an AI reminder app that turns voice notes, photos, screenshots, texts, and emails into reminders, alarms, and calendar events — and for the one thing you can't miss, it calls your phone.
+
+## For AI agents / MCP
+https://squirrelbrainapp.com/mcp
+
+The MCP memory + delivery layer for your AI agents | Squirrel Brain
+
+Give your agents a memory — and a phone line to you. Every agent you run is trapped in its window: it forgets between sessions, and it can't reach you once you've walked away from the screen. Squirrel Brain is the missing half — one persistent brain your whole fleet shares, plus a real line to your phone: a push, a spoken message, or an actual call it places itself.
+
+Squirrel Brain is an MCP server that gives your AI agents a persistent shared brain and a real line to your phone — set alarms, read your day, file what they find, and place an actual voice call. Works with Claude Code, Cursor, or any agent you run.
+
+One brain your whole fleet shares: not a vector store you bolt on and babysit. It's the same brain the human uses — so what your coding agent files, your research agent (and the person) can find later. Memory survives the session, the tool, and the model. Semantic search, a daily brief, boards, and a forever-note that never gets wiped.
+
+A line to the human's actual phone: when something can't wait, your agent places a real phone call and speaks — or fires an escalating alarm, or a push. It reaches the human in the physical world, on its own, unattended.
+
+Mint a key in the app, point your agent at the portal, and it acts on your brain. Each agent gets a personal API key, scoped to one brain and killable in a tap. Every write is attributed to the agent that created it. The server verifies the real effect before it confirms. Per-agent and fleet-wide cost ceilings are enforced server-side.
+
+## Agent skills
+https://squirrelbrainapp.com/skills
+
+Agent skills that can call their human
+
+Your agent got stuck. It called you. Download the complete loop: a useful phone briefing, your spoken answer, delivery back to the right task, and proof that the decision moved the work forward. Free for Squirrel Brain users.
+
+Free Squirrel Brain agent skills for human escalation: place a clear phone call, listen for the answer, route it back to the right task, and verify follow-through.
+
+Contact Your Human is a secure, reusable human-in-the-loop skill for any agent. It calls with useful context and options, captures the spoken reply, routes it, and verifies the result. Supervisor Loop is a dedicated watchdog for multiple work sessions. It detects stalls, verifies real artifacts, nudges the right task, and calls only after a verified question has waited at least five minutes.
+
+The loop on the page: the agent recognizes a real decision, repeated failure, or unsafe impasse; it names the task, describes verified state, gives numbered options, and recommends one; Squirrel Brain rings the human's iPhone and speaks the complete decision brief; the skill polls the private MCP Portal for the new spoken answer; the answer goes back to the owning task, and artifact progress proves it was applied.
+
+## For work
+https://squirrelbrainapp.com/work
+
+For Work — Capture, Follow-Ups & GPS Proof
+
+Your brain has too many tabs open. For sales reps, service techs, and contractors. Every job detail captured the moment it happens. Every follow-up handled before end of day.
+
+Squirrel Brain for sales reps, service techs, and contractors. Voice capture, GPS photo proof, Outlook import, and follow-ups that ring your phone.
+
+Voice capture — say it, it's saved: walk out of a meeting and talk through what just happened. Your squirrel extracts the follow-ups, the promised callbacks, and the dates. GPS-stamped photo proof: snap what you left on-site; your squirrel reads the photo, logs the job details, and stores a timestamped record with GPS. A good-morning email opens the workday with today's meetings, the follow-ups you owe, and anything you captured that's still open. A 4 PM nudge email recaps what's still open and what's due tomorrow. Follow-ups that matter ring your phone — a real call that rings when your ringer's on, vibrates on silent like any call, and reaches you on a locked screen. LinkStash saves links from Safari, YouTube, or anywhere else, organized by source, findable later in plain language.
+
+## For the family
+https://squirrelbrainapp.com/family
+
+For the Family
+
+The whole family in one brain. Snap schedules, receipts, permission slips, and meds. Your squirrel reads every photo, sets every alarm, and reminds you before anything slips. Reads every calendar already on your iPhone — nothing new to connect.
+
+Squirrel Brain for busy parents. Snap a soccer schedule and get every game as an alarm. Receipts, pix boards, morning brief with weather and a joke — all organised.
+
+Pix boards — for every pile on the counter: receipts, recipes, meds, school permission slips. Snap three of a kind and the board makes itself. Return-window reminders: snap a receipt and your squirrel reads the store and the amount, then asks if you want a reminder before the return window closes. Voice recall: open the Burrow and ask — your squirrel searches everything you've ever captured and answers back in plain language.
+
+## Watch it work
+https://squirrelbrainapp.com/demos
+
+Watch it Work
+
+Short, narrated films of Squirrel Brain doing its thing — grouped by what it's for. Short films of Squirrel Brain in action — for work, for family, and for your AI agents. Voice and photos turned into reminders, alarms, boards, and a phone call that rings when your ringer's on, vibrates on silent, and reaches you on a locked screen.
+
+For work: catch what slips between jobs — follow-ups, proof, and the things you leave behind. For family: the whole household in one brain — schedules, receipts, doses, and piles that sort themselves. For your AI: give your AI hands — real alarms, real calls, and your boards, over MCP.
+
+## Pricing
+https://squirrelbrainapp.com/pricing
+
+Pricing
+
+Simple, honest pricing. Your whole brain in one app — captures, reminders, the Burrow, and meeting notes. Everything's unlimited except meeting recording, so the only choice is how many hours you need. 7-day free trial, monthly billing, cancel anytime.
+
+Two simple plans: Standard at $9.99/month (10 hours of meeting recording) and Plus at $14.99/month (20 hours). Everything else is unlimited on both.
+
+Unlimited on both plans: photos, notes, and reminders; voice capture into an alarm, reminder, or calendar event; a real phone call when it matters — rings if your ringer's on, vibrates on silent, on a locked screen; pix boards for receipts, recipes, meds, and schedules; the Burrow (AI chat with your squirrel); a link and YouTube stash plus a forever note; a morning brief email and a 4 PM nudge; and an optional MCP portal so your AI tools can plug in.
+
+Standard is everything in Squirrel Brain, plus 10 hours of meeting recording each month. Plus is everything in Standard, with 20 hours of meeting recording each month.
+
+## Developer docs
+https://squirrelbrainapp.com/mcp-docs
+
+Developer Docs — Squirrel Brain MCP Server
+
+Connect Any AI Agent to Your Brain. Squirrel Brain has a built-in MCP server. Any AI agent — Claude, a custom agent, or your own automation — can read your tasks, create alarms, and send voice messages directly to your phone.
+
+Connect any AI agent to Squirrel Brain via MCP. Create alarms, read tasks, send voice messages to your phone — all from Claude or any agent.
+
+MCP (Model Context Protocol) is a standard that lets AI agents call tools on external services. Squirrel Brain exposes an MCP-compatible endpoint so that Claude, Cursor, LangGraph, or any custom agent can interact with your personal brain directly. An agent can read your tasks, create notes and checklists, set alarms on your phone, send push notifications, make a voice call, fetch your daily brief, and write persistent context notes. All actions are tied to your account via your API key. Only you can access your brain. The page is for developers, technical founders, and power users who want to wire Claude or a custom agent into their Squirrel Brain account. If you just want to use the app, no setup is needed.
+
+## AI reminder app
+https://squirrelbrainapp.com/ai-reminder-app
+
+AI Reminder App for iPhone — From Capture to Done | Squirrel Brain
+
+The AI reminder app for everything you forget. Speak it, snap it, or screenshot it — Squirrel Brain turns scattered information into reminders, alarms, notes, and calendar events, then makes sure you follow through.
+
+The AI reminder app for iPhone: speak it, snap it, or screenshot it, and Squirrel Brain turns it into the reminder, alarm, note, or calendar event — then follows through, with a real phone call for the one you can't miss.
+
+Most reminder apps make you stop, type, and set a time. Squirrel Brain meets you where the thought happens. Say it out loud, snap a photo, screenshot a message, or forward a text or email — the AI reads it, pulls out what matters, and turns it into something that actually nudges you. A note app just holds your words until you go looking for them. Squirrel Brain acts: it sets the alarm, adds the calendar event, files the photo onto the right board, and calls you when something genuinely can't slip.
+
+## Turn screenshots into reminders
+https://squirrelbrainapp.com/screenshot-to-reminder-app
+
+Screenshot to Reminder App — Turn Screenshots Into Reminders | Squirrel Brain
+
+Turn screenshots into reminders. Screenshot a text, an email, an appointment, or a to-do — Squirrel Brain reads it and turns it into a reminder, alarm, or calendar event so it never gets buried in your camera roll.
+
+Screenshot a text, email, appointment, or to-do and Squirrel Brain turns it into a reminder, alarm, or calendar event — so the things you screenshot don't vanish in your camera roll.
+
+Send a screenshot to Squirrel Brain and the AI reads the text in the image — the date, the time, the task, the name. It turns that into a reminder, a calendar event, or a loud alarm, and it can start a live countdown on your home screen. You review and confirm before anything is set. It is built for messages you can't act on directly, including a company inbox you can't sync.
+
+## Turn voice notes into reminders
+https://squirrelbrainapp.com/voice-note-reminder-app
+
+Voice Note Reminder App — Speak a Thought, Get a Reminder | Squirrel Brain
+
+Turn voice notes into tasks, alarms, and calendar events. Speak a thought — walking, driving, between meetings — and Squirrel Brain turns it into a task, note, alarm, or calendar event, then hands it back exactly when it matters.
+
+Squirrel Brain turns voice notes into tasks, alarms, reminders, and calendar events. Speak a thought on the move and your squirrel hands it back exactly when it matters.
+
+Tap once and talk. Squirrel Brain listens, pulls out the follow-ups, the dates, and the promises, and turns the important parts into things that nudge you later. Ask your squirrel in plain language later and it answers from everything you've captured. If you say a time, it uses it. If you don't, it won't guess silently — it prompts you so a reminder never lands at the wrong moment.
+
+## Turn photos into reminders
+https://squirrelbrainapp.com/photo-to-reminder-app
+
+Photo to Reminder App — Turn Photos Into Searchable Notes | Squirrel Brain
+
+Turn photos into searchable notes and reminders. Take a picture of something that matters — a receipt, a whiteboard, a parking spot, a schedule — and Squirrel Brain reads it, files it, and makes it searchable and actionable.
+
+Take a photo of something important and Squirrel Brain makes it searchable and actionable — receipts, whiteboards, parking spots, serial numbers, and schedules become reminders and notes you can find later.
+
+Squirrel Brain reads text, dates, and details out of the photo, auto-sorts photos onto boards — receipts, meds, schedules, parking — and lets you search by what's in the picture, in plain language. Photos can be stored with a timestamp and GPS location, which is useful as proof of delivery, service, or install for field work. It is just as useful for everyday life: receipts, fridge schedules, parking spots, and handwritten notes.
+
+## Loud reminder app
+https://squirrelbrainapp.com/loud-reminder-app
+
+Loud Reminder App — Hard-to-Miss Reminders & Alarms | Squirrel Brain
+
+A loud reminder app for people who miss quiet notifications. A normal notification is one gray banner in a stack of fifty. For the things you truly can't miss, Squirrel Brain gets loud — with alarms and phone-call-style reminders that ring your phone.
+
+For people who miss quiet notifications. Squirrel Brain sends loud alarms and phone-call-style reminders that ring your phone — so the one thing you can't miss actually reaches you.
+
+You choose which reminders escalate to a loud alarm or a call, and which stay gentle. The big ones get loud; the small ones stay quiet — so the volume always means something.
+
+## Second brain app
+https://squirrelbrainapp.com/second-brain-app
+
+Second Brain App That Takes Action | Squirrel Brain
+
+A second brain that doesn't just store — it acts. Most second-brain apps are a beautiful place to put things and never look at them again. Squirrel Brain captures the way you think and then does something with it.
+
+A practical second brain app that doesn't just store notes — it acts. Squirrel Brain captures voice, photos, and screenshots, then sets reminders, alarms, and calendar events so you actually follow through.
+
+Speak it, snap it, or screenshot it, and Squirrel Brain sets the alarm, adds the calendar event, files the photo, and calls you when something can't slip. Ask in plain language and your squirrel answers from everything you've captured. Through a built-in MCP server, MCP-capable agents — Claude Code, Cursor, or your own — can read your day and set things up on your behalf. Setting up an agent is optional — the app works on its own.
+
+## Reminder app for sales reps
+https://squirrelbrainapp.com/reminder-app-for-sales-reps
+
+Reminder App for Sales Reps & Field Service | Squirrel Brain
+
+The reminder app for sales reps and people on the move. Capture customer follow-ups, equipment photos, serial numbers, meeting notes, and deadlines the moment they happen — and let your squirrel make sure each one gets handled before end of day.
+
+Squirrel Brain helps sales reps and field techs capture customer follow-ups, equipment photos, serial numbers, meeting notes, and deadlines — and turns them into reminders that ring your phone before they slip.
+
+Talk it out and Squirrel Brain captures the follow-up, the date, and the detail before it's gone. Snap what you delivered or installed and it stores a timestamped, GPS-stamped record on the right board. Screenshot a locked-down Outlook event and it becomes a reminder with a live countdown. Every workday opens with a short email of your meetings and open follow-ups, and a 4 PM nudge catches anything still hanging before the drive home. For the follow-up that truly can't slip, your squirrel rings your phone.
+
+## Outlook screenshot reminder
+https://squirrelbrainapp.com/outlook-screenshot-reminder
+
+Outlook Screenshot Reminder App — Never Miss an Outlook Event | Squirrel Brain
+
+Never miss an Outlook event again. When company policy locks down your calendar app and the Outlook reminder fires while your phone is face-down, you miss it. Screenshot the event instead — Squirrel Brain turns it into a reminder you'll actually catch.
+
+If your company Outlook notifications are too quiet or locked down, screenshot the event and Squirrel Brain turns it into a reminder with a live countdown and a hard-to-miss alert.
+
+Take a screenshot of the Outlook event — the title, the time, the room. Squirrel Brain reads the title, date, time, and location, creates the reminder, and starts a live countdown on your home screen. No syncing required. For the meeting you can't be late to, it can escalate from a banner to a loud alarm or a phone-call-style reminder that rings your phone.
+
+## Can ChatGPT set a reminder on my iPhone?
+https://squirrelbrainapp.com/can-chatgpt-set-iphone-reminder
+
+Can ChatGPT Set a Reminder on My iPhone? | Squirrel Brain
+
+Can ChatGPT set a reminder on your iPhone? Short answer: no. ChatGPT and Claude can only nudge you inside their own app — they can't fire a real iPhone alarm or reminder. Squirrel Brain is the app that actually does it: say it, snap it, or forward it, and it becomes a real alarm — even a phone call.
+
+ChatGPT and Claude can't set a real alarm or reminder on your iPhone on their own — their tasks only fire inside their app. Squirrel Brain does the job itself — and MCP-capable agents like Claude Code can drive it directly.
+
+Squirrel Brain has a built-in MCP (Model Context Protocol) server. You generate a personal key in the app, connect an MCP-capable agent — Claude Code, Cursor, or one you run yourself — and it can set an alarm, create a reminder, read your day, file a note, and trigger a phone-call-style reminder on your actual phone. Consumer ChatGPT can't connect custom MCP servers yet. You don't need an AI agent to use the app: speak it, snap it, or screenshot it and it becomes a reminder.
+
+## A reminder app that calls you
+https://squirrelbrainapp.com/reminder-app-that-calls-you
+
+A Reminder App That Calls You — an AI Voice, Not a Banner | Squirrel Brain
+
+A reminder app that actually calls you. Not a banner you swipe away — a real phone call that rings when your ringer's on and vibrates on silent. Pick up and an AI voice talks to you about your day, hypes you up, or walks you through the meeting you're about to walk into.
+
+Squirrel Brain doesn't just remind you — it calls you. It's a real phone call — it rings when your ringer's on and vibrates on silent — and when you pick up, an AI voice actually talks to you: your day, a pep talk, or a quick prep before your next meeting.
+
+It rings on your ringer, vibrates on silent, and shows on a locked screen. An AI voice speaks your reminder and your day — not a canned recording. You can schedule recurring check-in, pep-talk, or daily-encouragement calls, or a prep call before a meeting that covers your key points. You decide which reminders escalate to a call and which stay as a normal nudge.
+
+## Talking reminder app
+https://squirrelbrainapp.com/talking-reminder-app
+
+Talking Reminder App — Reminders That Speak to You Out Loud | Squirrel Brain
+
+The talking reminder app — reminders you hear, not read. Verbal in, verbal out. Say the reminder in plain words, and when it's time your phone rings and an AI voice speaks it to you — not a silent banner you swipe away.
+
+Squirrel Brain is a talking reminder app: say the reminder in plain words, and when it's time an AI voice speaks it to you in a real phone call — it rings when your ringer's on and vibrates on silent.
+
+Tap once and say it. When the moment comes, the reminder returns the same way it went in: out loud. The voice tells you what it called about in plain language — the reminder, what's on your day, or the points you asked it to cover before a meeting. You choose which reminders talk and which stay quiet.
+
+## AI reminder agent
+https://squirrelbrainapp.com/ai-agent-reminder-app
+
+AI Reminder Agent — Let Your Agent Set Real Reminders on Your Phone | Squirrel Brain
+
+The AI reminder agent for your iPhone. Squirrel Brain is the action layer for your AI assistant. Through a built-in MCP server, Claude Code, Cursor, or any agent you run can set real reminders, alarms, and calendar events on your actual phone.
+
+Squirrel Brain turns your AI into a real AI reminder agent: connect Claude Code, Cursor, or any agent you run to its built-in MCP server and it sets real alarms, reminders, and calendar events on your iPhone — and can even call your phone.
+
+Connect your agent with a personal key and it gets a real toolset: set an alarm, create a reminder or note, read your daily brief, save a link, append to a forever note, and trigger a phone-call-style reminder — every action logged to the agent that made it. Nothing happens without the key you generate in the app, and you can revoke access any time. The app also works fully on its own. Connecting an agent is optional.
+
+## Reminder app for field service
+https://squirrelbrainapp.com/reminder-app-for-field-service
+
+Reminder App for Field Service Techs & Contractors | Squirrel Brain
+
+The reminder app for field service techs and contractors. Capture the job between stops, get a reminder loud enough to actually catch, and keep timestamped, GPS-stamped photo proof of every site — all in one app.
+
+Squirrel Brain captures the job, reminds you loud enough to catch, and keeps GPS-stamped photo proof — all in one app for field service techs, contractors, and installers.
+
+Talk it out or snap a photo and Squirrel Brain reads it, logs the detail, and sets the reminder before you've pulled out of the driveway. Snap what you installed, delivered, or serviced and it stores it with a timestamp and GPS location on the right board. For jobs that can't slip, it can ring your phone with a phone-call-style reminder instead of a quiet banner.
+
+## Reminder app for busy parents
+https://squirrelbrainapp.com/reminder-app-for-parents
+
+Reminder App for Busy Parents — Snap It, Don't Forget It | Squirrel Brain
+
+The reminder app for busy parents. Permission slips, soccer schedules, party invites, school flyers — snap a photo and Squirrel Brain turns it into a reminder and a calendar event, so the thing on the fridge doesn't become the thing you forgot.
+
+Snap the permission slip, the flyer, the field-trip date — Squirrel Brain turns it into a reminder and calendar event so busy parents never miss the things scattered across backpacks, texts, and the fridge.
+
+Take a picture of the slip, the flyer, or the schedule and Squirrel Brain reads the dates and details, sets the reminders, and adds the calendar events. Snap a soccer schedule and every game can become an alarm. Receipts, the field-trip form, and the birthday party address sort onto boards so later you just ask instead of scrolling. For the things you truly can't miss, it can ring your phone.
+
+## Daily pep-talk and encouragement calls
+https://squirrelbrainapp.com/daily-pep-talk-call-app
+
+An App That Calls You With a Daily Pep Talk or Scripture | Squirrel Brain
+
+A real call that talks you through your day. Ask your squirrel to call you a couple times a day — and an AI voice picks up with a pep talk, an encouraging word or scripture, a prep before your big meeting, or the thing you can't forget. A real phone call that rings when your ringer's on and vibrates on silent.
+
+Squirrel Brain can call your phone on a schedule and an AI voice gives you a pep talk, a daily word of encouragement or scripture, a prep before a big meeting, or a reminder you can't miss.
+
+You pick the schedule — once or twice a day — and what you want to hear: a daily scripture, an affirmation, a few encouraging words, a recap of your day, a meeting prep, or a specific reminder. It isn't a text you scroll past. When you pick up, an AI voice talks to you in plain language.
+
+## A daily Bible verse by phone call
+https://squirrelbrainapp.com/daily-bible-verse-call
+
+An App That Calls You With a Daily Bible Verse | Squirrel Brain
+
+A morning call with a Bible verse — not another app to open. Devotional apps wait for you to remember them. Squirrel Brain calls you: every morning your phone rings, and a warm voice reads a verse and a short word of encouragement to start your day. A real phone call that rings when your ringer's on and vibrates on silent.
+
+Squirrel Brain calls your phone each morning and an AI voice reads you a Bible verse and a word of encouragement — a real phone call, so your daily verse actually reaches you.
+
+You pick the time — every morning, midday, or both. A real voice reads the verse to you; nothing to open, nothing to scroll. Tell it what you want to hear: a verse and a short encouragement, a morning prayer prompt, or a word for what you're carrying. It does not replace a devotional or reading plan — it is the nudge that gets the day started. The same app is a full second brain: speak a thought, snap a photo, or screenshot a text and it becomes reminders, notes, and calendar events.

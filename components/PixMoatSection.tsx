@@ -218,7 +218,7 @@ export default function PixMoatSection() {
                   className="relative rounded-2xl overflow-hidden"
                   style={{ border: "4px solid #2a2018", boxShadow: "0 16px 34px rgba(0,0,0,0.45)" }}
                 >
-                  <Image src="/assets/camera_roll_mess.webp" alt="" width={560} height={932} className="w-full h-auto" />
+                  <Image src="/assets/camera_roll_mess.webp" alt="A crowded camera roll of documents, a whiteboard, food, and outdoor shots" width={560} height={932} className="w-full h-auto" />
                   <div className="absolute top-1.5 left-1.5 rounded-md px-2 py-0.5" style={{ background: "rgba(0,0,0,0.6)" }}>
                     <span className="text-[10px] font-bold tracking-wide" style={{ color: "rgba(255,245,232,0.92)" }}>BURIED</span>
                   </div>
