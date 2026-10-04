@@ -276,7 +276,7 @@ export default function McpPage() {
           <div className="max-w-6xl mx-auto px-6 lg:px-12">
             <FadeIn>
               <div className="text-center max-w-2xl mx-auto mb-14">
-                <p className="text-xs font-bold tracking-widest uppercase text-accent mb-3">The two things agents can&rsquo;t do alone</p>
+                <p className="text-xs font-bold tracking-widest uppercase text-accent mb-3">The two things agents can't do alone</p>
                 <h2
                   id="mcp-moat-heading"
                   className="font-display font-extrabold text-ink text-balance"
