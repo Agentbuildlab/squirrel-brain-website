@@ -2,7 +2,7 @@
 
 Need a hand? Email us at **[hello@squirrelbrainapp.com](mailto:hello@squirrelbrainapp.com)**. We read every message and reply within 2 business days (privacy and data requests within 30 days).
 
-Squirrel Brain is made by Acorn Labs LLC, 116 Agnes Rd, Suite 200, Knoxville, TN 37919, USA.
+Squirrel Brain is made by Acorn Labs LLC.
 
 When you write, tell us your iPhone model, iOS version and the Squirrel Brain version (Settings > the version shown at the bottom). A screenshot helps a lot. Please do not send passwords or full card numbers.
 
