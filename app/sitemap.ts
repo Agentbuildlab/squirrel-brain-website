@@ -15,6 +15,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/demos", priority: 0.7 },
     { path: "/pricing", priority: 0.7 },
     { path: "/mcp-docs", priority: 0.6 },
+    { path: "/support", priority: 0.5 },
+    { path: "/privacy", priority: 0.4 },
+    { path: "/terms", priority: 0.4 },
   ];
   // A real date (bump when content meaningfully changes). `new Date()` here
   // made every URL claim it changed "today" on every crawl, which search

@@ -278,16 +278,22 @@ export default function Footer() {
 
             <div className="mt-6 flex flex-wrap gap-4">
               <Link
-                href="/legal/privacy-policy"
+                href="/privacy"
                 className="text-xs text-muted hover:text-ink transition-colors"
               >
                 Privacy Policy
               </Link>
               <Link
-                href="/legal/terms-of-use"
+                href="/terms"
                 className="text-xs text-muted hover:text-ink transition-colors"
               >
                 Terms of Use
+              </Link>
+              <Link
+                href="/support"
+                className="text-xs text-muted hover:text-ink transition-colors"
+              >
+                Support
               </Link>
               <Link
                 href="/mcp-docs"
