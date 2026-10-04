@@ -7,7 +7,11 @@ import CtaButton from "@/components/CtaButton";
 import { WAITLIST_HREF } from "@/lib/config";
 
 export const metadata: Metadata = {
-  title: "The MCP memory + delivery layer for your AI agents | Squirrel Brain",
+  // `absolute` bypasses the root "%s — Squirrel Brain" template. This title
+  // already names the brand, so the template would append it a second time.
+  title: {
+    absolute: "The MCP memory + delivery layer for your AI agents | Squirrel Brain",
+  },
   description:
     "Squirrel Brain is an MCP server that gives your AI agents a persistent shared brain and a real line to your phone — set alarms, read your day, file what they find, and place an actual voice call. Works with Claude Code, Cursor, or any agent you run.",
   alternates: { canonical: "/mcp" },
