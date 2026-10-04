@@ -10,6 +10,7 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import FadeIn from "@/components/FadeIn";
 import CtaButton from "@/components/CtaButton";
+import TopWaitlistCta from "@/components/TopWaitlistCta";
 import CallDemoSection from "@/components/CallDemoSection";
 import { LANDING_DEMO_THEME } from "@/lib/demoVoices";
 import { PhoneShot } from "@/components/v2/PhoneKit";
@@ -107,18 +108,16 @@ export default function LandingPage({ slug }: { slug: string }) {
                 </p>
               </FadeIn>
               <FadeIn immediate delay={0.2}>
-                <div className="flex flex-wrap items-center gap-4">
-                  <CtaButton size="lg" />
-                  <Link
-                    href="/demos"
-                    className="text-sm font-semibold text-muted hover:text-ink transition-colors inline-flex items-center gap-1.5"
-                  >
-                    Watch it work
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                      <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                  </Link>
-                </div>
+                <TopWaitlistCta />
+                <Link
+                  href="/demos"
+                  className="mt-4 text-sm font-semibold text-muted hover:text-ink transition-colors inline-flex items-center gap-1.5"
+                >
+                  Watch it work
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                    <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </Link>
               </FadeIn>
             </div>
             <FadeIn immediate from="right" delay={0.1} className="flex justify-center lg:justify-end">

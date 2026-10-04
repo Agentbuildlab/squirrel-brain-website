@@ -110,22 +110,22 @@ Most reminder apps make you stop, type, and set a time. Squirrel Brain meets you
 ## Turn screenshots into reminders
 https://squirrelbrainapp.com/screenshot-to-reminder-app
 
-Screenshot to Reminder App — Turn Screenshots Into Reminders | Squirrel Brain
+Alarm Screenshot — Screenshot to Alarm or Reminder | Squirrel Brain
 
-Turn screenshots into reminders. Screenshot a text, an email, an appointment, or a to-do — Squirrel Brain reads it and turns it into a reminder, alarm, or calendar event so it never gets buried in your camera roll.
+Turn a screenshot into an alarm or reminder. Screenshot a text, an email, an appointment, or a to-do — Squirrel Brain reads it and turns it into a reminder, alarm, or calendar event so it never gets buried in your camera roll.
 
-Screenshot a text, email, appointment, or to-do and Squirrel Brain turns it into a reminder, alarm, or calendar event — so the things you screenshot don't vanish in your camera roll.
+Alarm screenshot: screenshot a text, email, appointment, or to-do and Squirrel Brain turns it into a reminder, alarm, or calendar event — so the things you screenshot don't vanish in your camera roll.
 
 Send a screenshot to Squirrel Brain and the AI reads the text in the image — the date, the time, the task, the name. It turns that into a reminder, a calendar event, or a loud alarm, and it can start a live countdown on your home screen. You review and confirm before anything is set. It is built for messages you can't act on directly, including a company inbox you can't sync.
 
 ## Turn voice notes into reminders
 https://squirrelbrainapp.com/voice-note-reminder-app
 
-Voice Note Reminder App — Speak a Thought, Get a Reminder | Squirrel Brain
+Voice Reminder App — Speak a Thought, Get a Reminder | Squirrel Brain
 
-Turn voice notes into tasks, alarms, and calendar events. Speak a thought — walking, driving, between meetings — and Squirrel Brain turns it into a task, note, alarm, or calendar event, then hands it back exactly when it matters.
+The voice reminder app — speak it, get a reminder. Speak a thought — walking, driving, between meetings — and Squirrel Brain turns it into a task, note, alarm, or calendar event, then hands it back exactly when it matters.
 
-Squirrel Brain turns voice notes into tasks, alarms, reminders, and calendar events. Speak a thought on the move and your squirrel hands it back exactly when it matters.
+A voice reminder app for iPhone. Squirrel Brain turns voice notes into tasks, alarms, reminders, and calendar events. Speak a thought on the move and your squirrel hands it back exactly when it matters.
 
 Tap once and talk. Squirrel Brain listens, pulls out the follow-ups, the dates, and the promises, and turns the important parts into things that nudge you later. Ask your squirrel in plain language later and it answers from everything you've captured. If you say a time, it uses it. If you don't, it won't guess silently — it prompts you so a reminder never lands at the wrong moment.
 
@@ -143,11 +143,11 @@ Squirrel Brain reads text, dates, and details out of the photo, auto-sorts photo
 ## Loud reminder app
 https://squirrelbrainapp.com/loud-reminder-app
 
-Loud Reminder App — Hard-to-Miss Reminders & Alarms | Squirrel Brain
+Loud Reminder — Hard-to-Miss Alarms That Ring Your Phone | Squirrel Brain
 
-A loud reminder app for people who miss quiet notifications. A normal notification is one gray banner in a stack of fifty. For the things you truly can't miss, Squirrel Brain gets loud — with alarms and phone-call-style reminders that ring your phone.
+A loud reminder for people who miss quiet notifications. A normal notification is one gray banner in a stack of fifty. For the things you truly can't miss, Squirrel Brain gets loud — with alarms and phone-call-style reminders that ring your phone.
 
-For people who miss quiet notifications. Squirrel Brain sends loud alarms and phone-call-style reminders that ring your phone — so the one thing you can't miss actually reaches you.
+A loud reminder for people who miss quiet notifications. Squirrel Brain sends loud alarms and phone-call-style reminders that ring your phone — so the one thing you can't miss actually reaches you.
 
 You choose which reminders escalate to a loud alarm or a call, and which stay gentle. The big ones get loud; the small ones stay quiet — so the volume always means something.
 
@@ -271,3 +271,25 @@ A morning call with a Bible verse — not another app to open. Devotional apps w
 Squirrel Brain calls your phone each morning and an AI voice reads you a Bible verse and a word of encouragement — a real phone call, so your daily verse actually reaches you.
 
 You pick the time — every morning, midday, or both. A real voice reads the verse to you; nothing to open, nothing to scroll. Tell it what you want to hear: a verse and a short encouragement, a morning prayer prompt, or a word for what you're carrying. It does not replace a devotional or reading plan — it is the nudge that gets the day started. The same app is a full second brain: speak a thought, snap a photo, or screenshot a text and it becomes reminders, notes, and calendar events.
+
+## ADHD reminders that call you
+https://squirrelbrainapp.com/adhd-reminder-app
+
+ADHD Reminders That Call You | Squirrel Brain
+
+ADHD reminders that call you. Not a banner you swipe away — a real phone call that rings when your ringer's on and vibrates on silent. Pick up and an AI voice talks to you. Squirrel Brain does not diagnose or treat ADHD.
+
+ADHD reminders that call you means a real phone call, not a treatment. Squirrel Brain does not diagnose or treat ADHD. For the one thing you can't miss, it places a real phone call that rings when your ringer's on, vibrates on silent, and reaches you on a locked screen.
+
+A banner you don't see is not a reminder. For things you can't miss, Squirrel Brain places a real phone call. When you answer, an AI voice talks with you — your day, a pep talk, or a prep call before a meeting — and you can talk right back. Not a canned recording. You choose which reminders escalate to a call and which stay gentle. iPhone only. Pre-launch — join the launch list.
+
+## Live call assistant for reminders
+https://squirrelbrainapp.com/live-call-assistant-reminders
+
+Live Call Assistant for Reminders | Squirrel Brain
+
+A live call assistant for reminders. Squirrel Brain places a real phone call for the reminder you can't miss. When you answer, it's a live two-way conversation — an AI voice talks with you, and you can talk right back. Not a canned recording.
+
+A live call assistant for reminders: Squirrel Brain places a real phone call that rings when your ringer's on, vibrates on silent, and reaches you on a locked screen. When you answer, it's a live two-way conversation — an AI voice talks with you, and you can talk right back.
+
+Answer it and you're not just listening — you talk back. Tell it to move the meeting, add a note, or walk you through your day, and it handles it on the call. You can also call it back and ask, or have it call you. You pick what it says and which reminders are worth a call. iPhone only. Pre-launch — join the launch list.

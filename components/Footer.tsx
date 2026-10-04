@@ -3,16 +3,10 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import posthog from "posthog-js";
+import { REF_STORAGE_KEY, submitLaunchSignup, type LaunchSignupResponse } from "@/components/waitlistSignup";
 
 // Referral state shape returned by /api/launch-signup (see lib/referral.ts).
-type SignupResult = {
-  position?: number | null;
-  referrals?: number;
-  referralCode?: string;
-  referralUrl?: string;
-};
-
-const REF_STORAGE_KEY = "sb_ref";
+type SignupResult = LaunchSignupResponse;
 
 export default function Footer() {
   const [email, setEmail] = useState("");
@@ -69,46 +63,20 @@ export default function Footer() {
     if (status === "loading") return;
     setStatus("loading");
     setMessage("");
-    try {
-      let ref: string | null = null;
-      try {
-        ref = localStorage.getItem(REF_STORAGE_KEY);
-      } catch {
-        /* no storage */
-      }
-      const res = await fetch("/api/launch-signup", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, website, ...(ref ? { ref } : {}) }),
-      });
-      const data = await res.json().catch(() => ({}));
-      if (res.ok) {
-        // Conversion event — tie the signup to a PostHog person (identified_only)
-        // and record the waitlist join for funnels.
-        if (email) posthog.identify(email, { email });
-        // source_path = which page converted this visitor — the per-segment
-        // scoreboard for the "one design, many segments" experiment.
-        posthog.capture("waitlist_signup", {
-          already: !!data.already,
-          source_path: typeof window !== "undefined" ? window.location.pathname : "unknown",
-          position: data.position ?? null,
-          referred: !!(typeof window !== "undefined" && localStorage.getItem(REF_STORAGE_KEY)),
-        });
-        setResult(data);
-        setStatus("done");
-        setMessage(
-          data.already
-            ? "You're already on the list — we'll be in touch the moment it's ready."
-            : "You're on the list! We'll email you the moment Squirrel Brain is ready."
-        );
-        setEmail("");
-      } else {
-        setStatus("error");
-        setMessage(data.error || "Something went wrong. Please try again.");
-      }
-    } catch {
+    const outcome = await submitLaunchSignup(email, website);
+    if (outcome.ok) {
+      // `waitlist_signup` (with this page's path) is captured inside submitLaunchSignup.
+      setResult(outcome.data);
+      setStatus("done");
+      setMessage(
+        outcome.data.already
+          ? "You're already on the list — we'll be in touch the moment it's ready."
+          : "You're on the list! We'll email you the moment Squirrel Brain is ready."
+      );
+      setEmail("");
+    } else {
       setStatus("error");
-      setMessage("Something went wrong. Please try again.");
+      setMessage(outcome.error);
     }
   }
 
@@ -178,6 +146,12 @@ export default function Footer() {
               </Link>
               <Link href="/reminder-app-that-calls-you" className="text-sm text-muted hover:text-ink transition-colors">
                 Reminder app that calls you
+              </Link>
+              <Link href="/adhd-reminder-app" className="text-sm text-muted hover:text-ink transition-colors">
+                ADHD reminders that call you
+              </Link>
+              <Link href="/live-call-assistant-reminders" className="text-sm text-muted hover:text-ink transition-colors">
+                Live call assistant for reminders
               </Link>
               <Link href="/talking-reminder-app" className="text-sm text-muted hover:text-ink transition-colors">
                 Talking reminder app
