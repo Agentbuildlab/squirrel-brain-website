@@ -44,6 +44,7 @@ Squirrel Brain runs a hosted, remote MCP server.
 - Auth: the user generates a personal key in the iOS app (Settings → API keys; starts with `sb_`) and supplies it as the `X-API-Key` header.
 - Compatibility: any MCP client that can send a custom header — Claude Code, Claude Desktop, Cursor, or a self-hosted agent. Consumer ChatGPT cannot connect custom MCP servers yet.
 - Connect details and the complete tool list: https://squirrelbrainapp.com/mcp and https://squirrelbrainapp.com/mcp-docs
+- Server card (static, machine-readable): https://squirrelbrainapp.com/.well-known/mcp/server-card.json
 
 Once connected, an agent can, on the user's behalf:
 - set a real alarm or reminder on the user's iPhone
