@@ -504,6 +504,7 @@
         <li><a href="#session-start">Session start sequence</a></li>
         <li><a href="#tools">All 31 tools — full reference</a></li>
         <li><a href="#flyer-tools-draft">Coming soon (DRAFT) — flyer smoke-check tools</a></li>
+        <li><a href="#flyer-ship-order">Ship order (planned) — still draft</a></li>
         <li><a href="#examples">curl examples</a></li>
         <li><a href="#checklist">Getting started checklist</a></li>
         <li><a href="#agent-configs">Copy-paste agent configs</a></li>
@@ -964,6 +965,15 @@
         <p>Param names below are the planned contract from Squirrel Brain. They may tighten when the portal ships. When the tools are live, this banner comes off and the tools move into the live WRITE table and the server card. They are not in either place today. These docs are not a shipped tool.</p>
       </div>
 
+      <h3 id="flyer-ship-order">Ship order (planned)</h3>
+      <p>Still <strong>DRAFT / coming soon</strong>. This is the order these pieces are planned to ship. Nothing here is live, and nothing here is in the live tool table or the server card, until Squirrel Brain confirms the names in <code>tools/list</code>.</p>
+      <ol class="checklist">
+        <li><span class="step-num">1</span><div><strong>Location field + GPS ban.</strong> Structured location <code>{title, address, latitude, longitude}</code>. The Maps Location pin is the venue or ballpark address from the flyer. Never the phone&rsquo;s home, captured GPS, or <code>captured_location</code> where the photo was taken.</div></li>
+        <li><span class="step-num">2</span><div><strong>dry_run / verify / idempotency.</strong> <code>dry_run</code> on ingest. <code>verify_flyer_events</code>. Create-new only (no backfill rewrite). Tag + cleanup: store a <code>tag</code> so verify can filter, then delete or cancel those tagged smoke items after a passing verify (existing delete/cancel tools; there is no cleanup parameter). Stop on verify fail (no re-ingest loop). One flyer at a time under spend caps.</div></li>
+        <li><span class="step-num">3</span><div><strong>Signed-URL <code>ingest_flyer</code>.</strong> Primary path (A): picture &rarr; upload &rarr; signed blob or allowlisted storage/CDN <code>image_url</code> &rarr; <code>ingest_flyer</code> &rarr; <code>verify_flyer_events</code> against that image. Not arbitrary HTTPS (SSRF guard). Size and type caps. Agents upload first.</div></li>
+        <li><span class="step-num">4</span><div><strong>Structured errors + EventKit readback.</strong> Ingest and verify return structured pass/fail errors. Verification is against EventKit / calendar readback (wall-clock + <code>timeZone</code> + structured location), not a title-only match.</div></li>
+      </ol>
+
       <p>Planned pair for flyer smoke checks: ingest a <strong>flyer picture</strong> into new calendar items with a real structured location, then verify wall-clock time (including DST), location shape, and that the write stayed inside caps. Auth is the same MCP API key as every other write tool (<code>X-API-Key: sb_…</code>). No anonymous access. No special flyer auth.</p>
 
       <h3><code>ingest_flyer</code> — planned write</h3>
@@ -1070,7 +1080,7 @@
       </table>
 
       <div class="info-box">
-        <strong>Planned return, per event:</strong> pass or fail, plus these checks — <code>wall_clock_match</code> (including DST), <code>no_invented_tba</code>, <code>location_match</code> (structured location), <code>notes_vs_title</code>, and <code>searchable</code>. A pass has to assert wall-clock time, structured location, and <code>timeZone</code>. Title-only match is not a pass.
+        <strong>Planned return, per event:</strong> structured pass/fail errors, plus these checks — <code>wall_clock_match</code> (including DST), <code>no_invented_tba</code>, <code>location_match</code> (structured location), <code>notes_vs_title</code>, and <code>searchable</code>. Verification is against EventKit / calendar readback (wall-clock + <code>timeZone</code> + structured location). Title-only match is not a pass.
       </div>
 
       <h3>Primary path (A) — picture &rarr; signed/allowlisted image_url &rarr; ingest_flyer</h3>
