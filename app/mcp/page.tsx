@@ -387,8 +387,8 @@ export default function McpPage() {
                   Coming soon (DRAFT)
                 </p>
                 <p className="text-sm leading-relaxed" style={{ color: "rgba(255,245,232,0.88)" }}>
-                  <span className="font-mono">ingest_flyer</span> and <span className="font-mono">verify_flyer_events</span>{" "}
-                  are a planned flyer smoke check with a structured location — see the{" "}
+                  <span className="font-mono">ingest_flyer</span> takes a flyer photo (<span className="font-mono">image_url</span>) plus optional pasted text, and{" "}
+                  <span className="font-mono">verify_flyer_events</span> checks it — a planned flyer-picture smoke check with a structured location, not text-only. See the{" "}
                   <a href="/mcp-docs#flyer-tools-draft" style={{ color: "#FF7A1A" }} className="hover:underline">
                     draft contract
                   </a>
