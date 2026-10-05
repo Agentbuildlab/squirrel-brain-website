@@ -968,7 +968,7 @@
 
       <h3><code>ingest_flyer</code> — planned write</h3>
       <div class="info-box" style="border-left:4px solid #c2410c;background:#fff6f0;">
-        <strong>Primary input is a flyer picture, not text-only.</strong> Pass <code>image_url</code>: an HTTPS URL to the photo of the flyer. Pasted OCR / <code>flyer_text</code> is optional and secondary, only when you already have the text. At least one of <code>image_url</code> or <code>flyer_text</code> is still required. Do not treat a text-only call as the main path.
+        <strong>Primary input is a flyer picture, not text-only, and <code>image_url</code> is not arbitrary HTTPS.</strong> Upload the flyer picture first, then pass <code>image_url</code>. Only two forms are accepted: (1) a pre-uploaded <strong>signed blob URL</strong>, or (2) an <strong>allowlisted host</strong> (Squirrel Brain storage/CDN only). Any other host is rejected — that is the SSRF guard. Pasted OCR / <code>flyer_text</code> is optional and secondary, only when you already have the text. At least one of <code>image_url</code> or <code>flyer_text</code> is still required. Do not treat a text-only call as the main path.
       </div>
       <p>Ingest a flyer picture (<code>image_url</code>) and create new calendar items for the events on it. Times go through <code>resolveWallClock</code> plus the user <code>timeZone</code> (DST-safe on a build that includes that write path). Location is a structured object only. This tool creates new items; it does not backfill or rewrite events that are already saved.</p>
       <p><strong>Auth:</strong> same MCP API key as other write tools. No anonymous key.</p>
@@ -983,7 +983,7 @@
         <tbody>
           <tr>
             <td class="tool-params"><span class="tag-opt">image_url</span></td>
-            <td class="tool-desc"><strong>Flyer picture (photo of the flyer).</strong> String. Primary input: HTTPS URL of the flyer picture the agent already uploaded or hosted. Reject oversize images per existing MCP image limits. At least one of <code>image_url</code> or <code>flyer_text</code> is required. This tool is not text-only.</td>
+            <td class="tool-desc"><strong>Flyer picture (photo of the flyer).</strong> String. Not arbitrary HTTPS. Upload the flyer picture first, then pass the returned URL. Accepted only as (1) a pre-uploaded signed blob URL, or (2) an allowlisted host (Squirrel Brain storage/CDN only). Other hosts are rejected (SSRF guard). Reject oversize images and non-flyer blobs per existing MCP image limits. At least one of <code>image_url</code> or <code>flyer_text</code> is required. Primary path is the picture, not text-only.</td>
           </tr>
           <tr>
             <td class="tool-params"><span class="tag-opt">flyer_text</span></td>
@@ -1008,7 +1008,7 @@
         <strong>Planned behavior:</strong><br>
         Never invent a time. If the flyer says TBA, store a null time and the label &ldquo;No time, tap to set&rdquo;.<br>
         Uses <code>resolveWallClock</code> + <code>timeZone</code> so wall-clock stays DST-safe on a build that includes that write path. Older binaries still corrupt November-and-later times. Do not treat a printed local time as UTC.<br>
-        Location is the structured object below — never a single free-text string.<br>
+        Location is the structured object below — never a single free-text string. The Maps Location pin is the venue or ballpark address printed on the flyer. Never the phone&rsquo;s home, captured GPS, or <code>captured_location</code> of where the photo was taken.<br>
         Keep the title clean. Put extras in notes.<br>
         Maker / agent attribution follows the same write path as other tools (the <code>X-Agent-Name</code> header, or the stable agent id if you omit it).<br>
         Flyer AI sits under the existing per-user and fleet spend caps.<br>
@@ -1017,7 +1017,7 @@
       </div>
 
       <h3>Structured <code>location</code> only</h3>
-      <p>When a location is present, this object is the only accepted shape. Never pass one unstructured free-text string as the whole location. Omit unknown fields. Do not invent coordinates. An address alone is enough for Maps when coordinates are unknown. Do not scrape contacts or photos into events. If the flyer only has a venue name, set <code>title</code> and leave <code>address</code>, <code>latitude</code>, and <code>longitude</code> null or omitted.</p>
+      <p>When a location is present, this object is the only accepted shape. Never pass one unstructured free-text string as the whole location. The Maps Location pin is the venue or ballpark address on the flyer — never the phone&rsquo;s home, captured GPS, or <code>captured_location</code> where the photo was taken. Omit unknown fields. Do not invent coordinates. An address alone is enough for Maps when coordinates are unknown. Do not scrape contacts or photos into events. If the flyer only has a venue name, set <code>title</code> and leave <code>address</code>, <code>latitude</code>, and <code>longitude</code> null or omitted.</p>
       <div class="code-label">Required location shape</div>
       <div class="code-block">{
   "title": "string | null",
@@ -1048,7 +1048,7 @@
         <tbody>
           <tr>
             <td class="tool-params"><span class="tag-opt">image_url</span></td>
-            <td class="tool-desc"><strong>Flyer picture (photo of the flyer).</strong> String. Primary source of truth: the same HTTPS flyer picture passed to <code>ingest_flyer</code>. One of <code>image_url</code>, <code>flyer_text</code>, or <code>expected_events</code> is required as that source. Put <code>image_url</code> first. Not a text-only check.</td>
+            <td class="tool-desc"><strong>Flyer picture (photo of the flyer).</strong> String. Primary source of truth: the same signed or allowlisted <code>image_url</code> passed to <code>ingest_flyer</code> (not arbitrary HTTPS). One of <code>image_url</code>, <code>flyer_text</code>, or <code>expected_events</code> is required as that source. Put <code>image_url</code> first. Not a text-only check.</td>
           </tr>
           <tr>
             <td class="tool-params"><span class="tag-opt">flyer_text</span></td>
@@ -1073,6 +1073,29 @@
         <strong>Planned return, per event:</strong> pass or fail, plus these checks — <code>wall_clock_match</code> (including DST), <code>no_invented_tba</code>, <code>location_match</code> (structured location), <code>notes_vs_title</code>, and <code>searchable</code>. A pass has to assert wall-clock time, structured location, and <code>timeZone</code>. Title-only match is not a pass.
       </div>
 
+      <h3>Primary path (A) — picture &rarr; signed/allowlisted image_url &rarr; ingest_flyer</h3>
+      <div class="info-box" style="border-left:4px solid #c2410c;background:#fff6f0;">
+        <strong>Locked primary path (DRAFT / coming soon):</strong> picture &rarr; signed/allowlisted <code>image_url</code> &rarr; <code>ingest_flyer</code>.<br>
+        <code>image_url</code> is <strong>not</strong> arbitrary HTTPS. Only (1) pre-uploaded signed blob URLs, or (2) allowlisted hosts (Squirrel Brain storage/CDN only). Agents must <strong>upload the flyer picture first</strong>, then call <code>ingest_flyer</code> with that <code>image_url</code>. Other hosts are rejected (SSRF guard). Oversize images and non-flyer blobs are rejected.<br>
+        <code>flyer_text</code> stays optional secondary when OCR text is already available. Do not present text-only as the main path.<br>
+        Email-to-portal is Phase 2 / coming later — not in this draft, and not the primary path.
+      </div>
+      <ol class="checklist">
+        <li><span class="step-num">1</span><div><strong>Upload the flyer picture &rarr; signed or allowlisted HTTPS image URL.</strong> Take a photo of the flyer, upload it, and use only the signed blob URL you get back, or a URL on an allowlisted Squirrel Brain storage/CDN host. Do not pass any other HTTPS URL.</div></li>
+        <li><span class="step-num">2</span><div><strong><code>ingest_flyer(image_url)</code>.</strong> Pass that <code>image_url</code>. <code>dry_run: true</code> is optional first (parse only, no writes).</div></li>
+        <li><span class="step-num">3</span><div><strong>Full calendar events, like an app scan.</strong> A write creates the events with a structured location, times, and notes. The Maps pin is the venue or ballpark address on the flyer, never the phone&rsquo;s home, captured GPS, or <code>captured_location</code>.</div></li>
+        <li><span class="step-num">4</span><div><strong><code>verify_flyer_events</code> against that same image.</strong> Pass the same signed or allowlisted <code>image_url</code>. A pass still requires wall-clock time, structured location, and <code>timeZone</code>.</div></li>
+      </ol>
+      <div class="info-box">
+        <strong>Rules on primary path (A):</strong><br>
+        Maps Location pin = venue or ballpark address from the flyer. Never the phone&rsquo;s home, captured GPS, or <code>captured_location</code> where the photo was taken.<br>
+        TBA = no invented time (null time / &ldquo;No time, tap to set&rdquo;).<br>
+        DST wall-clock via <code>resolveWallClock</code> + <code>timeZone</code>. Do not call this safe for smoke until the running build includes that write path.<br>
+        Flyer / OCR AI sits under the existing per-user and fleet spend caps.<br>
+        Auth is the same MCP API key as other write tools (<code>X-API-Key: sb_…</code>). No anonymous access. No special flyer auth.<br>
+        SSRF guard: <code>image_url</code> must be a pre-uploaded signed blob URL or an allowlisted Squirrel Brain storage/CDN host. Reject oversize and non-flyer blobs.
+      </div>
+
       <h3>Flyer smoke-check how-to</h3>
       <p>Run this only after <code>tools/list</code> actually contains these names, and only on a build Squirrel Brain confirms includes the DST <code>resolveWallClock</code> write path. Until then, read the contract and stop.</p>
       <ol class="checklist">
@@ -1080,16 +1103,16 @@
         <li><span class="step-num">2</span><div><strong>Spend and rate caps.</strong> Treat a flyer ingest that writes (not a dry run) like Alarm creates plus Write (items) on the <a href="#rate-limits">Rate Limits</a> table. Flyer AI also counts against the existing per-user and fleet spend caps. One flyer smoke is a few creates at most. Prefer <code>dry_run: true</code> first. One flyer at a time. Do not loop ingest, and do not run an uncapped batch overnight. Stop on rate-limit errors; do not retry-storm.</div></li>
         <li><span class="step-num">3</span><div><strong>DST and wall-clock.</strong> Call <code>get_user_profile</code> first. Pass IANA <code>timezone</code> only to override that profile; otherwise leave it off. Call <code>get_current_time</code> so you are not guessing &ldquo;now&rdquo;. The write path uses <code>resolveWallClock</code> plus <code>timeZone</code>. Never assume the flyer&rsquo;s printed local time is UTC. Never invent a time: TBA becomes a null time and &ldquo;No time, tap to set&rdquo;. After create, <code>verify_flyer_events</code> must show the stored wall clock matches that timezone across DST boundaries.</div></li>
         <li><span class="step-num">4</span><div><strong>Structured location only.</strong> Use the object with <code>title</code>, <code>address</code>, <code>latitude</code>, and <code>longitude</code>. Never stuff a paragraph into a string <code>location</code>. Reject or repair a free-text-only location before calling. Omit unknown fields and do not invent coordinates. Address alone is enough for Maps when coordinates are unknown. No contacts or photos scraped into events. Title stays clean; extras go in notes.</div></li>
-        <li><span class="step-num">5</span><div><strong>Smoke sequence.</strong> Dedicated test calendar, or clearly named test events only — never Adam&rsquo;s real calendar. Main path is a flyer picture, not text-only. Then: <code>get_user_profile</code> and <code>get_current_time</code> &rarr; <code>ingest_flyer</code> with <code>image_url</code> first (HTTPS URL of the flyer photo) and <code>dry_run: true</code> &rarr; review the parse &rarr; <code>ingest_flyer</code> once with writes on (<code>dry_run</code> left false), the same <code>image_url</code>, and a <code>tag</code> such as <code>[QA-184]</code>. Add <code>flyer_text</code> only if you already have OCR. &rarr; <code>verify_flyer_events</code> with that same <code>image_url</code> first, plus the tag (and <code>item_ids</code> when you have them). Require wall-clock time, structured location, and <code>timeZone</code>. After a passing verify, delete or cancel the smoke items with the existing delete and cancel tools (there is no cleanup parameter on these tools) and confirm zero residue with <code>list_alarms</code> and <code>list_items</code>, filtered by the tag. Ingest is create-new only. No <code>cell_alert</code> or notify unless the user asks.</div></li>
+        <li><span class="step-num">5</span><div><strong>Smoke sequence.</strong> Dedicated test calendar, or clearly named test events only — never Adam&rsquo;s real calendar. Follow primary path (A): picture &rarr; signed/allowlisted <code>image_url</code> &rarr; <code>ingest_flyer</code>. Not arbitrary HTTPS, and not text-only. Then: upload the flyer picture and take the signed or allowlisted URL &rarr; <code>get_user_profile</code> and <code>get_current_time</code> &rarr; <code>ingest_flyer</code> with that <code>image_url</code> and <code>dry_run: true</code> &rarr; review the parse &rarr; <code>ingest_flyer</code> once with writes on (<code>dry_run</code> left false), the same <code>image_url</code>, and a <code>tag</code> such as <code>[QA-184]</code>. Add <code>flyer_text</code> only if you already have OCR. &rarr; <code>verify_flyer_events</code> against that same image, plus the tag (and <code>item_ids</code> when you have them). Require wall-clock time, structured location, and <code>timeZone</code>. After a passing verify, delete or cancel the smoke items with the existing delete and cancel tools (there is no cleanup parameter on these tools) and confirm zero residue with <code>list_alarms</code> and <code>list_items</code>, filtered by the tag. Ingest is create-new only. No <code>cell_alert</code> or notify unless the user asks.</div></li>
         <li><span class="step-num">6</span><div><strong>Do not claim live.</strong> If <code>tools/list</code> does not include these names, the portal does not have them yet. Do not invent wrappers. Label the tools as planned until Squirrel Brain confirms the MCP names are live.</div></li>
       </ol>
-      <div class="code-label">Main smoke path — flyer picture first (<code>image_url</code>), dry run</div>
+      <div class="code-label">Primary path (A) — signed or allowlisted <code>image_url</code> only, dry run</div>
       <div class="code-block">{
-  "image_url": "https://example.com/flyers/saturday-market.jpg",
+  "image_url": "https://&lt;signed-blob-or-allowlisted-sb-host&gt;/flyer.jpg?sig=...",
   "tag": "[QA-184]",
   "dry_run": true
 }</div>
-      <p><code>flyer_text</code> stays off this example. Add it only as a secondary field when you already have OCR. A call with pasted text and no flyer picture is not the main path.</p>
+      <p>That <code>image_url</code> is the signed blob URL from the upload, or a URL on an allowlisted Squirrel Brain storage/CDN host. It is not an arbitrary HTTPS link. <code>flyer_text</code> stays off this example. Add it only as a secondary field when you already have OCR.</p>
 
       <h3>Adversarial guards</h3>
       <p>These guards are part of the smoke how-to. A smoke that skips them is not a pass.</p>
@@ -1098,7 +1121,7 @@
         <li><span class="step-num">2</span><div><strong>Dedicated test calendar only</strong> (or clearly named test events). Never Adam&rsquo;s real calendar. Delete and verify cleanup after the smoke.</div></li>
         <li><span class="step-num">3</span><div><strong><code>verify_flyer_events</code> must assert wall-clock time, structured location, and <code>timeZone</code>.</strong> A title-only match is not a pass.</div></li>
         <li><span class="step-num">4</span><div><strong>No backfill.</strong> Do not rewrite already-saved wrong events unless an explicit tool says it does that. <code>ingest_flyer</code> is create-new only.</div></li>
-        <li><span class="step-num">5</span><div><strong>Image and input limits.</strong> Reject oversize or non-flyer blobs. Do not paste secrets, API keys, or personal emails into flyer text or tool arguments.</div></li>
+        <li><span class="step-num">5</span><div><strong>Image and input limits, plus the SSRF guard.</strong> <code>image_url</code> is not arbitrary HTTPS. Accept only a pre-uploaded signed blob URL or an allowlisted Squirrel Brain storage/CDN host. Reject every other host. Reject oversize or non-flyer blobs. Do not paste secrets, API keys, or personal emails into flyer text or tool arguments.</div></li>
         <li><span class="step-num">6</span><div><strong>One flyer at a time</strong> under the fleet and per-user AI caps. Do not run uncapped batch smokes overnight.</div></li>
         <li><span class="step-num">7</span><div><strong>If verify fails, stop and file.</strong> Do not re-ingest in a loop. That creates duplicates and burns spend.</div></li>
         <li><span class="step-num">8</span><div><strong>Docs are not shipped.</strong> Keep these tools labeled planned until Squirrel Brain confirms the MCP names are live.</div></li>

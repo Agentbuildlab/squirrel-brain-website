@@ -45,7 +45,7 @@ Squirrel Brain runs a hosted, remote MCP server.
 - Compatibility: any MCP client that can send a custom header — Claude Code, Claude Desktop, Cursor, or a self-hosted agent. Consumer ChatGPT cannot connect custom MCP servers yet.
 - Connect details and the complete tool list: https://squirrelbrainapp.com/mcp and https://squirrelbrainapp.com/mcp-docs
 - Server card (static, machine-readable): https://squirrelbrainapp.com/.well-known/mcp/server-card.json
-- Draft docs only (not live yet): planned `ingest_flyer` accepts flyer images (`image_url`), not text-only — https://squirrelbrainapp.com/mcp-docs#flyer-tools-draft
+- Draft docs only (not live yet): primary path is picture → signed/allowlisted `image_url` → `ingest_flyer` (upload the flyer picture first; `image_url` is a signed blob URL or an allowlisted Squirrel Brain host, not arbitrary HTTPS, not text-only) — https://squirrelbrainapp.com/mcp-docs#flyer-tools-draft
 
 Once connected, an agent can, on the user's behalf:
 - set a real alarm or reminder on the user's iPhone
