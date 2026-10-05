@@ -389,7 +389,7 @@ export default function McpPage() {
                 <p className="text-sm leading-relaxed" style={{ color: "rgba(255,245,232,0.88)" }}>
                   Coming soon for any MCP client: picture &rarr; upload jpeg/png to <span className="font-mono">portal-images</span> or <span className="font-mono">pix-thumbs</span> &rarr; signed <span className="font-mono">image_url</span> &rarr;{" "}
                   <span className="font-mono">ingest_flyer</span>. Writes require <span className="font-mono">idempotency_key</span>. Not arbitrary HTTPS.{" "}
-                  <span className="font-mono">verify_flyer_events</span> checks that same image. See the{" "}
+                  <span className="font-mono">verify_flyer_events</span> checks that same image. A write is the server row (<span className="font-mono">user_items</span> location and timeZone); the phone calendar pin can lag until down-sync. See the{" "}
                   <a href="/mcp-docs#flyer-tools-draft" style={{ color: "#FF7A1A" }} className="hover:underline">
                     draft contract
                   </a>

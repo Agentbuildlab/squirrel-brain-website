@@ -971,7 +971,7 @@
         <li><span class="step-num">1</span><div><strong>Location field + GPS ban.</strong> Structured location <code>{title, address, latitude, longitude}</code>. The Maps Location pin is the venue or ballpark address from the flyer. Never the phone&rsquo;s home, captured GPS, or <code>captured_location</code> where the photo was taken.</div></li>
         <li><span class="step-num">2</span><div><strong>dry_run / verify / idempotency.</strong> <code>dry_run</code> on ingest. <code>verify_flyer_events</code>. Create-new only (no backfill rewrite). A write requires <code>idempotency_key</code> (unless <code>dry_run</code> is true). The same key returns the original rows and does not insert a duplicate. Tag + cleanup: store a <code>tag</code> so verify can filter, then delete or cancel those tagged smoke items after a passing verify. Stop on verify fail (no re-ingest loop). One flyer at a time under spend caps.</div></li>
         <li><span class="step-num">3</span><div><strong>Signed-URL <code>ingest_flyer</code>.</strong> Primary path (A), for any MCP client: picture &rarr; upload a jpeg or png &rarr; signed <code>image_url</code> on the <code>portal-images</code> or <code>pix-thumbs</code> bucket (<code>/storage/v1/object/sign/&lt;bucket&gt;/...?token=</code>) &rarr; <code>ingest_flyer</code> &rarr; <code>verify_flyer_events</code> against that image. Not arbitrary HTTPS, and not a generic allowlisted CDN (SSRF guard). Size and type caps. Upload first. Runtime requires <code>image_url</code>.</div></li>
-        <li><span class="step-num">4</span><div><strong>Structured errors + EventKit readback.</strong> Ingest and verify return structured pass/fail errors. Verification is against EventKit / calendar readback (wall-clock + <code>timeZone</code> + structured location), not a title-only match.</div></li>
+        <li><span class="step-num">4</span><div><strong>Structured errors + EventKit readback.</strong> Ingest and verify return structured pass/fail errors. Verification is against EventKit / calendar readback (wall-clock + <code>timeZone</code> + structured location), not a title-only match. The ingest return is the server row on <code>user_items</code>. The phone Calendar pin can lag until down-sync projects <code>location</code> and <code>timeZone</code>.</div></li>
       </ol>
 
       <p>Planned pair for flyer smoke checks, for <strong>any MCP client</strong> that holds an <code>alarms:write</code> API key: ingest a <strong>flyer picture</strong> into new calendar items with a real structured location, then verify wall-clock time (including DST), location shape, and that the write stayed inside caps. Auth is the same <code>X-API-Key: sb_…</code> header as every other write tool. No anonymous access. No client-specific flyer auth.</p>
@@ -980,7 +980,10 @@
       <div class="info-box" style="border-left:4px solid #c2410c;background:#fff6f0;">
         <strong>Primary input is a flyer picture. <code>image_url</code> is required, and it is not arbitrary HTTPS.</strong> Any MCP client uploads the flyer picture first (jpeg or png), then passes the signed URL. The only accepted URLs are already on the Squirrel Brain buckets <code>portal-images</code> or <code>pix-thumbs</code>, at <code>/storage/v1/object/sign/&lt;bucket&gt;/...?token=</code>. A generic allowlisted CDN is not accepted. Any other host is rejected (SSRF guard). Optional <code>text</code> is pasted words only, and it does not replace <code>image_url</code>.
       </div>
-      <p>Ingest a flyer picture (<code>image_url</code>) and create new calendar items for the events on it. Times go through <code>resolveWallClock</code> plus <code>timeZone</code> (DST-safe on a build that includes that write path). Location is a structured object only. This tool creates new items; it does not backfill or rewrite events that are already saved. The same <code>idempotency_key</code> returns the original rows and does not insert a duplicate.</p>
+      <p>Ingest a flyer picture (<code>image_url</code>) and write new server rows for the events on it. Times go through <code>resolveWallClock</code> plus <code>timeZone</code> (DST-safe on a build that includes that write path). Location is a structured object only. This tool creates new items; it does not backfill or rewrite events that are already saved. The same <code>idempotency_key</code> returns the original rows and does not insert a duplicate.</p>
+      <div class="info-box">
+        <strong>What a successful write actually means.</strong> <code>ingest_flyer</code> writes the server row: structured <code>location</code> and <code>timeZone</code> on <code>user_items</code>. The phone Calendar / EventKit copy can lag until down-sync projects those fields onto the device. Do not treat the tool return as proof that the Maps pin is already on the phone.
+      </div>
       <p><strong>Auth:</strong> same <code>X-API-Key</code> as other write tools, on any MCP client with an <code>alarms:write</code> key. No anonymous key.</p>
 
       <table class="tools-table">
@@ -1052,9 +1055,9 @@
 }</div>
 
       <h3><code>verify_flyer_events</code> — planned write / verify</h3>
-      <p>After ingest, check flyer-derived events for a smoke: EventKit / calendar readback of wall-clock and DST, structured location, and <code>timeZone</code>. A title-only match is a fail. Location must be the flyer venue, never <code>captured_location</code> or home GPS.</p>
+      <p>After ingest, check flyer-derived events for a smoke: EventKit / calendar readback of wall-clock and DST, structured location, and <code>timeZone</code>. That readback can lag. Ingest has already written <code>location</code> and <code>timeZone</code> on the <code>user_items</code> row; the phone Calendar pin is not guaranteed the instant the tool returns, and it appears after down-sync projects those fields. A title-only match is a fail. Location must be the flyer venue, never <code>captured_location</code> or home GPS.</p>
       <p><strong>Auth:</strong> same <code>X-API-Key</code> as other write tools, on any MCP client with an <code>alarms:write</code> key. No anonymous key.</p>
-      <p>Required arguments are <code>image_url</code>, <code>tag</code>, and <code>expected</code>. Optional <code>timeZone</code> overrides the profile timezone. Pass the same signed picture URL you ingested.</p>
+      <p>Required arguments are <code>image_url</code>, <code>tag</code>, and <code>expected</code>. Optional <code>timeZone</code> overrides the profile timezone. Pass the same signed picture URL you ingested. An optional <code>idempotency_key</code> on verify may land later. It is not in this contract, and it is not required.</p>
 
       <table class="tools-table">
         <thead>
@@ -1101,7 +1104,7 @@
         <code>{ "code": "string", "retryable": false, "field": "image_url", "hint": "string" }</code><br>
         <code>field</code> is optional.<br><br>
         <strong>Success and dry_run event shape:</strong> <code>id</code> (null when the row is only planned), <code>start</code>, <code>end</code> (null — not invented), <code>location</code>, <code>timeZone</code>.<br><br>
-        Verification is against EventKit / calendar readback (wall-clock + <code>timeZone</code> + structured location). Title-only match is a fail.
+        Verification is against EventKit / calendar readback (wall-clock + <code>timeZone</code> + structured location), after down-sync has projected the <code>user_items</code> row. Title-only match is a fail. The ingest return itself is not a live phone pin.
       </div>
 
       <h3>Primary path (A) — picture &rarr; upload &rarr; signed portal-images or pix-thumbs URL &rarr; ingest_flyer</h3>
@@ -1114,8 +1117,8 @@
       <ol class="checklist">
         <li><span class="step-num">1</span><div><strong>Upload the flyer picture</strong> (jpeg or png) into <code>portal-images</code> or <code>pix-thumbs</code>, then take the signed URL <code>/storage/v1/object/sign/&lt;bucket&gt;/...?token=</code>. Do not pass any other HTTPS URL.</div></li>
         <li><span class="step-num">2</span><div><strong><code>ingest_flyer(image_url)</code>.</strong> <code>image_url</code> is required. <code>dry_run: true</code> is optional first (parse only; <code>idempotency_key</code> not required). A real write requires <code>idempotency_key</code>.</div></li>
-        <li><span class="step-num">3</span><div><strong>Full calendar events, like an app scan.</strong> A write creates the events with a structured location, times, and notes. The Maps pin is the venue or ballpark address on the flyer, never the phone&rsquo;s home, captured GPS, or <code>captured_location</code>. <code>end</code> stays null when the flyer does not give one.</div></li>
-        <li><span class="step-num">4</span><div><strong><code>verify_flyer_events</code> against that same image.</strong> Required: the same <code>image_url</code>, the same <code>tag</code>, and <code>expected</code>. A pass is EventKit readback of wall-clock, <code>timeZone</code>, and structured location. Title-only is a fail.</div></li>
+        <li><span class="step-num">3</span><div><strong>Server rows, like an app scan.</strong> A write stores the events on <code>user_items</code> with structured location, times, notes, and <code>timeZone</code>. The Maps pin value is the venue or ballpark address on the flyer, never the phone&rsquo;s home, captured GPS, or <code>captured_location</code>. <code>end</code> stays null when the flyer does not give one. The phone Calendar / EventKit pin can lag until down-sync. The tool return is not that pin.</div></li>
+        <li><span class="step-num">4</span><div><strong><code>verify_flyer_events</code> against that same image.</strong> Required: the same <code>image_url</code>, the same <code>tag</code>, and <code>expected</code>. A pass is EventKit readback of wall-clock, <code>timeZone</code>, and structured location, after down-sync. Title-only is a fail. An optional verify <code>idempotency_key</code> may land later; it is not required and not in this contract.</div></li>
       </ol>
       <div class="info-box">
         <strong>Rules on primary path (A):</strong><br>
