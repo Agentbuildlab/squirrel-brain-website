@@ -379,6 +379,22 @@ export default function McpPage() {
                 Every tool, with parameters, is in the{" "}
                 <a href="/mcp-docs" style={{ color: "#FF7A1A" }} className="hover:underline">developer docs</a>.
               </p>
+              <div
+                className="mt-8 rounded-2xl border px-5 py-4 text-left"
+                style={{ borderColor: "rgba(255,122,26,0.55)", background: "rgba(255,122,26,0.1)" }}
+              >
+                <p className="text-xs font-bold tracking-widest uppercase mb-2" style={{ color: "#FF7A1A" }}>
+                  Coming soon (DRAFT)
+                </p>
+                <p className="text-sm leading-relaxed" style={{ color: "rgba(255,245,232,0.88)" }}>
+                  <span className="font-mono">ingest_flyer</span> and <span className="font-mono">verify_flyer_events</span>{" "}
+                  are a planned flyer smoke check with a structured location — see the{" "}
+                  <a href="/mcp-docs#flyer-tools-draft" style={{ color: "#FF7A1A" }} className="hover:underline">
+                    draft contract
+                  </a>
+                  . Not live until the portal lists them in <span className="font-mono">tools/list</span>.
+                </p>
+              </div>
             </FadeIn>
           </div>
         </section>

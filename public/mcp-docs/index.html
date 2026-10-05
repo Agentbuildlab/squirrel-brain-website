@@ -151,6 +151,23 @@
     .info-box.blue  { border-left-color: #4A8FE7; background: #eef0f8; }
     .info-box.purple { border-left-color: #a78bfa; background: #f3eeff; }
 
+    .doc-section h3 {
+      font-size: 18px; font-weight: 800; color: #2a1a08;
+      margin: 28px 0 10px; letter-spacing: -0.01em;
+    }
+    .draft-banner {
+      border: 2px solid #c2410c; background: #fff1e6;
+      border-radius: 14px; padding: 18px 20px; margin: 0 0 22px;
+    }
+    .draft-banner-kicker {
+      display: inline-block; font-size: 11px; font-weight: 800;
+      letter-spacing: 0.14em; text-transform: uppercase; color: #fff;
+      background: #c2410c; border-radius: 100px; padding: 4px 12px; margin-bottom: 12px;
+    }
+    .doc-section .draft-banner p { font-size: 15px; color: #5a3018; line-height: 1.65; margin-bottom: 10px; }
+    .doc-section .draft-banner p:last-child { margin-bottom: 0; }
+    .doc-section .draft-banner strong { color: #2a1a08; }
+
     /* ── FOR AGENTS HERO BOX ─────────────────────────────── */
     .for-agents-box {
       background: #eef7ee; border: 1px solid #22C55E33;
@@ -486,6 +503,7 @@
         <li><a href="#auth">Authentication &amp; API key</a></li>
         <li><a href="#session-start">Session start sequence</a></li>
         <li><a href="#tools">All 31 tools — full reference</a></li>
+        <li><a href="#flyer-tools-draft">Coming soon (DRAFT) — flyer smoke-check tools</a></li>
         <li><a href="#examples">curl examples</a></li>
         <li><a href="#checklist">Getting started checklist</a></li>
         <li><a href="#agent-configs">Copy-paste agent configs</a></li>
@@ -929,6 +947,152 @@
         <strong>⚠️ The real call needs the latest Squirrel Brain build.</strong><br><br>
         The break-through call — the one that rings right through <strong>Silent mode, Focus, and a locked screen</strong> and plays the squirrel's voice — requires the <strong>newest version of the Squirrel Brain app</strong> installed on the user's iPhone. On older builds it falls back to a standard alert where the OS allows. So if a call isn't ringing through, the first thing to check is that the user has <strong>updated to the current App Store / TestFlight build</strong>.
       </div>
+    </div>
+
+    <hr class="doc-divider" />
+
+    <!-- ──────────────────────────────────────────────────────── -->
+    <!-- DRAFT: flyer smoke-check tools (not live)               -->
+    <!-- ──────────────────────────────────────────────────────── -->
+    <div class="doc-section" id="flyer-tools-draft">
+      <div class="doc-section-label">Coming soon — not in the live tool table</div>
+      <h2 class="doc-section-title">Coming soon (DRAFT) — Flyer smoke-check tools</h2>
+
+      <div class="draft-banner">
+        <div class="draft-banner-kicker">Status: DRAFT / coming soon</div>
+        <p><strong>Not live on the MCP portal yet.</strong> Do not call <code>ingest_flyer</code> or <code>verify_flyer_events</code> until Squirrel Brain confirms those names appear in <code>tools/list</code> and the Agent Portal.</p>
+        <p>Param names below are the planned contract from Squirrel Brain. They may tighten when the portal ships. When the tools are live, this banner comes off and the tools move into the live WRITE table and the server card. They are not in either place today. These docs are not a shipped tool.</p>
+      </div>
+
+      <p>Planned pair for flyer smoke checks: ingest a flyer into new calendar items with a real structured location, then verify wall-clock time (including DST), location shape, and that the write stayed inside caps. Auth is the same MCP API key as every other write tool (<code>X-API-Key: sb_…</code>). No anonymous access. No special flyer auth.</p>
+
+      <h3><code>ingest_flyer</code> — planned write</h3>
+      <p>Ingest a flyer (HTTPS image and/or pasted OCR text) and create new calendar items for the events on it. Times go through <code>resolveWallClock</code> plus the user <code>timeZone</code> (DST-safe on a build that includes that write path). Location is a structured object only. This tool creates new items; it does not backfill or rewrite events that are already saved.</p>
+      <p><strong>Auth:</strong> same MCP API key as other write tools. No anonymous key.</p>
+
+      <table class="tools-table">
+        <thead>
+          <tr>
+            <th>Parameter</th>
+            <th>Planned contract</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="tool-params"><span class="tag-opt">image_url</span></td>
+            <td class="tool-desc">string, optional. HTTPS URL of the flyer image. Reject oversize images per existing MCP image limits. At least one of <code>image_url</code> or <code>flyer_text</code> is required.</td>
+          </tr>
+          <tr>
+            <td class="tool-params"><span class="tag-opt">flyer_text</span></td>
+            <td class="tool-desc">string, optional. Pasted flyer OCR or text. At least one of <code>image_url</code> or <code>flyer_text</code> is required. Do not paste secrets, API keys, or personal emails.</td>
+          </tr>
+          <tr>
+            <td class="tool-params"><span class="tag-opt">tag</span></td>
+            <td class="tool-desc">string, optional. Stored on the created items so verify can filter them. Example: <code>[QA-184]</code>.</td>
+          </tr>
+          <tr>
+            <td class="tool-params"><span class="tag-opt">dry_run</span></td>
+            <td class="tool-desc">boolean, optional. Default <code>false</code>. When <code>true</code>, parse only and write nothing. Preferred for the first smoke.</td>
+          </tr>
+          <tr>
+            <td class="tool-params"><span class="tag-opt">timezone</span></td>
+            <td class="tool-desc">string, optional. IANA timezone override (for example <code>America/New_York</code>). When omitted, timezone comes from <code>get_user_profile</code>.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="info-box">
+        <strong>Planned behavior:</strong><br>
+        Never invent a time. If the flyer says TBA, store a null time and the label &ldquo;No time, tap to set&rdquo;.<br>
+        Uses <code>resolveWallClock</code> + <code>timeZone</code> so wall-clock stays DST-safe on a build that includes that write path. Older binaries still corrupt November-and-later times. Do not treat a printed local time as UTC.<br>
+        Location is the structured object below — never a single free-text string.<br>
+        Keep the title clean. Put extras in notes.<br>
+        Maker / agent attribution follows the same write path as other tools (the <code>X-Agent-Name</code> header, or the stable agent id if you omit it).<br>
+        Flyer AI sits under the existing per-user and fleet spend caps.<br>
+        No <code>cell_alert</code> and no notify unless the user asks. Default is off.<br>
+        Create-new only. Do not rewrite events that were already saved wrong.
+      </div>
+
+      <h3>Structured <code>location</code> only</h3>
+      <p>When a location is present, this object is the only accepted shape. Never pass one unstructured free-text string as the whole location. Omit unknown fields. Do not invent coordinates. An address alone is enough for Maps when coordinates are unknown. Do not scrape contacts or photos into events. If the flyer only has a venue name, set <code>title</code> and leave <code>address</code>, <code>latitude</code>, and <code>longitude</code> null or omitted.</p>
+      <div class="code-label">Required location shape</div>
+      <div class="code-block">{
+  "title": "string | null",
+  "address": "string | null",
+  "latitude": "number | null",
+  "longitude": "number | null"
+}</div>
+      <div class="code-label">Example — venue plus street, coordinates unknown</div>
+      <div class="code-block">{
+  "title": "Austin Convention Center",
+  "address": "500 E Cesar Chavez St, Austin, TX 78701",
+  "latitude": null,
+  "longitude": null
+}</div>
+
+      <h3><code>verify_flyer_events</code> — planned write / verify</h3>
+      <p>After ingest, or against existing item ids, check flyer-derived events for a smoke: wall-clock and DST correctness, structured location when one was expected, notes kept out of the title, and that the items are searchable. A title-only match is not a pass.</p>
+      <p><strong>Auth:</strong> same MCP API key as other write tools. No anonymous key.</p>
+      <p>One of <code>image_url</code>, <code>flyer_text</code>, or <code>expected_events</code> is the source of truth for what &ldquo;expected&rdquo; means. Pass the same flyer you ingested, or an explicit expected-events array.</p>
+
+      <table class="tools-table">
+        <thead>
+          <tr>
+            <th>Parameter</th>
+            <th>Planned contract</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="tool-params"><span class="tag-opt">image_url</span></td>
+            <td class="tool-desc">string. HTTPS flyer image used as the source of truth for expected events. One of <code>image_url</code>, <code>flyer_text</code>, or <code>expected_events</code> is required as that source.</td>
+          </tr>
+          <tr>
+            <td class="tool-params"><span class="tag-opt">flyer_text</span></td>
+            <td class="tool-desc">string. Pasted flyer OCR or text used as the source of truth for expected events. Same one-of-three rule as <code>image_url</code>.</td>
+          </tr>
+          <tr>
+            <td class="tool-params"><span class="tag-opt">expected_events</span></td>
+            <td class="tool-desc">array. Explicit expected events used as the source of truth. Same one-of-three rule. Do not treat a title-only list as enough to pass.</td>
+          </tr>
+          <tr>
+            <td class="tool-params"><span class="tag-opt">item_ids</span></td>
+            <td class="tool-desc">string[], optional. Alarm or item ids to verify.</td>
+          </tr>
+          <tr>
+            <td class="tool-params"><span class="tag-opt">tag</span></td>
+            <td class="tool-desc">string, optional. Filter to items created with this tag (the same tag passed to <code>ingest_flyer</code>).</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="info-box">
+        <strong>Planned return, per event:</strong> pass or fail, plus these checks — <code>wall_clock_match</code> (including DST), <code>no_invented_tba</code>, <code>location_match</code> (structured location), <code>notes_vs_title</code>, and <code>searchable</code>. A pass has to assert wall-clock time, structured location, and <code>timeZone</code>. Title-only match is not a pass.
+      </div>
+
+      <h3>Flyer smoke-check how-to</h3>
+      <p>Run this only after <code>tools/list</code> actually contains these names, and only on a build Squirrel Brain confirms includes the DST <code>resolveWallClock</code> write path. Until then, read the contract and stop.</p>
+      <ol class="checklist">
+        <li><span class="step-num">1</span><div><strong>Auth.</strong> Same as every other write tool: <code>X-API-Key: sb_…</code>, plus the existing <code>Authorization</code> / <code>apikey</code> headers already documented under Authentication if your client sends them. No anonymous access. No special flyer auth.</div></li>
+        <li><span class="step-num">2</span><div><strong>Spend and rate caps.</strong> Treat a flyer ingest that writes (not a dry run) like Alarm creates plus Write (items) on the <a href="#rate-limits">Rate Limits</a> table. Flyer AI also counts against the existing per-user and fleet spend caps. One flyer smoke is a few creates at most. Prefer <code>dry_run: true</code> first. One flyer at a time. Do not loop ingest, and do not run an uncapped batch overnight. Stop on rate-limit errors; do not retry-storm.</div></li>
+        <li><span class="step-num">3</span><div><strong>DST and wall-clock.</strong> Call <code>get_user_profile</code> first. Pass IANA <code>timezone</code> only to override that profile; otherwise leave it off. Call <code>get_current_time</code> so you are not guessing &ldquo;now&rdquo;. The write path uses <code>resolveWallClock</code> plus <code>timeZone</code>. Never assume the flyer&rsquo;s printed local time is UTC. Never invent a time: TBA becomes a null time and &ldquo;No time, tap to set&rdquo;. After create, <code>verify_flyer_events</code> must show the stored wall clock matches that timezone across DST boundaries.</div></li>
+        <li><span class="step-num">4</span><div><strong>Structured location only.</strong> Use the object with <code>title</code>, <code>address</code>, <code>latitude</code>, and <code>longitude</code>. Never stuff a paragraph into a string <code>location</code>. Reject or repair a free-text-only location before calling. Omit unknown fields and do not invent coordinates. Address alone is enough for Maps when coordinates are unknown. No contacts or photos scraped into events. Title stays clean; extras go in notes.</div></li>
+        <li><span class="step-num">5</span><div><strong>Smoke sequence.</strong> Dedicated test calendar, or clearly named test events only — never Adam&rsquo;s real calendar. Then: <code>get_user_profile</code> and <code>get_current_time</code> &rarr; <code>ingest_flyer</code> with <code>dry_run: true</code> &rarr; review the parse &rarr; <code>ingest_flyer</code> once with writes on (<code>dry_run</code> left false) and a <code>tag</code> such as <code>[QA-184]</code> &rarr; <code>verify_flyer_events</code> using that tag (and <code>item_ids</code> when you have them) and <code>image_url</code>, <code>flyer_text</code>, or <code>expected_events</code> as the source of truth. Require wall-clock time, structured location, and <code>timeZone</code>. After a passing verify, delete or cancel the smoke items with the existing delete and cancel tools (there is no cleanup parameter on these tools) and confirm zero residue with <code>list_alarms</code> and <code>list_items</code>, filtered by the tag. Ingest is create-new only. No <code>cell_alert</code> or notify unless the user asks.</div></li>
+        <li><span class="step-num">6</span><div><strong>Do not claim live.</strong> If <code>tools/list</code> does not include these names, the portal does not have them yet. Do not invent wrappers. Label the tools as planned until Squirrel Brain confirms the MCP names are live.</div></li>
+      </ol>
+
+      <h3>Adversarial guards</h3>
+      <p>These guards are part of the smoke how-to. A smoke that skips them is not a pass.</p>
+      <ol class="checklist">
+        <li><span class="step-num">1</span><div><strong>Do not claim &ldquo;safe for smoke&rdquo;</strong> until the tools exist on a build that includes the DST <code>resolveWallClock</code> write path. Older binaries still corrupt November-and-later times.</div></li>
+        <li><span class="step-num">2</span><div><strong>Dedicated test calendar only</strong> (or clearly named test events). Never Adam&rsquo;s real calendar. Delete and verify cleanup after the smoke.</div></li>
+        <li><span class="step-num">3</span><div><strong><code>verify_flyer_events</code> must assert wall-clock time, structured location, and <code>timeZone</code>.</strong> A title-only match is not a pass.</div></li>
+        <li><span class="step-num">4</span><div><strong>No backfill.</strong> Do not rewrite already-saved wrong events unless an explicit tool says it does that. <code>ingest_flyer</code> is create-new only.</div></li>
+        <li><span class="step-num">5</span><div><strong>Image and input limits.</strong> Reject oversize or non-flyer blobs. Do not paste secrets, API keys, or personal emails into flyer text or tool arguments.</div></li>
+        <li><span class="step-num">6</span><div><strong>One flyer at a time</strong> under the fleet and per-user AI caps. Do not run uncapped batch smokes overnight.</div></li>
+        <li><span class="step-num">7</span><div><strong>If verify fails, stop and file.</strong> Do not re-ingest in a loop. That creates duplicates and burns spend.</div></li>
+        <li><span class="step-num">8</span><div><strong>Docs are not shipped.</strong> Keep these tools labeled planned until Squirrel Brain confirms the MCP names are live.</div></li>
+      </ol>
     </div>
 
     <hr class="doc-divider" />
