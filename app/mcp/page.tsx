@@ -387,8 +387,8 @@ export default function McpPage() {
                   Coming soon (DRAFT)
                 </p>
                 <p className="text-sm leading-relaxed" style={{ color: "rgba(255,245,232,0.88)" }}>
-                  Primary path (A), still draft: picture &rarr; signed/allowlisted <span className="font-mono">image_url</span> &rarr;{" "}
-                  <span className="font-mono">ingest_flyer</span>. Upload the flyer photo first. <span className="font-mono">image_url</span> is a signed blob URL or an allowlisted Squirrel Brain host, not arbitrary HTTPS. Optional pasted text only.{" "}
+                  Coming soon for any MCP client: picture &rarr; upload jpeg/png to <span className="font-mono">portal-images</span> or <span className="font-mono">pix-thumbs</span> &rarr; signed <span className="font-mono">image_url</span> &rarr;{" "}
+                  <span className="font-mono">ingest_flyer</span>. Writes require <span className="font-mono">idempotency_key</span>. Not arbitrary HTTPS.{" "}
                   <span className="font-mono">verify_flyer_events</span> checks that same image. See the{" "}
                   <a href="/mcp-docs#flyer-tools-draft" style={{ color: "#FF7A1A" }} className="hover:underline">
                     draft contract
