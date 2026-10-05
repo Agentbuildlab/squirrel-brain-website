@@ -1,0 +1,301 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/v1/server-card.schema.json",
+  "name": "com.squirrelbrainapp/squirrel-brain",
+  "version": "1.0.0",
+  "description": "Create alarms, read tasks, send voice messages to your phone — all from Claude or any agent.",
+  "title": "Squirrel Brain",
+  "websiteUrl": "https://squirrelbrainapp.com/mcp",
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://geczbtsjfbvfukdzdemr.supabase.co/functions/v1/mcp-server",
+      "headers": [
+        {
+          "name": "X-API-Key",
+          "description": "Per-user Squirrel Brain API key (starts with sb_), generated in the iOS app",
+          "isRequired": true,
+          "isSecret": true
+        }
+      ]
+    }
+  ],
+  "_meta": {
+    "com.squirrelbrainapp/server": {
+      "documentationUrl": "https://squirrelbrainapp.com/mcp-docs",
+      "llmsTxt": "https://squirrelbrainapp.com/llms.txt",
+      "authentication": {
+        "type": "api-key",
+        "header": "X-API-Key",
+        "keyPrefix": "sb_",
+        "howToGet": "The user generates a personal key in the iOS app (Settings → API keys; starts with sb_) and supplies it as the X-API-Key header."
+      },
+      "tools": [
+        {
+          "name": "cell_alert",
+          "description": "Places an urgent voice call that rings the user's iPhone in about 10 seconds through Silent mode, Focus, and a locked screen when something needs immediate attention."
+        },
+        {
+          "name": "notify_human",
+          "description": "Sends an instant banner push notification, not a full-screen alert, to the user's iPhone for a quick status update rather than an interruption."
+        },
+        {
+          "name": "get_user_profile",
+          "description": "Returns the user's name, squirrel name, IANA timezone, and notification preferences, and is required before creating alarms."
+        },
+        {
+          "name": "get_agent_context",
+          "description": "Reads the persistent context notes the user has written, which are standing orders to treat as active instructions for every session."
+        },
+        {
+          "name": "get_current_time",
+          "description": "Returns the current UTC time and the user's local time so the caller does not compute timezone offsets."
+        },
+        {
+          "name": "get_daily_brief",
+          "description": "Returns today's agenda of overdue items, items due today, high-priority pending tasks, and recent wins, the same data as the 5 AM email brief."
+        },
+        {
+          "name": "list_items",
+          "description": "Queries tasks, notes, and alarms, optionally filtered by type, status, maker, or recipient, so existing items can be checked before creating more."
+        },
+        {
+          "name": "create_item",
+          "description": "Saves a note or checklist to the user's Memory Stash, and can also save a calm voice note, write persistent instructions for future agents, flag the item for the 4 PM nudge email, or address it to the agent."
+        },
+        {
+          "name": "create_alarm",
+          "description": "Puts a tappable event on the user's calendar and schedules an iPhone alarm for any timed appointment, deadline, or reminder, and can also ring a real phone call at that time, repeat, or schedule it for the agent."
+        },
+        {
+          "name": "mark_item_done",
+          "description": "Marks a note, task, or alarm as completed after a task the caller created is finished or the user confirms it is done."
+        },
+        {
+          "name": "update_item",
+          "description": "Updates an existing note, task, or alarm in place, including rescheduling it, changing its call, importance, countdown, and reminder settings, or appending text, instead of creating a duplicate."
+        },
+        {
+          "name": "cancel_alarm",
+          "description": "Cancels a pending alarm by its alarm id and marks it done so it disappears on the next sync."
+        },
+        {
+          "name": "list_alarms",
+          "description": "Lists scheduled alarms, with an option to return only future alarms, so duplicates can be checked before creating alarms."
+        },
+        {
+          "name": "create_link",
+          "description": "Saves an HTTPS web link or video into the user's Link Stash as a rich link card, with the platform detected from the URL when it is not given."
+        },
+        {
+          "name": "add_to_forever_note",
+          "description": "Appends checklist content to the user's single pinned Forever Note, creating that note if it does not exist, and stores list entries as separate tappable lines."
+        },
+        {
+          "name": "remove_from_forever_note",
+          "description": "Removes a line from the user's Forever Note by its text or by its zero-based position, and reports that nothing was removed if the line is not found."
+        },
+        {
+          "name": "delete_items_by_maker",
+          "description": "Soft-deletes every item created by one maker in a single recoverable call."
+        },
+        {
+          "name": "delete_items_by_status",
+          "description": "Soft-deletes every item with a required status in one recoverable call, optionally limited to one type, and always leaves the Forever Note in place."
+        },
+        {
+          "name": "get_item",
+          "description": "Returns the full detail of a single item by id when the caller already has that id from a list or create call."
+        },
+        {
+          "name": "search_items",
+          "description": "Keyword-searches titles, content, and notes across every type and status, including calendar events, and can be limited to one maker."
+        },
+        {
+          "name": "delete_item",
+          "description": "Soft-deletes an item by marking it completed with a deletion note so it is removed from the user's view on the next sync."
+        },
+        {
+          "name": "list_boards",
+          "description": "Lists the Pix boards currently in use and how many items each holds."
+        },
+        {
+          "name": "move_to_board",
+          "description": "Files a Pix photo into a board by that board's key, or clears the board, and syncs the change to every device."
+        },
+        {
+          "name": "get_overdue_items",
+          "description": "Returns pending items whose alarm or due date is in the past within the last 30 days, for the user by default or for the calling agent when asked."
+        },
+        {
+          "name": "get_nudge_candidates",
+          "description": "Returns pending items flagged as important, which are the 4 PM nudge email list."
+        },
+        {
+          "name": "get_portal_messages",
+          "description": "Reads conversation history in the user's MCP Agent Portal for the caller's thread by default, or another thread when asked, and marks unread inbound messages as read."
+        },
+        {
+          "name": "send_portal_message",
+          "description": "Sends a chat message to the user in the MCP Agent Portal and push-notifies their phone, for talking or confirming rather than saving an appointment or task."
+        },
+        {
+          "name": "delete_portal_messages",
+          "description": "Deletes portal messages previously sent by the agent, by message id, agent name, or a cutoff time, up to 100 messages in one call for the current user only."
+        },
+        {
+          "name": "get_api_key_usage",
+          "description": "Returns this key's calls today, calls total, expiry date, and days until expiry."
+        },
+        {
+          "name": "rotate_api_key",
+          "description": "Revokes the current key and issues a new one immediately, and that new key must be saved before any further calls."
+        },
+        {
+          "name": "get_squirrel_brain_help",
+          "description": "Returns a full self-configuration guide with the endpoint, the hardcoded public anon key, all 31 tools with parameters, and session start instructions."
+        }
+      ]
+    }
+  },
+  "serverInfo": {
+    "name": "squirrel-brain",
+    "title": "Squirrel Brain",
+    "version": "1.0.0"
+  },
+  "transport": {
+    "type": "streamable-http",
+    "endpoint": "https://geczbtsjfbvfukdzdemr.supabase.co/functions/v1/mcp-server"
+  },
+  "authentication": {
+    "required": true,
+    "schemes": [
+      "api-key"
+    ]
+  },
+  "tools": [
+    {
+      "name": "cell_alert",
+      "description": "Places an urgent voice call that rings the user's iPhone in about 10 seconds through Silent mode, Focus, and a locked screen when something needs immediate attention."
+    },
+    {
+      "name": "notify_human",
+      "description": "Sends an instant banner push notification, not a full-screen alert, to the user's iPhone for a quick status update rather than an interruption."
+    },
+    {
+      "name": "get_user_profile",
+      "description": "Returns the user's name, squirrel name, IANA timezone, and notification preferences, and is required before creating alarms."
+    },
+    {
+      "name": "get_agent_context",
+      "description": "Reads the persistent context notes the user has written, which are standing orders to treat as active instructions for every session."
+    },
+    {
+      "name": "get_current_time",
+      "description": "Returns the current UTC time and the user's local time so the caller does not compute timezone offsets."
+    },
+    {
+      "name": "get_daily_brief",
+      "description": "Returns today's agenda of overdue items, items due today, high-priority pending tasks, and recent wins, the same data as the 5 AM email brief."
+    },
+    {
+      "name": "list_items",
+      "description": "Queries tasks, notes, and alarms, optionally filtered by type, status, maker, or recipient, so existing items can be checked before creating more."
+    },
+    {
+      "name": "create_item",
+      "description": "Saves a note or checklist to the user's Memory Stash, and can also save a calm voice note, write persistent instructions for future agents, flag the item for the 4 PM nudge email, or address it to the agent."
+    },
+    {
+      "name": "create_alarm",
+      "description": "Puts a tappable event on the user's calendar and schedules an iPhone alarm for any timed appointment, deadline, or reminder, and can also ring a real phone call at that time, repeat, or schedule it for the agent."
+    },
+    {
+      "name": "mark_item_done",
+      "description": "Marks a note, task, or alarm as completed after a task the caller created is finished or the user confirms it is done."
+    },
+    {
+      "name": "update_item",
+      "description": "Updates an existing note, task, or alarm in place, including rescheduling it, changing its call, importance, countdown, and reminder settings, or appending text, instead of creating a duplicate."
+    },
+    {
+      "name": "cancel_alarm",
+      "description": "Cancels a pending alarm by its alarm id and marks it done so it disappears on the next sync."
+    },
+    {
+      "name": "list_alarms",
+      "description": "Lists scheduled alarms, with an option to return only future alarms, so duplicates can be checked before creating alarms."
+    },
+    {
+      "name": "create_link",
+      "description": "Saves an HTTPS web link or video into the user's Link Stash as a rich link card, with the platform detected from the URL when it is not given."
+    },
+    {
+      "name": "add_to_forever_note",
+      "description": "Appends checklist content to the user's single pinned Forever Note, creating that note if it does not exist, and stores list entries as separate tappable lines."
+    },
+    {
+      "name": "remove_from_forever_note",
+      "description": "Removes a line from the user's Forever Note by its text or by its zero-based position, and reports that nothing was removed if the line is not found."
+    },
+    {
+      "name": "delete_items_by_maker",
+      "description": "Soft-deletes every item created by one maker in a single recoverable call."
+    },
+    {
+      "name": "delete_items_by_status",
+      "description": "Soft-deletes every item with a required status in one recoverable call, optionally limited to one type, and always leaves the Forever Note in place."
+    },
+    {
+      "name": "get_item",
+      "description": "Returns the full detail of a single item by id when the caller already has that id from a list or create call."
+    },
+    {
+      "name": "search_items",
+      "description": "Keyword-searches titles, content, and notes across every type and status, including calendar events, and can be limited to one maker."
+    },
+    {
+      "name": "delete_item",
+      "description": "Soft-deletes an item by marking it completed with a deletion note so it is removed from the user's view on the next sync."
+    },
+    {
+      "name": "list_boards",
+      "description": "Lists the Pix boards currently in use and how many items each holds."
+    },
+    {
+      "name": "move_to_board",
+      "description": "Files a Pix photo into a board by that board's key, or clears the board, and syncs the change to every device."
+    },
+    {
+      "name": "get_overdue_items",
+      "description": "Returns pending items whose alarm or due date is in the past within the last 30 days, for the user by default or for the calling agent when asked."
+    },
+    {
+      "name": "get_nudge_candidates",
+      "description": "Returns pending items flagged as important, which are the 4 PM nudge email list."
+    },
+    {
+      "name": "get_portal_messages",
+      "description": "Reads conversation history in the user's MCP Agent Portal for the caller's thread by default, or another thread when asked, and marks unread inbound messages as read."
+    },
+    {
+      "name": "send_portal_message",
+      "description": "Sends a chat message to the user in the MCP Agent Portal and push-notifies their phone, for talking or confirming rather than saving an appointment or task."
+    },
+    {
+      "name": "delete_portal_messages",
+      "description": "Deletes portal messages previously sent by the agent, by message id, agent name, or a cutoff time, up to 100 messages in one call for the current user only."
+    },
+    {
+      "name": "get_api_key_usage",
+      "description": "Returns this key's calls today, calls total, expiry date, and days until expiry."
+    },
+    {
+      "name": "rotate_api_key",
+      "description": "Revokes the current key and issues a new one immediately, and that new key must be saved before any further calls."
+    },
+    {
+      "name": "get_squirrel_brain_help",
+      "description": "Returns a full self-configuration guide with the endpoint, the hardcoded public anon key, all 31 tools with parameters, and session start instructions."
+    }
+  ]
+}
