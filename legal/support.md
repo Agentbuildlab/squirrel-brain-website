@@ -38,7 +38,7 @@ Everything is optional and asked only when you use the feature. You can change a
 No. The call comes from inside the app (it uses the iPhone call screen but no phone number or carrier minutes). You can decline it, and you can turn calls off in Settings.
 
 ### Do I need an account?
-No. Sign in with Apple is optional, but without it your notes and photos stay only on this phone. If you delete the app or lose the phone they cannot be recovered.
+No. Sign in with Apple is optional, but without it your notes and photos cannot be restored on a new phone or after reinstalling. They are still stored on our servers and sent to our AI providers to be processed, as the Privacy Policy describes.
 
 ### How do I get a copy of my data?
 Email [hello@squirrelbrainapp.com](mailto:hello@squirrelbrainapp.com) from the address tied to your account and ask for an export. We send your notes, tasks and account data in a machine-readable file (JSON or CSV) within 30 days.
