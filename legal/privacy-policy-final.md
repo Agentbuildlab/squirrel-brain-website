@@ -1,8 +1,8 @@
 # Privacy Policy — Squirrel Brain
 
-Effective Date: October 4, 2026
-Last Updated: October 4, 2026
-Version: 3.0
+Effective Date: October 8, 2026
+Last Updated: October 8, 2026
+Version: 3.1
 
 ---
 
@@ -62,17 +62,17 @@ Meeting-recording consent. Because a meeting recording necessarily captures the 
 
 ### 3.1b The Pip AI Assistant
 
-Squirrel Brain includes an in-app conversational assistant, "Pip." Messages you send Pip, and the conversation history needed to understand your request, are processed primarily by xAI's Grok AI model; specific tasks within a conversation (such as structuring a note or reconciling a meeting summary) may be handled by Anthropic's Claude instead. Pip can take actions in the app on your behalf — creating reminders, searching your saved items, scheduling a call — and, when useful, can search the public web using Grok's web-search capability to answer a question; web search queries are sent to xAI and, through xAI, to the underlying search provider. See Section 5 for full detail on each AI partner.
+Squirrel Brain includes an in-app conversational assistant, "Pip." Messages you send Pip, and the conversation history needed to understand your request, are processed by Anthropic's Claude AI models. Pip can take actions in the app on your behalf — creating reminders, searching your saved items, scheduling a call — and, when useful, can search the public web to answer a question; web search queries may be sent to xAI and, through xAI, to the underlying search provider. See Section 5 for full detail on each AI partner.
 
 ### 3.2 Photos and Images (PixNote)
 
-You choose which images Squirrel Brain ever sees. The app processes an image only when you actively bring it in — by taking a photo in the app, selecting specific photos from your library, sharing a photo or screenshot to Squirrel Brain through the iOS share sheet, or — only if you turn this option on — automatically importing your new screenshots. When you bring in an image, it is transmitted to Google's Gemini AI vision service (and, for some in-app capture flows, to xAI's Grok vision model) for analysis, text extraction, and date extraction, and the extracted facts may also be sent to Anthropic's Claude to decide which board or category the item belongs in and to keep your PixNotes organized. The extracted data is stored in Supabase as structured notes. A copy of the picture itself (the thumbnail shown on your PixNote) is also saved on your device and backed up to our secure, private cloud storage (Supabase, see Section 5), so your pictures survive loss of your device, a reinstall, or your phone automatically clearing the local copy. This image backup is locked to your account, is never made public, and is deleted when you delete the item or your account (see the photo/image retention row in Section 8). So you can later search your saved items by meaning rather than exact words, a short text summary of what an item contains may also be sent to Google's embedding service; the resulting search index is stored on your device.
+You choose which images Squirrel Brain ever sees. The app processes an image only when you actively bring it in — by taking a photo in the app, selecting specific photos from your library, sharing a photo or screenshot to Squirrel Brain through the iOS share sheet, or — only if you turn this option on — automatically importing your new screenshots. When you bring in an image, it is transmitted to Google's Gemini AI vision service for analysis, text extraction, and date extraction. If that reading fails our checks, the image is sent to Anthropic's Claude to be read instead. The extracted facts may also be sent to Anthropic's Claude to decide which board or category the item belongs in and to keep your PixNotes organized. The extracted data is stored in Supabase as structured notes. A copy of the picture itself (the thumbnail shown on your PixNote) is also saved on your device and backed up to our secure, private cloud storage (Supabase, see Section 5), so your pictures survive loss of your device, a reinstall, or your phone automatically clearing the local copy. This image backup is locked to your account, is never made public, and is deleted when you delete the item or your account (see the photo/image retention row in Section 8). So you can later search your saved items by meaning rather than exact words, a short text summary of what an item contains may also be sent to Google's embedding service; the resulting search index is stored on your device.
 
 We never access your whole camera roll. Squirrel Brain does not scan, browse, index, or upload your entire photo library. Photos you do not bring in are never seen by us or by our AI providers. The optional automatic screenshot import reads only your device's Screenshots album, only after you enable it, and you can turn it off at any time. We process only the specific images you choose to add — nothing else.
 
-What this means: Images you bring into Squirrel Brain — including photos that may depict people, faces, documents, locations, or health-related information — are sent to Google's (and, for some capture flows, xAI's) AI services over the internet, for those images and only those.
+What this means: Images you bring into Squirrel Brain — including photos that may depict people, faces, documents, locations, or health-related information — are sent to Google's AI service (and, when a backup reading is needed, Anthropic's) over the internet, for those images and only those.
 
-Important notice regarding photographic data: Photos that include faces may result in facial geometry data being processed by Google's Gemini service or xAI's Grok vision model. This may constitute biometric data under Illinois BIPA, Washington State My Health MY Data Act, and Texas CUBI. See Section 14. We do not intentionally collect facial geometry, and we do not retain or use any biometric data derived from faces for identification purposes.
+Important notice regarding photographic data: Photos that include faces may result in facial geometry data being processed by Google's Gemini service or, when a backup reading is needed, Anthropic's Claude. This may constitute biometric data under Illinois BIPA, Washington State My Health MY Data Act, and Texas CUBI. See Section 14. We do not intentionally collect facial geometry, and we do not retain or use any biometric data derived from faces for identification purposes.
 
 Photos may also inadvertently capture health-related information (e.g., prescription labels, medical records, health apps). Such data is processed only to the extent necessary to extract the notes and tasks you request.
 
@@ -82,7 +82,7 @@ Text you type directly is processed by Anthropic's Claude AI models to extract t
 
 ### 3.4 Location Data (GPS)
 
-With your explicit permission, Squirrel Brain optionally tags notes with your GPS coordinates at the time of capture. This constitutes precise geolocation data, which is a sensitive category under CPRA (California) and other state laws. Location data is stored as note metadata in Supabase.
+With your explicit permission, Squirrel Brain optionally tags notes with your GPS coordinates at the time of capture. This constitutes precise geolocation data, which is a sensitive category under CPRA (California) and other state laws. Location data is stored as note metadata in Supabase. Your saved location is also used to show weather and to work out which city you are in; see Section 5.11.
 
 You can revoke location access at any time in iOS Settings > Privacy & Security > Location Services. Revoking permission prevents future location tagging but does not automatically delete previously stored location data. To delete past location tags, delete the associated notes or request account deletion.
 
@@ -150,7 +150,7 @@ Before PostHog is configured to set cookies or device identifiers for visitors i
 | Purpose | Data Used | Legal Basis (GDPR) |
 |---|---|---|
 | Core app functionality — transcribing voice, structuring notes, extracting tasks and dates | Voice, photos, notes | Performance of contract (Art. 6(1)(b)) |
-| Location tagging of notes | GPS location | Consent (Art. 6(1)(a)) |
+| Location tagging of notes; weather and city lookup | GPS location | Consent (Art. 6(1)(a)) |
 | Daily Brief emails and notification emails | Email, calendar data, notes summary | Performance of contract + Consent (Art. 6(1)(a)/(b)) |
 | Push notifications and alarms | Push token, alarm settings | Performance of contract (Art. 6(1)(b)) |
 | Authentication and account management | Apple user ID, email | Performance of contract (Art. 6(1)(b)) |
@@ -161,28 +161,28 @@ Before PostHog is configured to set cookies or device identifiers for visitors i
 
 We do not use your personal information for any purpose incompatible with the purposes listed above. If we wish to use your data for a new purpose, we will update this policy and, where required, seek your consent.
 
-Data minimization. In accordance with GDPR Article 5(1)(c) and the principle of data minimization, we collect only the data necessary for the specific purpose listed. For example, location data is only collected when you choose to tag a note; calendar data is only read when you use the Daily Brief feature; photos are only processed when you use the PixNote feature.
+Data minimization. In accordance with GDPR Article 5(1)(c) and the principle of data minimization, we collect only the data necessary for the specific purpose listed. For example, location data is only collected if you allow location access, and is used to tag notes and to show weather and your city (Section 5.11); calendar data is only read when you use the Daily Brief feature; photos are only processed when you use the PixNote feature.
 
 ---
 
 ## 5. Third-Party Services That Receive Your Data
 
-We share your data with the following third-party services solely to operate the app features described in this policy. We do not authorize these services to use your data for their own advertising or marketing purposes. Squirrel Brain's AI features are built on four AI subprocessors, each handling a different kind of content — voice transcription and phone-call audio (OpenAI), the structuring of your notes, tasks, and meeting summaries plus board/organization decisions (Anthropic), image and photo analysis plus semantic search (Google), and the conversational "Pip" assistant plus web search (xAI) — described individually below.
+We share your data with the following third-party services solely to operate the app features described in this policy. We do not authorize these services to use your data for their own advertising or marketing purposes. Squirrel Brain's AI features are built on four AI subprocessors, each handling a different kind of content — voice transcription and phone-call audio (OpenAI), the structuring of your notes, tasks, and meeting summaries, board/organization decisions, and the conversational "Pip" assistant (Anthropic), image and photo analysis plus semantic search (Google), and web search for the assistant (xAI) — described individually below.
 
 ### 5.1 OpenAI
 
-What we share: Audio files of your voice recordings (for transcription); audio from live voice calls and other voice features, which is sent to OpenAI's real-time voice service; and, for automated phone-call reminders, the text Squirrel Brain reads aloud to you (for text-to-speech).
-Why: Speech-to-text transcription of voice memos and meeting audio (Whisper), real-time voice conversation for live calls and voice features (OpenAI's real-time voice service), and text-to-speech generation for scheduled calls.
+What we share: Audio of your voice recordings, for transcription (meeting audio is sent only as a backup when our primary meeting transcription fails); audio from live voice calls and in-app voice features; during a live call, the call's instructions and the notes, reminders, and calendar entries Pip looks up to answer you; and the text Squirrel Brain reads aloud to you.
+Why: Speech-to-text transcription of voice memos and meeting audio (Whisper), real-time voice conversation for live calls and voice features (OpenAI's real-time voice service), and text-to-speech generation for calls and spoken replies.
 Data processing location: United States
 OpenAI Privacy Policy: https://openai.com/policies/privacy-policy
 OpenAI API Terms: https://openai.com/policies/terms-of-use
 
-OpenAI's published API terms state that API inputs and outputs are not used to train OpenAI's models by default and are retained only for a limited abuse-monitoring window before deletion. We rely on those published terms as our contractual basis for this processing today; a signed Data Processing Agreement formalizing this under GDPR Article 28 is in progress.
+Acorn Labs LLC has a Zero Data Retention agreement with OpenAI. OpenAI does not store the content described above in its logs and does not use it to train its models. Two limits apply. Audio replies may be held for up to one hour to keep a conversation going, and OpenAI may retain content where the law requires or to investigate severe misuse of its services. Squirrel Brain does not send your photos or images to OpenAI. This agreement covers OpenAI only; the other AI providers described below handle content under their own terms. A Data Processing Agreement under GDPR Article 28 is in progress.
 
 ### 5.2 Anthropic (Claude)
 
-What we share: The text of your typed and transcribed notes; extracted facts from your photos (dates, line items, document text) for board-placement and organization decisions; meeting transcripts, for reconciling them into structured summaries and action items; and your messages to the in-app "Pip" assistant, for a portion of assistant replies and tool actions.
-Why: Structuring your voice and typed input into tasks, dates, and reminders; organizing and placing PixNote photos into the right board; reconciling meeting recordings into notes and follow-ups; and powering parts of the conversational assistant.
+What we share: The text of your typed and transcribed notes; extracted facts from your photos (dates, line items, document text) for board-placement and organization decisions; meeting transcripts, for reconciling them into structured summaries and action items; your messages to the in-app "Pip" assistant and the conversation history needed to answer you; and, when Google's reading of a photo fails our checks, the photo itself, to be read instead.
+Why: Structuring your voice and typed input into tasks, dates, and reminders; organizing and placing PixNote photos into the right board; reconciling meeting recordings into notes and follow-ups; powering the conversational Pip assistant; and reading a photo as a backup when needed.
 Data processing location: United States
 Anthropic Privacy Policy: https://www.anthropic.com/legal/privacy
 Anthropic Commercial Terms of Service: https://www.anthropic.com/legal/commercial-terms
@@ -201,8 +201,8 @@ Standard Gemini API terms state that content submitted through the API is not us
 
 ### 5.4 xAI (Grok)
 
-What we share: Your messages to the in-app "Pip" assistant and the conversation history needed to answer you; photos submitted for AI vision analysis in some capture flows; and search queries when Pip uses its web-search capability on your behalf.
-Why: Grok is the primary AI model powering the conversational Pip assistant — understanding your requests, taking actions in the app (creating reminders, searching your notes, scheduling calls), and answering questions, including by searching the web when useful.
+What we share: Search queries, when Pip searches the public web on your behalf.
+Why: Web search for the Pip assistant, so it can answer questions with current information.
 Data processing location: United States
 xAI Privacy Policy: https://x.ai/legal/privacy-policy
 xAI API Terms of Service: https://x.ai/legal/terms-of-service-api
@@ -253,6 +253,12 @@ Sentry Privacy Policy: https://sentry.io/privacy/
 What we share: Your purchase status and an app user ID.
 Why: RevenueCat is our subscription provider. It uses your purchase status to unlock your plan. Payments are handled by Apple, and we never see your card details.
 RevenueCat Privacy Policy: https://www.revenuecat.com/privacy
+
+### 5.11 Open-Meteo and OpenStreetMap
+
+If you allow location access, Squirrel Brain saves your location and sends its coordinates to Open-Meteo (weather and air quality) and to OpenStreetMap, to show weather and work out which city you are in for your daily brief and assistant. If you ask about the weather somewhere else, the place name you say is sent to Open-Meteo. These services receive coordinates or a place name, not your notes, recordings, or photos. When your phone requests weather directly, Open-Meteo also sees your device's IP address.
+Open-Meteo Terms and Privacy: https://open-meteo.com/en/terms
+OpenStreetMap Foundation Privacy Policy: https://osmfoundation.org/wiki/Privacy_Policy
 
 ---
 
@@ -305,7 +311,7 @@ We retain personal information only as long as necessary for the purposes descri
 | Calendar data | Not stored independently; transient cache cleared on logout | N/A |
 | Account identifiers (Apple user ID) | Until account deletion | Deleted within 30 days; may be retained longer if required by applicable law |
 | Crash logs | 90 days from generation | N/A |
-| AI provider processing logs | Subject to OpenAI/Anthropic/Google/xAI API terms — see Section 5 | Per each provider's API terms |
+| AI provider processing logs | OpenAI: not stored in OpenAI's logs under our Zero Data Retention agreement, subject to the two limits in Section 5.1. Anthropic, Google, and xAI: subject to each provider's API terms (Section 5). | Per each provider's API terms |
 | Pre-launch waitlist emails | Until account created, list dissolved, or unsubscription | Deleted within 30 days of dissolution/unsubscription |
 
 We maintain an internal Records of Processing Activities documenting the business justification for the retention periods above, consistent with GDPR Article 5(1)(e) and Article 30.
@@ -432,7 +438,7 @@ We are in the process of designating an EU Representative under GDPR Article 27 
 |---|---|---|
 | Core app features — voice transcription, note structuring, task extraction | Performance of contract | Art. 6(1)(b) |
 | PixNote / photo processing | Performance of contract | Art. 6(1)(b) |
-| Location tagging (optional) | Consent | Art. 6(1)(a) |
+| Location tagging; weather and city lookup (optional) | Consent | Art. 6(1)(a) |
 | Calendar reading for Daily Brief | Consent | Art. 6(1)(a) |
 | Calendar event creation | Consent / Performance of contract | Art. 6(1)(a)/(b) |
 | Daily Brief emails | Consent | Art. 6(1)(a) |
@@ -476,16 +482,16 @@ For UK residents, the relevant authority is the Information Commissioner's Offic
 |---|---|---|---|---|
 | Identifiers | Email address, Apple user ID, device identifier, push token | Yes | User, Apple | Authentication, notifications, emails |
 | Audio, electronic, visual, or similar information | Voice recordings, photographs | Yes | User (microphone/camera) | AI transcription, PixNote |
-| Geolocation data (precise) | GPS coordinates at note capture | Yes (optional) | Device GPS | Note tagging |
+| Geolocation data (precise) | GPS coordinates at note capture | Yes (optional) | Device GPS | Note tagging; weather and city lookup |
 | Internet or other electronic network activity | App feature usage, crash logs | Yes | App automatically | App improvement |
 | Inferences drawn from personal information | AI-extracted tasks, dates, priorities | Yes | Derived from above | Note structuring |
 | Sensitive Personal Information — Voice/audio recordings | Voice memos | Yes | User (microphone) | Core feature: AI transcription |
-| Sensitive Personal Information — Precise geolocation | GPS coordinates | Yes (optional) | Device GPS | Note tagging |
+| Sensitive Personal Information — Precise geolocation | GPS coordinates | Yes (optional) | Device GPS | Note tagging; weather and city lookup |
 | Sensitive Personal Information — Contents of communications | Note text, email content | Yes | User input | Core feature, email delivery |
 
 ### 13.2 Sensitive Personal Information — Disclosure and Limitation
 
-Under CPRA, voice recordings and precise geolocation constitute Sensitive Personal Information (SPI). Our use of SPI is limited to the specific purposes described in this policy (providing the AI transcription feature and note-tagging feature respectively). We do not use SPI for:
+Under CPRA, voice recordings and precise geolocation constitute Sensitive Personal Information (SPI). Our use of SPI is limited to the specific purposes described in this policy (providing the AI transcription feature, and the note-tagging and weather/city features, respectively). We do not use SPI for:
 
 - Inferring characteristics about you
 - Advertising
@@ -523,7 +529,7 @@ What constitutes biometric data. Under BIPA, "biometric identifiers" include voi
 
 Our processing of voice data. Squirrel Brain captures voice recordings and transmits them to OpenAI for transcription. While our intent is transcription only (not speaker identification), the audio may constitute a "voiceprint" or be used to generate one under BIPA's broad definition.
 
-Our processing of photographic data. Images you submit via PixNote or Share Extension may include faces. While our intent is text and date extraction only (not facial recognition), Google Gemini's vision AI (and, for some in-app capture flows, xAI's Grok vision model) processes facial geometry as part of image analysis. This may implicate BIPA's provisions regarding face geometry.
+Our processing of photographic data. Images you submit via PixNote or Share Extension may include faces. While our intent is text and date extraction only (not facial recognition), Google Gemini's vision AI (or, when a backup reading is needed, Anthropic's Claude) processes facial geometry as part of image analysis. This may implicate BIPA's provisions regarding face geometry.
 
 Written Consent for Illinois Residents. By using Squirrel Brain's voice recording feature or PixNote/photo feature as an Illinois resident, you are providing written consent to our collection, use, and transmission to third-party AI processors (OpenAI, Anthropic, Google, and xAI, as applicable — see Section 5) of any biometric identifiers or biometric information in your voice recordings and photographs. If you do not consent, do not use these features.
 
@@ -534,13 +540,13 @@ Retention and Destruction of Biometric Data.
 In accordance with BIPA Section 15(a), our retention and destruction schedule for biometric data is as follows:
 
 - Voice recordings: Retained in Supabase until you delete the recording or delete your account. Following account deletion, voice audio files are deleted within 30 days. We do not retain voice recordings beyond this period except as required by applicable law.
-- Photographic data: Image files processed by Google Gemini (or, for some in-app capture flows, xAI's Grok vision model) are not stored by us on a permanent basis beyond your active account. Image files are retained until you delete the associated note or delete your account. Following account deletion, image data is deleted within 30 days.
-- Third-party processing: OpenAI, Anthropic, Google, and xAI process your data under API terms that do not retain API inputs beyond a limited window per their standard API terms. See Section 5.
+- Photographic data: Image files processed by Google Gemini (or, when a backup reading is needed, Anthropic's Claude) are not stored by us on a permanent basis beyond your active account. Image files are retained until you delete the associated note or delete your account. Following account deletion, image data is deleted within 30 days.
+- Third-party processing: OpenAI processes voice recordings and live call audio under our Zero Data Retention agreement (Section 5.1). Anthropic, Google, and xAI process your data under their own API terms. See Section 5.
 - Destruction: We permanently delete (not merely anonymize) biometric data in our custody upon account deletion within the 30-day window above.
 
 No sale or profit from biometric data. In accordance with BIPA Section 15(c), we do not sell, lease, trade, or otherwise profit from users' biometric identifiers or biometric information.
 
-No disclosure to third parties beyond service providers. In accordance with BIPA Section 15(d), we do not disclose biometric data to third parties other than OpenAI (voice transcription), Google Gemini (image vision analysis), and xAI's Grok vision model (image vision analysis, in some capture flows), as described in this policy and as necessary to complete the service. These disclosures require completion of the service and are not made for independent commercial purposes.
+No disclosure to third parties beyond service providers. In accordance with BIPA Section 15(d), we do not disclose biometric data to third parties other than OpenAI (voice transcription and live voice calls), Google Gemini (image vision analysis), and Anthropic's Claude (image analysis, when a backup reading is needed), as described in this policy and as necessary to complete the service. These disclosures require completion of the service and are not made for independent commercial purposes.
 
 ### 14.2 Washington State Residents — My Health MY Data Act (MHMD Act)
 
@@ -570,7 +576,7 @@ Biometric identifiers under CUBI include retina or iris scans, fingerprints, voi
 
 Voice recordings. Squirrel Brain captures voice recordings that may constitute voiceprints under CUBI. By using the voice recording feature as a Texas resident, you consent to our capture and transmission to OpenAI of any voiceprints contained in your recordings for the purpose of transcription.
 
-Photographic data. Images submitted via PixNote may contain face geometry. By using the PixNote or Share Extension feature as a Texas resident, you consent to our transmission to Google Gemini (and, for some in-app capture flows, xAI's Grok vision model) of any face geometry data in your images for the purpose of AI vision analysis and text extraction.
+Photographic data. Images submitted via PixNote may contain face geometry. By using the PixNote or Share Extension feature as a Texas resident, you consent to our transmission to Google Gemini (or, when a backup reading is needed, Anthropic's Claude) of any face geometry data in your images for the purpose of AI vision analysis and text extraction.
 
 We do not sell biometric identifiers. In accordance with CUBI, we do not sell, lease, or otherwise profit from biometric identifiers.
 
@@ -610,15 +616,17 @@ We respond to all privacy inquiries within 30 days.
 
 | Service | Purpose | Data Received | DPA Executed? | Privacy Policy |
 |---|---|---|---|---|
-| OpenAI | Voice transcription; text-to-speech for calls | Voice/meeting audio, call script text | In progress | openai.com/policies/privacy-policy |
-| Anthropic (Claude) | Note/task structuring; photo organization; meeting reconciliation; Pip assistant | Typed/transcribed text, extracted photo facts, meeting transcripts, Pip messages | In progress | anthropic.com/legal/privacy |
+| OpenAI | Voice transcription; live voice calls; text-to-speech | Voice/meeting audio, live call audio and call text, text read aloud | In progress | openai.com/policies/privacy-policy |
+| Anthropic (Claude) | Note/task structuring; photo organization; backup photo reading; meeting reconciliation; Pip assistant | Typed/transcribed text, extracted photo facts, some photos, meeting transcripts, Pip messages | In progress | anthropic.com/legal/privacy |
 | Google (Gemini) | AI vision / image analysis; meeting diarization; search embeddings | Photos, screenshots, meeting audio, item summaries | In progress | policies.google.com/privacy |
-| xAI (Grok) | Pip assistant (primary); web search; some photo vision | Pip messages, some photos, web search queries | In progress | x.ai/legal/privacy-policy |
+| xAI (Grok) | Web search for the Pip assistant | Web search queries | In progress | x.ai/legal/privacy-policy |
 | Supabase | Cloud database / storage | All user data | In progress | supabase.com/privacy |
 | Resend | Email delivery | Email address, email content | In progress | resend.com/legal/privacy-policy |
 | Apple | Auth, push notifications | Apple user ID, notification payloads | N/A (Apple Developer Agreement) | apple.com/legal/privacy |
 | Sentry | Crash reports and performance traces | Device and app details, technical error data | To be confirmed | sentry.io/privacy |
 | RevenueCat | Subscription management | Purchase status, app user ID | To be confirmed | revenuecat.com/privacy |
+| Open-Meteo | Weather and air quality | Location coordinates or a place name; device IP address | To be confirmed | open-meteo.com/en/terms |
+| OpenStreetMap | City name from location | Location coordinates | To be confirmed | osmfoundation.org/wiki/Privacy_Policy |
 | PostHog | Website analytics only (not used in the app) | Anonymized website usage events | To be confirmed | posthog.com/privacy |
 
 ---
