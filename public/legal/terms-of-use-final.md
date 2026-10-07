@@ -1,7 +1,7 @@
 # Terms of Use
 
 Squirrel Brain
-Last Updated: October 8, 2026
+Last Updated: October 7, 2026
 Effective Date: October 8, 2026
 
 ---
