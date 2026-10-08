@@ -1,8 +1,8 @@
-# Terms of Use
+Terms of Use
 
 Squirrel Brain
-Last Updated: October 7, 2026
-Effective Date: October 8, 2026
+Last Updated: October 4, 2026
+Effective Date: October 4, 2026
 
 ---
 
@@ -37,7 +37,7 @@ BINDING ARBITRATION AND CLASS ACTION WAIVER. These Terms contain a binding arbit
 
 These Terms of Use ("Terms") are a legally binding agreement between you and Acorn Labs LLC ("Squirrel Brain," "we," "us," or "our"), governing your access to and use of the Squirrel Brain iOS application, squirrelbrainapp.com, and all related features, content, and services (collectively, "Services").
 
-By downloading, installing, creating an account, or using the App in any manner, you acknowledge that you have read, understood, and agree to be bound by these Terms and our Privacy Policy (https://squirrelbrainapp.com/legal/privacy-policy.html). If you do not agree, do not use the Services.
+By downloading, installing, creating an account, or using the App in any manner, you acknowledge that you have read, understood, and agree to be bound by these Terms and our Privacy Policy (https://squirrelbrainapp.com/legal/privacy-policy). If you do not agree, do not use the Services.
 
 ### 1.2 Electronic Acceptance
 
@@ -49,7 +49,7 @@ Your electronic acceptance constitutes your signature and agreement to these Ter
 
 ### 2.1 Age Requirement
 
-The App is available only to individuals at least 17 years of age. We do not offer a parental- or guardian-consent pathway for younger users, in any jurisdiction — if you are under 17, you may not use the Services, regardless of local age-of-majority or parental-consent rules that might otherwise permit a younger user to contract with parental consent. The App is not directed to children or teens under 17, and we do not knowingly collect personal information from anyone under 17. If we ever decide to permit younger users, we will amend these Terms, add the required consent mechanisms, and update our Privacy Policy before doing so.
+The App is available only to individuals at least 18 years of age. We do not offer a parental- or guardian-consent pathway for younger users, in any jurisdiction — if you are under 18, you may not use the Services, regardless of local age-of-majority or parental-consent rules that might otherwise permit a younger user to contract with parental consent. The App is not directed to children or teens under 18, and we do not knowingly collect personal information from anyone under 18. If we ever decide to permit younger users, we will amend these Terms, add the required consent mechanisms, and update our Privacy Policy before doing so.
 
 ### 2.2 Jurisdiction
 
@@ -79,7 +79,7 @@ The date of the most recent revision appears at the top of these Terms. Prior ve
 
 ### 4.1 Voice Capture
 
-You may record voice memos by tapping the microphone button (tap to start, tap again to stop — not press-and-hold). Audio is transmitted to OpenAI for transcription; the resulting text is then transmitted to Anthropic's Claude for AI structuring into notes, tasks, reminders, and calendar events. By using voice capture, you explicitly consent to recording and AI processing of your voice. See Section 5 for the full list of AI providers and what each one processes.
+You may record voice memos by tapping the microphone button (tap to start, tap again to stop — not press-and-hold). Audio is transmitted to our AI providers (see Section 5) to turn your speech into text and structure it into notes, tasks, reminders, and calendar events. By using voice capture, you explicitly consent to recording and AI processing of your voice. See Section 5 for the full list of AI providers.
 
 Recording Third Parties. The voice capture feature records all audio within its range. Recording conversations with other people without their knowledge and consent may violate wiretapping, eavesdropping, and privacy laws in your jurisdiction, including California Penal Code § 632 (all-party consent required), the federal Electronic Communications Privacy Act (18 U.S.C. § 2510 et seq.), the Illinois Eavesdropping Act (720 ILCS 5/14-1 et seq.), the UK Investigatory Powers Act 2016, and the Australian Telecommunications (Interception and Access) Act 1979, among others. You are solely responsible for obtaining all required consents before recording. See also Section 14(k).
 
@@ -87,11 +87,11 @@ MEETING MODE — YOUR CONSENT OBLIGATION IS MANDATORY. Meeting Mode is specifica
 
 ### 4.2 Photo and Image Capture (PixNote)
 
-You may capture photos or upload screenshots for AI analysis. Images are transmitted to Google's Gemini vision model for visual analysis, text extraction, and structuring into notes; if that reading fails our checks, the image is sent to Anthropic's Claude to be read instead, and extracted facts may also be sent to Anthropic's Claude to decide how the item should be organized. By using photo capture, you explicitly consent to AI processing of your images. Up to ten (10) photos may be processed per PixNote submission.
+You may capture photos or upload screenshots for AI analysis. Images are transmitted to our AI providers (see Section 5) for visual analysis, text extraction, and structuring into notes. By using photo capture, you explicitly consent to AI processing of your images. Up to ten (10) photos may be processed per PixNote submission.
 
 ### 4.3 Written Notes
 
-Text you type is processed by Anthropic's Claude to extract structured information, tasks, and calendar events.
+Text you type is processed by our AI providers (see Section 5) to extract structured information, tasks, and calendar events.
 
 ### 4.4 Smart Alarms and Reminders
 
@@ -111,7 +111,7 @@ The App provides searchable archives of your AI-structured notes ("Memory Stash"
 
 ### 4.8 AI Assistant (Pip)
 
-Squirrel Brain includes a personalized AI assistant named "Pip." Pip is AI, not a human. Pip's replies and actions are generated by Anthropic's Claude models; see Section 5. Pip is accessed within the App.
+Squirrel Brain includes a personalized AI assistant named "Pip." Pip is AI, not a human. Pip's replies and actions are generated by our AI providers; see Section 5. Pip is accessed within the App.
 
 ### 4.9 iOS Share Extension
 
@@ -131,12 +131,7 @@ Squirrel Brain's AI features are built on four AI subprocessors, each handling d
 
 | Your Input | AI Service Used | Purpose |
 |---|---|---|
-| Voice recordings / meeting audio | OpenAI, Inc. | Speech-to-text transcription |
-| Transcribed voice text, typed notes, meeting transcripts, Pip assistant conversations; some photos | Anthropic, PBC (Claude) | Structuring into tasks, dates, reminders; meeting reconciliation; photo organization; conversational assistant and tool actions; backup photo reading |
-| Photos / screenshots / meeting audio | Google LLC (Gemini) | Visual analysis, text extraction, meeting diarization, search embeddings |
-| Web search queries from the Pip assistant | xAI Corp. (Grok) | Web search |
-| Automated call reminders | OpenAI, Inc. | Text-to-speech generation |
-| Live voice calls and other voice features | OpenAI, Inc. | Real-time voice conversation (OpenAI's real-time voice service) |
+| Your voice, photos, screenshots, notes, and questions | OpenAI, Inc.; Anthropic, PBC; Google LLC; xAI Corp. | AI processing to power app features — transcription, reading and understanding your content, answering you, voice calls, and web search — depending on the feature you use |
 
 By using features that involve AI processing, you explicitly consent to transmission of your content to OpenAI, Inc., Anthropic, PBC, Google LLC, and/or xAI Corp. — as applicable to the feature you use, per the table above — for AI processing in accordance with their respective terms.
 
@@ -162,23 +157,20 @@ You are also subject to:
 | Authentication | Apple Inc. | Sign in with Apple |
 | Push notifications | Apple Inc. | Alarms and reminders |
 | Calendar access | Apple Inc. | Event creation and Daily Brief |
-| App Store billing | Apple Inc. | Payments, if paid plans are introduced |
-| Subscription management | RevenueCat | Purchase status and plan unlocking |
-| Crash and performance reports | Sentry | Finding and fixing crashes and performance problems |
+| App Store billing | Apple Inc. | Subscription management |
+| Crash reporting | Functional Software, Inc. (Sentry) | Crash and performance reports |
+| Subscription status | RevenueCat, Inc. | Purchase and subscription status |
+| Analytics | PostHog, Inc. | Usage analytics |
 
 ### 5.4 AI Training Data
 
-Under their current API terms, OpenAI, Anthropic, Google, and xAI do not use content sent through their APIs to train their models by default. For OpenAI, Acorn Labs also has a Zero Data Retention agreement: OpenAI does not store your voice or call content in its logs. Audio replies may be held for up to one hour, and OpenAI may retain content where the law requires or to investigate severe misuse of its services. This agreement covers OpenAI only. The other providers handle content under their own published terms, which may change.
+We have configured our API integrations in accordance with OpenAI's, Anthropic's, Google's, and xAI's published API data usage policies, which under current terms do not use API inputs for training base models by default. However, we cannot guarantee third-party AI providers' future practices or their internal processing of data beyond what their published policies state. Review each provider's current data usage policy (Section 5.2) before submitting sensitive content.
 
 We do not use your voice recordings, images, or personal notes to train our own AI models.
 
 ### 5.5 Force Majeure for AI Services
 
-Core features of the App, including voice transcription, photo analysis, note structuring, and the Pip assistant, are entirely dependent on third-party AI services (OpenAI, Anthropic, Google, xAI). Outages, rate limits, API changes, or discontinuation of any of these services will disable corresponding App features. We are not liable for service degradation or unavailability caused by third-party AI service failures. See also Sections 15.4 and 24.5.
-
-### 5.6 [Reserved]
-
-This section number is intentionally unused.
+Core features of the App, including voice transcription, photo analysis, note structuring, and the Pip assistant, are entirely dependent on third-party AI services (OpenAI, Anthropic, Google, xAI). Outages, rate limits, API changes, or discontinuation of any of these services will disable corresponding App features. We are not liable for service degradation or unavailability caused by third-party AI service failures. See also Sections 15.3 and 24.5.
 
 ---
 
@@ -228,7 +220,7 @@ Required for smart alarms and reminders. Notification delivery is subject to iOS
 
 ### 7.5 Location Access (Optional)
 
-Optional. Used to tag notes with your GPS location at time of capture, to show weather and your city, and to improve AI context. Location tagging is not required for core functionality. GPS coordinates are stored in Supabase as note metadata. Previously stored location data is not automatically deleted when you revoke location permission.
+Optional. Used to tag notes with your GPS location at time of capture and to improve AI context. Location tagging is not required for core functionality. GPS coordinates are stored in Supabase as note metadata. Previously stored location data is not automatically deleted when you revoke location permission.
 
 ### 7.6 Permission Changes
 
@@ -400,43 +392,41 @@ All commercial email communications will comply with the U.S. CAN-SPAM Act and, 
 
 ### 13.1 Free to Use at Launch
 
-Squirrel Brain is free to use at launch. No purchase is required and there is no free trial. Paid plans may be introduced later; if they are, we will announce them in advance, they will be billed through Apple, and Apple's subscription terms will apply to them.
+Squirrel Brain is free to use at launch. You do not need a subscription to use the App. Some features have usage limits that we may change. We will give notice in the App before we start requiring payment for a feature you currently use for free.
 
 ### 13.2 Paid Plans (If Introduced)
 
-If we introduce paid subscription plans, they will be billed through Apple App Store In-App Purchases and governed by Apple's Media Services Terms and Conditions: https://www.apple.com/legal/internet-services/itunes/. We do not directly process payment card information. Pricing and plan details would be displayed in the App and on the App Store listing at the time of purchase. You will not be charged unless you choose to subscribe.
+We may introduce optional paid plans in the future. If we do, they will be billed through Apple App Store In-App Purchases and governed by Apple's Media Services Terms and Conditions: https://www.apple.com/legal/internet-services/itunes/. We do not directly process payment card information. Pricing and plan details will be displayed in the App and on the App Store listing at the time of purchase.
 
-### 13.3 Automatic Renewal Disclosure (If Paid Plans Are Introduced)
+### 13.3 Automatic Renewal Disclosure
 
-This Section 13.3 applies only if paid plans are introduced and you choose to subscribe. It does not apply to the free launch.
+IMPORTANT — SUBSCRIPTIONS AUTO-RENEW UNLESS CANCELLED. This section applies only if you buy a paid subscription.
 
-IMPORTANT — PAID SUBSCRIPTIONS AUTO-RENEW UNLESS CANCELLED.
-
-A paid subscription automatically renews at the end of each billing period (monthly or annual, as applicable) at the then-current price, unless you cancel at least 24 hours before the end of the current billing period. Renewal charges are applied through your Apple ID. The renewal charge will appear on your Apple ID account statement.
+Your subscription automatically renews at the end of each billing period (as shown when you purchase) at the then-current price, unless you cancel at least 24 hours before the end of the current billing period. Renewal charges are applied through your Apple ID. The renewal charge will appear on your Apple ID account statement.
 
 Price changes: We will provide advance notice of any price increase before it takes effect. If you do not cancel, you consent to the new price at the next renewal.
 
 HOW TO CANCEL: Go to Settings > [Your Name] > Subscriptions on your iOS device. Select Squirrel Brain. Tap "Cancel Subscription." Cancellation takes effect at the end of the current paid billing period. You will not be charged again after cancellation, but you will retain access through the end of the current period.
 
-If a free trial is ever offered with a paid plan: You must cancel at least 24 hours before the end of the free trial period to avoid being charged for the first subscription period.
+Cancellation of a free trial: You must cancel at least 24 hours before the end of the free trial period to avoid being charged for the first subscription period.
 
 *This disclosure is provided pursuant to Apple App Store Guidelines and applicable consumer protection laws.*
 
 ### 13.4 Free Trials
 
-There is no free trial at launch. If a free trial is offered with a paid plan in the future, the trial period and conditions will be disclosed at the time of sign-up. Unless you cancel at least 24 hours before the trial ends, your subscription will automatically begin and you will be charged. You may not receive a separate notice that your trial is ending.
+If a free trial is offered, the trial period and conditions will be disclosed at the time of sign-up. Unless you cancel at least 24 hours before the trial ends, your subscription will automatically begin and you will be charged. You may not receive a separate notice that your trial is ending.
 
 ### 13.5 Refunds
 
-If you buy a paid plan, all refund requests must be directed to Apple. Squirrel Brain does not directly process refunds for App Store purchases. To request a refund: https://support.apple.com/billing. Apple's refund policies govern. No refunds are provided for partial subscription periods, except as required by applicable law or Apple policy.
+All refund requests must be directed to Apple. Squirrel Brain does not directly process refunds for App Store purchases. To request a refund: https://support.apple.com/billing. Apple's refund policies govern. No refunds are provided for partial subscription periods, except as required by applicable law or Apple policy.
 
 ### 13.6 Subscription Management
 
-If you subscribe to a paid plan, you can view and manage your subscriptions at any time in your Apple ID account settings. Squirrel Brain has no ability to issue refunds, modify charges, or cancel subscriptions on your behalf — these actions must be performed through Apple.
+You can view and manage your subscriptions at any time in your Apple ID account settings. Squirrel Brain has no ability to issue refunds, modify charges, or cancel subscriptions on your behalf — these actions must be performed through Apple.
 
-### 13.7 Future Paid Plans and Pricing
+### 13.7 Future Pricing
 
-Squirrel Brain may introduce paid plans or subscription tiers, or adjust pricing, in the future. We will announce any paid plan in advance. Once a paid plan exists, changes to it will be communicated with at least 30 days' notice and will not affect your current subscription period.
+Squirrel Brain may introduce paid subscription plans or adjust pricing in the future. Any changes will be communicated with at least 30 days' notice and will not affect your current subscription period.
 
 ---
 
@@ -467,19 +457,15 @@ You agree not to use the Services for any of the following:
 
 ### 15.1 Third-Party Integrations
 
-Use of third-party services integrated with the App (OpenAI, Anthropic, Google, xAI, Supabase, Resend, RevenueCat, Sentry, Apple, Open-Meteo, OpenStreetMap) is governed by those parties' respective terms of service and privacy policies. We are not responsible for those services' practices, content, security, availability, or performance.
+Use of third-party services integrated with the App (OpenAI, Anthropic, Google, xAI, Supabase, Resend, Apple, Sentry, RevenueCat, PostHog) is governed by those parties' respective terms of service and privacy policies. We are not responsible for those services' practices, content, security, availability, or performance.
 
-### 15.2 [Reserved]
-
-This section number is intentionally unused.
-
-### 15.3 Third-Party Links
+### 15.2 Third-Party Links
 
 The App and Site may contain links to third-party websites. These links are provided for convenience only. We do not endorse, control, or assume responsibility for the content, privacy practices, or security of third-party websites. Access third-party websites at your own risk.
 
-### 15.4 Third-Party Service Availability and Force Majeure
+### 15.3 Third-Party Service Availability and Force Majeure
 
-We are not liable for Service interruptions, feature degradation, or unavailability of the Services caused by the unavailability of third-party services, including without limitation OpenAI, Anthropic, Google, xAI, Supabase, Apple, Resend, RevenueCat, Sentry, or other providers. Extended unavailability of any of our four AI processing partners (OpenAI, Anthropic, Google, xAI) will disable the corresponding AI processing features in the App.
+We are not liable for Service interruptions, feature degradation, or unavailability of the Services caused by the unavailability of third-party services, including without limitation OpenAI, Anthropic, Google, xAI, Supabase, Apple, Resend, or other providers. Extended unavailability of any of our four AI processing partners (OpenAI, Anthropic, Google, xAI) will disable the corresponding AI processing features in the App.
 
 ---
 
@@ -487,7 +473,7 @@ We are not liable for Service interruptions, feature degradation, or unavailabil
 
 ### 16.1 Privacy Policy
 
-Our Privacy Policy is incorporated into these Terms by reference and forms part of this agreement. Please review our Privacy Policy carefully. It describes in detail what data we collect, how we use it, who we share it with, how long we retain it, and what rights you have. https://squirrelbrainapp.com/legal/privacy-policy.html
+Our Privacy Policy is incorporated into these Terms by reference and forms part of this agreement. Please review our Privacy Policy carefully. It describes in detail what data we collect, how we use it, who we share it with, how long we retain it, and what rights you have. https://squirrelbrainapp.com/legal/privacy-policy
 
 ### 16.2 California Residents (CCPA / CPRA)
 
@@ -523,9 +509,9 @@ Squirrel Brain's voice recording feature and PixNote/photo feature process audio
 
 ## 17. CHILDREN'S PRIVACY
 
-The Services are available only to users 17 and older (Section 2.1) and are not directed to children or teens under 17. We comply with the Children's Online Privacy Protection Act (COPPA), 15 U.S.C. § 6501 et seq., and do not knowingly collect personal information from anyone under 13; because our minimum age is 17, this also means we do not knowingly collect personal information from any minor. If we discover that we have collected personal information from someone under 17, we will delete that information promptly. If you believe a minor has provided personal information to us, please contact us at hello@squirrelbrainapp.com.
+The Services are available only to users 18 and older (Section 2.1) and are not directed to children or teens under 18. We comply with the Children's Online Privacy Protection Act (COPPA), 15 U.S.C. § 6501 et seq., and do not knowingly collect personal information from anyone under 13; because our minimum age is 18, this also means we do not knowingly collect personal information from any minor. If we discover that we have collected personal information from someone under 18, we will delete that information promptly. If you believe a minor has provided personal information to us, please contact us at hello@squirrelbrainapp.com.
 
-We do not offer a parental- or guardian-consent pathway that would permit a user under 17 to access the Services in any jurisdiction, including the EEA and UK.
+We do not offer a parental- or guardian-consent pathway that would permit a user under 18 to access the Services in any jurisdiction, including the EEA and UK.
 
 ---
 
@@ -569,7 +555,7 @@ WE EXPRESSLY DISCLAIM LIABILITY FOR:
 (b) Missed alarms or notifications resulting from iOS system behavior, Focus Modes, Low Power Mode, device power state, app restrictions, iOS updates, or any other iOS condition;
 (c) Incorrect, duplicated, missing, or conflicting calendar entries created by the App;
 (d) Third-party AI errors, failures, hallucinations, data loss, or service unavailability (OpenAI, Anthropic, Google, xAI);
-(e) Third-party service outages, errors, or unavailability (OpenAI, Anthropic, Google, xAI, Supabase, Apple, Resend, RevenueCat, Sentry, or any other service provider);
+(e) Third-party service outages, errors, or unavailability (OpenAI, Anthropic, Google, xAI, Supabase, Apple, Resend, PostHog, or any other service provider);
 (f) Consequences arising from your decision to capture, process, store, or transmit sensitive, confidential, regulated, or private content through the App;
 (g) Failed, delayed, blocked, or spam-filtered email delivery;
 (h) Reliance on AI output for professional, medical, legal, financial, or safety-critical decisions;
@@ -711,7 +697,7 @@ TO THE EXTENT PERMITTED BY APPLICABLE LAW, YOU AND SQUIRREL BRAIN EACH WAIVE THE
 
 ### 24.1 Entire Agreement
 
-These Terms, together with our Privacy Policy https://squirrelbrainapp.com/legal/privacy-policy.html and any subscription order forms or additional terms applicable to specific features, constitute the entire agreement between you and Squirrel Brain with respect to the Services and supersede all prior agreements, understandings, negotiations, and representations.
+These Terms, together with our Privacy Policy https://squirrelbrainapp.com/legal/privacy-policy and any subscription order forms or additional terms applicable to specific features, constitute the entire agreement between you and Squirrel Brain with respect to the Services and supersede all prior agreements, understandings, negotiations, and representations.
 
 ### 24.2 Severability
 
@@ -727,7 +713,7 @@ You may not assign, transfer, or sublicense your rights or obligations under the
 
 ### 24.5 Force Majeure
 
-Squirrel Brain is not liable for delay or failure in performance of our obligations to the extent caused by circumstances beyond our reasonable control, including acts of God, natural disasters, government actions, war, civil unrest, pandemic, infrastructure failures, Internet outages, third-party service provider outages (including OpenAI, Anthropic, Google, xAI, Supabase, Apple, Resend, RevenueCat, Sentry, and other service providers), labor disputes, or other events beyond our reasonable control ("Force Majeure Events"). For avoidance of doubt, third-party AI service outages (OpenAI, Anthropic, Google, xAI) are Force Majeure Events that disable corresponding App features without triggering liability.
+Squirrel Brain is not liable for delay or failure in performance of our obligations to the extent caused by circumstances beyond our reasonable control, including acts of God, natural disasters, government actions, war, civil unrest, pandemic, infrastructure failures, Internet outages, third-party service provider outages (including OpenAI, Anthropic, Google, xAI, Supabase, Apple, Resend, and other service providers), labor disputes, or other events beyond our reasonable control ("Force Majeure Events"). For avoidance of doubt, third-party AI service outages (OpenAI, Anthropic, Google, xAI) are Force Majeure Events that disable corresponding App features without triggering liability.
 
 ### 24.6 No Third-Party Beneficiaries
 
