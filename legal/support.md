@@ -30,7 +30,7 @@ Everything is optional and asked only when you use the feature. You can change a
 - **Camera and Photos:** snap or choose a receipt, flyer, schedule or screenshot to turn into reminders.
 - **Calendar:** read your events to suggest early reminders and add events you dictate.
 - **Notifications:** reminders, alarms and the morning brief.
-- **Location (while using the app):** adds a place to what you capture.
+- **Location (while using the app):** adds a place to what you capture, and shows the weather and your city in your daily brief.
 - **Contacts:** only adds a "Squirrel" contact so the call screen has a face. We do not read your contacts.
 - **Face ID:** protects your API key.
 
@@ -38,13 +38,13 @@ Everything is optional and asked only when you use the feature. You can change a
 No. The call comes from inside the app (it uses the iPhone call screen but no phone number or carrier minutes). You can decline it, and you can turn calls off in Settings.
 
 ### Do I need an account?
-No. Sign in with Apple is optional, but without it your notes and photos cannot be restored on a new phone or after reinstalling. They are still stored on our servers and sent to our AI providers to be processed, as the Privacy Policy describes.
+Yes. Signing in with Apple is required to use Squirrel Brain. It keeps your notes, photos, saved links and reminders backed up so they can be restored on a new phone or after reinstalling, and it lets your assistant work. Short voice recordings are not backed up. Your content is stored on our servers and sent to our AI providers to be processed, as the Privacy Policy describes.
 
 ### How do I get a copy of my data?
 Email [hello@squirrelbrainapp.com](mailto:hello@squirrelbrainapp.com) from the address tied to your account and ask for an export. We send your notes, tasks and account data in a machine-readable file (JSON or CSV) within 30 days.
 
 ### Which AI services see my information?
-Your voice, photos and text are processed by AI services through our servers to make the app work. See our [Privacy Policy](/legal/privacy-policy) for the full list and what each one receives. We do not sell your data.
+Your voice, photos and text are processed by AI services through our servers to make the app work. See our [Privacy Policy](/legal/privacy-policy) for the list of AI companies we use. We do not sell your data.
 
 ### Meeting recording
 Recording a meeting captures everyone's voice. You are responsible for telling the people in the room and getting their consent where the law requires it.

@@ -1,8 +1,8 @@
 # Privacy Policy — Squirrel Brain
 
 Effective Date: October 4, 2026
-Last Updated: October 4, 2026
-Version: 3.0
+Last Updated: October 8, 2026
+Version: 3.1
 
 ---
 
