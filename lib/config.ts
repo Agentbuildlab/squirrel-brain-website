@@ -1,7 +1,11 @@
 // Public TestFlight beta link (created 2026-06-11, serves build 87+).
-// Swap to the App Store URL at launch — real Apple app ID is 6766505549.
-// NOTE: we're PRE-BETA. Do NOT point public CTAs here yet — use WAITLIST_HREF.
 export const TESTFLIGHT_URL = "https://testflight.apple.com/join/R7WRjGEC";
+
+// Apple app ID recorded in this repo (docs/ASO_DRAFT.md, docs/SITE_SPEC.md).
+// Canonical App Store URL for that ID. On 2026-10-14 the public listing still
+// returned 404 and the iTunes lookup was empty — the ID is the one we have.
+export const APP_STORE_ID = "6766505549";
+export const APP_STORE_URL = `https://apps.apple.com/app/id${APP_STORE_ID}`;
 
 // Pre-beta: every public CTA points to the launch-list signup (the footer
 // email form, id="launch-list"). Swap to TESTFLIGHT_URL / App Store at launch.

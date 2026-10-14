@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
 import { WAITLIST_HREF } from "@/lib/config";
+import AppStoreButton from "@/components/AppStoreButton";
 import { T } from "@/components/v2/PhoneKit";
 import InteractiveCall from "@/components/InteractiveCall";
 
@@ -140,10 +141,11 @@ export default function HeroSection() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.55, delay: 0.38 }}
           >
+            <AppStoreButton />
             <a
               href={WAITLIST_HREF}
-              className="inline-flex items-center gap-2 text-white font-bold text-base lg:text-lg px-7 lg:px-9 py-3.5 lg:py-4 rounded-full hover:opacity-90 active:scale-[0.98] transition-all"
-              style={{ background: T.orange, boxShadow: "0 4px 24px rgba(255,122,26,0.35)" }}
+              className="inline-flex items-center gap-2 font-bold text-base lg:text-lg px-7 lg:px-9 py-3.5 lg:py-4 rounded-full hover:opacity-90 active:scale-[0.98] transition-all"
+              style={{ background: "white", color: T.orange, boxShadow: "inset 0 0 0 1.5px rgba(255,122,26,0.45)" }}
             >
               <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
                 <path d="M9 2a3.4 3.4 0 00-3.4 3.4c0 3.9-1.5 4.9-1.5 4.9h9.8s-1.5-1-1.5-4.9A3.4 3.4 0 009 2zM7.7 13.4a1.3 1.3 0 002.6 0" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
@@ -168,7 +170,7 @@ export default function HeroSection() {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.5 }}
           >
-            We&rsquo;ll email you the moment it&rsquo;s ready · free to use · iOS
+            Free to use at launch · nothing to buy · iOS
           </motion.p>
 
           {/* Interactive demo on mobile — the hook has to be tappable on a phone */}
