@@ -151,6 +151,23 @@
     .info-box.blue  { border-left-color: #4A8FE7; background: #eef0f8; }
     .info-box.purple { border-left-color: #a78bfa; background: #f3eeff; }
 
+    .doc-section h3 {
+      font-size: 18px; font-weight: 800; color: #2a1a08;
+      margin: 28px 0 10px; letter-spacing: -0.01em;
+    }
+    .draft-banner {
+      border: 2px solid #c2410c; background: #fff1e6;
+      border-radius: 14px; padding: 18px 20px; margin: 0 0 22px;
+    }
+    .draft-banner-kicker {
+      display: inline-block; font-size: 11px; font-weight: 800;
+      letter-spacing: 0.14em; text-transform: uppercase; color: #fff;
+      background: #c2410c; border-radius: 100px; padding: 4px 12px; margin-bottom: 12px;
+    }
+    .doc-section .draft-banner p { font-size: 15px; color: #5a3018; line-height: 1.65; margin-bottom: 10px; }
+    .doc-section .draft-banner p:last-child { margin-bottom: 0; }
+    .doc-section .draft-banner strong { color: #2a1a08; }
+
     /* ── FOR AGENTS HERO BOX ─────────────────────────────── */
     .for-agents-box {
       background: #eef7ee; border: 1px solid #22C55E33;
@@ -486,6 +503,8 @@
         <li><a href="#auth">Authentication &amp; API key</a></li>
         <li><a href="#session-start">Session start sequence</a></li>
         <li><a href="#tools">All 31 tools — full reference</a></li>
+        <li><a href="#flyer-tools-draft">Coming soon (DRAFT) — flyer smoke-check tools</a></li>
+        <li><a href="#flyer-ship-order">Ship order (planned) — still draft</a></li>
         <li><a href="#examples">curl examples</a></li>
         <li><a href="#checklist">Getting started checklist</a></li>
         <li><a href="#agent-configs">Copy-paste agent configs</a></li>
@@ -929,6 +948,235 @@
         <strong>⚠️ The real call needs the latest Squirrel Brain build.</strong><br><br>
         The break-through call — the one that rings right through <strong>Silent mode, Focus, and a locked screen</strong> and plays the squirrel's voice — requires the <strong>newest version of the Squirrel Brain app</strong> installed on the user's iPhone. On older builds it falls back to a standard alert where the OS allows. So if a call isn't ringing through, the first thing to check is that the user has <strong>updated to the current App Store / TestFlight build</strong>.
       </div>
+    </div>
+
+    <hr class="doc-divider" />
+
+    <!-- ──────────────────────────────────────────────────────── -->
+    <!-- DRAFT: flyer smoke-check tools (not live)               -->
+    <!-- ──────────────────────────────────────────────────────── -->
+    <div class="doc-section" id="flyer-tools-draft">
+      <div class="doc-section-label">Coming soon — not in the live tool table</div>
+      <h2 class="doc-section-title">Coming soon (DRAFT) — Flyer smoke-check tools</h2>
+
+      <div class="draft-banner">
+        <div class="draft-banner-kicker">Status: DRAFT / coming soon</div>
+        <p><strong>Not live on the MCP portal yet.</strong> Do not call <code>ingest_flyer</code> or <code>verify_flyer_events</code> until Squirrel Brain confirms those names appear in <code>tools/list</code> and the Agent Portal.</p>
+        <p>Param names below are the planned contract from Squirrel Brain. They may tighten when the portal ships. When the tools are live, this banner comes off and the tools move into the live WRITE table and the server card. They are not in either place today. These docs are not a shipped tool.</p>
+      </div>
+
+      <h3 id="flyer-ship-order">Ship order (planned)</h3>
+      <p>Still <strong>DRAFT / coming soon</strong>. This is the order these pieces are planned to ship. Nothing here is live, and nothing here is in the live tool table or the server card, until Squirrel Brain confirms the names in <code>tools/list</code>.</p>
+      <ol class="checklist">
+        <li><span class="step-num">1</span><div><strong>Location field + GPS ban.</strong> Structured location <code>{title, address, latitude, longitude}</code>. The Maps Location pin is the venue or ballpark address from the flyer. Never the phone&rsquo;s home, captured GPS, or <code>captured_location</code> where the photo was taken.</div></li>
+        <li><span class="step-num">2</span><div><strong>dry_run / verify / idempotency.</strong> <code>dry_run</code> on ingest. <code>verify_flyer_events</code>. Create-new only (no backfill rewrite). A write requires <code>idempotency_key</code> (unless <code>dry_run</code> is true). The same key returns the original rows and does not insert a duplicate. Concurrent retries are conflict-safe via the flyer fingerprint unique index. Verify selects saved rows with <code>tag</code> or <code>idempotency_key</code> (one of the two). Then delete or cancel those smoke items after a passing verify. Stop on verify fail (no re-ingest loop). One flyer at a time under spend caps.</div></li>
+        <li><span class="step-num">3</span><div><strong>Signed-URL <code>ingest_flyer</code>.</strong> Primary path (A), for any MCP client: picture &rarr; upload a jpeg or png &rarr; signed <code>image_url</code> on the <code>portal-images</code> or <code>pix-thumbs</code> bucket (<code>/storage/v1/object/sign/&lt;bucket&gt;/...?token=</code>) &rarr; <code>ingest_flyer</code> &rarr; <code>verify_flyer_events</code> against that image. Not arbitrary HTTPS, and not a generic allowlisted CDN (SSRF guard). Size and type caps. Upload first. Runtime requires <code>image_url</code>.</div></li>
+        <li><span class="step-num">4</span><div><strong>Structured errors + server-row check.</strong> Ingest and verify return structured pass/fail errors. Verify checks the server <code>user_items</code> rows (wall-clock + <code>timeZone</code> + structured location), not Calendar.app and not EventKit. Title-only is a fail. A success write does not update the phone calendar. The Calendar / EventKit pin can lag until down-sync.</div></li>
+      </ol>
+
+      <p>Planned pair for flyer smoke checks, for <strong>any MCP client</strong> that holds an <code>alarms:write</code> API key: ingest a <strong>flyer picture</strong> into new calendar items with a real structured location, then verify wall-clock time (including DST), location shape, and that the write stayed inside caps. Auth is the same <code>X-API-Key: sb_…</code> header as every other write tool. No anonymous access. No client-specific flyer auth.</p>
+
+      <h3><code>ingest_flyer</code> — planned write</h3>
+      <div class="info-box" style="border-left:4px solid #c2410c;background:#fff6f0;">
+        <strong>Primary input is a flyer picture. <code>image_url</code> is required, and it is not arbitrary HTTPS.</strong> Any MCP client uploads the flyer picture first (jpeg or png), then passes the signed URL. The only accepted URLs are already on the Squirrel Brain buckets <code>portal-images</code> or <code>pix-thumbs</code>, at <code>/storage/v1/object/sign/&lt;bucket&gt;/...?token=</code>. A generic allowlisted CDN is not accepted. Any other host is rejected (SSRF guard). Optional <code>text</code> is pasted words only, and it does not replace <code>image_url</code>.
+      </div>
+      <p>Ingest a flyer picture (<code>image_url</code>) and write new server rows for the events on it. Times go through <code>resolveWallClock</code> plus <code>timeZone</code> (DST-safe on a build that includes that write path). Location is a structured object only. This tool creates new items; it does not backfill or rewrite events that are already saved. A write requires <code>idempotency_key</code> unless <code>dry_run</code> is true. The same key returns the original rows and does not insert a duplicate. Concurrent retries are conflict-safe via the flyer fingerprint unique index.</p>
+      <div class="info-box">
+        <strong>What a successful write actually means.</strong> <code>ingest_flyer</code> writes the server <code>user_items</code> row only. It does <strong>not</strong> update Calendar.app or EventKit. <code>id</code>, <code>start</code>, <code>end</code> (null — not stored and not invented), <code>location</code>, and <code>timeZone</code> in the response are server values. The phone Calendar / EventKit pin can lag until down-sync projects those fields. Do not treat the tool return as a live phone pin.
+      </div>
+      <p><strong>Auth:</strong> same <code>X-API-Key</code> as other write tools, on any MCP client with an <code>alarms:write</code> key. No anonymous key.</p>
+
+      <table class="tools-table">
+        <thead>
+          <tr>
+            <th>Parameter</th>
+            <th>Planned contract</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="tool-params"><span class="tag-req">image_url</span></td>
+            <td class="tool-desc"><strong>Flyer picture (photo of the flyer). Required.</strong> Signed HTTPS URL only, for a jpeg or png already on the Squirrel Brain buckets <code>portal-images</code> or <code>pix-thumbs</code>, path <code>/storage/v1/object/sign/&lt;bucket&gt;/...?token=</code>. Upload first. Not arbitrary HTTPS. Not a generic allowlisted CDN. Other hosts are rejected (SSRF guard). Reject oversize images and non-jpeg/png blobs.</td>
+          </tr>
+          <tr>
+            <td class="tool-params"><span class="tag-opt">text</span></td>
+            <td class="tool-desc">string, optional secondary. Pasted words when you already have them. Does not replace <code>image_url</code>. Runtime still requires <code>image_url</code>. Do not paste secrets, API keys, or personal emails.</td>
+          </tr>
+          <tr>
+            <td class="tool-params"><span class="tag-opt">dry_run</span></td>
+            <td class="tool-desc">boolean. When <code>true</code>, parse only and write nothing. Preferred for the first smoke. <code>idempotency_key</code> is not required while <code>dry_run</code> is true.</td>
+          </tr>
+          <tr>
+            <td class="tool-params"><span class="tag-opt">timeZone</span></td>
+            <td class="tool-desc">string, optional. IANA timezone (for example <code>America/New_York</code>). CamelCase <code>timeZone</code>. When omitted, defaults to the profile from <code>get_user_profile</code>.</td>
+          </tr>
+          <tr>
+            <td class="tool-params"><span class="tag-req">idempotency_key</span></td>
+            <td class="tool-desc">string. <strong>Required unless <code>dry_run</code> is true.</strong> Max 128 characters: letters, digits, and <code>. _ : -</code>. The same key returns the original rows and does not insert a duplicate. Concurrent retries are conflict-safe via the flyer fingerprint unique index.</td>
+          </tr>
+          <tr>
+            <td class="tool-params"><span class="tag-opt">tag</span></td>
+            <td class="tool-desc">string, optional. Marker stored in notes so verify can filter. Example: <code>[QA-184]</code>.</td>
+          </tr>
+          <tr>
+            <td class="tool-params"><span class="tag-opt">agent_name</span></td>
+            <td class="tool-desc">string, optional. Maker name any MCP client may set. Max 80 characters. This is the attribution param — do not rely on a client-specific header.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="info-box">
+        <strong>Planned behavior:</strong><br>
+        Never invent a time. If the flyer says TBA, store a null time and the label &ldquo;No time, tap to set&rdquo;.<br>
+        Uses <code>resolveWallClock</code> + <code>timeZone</code> so wall-clock stays DST-safe on a build that includes that write path. Older binaries still corrupt November-and-later times. Do not treat a printed local time as UTC.<br>
+        Location is the structured object below — never a single free-text string. The Maps Location pin is the venue or ballpark address printed on the flyer. Never the phone&rsquo;s home, captured GPS, or <code>captured_location</code> of where the photo was taken.<br>
+        Keep the title clean. Put extras in notes.<br>
+        Pass optional <code>agent_name</code> (max 80) for the maker name. Any MCP client may set it.<br>
+        Flyer AI sits under the existing per-user and fleet spend caps.<br>
+        No <code>cell_alert</code> and no notify unless the user asks. Default is off.<br>
+        Create-new only. Do not rewrite events that were already saved wrong.
+      </div>
+
+      <h3>Structured <code>location</code> only</h3>
+      <p>When a location is present, this object is the only accepted shape. Never pass one unstructured free-text string as the whole location. The Maps Location pin is the venue or ballpark address on the flyer — never the phone&rsquo;s home, captured GPS, or <code>captured_location</code> where the photo was taken. On <code>verify_flyer_events</code> <code>expected[].location</code>, <code>address</code> is required. Leave <code>latitude</code> and <code>longitude</code> null when the flyer has no coordinates. Do not invent them. Do not scrape contacts or photos into events.</p>
+      <div class="code-label">Required location shape</div>
+      <div class="code-block">{
+  "title": "string | null",
+  "address": "string | null",
+  "latitude": "number | null",
+  "longitude": "number | null"
+}</div>
+      <div class="code-label">Example — venue plus street, coordinates unknown</div>
+      <div class="code-block">{
+  "title": "Austin Convention Center",
+  "address": "500 E Cesar Chavez St, Austin, TX 78701",
+  "latitude": null,
+  "longitude": null
+}</div>
+
+      <h3><code>verify_flyer_events</code> — planned write / verify</h3>
+      <p>After ingest, check the saved <strong>server rows</strong> for a smoke: wall-clock and DST, structured location, and <code>timeZone</code> on <code>user_items</code>. Verify does not read Calendar.app or EventKit. The phone pin can still lag until down-sync. A title-only match is a fail. Location must be the flyer venue, never <code>captured_location</code> or home GPS.</p>
+      <p><strong>Auth:</strong> same <code>X-API-Key</code> as other write tools, on any MCP client with an <code>alarms:write</code> key. No anonymous key.</p>
+      <p>Schema-required arguments are <code>image_url</code> and <code>expected</code>. Also pass <code>tag</code> or <code>idempotency_key</code> — one of those two is required to select the saved rows. <code>tag</code> filters notes. <code>idempotency_key</code> filters that ingest batch fingerprint. <code>tag</code> alone is not always required. Optional <code>timeZone</code> overrides the profile timezone. Pass the same signed picture URL you ingested.</p>
+
+      <table class="tools-table">
+        <thead>
+          <tr>
+            <th>Parameter</th>
+            <th>Planned contract</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="tool-params"><span class="tag-req">image_url</span></td>
+            <td class="tool-desc"><strong>Required.</strong> The same signed jpeg/png URL on <code>portal-images</code> or <code>pix-thumbs</code> (<code>/storage/v1/object/sign/&lt;bucket&gt;/...?token=</code>) that you passed to <code>ingest_flyer</code>. Not arbitrary HTTPS.</td>
+          </tr>
+          <tr>
+            <td class="tool-params"><span class="tag-req">expected</span></td>
+            <td class="tool-desc"><strong>Required array.</strong> Each item needs <code>title</code>, <code>location</code> (<code>title</code>, <code>address</code>, <code>latitude</code>, <code>longitude</code> — <code>address</code> is required), and <code>timeZone</code>. Time is either <code>wall_clock</code>, or untimed with <code>event_date</code> and <code>start: null</code>. Optional per item: <code>id</code>, <code>start</code>, <code>end</code>, <code>committed</code>. Title-only is a fail.</td>
+          </tr>
+          <tr>
+            <td class="tool-params"><span class="tag-opt">tag</span></td>
+            <td class="tool-desc">string. One of <code>tag</code> or <code>idempotency_key</code> is required. <code>tag</code> filters notes for the marker stored by ingest. Not required when <code>idempotency_key</code> is set.</td>
+          </tr>
+          <tr>
+            <td class="tool-params"><span class="tag-opt">idempotency_key</span></td>
+            <td class="tool-desc">string. One of <code>tag</code> or <code>idempotency_key</code> is required. Filters the saved rows for that ingest batch fingerprint. Not required when <code>tag</code> is set.</td>
+          </tr>
+          <tr>
+            <td class="tool-params"><span class="tag-opt">timeZone</span></td>
+            <td class="tool-desc">string, optional. IANA timezone. CamelCase <code>timeZone</code>. When omitted, defaults to the profile from <code>get_user_profile</code>.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="code-label"><code>expected[]</code> item — wall-clock, address required</div>
+      <div class="code-block">{
+  "title": "Saturday market",
+  "location": {
+    "title": "Austin Convention Center",
+    "address": "500 E Cesar Chavez St, Austin, TX 78701",
+    "latitude": null,
+    "longitude": null
+  },
+  "timeZone": "America/Chicago",
+  "wall_clock": "2026-11-07T19:00:00"
+}</div>
+      <p>Untimed alternative on the same item: <code>untimed: true</code>, <code>event_date</code>, and <code>start: null</code> (no <code>wall_clock</code>). Do not invent a start time. Location address is the flyer venue, never captured GPS.</p>
+      <div class="info-box">
+        <strong>Failures</strong> return a structured error on the JSON-RPC <code>data</code>:<br>
+        <code>{ "code": "string", "retryable": false, "field": "image_url", "hint": "string" }</code><br>
+        <code>field</code> is optional.<br><br>
+        <strong>Ingest success and dry_run fields</strong> (server values only — this response does not update Calendar.app or EventKit):<br>
+        <code>committed</code> means the server <code>user_items</code> row (<code>committed_means: "user_items"</code>). Also <code>saved_to: "user_items"</code>, <code>device_calendar: false</code>, <code>phone_calendar: "not_updated"</code>.<br>
+        <code>id</code>, <code>start</code>, <code>end</code> (null — not stored and not invented), <code>location</code>, and <code>timeZone</code> are stored server values. On a dry run, <code>id</code> is null when the row is only planned.<br><br>
+        Verify checks those server rows (wall-clock + <code>timeZone</code> + structured location). It does not check Calendar.app or EventKit. Title-only match is a fail. The phone pin can lag until down-sync.
+      </div>
+
+      <h3>Primary path (A) — picture &rarr; upload &rarr; signed portal-images or pix-thumbs URL &rarr; ingest_flyer</h3>
+      <div class="info-box" style="border-left:4px solid #c2410c;background:#fff6f0;">
+        <strong>Locked primary path (DRAFT / coming soon), any MCP client:</strong> picture &rarr; upload jpeg/png &rarr; signed <code>image_url</code> on <code>portal-images</code> or <code>pix-thumbs</code> &rarr; <code>ingest_flyer</code>.<br>
+        <code>image_url</code> is <strong>not</strong> arbitrary HTTPS and <strong>not</strong> a generic allowlisted CDN. Path shape: <code>/storage/v1/object/sign/&lt;bucket&gt;/...?token=</code>. Upload first. Runtime requires <code>image_url</code>. Other hosts are rejected (SSRF guard). Oversize images and non-jpeg/png blobs are rejected.<br>
+        Optional <code>text</code> is pasted words only. It does not replace the picture.<br>
+        Email-to-portal is Phase 2 / coming later — not in this draft, and not the primary path.
+      </div>
+      <ol class="checklist">
+        <li><span class="step-num">1</span><div><strong>Upload the flyer picture</strong> (jpeg or png) into <code>portal-images</code> or <code>pix-thumbs</code>, then take the signed URL <code>/storage/v1/object/sign/&lt;bucket&gt;/...?token=</code>. Do not pass any other HTTPS URL.</div></li>
+        <li><span class="step-num">2</span><div><strong><code>ingest_flyer(image_url)</code>.</strong> <code>image_url</code> is required. <code>dry_run: true</code> is optional first (parse only; <code>idempotency_key</code> not required). A real write requires <code>idempotency_key</code>. Concurrent retries with that key are conflict-safe via the flyer fingerprint unique index.</div></li>
+        <li><span class="step-num">3</span><div><strong>Server rows only.</strong> A write stores the events on <code>user_items</code> with structured location, times, notes, and <code>timeZone</code>. It does not update Calendar.app or EventKit. The response says <code>saved_to: "user_items"</code>, <code>device_calendar: false</code>, and <code>phone_calendar: "not_updated"</code>. <code>committed</code> means that server row (<code>committed_means: "user_items"</code>). The Maps address on the row is the venue or ballpark on the flyer, never the phone&rsquo;s home, captured GPS, or <code>captured_location</code>. <code>end</code> stays null when the flyer does not give one. The phone pin can lag until down-sync.</div></li>
+        <li><span class="step-num">4</span><div><strong><code>verify_flyer_events</code> against that same image.</strong> Required: <code>image_url</code> and <code>expected</code>, plus <code>tag</code> or <code>idempotency_key</code> (one of the two) to select the saved rows. A pass is a server-row match of wall-clock, <code>timeZone</code>, and structured location. Not a Calendar.app or EventKit check. Title-only is a fail.</div></li>
+      </ol>
+      <div class="info-box">
+        <strong>Rules on primary path (A):</strong><br>
+        Maps Location pin = venue or ballpark address from the flyer. Never the phone&rsquo;s home, captured GPS, or <code>captured_location</code> where the photo was taken.<br>
+        TBA = no invented time (null time / &ldquo;No time, tap to set&rdquo;). Do not invent <code>end</code>.<br>
+        DST wall-clock via <code>resolveWallClock</code> + <code>timeZone</code>. Do not call this safe for smoke until the running build includes that write path.<br>
+        Flyer / OCR AI sits under the existing per-user and fleet spend caps.<br>
+        Auth is the same <code>X-API-Key</code> as other write tools, for any MCP client with an <code>alarms:write</code> key. No anonymous access.<br>
+        SSRF guard: <code>image_url</code> must be a signed jpeg/png URL on <code>portal-images</code> or <code>pix-thumbs</code>. Reject every other host. Reject oversize and non-jpeg/png blobs.<br>
+        Writes require <code>idempotency_key</code> (max 128; letters, digits, <code>. _ : -</code>) unless <code>dry_run</code> is true. The same key returns the original rows. Concurrent retries are conflict-safe via the flyer fingerprint unique index.<br>
+        Success does not update Calendar.app or EventKit. <code>phone_calendar</code> is <code>"not_updated"</code> and <code>device_calendar</code> is <code>false</code>.
+      </div>
+
+      <h3>Flyer smoke-check how-to</h3>
+      <p>Run this only after <code>tools/list</code> actually contains these names, and only on a build Squirrel Brain confirms includes the DST <code>resolveWallClock</code> write path. Until then, read the contract and stop.</p>
+      <ol class="checklist">
+        <li><span class="step-num">1</span><div><strong>Auth.</strong> Same as every other write tool: <code>X-API-Key: sb_…</code>, plus the existing <code>Authorization</code> / <code>apikey</code> headers already documented under Authentication if your client sends them. No anonymous access. No special flyer auth.</div></li>
+        <li><span class="step-num">2</span><div><strong>Spend and rate caps.</strong> Treat a flyer ingest that writes (not a dry run) like Alarm creates plus Write (items) on the <a href="#rate-limits">Rate Limits</a> table. Flyer AI also counts against the existing per-user and fleet spend caps. One flyer smoke is a few creates at most. Prefer <code>dry_run: true</code> first. One flyer at a time. Do not loop ingest, and do not run an uncapped batch overnight. Stop on rate-limit errors; do not retry-storm.</div></li>
+        <li><span class="step-num">3</span><div><strong>DST and wall-clock.</strong> Call <code>get_user_profile</code> first. Pass IANA <code>timeZone</code> only to override that profile; otherwise leave it off. Call <code>get_current_time</code> so you are not guessing &ldquo;now&rdquo;. The write path uses <code>resolveWallClock</code> plus <code>timeZone</code>. Never assume the flyer&rsquo;s printed local time is UTC. Never invent a time: TBA becomes a null time and &ldquo;No time, tap to set&rdquo;. After create, <code>verify_flyer_events</code> must show the <strong>server row</strong> matches that wall clock across DST boundaries. That check is not Calendar.app or EventKit.</div></li>
+        <li><span class="step-num">4</span><div><strong>Structured location only.</strong> Use the object with <code>title</code>, <code>address</code>, <code>latitude</code>, and <code>longitude</code>. On <code>expected[]</code>, <code>address</code> is required and must be the flyer venue. Never stuff a paragraph into a string <code>location</code>. Never use captured GPS or home. Do not invent coordinates. No contacts or photos scraped into events. Title stays clean; extras go in notes, including the optional <code>tag</code>.</div></li>
+        <li><span class="step-num">5</span><div><strong>Smoke sequence.</strong> Dedicated test calendar, or clearly named test events only — never a real personal calendar. Any MCP client. Follow primary path (A): picture &rarr; upload jpeg/png to <code>portal-images</code> or <code>pix-thumbs</code> &rarr; signed <code>image_url</code> &rarr; <code>ingest_flyer</code>. Not arbitrary HTTPS. Then: <code>get_user_profile</code> and <code>get_current_time</code> &rarr; <code>ingest_flyer</code> with that <code>image_url</code> and <code>dry_run: true</code> &rarr; review the planned server fields (<code>id</code> null, <code>end</code> null, <code>phone_calendar: "not_updated"</code>) &rarr; <code>ingest_flyer</code> once with writes on, the same <code>image_url</code>, a required <code>idempotency_key</code>, optional <code>agent_name</code>, and a <code>tag</code> such as <code>[QA-184]</code>. Optional <code>text</code> only if you already have pasted words. The write updates <code>user_items</code> only. &rarr; <code>verify_flyer_events</code> with that <code>image_url</code>, <code>expected</code>, and either <code>tag</code> or the same <code>idempotency_key</code>. Require a server-row match of wall-clock, structured location, and <code>timeZone</code>. After a passing verify, delete or cancel the smoke items and confirm zero residue with <code>list_alarms</code> and <code>list_items</code>. Ingest is create-new only. Repeating the same <code>idempotency_key</code> must not insert a second copy. No <code>cell_alert</code> or notify unless the user asks.</div></li>
+        <li><span class="step-num">6</span><div><strong>Do not claim live.</strong> If <code>tools/list</code> does not include these names, the portal does not have them yet. Do not invent wrappers. Label the tools as planned until Squirrel Brain confirms the MCP names are live.</div></li>
+      </ol>
+      <div class="code-label">Primary path (A) — dry run, signed <code>portal-images</code> URL</div>
+      <div class="code-block">{
+  "image_url": "https://geczbtsjfbvfukdzdemr.supabase.co/storage/v1/object/sign/portal-images/flyer.jpg?token=...",
+  "tag": "[QA-184]",
+  "dry_run": true,
+  "agent_name": "smoke-check"
+}</div>
+      <p><code>pix-thumbs</code> is the other allowed bucket, same <code>/storage/v1/object/sign/&lt;bucket&gt;/...?token=</code> shape, jpeg or png only. A write drops <code>dry_run</code> (or sets it false) and adds required <code>idempotency_key</code> (max 128; letters, digits, <code>. _ : -</code>). Optional <code>text</code> is pasted words only and is not shown here. This URL is not an arbitrary HTTPS link.</p>
+      <div class="code-label">Write — <code>idempotency_key</code> required</div>
+      <div class="code-block">{
+  "image_url": "https://geczbtsjfbvfukdzdemr.supabase.co/storage/v1/object/sign/portal-images/flyer.jpg?token=...",
+  "tag": "[QA-184]",
+  "idempotency_key": "qa-184.flyer.1",
+  "timeZone": "America/Chicago",
+  "agent_name": "smoke-check"
+}</div>
+
+      <h3>Adversarial guards</h3>
+      <p>These guards are part of the smoke how-to. A smoke that skips them is not a pass.</p>
+      <ol class="checklist">
+        <li><span class="step-num">1</span><div><strong>Do not claim &ldquo;safe for smoke&rdquo;</strong> until the tools exist on a build that includes the DST <code>resolveWallClock</code> write path. Older binaries still corrupt November-and-later times.</div></li>
+        <li><span class="step-num">2</span><div><strong>Dedicated test calendar only</strong> (or clearly named test events). Never Adam&rsquo;s real calendar. Delete and verify cleanup after the smoke.</div></li>
+        <li><span class="step-num">3</span><div><strong><code>verify_flyer_events</code> must assert wall-clock time, structured location, and <code>timeZone</code> on the server row.</strong> A title-only match is not a pass. Do not treat Calendar.app or EventKit as the check.</div></li>
+        <li><span class="step-num">4</span><div><strong>No backfill.</strong> Do not rewrite already-saved wrong events unless an explicit tool says it does that. <code>ingest_flyer</code> is create-new only.</div></li>
+        <li><span class="step-num">5</span><div><strong>Image and input limits, plus the SSRF guard.</strong> <code>image_url</code> is not arbitrary HTTPS and not a generic CDN. Accept only a signed jpeg or png already on <code>portal-images</code> or <code>pix-thumbs</code> (<code>/storage/v1/object/sign/&lt;bucket&gt;/...?token=</code>). Reject every other host. Reject oversize or non-jpeg/png blobs. Do not paste secrets, API keys, or personal emails into <code>text</code> or tool arguments.</div></li>
+        <li><span class="step-num">6</span><div><strong>One flyer at a time</strong> under the fleet and per-user AI caps. Do not run uncapped batch smokes overnight.</div></li>
+        <li><span class="step-num">7</span><div><strong>If verify fails, stop and file.</strong> Do not re-ingest in a loop. That creates duplicates and burns spend.</div></li>
+        <li><span class="step-num">8</span><div><strong>Docs are not shipped.</strong> Keep these tools labeled planned until Squirrel Brain confirms the MCP names are live.</div></li>
+      </ol>
     </div>
 
     <hr class="doc-divider" />

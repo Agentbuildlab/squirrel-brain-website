@@ -379,6 +379,23 @@ export default function McpPage() {
                 Every tool, with parameters, is in the{" "}
                 <a href="/mcp-docs" style={{ color: "#FF7A1A" }} className="hover:underline">developer docs</a>.
               </p>
+              <div
+                className="mt-8 rounded-2xl border px-5 py-4 text-left"
+                style={{ borderColor: "rgba(255,122,26,0.55)", background: "rgba(255,122,26,0.1)" }}
+              >
+                <p className="text-xs font-bold tracking-widest uppercase mb-2" style={{ color: "#FF7A1A" }}>
+                  Coming soon (DRAFT)
+                </p>
+                <p className="text-sm leading-relaxed" style={{ color: "rgba(255,245,232,0.88)" }}>
+                  Coming soon for any MCP client: picture &rarr; upload jpeg/png to <span className="font-mono">portal-images</span> or <span className="font-mono">pix-thumbs</span> &rarr; signed <span className="font-mono">image_url</span> &rarr;{" "}
+                  <span className="font-mono">ingest_flyer</span>. Writes require <span className="font-mono">idempotency_key</span>. Not arbitrary HTTPS.{" "}
+                  <span className="font-mono">verify_flyer_events</span> checks the server rows, not Calendar.app. A write updates <span className="font-mono">user_items</span> only (<span className="font-mono">phone_calendar: &quot;not_updated&quot;</span>); the phone pin can lag until down-sync. See the{" "}
+                  <a href="/mcp-docs#flyer-tools-draft" style={{ color: "#FF7A1A" }} className="hover:underline">
+                    draft contract
+                  </a>
+                  . Not live until the portal lists them in <span className="font-mono">tools/list</span>.
+                </p>
+              </div>
             </FadeIn>
           </div>
         </section>
