@@ -6,27 +6,15 @@
 const FAQS: { q: string; a: string }[] = [
   {
     q: "What is Squirrel Brain?",
-    a: "Squirrel Brain is an iOS app that turns photos, voice notes, screenshots, and forwarded texts into reminders, alarms, and calendar events — then makes sure you follow through, including a real phone call that rings when your ringer's on, vibrates on silent, and reaches you on a locked screen.",
-  },
-  {
-    q: "How is it different from a notes app or the Reminders app?",
-    a: "Most apps only store what you capture — it just sits there. Squirrel Brain acts on it: it sets alarms, adds calendar events, organizes photos into boards, and calls you when something can't slip.",
+    a: "Squirrel Brain is an iOS app that turns photos, voice notes, screenshots, and forwarded texts into reminders, alarms, and calendar events — then makes sure you follow through, including a real phone call for the one thing you can't miss.",
   },
   {
     q: "What happens to the call when my phone's on silent?",
-    a: "It comes through like a real phone call: it rings when your ringer's on, and vibrates on silent — exactly like any incoming call — and it shows on your locked screen either way. Because it's a real call, not a system alarm, the silent switch mutes the ring the same as it does for any call. You can also turn it off entirely with the app's own 'Silence all reminders' switch.",
-  },
-  {
-    q: "Can my AI tools use it too?",
-    a: "If you want — it's completely optional, and the app never needs it. Squirrel Brain has a built-in MCP portal, so an MCP-capable agent — Claude Code, Cursor, or one you run yourself — can set alarms, file notes, and even have your squirrel call you. Everything about it lives on the MCP page.",
-  },
-  {
-    q: "Where do my photos and voice notes go?",
-    a: "They're processed to pull out what matters — a date, a name, an amount — and stored in your own private account, visible only to you. Your camera roll stays yours: Squirrel Brain only touches the photos you hand it, never scans your library, and you can delete anything you've saved at any time.",
+    a: "It comes through like any incoming call: it rings when your ringer's on, vibrates on silent, and shows on your locked screen either way. Because it's a real call — not a system alarm — the silent switch mutes the ring just like it does for any call. You can also silence every reminder with one switch in the app.",
   },
   {
     q: "What does it cost, and what devices does it run on?",
-    a: "iPhone only for now. Squirrel Brain is free to use at launch: there is nothing to buy and no trial to start. Paid plans may come later, and if they do we will say so clearly before anyone is asked to pay. Join the launch list and we'll email you when it's ready.",
+    a: "iPhone only for now, and free to use at launch — nothing to buy and no trial to start. Paid plans may come later; if they do, we'll say so clearly first. Join the launch list and we'll email you when it's ready.",
   },
 ];
 
