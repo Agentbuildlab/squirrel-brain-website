@@ -68,8 +68,13 @@ export default function ForAiPage() {
               photos, screenshots, texts, and emails into reminders, alarms, notes, and
               calendar events. You can use it on its own. MCP-capable agents — Claude
               Code, Claude Desktop, Cursor, or an agent you run — can also drive it
-              through a built-in Model Context Protocol server. Consumer ChatGPT cannot
-              connect a custom MCP server yet.
+              through a built-in Model Context Protocol server. ChatGPT can add a custom
+              MCP server on Business, Enterprise, and Edu plans (full MCP, including
+              write actions, is in beta on the web). Pro can connect a custom server
+              for read and fetch. An admin adds it from Plugins and chooses the
+              authentication method. Squirrel Brain&rsquo;s server expects an{" "}
+              <code>X-API-Key</code> header. This page does not claim ChatGPT can send
+              that header; that connection has not been verified.
             </p>
           </section>
 

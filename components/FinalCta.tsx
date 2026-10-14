@@ -11,7 +11,6 @@
 import Image from "next/image";
 import { motion, useReducedMotion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { WAITLIST_HREF } from "@/lib/config";
 import AppStoreButton from "@/components/AppStoreButton";
 import { T } from "@/components/v2/PhoneKit";
 
@@ -151,20 +150,6 @@ export default function FinalCta() {
           transition={{ duration: 0.5, delay: 0.44, ease: [0.34, 1.3, 0.64, 1] }}
         >
           <AppStoreButton size="lg" />
-          <motion.a
-            href={WAITLIST_HREF}
-            className="inline-flex items-center gap-3 font-bold text-lg lg:text-xl px-10 py-5 rounded-full hover:opacity-90 active:scale-[0.98]"
-            style={{
-              background: "white",
-              color: T.orange,
-              boxShadow: "inset 0 0 0 1.5px rgba(255,122,26,0.45)",
-            }}
-          >
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-              <path d="M10 2.2a3.8 3.8 0 00-3.8 3.8c0 4.3-1.7 5.4-1.7 5.4h11s-1.7-1.1-1.7-5.4A3.8 3.8 0 0010 2.2zM8.6 14.9a1.4 1.4 0 002.8 0" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-            Join the launch list
-          </motion.a>
         </motion.div>
 
         <motion.p

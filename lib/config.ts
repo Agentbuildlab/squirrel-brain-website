@@ -7,6 +7,10 @@ export const TESTFLIGHT_URL = "https://testflight.apple.com/join/R7WRjGEC";
 export const APP_STORE_ID = "6766505549";
 export const APP_STORE_URL = `https://apps.apple.com/app/id${APP_STORE_ID}`;
 
+// TODO: flip to true once the public listing for APP_STORE_URL is live.
+// On 2026-10-14 it still 404'd, so the visible button must not offer a download.
+export const APP_STORE_LISTING_LIVE = false;
+
 // Pre-beta: every public CTA points to the launch-list signup (the footer
 // email form, id="launch-list"). Swap to TESTFLIGHT_URL / App Store at launch.
 export const WAITLIST_HREF = "#launch-list";
