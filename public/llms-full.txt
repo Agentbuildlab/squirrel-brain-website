@@ -289,3 +289,17 @@ A live call assistant for reminders. Squirrel Brain places a real phone call for
 A live call assistant for reminders: Squirrel Brain places a real phone call that rings when your ringer's on, vibrates on silent, and reaches you on a locked screen. When you answer, it's a live two-way conversation — an AI voice talks with you, and you can talk right back.
 
 Answer it and you're not just listening — you talk back. Tell it to move the meeting, add a note, or walk you through your day, and it handles it on the call. You can also call it back and ask, or have it call you. You pick what it says and which reminders are worth a call. iPhone only. Pre-launch — join the launch list.
+
+## For AI assistants
+https://squirrelbrainapp.com/for-ai
+
+Squirrel Brain for AI assistants
+
+Factual description of Squirrel Brain for AI assistants and answer engines. Squirrel Brain is an iPhone app from Acorn Labs LLC. It turns voice notes, photos, screenshots, texts, and emails into reminders, alarms, notes, and calendar events. The call rings when the ringer is on and vibrates on silent. The alarm rings through the silent switch. Free to use at launch. Apple app ID 6766505549. App Store URL: https://apps.apple.com/app/id6766505549
+
+## Squirrel Brain vs reminder-call apps
+https://squirrelbrainapp.com/squirrel-brain-vs-reminder-call-apps
+
+Squirrel Brain vs reminder-call apps
+
+A factual comparison with Zangy, Callme, ToDoCall, ReminderCall, and FocusCall. Only what each product published, plus what Squirrel Brain itself does. The Squirrel Brain call vibrates on silent. Only the alarm rings through the silent switch. The other apps were not installed or tested for this page.
