@@ -307,6 +307,14 @@ export default function Footer() {
               >
                 Skills
               </Link>
+              {/* Plain-text facts for AI crawlers / answer engines. /llms.txt is a
+                  static file in public/, so a normal anchor (not next/link). */}
+              <a
+                href="/llms.txt"
+                className="text-xs text-muted hover:text-ink transition-colors"
+              >
+                For AI bots 🤖
+              </a>
             </div>
           </div>
         </div>

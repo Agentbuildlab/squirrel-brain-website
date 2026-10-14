@@ -3,10 +3,7 @@ import Script from "next/script";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import HeroSection from "@/components/HeroSection";
-import SegmentDoors from "@/components/SegmentDoors";
-import PixMoatSection from "@/components/PixMoatSection";
-import CallSection from "@/components/CallSection";
-import CallMeDemo from "@/components/CallMeDemo";
+import BenefitsSection from "@/components/BenefitsSection";
 import FaqSection from "@/components/FaqSection";
 import FinalCta from "@/components/FinalCta";
 
@@ -23,13 +20,12 @@ export const metadata: Metadata = {
   alternates: { canonical: "/" },
 };
 
-// 2026-07-02 redesign (research-backed): ONE promise above the fold (the call,
-// shown ringing), a single primary CTA, then the segment doors ("which busy are
-// you?") that route + tag each audience for the PostHog segment experiment.
-// 2026-07-03 (Adam): trimmed to SIX sections — hero · segment doors · the AI-sort
-// wow · the call deep-dive · FAQ · final CTA — to cut the "too busy" feeling.
-// Removed from the homepage (components kept for the landing pages): the screenshot
-// gotcha, the proof gotcha, and the founder-story band.
+// 2026-10-13 simplify (Adam): cut the home page to four sections so the promise
+// isn't restated five times over ~1,180 words. Hero (with the interactive ringing
+// call — the one differentiating hook, shown not told) · a compact Benefits block ·
+// a short FAQ · the final CTA. The richer narrative components — SegmentDoors,
+// PixMoatSection, CallSection, CallMeDemo — are kept in the repo (now unused) so the
+// longer treatment can be restored or reused; they're just no longer stacked here.
 export default function HomePage() {
   return (
     <>
@@ -39,23 +35,13 @@ export default function HomePage() {
         {/* 1 — HERO: the second brain that RINGS YOU BACK (phone shown ringing) */}
         <HeroSection />
 
-        {/* 2 — SEGMENT DOORS: six kinds of busy, instrumented (segment_door_click) */}
-        <SegmentDoors />
+        {/* 2 — BENEFITS: the three core promises in four scannable lines */}
+        <BenefitsSection />
 
-        {/* 3 — THE AI WOW: your camera roll, sorted for you (auto-ingestion moat) */}
-        <PixMoatSection />
-
-        {/* 4 — THE DEEP DIVE: the call, full story (hero promised it; this proves it) */}
-        <CallSection />
-
-        {/* LIVE DEMO — "Scuttle calls you right now" (renders null until
-            CALL_ME_DEMO_ENABLED + the app-side endpoint exist — see spec) */}
-        <CallMeDemo />
-
-        {/* 5 — FAQ: product questions — the AI/AEO lane lives on /mcp now */}
+        {/* 3 — FAQ: product questions — the AI/AEO lane lives on /mcp now */}
         <FaqSection />
 
-        {/* 6 — FINAL CTA */}
+        {/* 4 — FINAL CTA */}
         <FinalCta />
       </main>
       <Footer />
