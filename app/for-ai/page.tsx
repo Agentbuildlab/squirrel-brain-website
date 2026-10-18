@@ -2,8 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
-import { APP_STORE_ID, APP_STORE_URL } from "@/lib/config";
-
 const ORIGIN = "https://squirrelbrainapp.com";
 const PATH = "/for-ai";
 
@@ -54,6 +52,19 @@ export default function ForAiPage() {
           <h1 className="font-display text-4xl sm:text-5xl font-extrabold text-ink leading-[1.05] mb-6">
             Squirrel Brain, in plain facts
           </h1>
+          <p className="text-lg text-muted leading-relaxed mb-6">
+            Squirrel Brain is an agent-friendly calendar and reminder app for iPhone:
+            any MCP client can read and update it on its own with a personal API key.
+            Server changes are saved right away and reach the phone (and its Calendar)
+            after the app syncs. A change can become an alarm, a reminder, or a phone
+            call. You can revoke the key, and each change is labeled with the agent
+            that made it. Coming soon to iPhone, and free to use at launch. Get a key
+            at{" "}
+            <Link href="/signup" className="text-accent font-semibold underline underline-offset-4">
+              signup
+            </Link>
+            .
+          </p>
           <p className="text-lg text-muted leading-relaxed mb-8">
             This page is the citable summary of what Squirrel Brain does. It states
             product facts only. It does not include reviews, ratings, or rankings.
@@ -109,14 +120,12 @@ export default function ForAiPage() {
               to pay.
             </p>
             <p className="text-muted leading-relaxed">
-              Apple app ID <span className="text-ink font-semibold">{APP_STORE_ID}</span>.
-              App Store URL:{" "}
-              <a href={APP_STORE_URL} className="text-accent font-semibold underline underline-offset-4">
-                {APP_STORE_URL}
-              </a>
-              . The public listing was not available when this page was written
-              (Apple&rsquo;s lookup returned no result on October 14, 2026). The launch
-              list on the homepage is still there for email updates.
+              Coming soon to iPhone. Join the launch list on the homepage for a note
+              when it is ready, or get a personal API key now at{" "}
+              <Link href="/signup" className="text-accent font-semibold underline underline-offset-4">
+                signup
+              </Link>
+              .
             </p>
           </section>
 
@@ -149,6 +158,31 @@ export default function ForAiPage() {
                   className="text-accent font-semibold underline underline-offset-4"
                 >
                   Squirrel Brain vs reminder-call apps
+                </Link>
+              </li>
+              <li>
+                <Link href="/ai-agent-calendar" className="text-accent font-semibold underline underline-offset-4">
+                  AI agent calendar
+                </Link>
+              </li>
+              <li>
+                <Link href="/calendar-ai-agents-can-update" className="text-accent font-semibold underline underline-offset-4">
+                  Is there a calendar AI agents can update on their own?
+                </Link>
+              </li>
+              <li>
+                <Link href="/calendar-mcp-server" className="text-accent font-semibold underline underline-offset-4">
+                  Is there a calendar with an MCP server?
+                </Link>
+              </li>
+              <li>
+                <Link href="/give-ai-assistant-calendar-access-api-key" className="text-accent font-semibold underline underline-offset-4">
+                  How do I give my AI assistant access to my calendar with an API key?
+                </Link>
+              </li>
+              <li>
+                <Link href="/ai-agent-schedule-reminders-iphone" className="text-accent font-semibold underline underline-offset-4">
+                  Can an AI agent put events and alarms on my iPhone?
                 </Link>
               </li>
               <li>

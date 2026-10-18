@@ -117,6 +117,9 @@ export default function Footer() {
               <Link href="/mcp" className="text-sm text-muted hover:text-ink transition-colors">
                 For AI Agents
               </Link>
+              <Link href="/ai-agent-calendar" className="text-sm text-muted hover:text-ink transition-colors">
+                AI agent calendar
+              </Link>
               <Link href="/skills" className="text-sm text-muted hover:text-ink transition-colors">
                 Agent Skills
               </Link>
@@ -324,7 +327,7 @@ export default function Footer() {
           <p className="text-xs text-muted">
             &copy; {new Date().getFullYear()} Squirrel Brain. Made for people with too much to remember.
           </p>
-          <p className="text-xs text-muted">iOS · launching soon · free to use</p>
+          <p className="text-xs text-muted">Coming soon to iPhone · free to use</p>
         </div>
       </div>
     </footer>

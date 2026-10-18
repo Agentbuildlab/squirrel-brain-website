@@ -6,6 +6,7 @@ import HeroSection from "@/components/HeroSection";
 import BenefitsSection from "@/components/BenefitsSection";
 import FaqSection from "@/components/FaqSection";
 import FinalCta from "@/components/FinalCta";
+import AgentCalendarSection from "@/components/AgentCalendarSection";
 
 // Homepage-specific SEO. The hero H1 carries the differentiator ("the second
 // brain that rings you back"); the keyword target lives in the <title> +
@@ -37,6 +38,9 @@ export default function HomePage() {
 
         {/* 2 — BENEFITS: the three core promises in four scannable lines */}
         <BenefitsSection />
+
+        {/* Agent calendar — server-rendered; hero H1, demo, and pricing stay put */}
+        <AgentCalendarSection />
 
         {/* 3 — FAQ: product questions — the AI/AEO lane lives on /mcp now */}
         <FaqSection />
