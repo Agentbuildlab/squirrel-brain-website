@@ -3,8 +3,6 @@
 // Overviews) to understand and cite exactly what Squirrel Brain is. Rendered in
 // the root layout so it appears on every page.
 
-import { APP_STORE_URL } from "@/lib/config";
-
 const ORIGIN = "https://squirrelbrainapp.com";
 
 const graph = {
@@ -37,8 +35,6 @@ const graph = {
       applicationCategory: "ProductivityApplication",
       operatingSystem: "iOS",
       url: ORIGIN,
-      downloadUrl: APP_STORE_URL,
-      installUrl: APP_STORE_URL,
       image: `${ORIGIN}/og-image.png`,
       description:
         "Squirrel Brain is an iOS app that turns photos, voice notes, screenshots, and forwarded texts into reminders, alarms, and calendar events, then makes sure you follow through — including a real phone call that rings when your ringer's on, vibrates on silent, and reaches you on a locked screen. The alarm is separate: it rings through the silent switch. It also has an optional built-in MCP server, so MCP-capable AI agents (Claude Code, Cursor, or your own) can set alarms, read your day, file notes to boards, append to a forever note, and call your phone on your behalf. Built for work and family first — the AI hookup is there if you want it. Free to use at launch.",
@@ -58,7 +54,7 @@ const graph = {
         name: "Free",
         price: "0",
         priceCurrency: "USD",
-        url: APP_STORE_URL,
+        url: `${ORIGIN}/signup`,
         availability: "https://schema.org/PreOrder",
         description: "Free to use at launch. Nothing to buy and no trial to start.",
       },

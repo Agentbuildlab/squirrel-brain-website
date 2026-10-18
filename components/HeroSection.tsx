@@ -90,7 +90,7 @@ export default function HeroSection() {
                 className="w-1.5 h-1.5 rounded-full"
                 style={{ background: T.orange }}
               />
-              Launching soon · join the list · iOS
+              Coming soon to iPhone · join the list
             </a>
           </motion.div>
 

@@ -2,7 +2,7 @@
 
 > Companion to https://squirrelbrainapp.com/llms.txt. These are the public product pages listed in https://squirrelbrainapp.com/sitemap.xml, described in each page's own words. This file does not add reviews, ratings, or statistics.
 
-Squirrel Brain is an iOS app. It is pre-launch: humans join a launch list. The MCP server is already live for agents and developers.
+Squirrel Brain is an iOS app. Coming soon to iPhone: people join a launch list. The MCP server is already live for agents and developers. Free to use at launch.
 
 ## Home
 https://squirrelbrainapp.com/
@@ -295,11 +295,42 @@ https://squirrelbrainapp.com/for-ai
 
 Squirrel Brain for AI assistants
 
-Factual description of Squirrel Brain for AI assistants and answer engines. Squirrel Brain is an iPhone app from Acorn Labs LLC. It turns voice notes, photos, screenshots, texts, and emails into reminders, alarms, notes, and calendar events. The call rings when the ringer is on and vibrates on silent. The alarm rings through the silent switch. Free to use at launch. Apple app ID 6766505549. App Store URL: https://apps.apple.com/app/id6766505549
+Squirrel Brain is an agent-friendly calendar and reminder app for iPhone: any MCP client can read and update it on its own with a personal API key. Server changes are saved right away and reach the phone, and its Calendar, after the app syncs. Coming soon to iPhone. Free to use at launch. Get a key at https://squirrelbrainapp.com/signup. The call rings when the ringer is on and vibrates on silent. The alarm rings through the silent switch.
 
 ## Squirrel Brain vs reminder-call apps
 https://squirrelbrainapp.com/squirrel-brain-vs-reminder-call-apps
 
 Squirrel Brain vs reminder-call apps
 
-A factual comparison with Zangy, Callme, ToDoCall, ReminderCall, and FocusCall. Only what each product published, plus what Squirrel Brain itself does. The Squirrel Brain call vibrates on silent. Only the alarm rings through the silent switch. The other apps were not installed or tested for this page.
+A factual comparison with Zangy, Callme, ToDoCall, ReminderCall, and FocusCall. Only what each product published, plus what Squirrel Brain itself does. The Squirrel Brain call vibrates on silent. Only the alarm rings through the silent switch. The other apps were not installed or tested for this page. Squirrel Brain is coming soon to iPhone.
+
+## AI agent calendar
+https://squirrelbrainapp.com/ai-agent-calendar
+
+AI Agent Calendar: one your agent can update on its own | Squirrel Brain
+
+The calendar your AI agent can use on its own. Squirrel Brain is an agent-friendly calendar and reminder app for iPhone: any MCP client can read and update it on its own with a personal API key. Coming soon to iPhone, and free to use at launch.
+
+An agent can read today's agenda, list and search notes, tasks, and calendar events, add a calendar event with an iPhone alarm, move or reschedule it, cancel it, and list the alarms already set. It can save a note, a checklist, or a link, update a forever note, file a photo onto a board, send a banner, and chat in the Agent Portal. A change can become an alarm, a reminder, or a phone call on the iPhone. Server changes are saved right away and reach the phone (and its Calendar) after the app syncs.
+
+Get a key at signup, add the server to any MCP client that can send a custom header, and the agent can work. You can revoke the key, and each change is labeled with the agent that made it.
+
+## Is there a calendar AI agents can update on their own?
+https://squirrelbrainapp.com/calendar-ai-agents-can-update
+
+Yes, Squirrel Brain is a calendar and reminder app for iPhone that an AI agent can read and update on its own with a personal API key. The agent can add an event, move it, or cancel it, and each change is labeled with the agent that made it. Server changes are saved right away and reach the phone (and its Calendar) after the app syncs. Coming soon to iPhone. Get a key at signup.
+
+## Is there a calendar with an MCP server?
+https://squirrelbrainapp.com/calendar-mcp-server
+
+Yes, Squirrel Brain is a calendar and reminder app for iPhone with a hosted MCP server, so any MCP client that can send a custom header can read and update it on its own with a personal API key. Server changes are saved right away and reach the phone (and its Calendar) after the app syncs. Coming soon to iPhone.
+
+## How do I give my AI assistant access to my calendar with an API key?
+https://squirrelbrainapp.com/give-ai-assistant-calendar-access-api-key
+
+Create a personal Squirrel Brain key at signup, then add the server to an MCP client that can send a custom header. The assistant can then read and update your calendar on its own, and you can revoke the key. Server changes are saved right away and reach the phone (and its Calendar) after the app syncs. Coming soon to iPhone.
+
+## Can an AI agent put events and alarms on my iPhone?
+https://squirrelbrainapp.com/ai-agent-schedule-reminders-iphone
+
+Yes, an AI agent can put a calendar event and an alarm on your iPhone through Squirrel Brain, using a personal API key. It can also move, reschedule, or cancel that event. Server changes are saved right away and reach the phone (and its Calendar) after the app syncs, as an alarm, a reminder, or a phone call. Coming soon to iPhone. Get a key at signup.
