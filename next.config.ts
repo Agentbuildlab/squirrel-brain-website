@@ -6,6 +6,8 @@ const nextConfig: NextConfig = {
     return [
       { source: "/legal/privacy-policy.html", destination: "/legal/privacy-policy", permanent: true },
       { source: "/legal/terms-of-use.html", destination: "/legal/terms-of-use", permanent: true },
+      // /for-bots was a 404 that inherited the homepage canonical. Send it to the real page.
+      { source: "/for-bots", destination: "/for-ai", permanent: true },
     ];
   },
   async rewrites() {

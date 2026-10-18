@@ -147,6 +147,9 @@ export default function Footer() {
               <Link href="/reminder-app-that-calls-you" className="text-sm text-muted hover:text-ink transition-colors">
                 Reminder app that calls you
               </Link>
+              <Link href="/squirrel-brain-vs-reminder-call-apps" className="text-sm text-muted hover:text-ink transition-colors">
+                Vs reminder-call apps
+              </Link>
               <Link href="/adhd-reminder-app" className="text-sm text-muted hover:text-ink transition-colors">
                 ADHD reminders that call you
               </Link>
@@ -307,14 +310,12 @@ export default function Footer() {
               >
                 Skills
               </Link>
-              {/* Plain-text facts for AI crawlers / answer engines. /llms.txt is a
-                  static file in public/, so a normal anchor (not next/link). */}
-              <a
-                href="/llms.txt"
+              <Link
+                href="/for-ai"
                 className="text-xs text-muted hover:text-ink transition-colors"
               >
-                For AI bots 🤖
-              </a>
+                For AI bots
+              </Link>
             </div>
           </div>
         </div>
