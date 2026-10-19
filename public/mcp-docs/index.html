@@ -444,6 +444,10 @@
           <div><div class="atq-desc">Read current tasks, notes, alarms. Check this before creating items to avoid duplicates.</div><div class="atq-note">Optional: type, status ("pending"|"done"|"all"), limit, search, maker_name.</div></div>
         </div>
         <div class="atq-row">
+          <span class="atq-name">find_items</span>
+          <div><div class="atq-desc">Find items by filters.</div><div class="atq-note">Optional: type, status, limit, search, maker_name, recipient.</div></div>
+        </div>
+        <div class="atq-row">
           <span class="atq-name">get_item</span>
           <div><div class="atq-desc">get_item now returns the Scribbly-organized version of a note, read-only, so your agent sees the note the way you do.</div><div class="atq-note">Required: item_id. Read-only. Output <code>scribbly</code> is documented in the tools table.</div></div>
         </div>
@@ -493,7 +497,7 @@
         <li><a href="#overview">What this is (for humans)</a></li>
         <li><a href="#auth">Authentication &amp; API key</a></li>
         <li><a href="#session-start">Session start sequence</a></li>
-        <li><a href="#tools">All 32 tools — full reference</a></li>
+        <li><a href="#tools">All 33 tools — full reference</a></li>
         <li><a href="#examples">curl examples</a></li>
         <li><a href="#checklist">Getting started checklist</a></li>
         <li><a href="#agent-configs">Copy-paste agent configs</a></li>
@@ -547,7 +551,7 @@
         <strong>✅ Store the key persistently — don't re-derive it each session.</strong><br><br>
         Save the <code>sb_</code> key once in a real config file or environment variable. Agents that re-figure-out the connection from scratch every session (and hold the key only in short-term memory) tend to fall back to a stale key and start failing with <strong>"Invalid API key."</strong> Set it once, persist it, and it keeps working.<br><br>
         <strong>If you ever see "Invalid API key":</strong> the key was regenerated. Ask the human to open the app → <strong>Settings → API Key</strong>, copy the current <code>sb_</code> key, and update your config. Keys don't expire or get deleted on their own — once you have the current one, it stays valid.<br><br>
-        <strong>Connect as a real MCP server — don't hand-roll HTTP.</strong> Register Squirrel Brain in your agent's MCP config (the copy-paste snippets below) so the key lives in the request <em>headers</em> and is applied automatically on every call. Writing one-off HTTP request code with the key pasted inline is exactly how it goes stale. <strong>Then verify:</strong> your MCP client should connect and list <strong>32 tools</strong> (e.g. an <code>initialize</code> + <code>tools/list</code> handshake, or your client's "test/list servers" command). If you see 0 tools, the key is wrong or your sandbox's network allowlist is blocking <code>*.supabase.co</code>.<br><br>
+        <strong>Connect as a real MCP server — don't hand-roll HTTP.</strong> Register Squirrel Brain in your agent's MCP config (the copy-paste snippets below) so the key lives in the request <em>headers</em> and is applied automatically on every call. Writing one-off HTTP request code with the key pasted inline is exactly how it goes stale. <strong>Then verify:</strong> your MCP client should connect and list <strong>33 tools</strong> (e.g. an <code>initialize</code> + <code>tools/list</code> handshake, or your client's "test/list servers" command). If you see 0 tools, the key is wrong or your sandbox's network allowlist is blocking <code>*.supabase.co</code>.<br><br>
         <strong>Once it's configured, just CALL the tools — don't go hunting for the key.</strong> A common failure mode: an agent forgets it already has the connection and starts trying to <em>fetch</em> the key (writing a Keychain/secret-lookup script, an <code>SB_API_KEY</code> env shim, a <code>get_*_key</code> helper) before every call. You never need to — the configured MCP connection injects the key for you. If you have the <code>squirrel_brain</code> tools, call <code>cell_alert</code> / <code>create_alarm</code> / <code>create_item</code> directly. No scripts, no key retrieval.
       </div>
 
@@ -617,7 +621,7 @@
     <!-- ──────────────────────────────────────────────────────── -->
     <div class="doc-section" id="tools">
       <div class="doc-section-label">Tools Reference</div>
-      <h2 class="doc-section-title">All 32 available tools</h2>
+      <h2 class="doc-section-title">All 33 available tools</h2>
       <p>Call <code>tools/list</code> at any time to get live JSON schemas. The table below matches the current schema exactly.</p>
 
       <table class="tools-table">
@@ -675,6 +679,18 @@
           <tr>
             <td><div class="tool-name"><code>list_items</code></div></td>
             <td class="tool-desc">Query tasks, notes, and alarms. Check this before creating items to avoid duplicates. Filter by type and status. Pass <code>maker_name</code> to return only items created by one maker. Pass <code>recipient</code> with your own agent name to see items addressed to you; pass <code>"user"</code> for the human's own items.</td>
+            <td class="tool-params">
+              <span class="tag-opt">type</span>
+              <span class="tag-opt">status</span>
+              <span class="tag-opt">limit</span>
+              <span class="tag-opt">search</span>
+              <span class="tag-opt">maker_name</span>
+              <span class="tag-opt">recipient</span>
+            </td>
+          </tr>
+          <tr>
+            <td><div class="tool-name"><code>find_items</code></div></td>
+            <td class="tool-desc">Find items by filters. Use it when you want items that match filters rather than a keyword search (<code>search_items</code>).</td>
             <td class="tool-params">
               <span class="tag-opt">type</span>
               <span class="tag-opt">status</span>
@@ -892,11 +908,13 @@
           </tr>
           <tr>
             <td><div class="tool-name"><code>send_portal_message</code></div></td>
-            <td class="tool-desc">Send a chat message to the user in the MCP Agent Portal AND push-notify their phone. Use it to talk to the user or confirm what you did. <strong>Do NOT use this in place of an action</strong> — if the user gives you something to save (an appointment, a task, info to remember), call <code>create_alarm</code> or <code>create_item</code> instead of just messaging it, or it never reaches their calendar/stash.</td>
+            <td class="tool-desc">Send a chat message to the user in the MCP Agent Portal AND push-notify their phone. Use it to talk to the user or confirm what you did. <strong>Do NOT use this in place of an action</strong> — if the user gives you something to save (an appointment, a task, info to remember), call <code>create_alarm</code> or <code>create_item</code> instead of just messaging it, or it never reaches their calendar/stash. Optional <code>kind</code> is <code>'ops'</code> or the default, and <code>urgent</code> is a boolean. Bad values return <code>-32602</code>.</td>
             <td class="tool-params">
               <span class="tag-req">content</span>
               <span class="tag-opt">action_taken</span>
               <span class="tag-opt">image_url</span>
+              <span class="tag-opt">kind</span>
+              <span class="tag-opt">urgent</span>
             </td>
           </tr>
 
@@ -925,7 +943,7 @@
           <tr class="group-hdr"><td colspan="3">META</td></tr>
           <tr>
             <td><div class="tool-name"><code>get_squirrel_brain_help</code></div></td>
-            <td class="tool-desc">Returns a full self-configuration guide: endpoint, the hardcoded public anon key, all 32 tools with params, and session start instructions. Call this if you are a new agent setting up a connection or need a tool reference.</td>
+            <td class="tool-desc">Returns a full self-configuration guide: endpoint, the hardcoded public anon key, all 33 tools with params, and session start instructions. Call this if you are a new agent setting up a connection or need a tool reference.</td>
             <td class="tool-params"><em style="color:#b8986e;">no params</em></td>
           </tr>
 
@@ -1325,8 +1343,8 @@ Body (tools/call):
           </tr>
           <tr>
             <td class="rate-action">-32602</td>
-            <td>Invalid params (missing required field)</td>
-            <td>The error message names the missing field. Add it.</td>
+            <td>Invalid params (missing required field). <code>send_portal_message</code> also returns -32602 when <code>kind</code> or <code>urgent</code> has a bad value.</td>
+            <td>The error message names the missing field. For <code>send_portal_message</code>, <code>kind</code> must be <code>'ops'</code> or the default, and <code>urgent</code> must be a boolean.</td>
           </tr>
           <tr>
             <td class="rate-action">-32603</td>

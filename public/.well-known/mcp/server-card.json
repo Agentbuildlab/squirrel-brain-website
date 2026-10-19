@@ -115,6 +115,10 @@
           "description": "Keyword-searches titles, content, and notes across every type and status, including calendar events, and can be limited to one maker."
         },
         {
+          "name": "find_items",
+          "description": "Finds items by filters."
+        },
+        {
           "name": "delete_item",
           "description": "Soft-deletes an item by marking it completed with a deletion note so it is removed from the user's view on the next sync."
         },
@@ -140,7 +144,7 @@
         },
         {
           "name": "send_portal_message",
-          "description": "Sends a chat message to the user in the MCP Agent Portal and push-notifies their phone, for talking or confirming rather than saving an appointment or task."
+          "description": "Sends a chat message to the user in the MCP Agent Portal and push-notifies their phone, for talking or confirming rather than saving an appointment or task. Optional kind is 'ops' or the default, and urgent is a boolean; bad values return -32602."
         },
         {
           "name": "delete_portal_messages",
@@ -156,7 +160,7 @@
         },
         {
           "name": "get_squirrel_brain_help",
-          "description": "Returns a full self-configuration guide with the endpoint, the hardcoded public anon key, all 31 tools with parameters, and session start instructions."
+          "description": "Returns a full self-configuration guide with the endpoint, the hardcoded public anon key, all 33 tools with parameters, and session start instructions."
         }
       ]
     }
@@ -262,6 +266,10 @@
       "description": "Keyword-searches titles, content, and notes across every type and status, including calendar events, and can be limited to one maker."
     },
     {
+      "name": "find_items",
+      "description": "Finds items by filters."
+    },
+    {
       "name": "delete_item",
       "description": "Soft-deletes an item by marking it completed with a deletion note so it is removed from the user's view on the next sync."
     },
@@ -287,7 +295,7 @@
     },
     {
       "name": "send_portal_message",
-      "description": "Sends a chat message to the user in the MCP Agent Portal and push-notifies their phone, for talking or confirming rather than saving an appointment or task."
+      "description": "Sends a chat message to the user in the MCP Agent Portal and push-notifies their phone, for talking or confirming rather than saving an appointment or task. Optional kind is 'ops' or the default, and urgent is a boolean; bad values return -32602."
     },
     {
       "name": "delete_portal_messages",
@@ -303,7 +311,7 @@
     },
     {
       "name": "get_squirrel_brain_help",
-      "description": "Returns a full self-configuration guide with the endpoint, the hardcoded public anon key, all 31 tools with parameters, and session start instructions."
+      "description": "Returns a full self-configuration guide with the endpoint, the hardcoded public anon key, all 33 tools with parameters, and session start instructions."
     }
   ]
 }

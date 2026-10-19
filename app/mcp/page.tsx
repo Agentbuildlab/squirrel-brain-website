@@ -385,6 +385,12 @@ export default function McpPage() {
               <p className="text-sm mt-3" style={{ color: "rgba(255,245,232,0.72)" }}>
                 create_scribbly_note: Save a text note into Squirrel Brain as a Scribbly note. Preview it first with dry_run; retries with the same idempotency_key never make duplicates.
               </p>
+              <p className="text-sm mt-3" style={{ color: "rgba(255,245,232,0.72)" }}>
+                find_items: Find items by filters.
+              </p>
+              <p className="text-sm mt-3" style={{ color: "rgba(255,245,232,0.72)" }}>
+                send_portal_message accepts optional kind (&apos;ops&apos; or the default) and urgent (boolean). Bad values return -32602.
+              </p>
             </FadeIn>
           </div>
         </section>
