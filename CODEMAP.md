@@ -55,7 +55,7 @@ _Where everything lives. Branch `v2-rebuild`._
 never a box-shadow/rounded tile).
 
 **Agent-friendly (force-added to git):** `public/robots.txt`, `public/llms.txt`,
-`public/mcp/index.html` (human-readable MCP docs, 29 tools, correct anon key).
+`public/mcp-docs/index.html` (human-readable MCP docs, 33 tools, correct anon key).
 
 ## Tooling scripts (`/tmp/` — may not survive reboot; logic documented here)
 - `sbgen.py` — `gen(prompt, outfile, tries=2)`; POSTs to the app `ai-gemini` edge function,
