@@ -379,6 +379,9 @@ export default function McpPage() {
                 Every tool, with parameters, is in the{" "}
                 <a href="/mcp-docs" style={{ color: "#FF7A1A" }} className="hover:underline">developer docs</a>.
               </p>
+              <p className="text-sm mt-3" style={{ color: "rgba(255,245,232,0.72)" }}>
+                get_item now returns the Scribbly-organized version of a note, read-only, so your agent sees the note the way you do.
+              </p>
             </FadeIn>
           </div>
         </section>

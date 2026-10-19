@@ -440,6 +440,10 @@
           <div><div class="atq-desc">Read current tasks, notes, alarms. Check this before creating items to avoid duplicates.</div><div class="atq-note">Optional: type, status ("pending"|"done"|"all"), limit, search, maker_name.</div></div>
         </div>
         <div class="atq-row">
+          <span class="atq-name">get_item</span>
+          <div><div class="atq-desc">get_item now returns the Scribbly-organized version of a note, read-only, so your agent sees the note the way you do.</div><div class="atq-note">Required: item_id. Read-only. Output <code>scribbly</code> is documented in the tools table.</div></div>
+        </div>
+        <div class="atq-row">
           <span class="atq-name">get_daily_brief</span>
           <div><div class="atq-desc">Today's agenda: overdue items, due today, high-priority pending, recent wins. Same data as the 5 AM email brief.</div><div class="atq-note">No params.</div></div>
         </div>
@@ -807,7 +811,7 @@
           <tr class="group-hdr"><td colspan="3">QUERY &amp; SEARCH</td></tr>
           <tr>
             <td><div class="tool-name"><code>get_item</code></div></td>
-            <td class="tool-desc">Get full detail on a single item by ID. Use when you have an item_id from <code>list_items</code> or <code>create_item</code> and need all fields.</td>
+            <td class="tool-desc">Get full detail on a single item by ID. Use when you have an item_id from <code>list_items</code> or <code>create_item</code> and need all fields. get_item now returns the Scribbly-organized version of a note, read-only, so your agent sees the note the way you do. Scribbly is the cleaned-up, organized version the user's phone made. The response includes a <code>scribbly</code> object: <code>available</code> (boolean); <code>stale</code> (true if the note was edited since the cleanup); <code>compiler_version</code>; <code>truncated</code>; <code>refined</code> (the organized note text, capped at 20k characters). When no cleanup exists yet it returns <code>available: false</code> with a reason such as <code>not_compiled</code>. Read-only; only the key owner's own items; nothing is generated on the server.</td>
             <td class="tool-params">
               <span class="tag-req">item_id</span>
             </td>
