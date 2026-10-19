@@ -64,6 +64,9 @@ Once connected, an agent can, on the user's behalf:
 - create and read items, tasks, and the daily brief
 - get_item now returns the Scribbly-organized version of a note, read-only, so your agent sees the note the way you do.
 - create_scribbly_note: Save a text note into Squirrel Brain as a Scribbly note. Preview it first with dry_run; retries with the same idempotency_key never make duplicates.
+- find_items: Find items by filters.
+- The live MCP tool set is 33 tools.
+- send_portal_message accepts optional kind ('ops' or the default) and urgent (boolean). Bad values return -32602.
 - append to the user's "forever note" and save links
 - file and organize photos into boards
 - a saved change can become an alarm, a reminder, or a phone call on the user's iPhone after the app syncs

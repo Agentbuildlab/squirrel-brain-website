@@ -32,6 +32,12 @@ get_item now returns the Scribbly-organized version of a note, read-only, so you
 
 create_scribbly_note: Save a text note into Squirrel Brain as a Scribbly note. Preview it first with dry_run; retries with the same idempotency_key never make duplicates.
 
+find_items: Find items by filters.
+
+The live MCP tool set is 33 tools.
+
+send_portal_message accepts optional kind ('ops' or the default) and urgent (boolean). Bad values return -32602.
+
 ## Agent skills
 https://squirrelbrainapp.com/skills
 
@@ -99,6 +105,12 @@ MCP (Model Context Protocol) is a standard that lets AI agents call tools on ext
 get_item now returns the Scribbly-organized version of a note, read-only, so your agent sees the note the way you do. Scribbly is the cleaned-up, organized version the user's phone made. The response includes a scribbly object: available (boolean); stale (true if the note was edited since the cleanup); compiler_version; truncated; refined (the organized note text, capped at 20k characters). When no cleanup exists yet it returns available: false with a reason such as not_compiled. Read-only; only the key owner's own items; nothing is generated on the server.
 
 create_scribbly_note: Save a text note into Squirrel Brain as a Scribbly note. Preview it first with dry_run; retries with the same idempotency_key never make duplicates. Inputs: title (required, 1–200 characters), body (required, 1–20,000 characters), why_saved (optional, up to 500), agent_name (optional, up to 80), dry_run (boolean, default false), idempotency_key (8–128 characters). Unknown fields are rejected. Error codes: INVALID_TYPE, UNKNOWN_FIELD, IMAGE_URL_NOT_ALLOWED, TITLE_TOO_LONG, BODY_REQUIRED, IDEMPOTENCY_MISMATCH, RATE_LIMITED (60 calls per minute per key).
+
+find_items: Find items by filters.
+
+The live MCP tool set is 33 tools.
+
+send_portal_message accepts optional kind ('ops' or the default) and urgent (boolean). Bad values return -32602.
 
 ## AI reminder app
 https://squirrelbrainapp.com/ai-reminder-app
