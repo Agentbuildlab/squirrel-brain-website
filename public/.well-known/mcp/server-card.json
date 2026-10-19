@@ -104,7 +104,7 @@
         },
         {
           "name": "get_item",
-          "description": "Returns the full detail of a single item by id when the caller already has that id from a list or create call."
+          "description": "get_item now returns the Scribbly-organized version of a note, read-only, so your agent sees the note the way you do."
         },
         {
           "name": "search_items",
@@ -247,7 +247,7 @@
     },
     {
       "name": "get_item",
-      "description": "Returns the full detail of a single item by id when the caller already has that id from a list or create call."
+      "description": "get_item now returns the Scribbly-organized version of a note, read-only, so your agent sees the note the way you do."
     },
     {
       "name": "search_items",

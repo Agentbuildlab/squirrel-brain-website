@@ -62,6 +62,7 @@ Squirrel Brain runs a hosted, remote MCP server.
 Once connected, an agent can, on the user's behalf:
 - set a real alarm or reminder on the user's iPhone
 - create and read items, tasks, and the daily brief
+- get_item now returns the Scribbly-organized version of a note, read-only, so your agent sees the note the way you do.
 - append to the user's "forever note" and save links
 - file and organize photos into boards
 - a saved change can become an alarm, a reminder, or a phone call on the user's iPhone after the app syncs
