@@ -63,6 +63,10 @@
           "description": "Saves a note or checklist to the user's Memory Stash, and can also save a calm voice note, write persistent instructions for future agents, flag the item for the 4 PM nudge email, or address it to the agent."
         },
         {
+          "name": "create_scribbly_note",
+          "description": "Save a text note into Squirrel Brain as a Scribbly note. Preview it first with dry_run; retries with the same idempotency_key never make duplicates."
+        },
+        {
           "name": "create_alarm",
           "description": "Puts a tappable event on the user's calendar and schedules an iPhone alarm for any timed appointment, deadline, or reminder, and can also ring a real phone call at that time, repeat, or schedule it for the agent."
         },
@@ -204,6 +208,10 @@
     {
       "name": "create_item",
       "description": "Saves a note or checklist to the user's Memory Stash, and can also save a calm voice note, write persistent instructions for future agents, flag the item for the 4 PM nudge email, or address it to the agent."
+    },
+    {
+      "name": "create_scribbly_note",
+      "description": "Save a text note into Squirrel Brain as a Scribbly note. Preview it first with dry_run; retries with the same idempotency_key never make duplicates."
     },
     {
       "name": "create_alarm",
