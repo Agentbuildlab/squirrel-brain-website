@@ -436,6 +436,10 @@
           <div><div class="atq-desc">Write a note or checklist to the user's brain. Set type_label="context" to write persistent instructions future agents read at session start.</div><div class="atq-note">Required: type ("note"|"running"), title. Optional: content, type_label, is_important, include_in_brief, agent_name, agent_context, tts_text, tts_voice.</div></div>
         </div>
         <div class="atq-row">
+          <span class="atq-name">create_scribbly_note</span>
+          <div><div class="atq-desc">Save a text note into Squirrel Brain as a Scribbly note. Preview it first with dry_run; retries with the same idempotency_key never make duplicates.</div><div class="atq-note">Required: title (1–200 chars), body (1–20,000 chars). Optional: why_saved (up to 500), agent_name (up to 80), dry_run (default false), idempotency_key (8–128). Unknown fields are rejected.</div></div>
+        </div>
+        <div class="atq-row">
           <span class="atq-name">list_items</span>
           <div><div class="atq-desc">Read current tasks, notes, alarms. Check this before creating items to avoid duplicates.</div><div class="atq-note">Optional: type, status ("pending"|"done"|"all"), limit, search, maker_name.</div></div>
         </div>
@@ -489,7 +493,7 @@
         <li><a href="#overview">What this is (for humans)</a></li>
         <li><a href="#auth">Authentication &amp; API key</a></li>
         <li><a href="#session-start">Session start sequence</a></li>
-        <li><a href="#tools">All 31 tools — full reference</a></li>
+        <li><a href="#tools">All 32 tools — full reference</a></li>
         <li><a href="#examples">curl examples</a></li>
         <li><a href="#checklist">Getting started checklist</a></li>
         <li><a href="#agent-configs">Copy-paste agent configs</a></li>
@@ -543,7 +547,7 @@
         <strong>✅ Store the key persistently — don't re-derive it each session.</strong><br><br>
         Save the <code>sb_</code> key once in a real config file or environment variable. Agents that re-figure-out the connection from scratch every session (and hold the key only in short-term memory) tend to fall back to a stale key and start failing with <strong>"Invalid API key."</strong> Set it once, persist it, and it keeps working.<br><br>
         <strong>If you ever see "Invalid API key":</strong> the key was regenerated. Ask the human to open the app → <strong>Settings → API Key</strong>, copy the current <code>sb_</code> key, and update your config. Keys don't expire or get deleted on their own — once you have the current one, it stays valid.<br><br>
-        <strong>Connect as a real MCP server — don't hand-roll HTTP.</strong> Register Squirrel Brain in your agent's MCP config (the copy-paste snippets below) so the key lives in the request <em>headers</em> and is applied automatically on every call. Writing one-off HTTP request code with the key pasted inline is exactly how it goes stale. <strong>Then verify:</strong> your MCP client should connect and list <strong>31 tools</strong> (e.g. an <code>initialize</code> + <code>tools/list</code> handshake, or your client's "test/list servers" command). If you see 0 tools, the key is wrong or your sandbox's network allowlist is blocking <code>*.supabase.co</code>.<br><br>
+        <strong>Connect as a real MCP server — don't hand-roll HTTP.</strong> Register Squirrel Brain in your agent's MCP config (the copy-paste snippets below) so the key lives in the request <em>headers</em> and is applied automatically on every call. Writing one-off HTTP request code with the key pasted inline is exactly how it goes stale. <strong>Then verify:</strong> your MCP client should connect and list <strong>32 tools</strong> (e.g. an <code>initialize</code> + <code>tools/list</code> handshake, or your client's "test/list servers" command). If you see 0 tools, the key is wrong or your sandbox's network allowlist is blocking <code>*.supabase.co</code>.<br><br>
         <strong>Once it's configured, just CALL the tools — don't go hunting for the key.</strong> A common failure mode: an agent forgets it already has the connection and starts trying to <em>fetch</em> the key (writing a Keychain/secret-lookup script, an <code>SB_API_KEY</code> env shim, a <code>get_*_key</code> helper) before every call. You never need to — the configured MCP connection injects the key for you. If you have the <code>squirrel_brain</code> tools, call <code>cell_alert</code> / <code>create_alarm</code> / <code>create_item</code> directly. No scripts, no key retrieval.
       </div>
 
@@ -613,7 +617,7 @@
     <!-- ──────────────────────────────────────────────────────── -->
     <div class="doc-section" id="tools">
       <div class="doc-section-label">Tools Reference</div>
-      <h2 class="doc-section-title">All 31 available tools</h2>
+      <h2 class="doc-section-title">All 32 available tools</h2>
       <p>Call <code>tools/list</code> at any time to get live JSON schemas. The table below matches the current schema exactly.</p>
 
       <table class="tools-table">
@@ -699,6 +703,18 @@
               <span class="tag-opt">recipient</span>
               <span class="tag-opt">tts_text</span>
               <span class="tag-opt">tts_voice</span>
+            </td>
+          </tr>
+          <tr>
+            <td><div class="tool-name"><code>create_scribbly_note</code></div></td>
+            <td class="tool-desc"><strong>Save a text note into Squirrel Brain as a Scribbly note. Preview it first with dry_run; retries with the same idempotency_key never make duplicates.</strong> Pass the user's own words: <code>title</code> (1–200 characters) and <code>body</code> (1–20,000 characters). Optional: <code>why_saved</code> (the user's reason, up to 500 characters), <code>agent_name</code> (up to 80 characters), <code>dry_run</code> (boolean, default <code>false</code>; previews the note without saving it), and <code>idempotency_key</code> (8–128 characters; retries with the same key never make duplicates). Unknown fields are rejected. Error codes: <code>INVALID_TYPE</code>, <code>UNKNOWN_FIELD</code>, <code>IMAGE_URL_NOT_ALLOWED</code>, <code>TITLE_TOO_LONG</code>, <code>BODY_REQUIRED</code>, <code>IDEMPOTENCY_MISMATCH</code>, <code>RATE_LIMITED</code> (60 calls per minute per key).</td>
+            <td class="tool-params">
+              <span class="tag-req">title</span>
+              <span class="tag-req">body</span>
+              <span class="tag-opt">why_saved</span>
+              <span class="tag-opt">agent_name</span>
+              <span class="tag-opt">dry_run</span>
+              <span class="tag-opt">idempotency_key</span>
             </td>
           </tr>
           <tr>
@@ -909,7 +925,7 @@
           <tr class="group-hdr"><td colspan="3">META</td></tr>
           <tr>
             <td><div class="tool-name"><code>get_squirrel_brain_help</code></div></td>
-            <td class="tool-desc">Returns a full self-configuration guide: endpoint, the hardcoded public anon key, all 31 tools with params, and session start instructions. Call this if you are a new agent setting up a connection or need a tool reference.</td>
+            <td class="tool-desc">Returns a full self-configuration guide: endpoint, the hardcoded public anon key, all 32 tools with params, and session start instructions. Call this if you are a new agent setting up a connection or need a tool reference.</td>
             <td class="tool-params"><em style="color:#b8986e;">no params</em></td>
           </tr>
 
@@ -1316,6 +1332,41 @@ Body (tools/call):
             <td class="rate-action">-32603</td>
             <td>Insufficient scope <em>or</em> internal error</td>
             <td>Read the <code>message</code> field. Every key is issued with <strong>full permissions</strong> by default, so "Insufficient scope" is rare — if you hit it, regenerate your key in Settings &rarr; API Key. Any other <code>-32603</code> message is a transient server error &mdash; check the <code>data</code> field and retry once.</td>
+          </tr>
+          <tr>
+            <td class="rate-action">INVALID_TYPE</td>
+            <td><code>create_scribbly_note</code>: A field has the wrong type</td>
+            <td>Send title, body, why_saved, agent_name and idempotency_key as strings, and dry_run as a boolean.</td>
+          </tr>
+          <tr>
+            <td class="rate-action">UNKNOWN_FIELD</td>
+            <td><code>create_scribbly_note</code>: The call included a field the tool does not accept</td>
+            <td>Send only the documented fields.</td>
+          </tr>
+          <tr>
+            <td class="rate-action">IMAGE_URL_NOT_ALLOWED</td>
+            <td><code>create_scribbly_note</code>: The call included a field this tool does not accept</td>
+            <td>Remove it and send text fields only.</td>
+          </tr>
+          <tr>
+            <td class="rate-action">TITLE_TOO_LONG</td>
+            <td><code>create_scribbly_note</code>: title is over 200 characters</td>
+            <td>Shorten the title.</td>
+          </tr>
+          <tr>
+            <td class="rate-action">BODY_REQUIRED</td>
+            <td><code>create_scribbly_note</code>: body is missing or empty</td>
+            <td>Send the note text in body (up to 20,000 characters).</td>
+          </tr>
+          <tr>
+            <td class="rate-action">IDEMPOTENCY_MISMATCH</td>
+            <td><code>create_scribbly_note</code>: The idempotency_key was already used with different input</td>
+            <td>Reuse a key only to retry the exact same call. Use a new key for a new note.</td>
+          </tr>
+          <tr>
+            <td class="rate-action">RATE_LIMITED</td>
+            <td><code>create_scribbly_note</code>: More than 60 calls per minute on this key</td>
+            <td>Wait a minute, then retry with the same idempotency_key.</td>
           </tr>
         </tbody>
       </table>

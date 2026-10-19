@@ -17,10 +17,10 @@ export const metadata: Metadata = {
   alternates: { canonical: "/mcp" },
 };
 
-// The COMPLETE live tool set (32), grouped. Names must match the server's
+// The COMPLETE live tool set (33), grouped. Names must match the server's
 // tools/list exactly — agents and directory reviewers read both.
 const TOOL_GROUPS: { label: string; tools: string[] }[] = [
-  { label: "Capture & save", tools: ["create_item", "create_alarm", "create_link", "add_to_forever_note"] },
+  { label: "Capture & save", tools: ["create_item", "create_scribbly_note", "create_alarm", "create_link", "add_to_forever_note"] },
   { label: "Reach you IRL", tools: ["cell_alert", "notify_human", "send_portal_message"] },
   {
     label: "Recall the shared brain",
@@ -110,7 +110,7 @@ const STEPS = [
   {
     n: "2",
     title: "Point your agent at the portal",
-    body: "Add the MCP server to Claude Code, Claude Desktop, or Cursor — or wire it into your own agent. The 32 tools appear automatically. No glue code.",
+    body: "Add the MCP server to Claude Code, Claude Desktop, or Cursor — or wire it into your own agent. The 33 tools appear automatically. No glue code.",
   },
   {
     n: "3",
@@ -381,6 +381,9 @@ export default function McpPage() {
               </p>
               <p className="text-sm mt-3" style={{ color: "rgba(255,245,232,0.72)" }}>
                 get_item now returns the Scribbly-organized version of a note, read-only, so your agent sees the note the way you do.
+              </p>
+              <p className="text-sm mt-3" style={{ color: "rgba(255,245,232,0.72)" }}>
+                create_scribbly_note: Save a text note into Squirrel Brain as a Scribbly note. Preview it first with dry_run; retries with the same idempotency_key never make duplicates.
               </p>
             </FadeIn>
           </div>
