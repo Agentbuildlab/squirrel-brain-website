@@ -1050,7 +1050,7 @@ export const LANDING_PAGES: LandingPageData[] = [
     sections: [
       {
         eyebrow: "Quiet notifications fail",
-        h2: "A banner you don't see is not a reminder",
+        h2: "A silent banner won't cut through a distracted day",
         body: "When your attention is already pulled in ten directions, a silent banner in a stack of fifty never stands a chance — swiped away or buried before it registers, gone while your phone is face-down. Missing it isn't a willpower problem; the reminder was simply too quiet to do its job.",
       },
       {
@@ -1080,7 +1080,7 @@ export const LANDING_PAGES: LandingPageData[] = [
       },
       {
         q: "Does every reminder call me?",
-        a: "No. You decide which reminders escalate to a call and which stay as a normal nudge, so a ring always means it matters.",
+        a: "No — you choose which reminders ring and which stay a quiet nudge, so when your phone does ring, it's one you decided is worth stopping for.",
       },
       {
         q: "What device does it run on?",
