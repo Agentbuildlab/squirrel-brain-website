@@ -718,7 +718,7 @@ export const LANDING_PAGES: LandingPageData[] = [
       },
       {
         q: "What does the voice actually say?",
-        a: "An AI voice tells you what it called about in plain language — your reminder, what's coming up on your day, or the points you asked it to cover. It's generated for you in the moment, not a pre-recorded message.",
+        a: "It speaks the thing you asked it to remember, out loud and in plain language, then adds whatever you wanted with it — what's next on your day, or the points to cover before a call. The words are written for this reminder in the moment, so it sounds like someone telling you, not a recording playing back.",
       },
       {
         q: "Does every reminder talk out loud?",
@@ -1051,7 +1051,7 @@ export const LANDING_PAGES: LandingPageData[] = [
       {
         eyebrow: "Quiet notifications fail",
         h2: "A banner you don't see is not a reminder",
-        body: "Push notifications pile up, get swiped away, and vanish while your phone is face-down. If you've ever missed something important because the alert was silent or buried, the problem isn't you — it's that the reminder was too quiet to do its job.",
+        body: "When your attention is already pulled in ten directions, a silent banner in a stack of fifty never stands a chance — swiped away or buried before it registers, gone while your phone is face-down. Missing it isn't a willpower problem; the reminder was simply too quiet to do its job.",
       },
       {
         eyebrow: "It calls you",
@@ -1066,7 +1066,7 @@ export const LANDING_PAGES: LandingPageData[] = [
       {
         eyebrow: "You decide",
         h2: "Loud only when it matters",
-        body: "Not everything should shout. You pick which reminders escalate to a loud alarm or a call, and which stay gentle. The big ones get loud; the small ones stay quiet — so the volume always means something.",
+        body: "When everything buzzes, nothing lands. You pick which reminders escalate to a loud alarm or a real call and which stay a gentle nudge — so the big things break through and the small ones stay quiet, and a ring always means it's worth stopping for.",
       },
     ],
     faqs: [
@@ -1141,7 +1141,7 @@ export const LANDING_PAGES: LandingPageData[] = [
       },
       {
         q: "Is it actually a phone call?",
-        a: "Yes. It rings your phone like a real call — ringing when your ringer's on, vibrating on silent — and shows on your locked screen. When you pick up, an AI voice talks to you in plain language.",
+        a: "Yes — a real incoming call, not a push notification. It rings when your ringer's on, vibrates on silent, and shows on your locked screen. The \"assistant\" part is what happens once you answer: an AI voice talks with you and you can talk right back, in the moment.",
       },
       {
         q: "Can I talk back on the call?",
