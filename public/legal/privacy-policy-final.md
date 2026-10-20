@@ -214,7 +214,7 @@ What we share: Your content, as needed to provide the AI features you use (see t
 Why: AI processing to power app features.
 Data processing location: United States
 xAI Privacy Policy: https://x.ai/legal/privacy-policy
-xAI API Terms of Service: https://x.ai/legal/terms-of-service-api
+xAI API Terms of Service: https://x.ai/legal/
 
 xAI's published API terms state that API inputs are not used to train xAI's models by default for this API product. We rely on those published terms as our contractual basis for this processing today; a signed Data Processing Agreement formalizing this under GDPR Article 28 is in progress.
 
