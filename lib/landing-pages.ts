@@ -1222,7 +1222,7 @@ export const LANDING_PAGES: LandingPageData[] = [
       },
       {
         q: "Where does the tidying happen — are my notes private?",
-        a: "The clean-up runs on your iPhone, not on a server, and your notes stay in your own private account. Your raw words are kept alongside the tidied version, and you can edit either one.",
+        a: "The clean-up runs on your iPhone, not on a server, and your notes stay in your own private account. Your original words are always kept alongside the tidied version, and the note stays editable.",
       },
       {
         q: "What devices does it run on, and what does it cost?",
