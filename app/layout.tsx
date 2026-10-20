@@ -72,6 +72,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${inter.variable} ${bricolage.variable}`}>
+      <head>
+        <script src="https://analytics.ahrefs.com/analytics.js" data-key="qMxQHfN/LN3Zxqa/QVGzKQ" async />
+      </head>
       <body className="font-body bg-bg text-ink antialiased">
         <StructuredData />
         <Suspense fallback={null}>
