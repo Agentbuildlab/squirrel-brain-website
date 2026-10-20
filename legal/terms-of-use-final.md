@@ -145,7 +145,7 @@ You are also subject to:
 - Anthropic Privacy Policy: https://www.anthropic.com/legal/privacy
 - Google Gemini API Terms: https://ai.google.dev/gemini-api/terms
 - Google Privacy Policy: https://policies.google.com/privacy
-- xAI Terms of Service: https://x.ai/legal/terms-of-service-api
+- xAI Enterprise Terms of Service (covers the API): https://x.ai/legal/terms-of-service-enterprise
 - xAI Privacy Policy: https://x.ai/legal/privacy-policy
 
 ### 5.3 Other Third-Party Services

@@ -16,6 +16,10 @@ Coming soon to iPhone. Free to use at launch. Join the launch list on the homepa
 - [For AI assistants](https://squirrelbrainapp.com/for-ai): the short factual page to cite
 - [Full page descriptions](https://squirrelbrainapp.com/llms-full.txt): plain-language descriptions of every public product page, in each page's own words
 - [Home](https://squirrelbrainapp.com/): the AI reminder app — for work, family, and AI agents
+- [For Work](https://squirrelbrainapp.com/work): for field reps, techs, and contractors — capture on the job, GPS-stamped photo proof, Outlook-screenshot import, and loud or phone-call reminders
+- [For Family](https://squirrelbrainapp.com/family): for busy parents — snap the permission slip or the season schedule and never drop a practice, form, or medication
+- [Demos](https://squirrelbrainapp.com/demos): short videos of Squirrel Brain in action across work, family, and AI
+- [Support](https://squirrelbrainapp.com/support): help, account deletion, permissions, and how your data is handled
 - [Squirrel Brain vs reminder-call apps](https://squirrelbrainapp.com/squirrel-brain-vs-reminder-call-apps): Zangy, Callme, ToDoCall, ReminderCall, and FocusCall, using only published facts
 - [For AI agents / MCP](https://squirrelbrainapp.com/mcp): connect Claude Code, Cursor, or any MCP-capable agent over the Model Context Protocol
 - [Developer docs](https://squirrelbrainapp.com/mcp-docs): MCP server endpoint, the full tool list, and auth (per-user API key)
