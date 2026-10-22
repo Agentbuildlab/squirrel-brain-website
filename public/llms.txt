@@ -32,6 +32,7 @@ Coming soon to iPhone. Free to use at launch. Join the launch list on the homepa
 - [AI reminder app](https://squirrelbrainapp.com/ai-reminder-app): capture anything, turn it into a reminder, alarm, note, or calendar event
 - [Turn screenshots into reminders](https://squirrelbrainapp.com/screenshot-to-reminder-app): screenshot a text/email/appointment → a reminder
 - [Turn voice notes into reminders](https://squirrelbrainapp.com/voice-note-reminder-app): speak a thought → task, alarm, or calendar event
+- [Scribbly Notes](https://squirrelbrainapp.com/scribbly-notes): speak or type freely → your iPhone compiles it into a clean, organized page with real tap-to-check boxes; your raw words are kept and the tidy-up runs on-device
 - [Turn photos into reminders](https://squirrelbrainapp.com/photo-to-reminder-app): a photo becomes a searchable, actionable note
 - [Loud reminder app](https://squirrelbrainapp.com/loud-reminder-app): for people who miss quiet notifications
 - [A reminder app that calls you](https://squirrelbrainapp.com/reminder-app-that-calls-you): a real call with an AI voice — pep talk, your day, or meeting prep

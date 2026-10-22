@@ -108,6 +108,9 @@ export default function Footer() {
               <Link href="/family" className="text-sm text-muted hover:text-ink transition-colors">
                 For Family
               </Link>
+              <Link href="/scribbly-notes" className="text-sm text-muted hover:text-ink transition-colors">
+                Scribbly Notes
+              </Link>
               <Link href="/demos" className="text-sm text-muted hover:text-ink transition-colors">
                 Demos
               </Link>

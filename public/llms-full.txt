@@ -145,6 +145,15 @@ A voice reminder app for iPhone. Squirrel Brain turns voice notes into tasks, al
 
 Tap once and talk. Squirrel Brain listens, pulls out the follow-ups, the dates, and the promises, and turns the important parts into things that nudge you later. Ask your squirrel in plain language later and it answers from everything you've captured. If you say a time, it uses it. If you don't, it won't guess silently — it prompts you so a reminder never lands at the wrong moment.
 
+## Scribbly Notes
+https://squirrelbrainapp.com/scribbly-notes
+
+Scribbly Notes — Speak Freely, Share Beautifully | Squirrel Brain
+
+Scribbly Notes is Squirrel Brain's voice-first notes. Say it or type it, however it comes out, and your iPhone turns the mess into a clean, organized page — with real tap-to-check boxes and no stray formatting. Your raw words are always kept, and the note stays editable.
+
+Speak freely: talk, type, or paste — a half-finished list, the same thought said three ways, the thing you'd forget by lunch. Scribbly takes it as it comes and keeps your exact words. Your phone, not a server, strips the stray formatting and repeats, gives the note a clear title, and lays it out as a real page with checkbox lines you actually tap to check off. Share or forward the clean note — photos included. Because it's all one app, the thoughts that need a nudge can become a reminder, alarm, or calendar event, and an AI agent can add notes over the built-in MCP server. iPhone, pre-launch, free at launch.
+
 ## Turn photos into reminders
 https://squirrelbrainapp.com/photo-to-reminder-app
 

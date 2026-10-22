@@ -84,6 +84,7 @@ export const LANDING_ANCHORS: Record<string, string> = {
   "daily-bible-verse-call": "a daily Bible verse by phone call",
   "adhd-reminder-app": "ADHD reminders that call you",
   "live-call-assistant-reminders": "a live call assistant for reminders",
+  "scribbly-notes": "Scribbly Notes",
 };
 
 export const LANDING_PAGES: LandingPageData[] = [
@@ -259,7 +260,7 @@ export const LANDING_PAGES: LandingPageData[] = [
         a: "Squirrel Brain is an iPhone app built around fast, one-tap voice capture for hands-busy moments. It's pre-launch — join the launch list to get early access.",
       },
     ],
-    related: ["ai-reminder-app", "second-brain-app", "photo-to-reminder-app", "loud-reminder-app", "adhd-reminder-app"],
+    related: ["scribbly-notes", "ai-reminder-app", "second-brain-app", "photo-to-reminder-app", "loud-reminder-app", "adhd-reminder-app"],
   },
 
   {
@@ -429,7 +430,7 @@ export const LANDING_PAGES: LandingPageData[] = [
         a: "iPhone, for now. Squirrel Brain is pre-launch — join the launch list to get early access.",
       },
     ],
-    related: ["ai-agent-reminder-app", "ai-reminder-app", "voice-note-reminder-app", "photo-to-reminder-app", "loud-reminder-app"],
+    related: ["scribbly-notes", "ai-agent-reminder-app", "ai-reminder-app", "voice-note-reminder-app", "photo-to-reminder-app", "loud-reminder-app"],
   },
 
   {
@@ -1162,6 +1163,78 @@ export const LANDING_PAGES: LandingPageData[] = [
       "adhd-reminder-app",
       "daily-pep-talk-call-app",
       "loud-reminder-app",
+    ],
+  },
+
+  {
+    slug: "scribbly-notes",
+    title: "Scribbly Notes — Speak Freely, Share Beautifully | Squirrel Brain",
+    description:
+      "Scribbly Notes is Squirrel Brain's voice-first notes: say it or type it, and your iPhone turns the mess into a clean, organized page you can share — real tap-to-check boxes, no stray formatting, and your raw words always kept.",
+    eyebrow: "Scribbly Notes",
+    h1: "Scribbly Notes: speak freely, share beautifully",
+    subhead:
+      "Say it or type it, however it comes out. Your phone turns the mess into a clean, organized page — real tap-to-check boxes, no stray formatting — ready to read, edit, or share.",
+    heroShot: {
+      src: "/assets/screens/notes-v2.webp",
+      alt: "Squirrel Brain's notes screen — a Forever Note running list with tap-to-check items, and spoken notes saved as clean cards",
+    },
+    sections: [
+      {
+        eyebrow: "Speak freely",
+        h2: "Just say it — however it comes out",
+        body: "You don't think in tidy documents, so you shouldn't have to write in them. Talk, type, or paste — a half-finished list, the same thought said three different ways, the thing you'll forget by lunch. Scribbly takes it as it comes. Your exact words are always kept, so nothing you said is ever lost.",
+        bullets: [
+          "Capture by voice or keyboard",
+          "Your raw words are always saved",
+          "No formatting to fiddle with",
+        ],
+      },
+      {
+        eyebrow: "Share beautifully",
+        h2: "Your phone turns the mess into a clean page",
+        body: "The tidying happens on your iPhone, not on a server. Scribbly strips the stray formatting and repeats, gives the note a clear title, and lays it out as a real page — with checkbox lines you actually tap to check off, not raw bracket marks. Open a note and it reads like something you'd be happy to send.",
+        bullets: [
+          "A clear title and clean layout, made for you",
+          "Real tap-to-check boxes — no raw markup",
+          "Tidied on your phone; nothing is built on a server",
+        ],
+      },
+      {
+        eyebrow: "It's part of Squirrel Brain",
+        h2: "Notes that can also do something",
+        body: "Scribbly Notes live inside Squirrel Brain, so a note isn't a dead end. Share or forward the clean version — with any photos — in a tap. And because it's all one app, the thoughts that need a nudge can become a reminder, an alarm, or a calendar event. If you want, an AI agent can even add notes for you over the built-in MCP server. It's all private to you.",
+        bullets: [
+          "Share or forward the clean note, photos included",
+          "The thoughts that need a nudge can become a reminder, alarm, or calendar event",
+          "Optional: agents can add notes over MCP",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        q: "What is Scribbly Notes?",
+        a: "Scribbly Notes is Squirrel Brain's notes experience: you speak or type freely, and your iPhone turns it into a clean, organized page — a clear title, tidy layout, and real tap-to-check boxes. Your original words are always kept, so nothing is lost.",
+      },
+      {
+        q: "Do I have to type my notes?",
+        a: "No. Tap the mic and talk — say it however it comes out and Scribbly captures it. You can also type or paste. Either way it keeps your raw words and builds the clean page from them.",
+      },
+      {
+        q: "Where does the tidying happen — are my notes private?",
+        a: "The clean-up runs on your iPhone, not on a server, and your notes stay in your own private account. Your original words are always kept alongside the tidied version, and the note stays editable.",
+      },
+      {
+        q: "What devices does it run on, and what does it cost?",
+        a: "iPhone, for now. Squirrel Brain is free to use at launch and pre-launch today — join the launch list and you'll be first into the beta.",
+      },
+    ],
+    related: [
+      "voice-note-reminder-app",
+      "second-brain-app",
+      "talking-reminder-app",
+      "ai-reminder-app",
+      "photo-to-reminder-app",
     ],
   },
 ];
