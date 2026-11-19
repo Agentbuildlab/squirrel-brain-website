@@ -11,7 +11,7 @@ When you write, tell us your iPhone model, iOS version and the Squirrel Brain ve
 ## Frequently asked questions
 
 ### How do I delete my account and my data?
-Open Squirrel Brain, go to **Settings > Account > Delete Account**, and confirm. This permanently deletes your cloud data, turns off your API keys and stops push notifications to your phone. Deletion of stored data is completed within 30 days. Deleting the app alone does not delete your account. If you cannot open the app, email us from the address tied to your account and we will delete it for you.
+Open Squirrel Brain, open **Settings**, scroll to the bottom, tap **Delete account**, and confirm twice. This permanently deletes your cloud data, turns off your API keys and stops push notifications to your phone. Deletion of stored data is completed within 30 days. Deleting the app alone does not delete your account. If you cannot open the app, email us from the address tied to your account and we will delete it for you.
 
 ### Do I have to pay for anything? What about purchases and subscriptions?
 Squirrel Brain is free to use right now. There is nothing to purchase, no trial to start and nothing to restore. Subscriptions may be offered later; if that happens we will say so clearly in the app and on this page first, and billing and cancelling would be handled by Apple through your iPhone's Settings > your name > Subscriptions. If you see a Squirrel Brain charge you do not recognize, email us.

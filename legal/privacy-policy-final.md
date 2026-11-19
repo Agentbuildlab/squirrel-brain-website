@@ -1,8 +1,8 @@
 # Privacy Policy — Squirrel Brain
 
 Effective Date: October 4, 2026
-Last Updated: October 8, 2026
-Version: 3.1
+Last Updated: November 19, 2026
+Version: 3.2
 
 ---
 
@@ -22,7 +22,7 @@ If you are a resident of Illinois, Washington State, or Texas, Section 14 contai
 
 Data Controller and Contact for Privacy Matters:
 
-Squirrel Brain / Acorn Labs LLC
+Squirrel Brain / Acorn Labs LLC, Knoxville, Tennessee, USA
 Email: hello@squirrelbrainapp.com
 Website: https://squirrelbrainapp.com
 
@@ -48,9 +48,9 @@ We do not permit users under 18 at all (see the age restriction above), so we do
 
 ### 3.1 Voice Recordings
 
-When you use the microphone feature, the app records your voice on-device. The audio file is transmitted to our servers and to our AI providers (see Section 5) to turn your speech into text and structure it into notes, tasks, and reminders. The original audio file is stored in Supabase so you can replay recordings.
+When you use the microphone feature, the app records your voice on-device. The audio is sent through our servers to our AI providers (see Section 5) to turn your speech into text and structure it into notes, tasks, and reminders. Short voice recordings are not backed up: we keep the text, not the audio, on our servers. (Meeting Mode recordings are different and are backed up; see Section 3.1a.)
 
-What this means: Your voice is captured, transmitted over the internet to our AI providers (see Section 5) for transcription and structuring, and stored in Supabase's cloud database.
+What this means: Your voice is captured, sent over the internet to our AI providers (see Section 5) for transcription and structuring, and the resulting text is stored in your account.
 
 Important notice regarding voice data and biometric laws: Voice recordings may constitute biometric identifiers under Illinois law (BIPA), Washington State law (My Health MY Data Act), and Texas law (CUBI). If you are a resident of those states, see Section 14 for important additional rights and consent requirements. We process voice data solely to provide the transcription and note-structuring features you request; we do not use voice data for speaker identification, authentication, or any biometric purpose.
 
@@ -63,6 +63,18 @@ Meeting-recording consent. Because a meeting recording necessarily captures the 
 ### 3.1b The Pip AI Assistant
 
 Squirrel Brain includes an in-app conversational assistant, "Pip." Messages you send Pip, and the conversation history needed to understand your request, are processed by our AI providers (see Section 5). Pip can take actions in the app on your behalf — creating reminders, searching your saved items, scheduling a call — and, when useful, can search the public web to answer a question; when it does, your search words are sent to one of our AI providers and, through it, to the underlying search provider. See Section 5 for the list of AI providers.
+
+### 3.1c Live Calls
+
+If you turn on "Call me" for a reminder, or ask Pip to call you, Pip can call you through the iPhone call screen (no phone number or carrier minutes are used). Apple delivers the call alert. When you answer, your voice is sent to our AI providers (see Section 5) so Pip can talk with you, and Pip can read and change your reminders, events and notes during the call, just as it can in the chat.
+
+### 3.1d Contacts
+
+With your permission, the app adds one "Squirrel" contact so its picture shows when it calls you. To find that contact, the app searches the contacts on your phone, on your phone only. We do not upload your contacts, and the app does not change any other contact.
+
+### 3.1e API Keys and Outside AI Apps
+
+If you create an API key and connect an outside AI app, that app can read and change your Squirrel Brain items as you allow. It handles them under its own terms. You can revoke the key at any time, and deleting your account revokes all keys.
 
 ### 3.2 Photos and Images (PixNote)
 
@@ -111,7 +123,7 @@ We use Resend to deliver all transactional and Daily Brief emails. Your email ad
 
 ### 3.8 Authentication Data (Sign In with Apple)
 
-We use Apple's Sign In with Apple for authentication. Apple provides us with a unique anonymous user identifier and, at your option, your email address. We do not receive your Apple ID password. Your Apple Sign In credentials are managed by Apple under Apple's Privacy Policy.
+We use Apple's Sign In with Apple for authentication. Apple provides us with a unique anonymous user identifier and, at your option, your name and your email address. We store your first name so the app and Pip can greet you by name; you can change it in the app. We do not receive your Apple ID password. Your Apple Sign In credentials are managed by Apple under Apple's Privacy Policy.
 
 ### 3.8a Sign-In Log
 
@@ -127,27 +139,51 @@ We plan to integrate PostHog to collect anonymized usage data (feature usage, sc
 
 This policy will be updated with specific PostHog data practices before activation. When PostHog is activated in the app, this policy will be updated in advance with the specific data processing region, retention period, and IP address handling for that integration, and Section 5 will name PostHog as a subprocessor with the same disclosures we give every other processor in this policy.
 
-### 3.11 Technical and Device Data
+### 3.10 Technical and Device Data
 
 We automatically collect:
 
 - Device type and model
 - Operating system version
 - App version
-- Crash reports and error logs (sent to Sentry, our crash-reporting service; see Section 5.9)
-- General usage patterns (e.g., which features are used, how often)
+- Crash reports and error logs (sent to Sentry, our crash-reporting service; see Section 5.9), used only to find and fix crashes
+- Performance traces (sent to Sentry): how long screens and actions take, and which screen or button started a slow action, used only to find and fix slow parts of the app
 
 This information is used to maintain, improve, and debug the app. We do not link crash reports to your notes or voice recordings. Crash logs are retained for approximately 90 days.
 
-### 3.12 Website Data (squirrelbrainapp.com)
+### 3.11 Website Data (squirrelbrainapp.com)
 
 When you visit squirrelbrainapp.com:
 
 - Standard web server logs (IP address, browser type, referrer, page visited, timestamp) may be collected by our hosting provider (Vercel)
 - If you submit the waitlist form, your email is stored in Supabase for pre-launch communications
-- PostHog analytics are active on squirrelbrainapp.com (activated May 27, 2026). PostHog collects anonymized usage events — pages visited, button clicks, session data. PostHog is configured with `person_profiles: 'identified_only'`, meaning anonymous visitors are not profiled. No note content, voice recordings, or personal account data is collected via the website analytics. See Section 5.8 for more on PostHog data practices.
+- Ahrefs Web Analytics is active on squirrelbrainapp.com. It counts page views and traffic sources without cookies and without collecting personal information beyond what any web request carries (such as IP address and browser type).
+- PostHog analytics are active on squirrelbrainapp.com (activated May 27, 2026). PostHog collects anonymized usage events — pages visited, button clicks, session data. PostHog is configured to build profiles only for identified users, meaning anonymous visitors are not profiled. No note content, voice recordings, or personal account data is collected via the website analytics. See Section 5.8 for more on PostHog data practices.
 
 Before PostHog is configured to set cookies or device identifiers for visitors in the EEA, UK, or Switzerland, squirrelbrainapp.com will present a cookie/tracking consent banner offering those visitors the choice to accept or decline non-essential analytics cookies, consistent with the ePrivacy Directive and GDPR. Today, PostHog on the website is configured to identified-only profiles and does not set cross-site advertising cookies.
+
+
+### 3.12 How This Policy Matches Our App Store Privacy Label
+
+Our App Store privacy label lists the data types below. All of them are linked to your account, none are used to track you across other companies' apps or websites, and none are sold. Unless the table says otherwise, each is used only for App Functionality.
+
+| App Store data type | What it is in Squirrel Brain | Used for | Where it is explained |
+|---|---|---|---|
+| Name | The name Sign in with Apple shares with us, if you allow it | App Functionality; Product Personalization (greeting you by name) | Section 3.8 |
+| Email Address | Your email from Sign in with Apple; used for account and Daily Brief emails | App Functionality | Sections 3.7, 3.8 |
+| Emails or Text Messages | Messages you send Pip in the chat, and messages exchanged with outside AI apps you connect | App Functionality | Sections 3.1b, 3.1e |
+| Photos or Videos | Photos and screenshots you bring in, and saved video links | App Functionality | Section 3.2 |
+| Audio Data | Voice you dictate (sent to be transcribed, not kept as audio), meeting recordings, and your voice on live calls | App Functionality | Sections 3.1, 3.1a, 3.1c |
+| Precise Location | Your location, only if you allow it, to tag notes and show weather and your city | App Functionality | Sections 3.4, 5.11 |
+| Other User Content | Your notes, reminders, events, saved links, boards, and the "About you" text | App Functionality; Product Personalization (Pip's answers and your Daily Brief) | Sections 3.3, 3.5, 4 |
+| Search History | Searches you run in the app and web searches you ask Pip to make | App Functionality | Sections 3.1b, 5.4 |
+| User ID | Your account ID and the anonymous Apple user identifier | App Functionality | Sections 3.8, 3.8a |
+| Device ID | Your device identifier and push token | App Functionality | Sections 3.6, 3.8a |
+| Purchase History | Your subscription and purchase status from the App Store, through RevenueCat | App Functionality | Section 5.10 |
+| Other Usage Data | Your settings and the records the app needs to work, such as the sign-in log | App Functionality | Sections 3.8a, 3.10 |
+| Crash Data | Crash reports sent to Sentry | App Functionality | Sections 3.10, 5.9 |
+| Performance Data | Performance traces sent to Sentry (how long screens and actions take) | App Functionality; Analytics (finding slow parts of the app) | Sections 3.10, 5.9 |
+| Other Diagnostic Data | Error logs, app version, device model and iOS version | App Functionality | Sections 3.10, 5.9 |
 
 ---
 
@@ -210,7 +246,7 @@ Standard Gemini API terms state that content submitted through the API is not us
 
 ### 5.4 xAI (Grok)
 
-What we share: Your content, as needed to provide the AI features you use (see the overview at the start of this section).
+What we share: Your content, as needed to provide the AI features you use (see the overview at the start of this section). When Pip searches the web for you (for example, to find a nearby place), the search may include your city and state so results are local. The web search never includes your precise location coordinates.
 Why: AI processing to power app features.
 Data processing location: United States
 xAI Privacy Policy: https://x.ai/legal/privacy-policy
@@ -249,7 +285,7 @@ What we share (when activated): Anonymized usage events — feature interactions
 Why: Product analytics to understand how features are used and improve the app.
 PostHog Privacy Policy: https://posthog.com/privacy
 
-Before activating PostHog in the app (it is already active on the website, see Section 3.12), we will confirm and disclose here the data processing region (EU or US Cloud), whether IP addresses are collected and how they are masked, the applicable GDPR legal basis, and the specific retention period for analytics events.
+Before activating PostHog in the app (it is already active on the website, see Section 3.11), we will confirm and disclose here the data processing region (EU or US Cloud), whether IP addresses are collected and how they are masked, the applicable GDPR legal basis, and the specific retention period for analytics events.
 
 ### 5.9 Sentry (Crash and Performance Reports)
 
@@ -271,6 +307,17 @@ What we share: If you allow location access, Squirrel Brain sends your location 
 Why: To show current weather and air quality and to label your notes and brief with your city.
 Open-Meteo Terms and Privacy: https://open-meteo.com/en/terms
 OpenStreetMap Foundation Privacy Policy: https://osmfoundation.org/wiki/Privacy_Policy
+
+### 5.12 Expo (Push Delivery and App Updates)
+
+What we share: Your device's push token and the text of the notification being sent; when the app checks for an update, your app version and device type.
+Why: To deliver notifications to your iPhone and to deliver app updates.
+Data processing location: United States
+Expo Privacy Policy: https://expo.dev/privacy
+
+### 5.13 Link Previews
+
+When you save a link, our servers first fetch that page (and, for YouTube links, YouTube's API) to show a title and thumbnail, so in that step the site receives a request from our server, not from your phone. For some links the app fetches the page from your phone instead: for a YouTube video, the app loads the video page and its captions directly from YouTube so it can summarize the video, and that transcript is sent to our AI providers (see Section 5); for a few shopping sites such as Amazon, your phone may fetch the page when our server cannot. The thumbnail image is loaded from the linked site or its image service. No note content is sent to the linked site.
 
 ---
 
@@ -294,6 +341,8 @@ We believe in being explicit about what we do not do with your data:
 
 Squirrel Brain is fundamentally AI-powered. A substantial portion of your personal information — voice recordings, photos, typed notes, and your conversations with the Pip assistant — is processed by four third-party AI systems: OpenAI, Anthropic, Google, and xAI (see Section 5 for what each one handles).
 
+Nothing is sent to an AI provider until you tap Allow AI. You can turn this off in Settings > Privacy & AI.
+
 Key disclosures:
 
 - Automated decision-making and structuring: The app uses AI to automatically structure your voice, images, and text into tasks, reminders, calendar events, and notes. These are organizational tools you can always review, edit, and delete. We do not consider these to constitute high-stakes "automated decisions" under GDPR Article 22 because they do not produce legally significant or similarly significant effects on you.
@@ -315,7 +364,7 @@ We retain personal information only as long as necessary for the purposes descri
 | Data Type | Active Account Retention | Post-Deletion Retention |
 |---|---|---|
 | Notes, tasks, structured data | Until you delete the item or account | Deleted/anonymized within 30 days of account deletion |
-| Voice recordings (audio files) | Until you delete the recording or account | Deleted/anonymized within 30 days of account deletion |
+| Voice recordings | Short recordings: the audio is not kept on our servers (only the text). Meeting Mode audio: until you delete the recording or account | Deleted/anonymized within 30 days of account deletion |
 | Photos / image data | Until you delete the item or account | Deleted/anonymized within 30 days of account deletion |
 | Location tags | Until you delete the associated note or account | Deleted/anonymized within 30 days of account deletion |
 | Push notification tokens | Until you sign out or delete account | Deleted immediately on sign-out/deletion |
@@ -366,7 +415,7 @@ Request a copy of the personal information we hold about you. We will provide th
 
 Request deletion of your personal information. You can delete your account and all associated data at any time.
 
-To delete your account in-app: Go to Settings > Account > Delete Account > Confirm. This permanently deletes your account and queues your personal data for deletion within 30 days. (Required per Apple App Store Guidelines Section 5.1.1(v).)
+To delete your account in-app: Open Settings, scroll to the bottom, tap Delete account, and confirm twice. This permanently deletes your account and queues your personal data for deletion within 30 days. (Required per Apple App Store Guidelines Section 5.1.1(v).)
 
 You may also request deletion by emailing hello@squirrelbrainapp.com. Note that we may retain certain data where required by law or to comply with legal obligations.
 
@@ -406,13 +455,13 @@ We do not sell or share your personal information. This right is therefore autom
 
 ### 10.10 Opt Out of Analytics (When Activated)
 
-When PostHog analytics are activated, we will provide an in-app opt-out mechanism. we will provide an in-app toggle under Settings > Privacy to opt out, in addition to the rights described elsewhere in this Section 10.
+When PostHog analytics are activated in the app, we will add a toggle under Settings > Privacy & AI to opt out.
 
 ---
 
 ## 11. Data Transfers
 
-Squirrel Brain is operated from the United States. Your personal information is processed and stored in the US by us and by our third-party service providers (OpenAI, Anthropic, Google, xAI, Supabase, Resend). If you are located outside the United States, your data will be transferred to and processed in the US.
+Squirrel Brain is operated from the United States. Your personal information is processed and stored in the US by us and by our third-party service providers (OpenAI, Anthropic, Google, xAI, Supabase, Resend, Sentry, RevenueCat, Expo). If you are located outside the United States, your data will be transferred to and processed in the US.
 
 For EEA, UK, and Swiss users: Data transfers to the United States must be made under a valid transfer mechanism under GDPR Chapter V. The specific mechanisms applicable to each of our providers are as follows:
 
@@ -422,6 +471,11 @@ For EEA, UK, and Swiss users: Data transfers to the United States must be made u
 | Google (Gemini / Google Cloud) | EU-US Data Privacy Framework (Google LLC is certified); SCCs also available via Google Cloud DPA |
 | Supabase | Standard Contractual Clauses via Supabase's underlying AWS infrastructure |
 | Resend | Standard Contractual Clauses (per Resend's Data Processing Agreement) |
+| Anthropic | Relying on Anthropic's published terms today; Standard Contractual Clauses through the Data Processing Agreement in progress |
+| xAI | Relying on xAI's published terms today; Standard Contractual Clauses through the Data Processing Agreement in progress |
+| Sentry | Relying on Sentry's published terms today; Standard Contractual Clauses through its Data Processing Addendum |
+| RevenueCat | Relying on RevenueCat's published terms today; Standard Contractual Clauses through its Data Processing Addendum |
+| Expo | Relying on Expo's published terms today; Standard Contractual Clauses through its Data Processing Addendum |
 | PostHog | To be confirmed before activation; PostHog offers an EU-hosted Cloud option we will evaluate for EEA/UK/Swiss users |
 
 We are executing GDPR Article 28 Data Processing Agreements with each processor named in Section 5 that may handle EU personal data, relying on Standard Contractual Clauses or an applicable adequacy/Data Privacy Framework certification as the transfer mechanism, and we have performed a preliminary Transfer Impact Assessment for our US-based processors.
@@ -434,7 +488,7 @@ We are executing GDPR Article 28 Data Processing Agreements with each processor 
 
 For GDPR purposes, the data controller is:
 
-Acorn Labs LLC
+Acorn Labs LLC, Knoxville, Tennessee, USA
 Country of establishment: United States
 Email: hello@squirrelbrainapp.com
 
@@ -577,7 +631,7 @@ Your Washington State rights include:
 - Right to access your consumer health data
 - Right to withdraw consent to our collection and sharing of consumer health data
 - Right to have your consumer health data deleted
-- Right not to be subject to geofencing around healthcare facilities [Note: this app does not implement geofencing]
+- Right not to be subject to geofencing around healthcare facilities (This app does not use geofencing.)
 
 To exercise these rights, contact hello@squirrelbrainapp.com.
 
@@ -604,12 +658,10 @@ Consistent with CUBI's before-capture consent requirement, your affirmative choi
 We may update this Privacy Policy from time to time to reflect changes in our practices, features, or applicable law. When we make changes:
 
 - We will update the "Last Updated" date at the top of this policy
-- For material changes, we will: (a) provide in-app notification; (b) where we have your email, send you email notification; and (c) where required by law, seek fresh consent before resuming the affected processing
+- For material changes, we will notify you in the app or by email before the change takes effect, and ask for your consent where the law requires it
 - For non-material changes (e.g., clarifications, typo corrections), we will update the date without separate notice
 
 Continued use of the app after the effective date of an updated policy constitutes your acknowledgment of the changes. For material changes affecting how we process your data, we will seek fresh consent where legally required.
-
-Where applicable law (including California's) requires affirmative consent rather than mere notice for a material, retroactive change to how we process your data, our in-app change notification will include an explicit opt-in action before the new practice applies to your existing data.
 
 ---
 
@@ -617,11 +669,12 @@ Where applicable law (including California's) requires affirmative consent rathe
 
 If you have any questions, concerns, or requests regarding this Privacy Policy or our data practices:
 
+Acorn Labs LLC, Knoxville, Tennessee, USA
 Email: hello@squirrelbrainapp.com
 Website: https://squirrelbrainapp.com
 
-To be appointed under GDPR Article 27 — see Section 12.1. In the meantime, direct EU inquiries to hello@squirrelbrainapp.com.
-To be appointed under UK GDPR Article 27 — see Section 12.1. In the meantime, direct UK inquiries to hello@squirrelbrainapp.com.
+EU Representative: to be appointed under GDPR Article 27 — see Section 12.1. In the meantime, direct EU inquiries to hello@squirrelbrainapp.com.
+UK Representative: to be appointed under UK GDPR Article 27 — see Section 12.1. In the meantime, direct UK inquiries to hello@squirrelbrainapp.com.
 
 We respond to all privacy inquiries within 30 days.
 
@@ -643,6 +696,7 @@ We respond to all privacy inquiries within 30 days.
 | RevenueCat | Subscription status | Random app user ID, purchase and subscription status | Relying on published terms | revenuecat.com/privacy |
 | Open-Meteo | Weather and air quality | Location coordinates or a place name; device IP address | Relying on published terms | open-meteo.com/en/terms |
 | OpenStreetMap | City name from location | Location coordinates | Relying on published terms | osmfoundation.org/wiki/Privacy_Policy |
+| Expo | Push delivery and app updates | Push token, notification text, app version, device type | Relying on published terms | expo.dev/privacy |
 
 ---
 

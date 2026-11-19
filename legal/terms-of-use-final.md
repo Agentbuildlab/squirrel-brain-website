@@ -1,7 +1,7 @@
 Terms of Use
 
 Squirrel Brain
-Last Updated: October 8, 2026
+Last Updated: November 19, 2026
 Effective Date: October 4, 2026
 
 ---
@@ -67,7 +67,7 @@ These Terms apply to individual users. Business or enterprise use requires a sep
 
 ## 3. CHANGES TO THESE TERMS
 
-We may modify these Terms at any time. Material changes will be communicated via in-app notification, email to your registered address, or a prominent notice on the Site, with at least 14 days' advance notice before taking effect. For material changes that significantly expand data processing or affect your legal rights, we will seek fresh consent where required by law.
+We may modify these Terms at any time. For material changes, we will notify you in the app or by email before the change takes effect, and ask for your consent where the law requires it.
 
 Continued use of the Services after the effective date of changes constitutes acceptance of the revised Terms. If you do not agree to the changes, you must stop using the Services before the effective date.
 
@@ -95,7 +95,7 @@ Text you type is processed by our AI providers (see Section 5) to extract struct
 
 ### 4.4 Smart Alarms and Reminders
 
-The App creates iOS local notifications and Apple Calendar events based on AI-extracted dates and times. These are iOS local notifications, not a guaranteed alarm service. See Section 11 for critical limitations.
+The App creates iOS local notifications and Apple Calendar events based on AI-extracted dates and times. These are iOS local notifications, not a guaranteed alarm service. If you turn on "Call me" for a reminder, Pip can also call you through the iPhone call screen; Apple delivers that call alert, and when you answer your voice is sent to our AI providers so Pip can talk with you (see the Privacy Policy, Section 3.1c). See Section 11 for critical limitations.
 
 ### 4.5 Apple Calendar Integration
 
@@ -140,7 +140,7 @@ Your content is processed in accordance with the third-party AI services' curren
 ### 5.2 Third-Party AI Terms
 
 You are also subject to:
-- OpenAI Terms of Service: https://openai.com/policies/
+- OpenAI Terms of Use: https://openai.com/policies/terms-of-use
 - Anthropic Consumer/Commercial Terms of Service: https://www.anthropic.com/legal/commercial-terms
 - Anthropic Privacy Policy: https://www.anthropic.com/legal/privacy
 - Google Gemini API Terms: https://ai.google.dev/gemini-api/terms
@@ -160,7 +160,7 @@ You are also subject to:
 | App Store billing | Apple Inc. | Subscription management |
 | Crash reporting | Functional Software, Inc. (Sentry) | Crash and performance reports |
 | Subscription status | RevenueCat, Inc. | Purchase and subscription status |
-| Analytics | PostHog, Inc. | Usage analytics |
+| Website analytics (squirrelbrainapp.com only; not used in the app) | PostHog, Inc. | Website usage analytics |
 
 ### 5.4 AI Training Data
 
@@ -186,9 +186,9 @@ You are responsible for maintaining the confidentiality of your account credenti
 
 ### 6.3 Account Deletion
 
-You may delete your account and request deletion of your personal data at any time through Settings > Account > Delete Account. Account deletion is processed within 30 days. Personal data handling upon deletion is described in our Privacy Policy.
+You may delete your account and request deletion of your personal data at any time in the app: Open Settings, scroll to the bottom, tap Delete account, and confirm twice. Account deletion is processed within 30 days. Personal data handling upon deletion is described in our Privacy Policy.
 
-Apple App Store Requirement. Pursuant to Apple App Store Guidelines § 5.1.1(v), in-app account deletion is available without requiring users to contact customer support. In-app account deletion is implemented at Settings > Account > Delete Account.
+Apple App Store Requirement. Pursuant to Apple App Store Guidelines § 5.1.1(v), in-app account deletion is available without requiring users to contact customer support. In-app account deletion is at the bottom of Settings (Delete account).
 
 ### 6.4 Sign in with Apple
 
@@ -204,7 +204,7 @@ Accounts are for individual, personal use only. You may not create accounts on b
 
 ### 7.1 Microphone Access
 
-Required for voice capture. The App records audio only when you actively initiate a recording session by tapping the microphone button. The App does not continuously record audio in the background without your active initiation.
+The App uses the microphone only while you are using a voice feature: dictation, Running Note, meeting recording, talking with Pip, or a live call you answer. It does not listen in the background otherwise.
 
 ### 7.2 Camera and Photo Library Access
 
@@ -220,7 +220,7 @@ Required for smart alarms and reminders. Notification delivery is subject to iOS
 
 ### 7.5 Location Access (Optional)
 
-Optional. Used to tag notes with your GPS location at time of capture and to improve AI context. Location tagging is not required for core functionality. GPS coordinates are stored in Supabase as note metadata. Previously stored location data is not automatically deleted when you revoke location permission.
+Optional. Used to tag notes, show local weather and your city in your Daily Brief, and show what you saved nearby. Location tagging is not required for core functionality. GPS coordinates are stored in Supabase as note metadata. Previously stored location data is not automatically deleted when you revoke location permission.
 
 ### 7.6 Permission Changes
 
@@ -326,7 +326,7 @@ BY USING ANY AI-POWERED FEATURE, YOU EXPRESSLY ACCEPT ALL RISK ASSOCIATED WITH A
 
 ### 11.1 How Alarms Work
 
-Smart alarms in Squirrel Brain are iOS local notifications and Apple Calendar events. They are generated on your device by the iOS notification system and are subject to all iOS notification system constraints and limitations. Squirrel Brain does not operate its own independent alarm hardware or guaranteed notification delivery infrastructure.
+Smart alarms in Squirrel Brain are iOS local notifications and Apple Calendar events. They are generated on your device by the iOS notification system and are subject to all iOS notification system constraints and limitations. A "Call me" reminder is delivered as an incoming call through Apple's push service and the iPhone call screen, and is subject to the same iOS and network conditions. Squirrel Brain does not operate its own independent alarm hardware or guaranteed notification delivery infrastructure.
 
 ### 11.2 Conditions That May Silently Prevent Alarm Delivery
 
@@ -406,7 +406,7 @@ Your subscription automatically renews at the end of each billing period (as sho
 
 Price changes: We will provide advance notice of any price increase before it takes effect. If you do not cancel, you consent to the new price at the next renewal.
 
-HOW TO CANCEL: Go to Settings > [Your Name] > Subscriptions on your iOS device. Select Squirrel Brain. Tap "Cancel Subscription." Cancellation takes effect at the end of the current paid billing period. You will not be charged again after cancellation, but you will retain access through the end of the current period.
+HOW TO CANCEL: Go to Settings > your name > Subscriptions on your iOS device. Select Squirrel Brain. Tap "Cancel Subscription." Cancellation takes effect at the end of the current paid billing period. You will not be charged again after cancellation, but you will retain access through the end of the current period.
 
 Cancellation of a free trial: You must cancel at least 24 hours before the end of the free trial period to avoid being charged for the first subscription period.
 
@@ -457,7 +457,7 @@ You agree not to use the Services for any of the following:
 
 ### 15.1 Third-Party Integrations
 
-Use of third-party services integrated with the App (OpenAI, Anthropic, Google, xAI, Supabase, Resend, Apple, Sentry, RevenueCat, PostHog) is governed by those parties' respective terms of service and privacy policies. We are not responsible for those services' practices, content, security, availability, or performance.
+Use of third-party services integrated with the App (OpenAI, Anthropic, Google, xAI, Supabase, Resend, Apple, Sentry, RevenueCat, Expo) is governed by those parties' respective terms of service and privacy policies. We are not responsible for those services' practices, content, security, availability, or performance.
 
 ### 15.2 Third-Party Links
 
@@ -605,7 +605,7 @@ We reserve the right, at our own expense, to assume exclusive defense and contro
 
 ### 21.1 Termination by You
 
-You may terminate your account at any time through Settings > Account > Delete Account > Confirm, or by contacting us at hello@squirrelbrainapp.com. Termination does not entitle you to a refund of subscription fees except as described in Section 13.5.
+You may terminate your account at any time in the app (open Settings, scroll to the bottom, tap Delete account, and confirm twice), or by contacting us at hello@squirrelbrainapp.com. Termination does not entitle you to a refund of subscription fees except as described in Section 13.5.
 
 ### 21.2 Termination by Squirrel Brain
 
@@ -671,7 +671,7 @@ If any portion of this Section 22 is found unenforceable, the unenforceable port
 
 ### 22.8 EU, UK, Australian, and Canadian Users
 
-The arbitration clause in Sections 22.1–22.7 does NOT apply to users who are residents of: the European Union, the United Kingdom, Australia, or Canada. Such users may bring claims before the competent courts in their jurisdiction of residence. EU and UK consumers may also access out-of-court dispute resolution mechanisms, including the EU Online Dispute Resolution platform (https://ec.europa.eu/consumers/odr) and UK Alternative Dispute Resolution schemes.
+The arbitration clause in Sections 22.1–22.7 does NOT apply to users who are residents of: the European Union, the United Kingdom, Australia, or Canada. Such users may bring claims before the competent courts in their jurisdiction of residence. UK consumers may also use UK Alternative Dispute Resolution schemes.
 
 ---
 
@@ -717,7 +717,7 @@ Squirrel Brain is not liable for delay or failure in performance of our obligati
 
 ### 24.6 No Third-Party Beneficiaries
 
-Except as provided in Section 24.9 (Apple) and Section 24.10 (indemnified parties), no third-party beneficiary rights are created by these Terms, and no third party may enforce any provision hereof.
+Except as provided in Section 24.9 (Apple) and Section 20 (indemnified parties), no third-party beneficiary rights are created by these Terms, and no third party may enforce any provision hereof.
 
 ### 24.7 Notices
 
@@ -756,7 +756,7 @@ These Terms are in English. If they are translated into other languages and ther
 
 ## 25. CONTACT INFORMATION
 
-Squirrel Brain / Acorn Labs LLC
+Squirrel Brain / Acorn Labs LLC, Knoxville, Tennessee, USA
 Email (General / Support): hello@squirrelbrainapp.com
 Email (Legal Notices): hello@squirrelbrainapp.com
 Email (Privacy Requests): hello@squirrelbrainapp.com
