@@ -482,7 +482,7 @@ export const LANDING_PAGES: LandingPageData[] = [
       },
       {
         q: "What does it cost?",
-        a: "Squirrel Brain is $14.99/month, billed by Apple through your App Store account. Join the launch list to hear when it is ready.",
+        a: "Squirrel Brain is free for 1 week, then $14.99/month, billed by Apple through your App Store account. Join the launch list to hear when it is ready.",
       },
     ],
     related: ["reminder-app-for-field-service", "outlook-screenshot-reminder", "photo-to-reminder-app", "voice-note-reminder-app", "loud-reminder-app"],

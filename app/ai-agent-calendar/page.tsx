@@ -9,7 +9,7 @@ const PATH = "/ai-agent-calendar";
 const ORIGIN = "https://squirrelbrainapp.com";
 const TITLE = "AI Agent Calendar: one your agent can update on its own | Squirrel Brain";
 const DESCRIPTION =
-  "The calendar your AI agent can use on its own. A personal API key lets any MCP client read and update Squirrel Brain on iPhone. Coming soon to iPhone. $14.99/month.";
+  "The calendar your AI agent can use on its own. A personal API key lets any MCP client read and update Squirrel Brain on iPhone. Coming soon to iPhone. 1 week free, then $14.99/month.";
 
 export const metadata = pageMeta(TITLE, DESCRIPTION, PATH);
 
@@ -32,7 +32,7 @@ const FAQS = [
   },
   {
     q: "Is the iPhone app out, and what does it cost?",
-    a: "Coming soon to iPhone. It is $14.99/month. You can get a key now at signup.",
+    a: "Coming soon to iPhone. It is free for 1 week, then $14.99/month. You can get a key now at signup.",
   },
 ];
 
@@ -111,7 +111,7 @@ export default function AiAgentCalendarPage() {
                 <p className="text-lg text-muted leading-relaxed max-w-xl">
                   Squirrel Brain is an agent-friendly calendar and reminder app for iPhone:
                   any MCP client can read and update it on its own with a personal API key.
-                  Coming soon to iPhone, $14.99/month.
+                  Coming soon to iPhone. 1 week free, then $14.99/month.
                 </p>
               </FadeIn>
             </div>

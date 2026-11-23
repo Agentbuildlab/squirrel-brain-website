@@ -14,7 +14,7 @@ const FAQS: { q: string; a: string }[] = [
   },
   {
     q: "What does it cost, and what devices does it run on?",
-    a: "$14.99/month, billed by Apple through your App Store account. iPhone only for now. Join the launch list and we'll email you when it's ready.",
+    a: "1 week free, then $14.99/month, billed by Apple through your App Store account. iPhone only for now. Join the launch list and we'll email you when it's ready.",
   },
 ];
 

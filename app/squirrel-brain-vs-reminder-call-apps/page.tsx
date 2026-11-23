@@ -40,7 +40,7 @@ const ROWS: Row[] = [
     href: "/",
     source: "This site",
     what: "iPhone app. Voice notes, photos, screenshots, texts, and emails become reminders, alarms, notes, and calendar events. Optional MCP server so Claude Code, Claude Desktop, Cursor, or your own agent can set alarms and place a call. When you answer the call, you can talk back.",
-    price: "$14.99/month, billed by Apple.",
+    price: "1 week free, then $14.99/month, billed by Apple.",
     silent:
       "The call vibrates on silent and rings only when the ringer is on. The alarm rings through the silent switch. Focus, Low Power Mode, and other iOS limits can still suppress an alarm.",
   },
@@ -109,7 +109,7 @@ const faqJsonLd = {
       name: "How much does Squirrel Brain cost?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Squirrel Brain is $14.99/month, billed by Apple through your App Store account.",
+        text: "Squirrel Brain is free for 1 week, then $14.99/month, billed by Apple through your App Store account.",
       },
     },
   ],
@@ -192,7 +192,7 @@ export default function ComparisonPage() {
               <li>The call vibrates on silent. The alarm rings through the silent switch.</li>
               <li>Answering the call is a two-way conversation, not a recording you can only listen to.</li>
               <li>An optional MCP server lets Claude Code, Claude Desktop, Cursor, or your own agent set alarms and place a call. The app also works with no agent connected.</li>
-              <li>It is $14.99/month. iPhone only.</li>
+              <li>It is free for 1 week, then $14.99/month. iPhone only.</li>
             </ul>
             <p className="mt-4 text-muted leading-relaxed">
               We are not claiming the other apps lack those capabilities. Their pages,
@@ -221,7 +221,7 @@ export default function ComparisonPage() {
                   How much does Squirrel Brain cost?
                 </summary>
                 <p className="mt-3 text-muted leading-relaxed">
-                  $14.99/month. See{" "}
+                  1 week free, then $14.99/month. See{" "}
                   <Link href="/pricing" className="text-accent font-semibold underline underline-offset-4">
                     pricing
                   </Link>

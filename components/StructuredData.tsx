@@ -57,7 +57,7 @@ const graph = {
         priceSpecification: { "@type": "UnitPriceSpecification", price: "14.99", priceCurrency: "USD", billingDuration: "P1M" },
         url: `${ORIGIN}/signup`,
         availability: "https://schema.org/PreOrder",
-        description: "$14.99/month, billed by Apple.",
+        description: "1 week free, then $14.99/month, billed by Apple.",
       },
       publisher: { "@id": `${ORIGIN}/#org` },
     },

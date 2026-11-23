@@ -7,12 +7,12 @@ import CtaButton from "@/components/CtaButton";
 export const metadata: Metadata = {
   title: "Pricing: $14.99/month",
   description:
-    "Squirrel Brain is $14.99/month, billed by Apple through your App Store account. Cancel any time.",
+    "Squirrel Brain is free for 1 week, then $14.99/month, billed by Apple through your App Store account. Cancel any time.",
   alternates: { canonical: "/pricing" },
 };
 
-// One price: $14.99/month (Adam, 2026-11-23). Billing is Apple's. No trial claim here:
-// any intro offer is shown by the App Store itself.
+// One plan: 1 week free, then $14.99/month (Adam, 2026-11-23: "14.99 only plan. One week free.").
+// The trial is the App Store intro offer on sb_plus_monthly; billing and cancelling are Apple's.
 export default function PricingPage() {
   return (
     <>
@@ -34,14 +34,15 @@ export default function PricingPage() {
             </FadeIn>
             <FadeIn immediate delay={0.08}>
               <p className="text-xl text-muted mb-4">
-                One plan, everything included: the assistant that calls you, photo and
-                voice capture, your calendar, reminders and notes.
+                Try it free for 1 week. One plan, everything included: the assistant that
+                calls you, photo and voice capture, your calendar, reminders and notes.
               </p>
             </FadeIn>
             <FadeIn immediate delay={0.14}>
               <p className="text-base text-muted mb-10">
-                Billed monthly by Apple through your App Store account. Cancel any time
-                in your iPhone&apos;s Settings.
+                After the free week, $14.99/month, billed by Apple through your App Store
+                account. Renews monthly until cancelled; cancel any time in your iPhone&apos;s
+                Settings at least 24 hours before the trial or period ends.
               </p>
             </FadeIn>
             <FadeIn immediate delay={0.2}>
