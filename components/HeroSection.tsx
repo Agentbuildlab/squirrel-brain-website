@@ -160,7 +160,7 @@ export default function HeroSection() {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.5 }}
           >
-            Free to use at launch · nothing to buy · iOS
+            1 week free, then $14.99/month · iOS
           </motion.p>
 
           {/* Interactive demo on mobile — the hook has to be tappable on a phone */}

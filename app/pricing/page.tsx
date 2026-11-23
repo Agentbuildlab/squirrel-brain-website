@@ -5,14 +5,14 @@ import FadeIn from "@/components/FadeIn";
 import CtaButton from "@/components/CtaButton";
 
 export const metadata: Metadata = {
-  title: "Free to use",
+  title: "Pricing: $14.99/month",
   description:
-    "Squirrel Brain is free to use at launch. There is nothing to buy and no trial to start.",
+    "Squirrel Brain is free for 1 week, then $14.99/month, billed by Apple through your App Store account. Cancel any time.",
   alternates: { canonical: "/pricing" },
 };
 
-// Free-launch page. The earlier two-plan pricing page (Standard / Plus, 7-day
-// trial) was removed on 2026-10-04 because 1.0 launches free with the paywall off.
+// One plan: 1 week free, then $14.99/month (Adam, 2026-11-23: "14.99 only plan. One week free.").
+// The trial is the App Store intro offer on sb_plus_monthly; billing and cancelling are Apple's.
 export default function PricingPage() {
   return (
     <>
@@ -29,19 +29,20 @@ export default function PricingPage() {
                 id="pricing-heading"
                 className="font-display text-5xl sm:text-6xl font-extrabold text-ink mb-5"
               >
-                Free to use
+                $14.99/month
               </h1>
             </FadeIn>
             <FadeIn immediate delay={0.08}>
               <p className="text-xl text-muted mb-4">
-                Squirrel Brain is free to use at launch. There is nothing to buy and no
-                trial to start.
+                Try it free for 1 week. One plan, everything included: the assistant that
+                calls you, photo and voice capture, your calendar, reminders and notes.
               </p>
             </FadeIn>
             <FadeIn immediate delay={0.14}>
               <p className="text-base text-muted mb-10">
-                Paid plans may come later. If they do, we will say so clearly before
-                anyone is asked to pay.
+                After the free week, $14.99/month, billed by Apple through your App Store
+                account. Renews monthly until cancelled; cancel any time in your iPhone&apos;s
+                Settings at least 24 hours before the trial or period ends.
               </p>
             </FadeIn>
             <FadeIn immediate delay={0.2}>

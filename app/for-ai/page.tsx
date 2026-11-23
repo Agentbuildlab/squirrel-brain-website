@@ -58,7 +58,7 @@ export default function ForAiPage() {
             Server changes are saved right away and reach the phone (and its Calendar)
             after the app syncs. A change can become an alarm, a reminder, or a phone
             call. You can revoke the key, and each change is labeled with the agent
-            that made it. Coming soon to iPhone, and free to use at launch. Get a key
+            that made it. Coming soon to iPhone. 1 week free, then $14.99/month. Get a key
             at{" "}
             <Link href="/signup" className="text-accent font-semibold underline underline-offset-4">
               signup
@@ -115,9 +115,8 @@ export default function ForAiPage() {
               Price and where to get it
             </h2>
             <p className="text-muted leading-relaxed mb-3">
-              Free to use at launch. Nothing to buy and no trial to start. Paid plans
-              may come later; if they do, the site will say so before anyone is asked
-              to pay.
+              Squirrel Brain is free for 1 week, then $14.99/month, billed by Apple through your App Store account.
+              Cancel any time in your iPhone's Settings.
             </p>
             <p className="text-muted leading-relaxed">
               Coming soon to iPhone. Join the launch list on the homepage for a note

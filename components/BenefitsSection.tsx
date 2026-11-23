@@ -97,7 +97,7 @@ export default function BenefitsSection() {
             For AI agents
           </Link>
           {"  ·  "}
-          Free to use at launch · iPhone
+          1 week free, then $14.99/month · iPhone
         </p>
       </div>
     </section>

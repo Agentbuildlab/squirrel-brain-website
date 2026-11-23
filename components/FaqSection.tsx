@@ -14,7 +14,7 @@ const FAQS: { q: string; a: string }[] = [
   },
   {
     q: "What does it cost, and what devices does it run on?",
-    a: "iPhone only for now, and free to use at launch — nothing to buy and no trial to start. Paid plans may come later; if they do, we'll say so clearly first. Join the launch list and we'll email you when it's ready.",
+    a: "1 week free, then $14.99/month, billed by Apple through your App Store account. iPhone only for now. Join the launch list and we'll email you when it's ready.",
   },
 ];
 

@@ -159,7 +159,7 @@ export default function FinalCta() {
           animate={inView ? { opacity: 1 } : {}}
           transition={{ duration: 0.4, delay: 0.56 }}
         >
-          Free to use at launch · nothing to buy · iOS
+          1 week free, then $14.99/month · iOS
         </motion.p>
       </div>
     </section>
