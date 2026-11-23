@@ -25,7 +25,7 @@ const FAQS = [
   },
   {
     q: "Do I need the app installed today?",
-    a: "Coming soon to iPhone, and free to use at launch. You can get a key now at signup and connect an MCP client.",
+    a: "Coming soon to iPhone, $14.99/month. You can get a key now at signup and connect an MCP client.",
   },
 ];
 
@@ -39,7 +39,7 @@ export default function Page() {
         The agent can read today&rsquo;s agenda before it adds anything, list the alarms already set, and search the events you already have. You can revoke the key, and each change is labeled with the agent that made it. Server changes are saved right away and reach the phone (and its Calendar) after the app syncs.
       </p>
       <p>
-        Coming soon to iPhone, and free to use at launch. Get a key at{" "}
+        Coming soon to iPhone, $14.99/month. Get a key at{" "}
         <Link href="/signup" className="text-accent font-semibold underline underline-offset-4">signup</Link>
         , then add the server to any MCP client that can send a custom header. The{" "}
         <Link href="/ai-agent-calendar" className="text-accent font-semibold underline underline-offset-4">AI agent calendar</Link>

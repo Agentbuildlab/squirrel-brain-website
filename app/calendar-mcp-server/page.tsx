@@ -39,7 +39,7 @@ export default function Page() {
         The agent can read today&rsquo;s agenda, search events and notes, add a calendar event with an alarm, and change or cancel it. You can revoke the key, and each change is labeled with the agent that made it. Server changes are saved right away and reach the phone (and its Calendar) after the app syncs.
       </p>
       <p>
-        Coming soon to iPhone, and free to use at launch. Start with a key at{" "}
+        Coming soon to iPhone, $14.99/month. Start with a key at{" "}
         <Link href="/signup" className="text-accent font-semibold underline underline-offset-4">signup</Link>
         . The{" "}
         <Link href="/ai-agent-calendar" className="text-accent font-semibold underline underline-offset-4">AI agent calendar</Link>

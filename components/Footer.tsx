@@ -327,7 +327,7 @@ export default function Footer() {
           <p className="text-xs text-muted">
             &copy; {new Date().getFullYear()} Squirrel Brain. Made for people with too much to remember.
           </p>
-          <p className="text-xs text-muted">Coming soon to iPhone · free to use</p>
+          <p className="text-xs text-muted">Coming soon to iPhone · $14.99/month</p>
         </div>
       </div>
     </footer>

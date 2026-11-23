@@ -25,7 +25,7 @@ const FAQS = [
   },
   {
     q: "Where do I get a key?",
-    a: "Coming soon to iPhone. You can get a personal key now at signup. It is free to use at launch.",
+    a: "Coming soon to iPhone. You can get a personal key now at signup. It is $14.99/month.",
   },
 ];
 
@@ -39,7 +39,7 @@ export default function Page() {
         You can revoke the key. Server changes are saved right away and reach the phone (and its Calendar) after the app syncs, as an alarm, a reminder, or a phone call. The agent can also read today&rsquo;s agenda, search notes and calendar events, save a note or a link, send a banner, and file a photo onto a board.
       </p>
       <p>
-        Coming soon to iPhone, and free to use at launch. Get a key at{" "}
+        Coming soon to iPhone, $14.99/month. Get a key at{" "}
         <Link href="/signup" className="text-accent font-semibold underline underline-offset-4">signup</Link>
         , then add Squirrel Brain to any MCP client that can send a custom header. Claude Code, Claude Desktop, and Cursor are examples. See the{" "}
         <Link href="/ai-agent-calendar" className="text-accent font-semibold underline underline-offset-4">AI agent calendar</Link>

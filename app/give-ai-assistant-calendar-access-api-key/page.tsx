@@ -41,7 +41,7 @@ export default function Page() {
         {" "}and copy the key. Add Squirrel Brain in your MCP client and send the key as the X-API-Key header. Ask the agent to read today&rsquo;s agenda or add an event. Each change is labeled with the agent that made it. Server changes are saved right away and reach the phone (and its Calendar) after the app syncs, as an alarm, a reminder, or a phone call.
       </p>
       <p>
-        Coming soon to iPhone, and free to use at launch. The{" "}
+        Coming soon to iPhone, $14.99/month. The{" "}
         <Link href="/ai-agent-calendar" className="text-accent font-semibold underline underline-offset-4">AI agent calendar</Link>
         {" "}page lists what the agent can do. The{" "}
         <Link href="/mcp" className="text-accent font-semibold underline underline-offset-4">MCP page</Link>
