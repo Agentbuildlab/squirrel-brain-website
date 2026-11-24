@@ -1,8 +1,8 @@
 # Privacy Policy — Squirrel Brain
 
 Effective Date: October 4, 2026
-Last Updated: November 19, 2026
-Version: 3.2
+Last Updated: November 24, 2026
+Version: 3.3
 
 ---
 
@@ -66,7 +66,7 @@ Squirrel Brain includes an in-app conversational assistant, "Pip." Messages you 
 
 ### 3.1c Live Calls
 
-If you turn on "Call me" for a reminder, or ask Pip to call you, Pip can call you through the iPhone call screen (no phone number or carrier minutes are used). Apple delivers the call alert. When you answer, your voice is sent to our AI providers (see Section 5) so Pip can talk with you, and Pip can read and change your reminders, events and notes during the call, just as it can in the chat.
+If you turn on "Call me" for a reminder, or ask Pip to call you, Pip can call you through the iPhone call screen (no phone number or carrier minutes are used). Apple delivers the call alert. When you answer, your voice is sent to our AI providers (see Section 5) so Pip can talk with you, and Pip can read and change your reminders, events and notes during the call, just as it can in the chat. Your voice goes to OpenAI so Pip can talk with you, and what you ask Pip to look up or change goes to Anthropic.
 
 ### 3.1d Contacts
 
@@ -78,7 +78,7 @@ If you create an API key and connect an outside AI app, that app can read and ch
 
 ### 3.2 Photos and Images (PixNote)
 
-You choose which images Squirrel Brain ever sees. The app processes an image only when you actively bring it in — by taking a photo in the app, selecting specific photos from your library, sharing a photo or screenshot to Squirrel Brain through the iOS share sheet, or — only if you turn this option on — automatically importing your new screenshots. When you bring in an image, it is transmitted to our AI providers (see Section 5) for analysis, text extraction, and date extraction, and to decide which board or category the item belongs in and to keep your PixNotes organized. The extracted data is stored in Supabase as structured notes. A copy of the picture itself (the thumbnail shown on your PixNote) is also saved on your device and backed up to our secure, private cloud storage (Supabase, see Section 5), so your pictures survive loss of your device, a reinstall, or your phone automatically clearing the local copy. This image backup is locked to your account, is never made public, and is deleted when you delete the item or your account (see the photo/image retention row in Section 8). So you can later search your saved items by meaning rather than exact words, a short text summary of what an item contains may also be sent to our AI providers (see Section 5) so a search index can be built; the resulting search index is stored on your device.
+You choose which images Squirrel Brain ever sees. The app processes an image only when you actively bring it in — by taking a photo in the app, selecting specific photos from your library, sharing a photo or screenshot to Squirrel Brain through the iOS share sheet, or — only if you turn this option on — automatically importing your new screenshots. When you bring in an image, it is transmitted to our AI providers (see Section 5) for analysis, text extraction, and date extraction, and to decide which board or category the item belongs in and to keep your PixNotes organized. The extracted data is stored in Supabase as structured notes. A copy of the picture itself (the thumbnail shown on your PixNote) is also saved on your device and backed up to our secure, private cloud storage (Supabase, see Section 5), so your pictures survive loss of your device, a reinstall, or your phone automatically clearing the local copy. This image backup is locked to your account, is never made public, and is deleted when you delete the item or your account (see the photo/image retention row in Section 8). To let you search your saved items by meaning, not just exact words, we send a short text summary of each item (never the picture itself) to Google's Gemini service. Gemini turns it into a search code, which is stored with your account on our servers (Supabase), not on your device. We only do this if you've allowed AI features in the app. When you search, your search words are sent to Google the same way. If you tap "Find the source" on a photo, the photo is sent to Google Gemini with Google Search turned on so it can find the original web page. For that feature, Google keeps the request for up to 30 days to run and fix its search service.
 
 We never access your whole camera roll. Squirrel Brain does not scan, browse, index, or upload your entire photo library. Photos you do not bring in are never seen by us or by our AI providers. The optional automatic screenshot import reads only your device's Screenshots album, only after you enable it, and you can turn it off at any time. We process only the specific images you choose to add — nothing else.
 
@@ -212,47 +212,39 @@ Data minimization. In accordance with GDPR Article 5(1)(c) and the principle of 
 
 We share your data with the following third-party services solely to operate the app features described in this policy. We do not authorize these services to use your data for their own advertising or marketing purposes.
 
-Squirrel Brain uses several AI providers to power its features. Depending on which feature you use, your voice, photos, screenshots, typed notes, and questions may be sent to one or more of these AI providers to be transcribed, read, organized, answered, or searched for on the web. We send each provider only what the feature you are using needs. Under these providers' API terms, your content is not used to train their models, and we are executing GDPR Article 28 Data Processing Agreements with each. The AI providers we use are listed in Sections 5.1–5.4; the remaining services below support the app's accounts, storage, email, payments, reliability, and weather.
+Squirrel Brain uses four AI companies to run its features: OpenAI, Anthropic, Google, and xAI. Depending on the feature you use, your voice, photos, screenshots, typed notes, and questions may be sent to one or more of them. We send each one only what that feature needs. We use each company's paid business service, and under those business terms none of them may use your content to train their AI models. Each may keep content for a limited time for safety and legal reasons, as described below. Each company processes your data under its data processing terms.
 
 ### 5.1 OpenAI
 
-What we share: Your content, as needed to provide the AI features you use (see the overview at the start of this section).
+What we send: your voice when you record a note, and meeting audio when our main meeting transcriber can't handle it, to turn speech into text. During a live call with Pip, your voice and Pip's spoken replies. Text that Pip reads aloud. Messages you type to Pip, which are checked by OpenAI's safety filter. We never send your photos or images to OpenAI. Our OpenAI account has Zero Data Retention turned on: OpenAI does not keep this content in its logs and does not use it to train its models. Two limits apply: audio replies may be held for up to one hour to keep a conversation going, and OpenAI may keep content where the law requires it.
 Why: AI processing to power app features.
 Data processing location: United States
 OpenAI Privacy Policy: https://openai.com/policies/privacy-policy
 OpenAI API Terms: https://openai.com/policies/terms-of-use
 
-Acorn Labs LLC has a Zero Data Retention agreement with OpenAI. OpenAI does not store the content described above in its logs and does not use it to train its models. Two limits apply. Audio replies may be held for up to one hour to keep a conversation going, and OpenAI may retain content where the law requires or to investigate severe misuse of its services. Squirrel Brain does not send your photos or images to OpenAI. This agreement covers OpenAI only; the other AI providers described below handle content under their own terms. A Data Processing Agreement under GDPR Article 28 is in progress.
-
 ### 5.2 Anthropic (Claude)
 
-What we share: Your content, as needed to provide the AI features you use (see the overview at the start of this section). For some features this can include the photo or screenshot itself, sent as an image, not only the text we extract from it.
+What we send: what you type or say to Pip, including during a live call when Pip looks up or changes your reminders, events and notes. Your notes, so they can be sorted into tasks and reminders. Your morning Daily Brief details (first name, city, and today's tasks and events). And sometimes a photo or screenshot itself, when our main photo reader can't read it. Anthropic's business terms say it may not train its models on this content, and it handles the content under its Data Processing Addendum, which is part of those terms.
 Why: AI processing to power app features.
 Data processing location: United States
 Anthropic Privacy Policy: https://www.anthropic.com/legal/privacy
 Anthropic Commercial Terms of Service: https://www.anthropic.com/legal/commercial-terms
 
-Anthropic's published API terms state that API inputs and outputs are not used to train Anthropic's models by default. We rely on those published terms as our contractual basis for this processing today; a signed Data Processing Agreement formalizing this under GDPR Article 28 is in progress.
-
 ### 5.3 Google (Gemini AI)
 
-What we share: Your content, as needed to provide the AI features you use (see the overview at the start of this section).
+What we send: photos and screenshots you bring in (Gemini is our main photo reader), Meeting Mode audio (to tell speakers apart), photos you ask us to find the source for, and short text summaries of your items and your search words (to power search by meaning). We use Google's paid Gemini API. Under Google's paid terms, Google does not use this content to improve its products or train its models, and it processes the content as our data processor. Google keeps requests for a limited time, only to catch misuse and meet legal requirements. Find-the-source requests are kept for 30 days. Where it's processed: the United States and other countries where Google has facilities.
 Why: AI processing to power app features.
-Data processing location: United States (Google Cloud)
 Google Privacy Policy: https://policies.google.com/privacy
-Google Cloud Data Processing Terms: https://cloud.google.com/terms/data-processing-addendum
-
-Standard Gemini API terms state that content submitted through the API is not used to train Google's general-purpose models by default. We rely on those published terms as our contractual basis for this processing today; a signed Data Processing Agreement under GDPR Article 28 with Google is in progress.
+Google Data Processing Addendum (Products Where Google is a Data Processor): https://cloud.google.com/terms/data-processing-addendum
+Gemini API Additional Terms of Service: https://ai.google.dev/gemini-api/terms
 
 ### 5.4 xAI (Grok)
 
-What we share: Your content, as needed to provide the AI features you use (see the overview at the start of this section). When Pip searches the web for you (for example, to find a nearby place), the search may include your city and state so results are local. The web search never includes your precise location coordinates.
+Company: SpaceX Super Intelligence LLC (xAI), maker of Grok. What we send: your search words when Pip searches the web for you. This may include your city and state, but never your exact location. Our xAI account has Zero Data Retention turned on, so xAI does not keep your search words after answering, and it may not use them to train its AI models.
 Why: AI processing to power app features.
 Data processing location: United States
 xAI Privacy Policy: https://x.ai/legal/privacy-policy
 xAI Enterprise Terms of Service (covers the API): https://x.ai/legal/terms-of-service-enterprise
-
-xAI's published API terms state that API inputs are not used to train xAI's models by default for this API product. We rely on those published terms as our contractual basis for this processing today; a signed Data Processing Agreement formalizing this under GDPR Article 28 is in progress.
 
 ### 5.5 Supabase
 
@@ -468,10 +460,10 @@ For EEA, UK, and Swiss users: Data transfers to the United States must be made u
 | Service Provider | Transfer Mechanism |
 |---|---|
 | OpenAI | Standard Contractual Clauses (SCCs); OpenAI, L.L.C. is also self-certified under the EU-US Data Privacy Framework |
-| Google (Gemini / Google Cloud) | EU-US Data Privacy Framework (Google LLC is certified); SCCs also available via Google Cloud DPA |
+| Google (Gemini) | Google's data processing terms, which include Standard Contractual Clauses; Google LLC is certified under the EU-US Data Privacy Framework. |
 | Supabase | Standard Contractual Clauses via Supabase's underlying AWS infrastructure |
 | Resend | Standard Contractual Clauses (per Resend's Data Processing Agreement) |
-| Anthropic | Relying on Anthropic's published terms today; Standard Contractual Clauses through the Data Processing Agreement in progress |
+| Anthropic | Anthropic's Data Processing Addendum, part of its business terms. |
 | xAI | Relying on xAI's published terms today; Standard Contractual Clauses through the Data Processing Agreement in progress |
 | Sentry | Relying on Sentry's published terms today; Standard Contractual Clauses through its Data Processing Addendum |
 | RevenueCat | Relying on RevenueCat's published terms today; Standard Contractual Clauses through its Data Processing Addendum |
@@ -685,8 +677,8 @@ We respond to all privacy inquiries within 30 days.
 | Service | Purpose | Data Received | DPA Executed? | Privacy Policy |
 |---|---|---|---|---|
 | OpenAI | AI processing | Your content, as needed for the features you use | In progress | openai.com/policies/privacy-policy |
-| Anthropic (Claude) | AI processing | Your content, as needed for the features you use | In progress | anthropic.com/legal/privacy |
-| Google (Gemini) | AI processing | Your content, as needed for the features you use | In progress | policies.google.com/privacy |
+| Anthropic (Claude) | AI processing | Your content, as needed for the features you use | Included in business terms | anthropic.com/legal/privacy |
+| Google (Gemini) | AI processing | Your content, as needed for the features you use | Included in business terms | policies.google.com/privacy |
 | xAI (Grok) | AI processing | Your content, as needed for the features you use | In progress | x.ai/legal/privacy-policy |
 | Supabase | Cloud database / storage | All user data | In progress | supabase.com/privacy |
 | Resend | Email delivery | Email address, email content | In progress | resend.com/legal/privacy-policy |
