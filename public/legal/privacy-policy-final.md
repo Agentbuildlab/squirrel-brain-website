@@ -240,7 +240,7 @@ Gemini API Additional Terms of Service: https://ai.google.dev/gemini-api/terms
 
 ### 5.4 xAI (Grok)
 
-Company: SpaceX Super Intelligence LLC (xAI), maker of Grok. What we send: your search words when Pip searches the web for you. This may include your city and state, but never your exact location. Our xAI account has Zero Data Retention turned on, so xAI does not keep your search words after answering, and it may not use them to train its AI models.
+Company: SpaceX Super Intelligence LLC (xAI), maker of Grok. What we send: your search words when Pip searches the web for you. This may include your city and state, but never your exact location. We send every request to xAI with storage turned off (store: false). Under xAI's API terms, xAI does not train its models on this content. xAI may keep requests for a limited time for safety and legal reasons.
 Why: AI processing to power app features.
 Data processing location: United States
 xAI Privacy Policy: https://x.ai/legal/privacy-policy
