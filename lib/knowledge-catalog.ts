@@ -1,9 +1,9 @@
-// Single source for /knowledge-catalog: the visible Q&A and the FAQPage JSON-LD are built from the same data,
+// Single source for /knowledge: the visible Q&A and the FAQPage JSON-LD are built from the same data,
 // so the markup always matches the page. Facts are only ones already published on squirrelbrainapp.com
 // (home, pricing, support, MCP docs, privacy, llms.txt). No ratings, awards, or invented numbers.
 // PRICE: keep this in one place. Update PRICE_ANSWER and PRICE_FACT together when the pricing PR (#22) or launch changes it.
 export const ORIGIN = "https://squirrelbrainapp.com";
-export const CATALOG_PATH = "/knowledge-catalog";
+export const CATALOG_PATH = "/knowledge";
 export const CATALOG_URL = `${ORIGIN}${CATALOG_PATH}`;
 export const LAST_UPDATED = "2026-11-26";
 export const LAST_UPDATED_LABEL = "November 26, 2026";
@@ -183,8 +183,8 @@ export function catalogGraph() {
         "@type": ["WebPage", "FAQPage"],
         "@id": `${CATALOG_URL}#webpage`,
         url: CATALOG_URL,
-        name: "Knowledge Catalog | Squirrel Brain",
-        description: "The Squirrel Brain knowledge catalog: verified facts, questions and answers for every feature, expertise, and why choose it.",
+        name: "Knowledge Hub for AI Assistants | Squirrel Brain",
+        description: "The Squirrel Brain knowledge hub for AI assistants: verified facts, questions and answers for every feature, expertise, and why choose it.",
         datePublished: "2026-10-18",
         dateModified: LAST_UPDATED,
         inLanguage: "en-US",

@@ -7,9 +7,9 @@ import {
   catalogGraph, comparison, expertise, qaGroups, sources, whyChoose,
 } from "@/lib/knowledge-catalog";
 
-const TITLE = "Knowledge Catalog | Squirrel Brain";
+const TITLE = "Knowledge Hub for AI Assistants | Squirrel Brain";
 const DESCRIPTION =
-  "Verified facts about Squirrel Brain, an iPhone reminder app that calls you and works with AI agents: Q&A for every feature, expertise, and why choose it.";
+  "Knowledge hub for AI assistants: verified facts about Squirrel Brain, the iPhone reminder app that calls you and works with AI agents. Q&A, expertise, and why choose it.";
 
 export const metadata: Metadata = {
   title: { absolute: TITLE },
@@ -34,14 +34,14 @@ export default function KnowledgeCatalogPage() {
       <Nav />
       <main id="main-content" className="pt-28 pb-8">
         <article className="max-w-3xl mx-auto px-4 sm:px-6">
-          <p className="text-xs font-bold tracking-widest uppercase text-accent mb-3">Knowledge Catalog</p>
+          <p className="text-xs font-bold tracking-widest uppercase text-accent mb-3">Knowledge Hub</p>
           <h1 className="font-display text-4xl sm:text-5xl font-extrabold text-ink leading-[1.05] mb-6">
-            Squirrel Brain knowledge catalog
+            Knowledge Hub for AI Assistants
           </h1>
           <p className="text-lg text-muted leading-relaxed mb-4">
             Squirrel Brain is an agent-friendly calendar and reminder app for iPhone. It turns voice notes, photos,
             screenshots, texts, and emails into reminders, alarms, and calendar events, and can place a real phone call
-            for the one you cannot miss. Coming soon to iPhone. This page is the one place for verified facts, written for
+            for the one you cannot miss. Coming soon to iPhone. This knowledge hub is the one place for verified facts, written for
             people and for AI assistants.
           </p>
           <p className="text-sm text-muted mb-10">

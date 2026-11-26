@@ -314,10 +314,10 @@ export default function Footer() {
                 Skills
               </Link>
               <Link
-                href="/knowledge-catalog"
+                href="/knowledge"
                 className="text-xs text-muted hover:text-ink transition-colors"
               >
-                Knowledge Catalog
+                Knowledge Hub
               </Link>
             </div>
           </div>

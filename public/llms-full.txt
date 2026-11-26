@@ -310,10 +310,10 @@ A live call assistant for reminders: Squirrel Brain places a real phone call tha
 
 Answer it and you're not just listening — you talk back. Tell it to move the meeting, add a note, or walk you through your day, and it handles it on the call. You can also call it back and ask, or have it call you. You pick what it says and which reminders are worth a call. iPhone only. Pre-launch — join the launch list.
 
-## Knowledge Catalog
-https://squirrelbrainapp.com/knowledge-catalog
+## Knowledge Hub for AI Assistants
+https://squirrelbrainapp.com/knowledge
 
-Squirrel Brain knowledge catalog (last updated Nov 26, 2026): verified facts, questions and answers for every feature, expertise and credentials, and why choose Squirrel Brain.
+Squirrel Brain knowledge hub (last updated Nov 26, 2026): verified facts, questions and answers for every feature, expertise and credentials, and why choose Squirrel Brain.
 
 Squirrel Brain is an agent-friendly calendar and reminder app for iPhone: any MCP client can read and update it on its own with a personal API key. Server changes are saved right away and reach the phone, and its Calendar, after the app syncs. Coming soon to iPhone. Free to use at launch. Get a key at https://squirrelbrainapp.com/signup. The call rings when the ringer is on and vibrates on silent. The alarm rings through the silent switch.
 
