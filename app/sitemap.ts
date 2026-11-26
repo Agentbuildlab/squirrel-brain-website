@@ -17,7 +17,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/calendar-mcp-server", priority: 0.75 },
     { path: "/give-ai-assistant-calendar-access-api-key", priority: 0.75 },
     { path: "/ai-agent-schedule-reminders-iphone", priority: 0.75 },
-    { path: "/for-ai", priority: 0.8 },
+    { path: "/knowledge-catalog", priority: 0.9 },
     { path: "/squirrel-brain-vs-reminder-call-apps", priority: 0.75 },
     { path: "/demos", priority: 0.7 },
     { path: "/pricing", priority: 0.7 },
@@ -30,7 +30,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // A real date (bump when content meaningfully changes). `new Date()` here
   // made every URL claim it changed "today" on every crawl, which search
   // engines learn to ignore — a static honest date is a stronger signal.
-  const lastModified = new Date("2026-10-18");
+  const lastModified = new Date("2026-11-26");
   return routes.map((r) => ({
     url: `${BASE}${r.path}`,
     lastModified,

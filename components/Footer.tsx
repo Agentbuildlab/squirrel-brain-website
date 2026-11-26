@@ -314,10 +314,10 @@ export default function Footer() {
                 Skills
               </Link>
               <Link
-                href="/for-ai"
+                href="/knowledge-catalog"
                 className="text-xs text-muted hover:text-ink transition-colors"
               >
-                For AI bots
+                Knowledge Catalog
               </Link>
             </div>
           </div>

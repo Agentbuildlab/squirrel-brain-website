@@ -233,8 +233,8 @@ export default function ComparisonPage() {
 
           <div className="mt-12 flex flex-wrap items-center gap-3">
             <AppStoreButton />
-            <Link href="/for-ai" className="text-sm font-semibold text-muted hover:text-ink">
-              For AI bots
+            <Link href="/knowledge-catalog" className="text-sm font-semibold text-muted hover:text-ink">
+              Knowledge Catalog
             </Link>
           </div>
         </article>
