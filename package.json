@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "node scripts/check-legal.mjs && next build",
+    "build": "node scripts/check-legal.mjs && node scripts/check-knowledge-catalog.mjs && next build",
     "start": "next start",
     "lint": "next lint",
     "indexnow": "node scripts/indexnow.mjs"
