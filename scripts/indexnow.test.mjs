@@ -18,13 +18,13 @@ test("payload includes every sitemap URL", () => {
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset>
   <url><loc>https://squirrelbrainapp.com/</loc></url>
-  <url><loc>https://squirrelbrainapp.com/knowledge-catalog</loc></url>
+  <url><loc>https://squirrelbrainapp.com/knowledge</loc></url>
   <url><loc>https://squirrelbrainapp.com/llms.txt</loc></url>
 </urlset>`;
   const urls = parseSitemapLocs(xml);
   assert.deepEqual(urls, [
     "https://squirrelbrainapp.com/",
-    "https://squirrelbrainapp.com/knowledge-catalog",
+    "https://squirrelbrainapp.com/knowledge",
     "https://squirrelbrainapp.com/llms.txt",
   ]);
   const body = buildIndexNowBody({ key: KEY, urls });

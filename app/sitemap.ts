@@ -17,7 +17,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/calendar-mcp-server", priority: 0.75 },
     { path: "/give-ai-assistant-calendar-access-api-key", priority: 0.75 },
     { path: "/ai-agent-schedule-reminders-iphone", priority: 0.75 },
-    { path: "/knowledge-catalog", priority: 0.9 },
+    { path: "/knowledge", priority: 0.9 },
     { path: "/squirrel-brain-vs-reminder-call-apps", priority: 0.75 },
     { path: "/demos", priority: 0.7 },
     { path: "/pricing", priority: 0.7 },

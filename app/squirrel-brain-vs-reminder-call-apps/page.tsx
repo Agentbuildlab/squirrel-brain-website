@@ -233,8 +233,8 @@ export default function ComparisonPage() {
 
           <div className="mt-12 flex flex-wrap items-center gap-3">
             <AppStoreButton />
-            <Link href="/knowledge-catalog" className="text-sm font-semibold text-muted hover:text-ink">
-              Knowledge Catalog
+            <Link href="/knowledge" className="text-sm font-semibold text-muted hover:text-ink">
+              Knowledge Hub
             </Link>
           </div>
         </article>
