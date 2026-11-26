@@ -12,10 +12,10 @@ const FILES = ["privacy-policy-final.md", "terms-of-use-final.md"];
 // Sentences that must stay exactly as approved (Adam, 2026-10-07).
 const REQUIRED = {
   "privacy-policy-final.md": [
-    "Acorn Labs LLC has a Zero Data Retention agreement with OpenAI. OpenAI does not store the content described above in its logs and does not use it to train its models.",
-    "Audio replies may be held for up to one hour to keep a conversation going, and OpenAI may retain content where the law requires or to investigate severe misuse of its services.",
-    "Squirrel Brain does not send your photos or images to OpenAI.",
-    "This agreement covers OpenAI only; the other AI providers described below handle content under their own terms.",
+    // Policy 3.3 (preview, 2026-11-24): section 5.1 rewritten; the Section 5 intro now covers all four providers.
+    "Our OpenAI account has Zero Data Retention turned on: OpenAI does not keep this content in its logs and does not use it to train its models.",
+    "Two limits apply: audio replies may be held for up to one hour to keep a conversation going, and OpenAI may keep content where the law requires it.",
+    "We never send your photos or images to OpenAI.",
   ],
   "terms-of-use-final.md": [
     "For OpenAI, Acorn Labs also has a Zero Data Retention agreement: OpenAI does not store your voice or call content in its logs.",
@@ -27,7 +27,8 @@ const REQUIRED = {
 const BANNED = [
   "abuse-monitoring",
   "limited window",
-  "up to 30 days",
+  // "up to 30 days" was banned as an over-broad retention claim; 3.3 states it once, accurately, for
+  // Google's Find-the-source requests (section 3.2), so the ban is lifted.
   "does not promise Zero Data Retention",
   "never stored anywhere",
   "instantly deleted",
